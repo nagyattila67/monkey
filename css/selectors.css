@@ -1,0 +1,50 @@
+.container{background-color:#f6f6f6}
+h2{margin-left:16px;}
+p{text-align:justify}
+img{margin:0px 20px 20px;}
+#littleInfo{margin:0px; padding: 10px 10px 10px 30px; border:1px solid #a8a8a8; background-color:#f1f1f1}
+#word{font-weight:bolder}
+#pageInput{width:90px;margin-bottom:11px;}    
+#wordLength{width:50px}
+#consoleInfo{font-size:11px}
+#pages{width:100px; height:800px;margin:0px; padding: 10px 0px 10px; border:1px solid #a8a8a8; background-color:#f1f1f1; text-align:center;}
+#wordTable{text-align:center; font-size:13px;}
+.btn{margin:8px;margin-bottom:18px;}
+#volumeInfo{font-size:12px;}
+#please{margin-bottom:8px;}
+#result td{ vertical-align:center; margin:0px;padding:5px;}
+#result button{ margin:4px; }
+#result p{ margin:5px; padding:1px }
+#hossz{margin:0px;padding:2px}
+#result{margin: 0px 0px 40px}
+.row{margin:10px 0px 0px 10px; padding:0px}
+.form{margin:0px;padding:0px}
+label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
+#szohossz{margin:0px 0px 0px;padding:20px 0px 20px 0px;}
+#searchEngines{display:inline}
+#wordTable tr:first-child{height: 25px}
+#forTable{overflow:scroll}
+#graphic{width:500;height:300;background-color:#dbdbdb;border-spacing:0px;}
+#graphic td{border:none;}
+#loopInfo{font-size:11px}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

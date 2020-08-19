@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Majom az írógépnél</title>
+    <link rel="stylesheet" href="css/selectors.css">
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap-4.5.2-dist/bootstrap-4.5.2-dist/css/bootstrap.min.css">
+
+
+</head>
+
+<body>
+
+    <div class="container container-fluid">
+
+        <div class="row">
+            <div class="col-0 col-sm-1 col-md-1"></div>
+            <div class="col-12 col-sm-12 col-md-9">
+                <div class="row">
+                    <h2 class="mt-3 mb-5">Majom az írógépnél</h2>
+                </div class="row">
+                <div>
+                    <img class="img-fluid" src="img/Chimpanzee_seated_at_typewriter_500px.png" height="400px"
+                        style="vertical-align:middle; float:right; height:300px" ; alt="Majom az írógépnél" float:left;>
+                    <p>Egy majom ül egy írógép előtt. Az írógépen csak nagybetűk és egy sorváltó billenytű
+                        van. A majom egymás után nyomkodja az írógépen az ábécé betűt, majd időnként új sort
+                        kezd.
+                        Természetesen
+                        teljesen
+                        értelmetlen betűsorozatokat ír le egymás után.</p>
+                    <p>Egy gondozó figyeli a majom munkáját, és ha betelt a lap, akkor új lapot fűz a gépbe. Ez addig
+                        tart,
+                        amíg
+                        valamelyik
+                        sorban meg nem jelenik egy olyan betűsorozat, amelyek együtt egy értelmes magyar szót nem
+                        alkotnak.
+                        Ekkor a
+                        gondozó
+                        elveszi a majomtól a papírt és ad neki egy banánt. Az összegyűjtött papírlapokat pedig 300
+                        oldalas
+                        kötetekbe
+                        köti, s
+                        átadja Önnek.</p>
+                    <p>Az utolsó kötet utolsó lapjának utolsó sorában szerepel az az első értelmes szó, amelyet a majom
+                        végül
+                        leírt.
+                        Vajon
+                        hány kötetet fog átadni Önnek a gondozó?
+                    </p>
+                </div>
+                <div class="row">
+                    <ul id="littleInfo">
+                        <li><small>Egy lapon 40 sor van, egy sorban pedig csak egy betűsorozat van szóköz
+                                nélkül.</small>
+                        </li>
+                        <li><small>100 000 000 leírt sor után - ha még mindig nincs értelmes szó, s így banán se -,
+                                akkor a
+                                majom
+                                feladja.</small></li>
+                        <li><small>Egy 6 betűs értelmes szó létrehozása átlagosa fél perc - két perc ideig tart, s
+                                100-300
+                                ezer
+                                sort
+                                tartalmaznak a kötetek.</small></li>
+                        <li><small>Egy 7 betűs értelmes szó létrehozása átlagosan 20 percig tart, s 2-3 millió sort
+                                tartalmaznak
+                                a
+                                kötetek.</small></li>
+                        <li><small>Minden újabb betű <em>tízszeresére</em> emeli a program futásának az átlagos
+                                időtartamát.
+                                Így 8
+                                betűnél már három óráig, 9 betűnél pedig több mint egy napig fut a program!</small></li>
+
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div id="hossz" class="col-6">
+                        <form id="szohossz" class=" form-inline" mb-5>
+                            <div class="row form-row align-items-center">
+                                <div class="col-auto">
+                                    <label>A szó hossza legyen</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input class="form-control form-control-sm" id="wordLength" type="number" min="1"
+                                        max="8" value="4">
+                                </div>
+                                <div class="col-auto">
+                                    <label>betű!</label>
+                                </div>
+                                <div class="col-auto">
+                                    <button id="please" type="button" class="btn btn-secondary btn-sm"
+                                        onclick="word()">Kérem a
+                                        szót!</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-3"></div>
+
+                </div>
+
+                <div class=row>
+                    <table id="result" mt-5; class="table table-sm table-bordered table-striped table-small">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p class="mb-0 pb-0"> A program állapota:</p>
+                                    <p class="mb-0 pb-0" id="consoleInfo"><i>Hosszabb futás esetén részinformációk a
+                                            konzolon!</i></p>
+                                </td>
+                                <td>
+                                    <p><span id="status">-</span></p>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p id="getWord"> Íme a szó: </p>
+                                </td>
+                                <td>
+                                    <p><span id="word">-</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>A szó jelentése a magyar nyelv értelmező szótárában:</p>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                        onclick="dictionary()">Megnéz</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>A program ennyi ideig futott: </p>
+                                </td>
+                                <td>
+                                    <p><span id="timeCount">-</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>A lapokon található összes szó [sor] száma együttesen: </p>
+                                </td>
+                                <td>
+                                    <p><span id="wordCount">-</span> </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>A lapok száma összesen: </p>
+                                </td>
+                                <td>
+                                    <p><span id="sheetCount">-</span></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Az átadott kötetek száma: </p>
+                                </td>
+                                <td>
+                                    <p><span id="volumeCount">-</span></p>
+                                </td>
+                            </tr>
+                            <tr style="display:none">
+                                <td>
+                                    <p>Ha a köteteket egymásra helyezzük, ilyen magas tornyot kapunk: </p>
+                                </td>
+                                <td><span id="towerHight">-</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="pagesContainer" class="row">
+                    <div id="pagesInfo" class="col-6">
+                        <div class="row">
+                            <p>Jobbra láthatja az utolsó kötet utolsó oldalát - <span
+                                    style="background-color:#fadadd">az utolsó sorában van az Ön szava.</span></p>
+                            <p>Szeretne belelapozni a kötetekbe? Megteheti! Lapozhat akár előre és hátra is!</p>
+                        </div>
+                        <div class="row">
+
+
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="first()">
+                                    első
+                                </button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="backward()">
+                                    &lt&lt&lt
+                                </button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="forward()">
+                                    &gt&gt&gt
+                                </button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="last()">
+                                    utolsó
+                                </button>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <p>Akár átugorhat egy kiválasztott oldalra is!</p>
+                        </div>
+                        <form>
+                            <div class="form-row align-items-center">
+                                <div class="col-auto">
+                                    <button id="skip" type="button" class="btn btn-secondary btn-sm"
+                                        onclick="skipToPage(event)">Ugrás a</button>
+                                </div>
+                                <div class="col-auto">
+                                    <input id="pageInput" type="number" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-auto">
+                                    <label for="pageInput">oldalra</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <p id="volumeInfo">Az Ön kötetei a <span id="firstPage">-</span> oldaltól a(z) <span
+                                        id="lastPage">-</span>
+                                    oldalig terjednek.</p>
+                            </div>
+                        </form>
+
+                        <div class="row mt-4">
+                            <p>Kattintson rá valamelyik betűsorotatra, majd az egyik kereső gombjára, s megnézheti, hogy
+                                a világon van-e valahol jelentése annak a karaktersorozatnak, amelyet
+                                kiválasztott.
+                                <small>(Javasoljuk, hogy ékezet nélküli betűsorozatot válasszon! <i>Ötlet:</i> hosszabb
+                                    betűcsoportokra a Baidu adja a legpontosabb találatokat.)</small></p>
+                        </div>
+
+                        <div class="row">
+                            <div id="searchEngines" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="searching()">
+                                    <input type="radio" name="options" id="pagesBack" checked>
+                                    Google
+                                </button>
+
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="searching()">
+                                    <input type="radio" name="options" id="pagesOn">
+                                    Yahoo
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="searching()">
+                                    <input type="radio" name="options" id="pagesOn">
+                                    Bing
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="searching()">
+                                    <input type="radio" name="options" id="pagesOn">
+                                    DuckDuckGo
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="searching()">
+                                    <input type="radio" name="options" id="pagesOn">
+                                    Baidu
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="searching()">
+                                    <input type="radio" name="options" id="pagesOn">
+                                    Yandex
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-4" id="pages">
+                        <table type="table" class="table table-sm" id="wordTable"></table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <form>
+                        <label>Futások száma:</label>
+                        <input type="number" class="form-control form-control-sm" style="width:100px" min="1"
+                            max="1000000">
+                        <label>Karakterek száma:</label>
+                        <input type="number" class="form-control form-control-sm" style="width:100px" min="1" max="3">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="repeat(event)">Mehet</button>
+                    </form>
+                </div>
+                <div class="row">
+                    <table class="table table-sm table-bordered table-striped table-small">
+                        <tr>
+                            <td>Ciklusok száma összesen:</td>
+                            <td><span id="numberOfLoops">-</span></td>
+                        </tr>
+                        <tr>
+                            <td>Legrövidebb ciklus hossza:</td>
+                            <td><span id="minLoopLength">-</span></td>
+                        </tr>
+                        <tr>
+                            <td>Leghosszabb ciklus hossza:</td>
+                            <td><span id="maxLoopLength">-</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="mb-0 pb-0"> A legtöbbször előforduló ciklus hossza:</p>
+                                <p class="mb-0 pb-0" id="loopInfo"><i>Ezen a helyen áll a grafikon legmagasabb oszlopa!</i></p>
+                            </td>
+                            <td><span id="loopInfoValue"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Futásidő:</td>
+                            <td><span id="runTime">-</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="row">
+                    <div id="forTable" class="col col-12">
+                        <table class="table" id="graphic">
+                        </table>
+                    </div>
+                </div>
+                <div class="col-0 col-sm-1 col-md-1"></div>
+            </div>
+        </div>
+
+        <script src="/gyak.js"></script>
+</body>
+
+</html>
