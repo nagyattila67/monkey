@@ -185,7 +185,6 @@ learn = function (expressionHex) {
                 nowHere = learning.length;
                 myValue = 1;
                 learning[nowHere] = [learnThis, myValue];
-                console.log("learnThis", learnThis);
             }
             else {
                 k = k - 1;
@@ -204,59 +203,66 @@ generateWord = function (event) {
     wordOfMonkey = String();
     nextStep = String();
     lengthOfMonkeyWord = event.path[1].children[1].value;
-    temporaryLengthOfMonkeyWord = 1;
     monkeyNumber = Math.floor(Math.random() * learning.length);
     wordOfMonkey = learning[monkeyNumber][0];
-    vowel = wordOfMonkey[wordOfMonkey.length - 1];
-    shortMemoryOfMonkey = Array();
+    lengthOfTemporaryWord = wordOfMonkey.length;
+    vowel = wordOfMonkey[1];
+    console.log(wordOfMonkey, wordOfMonkey[0], "!!!!!!!!!!!!!!")
+    workMemory = Array();
 
-
-
-    while (temporaryLengthOfMonkeyWord < lengthOfMonkeyWord - 1) {
+    while (lengthOfTemporaryWord < lengthOfMonkeyWord) {
         index = 0;
+        workMemory = Array();
         for (let i = 0; i < learning.length; i++) {
             if (learning[i][0][0] == vowel) {
-                shortMemoryOfMonkey[index] = learning[i];
+                workMemory[index] = learning[i];
                 index = index + 1;
             };
-
-            max = 0;
-            for (let i = 0; i < shortMemoryOfMonkey.length; i++) {
-                if (shortMemoryOfMonkey[i][1] > max
-                    &&
-                    !(shortMemoryOfMonkey[i][0][1] == wordOfMonkey[temporaryLengthOfMonkeyWord - 1]
-                        &&
-                        wordOfMonkey[temporaryLengthOfMonkeyWord - 1] == wordOfMonkey[temporaryLengthOfMonkeyWord - 2])
-                ) {
-                    console.log(wordOfMonkey, temporaryLengthOfMonkeyWord,
-                        vowel,
-                        wordOfMonkey[temporaryLengthOfMonkeyWord - 1],
-                        wordOfMonkey[temporaryLengthOfMonkeyWord - 2],
-
-
-                        "hello");
-                    vowel = shortMemoryOfMonkey[i][0][1]
-                };
-                max = max + 1;
-
-            };
         };
-        wordOfMonkey = wordOfMonkey + vowel;
-        temporaryLengthOfMonkeyWord = temporaryLengthOfMonkeyWord + 1;
-        console.log(wordOfMonkey[temporaryLengthOfMonkeyWord - 2], wordOfMonkey[temporaryLengthOfMonkeyWord - 1], vowel)
+        console.log(workMemory);
+        max = 0;
+        for (let i = 0; i < workMemory.length; i++) {
+            if (workMemory[i][1] > max) { max = workMemory[i][1] };
+        };
+
+
+        for (let i = 0; i < workMemory.length; i++) {
+            if (workMemory[i][1] < max
+                ||
+                (workMemory[i][0][1] == wordOfMonkey[lengthOfTemporaryWord]
+                    &&
+                    wordOfMonkey[lengthOfTemporaryWord] == wordOfMonkey[lengthOfTemporaryWord - 1])) { workMemory.splice(i, 1) };
+        };
+        console.log(workMemory);
+
+
+
+        if (workMemory.length == 0) {
+            lengthOfTemporaryWord = lengthOfMonkeyWord;
+            wordOfMonkey = wordOfMonkey + " - Csak eddig jutottam!"
+        }
+        else {
+            numberOfMonkey = Math.floor(Math.random() * workMemory.length);
+
+            vowel = workMemory[numberOfMonkey][0][1];
+            wordOfMonkey = wordOfMonkey + vowel;
+            lengthOfTemporaryWord = lengthOfTemporaryWord + 1;
+        }
+
+        console.log(wordOfMonkey, lengthOfTemporaryWord,
+            vowel,
+            wordOfMonkey[lengthOfTemporaryWord - 1],
+            wordOfMonkey[lengthOfTemporaryWord - 2],
+            "hello");
+
+
+
+       
+        console.log(wordOfMonkey[lengthOfTemporaryWord - 2], wordOfMonkey[lengthOfTemporaryWord - 1], vowel)
         console.log(wordOfMonkey);
 
     };
-
-
-
-    //shortMemoryOfMonkey
-
-
-
-
-    //wordOfMonkey=
-    document.querySelector("#generatedWord").innerHTML = "a szó"
+    document.querySelector("#generatedWord").innerHTML = wordOfMonkey;
 };
 
 displayResultOfTyping = function (place, expressionHTML, hit, turn, maxTurn) {
