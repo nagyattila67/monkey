@@ -284,32 +284,49 @@
                     <form>
                         <label>Futások száma:</label>
                         <input type="number" class="form-control form-control-sm" style="width:100px" min="1"
-                            max="1000000">
+                            max="1000000" value="100">
                         <label>Karakterek száma:</label>
-                        <input type="number" class="form-control form-control-sm" style="width:100px" min="1" max="3">
+                        <input type="number" class="form-control form-control-sm" style="width:100px" min="1" max="3"
+                            value="2">
                         <button type="button" class="btn btn-secondary btn-sm" onclick="repeat(event)">Mehet</button>
                     </form>
                 </div>
                 <div class="row">
                     <table class="table table-sm table-bordered table-striped table-small">
                         <tr>
-                            <td>Ciklusok száma összesen:</td>
-                            <td><span id="numberOfLoops">-</span></td>
+                            <td>Ennyi betűsorozatot írt le összesen a majom:</td>
+                            <td><span id="numberOfWords">-</span></td>
                         </tr>
                         <tr>
-                            <td>Legrövidebb ciklus hossza:</td>
-                            <td><span id="minLoopLength">-</span></td>
-                        </tr>
-                        <tr>
-                            <td>Leghosszabb ciklus hossza:</td>
-                            <td><span id="maxLoopLength">-</span></td>
+                            <td>A legrövidebb lista szó-száma:</td>
+                            <td><span id="shortestListLength">-</span></td>
                         </tr>
                         <tr>
                             <td>
-                                <p class="mb-0 pb-0"> A legtöbbször előforduló ciklus hossza:</p>
-                                <p class="mb-0 pb-0" id="loopInfo"><i>Ezen a helyen áll a grafikon legmagasabb oszlopa!</i></p>
+                                <p class="mb-0 pb-0">Ebből a listából ennyi van:</p>
+                                <p class="loopInfo mb-0 pb-0"><i>Az első oszlop magassága a grafikonon</i></p>
                             </td>
-                            <td><span id="loopInfoValue"></span></td>
+                            <td><span id="shortestListValue"></span></td>
+                        </tr>
+                        <tr>
+                            <td>A leghosszabb lista szó-száma:</td>
+                            <td><span id="longestListLength">-</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ebből a listából ennyi van:</td>
+                            <td><span id="longestListValue">-</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="mb-0 pb-0"> A legtöbbször előforduló lista szószáma:</p>
+                            <td><span id="mostFrequentedListLength"></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="mb-0 pb-0"> Ebből a listából ennyi van:</p>
+                                <p class="loopInfo mb-0 pb-0"><i>Ez a legmagasabb oszlop a grafikonon.</i></p>
+                            </td>
+                            <td><span id="mostFrequentedListValue"></span></td>
                         </tr>
                         <tr>
                             <td>Futásidő:</td>
@@ -323,11 +340,35 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-0 col-sm-1 col-md-1"></div>
+                <div class="row">
+                    <p>A következő grafikon azt mutatja meg, hogy az első 600 futás során futásonként hány betűsorozat
+                        lett legépelve.</p>
+                </div>
+                <div class="row">
+                    <div id="forTableSecond" class="col col-12">
+                        <table class="table" id="graphicSecond">
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <form class="form-inline">
+                        <label>A szó hossza legyen:</label>
+                        <input type="number" class="form-control form-control-sm" style="width:100px" min="2" max="10"
+                            value="8">
+                        <label> betű!</label>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="generateWord(event)">Kérek egy
+                            szót!</button>
+                    </form>
+                </div>
+                <div class="row">
+                    <p>Íme a szó:<span id="generatedWord"></span> </p>
+                </div>
             </div>
-        </div>
 
-        <script src="/gyak.js"></script>
+
+            <div class="col-0 col-sm-1 col-md-1"></div>
+
+            <script src="/gyak.js"></script>
 </body>
 
 </html>

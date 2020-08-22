@@ -8,7 +8,14 @@ wordForSearch = String();
 rep = false;
 cons = true;
 displayNow = true;
-totalNumberOfLoops=0
+totalNumberOfWords = 0
+hungWord = "";
+learning = Array();
+learnThis = String();
+nowHere = Number();
+wasMaximumCanged = false;
+wasDistMaxChanged = false;
+distMaxOriginal = 0;
 
 
 
@@ -155,7 +162,101 @@ word = function () {
     if (displayNow == true) { displayResultOfTyping(place, expressionHTML, hit, turn, maxTurn) };
     if (displayNow == true) { displayWord() };
 
+    learn(expressionHex);
+
     return expressionHex, expressionHTML, digit, digitHex, sheetCounter, hit, turn, timeLength;
+};
+
+
+learn = function (expressionHex) {
+    if (expressionHex.length > 4) {
+        index = szavakHex.findIndex(x => x == expressionHex);
+        hungWord = szavak[index];
+        for (let i = 0; i < hungWord.length - 1; i++) {
+            learnThis = hungWord[i] + hungWord[i + 1];
+            doIt = true;
+            k = 0;
+            while (doIt == true && k < learning.length) {
+                if (learnThis == learning[k][0]) { doIt = false }
+                k = k + 1;
+            };
+            if (doIt == true) {
+                learnThis = learnThis;
+                nowHere = learning.length;
+                myValue = 1;
+                learning[nowHere] = [learnThis, myValue];
+                console.log("learnThis", learnThis);
+            }
+            else {
+                k = k - 1;
+                learning[k][1] = learning[k][1] + 1;
+
+            };
+        };
+    };
+};
+
+//az eddig tanultak alapján generál egy új szót
+generateWord = function (event) {
+    ev = event;
+    console.log("GENERATE");
+    monkeyNumber = Number();
+    wordOfMonkey = String();
+    nextStep = String();
+    lengthOfMonkeyWord = event.path[1].children[1].value;
+    temporaryLengthOfMonkeyWord = 1;
+    monkeyNumber = Math.floor(Math.random() * learning.length);
+    wordOfMonkey = learning[monkeyNumber][0];
+    vowel = wordOfMonkey[wordOfMonkey.length - 1];
+    shortMemoryOfMonkey = Array();
+
+
+
+    while (temporaryLengthOfMonkeyWord < lengthOfMonkeyWord - 1) {
+        index = 0;
+        for (let i = 0; i < learning.length; i++) {
+            if (learning[i][0][0] == vowel) {
+                shortMemoryOfMonkey[index] = learning[i];
+                index = index + 1;
+            };
+
+            max = 0;
+            for (let i = 0; i < shortMemoryOfMonkey.length; i++) {
+                if (shortMemoryOfMonkey[i][1] > max
+                    &&
+                    !(shortMemoryOfMonkey[i][0][1] == wordOfMonkey[temporaryLengthOfMonkeyWord - 1]
+                        &&
+                        wordOfMonkey[temporaryLengthOfMonkeyWord - 1] == wordOfMonkey[temporaryLengthOfMonkeyWord - 2])
+                ) {
+                    console.log(wordOfMonkey, temporaryLengthOfMonkeyWord,
+                        vowel,
+                        wordOfMonkey[temporaryLengthOfMonkeyWord - 1],
+                        wordOfMonkey[temporaryLengthOfMonkeyWord - 2],
+
+
+                        "hello");
+                    vowel = shortMemoryOfMonkey[i][0][1]
+                };
+                max = max + 1;
+
+            };
+        };
+        wordOfMonkey = wordOfMonkey + vowel;
+        temporaryLengthOfMonkeyWord = temporaryLengthOfMonkeyWord + 1;
+        console.log(wordOfMonkey[temporaryLengthOfMonkeyWord - 2], wordOfMonkey[temporaryLengthOfMonkeyWord - 1], vowel)
+        console.log(wordOfMonkey);
+
+    };
+
+
+
+    //shortMemoryOfMonkey
+
+
+
+
+    //wordOfMonkey=
+    document.querySelector("#generatedWord").innerHTML = "a szó"
 };
 
 displayResultOfTyping = function (place, expressionHTML, hit, turn, maxTurn) {
@@ -228,8 +329,9 @@ displayWord = function () {
 };
 
 repeatCount = 0;
-clearing = "false";
+//clearing = "false";
 repeat = function (event) {
+    wasMaximumChanged = false;
     repeatCount = 0;
     displayNow = false;
     console.log("Az ismétlések elindultak. Csak az utolsó ismétlés találatát fogja látni.")
@@ -241,7 +343,7 @@ repeat = function (event) {
     runningNumber = parseInt(runningNumber);
     charNumber = parseInt(charNumber);
     maximum = 0;
-    totalNumberOfLoops=0;
+    totalNumberOfWords = 0;
     //averageArray: adott sorszámú futásnál hány ciklus történt
     for (let i = 0; i < runningNumber; i++) { averageArray[i] = [0, 0]; averageArray[i][0] = 0; averageArray[i][1] = 0 };
     for (let i = 0; i < runningNumber; i++) {
@@ -255,11 +357,11 @@ repeat = function (event) {
         if (turn > maximum) { maximum = turn }
     };
 
-    for(let i=0;i<averageArray.length;i++){
-        totalNumberOfLoops=totalNumberOfLoops+averageArray[i][0];
+    for (let i = 0; i < averageArray.length; i++) {
+        totalNumberOfWords = totalNumberOfWords + averageArray[i][0];
     };
 
-    console.log("Az ismétlések lefutottak, összesen: ", repeatCount, " a legrövidebb ciklus: ", minimum, " a leghosszabb ciklus: ", maximum, "ciklusok száma összesen", totalNumberOfLoops);
+    console.log("Az ismétlések lefutottak, összesen: ", repeatCount, " a legrövidebb ciklus: ", minimum, " a leghosszabb ciklus: ", maximum, "ciklusok száma összesen", totalNumberOfWords);
     /*for (let i = 0; i < averageArray.length; i++) {
         console.log(i, ". sorszámú futás hossza: ", averageArray[i][0], " ciklus", averageArray[i][1], " mp")
     }*/
@@ -273,19 +375,24 @@ repeat = function (event) {
             if (averageArray[j][0] == i) {
                 distribution[i] = distribution[i] + 1;
             };
-            if (distribution[i] > distMax) { distMax = distribution[i];};
+            if (distribution[i] > distMax) { distMax = distribution[i]; };
         };
     };
-    
+
     distributionCopy = Array();
     for (let i = 0; i < distribution.length; i++) {
         distributionCopy[i] = distribution[i];
+
     }
-    
-    distMaxPlace=distributionCopy.findIndex(value=>value==distMax);
+    distributionCopy2 = Array();
+    for (let i = 0; i < distribution.length; i++) {
+        distributionCopy2[i] = distribution[i];
+    }
+
+    distMaxPlace = distributionCopy.findIndex(value => value == distMax);
 
     /*distHeight = 0;
-    for (let i = 0; i < distribution.lenght; i++) {
+    for (let i = 0; i < distribution.length; i++) {
         if (distribution[i] > distHeight) {
             distHeight = distribution[i]
         };
@@ -299,20 +406,29 @@ repeat = function (event) {
     timeLength = timeLength / averageArray.length
     console.log(timeLength, " sec");
 
-    if (displayNow == true) { makeTableAndColoring() };
-    fillLoopTable();
+    if (displayNow == true) {
+        fillLoopTable();
+        makeTableAndColoring();
+        console.log("első grafikon elkészült");
+        console.log("indul a második táblázat elkészítése");
+        makeTheSecondTable();
+        console.log("második grafikon elkészült");
+
+    };
 
     rep = false;
 };
 
-fillLoopTable = function(){
-    document.querySelector("#numberOfLoops").innerHTML=totalNumberOfLoops;
-    document.querySelector("#minLoopLength").innerHTML=minimum;
-    document.querySelector("#maxLoopLength").innerHTML=maximum;
-    document.querySelector("#runTime").innerHTML="?";
-    document.querySelector("#loopInfoValue").innerHTML=distMaxPlace;
-
-}
+fillLoopTable = function () {
+    document.querySelector("#numberOfWords").innerHTML = totalNumberOfWords;
+    document.querySelector("#shortestListLength").innerHTML = minimum;
+    document.querySelector("#shortestListValue").innerHTML = distribution[minimum];
+    document.querySelector("#longestListLength").innerHTML = distribution.length - 1;
+    document.querySelector("#longestListValue").innerHTML = distribution[distribution.length - 1];
+    document.querySelector("#mostFrequentedListLength").innerHTML = distMaxPlace;
+    document.querySelector("#mostFrequentedListValue").innerHTML = distMax;
+    document.querySelector("#runTime").innerHTML = "?";
+};
 
 //elkészíti az üres táblázatot
 makeTableAndColoring = function () {
@@ -325,10 +441,39 @@ makeTableAndColoring = function () {
         area.removeChild(element);
     };
 
-    pixWidth = Math.ceil(500 / maximum);
-    pixHeight = Math.ceil(300 / distMax);
+    if (maximum > 600) {
+
+        console.log("ACTIVE: oszlopok száma!!!");
+        let k = maximum / 600;
+        let average = Number();
+        distribution = Array();
+        for (let j = 0; j < k; j++) {
+            average = 0;
+            for (let i = k * 600; i < (k + 1) * 600; i++) {
+                average = average + distributionCopy[i];
+            };
+            average = Math.ceil(average / 600);
+            distributionCopy[j] = average;
+        };
+        wasMaximumChanged = true;
+        maximum = 600;
+    };
+
+    if (distMax > 1200) {
+        console.log("ACTIVE: sorok száma!!!");
+        distMaxOriginal = distMax;
+        distMax = 1200;
+        wasDistMaxChanged = true;
+    };
+
+    myArray = Array();
+    for (let i = 0; i < averageArray.length; i++) { myArray[i] = averageArray[i][0] };
+
+    pixWidth = Math.ceil(600 / maximum);
+    pixHeight = Math.ceil(400 / distMax);
     //pixHeight = 10;
 
+    //táblázat elkészítése
     for (let i = 0; i <= distMax; i++) {
         place = document.querySelector("#graphic");
         dataRow = document.createElement("tr");
@@ -352,10 +497,134 @@ makeTableAndColoring = function () {
             if (distributionCopy[j] != 0) { dataCell.style["background"] = "#f00c93"; distributionCopy[j] = distributionCopy[j] - 1 };
         };
         k = k - 1;
-        clearing = true;
+        //clearing = true;
     };
 
-}
+};
+
+makeTheSecondTable = function () {
+    myArray2 = Array();
+    for (let i = 0; i < averageArray.length; i++) { myArray2[i] = averageArray[i][0] };
+    //elkészíti az üres táblázatot
+
+    //tisztítás: újraklikkelésnél eltávollítja az odarakott cellákat, hogy üres legyen a table
+    borderNumber = document.querySelectorAll("#graphicSecond tr").length;
+    for (let i = 0; i < borderNumber; i++) {
+        area = document.querySelector("#graphicSecond");
+        element = document.querySelectorAll("#graphicSecond tr")[borderNumber - 1 - i];
+        area.removeChild(element);
+    };
+
+    /*if (maximum > 600) {
+
+
+
+        console.log("ACTIVE: oszlopok száma!!!");
+        let k = maximum / 600;
+        let average = Number();
+        distribution = Array();
+        for (let j = 0; j < k; j++) {
+            average = 0;
+            for (let i = k * 600; i < (k + 1) * 600; i++) {
+                average = average + distributionCopy2[i];
+            };
+            average = Math.ceil(average / 600);
+            distributionCopy2[j] = average;
+        };
+        maximum = 600;
+    };
+
+    if (distMax > 400) {
+        console.log("ACTIVE: sorok száma!!!");
+        distMax = 400;
+    };*/
+
+    //myArray = Array();
+    //for (let i = 0; i < averageArray.length; i++) { myArray2[i] = averageArray[i][0] };
+
+
+
+    //pixWidth = Math.ceil(600 / maximum);
+    //pixHeight = Math.ceil(400 / myArray2.length);
+    pixWidth = 1;
+    pixHeight = 1;
+    //pixHeight = 10;
+
+    //táblázat elkészítése
+
+    //csak az első 600 oszlopát készíti el és írja ki, ui. a kiszínezésnél órákig futna egyébként!
+    //for (let j = 0; j < myArray.length; j++) {
+    myBorder = 600;
+    if (myArray.length < myBorder) { myBorder = myArray.length }
+
+    for (let i = 0; i <= maximum - 1; i++) {
+        place = document.querySelector("#graphicSecond");
+        dataRow = document.createElement("tr");
+        place.appendChild(dataRow)
+        sector = document.querySelectorAll("#graphicSecond tr")[i];
+        for (let j = 0; j < myBorder; j++) {
+            dataCell = document.createElement("td");
+            sector.appendChild(dataCell);
+            dataCell.style.width = `${pixWidth}px`;
+            dataCell.style.height = `${pixHeight}px`;
+            dataCell.style.margin = "0px";
+            dataCell.style.padding = "0px";
+        };
+    };
+
+    console.log("a második táblázat elkészült!!!!");
+
+    //kiszínezi a cellákat alulról haladva       
+    /*let k = distMax;
+    myArrayCopy=Array();
+    while (k > 0) {
+        console.log("coloring");
+        for (let j = 0; j < maximum - 1; j++) {
+            dataCell = document.querySelectorAll("#graphicSecond tr")[k].children[j];
+            if (myArray2[j] != 0) { dataCell.style["background"] = "#f00c93";
+            //distributionCopy2[j] = distributionCopy2[j] - 1 
+        };
+        };
+        k = k - 1;
+        //clearing2 = true;
+    };
+    */
+
+    //for (let k = 0; k < maximum; k++) {
+    k = maximum - 1;
+    console.log("coloring most indul");
+    while (k > 0) {
+        console.log("COLORING!! ", k)
+
+        for (let j = 0; j < myBorder; j++) {
+            dataCell = document.querySelectorAll("#graphicSecond tr")[k].children[j];
+            if (myArray2[j] != 0) {
+                dataCell.style["background"] = "#f00c93";
+                myArray2[j] = myArray2[j] - 1;
+            };
+        };
+        k = k - 1;
+
+
+        /* let k = distMax;
+         while (k > 0) {
+             for (let j = 0; j < maximum - 1; j++) {
+                 dataCell = document.querySelectorAll("#graphic tr")[k].children[j];
+                 if (distributionCopy[j] != 0) { dataCell.style["background"] = "#f00c93"; distributionCopy[j] = distributionCopy[j] - 1 };
+             };
+             k = k - 1;
+             //clearing = true;
+         };*/
+
+
+        //distributionCopy2-re szükség van?
+        //clearing-re szükség van?
+
+
+    };
+    document.querySelector("#graphicSecond").style.width = `${myArray.length}px`
+};
+
 
 dictionary = function () {
     if (wasClick == true) {
