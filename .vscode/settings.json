@@ -6,7 +6,7 @@
     "liveServer.settings.NoBrowser" : false,
     "liveServer.settings.ignoreFiles" : [
 
-        "data/data.json",
+        "data/dataBase.json",
 
         
     ]

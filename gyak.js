@@ -16,8 +16,13 @@ nowHere = Number();
 wasMaximumCanged = false;
 wasDistMaxChanged = false;
 distMaxOriginal = 0;
-
-
+maximumOriginal = Number();
+learningNew = Object();
+learningForPost = Object();
+random = false;
+temporaryContainer = Array();
+sentenceOfMonkey = String();
+totalNumberOfCurrents = 0
 
 time = function (timeStart, timeFinish) {
     timeLength = (timeFinish.getTime() - timeStart.getTime()) / 1000;
@@ -25,7 +30,7 @@ time = function (timeStart, timeFinish) {
     sec = timeLength % 60;
     min = Math.floor(timeLength / 60);
     return sec, min;
-}
+};
 
 //a majom által megírt könyv üres mutatványoldalának az elkészítése
 area = document.querySelector("#wordTable");
@@ -125,23 +130,22 @@ word = function () {
 
             memory[turn] = expressionHTML;
             //console.log("digit: ", digit, " digitHEX: ", digitHex, " expressionHEX: ", expressionHex, " turn: ", turn);
-
-        }
+        };
 
         for (let k = 0; k < szavakHex.length; k++) {
             if (expressionHex == szavakHex[k]) {
                 index = szavakHex.findIndex(x => x == expressionHex);
                 hit = true;
-                if (cons == true && displayNow == true) { console.log("TALÁLAT!!!!! ", turn, "ciklus után. A szó: ", szavak[index]) };
+                if (cons == true && displayNow == true) { console.log("TALÁLAT!!!!! ", turn, "ciklus után. A szó: ", szavak[index]); };
                 timeFinish = new Date();
-            }
-        }
+            };
+        };
 
         if (turn == maxTurn) {
             hit = true;
             if (cons = true && displayNow == true) { console.log("FELAD!!!!! ", turn, "ciklus után") };
             timeFinish = new Date();
-        }
+        };
 
         if (turn == 0 && cons == true && displayNow == true) { console.log("A betűkombinációk kirakása elindult.") }
 
@@ -150,10 +154,10 @@ word = function () {
                 timeFinishTemp = new Date();
                 time(timeStart, timeFinishTemp);
                 if (cons == true) { console.log(turn, "ciklus futott le eddig", `${min} perc, ${sec} másodperc alatt`) };
-            }
+            };
         };
         turn = turn + 1;
-    }
+    };
 
     //timeFinish2 = new Date();
     place = document.querySelector("#word");
@@ -167,8 +171,8 @@ word = function () {
     return expressionHex, expressionHTML, digit, digitHex, sheetCounter, hit, turn, timeLength;
 };
 
-
 learn = function (expressionHex) {
+    //learning tömb elemei [két betű / gyakoriság:hány szóban fordult eddig elő / a szóban hányadik betűhelyen kezdődött ez a kétbetűs rész / hány betűs volt a szó]
     if (expressionHex.length > 4) {
         index = szavakHex.findIndex(x => x == expressionHex);
         hungWord = szavak[index];
@@ -184,27 +188,65 @@ learn = function (expressionHex) {
                 learnThis = learnThis;
                 nowHere = learning.length;
                 myValue = 1;
-                learning[nowHere] = [learnThis, myValue];
+                learning[nowHere] = [learnThis, myValue, i + 1, hungWord.length];
             }
             else {
                 k = k - 1;
                 learning[k][1] = learning[k][1] + 1;
-
             };
         };
+        totalNumberOfCurrents = totalNumberOfCurrents + 1;
     };
+
+    learningForPost = learning;
+    document.querySelector("#monkeyMemorySize").innerHTML = `${learning.length} karakterkettős.`
+    document.querySelector("#monkeyMemorySize").style["background-color"] = "#FADADD";
+    document.querySelector("#numberOfRunnings").innerHTML = totalNumberOfCurrents;
+};
+
+sendData = function () {
+    luggage = learningForPost;
+    pack = Array();
+    console.log("Adatok elküldve.");
+
+    fetchInit = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
+        cache: 'no-cache',
+        body: luggage = JSON.stringify(luggage)
+    };
+
+    fetch("http://localhost:3000/letterGroups", fetchInit).then(data => data.json()).catch(err => console.log(err))
+        .then(data => pack = data).catch(err => console.log(err))
+};
+
+generateWordRnd = function () {
+    random = true;
+    myRndNumber = Math.ceil(Math.random() * 10);
+    myRndNumber = myRndNumber + 2;
+    generateWord();
 };
 
 //az eddig tanultak alapján generál egy új szót
 generateWord = function (event) {
+    let gotIt = false;
     ev = event;
     console.log("GENERATE");
     monkeyNumber = Number();
     wordOfMonkey = String();
     nextStep = String();
-    lengthOfMonkeyWord = event.path[1].children[1].value;
-    monkeyNumber = Math.floor(Math.random() * learning.length);
-    wordOfMonkey = learning[monkeyNumber][0];
+    if (random == false) { lengthOfMonkeyWord = event.path[1].children[1].value }
+    else { lengthOfMonkeyWord = myRndNumber }
+
+    while (gotIt == false) {
+        monkeyNumber = Math.floor(Math.random() * learning.length);
+        if (learning[monkeyNumber][2] = 1) {
+            wordOfMonkey = learning[monkeyNumber][0];
+            gotIt = true;
+        };
+    };
+
     lengthOfTemporaryWord = wordOfMonkey.length;
     vowel = wordOfMonkey[1];
     console.log(wordOfMonkey, wordOfMonkey[0], "!!!!!!!!!!!!!!")
@@ -225,7 +267,6 @@ generateWord = function (event) {
             if (workMemory[i][1] > max) { max = workMemory[i][1] };
         };
 
-
         for (let i = 0; i < workMemory.length; i++) {
             if (workMemory[i][1] < max
                 ||
@@ -235,11 +276,9 @@ generateWord = function (event) {
         };
         console.log(workMemory);
 
-
-
         if (workMemory.length == 0) {
             lengthOfTemporaryWord = lengthOfMonkeyWord;
-            wordOfMonkey = wordOfMonkey + " - Csak eddig jutottam!"
+            //wordOfMonkey = wordOfMonkey + " - Csak eddig jutottam!"
         }
         else {
             numberOfMonkey = Math.floor(Math.random() * workMemory.length);
@@ -255,14 +294,70 @@ generateWord = function (event) {
             wordOfMonkey[lengthOfTemporaryWord - 2],
             "hello");
 
-
-
-       
         console.log(wordOfMonkey[lengthOfTemporaryWord - 2], wordOfMonkey[lengthOfTemporaryWord - 1], vowel)
         console.log(wordOfMonkey);
-
     };
-    document.querySelector("#generatedWord").innerHTML = wordOfMonkey;
+
+    if (workMemory.length == 0) {
+        document.querySelector("#generatedWord").innerHTML = `${wordOfMonkey} - csak eddig jutottam!`
+    }
+    else { document.querySelector("#generatedWord").innerHTML = wordOfMonkey }
+    random = false;
+};
+
+clearNotation = function () {
+    myLength = document.querySelectorAll("#notations tr").length
+    place = document.querySelector("#notations");
+    place.removeChild(tr)
+};
+
+numero = Number();
+remove = function (event) {
+    numero = event.path[1].children[0].getAttribute("name");
+    temporaryContainer.splice(numero, 1);
+    console.log("remove", event);
+    target = event.path[1];
+    area = event.path[2];
+    area.removeChild(target, event);
+
+    myLength = document.querySelectorAll("#notations tr").length
+    //area = document.querySelectorAll("#notations tr")[myLength - 1];
+    //sector = area.querySelector("td:last-child");
+    for (let i = 0; i < myLength; i++) {
+        area = document.querySelectorAll("#notations tr")[i];
+        sector = area.querySelector("td");
+        sector.setAttribute("name", i);
+    };
+};
+
+notation = function () {
+    console.log("notation");
+    place = document.querySelector("#notations");
+    trow = document.createElement("tr");
+    place.appendChild(trow);
+    tdata = document.createElement("td");
+    myLength = document.querySelectorAll("#notations tr").length
+    area = document.querySelectorAll("#notations tr")[myLength - 1];
+    area.appendChild(tdata);
+    sector = area.querySelector("td:last-child");
+    sector.setAttribute("onclick", "remove(event)");
+    sector.setAttribute("name", myLength - 1);
+    tdata.innerHTML = wordOfMonkey;
+    temporaryContainer[temporaryContainer.length] = wordOfMonkey;
+};
+
+writeSentence = function () {
+    if (document.querySelectorAll("#notations tr").length > 4) {
+        sentenceOfMonkey = temporaryContainer[0] + " " +
+            temporaryContainer[1] + "JE MEG" + temporaryContainer[2] + "TE A " +
+            temporaryContainer[3] + " " + temporaryContainer[4] + "T.";
+        sentenceOfMonkey = sentenceOfMonkey.toLowerCase();
+        sentenceOfMonkey = "A " + sentenceOfMonkey;
+
+
+        document.querySelector("#sentence").innerHTML = sentenceOfMonkey;
+    }
+    else { alert("Legalább öt szónak kell lennie a listáján!") }
 };
 
 displayResultOfTyping = function (place, expressionHTML, hit, turn, maxTurn) {
@@ -326,15 +421,20 @@ displayWord = function () {
             rowList[i].innerHTML = memory[memory.length - 40 + i - 2]
             document.querySelectorAll("#wordTable tr")[main].style["background-color"] = "#fadadd";
         };
-
     };
-
     addSearchingEvent();
     wordForSearch = rowList[main].innerHTML;
+};
 
+isItRepeating = false;
+goToRepeat = function () {
+    isItRepeating = true;
+    repeat();
 };
 
 repeatCount = 0;
+previousCharNumber = Number();
+previousRunningNumber = Number();
 //clearing = "false";
 repeat = function (event) {
     wasMaximumChanged = false;
@@ -343,11 +443,19 @@ repeat = function (event) {
     console.log("Az ismétlések elindultak. Csak az utolsó ismétlés találatát fogja látni.")
     averageArray = Array();
     rep = true;
-    ev = event;
-    runningNumber = event.path[1][0].value;
-    charNumber = event.path[1][1].value;
+    if (isItRepeating == false) {
+        runningNumber = event.path[1][0].value;
+        charNumber = event.path[1][1].value;
+    }
+    if (isItRepeating == true) {
+        runningNumber = previousRunningNumber;
+        charNumber = previousCharNumber
+    };
+
     runningNumber = parseInt(runningNumber);
     charNumber = parseInt(charNumber);
+    previousCharNumber = charNumber;
+    previousRunningNumber = runningNumber;
     maximum = 0;
     totalNumberOfWords = 0;
     //averageArray: adott sorszámú futásnál hány ciklus történt
@@ -419,9 +527,7 @@ repeat = function (event) {
         console.log("indul a második táblázat elkészítése");
         makeTheSecondTable();
         console.log("második grafikon elkészült");
-
     };
-
     rep = false;
 };
 
@@ -434,6 +540,73 @@ fillLoopTable = function () {
     document.querySelector("#mostFrequentedListLength").innerHTML = distMaxPlace;
     document.querySelector("#mostFrequentedListValue").innerHTML = distMax;
     document.querySelector("#runTime").innerHTML = "?";
+};
+
+valueOne = Number();
+valueTwo = Number();
+valueThree = Number();
+previousValueOne = Number();
+previousValueTwo = Number();
+previousValueThree = Number();
+needErase = false;
+assistantArray = Array();
+
+eraseGraph = function () {
+
+    for (let i = 1; i < distMax; i++) {
+
+        for (let j = 0; j < distribution.length; j++)
+            if (Math.ceil(previousValueOne * distMax / i + previousValueTwo) + previousValueThree == j) {
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && assistantArray[i] == "pink") {
+                    document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#f00c93"
+                };
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && assistantArray[i] == "grey") {
+                    document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#dbdbdb";
+                };
+            };
+    };
+    assistantArray = Array();
+};
+
+distributionMath = Array()
+estimateFunction = function () {
+    //odaszínezi a közelítő függvény grafikonját az oszlopgrafikonra
+
+    if (needErase == true) { eraseGraph()};
+
+    valueOne = event.path[1][0].value;
+    valueTwo = event.path[1][1].value;
+    valueThree = event.path[1][2].value;
+
+    if (needErase == true) { eraseGraph() };
+
+    for (let i = 1; i < distMax; i++) {
+
+        for (let j = 0; j < distribution.length; j++)
+            if (Math.ceil(valueOne * distMax / i + valueTwo) + valueThree == j) {
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(240, 12, 147)") { assistantArray[i] = "pink" };
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(219, 219, 219)") { assistantArray[i] = "grey" };
+
+                document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#000000";
+            };
+    };
+
+    needErase = true;
+
+    previousValueOne = valueOne;
+    previousValueTwo = valueTwo;
+    previousValueThree = valueThree;
+
+
+    let k = distMax;
+    while (k > 0) {
+        for (let j = 0; j < maximum - 1; j++) {
+            dataCell = document.querySelectorAll("#graphic tr")[k].children[j];
+            if (distributionCopy[j] != 0) { dataCell.style["background"] = "#f00c93"; distributionCopy[j] = distributionCopy[j] - 1 };
+        };
+        k = k - 1;
+        //clearing = true;
+    };
 };
 
 //elkészíti az üres táblázatot
@@ -458,10 +631,11 @@ makeTableAndColoring = function () {
             for (let i = k * 600; i < (k + 1) * 600; i++) {
                 average = average + distributionCopy[i];
             };
-            average = Math.ceil(average / 600);
+            average = Math.floor(average / 600);
             distributionCopy[j] = average;
         };
         wasMaximumChanged = true;
+        maximumOriginal = maximum;
         maximum = 600;
     };
 
@@ -492,6 +666,7 @@ makeTableAndColoring = function () {
             dataCell.style.height = `${pixHeight}px`;
             dataCell.style.margin = "0px";
             dataCell.style.padding = "0px";
+            dataCell.style["background-color"] = "#dbdbdb";
         };
     };
 
@@ -630,6 +805,7 @@ makeTheSecondTable = function () {
     };
     document.querySelector("#graphicSecond").style.width = `${myArray.length}px`
 };
+
 
 
 dictionary = function () {
