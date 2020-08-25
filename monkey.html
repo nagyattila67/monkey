@@ -344,22 +344,48 @@
                     </div>
                 </div>
                 <div class="row">
-                    <p>A következő grafikon azt mutatja meg, hogy az első 600 futás során futásonként hány betűsorozat
-                        lett legépelve.</p>
+                    <p>Ha akarja, megkeresheti az oszlopgrafikon burkológörbéjét! Ebben az esetben a program először
+                        1000-szer le fog futni egymás után '<i>a majom kétbetűs szavakat keres</i>' beállítással. Ez kb.
+                        fél
+                        percig tart majd. Ehhez kattintson ide: </p>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="preparation()">Felkészülés a
+                        burkológörbe kereséséhez</button>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <form>
+                            <p>Hiperbolikus burkológörbe (javasolt beállítással):</p>
+                            <p><input type="number" name="one" style="width:80px" value="5">*maximum/(x+<input
+                                    type="number" name="two" style="width:80px" value="2"> ) + <input type="number"
+                                    name="three" style="width:80px" value="-15">
+                            </p>
+                            <button disabled id="estimateFunc" type="button" class="btn btn-secondary btn-sm"
+                                onclick="estimateFunction(event)">Mehet</button>
+                            <button disabled id="functionAppr" type="button" class="btn btn-secondary btn-sm"
+                                onclick="decisionAboutErase()">Töröl</button>
+                            <p>A függvény: <span id="FunctionApprox"></span></p>
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <form>
+                            <p>Logaritmikus burkológörbe (javasolt beállítással):</p>
+                            <p><input type="number" name="one" style="width:80px" value="-4">*maximum/(x+<input
+                                    type="number" name="two" style="width:80px" value="-29"> ) + <input type="number"
+                                    name="three" style="width:80px" value="1">
+                            </p>
+                            <button disabled id="estimateFuncLog" type="button" class="btn btn-secondary btn-sm"
+                                onclick="estimateFunctionLog(event)">Mehet</button>
+                            <button disabled id="functionApprLog" type="button" class="btn btn-secondary btn-sm"
+                                onclick="decisionAboutErase()">Töröl</button>
+                            <p>A függvény: <span id="FunctionApproxLog"></span></p>
+                        </form>
+                    </div>
                 </div>
                 <div class="row">
-                    <form>
-                        <p>Burkológörbe:</p>
-                        <p><input type="number" name="one" style="width:40px" value="2">*maximum/(x+<input type="number"
-                                name="two" style="width:40px" value="0"> ) + <input type="number" name="three"
-                                style="width:40px" value="0">
-                        </p>
-                        <button type="button" class="btn btn-secondary btn-sm"
-                            onclick="estimateFunction(event)">Mehet</button>
-                        <button type="button" class="btn btn-secondary btn-sm"
-                            onclick="eraseGraph(event)">Töröl</button>
-                        <p>A függvény: <span id="FunctionApprox"></span></p>
-                    </form>
+                    <p>A következő grafikon azt mutatja meg, hogy az első 600 futás során futásonként hány betűsorozat
+                        lett legépelve.</p>
                 </div>
                 <div class="row">
                     <div id="forTableSecond" class="col col-12">

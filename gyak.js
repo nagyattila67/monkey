@@ -529,6 +529,7 @@ repeat = function (event) {
         console.log("második grafikon elkészült");
     };
     rep = false;
+    isItRepeating = false;
 };
 
 fillLoopTable = function () {
@@ -550,13 +551,14 @@ previousValueTwo = Number();
 previousValueThree = Number();
 needErase = false;
 assistantArray = Array();
+expOrLog = ""
 
 eraseGraph = function () {
 
     for (let i = 1; i < distMax; i++) {
 
         for (let j = 0; j < distribution.length; j++)
-            if (Math.ceil(previousValueOne * distMax / i + previousValueTwo) + previousValueThree == j) {
+            if ((Math.ceil(previousValueOne * distMax / (i - previousValueThree)) - previousValueTwo) == j) {
                 if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && assistantArray[i] == "pink") {
                     document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#f00c93"
                 };
@@ -568,22 +570,58 @@ eraseGraph = function () {
     assistantArray = Array();
 };
 
-distributionMath = Array()
-estimateFunction = function () {
-    //odaszínezi a közelítő függvény grafikonját az oszlopgrafikonra
-
-    if (needErase == true) { eraseGraph()};
-
-    valueOne = event.path[1][0].value;
-    valueTwo = event.path[1][1].value;
-    valueThree = event.path[1][2].value;
-
-    if (needErase == true) { eraseGraph() };
+eraseGraphLog = function () {
 
     for (let i = 1; i < distMax; i++) {
 
         for (let j = 0; j < distribution.length; j++)
-            if (Math.ceil(valueOne * distMax / i + valueTwo) + valueThree == j) {
+            if (
+
+                Math.ceil(valueOne * (Math.log(i - valueThree)/Math.log(1/2)) - valueTwo)
+                ==j
+
+            ) {
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && assistantArray[i] == "pink") {
+                    document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#f00c93"
+                };
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && assistantArray[i] == "grey") {
+                    document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#dbdbdb";
+                };
+            };
+    };
+    assistantArray = Array();
+};
+
+decisionAboutErase = function () {
+    if (needErase == true && expOrLog == "log") { eraseGraphLog() };
+    if (needErase == true && expOrLog == "exp") { eraseGraph() };
+};
+
+
+distributionMath = Array()
+estimateFunction = function () {
+    //odaszínezi a közelítő függvény grafikonját az oszlopgrafikonra
+
+
+
+    valueOne = parseInt(event.path[1][0].value);
+    valueTwo = parseInt(event.path[1][1].value);
+    valueThree = parseInt(event.path[1][2].value);
+    if (isNaN(valueOne) == true) { valueOne = 0 };
+    if (isNaN(valueTwo) == true) { valueTwo = 0 };
+    if (isNaN(valueThree) == true) { valueThree = 0 };
+
+    if (needErase == true && expOrLog == "log") { eraseGraphLog() };
+    if (needErase == true && expOrLog == "exp") { eraseGraph() };
+
+    for (let i = 1; i < distMax; i++) {
+
+        for (let j = 0; j < distribution.length; j++)
+            if ((Math.ceil(
+
+                valueOne * distMax / (i - valueThree)) - valueTwo
+
+            ) == j) {
                 if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(240, 12, 147)") { assistantArray[i] = "pink" };
                 if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(219, 219, 219)") { assistantArray[i] = "grey" };
 
@@ -607,6 +645,59 @@ estimateFunction = function () {
         k = k - 1;
         //clearing = true;
     };
+    expOrLog = "exp";
+};
+ev = ""
+estimateFunctionLog = function () {
+    //odaszínezi a közelítő függvény grafikonját az oszlopgrafikonra
+
+    if (needErase == true && expOrLog == "log") { eraseGraphLog() };
+    if (needErase == true && expOrLog == "exp") { eraseGraph() };
+
+    valueOne = parseInt(event.path[1][0].value);
+    valueTwo = parseInt(event.path[1][1].value);
+    valueThree = parseInt(event.path[1][2].value);
+    if (isNaN(valueOne) == true) { valueOne = 0 };
+    if (isNaN(valueTwo) == true) { valueTwo = 0 };
+    if (isNaN(valueThree) == true) { valueThree = 0 };
+    if (needErase == true) { eraseGraph() };
+
+    ev = event;
+    console.log(ev, valueOne, valueTwo, valueThree);
+
+
+    for (let i = 1; i < distMax; i++) {
+
+        for (let j = 0; j < distribution.length; j++)
+            if (
+
+                Math.ceil(valueOne * (Math.log(i - valueThree)/Math.log(1/2)) - valueTwo)== j
+
+            ) {
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(240, 12, 147)") { assistantArray[i] = "pink" };
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(219, 219, 219)") { assistantArray[i] = "grey" };
+
+                document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#000000";
+            };
+    };
+
+    needErase = true;
+
+    previousValueOne = valueOne;
+    previousValueTwo = valueTwo;
+    previousValueThree = valueThree;
+
+
+    let k = distMax;
+    while (k > 0) {
+        for (let j = 0; j < maximum - 1; j++) {
+            dataCell = document.querySelectorAll("#graphic tr")[k].children[j];
+            if (distributionCopy[j] != 0) { dataCell.style["background"] = "#f00c93"; distributionCopy[j] = distributionCopy[j] - 1 };
+        };
+        k = k - 1;
+        //clearing = true;
+    };
+    expOrLog = "log";
 };
 
 //elkészíti az üres táblázatot
@@ -682,6 +773,17 @@ makeTableAndColoring = function () {
     };
 
 };
+
+preparation = function () {
+    isItRepeating = true;
+    previousRunningNumber = 1000;
+    previousCharNumber = 2;
+    repeat();
+    document.querySelector("#estimateFunc").disabled = "";
+    document.querySelector("#functionAppr").disabled = "";
+    document.querySelector("#estimateFuncLog").disabled = "";
+    document.querySelector("#functionApprLog").disabled = "";
+}
 
 makeTheSecondTable = function () {
     myArray2 = Array();
