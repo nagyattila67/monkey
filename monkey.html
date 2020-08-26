@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <input class="form-control form-control-sm" id="wordLength" type="number" min="1"
-                                        max="8" value="4">
+                                        max="8" value="2">
                                 </div>
                                 <div class="col-auto">
                                     <label>betű!</label>
@@ -357,29 +357,33 @@
                     <div class="col-6">
                         <form>
                             <p>Hiperbolikus burkológörbe (javasolt beállítással):</p>
-                            <p><input type="number" name="one" style="width:80px" value="5">*maximum/(x+<input
-                                    type="number" name="two" style="width:80px" value="2"> ) + <input type="number"
-                                    name="three" style="width:80px" value="-15">
+                            <p><input type="number" name="one" style="width:60px" value="5">*maximum/(x+<input
+                                    type="number" name="two" style="width:60px" value="2"> ) + <input type="number"
+                                    name="three" style="width:60px" value="-15">
                             </p>
                             <button disabled id="estimateFunc" type="button" class="btn btn-secondary btn-sm"
                                 onclick="estimateFunction(event)">Mehet</button>
                             <button disabled id="functionAppr" type="button" class="btn btn-secondary btn-sm"
                                 onclick="decisionAboutErase()">Töröl</button>
-                            <p>A függvény: <span id="FunctionApprox"></span></p>
+                            <p>A függvény: <span id="FunctionApprox"></span></sub></p>
                         </form>
                     </div>
                     <div class="col-6">
                         <form>
-                            <p>Logaritmikus burkológörbe (javasolt beállítással):</p>
-                            <p><input type="number" name="one" style="width:80px" value="-4">*maximum/(x+<input
-                                    type="number" name="two" style="width:80px" value="-29"> ) + <input type="number"
-                                    name="three" style="width:80px" value="1">
+                            <p>Logaritmikus burkológörbe (javasolt beállítással - <span style="font-size:12px">Javasoljuk
+                                    még az alap: 0,87; konstansok: 1, -36, 0 beállítást</span>):</p>
+                            <p>Logaritmus alapja: <input type="number" name="logBase" style="width:60px" value="0.5">
+                            </p>
+                            <p><input type="number" name="one" style="width:60px" value="5">log(x+<input type="number"
+                                    name="two" style="width:60px" value="-36"> ) + <input type="number" name="three"
+                                    style="width:60px" value="0">
                             </p>
                             <button disabled id="estimateFuncLog" type="button" class="btn btn-secondary btn-sm"
                                 onclick="estimateFunctionLog(event)">Mehet</button>
                             <button disabled id="functionApprLog" type="button" class="btn btn-secondary btn-sm"
                                 onclick="decisionAboutErase()">Töröl</button>
-                            <p>A függvény: <span id="FunctionApproxLog"></span></p>
+                            <p>A függvény: <span id="FunctionApproxLog1"></span><sub id="base"></sub><span
+                                    id="FunctionApproxLog2"></span></p>
                         </form>
                     </div>
                 </div>

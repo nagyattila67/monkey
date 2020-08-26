@@ -22,7 +22,7 @@ learningForPost = Object();
 random = false;
 temporaryContainer = Array();
 sentenceOfMonkey = String();
-totalNumberOfCurrents = 0
+totalNumberOfCurrents = 0;
 
 time = function (timeStart, timeFinish) {
     timeLength = (timeFinish.getTime() - timeStart.getTime()) / 1000;
@@ -71,16 +71,21 @@ word = function () {
     wordForSearch = String();
     wordNumber = Number();
     lastWordNumber = Number();
+
     area = document.querySelector("#getWord");
-    if (rep == false) { wordLength = event.path[2].children[1].children[0]["value"]; }
+    if (rep == false) { wordLength = event.path[2].children[1].children[0]["value"]; wordLength = parseInt(wordLength); }
     if (rep == true) { wordLength = charNumber };
-    if (wordLength > 8) {
-        alert("Maximum 8 betű!");
+    if (wordLength > 8 || wordLength < 1) {
+        alert("Minimum 1, maximum 8 betű!");
         wordLength = 4;
         document.querySelector("#wordLength").value = "4"
     };
     area.style.display = "initial";
     goToPage = String();
+
+    if (wordLength != previousWordLength) { beFaster() };
+    previousWordLength = wordLength;
+
 
     //if(hit==false && turn==0){document.querySelector("#status").setAttribute("innerHTML","A majom //////éppen gépel");}
 
@@ -95,7 +100,6 @@ word = function () {
         expressionHex = ""
         digitHex = "";
         //turn = turn + 1; áttettem a végéra
-        wordLength = parseInt(wordLength);
         for (let i = 1; i < (wordLength + 1); i++) {
 
             // a digit egy decimális szám
@@ -432,6 +436,26 @@ goToRepeat = function () {
     repeat();
 };
 
+//Összegyűjti a 'charNumb' hosszúságú szavakat egy ideiglenes tömbbe, s ebből fog újra és újra keresni, nem pedig a teljes 'szavak' tömbből
+szavakTemp = Array();
+szavakHexTemp = Array();
+beFaster = function () {
+    console.log("BEFASTER!!!");
+    let j = 0;
+    for (let i = 0; i < szavak.length; i++) {
+        if (szavak[i].length == wordLength) {
+            szavakTemp[j] = szavak[i];
+            szavakHexTemp[j] = szavakHex[i];
+            j = j + 1;
+        };
+    };
+    console.log(szavakTemp.length, szavakHexTemp.length, wordLength);
+    return (szavakTemp, szavakHexTemp);
+};
+
+
+
+
 repeatCount = 0;
 previousCharNumber = Number();
 previousRunningNumber = Number();
@@ -542,98 +566,156 @@ fillLoopTable = function () {
     document.querySelector("#mostFrequentedListValue").innerHTML = distMax;
     document.querySelector("#runTime").innerHTML = "?";
 };
-
+base = Number();
 valueOne = Number();
 valueTwo = Number();
 valueThree = Number();
+previousBase = Number();
 previousValueOne = Number();
 previousValueTwo = Number();
 previousValueThree = Number();
 needErase = false;
 assistantArray = Array();
-expOrLog = ""
+previousAssistantArray = Array();
+hypOrLog = ""
 
 eraseGraph = function () {
 
-    for (let i = 1; i < distMax; i++) {
 
-        for (let j = 0; j < distribution.length; j++)
-            if ((Math.ceil(previousValueOne * distMax / (i - previousValueThree)) - previousValueTwo) == j) {
-                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && assistantArray[i] == "pink") {
+    for (let i = 0; i < previousAssistantArray.length; i++) {
+        if (previousAssistantArray[i][2] == "pink") { document.querySelectorAll("#graphic tr")[previousAssistantArray[i][0]].children[previousAssistantArray[i][1]].style["background-color"] = "#f00c93" }
+        if (previousAssistantArray[i][2] == "grey") {
+            document.querySelectorAll("#graphic tr")[previousAssistantArray[i][0]].children[previousAssistantArray[i][1]].style["background-color"] = "#dbdbdb";
+        };
+    };
+
+
+    /*for (let i = 1; i < distMax; i++) {
+        valueOfFunctionHyp = hyperbola(previousValueOne, previousValueTwo, previousValueThree, i);
+        for (let j = 0; j < distribution.length; j++) {
+            if (valueOfFunctionHyp == j) {
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && previousAssistantArray[i] == "pink") {
                     document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#f00c93"
                 };
-                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && assistantArray[i] == "grey") {
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && previousAssistantArray[i] == "grey") {
                     document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#dbdbdb";
                 };
             };
-    };
+        };
+    };*/
     assistantArray = Array();
+    needErase = false;
 };
 
-eraseGraphLog = function () {
+/*eraseGraphLog = function () {
 
     for (let i = 1; i < distMax; i++) {
-
-        for (let j = 0; j < distribution.length; j++)
-            if (
-
-                Math.ceil(valueOne * (Math.log(i - valueThree)/Math.log(1/2)) - valueTwo)
-                ==j
-
-            ) {
-                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && assistantArray[i] == "pink") {
+        valueOfFunctionLog = logarithm(previousBase, previousValueOne, previousValueTwo, previousValueThree, i);
+        for (let j = 0; j < distribution.length; j++) {
+            if (valueOfFunctionLog == j) {
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && previousAssistantArray[i] == "pink") {
                     document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#f00c93"
                 };
-                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && assistantArray[i] == "grey") {
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && previousAssistantArray[i] == "grey") {
                     document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#dbdbdb";
                 };
             };
+        };
     };
     assistantArray = Array();
+    needErase = false;
+};*/
+
+eraseGraphLog = function () {
+    for (let i = 1; i < distMax; i++) {
+        valueOfFunctionLog = logarithm(previousBase, previousValueOne, previousValueTwo, previousValueThree, i);
+        for (let j = 0; j < distribution.length; j++) {
+            if (valueOfFunctionLog == j) {
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && previousAssistantArray[i] == "pink") {
+                    document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#f00c93"
+                };
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && previousAssistantArray[i] == "grey") {
+                    document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#dbdbdb";
+                };
+            };
+        };
+    };
+    assistantArray = Array();
+    needErase = false;
 };
 
 decisionAboutErase = function () {
-    if (needErase == true && expOrLog == "log") { eraseGraphLog() };
-    if (needErase == true && expOrLog == "exp") { eraseGraph() };
+    if (needErase == true && hypOrLog == "log") { eraseGraphLog() };
+    if (needErase == true && hypOrLog == "hyp") { eraseGraph() };
 };
 
+hyperbola = function (valueOne, valueTwo, valueThree, i) {
+    valueHyp = Math.ceil(valueOne * distMax / (i - valueThree)) - valueTwo;
+    return valueHyp;
+};
+
+logarithm = function (base, valueOne, valueTwo, valueThree, i) {
+    valueLog = Math.ceil(valueOne * (Math.log(i - valueThree) / Math.log(base)) - valueTwo);
+    return valueLog;
+};
 
 distributionMath = Array()
+valueOfFunctionHyp = Number();
+
 estimateFunction = function () {
     //odaszínezi a közelítő függvény grafikonját az oszlopgrafikonra
 
+    if (needErase == true && hypOrLog == "log") { eraseGraphLog() };
+    if (needErase == true && hypOrLog == "hyp") { eraseGraph() };
 
 
-    valueOne = parseInt(event.path[1][0].value);
-    valueTwo = parseInt(event.path[1][1].value);
-    valueThree = parseInt(event.path[1][2].value);
+
+
+    valueOne = parseFloat(event.path[1][0].value);
+    valueTwo = parseFloat(event.path[1][1].value);
+    valueThree = parseFloat(event.path[1][2].value);
     if (isNaN(valueOne) == true) { valueOne = 0 };
     if (isNaN(valueTwo) == true) { valueTwo = 0 };
     if (isNaN(valueThree) == true) { valueThree = 0 };
 
-    if (needErase == true && expOrLog == "log") { eraseGraphLog() };
-    if (needErase == true && expOrLog == "exp") { eraseGraph() };
-
-    for (let i = 1; i < distMax; i++) {
-
+    /*for (let i = 1; i < distMax; i++) {
+        valueOfFunctionHyp = hyperbola(valueOne, valueTwo, valueThree, i);
         for (let j = 0; j < distribution.length; j++)
-            if ((Math.ceil(
-
-                valueOne * distMax / (i - valueThree)) - valueTwo
-
-            ) == j) {
+            if (valueOfFunctionHyp == j) {
                 if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(240, 12, 147)") { assistantArray[i] = "pink" };
                 if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(219, 219, 219)") { assistantArray[i] = "grey" };
-
+ 
                 document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#000000";
             };
+    };*/
+
+    var n = 0;
+    assistantArray = Array();
+    //amikor kiszínezi feketére a grafikont, előtte megjegyzi, hogy milyen szín volt ott, hogy majd vissza tudja 'radírozni'
+    for (let i = 1; i < distMax; i++) {
+        valueOfFunctionHyp = hyperbola(valueOne, valueTwo, valueThree, i);
+        for (let j = 0; j < distribution.length; j++) {
+            if (valueOfFunctionHyp == j) {
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(240, 12, 147)") { assistantArray[n] = Array(); assistantArray[n][0] = distMax-i; assistantArray[n][1] = j; assistantArray[n][2] = "pink" };
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(219, 219, 219)") { assistantArray[n] = Array(); assistantArray[n][0] = distMax-i; assistantArray[n][1] = j; assistantArray[n][2] = "grey" };
+
+                document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#000000";
+                n = n + 1;
+            };
+        };
     };
 
     needErase = true;
 
+    previousAssistantArray = Array();
+    for (let i = 0; i < assistantArray.length; i++) {
+        previousAssistantArray[i] = assistantArray[i];
+    };
     previousValueOne = valueOne;
     previousValueTwo = valueTwo;
     previousValueThree = valueThree;
+
+
 
 
     let k = distMax;
@@ -645,35 +727,38 @@ estimateFunction = function () {
         k = k - 1;
         //clearing = true;
     };
-    expOrLog = "exp";
+    hypOrLog = "hyp";
 };
 ev = ""
+
+valueOfFunctionLog = Number()
 estimateFunctionLog = function () {
     //odaszínezi a közelítő függvény grafikonját az oszlopgrafikonra
 
-    if (needErase == true && expOrLog == "log") { eraseGraphLog() };
-    if (needErase == true && expOrLog == "exp") { eraseGraph() };
+    if (needErase == true && hypOrLog == "log") { eraseGraphLog() };
+    if (needErase == true && hypOrLog == "hyp") { eraseGraph() };
 
-    valueOne = parseInt(event.path[1][0].value);
-    valueTwo = parseInt(event.path[1][1].value);
-    valueThree = parseInt(event.path[1][2].value);
+    base = parseFloat(event.path[1][0].value);
+    valueOne = parseFloat(event.path[1][1].value);
+    valueTwo = parseFloat(event.path[1][2].value);
+    valueThree = parseFloat(event.path[1][3].value);
     if (isNaN(valueOne) == true) { valueOne = 0 };
     if (isNaN(valueTwo) == true) { valueTwo = 0 };
     if (isNaN(valueThree) == true) { valueThree = 0 };
     if (needErase == true) { eraseGraph() };
 
+    document.querySelector("#FunctionApproxLog1").innerHTML = `${valueOne}log`
+    document.querySelector("#base").innerHTML = `${base}`
+    document.querySelector("#FunctionApproxLog2").innerHTML = `(x+${valueTwo})+${valueThree}`
+
     ev = event;
-    console.log(ev, valueOne, valueTwo, valueThree);
+    console.log(ev, base, valueOne, valueTwo, valueThree);
 
 
     for (let i = 1; i < distMax; i++) {
-
+        valueOfFunctionLog = logarithm(base, valueOne, valueTwo, valueThree, i);
         for (let j = 0; j < distribution.length; j++)
-            if (
-
-                Math.ceil(valueOne * (Math.log(i - valueThree)/Math.log(1/2)) - valueTwo)== j
-
-            ) {
+            if (valueOfFunctionLog == j) {
                 if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(240, 12, 147)") { assistantArray[i] = "pink" };
                 if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(219, 219, 219)") { assistantArray[i] = "grey" };
 
@@ -683,6 +768,12 @@ estimateFunctionLog = function () {
 
     needErase = true;
 
+    previousAssistantArray = Array();
+    for (let i = 0; i < assistantArray.length; i++) {
+        previousAssistantArray[i] = assistantArray[i];
+    };
+
+    previousBase = base;
     previousValueOne = valueOne;
     previousValueTwo = valueTwo;
     previousValueThree = valueThree;
@@ -697,7 +788,7 @@ estimateFunctionLog = function () {
         k = k - 1;
         //clearing = true;
     };
-    expOrLog = "log";
+    hypOrLog = "log";
 };
 
 //elkészíti az üres táblázatot
@@ -799,9 +890,9 @@ makeTheSecondTable = function () {
     };
 
     /*if (maximum > 600) {
-
-
-
+ 
+ 
+ 
         console.log("ACTIVE: oszlopok száma!!!");
         let k = maximum / 600;
         let average = Number();
@@ -816,7 +907,7 @@ makeTheSecondTable = function () {
         };
         maximum = 600;
     };
-
+ 
     if (distMax > 400) {
         console.log("ACTIVE: sorok száma!!!");
         distMax = 400;
@@ -1120,4 +1211,7 @@ szavak = ["A", "ABAJGAT", "ABÁL", "ABAPOSZTÓ", "ABÁROL", "ABBA", "ABBAHAGY", 
 //itt alakítja át a szótár szavait jacaScriptben használható hexadecimális kódsorokká
 transform();
 
+wordLength = 4;
+previousWordLength = wordLength;
+beFaster();
 
