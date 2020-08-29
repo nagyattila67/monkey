@@ -23,7 +23,6 @@ random = false;
 temporaryContainer = Array();
 sentenceOfMonkey = String();
 totalNumberOfCurrents = 0;
-needMemory = false;
 
 time = function (timeStart, timeFinish) {
     timeLength = (timeFinish.getTime() - timeStart.getTime()) / 1000;
@@ -65,7 +64,6 @@ word = function () {
     thickness = 0;
     km = 0; m = 0; cm = 0;
     memory = Array();
-    memoryABC = Array();
     page = 0;
     maxPage = 0;
     firstWordIndex = Number();
@@ -73,7 +71,6 @@ word = function () {
     wordForSearch = String();
     wordNumber = Number();
     lastWordNumber = Number();
-    wordABC = "";
 
     area = document.querySelector("#getWord");
     if (rep == false) { wordLength = event.path[2].children[1].children[0]["value"]; wordLength = parseInt(wordLength); }
@@ -96,14 +93,12 @@ word = function () {
     maxTurn = 100000000
 
     while (hit == false && turn < maxTurn) {
-        if (turn == 0) { timeStart = new Date(); };
+        if (turn == 0) { timeStart = new Date() };
 
         expressionHTML = "";
         digitHTML = "";
         expressionHex = ""
         digitHex = "";
-        expressionABC = "";
-        digitABC = "";
         //turn = turn + 1; áttettem a végéra
         for (let i = 1; i < (wordLength + 1); i++) {
 
@@ -127,7 +122,7 @@ word = function () {
             if (digit == 32) { digit = 211 }
             //'Á' betű 0xc1
             if (digit == 33) { digit = 193 }
-            //'Ú' betű 0xda
+            //'Ű' betű 0xda
             if (digit == 34) { digit = 218 }
 
             digitHex = digit.toString(16);
@@ -137,16 +132,9 @@ word = function () {
             digitHTML = `&#${digit}`
             expressionHTML = expressionHTML + digitHTML;
 
-            digitABC = String.fromCharCode(digit);
-            expressionABC = expressionABC + digitABC;
-
-            //kikapcsolva, mert ötszörösére növeli a program által használt memóriát
-            //memory[turn] = expressionHTML;
-            if (wordLength < 8) { memoryABC[turn] = expressionABC; }
+            memory[turn] = expressionHTML;
             //console.log("digit: ", digit, " digitHEX: ", digitHex, " expressionHEX: ", expressionHex, " turn: ", turn);
         };
-
-
 
         for (let k = 0; k < szavakHex.length; k++) {
             if (expressionHex == szavakHex[k]) {
@@ -389,7 +377,7 @@ displayResultOfTyping = function (place, expressionHTML, hit, turn, maxTurn) {
 
 //az eredmény kiírása a képernyőre
 displayWord = function () {
-    wordCounter = memoryABC.length;
+    wordCounter = memory.length;
     sheetCounter = Math.ceil(wordCounter / 40);
     volumeCounter = Math.ceil(sheetCounter / 300);
     document.querySelector("#wordCount").innerHTML = `${wordCounter} szó`;
@@ -420,8 +408,8 @@ displayWord = function () {
 
         if (wordCounter % 40 != 0) {
             for (let i = wordCounter; i <= (Math.floor(wordCounter / 40) + 1) * 40; i++) {
-                //memory[i] ="";
-                memoryABC[i] = "";
+                //memory[i] = `üres${i}`
+                memory[i] = ``
             };
         };
 
@@ -434,7 +422,7 @@ displayWord = function () {
         for (let i = 1; i < 41; i++) {
             document.querySelectorAll("#wordTable tr")[main].style["background-color"] = "#f1f1f1";
             main = wordCounter % 40;
-            rowList[i].innerHTML = memoryABC[memoryABC.length - 40 + i - 2]
+            rowList[i].innerHTML = memory[memory.length - 40 + i - 2]
             document.querySelectorAll("#wordTable tr")[main].style["background-color"] = "#fadadd";
         };
     };
@@ -452,7 +440,6 @@ goToRepeat = function () {
 szavakTemp = Array();
 szavakHexTemp = Array();
 beFaster = function () {
-    szavakTemp = Array();
     console.log("BEFASTER!!!");
     let j = 0;
     for (let i = 0; i < szavak.length; i++) {
@@ -468,7 +455,7 @@ beFaster = function () {
 
 
 
-times = Array();
+
 repeatCount = 0;
 previousCharNumber = Number();
 previousRunningNumber = Number();
@@ -570,35 +557,14 @@ repeat = function (event) {
 };
 
 fillLoopTable = function () {
-    document.querySelector("#numberOfAllRunning").innerHTML = runningNumber;
-    document.querySelector("#numberOfWords").innerHTML = totalNumberOfWords
-    document.querySelector("#averageNumberOfWords").innerHTML = (totalNumberOfWords / runningNumber).toFixed(2);
-    document.querySelector("#averageNumberOfWords").style["background-color"] = "#7ee4e4";
+    
+    document.querySelector("#shortestListLength").innerHTML = minimum;
     document.querySelector("#shortestListValue").innerHTML = distribution[minimum];
     document.querySelector("#longestListLength").innerHTML = distribution.length - 1;
     document.querySelector("#longestListValue").innerHTML = distribution[distribution.length - 1];
     document.querySelector("#mostFrequentedListLength").innerHTML = distMaxPlace;
     document.querySelector("#mostFrequentedListValue").innerHTML = distMax;
     document.querySelector("#runTime").innerHTML = "?";
-    document.querySelector("#explantation1").innerHTML = `A szótárban összesen ${szavakTemp.length} db. ${wordLength} betű hosszúságú szó szerepel. Az ábécé 35 betűs. Ebből az ábécéből 35`;
-    document.querySelector("#explantation2").innerHTML = `${wordLength}`;
-
-    result = (35 ** wordLength / szavakTemp.length).toFixed(2);
-    document.querySelector("#explantation3").innerHTML = ` = ${35 ** wordLength} darab ${wordLength} betű hosszúságú szó rakható ki.`
-    
-    document.querySelector("#explantation4").innerHTML=`Ha a két értéket elosztjuk egymással, akkor a ${35 ** wordLength} /  ${szavakTemp.length} = `
-    document.querySelector("#explantation5").innerHTML = `${result}`;
-    document.querySelector("#explantation5").style["background-color"] = "#7ee4e4";
-
-    document.querySelector("#explantation6").innerHTML = ` értéket kapjuk, ami azt mutatja meg, hogy melyik hosszúságú karaktercsoport fordul elő a legnagyobb valószínűséggel a listákon.`
-    document.querySelector("#explantation7").innerHTML = "Minél jobban növeljük a futások számát, "
-    document.querySelector("#explantation8").innerHTML = "a két érték"
-    document.querySelector("#explantation8").style["background-color"] = "#7ee4e4"
-    document.querySelector("#explantation9").innerHTML = " annál jobban meg fogja közelíteni egymást."
-
-
-
-
 };
 base = Number();
 valueOne = Number();
@@ -615,6 +581,7 @@ hypOrLog = ""
 
 eraseGraph = function () {
 
+
     for (let i = 0; i < previousAssistantArray.length; i++) {
         if (previousAssistantArray[i][2] == "pink") { document.querySelectorAll("#graphic tr")[previousAssistantArray[i][0]].children[previousAssistantArray[i][1]].style["background-color"] = "#f00c93" }
         if (previousAssistantArray[i][2] == "grey") {
@@ -622,12 +589,57 @@ eraseGraph = function () {
         };
     };
 
+
+    /*for (let i = 1; i < distMax; i++) {
+        valueOfFunctionHyp = hyperbola(previousValueOne, previousValueTwo, previousValueThree, i);
+        for (let j = 0; j < distribution.length; j++) {
+            if (valueOfFunctionHyp == j) {
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && previousAssistantArray[i] == "pink") {
+                    document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#f00c93"
+                };
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && previousAssistantArray[i] == "grey") {
+                    document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#dbdbdb";
+                };
+            };
+        };
+    };*/
+    assistantArray = Array();
+    needErase = false;
+};
+
+/*eraseGraphLog = function () {
+
+    for (let i = 1; i < distMax; i++) {
+        valueOfFunctionLog = logarithm(previousBase, previousValueOne, previousValueTwo, previousValueThree, i);
+        for (let j = 0; j < distribution.length; j++) {
+            if (valueOfFunctionLog == j) {
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && previousAssistantArray[i] == "pink") {
+                    document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#f00c93"
+                };
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(0, 0, 0)" && previousAssistantArray[i] == "grey") {
+                    document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#dbdbdb";
+                };
+            };
+        };
+    };
+    assistantArray = Array();
+    needErase = false;
+};*/
+
+eraseGraphLog = function () {
+    for (let i = 0; i < previousAssistantArray.length; i++) {
+        if (previousAssistantArray[i][2] == "pink") { document.querySelectorAll("#graphic tr")[previousAssistantArray[i][0]].children[previousAssistantArray[i][1]].style["background-color"] = "#f00c93" }
+        if (previousAssistantArray[i][2] == "grey") {
+            document.querySelectorAll("#graphic tr")[previousAssistantArray[i][0]].children[previousAssistantArray[i][1]].style["background-color"] = "#dbdbdb";
+        };
+    };
     assistantArray = Array();
     needErase = false;
 };
 
 decisionAboutErase = function () {
-    if (needErase == true) { eraseGraph() };
+    if (needErase == true && hypOrLog == "log") { eraseGraphLog() };
+    if (needErase == true && hypOrLog == "hyp") { eraseGraph() };
 };
 
 hyperbola = function (valueOne, valueTwo, valueThree, i) {
@@ -646,10 +658,9 @@ valueOfFunctionHyp = Number();
 estimateFunction = function () {
     //odaszínezi a közelítő függvény grafikonját az oszlopgrafikonra
 
-    //if (needErase == true && hypOrLog == "log") { eraseGraphLog() };
-    //if (needErase == true && hypOrLog == "hyp") { eraseGraph() };
+    if (needErase == true && hypOrLog == "log") { eraseGraphLog() };
+    if (needErase == true && hypOrLog == "hyp") { eraseGraph() };
 
-    if (needErase == true) { eraseGraph() };
 
 
 
@@ -678,8 +689,8 @@ estimateFunction = function () {
         valueOfFunctionHyp = hyperbola(valueOne, valueTwo, valueThree, i);
         for (let j = 0; j < distribution.length; j++) {
             if (valueOfFunctionHyp == j) {
-                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(240, 12, 147)") { assistantArray[n] = Array(); assistantArray[n][0] = distMax - i; assistantArray[n][1] = j; assistantArray[n][2] = "pink" };
-                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(219, 219, 219)") { assistantArray[n] = Array(); assistantArray[n][0] = distMax - i; assistantArray[n][1] = j; assistantArray[n][2] = "grey" };
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(240, 12, 147)") { assistantArray[n] = Array(); assistantArray[n][0] = distMax-i; assistantArray[n][1] = j; assistantArray[n][2] = "pink" };
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(219, 219, 219)") { assistantArray[n] = Array(); assistantArray[n][0] = distMax-i; assistantArray[n][1] = j; assistantArray[n][2] = "grey" };
 
                 document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#000000";
                 n = n + 1;
@@ -696,6 +707,9 @@ estimateFunction = function () {
     previousValueOne = valueOne;
     previousValueTwo = valueTwo;
     previousValueThree = valueThree;
+
+
+
 
     let k = distMax;
     while (k > 0) {
@@ -714,10 +728,8 @@ valueOfFunctionLog = Number()
 estimateFunctionLog = function () {
     //odaszínezi a közelítő függvény grafikonját az oszlopgrafikonra
 
-    //if (needErase == true && hypOrLog == "log") { eraseGraphLog() };
-    //if (needErase == true && hypOrLog == "hyp") { eraseGraph() };
-
-    if (needErase == true) { eraseGraph() };
+    if (needErase == true && hypOrLog == "log") { eraseGraphLog() };
+    if (needErase == true && hypOrLog == "hyp") { eraseGraph() };
 
     base = parseFloat(event.path[1][0].value);
     valueOne = parseFloat(event.path[1][1].value);
@@ -754,14 +766,16 @@ estimateFunctionLog = function () {
         valueOfFunctionHyp = logarithm(base, valueOne, valueTwo, valueThree, i);
         for (let j = 0; j < distribution.length; j++) {
             if (valueOfFunctionHyp == j) {
-                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(240, 12, 147)") { assistantArray[n] = Array(); assistantArray[n][0] = distMax - i; assistantArray[n][1] = j; assistantArray[n][2] = "pink" };
-                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(219, 219, 219)") { assistantArray[n] = Array(); assistantArray[n][0] = distMax - i; assistantArray[n][1] = j; assistantArray[n][2] = "grey" };
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(240, 12, 147)") { assistantArray[n] = Array(); assistantArray[n][0] = distMax-i; assistantArray[n][1] = j; assistantArray[n][2] = "pink" };
+                if (document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] == "rgb(219, 219, 219)") { assistantArray[n] = Array(); assistantArray[n][0] = distMax-i; assistantArray[n][1] = j; assistantArray[n][2] = "grey" };
 
                 document.querySelectorAll("#graphic tr")[distMax - i].children[j].style["background-color"] = "#000000";
                 n = n + 1;
             };
         };
     };
+
+
 
     needErase = true;
 
@@ -828,10 +842,9 @@ makeTableAndColoring = function () {
     myArray = Array();
     for (let i = 0; i < averageArray.length; i++) { myArray[i] = averageArray[i][0] };
 
-    //pixWidth = Math.ceil(600 / maximum);
-    //pixHeight = Math.ceil(400 / distMax);
-    pixHeight = "1px";
-    pixWidth = "1px";
+    pixWidth = Math.ceil(600 / maximum);
+    pixHeight = Math.ceil(400 / distMax);
+    //pixHeight = 10;
 
     //táblázat elkészítése
     for (let i = 0; i <= distMax; i++) {
@@ -872,7 +885,7 @@ preparation = function () {
     document.querySelector("#functionAppr").disabled = "";
     document.querySelector("#estimateFuncLog").disabled = "";
     document.querySelector("#functionApprLog").disabled = "";
-};
+}
 
 makeTheSecondTable = function () {
     myArray2 = Array();
@@ -885,12 +898,13 @@ makeTheSecondTable = function () {
         area = document.querySelector("#graphicSecond");
         element = document.querySelectorAll("#graphicSecond tr")[borderNumber - 1 - i];
         area.removeChild(element);
-        console.log("HOSSZ:", document.querySelectorAll("#graphicSecond tr").length);
     };
 
-    //pixWidth = Math.ceil(600 / maximum);
-    pixWidth = "1px"
-    pixHeight = Math.ceil(400 / myArray2.length);
+   
+   
+    pixWidth = 1;
+    pixHeight = 400/maximum;
+    
 
     //táblázat elkészítése
 
@@ -916,6 +930,7 @@ makeTheSecondTable = function () {
 
     console.log("a második táblázat elkészült!!!!");
 
+   
     k = maximum - 1;
     console.log("coloring most indul");
     while (k > 0) {
@@ -930,6 +945,8 @@ makeTheSecondTable = function () {
         };
         k = k - 1;
 
+
+       
         //distributionCopy2-re szükség van?
         //clearing-re szükség van?
 
@@ -937,6 +954,7 @@ makeTheSecondTable = function () {
     };
     document.querySelector("#graphicSecond").style.width = `${myArray.length}px`
 };
+
 
 
 dictionary = function () {
@@ -962,7 +980,7 @@ forward = function () {
 
 
         for (let i = 1; i < 41; i++) {
-            rowList[i].innerHTML = memoryABC[firstWordIndex + i]
+            rowList[i].innerHTML = memory[firstWordIndex + i]
         };
         if (page == maxPage) {
             document.querySelectorAll("#wordTable tr")[main].style["background-color"] = "#fadadd";
@@ -987,7 +1005,7 @@ backward = function () {
 
 
         for (let i = 1; i < 41; i++) {
-            rowList[i].innerHTML = memoryABC[firstWordIndex + i]
+            rowList[i].innerHTML = memory[firstWordIndex + i]
         };
         if (page == maxPage) {
             document.querySelectorAll("#wordTable tr")[main].style["background-color"] = "#fadadd";
@@ -1011,7 +1029,7 @@ first = function () {
 
 
         for (let i = 1; i < 41; i++) {
-            rowList[i].innerHTML = memoryABC[firstWordIndex + i]
+            rowList[i].innerHTML = memory[firstWordIndex + i]
         };
         if (page == maxPage) {
             document.querySelectorAll("#wordTable tr")[main].style["background-color"] = "#fadadd";
@@ -1035,7 +1053,7 @@ last = function () {
 
 
         for (let i = 1; i < 41; i++) {
-            rowList[i].innerHTML = memoryABC[firstWordIndex + i]
+            rowList[i].innerHTML = memory[firstWordIndex + i]
         };
         if (page == maxPage) {
             document.querySelectorAll("#wordTable tr")[main].style["background-color"] = "#fadadd";
@@ -1066,7 +1084,7 @@ skipToPage = function (event) {
 
 
         for (let i = 1; i < 41; i++) {
-            rowList[i].innerHTML = memoryABC[firstWordIndex + i]
+            rowList[i].innerHTML = memory[firstWordIndex + i]
         };
         if (page == maxPage) {
             document.querySelectorAll("#wordTable tr")[main].style["background-color"] = "#fadadd";

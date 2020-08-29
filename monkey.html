@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <input class="form-control form-control-sm" id="wordLength" type="number" min="1"
-                                        max="8" value="2">
+                                        max="8" value="4">
                                 </div>
                                 <div class="col-auto">
                                     <label>betű!</label>
@@ -289,53 +289,81 @@
                         <input type="number" class="form-control form-control-sm" style="width:100px" min="1"
                             max="1000000" value="100">
                         <label>Karakterek száma:</label>
-                        <input type="number" class="form-control form-control-sm" style="width:100px" min="1" max="3"
+                        <input type="number" class="form-control form-control-sm" style="width:100px" min="1" max="7"
                             value="2">
                         <button type="button" class="btn btn-secondary btn-sm" onclick="repeat(event)">Mehet</button>
                     </form>
                 </div>
                 <div class="row">
-                    <table class="table table-sm table-bordered table-striped table-small">
-                        <tr>
-                            <td>Ennyi betűsorozatot írt le összesen a majom:</td>
-                            <td><span id="numberOfWords">-</span></td>
-                        </tr>
-                        <tr>
-                            <td>A legrövidebb lista szó-száma:</td>
-                            <td><span id="shortestListLength">-</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="mb-0 pb-0">Ebből a listából ennyi van:</p>
-                                <p class="loopInfo mb-0 pb-0"><i>Az első oszlop magassága a grafikonon</i></p>
-                            </td>
-                            <td><span id="shortestListValue"></span></td>
-                        </tr>
-                        <tr>
-                            <td>A leghosszabb lista szó-száma:</td>
-                            <td><span id="longestListLength">-</span></td>
-                        </tr>
-                        <tr>
-                            <td>Ebből a listából ennyi van:</td>
-                            <td><span id="longestListValue">-</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="mb-0 pb-0"> A legtöbbször előforduló lista szószáma:</p>
-                            <td><span id="mostFrequentedListLength"></span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="mb-0 pb-0"> Ebből a listából ennyi van:</p>
-                                <p class="loopInfo mb-0 pb-0"><i>Ez a legmagasabb oszlop a grafikonon.</i></p>
-                            </td>
-                            <td><span id="mostFrequentedListValue"></span></td>
-                        </tr>
-                        <tr>
-                            <td>Futásidő:</td>
-                            <td><span id="runTime">-</span></td>
-                        </tr>
-                    </table>
+                    <div class="col-6">
+                        <table id="secondInfo" class="table table-sm table-bordered table-striped table-small">
+                            <tr>
+                                <td>Ennyiszer futott neki összesen a majom: </td>
+                                <td><span id="numberOfAllRunning">-</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ennyi betűsorozatot írt le összesen a majom az összes nekifutás során:</td>
+                                <td><span id="numberOfWords">-</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ennyi betűsorozatot írt le átlagosan a majom egy nekifutásra:</td>
+                                <td><span id="averageNumberOfWords">-</span></td>
+                            </tr>
+                            <tr>
+                                <td>A legrövidebb lista szó-száma:</td>
+                                <td><span id="shortestListLength">-</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="mb-0 pb-0">Ebből a listából ennyi van:</p>
+                                    <p class="loopInfo mb-0 pb-0"><i>Az első oszlop magassága a grafikonon</i></p>
+                                </td>
+                                <td><span id="shortestListValue"></span></td>
+                            </tr>
+                            <tr>
+                                <td>A leghosszabb lista szó-száma:</td>
+                                <td><span id="longestListLength">-</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ebből a listából ennyi van:</td>
+                                <td><span id="longestListValue">-</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="mb-0 pb-0"> A legtöbbször előforduló lista szószáma:</p>
+                                <td><span id="mostFrequentedListLength"></span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="mb-0 pb-0"> Ebből a listából ennyi van:</p>
+                                    <p class="loopInfo mb-0 pb-0"><i>Ez a legmagasabb oszlop a grafikonon.</i></p>
+                                </td>
+                                <td><span id="mostFrequentedListValue"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Futásidő:</td>
+                                <td><span id="runTime">-</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="explantation" class="col-6">
+                        <p>Magyarázat: </p>
+
+                        <i>
+                            <p><span id="explantation1">-</span>
+                                <sup id="explantation2"></sup>
+                                <span id="explantation3"></span></p>
+
+                            <p><span id="explantation4"></span>
+                                <span id="explantation5"></span>
+                                <span id="explantation6"></span></p>
+
+                            <p><span id="explantation7"></span>
+                                <span id="explantation8"></span>
+                                <span id="explantation9"></span></p>
+                        </i>
+                    </div>
+
                 </div>
                 <div class="row">
                     <div id="forTable" class="col col-12">
@@ -359,7 +387,7 @@
                             <p>Hiperbolikus burkológörbe (javasolt beállítással):</p>
                             <p><input type="number" name="one" style="width:60px" value="5">*maximum/(x+<input
                                     type="number" name="two" style="width:60px" value="2"> ) + <input type="number"
-                                    name="three" style="width:60px" value="-15">
+                                    name="three" style="width:60px" value="-17">
                             </p>
                             <button disabled id="estimateFunc" type="button" class="btn btn-secondary btn-sm"
                                 onclick="estimateFunction(event)">Mehet</button>
@@ -370,7 +398,8 @@
                     </div>
                     <div class="col-6">
                         <form>
-                            <p>Logaritmikus burkológörbe (javasolt beállítással - <span style="font-size:12px">Javasoljuk
+                            <p>Logaritmikus burkológörbe (javasolt beállítással - <span
+                                    style="font-size:12px">Javasoljuk
                                     még az alap: 0,87; konstansok: 1, -36, 0 beállítást</span>):</p>
                             <p>Logaritmus alapja: <input type="number" name="logBase" style="width:60px" value="0.5">
                             </p>

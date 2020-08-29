@@ -24,12 +24,13 @@ label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
 #szohossz{margin:0px 0px 0px;padding:20px 0px 20px 0px;}
 #searchEngines{display:inline}
 #wordTable tr:first-child{height: 25px}
-#forTable{overflow:auto;min-width:640px;height:400px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
-#graphic{width:auto;height:auto;}
-#graphic td{border:none;}
-#forTableSecond{margin-left:12px;overflow:auto;min-width:600px;min-height:400px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
-#graphicSecond{min-width:600px;min-height:400px;}
-#graphicSecond td{border:none}
+#explantation{border:1px solid #a8a8a8;background-color:#f0f0f0;}
+#forTable{overflow:auto;min-width:640px;min-height:400px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
+#graphic{border-collapse:initial;min-width:600px;min-height:400px;}
+#graphic td{border:none;min-width:3px}
+#forTableSecond{margin-left:12px;overflow:auto;min-width:600px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
+#graphicSecond{border-collapse:separated;min-height:100px;}
+#graphicSecond td{border:none;width:3px;height:3px;}
 .loopInfo{font-size:11px}
 #generatedWord{background-color:#FADADD}
 #send-data{margin-bottom:0px}
@@ -38,6 +39,27 @@ label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
 #divForNotations{overflow:auto;border:1px solid #a8a8a8;background-color:#dbdbdb;max-height:300px;max-width:300px;}
 #divForSentence{min-height:100px;}
 #sentence{background-color:#FADADD}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
