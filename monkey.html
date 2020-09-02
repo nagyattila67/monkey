@@ -35,11 +35,7 @@
                         értelmetlen betűsorozatokat ír le egymás után.</p>
                     <p>Egy gondozó figyeli a majom munkáját, és ha betelt a lap, akkor új lapot fűz a gépbe. Ez addig
                         tart,
-                        amíg
-                        valamelyik
-                        sorban meg nem jelenik egy olyan betűsorozat, amelyek együtt egy értelmes magyar szót nem
-                        alkotnak.
-                        Ekkor a
+                        amíg meg nem jelenik egy értelmes magyar szó a papíron. Ekkor a
                         gondozó
                         elveszi a majomtól a papírt és ad neki egy banánt. Az összegyűjtött papírlapokat pedig 300
                         oldalas
@@ -55,27 +51,28 @@
                 </div>
                 <div class="row">
                     <ul id="littleInfo">
-                        <li><small>Egy lapon 40 sor van, egy sorban pedig csak egy betűsorozat van szóköz
-                                nélkül.</small>
+                        <li><small>Egy 5 betűs értelmes szó létrehozása a programnak átlagosan 7 másodpercig
+                                tart.</small></li>
+                        <li><small>Egy 6 betűs értelmes szó létrehozásához kb. 3 percre van szüksége a
+                                programnak.</small></li>
+                        <li><small>Egy 7 betűs értelmes szó létrehozása már 108 percig tart tart.</small></li>
+                        <li><small>Egy 8 betűs értelmes szó létrehozásához átlagosan 63 órán keresztül kellene futnia a
+                                programnak.</small></li>
+                        <li><small>Minden újabb betű <em>35-szörösére</em> emeli a program futásának az átlagos
+                                időtartamát, hiszen az ábécé - amit a program használ - 35 betűből áll.</small></li>
+                        <li><small>Egy 9 betűs értelmes szó megtalálásához a programnak már 110 napra lenne szüksége, s
+                                a teleírt kötetek egymásra pakolva 788 méter tennének ki. Ez megközelíti a világ
+                                legmagasabb felhőkarcolójának a magasságát, a Burdzs Kalifa-ét, amely Dubajban található
+                                (828 m).</small></li>
+                        <li><small>Egy 13 betűből álló értelmes szó - pl.: <i>'asztrofizikus'</i> - megtalálásához
+                                átlagosan 20
+                                milliárd évre van szükség. Ez az időtartam nagyságrendileg az univerzum életkorához
+                                (13,8 milliárd év)
+                                áll közel.
+                                Ha tehát az ősrobbanás pillanatában indult volna el a programunk, akkor az azóta eltelt
+                                felfoghatatlan hosszúságú idő ellenére sem talált volna még egyetlen 13 betű hosszúságú
+                                értelmes szót sem.</small>
                         </li>
-                        <li><small>100 000 000 leírt sor után - ha még mindig nincs értelmes szó, s így banán se -,
-                                akkor a
-                                majom
-                                feladja.</small></li>
-                        <li><small>Egy 6 betűs értelmes szó létrehozása átlagosa fél perc - két perc ideig tart, s
-                                100-300
-                                ezer
-                                sort
-                                tartalmaznak a kötetek.</small></li>
-                        <li><small>Egy 7 betűs értelmes szó létrehozása átlagosan 20 percig tart, s 2-3 millió sort
-                                tartalmaznak
-                                a
-                                kötetek.</small></li>
-                        <li><small>Minden újabb betű <em>tízszeresére</em> emeli a program futásának az átlagos
-                                időtartamát.
-                                Így 8
-                                betűnél már három óráig, 9 betűnél pedig több mint egy napig fut a program!</small></li>
-
                     </ul>
                 </div>
 
@@ -89,7 +86,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <input class="form-control form-control-sm" id="wordLength" type="number" min="1"
-                                        max="8" value="4">
+                                        max="7" value="4">
                                 </div>
                                 <div class="col-auto">
                                     <label>betű!</label>
@@ -284,15 +281,72 @@
                 </div>
 
                 <div class="row">
-                    <form>
-                        <label>Futások száma:</label>
-                        <input type="number" class="form-control form-control-sm" style="width:100px" min="1"
-                            max="1000000" value="100">
-                        <label>Karakterek száma:</label>
-                        <input type="number" class="form-control form-control-sm" style="width:100px" min="1" max="7"
-                            value="2">
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="repeat(event)">Mehet</button>
-                    </form>
+                    </br>
+                </div>
+
+                <div class="row">
+                    <p>Beállíthatja a programot úgy is, hogy a majom többször fusson neki és adott hosszúságú
+                        szavakat keressen. Ekkor egy-egy grafikonokon láthatja majd, hogy az egyes 'futások' során a
+                        majom milyen
+                        hosszúságú szólistákat írt le, s az adott hosszúságú szólisták az előfordulásuk száma szerint
+                        hogyan
+                        oszlanak
+                        meg.
+                    </p>
+                    <div class="row" id="setting1">
+                        <div class="col-6">
+                            <form oninput="timeCounting()">
+                                <label>Futások száma:</label>
+                                <input id="futasSzam" type="number" class="form-control form-control-sm"
+                                    style="width:100px" min="1" max="1000000" value="100">
+                                <label>Karakterek száma:</label>
+                                <input id="karakterSzam" type="number" class="form-control form-control-sm"
+                                    style="width:100px" min="1" max="7" value="2">
+
+                            </form>
+                        </div>
+                        <div class="col-6">
+                            <div class=row>
+                                <p>A program lefutásának várható ideje ezzel a beállítással <span
+                                        style="font-size:12px">(becsült érték!)</span>: </p>
+                            </div>
+                            <div class=row>
+                                <div class=col-6>
+                                    <p><span id="timeInfo">-</span></p>
+                                </div>
+                                <div class=col-6>
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                        onclick="repeat(event)">Mehet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- A két grafikon meg lett cserélve az eredetihez képest, így a második az első és az első a második! -->
+                <div class="row">
+                    <p> Képzeljük el, hogy minden egyes futás után a megkapott köteteket egy-egy kupacban lerakjuk a
+                        földre. Ezek a kupacok - a futás hosszától függően - különböző magasságúak lesznek. Az első 1000
+                        könyvkupac magasságsorozatát látja a következő grafikonon.
+                    </p>
+                    <p>Azaz a grafikon azt mutatja meg, hogy az első 1000 futás során futásonként hány betűsorozatot
+                        gépelt le a majom. Az egyes oszlopok az egyes gépelési sorozatok, ahol az oszlop magassága
+                        jelzi azt, hogy milyen hosszú volt a gépelés, azaz hány értelmetlen jelsorotat után kapott a
+                        majom egy értelmes szót.
+                    </p>
+                    <p>Tulajdonképpen egy fésűmintázatot látunk, ahol a különböző magasságú fésűfogak teljesen
+                        véletlenszerűen követik egymást és semmilyen szabályosság nem mutatható ki ebben a
+                        magasságsorozatban - azon túl, hogy minél magasabb egy oszlop, annál ritkábban fordul elő.
+                    </p>
+                    <p id="mergeFirst"><span id="mergeFirst1"></span id="mergeFirst2"></p>
+                </div>
+                <div class="row">
+                    <div id="forTableSecond" class="col col-12">
+                        <table class="table" id="graphicSecond">
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <p>A következő táblázat a sorozat elemeinek főbb jellemzőit listázza ki.</p>
                 </div>
                 <div class="row">
                     <div class="col-6">
@@ -350,21 +404,34 @@
                         <p>Magyarázat: </p>
 
                         <i>
-                            <p><span id="explantation1">-</span>
-                                <sup id="explantation2"></sup>
-                                <span id="explantation3"></span></p>
+                            <p><span id="explantation1"></span>
+                            </p>
+                            <p><span id="explantation2"></span>
+                                <sup id="explantation3"></sup>
+                                <span id="explantation4"></span></p>
 
                             <p><span id="explantation4"></span>
                                 <span id="explantation5"></span>
-                                <span id="explantation6"></span></p>
+                                <span id="explantation6"></span>
+                                <span id="explantation7"></span>
+                            </p>
 
-                            <p><span id="explantation7"></span>
-                                <span id="explantation8"></span>
-                                <span id="explantation9"></span></p>
+                            <p> <span id="explantation8"></span>
+                                <span id="explantation9"></span>
+                                <span id="explantation10"></span>
+
+                            <p> <span id="explantation11"></span></p>
                         </i>
                     </div>
-
                 </div>
+                <div class="row">
+                    <p>A következő grafikon azt mutatja meg, hogy az egyes szóhosszúságú listákból hány darab van.
+                        Az
+                        első oszlop magassága mutatja, hogy hány egyszavas listánk van. A második oszlopé, hogy hány
+                        kétszavas listánk van, és így tovább. </p>
+                    <p id="merge" style="display:initial"><i><span id="merge1"></span> <span id="merge2"></span></i></p>
+                </div>
+
                 <div class="row">
                     <div id="forTable" class="col col-12">
                         <table class="table" id="graphic">
@@ -372,60 +439,165 @@
                     </div>
                 </div>
                 <div class="row">
-                    <p>Ha akarja, megkeresheti az oszlopgrafikon burkológörbéjét! Ebben az esetben a program először
-                        1000-szer le fog futni egymás után '<i>a majom kétbetűs szavakat keres</i>' beállítással. Ez kb.
-                        fél
-                        percig tart majd. Ehhez kattintson ide: </p>
-                    <button type="button" class="btn btn-primary btn-sm" onclick="preparation()">Felkészülés a
-                        burkológörbe kereséséhez</button>
+                    <div id="forEnvelope" class="col-6">
+                        <h6>Burkológörbe felrajzolása:</h6>
+                        <p>Ha akarja, megkeresheti az oszlopgrafikon burkológörbéjét!</p>
+                        <p>Javasoljuk, első alkalommal
+                            használja a program által felajánlott alapbeállítást. Ekkor Ön egy <i>'szép'</i>, könnyen
+                            áttekinthető eloszlásfüggvényt kap. </p>
+                        <p> Klikkeljen az <i>'alapbeállítás'</i> gombra, s ekkor a szókeresés
+                            300-szor le fog futni egymás után '<i>a majom kétbetűs szavakat keres</i>' beállítással. Ez
+                            kb. 10 másodpercig tart majd.</p>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="preparation()">alapbeállítás
+                        </button>
+                        <p> Ezután kattintson a <i>'hiperbolikus'</i> vagy <i>'logaritmikus'</i> gombra. Ekkor
+                            megjelenik a burkológörbe, amit a zöld nyilakkal tud mozgatni. </p>
 
+                    </div>
+                    <div id="wrapping0" class="col-8">
+                        <div class="row">
+                            <button name="chooseGraph" type="button" onclick="wantHyp()"
+                                class="btn btn-success btn-sm">hiperbolikus</button>
+                            <button name="chooseGraph" type="button" onclick="wantLog()"
+                                class="btn btn-success btn-sm">logaritmikus</button>
+                        </div>
+                        <div class="row">
+
+                            <table>
+                                <tr>
+                                    <td></td>
+                                    <td><button name="arrow" type="button" onclick="up()"
+                                            class="btn btn-success btn-sm">&#8679</button></td>
+                                    <td></td>
+                                    <td rowspan="3"><button name="backToStart" type="button"
+                                            onclick="backToBasicGraph()" class="btn btn-success btn-sm">&#11119</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><button name="arrow" type="button" onclick="left()"
+                                            class="btn btn-success btn-sm">&#8678</button></td>
+                                    <td></td>
+                                    <td><button name="arrow" type="button" onclick="right()"
+                                            class="btn btn-success btn-sm">&#8680</button></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><button name="arrow" type="button" onclick="down()"
+                                            class="btn btn-success btn-sm">&#8681</button></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+
+
+                        </div>
+                        <div class="row">
+                            <p>meredekség:</p>
+                        </div>
+                        <div class="row">
+
+                            <button name="rising" type="button" onclick="risingUpUp()"
+                                class="btn btn-success btn-sm">++</button>
+                            <button name="rising" type="button" onclick="risingUp()"
+                                class="btn btn-success btn-sm">+</button>
+                            <button name="rising" type="button" onclick="risingDown()"
+                                class="btn btn-success btn-sm">-</button>
+                            <button name="rising" type="button" onclick="risingDownDown()"
+                                class="btn btn-success btn-sm">--</button>
+
+                        </div>
+                        <div class="row">
+                            <p>a függvény:</p>
+                        </div>
+                        <div class="row">
+                            <p><strong><span id="howFunctionLooksLike1"></span><sub><span id="base"></span></sub><span
+                                        id="howFunctionLooksLike2"></span></strong></p>
+                        </div>
+                        <div class="row">
+                            <button id="jump0" name="skipToBetterPlace" type="button" class="btn btn-danger btn-sm"
+                                onclick="jumpUp0()">Ugrás</button>
+                        </div>
+                        <div class="row">
+                            <p id="jumpInfo0" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez a blokk
+                                    felugrik
+                                    a képernyő
+                                    jobb felső sarkába,
+                                    így ha odagörget a grafikonhoz, akkor is használni tudja.</i></p>
+                        </div>
+
+                    </div>
                 </div>
-
+                <div class="row">
+                    <h6>Beállíthatja a burkológörbét a függvény konkrét megadásával is.</h6>
+                </div>
                 <div class="row">
                     <div class="col-6">
-                        <form>
-                            <p>Hiperbolikus burkológörbe (javasolt beállítással):</p>
-                            <p><input type="number" name="one" style="width:60px" value="5">*maximum/(x+<input
-                                    type="number" name="two" style="width:60px" value="2"> ) + <input type="number"
-                                    name="three" style="width:60px" value="-17">
-                            </p>
-                            <button disabled id="estimateFunc" type="button" class="btn btn-secondary btn-sm"
-                                onclick="estimateFunction(event)">Mehet</button>
-                            <button disabled id="functionAppr" type="button" class="btn btn-secondary btn-sm"
-                                onclick="decisionAboutErase()">Töröl</button>
-                            <p>A függvény: <span id="FunctionApprox"></span></sub></p>
+                        <form id="wrapping1" class="wrapping">
+                            <div class="row">
+                                <p>Hiperbolikus burkológörbe (javasolt beállítással):</p>
+                            </div>
+                            <div class="row">
+                                <p><input type="number" id="H1" name="one" style="width:60px"
+                                        value="5">*maximum/(x+<input type="number" id="H2" name="two" style="width:60px"
+                                        value="2"> ) + <input type="number" id="H3" name="three" style="width:60px"
+                                        value="-4">
+                                </p>
+                            </div>
+                            <div class="row">
+                                <button disabled id="estimateFunc" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="estimateFunction(event)">Mehet</button>
+                                <button disabled id="functionAppr" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="decisionAboutErase()">Töröl</button>
+                                <button id="jump1" name="skipToBetterPlace" type="button" class="btn btn-danger btn-sm"
+                                    onclick="jumpUp1()">Ugrás</button>
+                            </div>
+
+                            <div class="row">
+                                <p id="jumpInfo1" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez a blokk
+                                        felugrik a képernyő
+                                        jobb felső sarkába,
+                                        így ha odagörget a grafikonhoz, akkor is használni tudja.</i></p>
+                            </div>
+
                         </form>
                     </div>
                     <div class="col-6">
-                        <form>
-                            <p>Logaritmikus burkológörbe (javasolt beállítással - <span
+                        <form id="wrapping2" class="wrapping">
+                            <div class="row">
+                                <p>Logaritmikus burkológörbe (javasolt beállítással</p> - <span
                                     style="font-size:12px">Javasoljuk
-                                    még az alap: 0,87; konstansok: 1, -36, 0 beállítást</span>):</p>
-                            <p>Logaritmus alapja: <input type="number" name="logBase" style="width:60px" value="0.5">
-                            </p>
-                            <p><input type="number" name="one" style="width:60px" value="5">log(x+<input type="number"
-                                    name="two" style="width:60px" value="-36"> ) + <input type="number" name="three"
-                                    style="width:60px" value="0">
-                            </p>
-                            <button disabled id="estimateFuncLog" type="button" class="btn btn-secondary btn-sm"
-                                onclick="estimateFunctionLog(event)">Mehet</button>
-                            <button disabled id="functionApprLog" type="button" class="btn btn-secondary btn-sm"
-                                onclick="decisionAboutErase()">Töröl</button>
-                            <p>A függvény: <span id="FunctionApproxLog1"></span><sub id="base"></sub><span
-                                    id="FunctionApproxLog2"></span></p>
+                                    még az alap: 0,87; konstansok: 1, -27, 0 beállítást</span>):
+                            </div>
+                            <div class="row">
+                                <p>Logaritmus alapja: <input type="number" id="LBase" name="logBase" style="width:60px"
+                                        value="0.5">
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p><input type="number" id="L1" name="one" style="width:60px" value="5">log(x+<input
+                                        type="number" id="L2" name="two" style="width:60px" value="-28"> ) + <input
+                                        type="number" id="L3" name="three" style="width:60px" value="0">
+                                </p>
+                            </div>
+                            <div class="row">
+                                <button disabled id="estimateFuncLog" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="estimateFunctionLog(event)">Mehet</button>
+                                <button disabled id="functionApprLog" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="decisionAboutErase()">Töröl</button>
+                                <button id="jump2" name="skipToBetterPlace" type="button" class="btn btn-danger btn-sm"
+                                    onclick="jumpUp2()">Ugrás</button>
+                            </div>
+                            <div class="row">
+                                <p id="jumpInfo2" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez a blokk
+                                        felugrik a képernyő
+                                        jobb felső sarkába,
+                                        így ha odagörget a grafikonhoz, akkor is használni tudja.</i></p>
+                            </div>
                         </form>
                     </div>
                 </div>
-                <div class="row">
-                    <p>A következő grafikon azt mutatja meg, hogy az első 600 futás során futásonként hány betűsorozat
-                        lett legépelve.</p>
-                </div>
-                <div class="row">
-                    <div id="forTableSecond" class="col col-12">
-                        <table class="table" id="graphicSecond">
-                        </table>
-                    </div>
-                </div>
+
 
                 <div class="row">
                     <form class="form-inline">
@@ -448,7 +620,8 @@
                         <input type="number" class="form-control form-control-sm" style="width:100px" min="2" max="10"
                             value="8">
                         <label> betű!</label>
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="generateWord(event)">Kérek egy
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="generateWord(event)">Kérek
+                            egy
                             szót!</button>
                         <button type="button" class="btn btn-secondary btn-sm" onclick="generateWordRnd(event)">Véletlen
                             hosszúságú szót kérek!</button>
@@ -461,13 +634,15 @@
 
                     <div class="col-6">
                         <div class="row">
-                            <label>Tetszik a szó, jegyezzük fel!<small> A szó eltávolítása a táblázatból: klikkeljen rá
+                            <label>Tetszik a szó, jegyezzük fel!<small> A szó eltávolítása a táblázatból: klikkeljen
+                                    rá
                                     egyet!</small></label>
                             <button type="button" class="btn btn-secondary btn-sm btn-block"
                                 onclick="notation(event)">Rajta!</button>
                         </div>
                         <div class="row">
-                            <button type="button" class="btn btn-secondary btn-sm" onclick="writeSentence()">Kérek egy
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="writeSentence()">Kérek
+                                egy
                                 mondatot
                                 a
                                 kedvenc szavakból!</button>
@@ -482,17 +657,10 @@
                         <table id="notations" class="table table-small"></table>
                     </div>
                 </div>
-
-
             </div>
             <div class="row">
-
-
             </div>
-
         </div>
-
-
         <div class="col-0 col-sm-1 col-md-1"></div>
     </div>
     <div class="row m-3"></div>
