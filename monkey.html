@@ -444,7 +444,9 @@
                         <p>Ha akarja, megkeresheti az oszlopgrafikon burkológörbéjét!</p>
                         <p>Javasoljuk, első alkalommal
                             használja a program által felajánlott alapbeállítást. Ekkor Ön egy <i>'szép'</i>, könnyen
-                            áttekinthető eloszlásfüggvényt kap. </p>
+                            áttekinthető eloszlásfüggvényt kap.</p>
+                        <p> Ezzel a beállítással a grafikon még egésszében kifér a képernyőre, így nem lesz tömörítve,
+                            tehát a pontos eloszlást mutatja majd. </p>
                         <p> Klikkeljen az <i>'alapbeállítás'</i> gombra, s ekkor a szókeresés
                             300-szor le fog futni egymás után '<i>a majom kétbetűs szavakat keres</i>' beállítással. Ez
                             kb. 10 másodpercig tart majd.</p>
@@ -597,6 +599,80 @@
                         </form>
                     </div>
                 </div>
+                <div class="row">
+                </div>
+                <div id="kindOfDistributions">
+                    <div class="row">
+                        <h5>Eloszlástípusok:</h5>
+                    </div>
+                    <div class="row">
+                        <div>
+                            <img name="kindOfDistImg" class="float-left" width="250" src="img\example1_100_2.png"
+                                alt="eloszlás: 2 betűs szó 100-szor">
+                            <p>Ez egy <i>'szép'</i> eloszlás. A program a <i>'majom két betűs szavakat keres'</i>
+                                beállítással lett lefuttatva
+                                100-szor.</p>
+                            <p>Összesen 36 oszlopunk van, s az egyes oszlopok magasságai: <i>0, 9, 13, 8, 3, 8, 6, 6, 6,
+                                    5,
+                                    4, 3, 4, 4, 3, 0, 2,
+                                    0, 2, 1, 1, 2, 1, 1, 1, 0, 0, 0, 0, 2, 1, 1, 0, 0, 1, 1, 0 . </i></p>
+                            <p>Jól látható, hogy <i>'az elsőre talált egy értelmes szót</i> esetből 9 db. van. A
+                                <i>másodjára
+                                    talált egy értelmes szót</i> esetből 13 db. van, s ez a legmagasabb oszlop. A
+                                <i>'harmadjára talál egy értelmes szót'</i> esetből 8 db. van. És így tovább. Láthatjuk,
+                                hogy <u>az oszlopok magassága fokozatosan csökken</u>, azaz az egyre hosszabb listákból
+                                egyre
+                                kevesebb van. Ezeknél a <i>'szép'</i> eloszlásoknál meg tudjuk keresni a burkológörbét.
+                            </p>
+                        </div>
+                        <div>
+                            <img name="kindOfDistImg" class=" float-left" width="250" src="img\example2_800_5.png"
+                                alt="eloszlás: 5 betűs szó 800-szor">
+                            <p>A majom most <i> 5 betűs szavakat keresett 800-szor egymás után.</i> A leghosszabb
+                                próbálkozása 98 325 sor
+                                volt.
+                            <p>Ez azt jelenti, hogy
+                                98 325 oszlop áll egymás mellett az eredeti grafikonon. <span id="infoAboutCol">(Persze
+                                    itt
+                                    most az oszlopok össze
+                                    lettek vonva, egy oszlop 1024 egymás melletti eredeti oszlopot jelöl, s az
+                                    oszlopcsoportot
+                                    képviselő oszlop magassága azonos a csoport legmagasabb oszlopának a magasságával. -
+                                    De
+                                    mindettől most
+                                    tekintsünk el.)</span>
+                            </p>
+                            <p>Viszont csak 800 listánk lesz, amit 98 325 különböző magasságlehetőség között kell
+                                elosztanunk. Így sok magasság lesz, ahova nem jut lista - itt 0 magasságú az oszlop a
+                                grafikonon. <span id="infoAboutCol">(Valójában az oszlopok 99%-a ilyen - 0 magasságú -, de ez most
+                                    nem látszik az oszlopok összevonása - a tömörítés - miatt.)</span>
+                            </p>
+                            <p>Hasonlóan sok
+                                oszlopmagasságnak csak egy-egy lista jut, s ezek lesznek az 1
+                                magasságú oszlopok. Végül akad néhány <i>'szerencsésebb'</i> oszlopmagasság is,
+                                amelyeknek
+                                két-két
+                                lista jutott, s ezek a 2 magasságú oszlopok. S láthatjuk azt is, hogy éppenséggel egy
+                                oszlopmagasságunk sincs, amelynek három vagy több lista jutott volna. </p>
+                            </p>
+                            <p>Mindez azt eredményezi, hogy az oszlopgrafikon <i>'ki van lapítva'</i>, azaz itt már
+                                <u>nem csökken az oszlopok magassága</u> a listahossz függvényéban.</p>
+                            <p>Vegyük észre, hogy a két grafikon között az a lényeges különbség, hogy az elsőnél 100
+                                'golyót' kellett szétosztani 38 dobozba, s így volt olyan doboz, amibe sok golyó jutott.
+                                A
+                                második esetben viszont 800 'golyót' kellett elosztani 98 325 dobozba, így még az a
+                                doboz is
+                                'jól járt', amelyikbe csak egy 'golyó' jutott.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
 
 
                 <div class="row">

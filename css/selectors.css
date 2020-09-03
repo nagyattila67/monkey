@@ -55,6 +55,10 @@ button[name='rising']{width:35px;height:35px;margin:8px;padding:5px;}
 .wrapping input{margin:3px}
 .wrapping button{margin:5px;}
 .infoAboutJump{line-height:14px;font-size:14px;}
+#infoAboutCol{font-size:13px;}
+#kindOfDistributions{margin:0px; padding: 10px 30px 10px 30px; border:1px solid #a8a8a8; background-color:}
+img[name='kindOfDistImg']{margin-bottom:0px;}
+
 
 
 

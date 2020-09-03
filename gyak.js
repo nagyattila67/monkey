@@ -13,7 +13,7 @@ hungWord = "";
 learning = Array();
 learnThis = String();
 nowHere = Number();
-wasMaximumCanged = false;
+wasMaximumChanged = false;
 wasDistMaxChanged = false;
 distMaxOriginal = 0;
 maximumOriginal = Number();
@@ -28,7 +28,6 @@ wasMerge = false;
 timeLine = Array();
 
 time = function (timeStart, timeFinish) {
-    console.log("FUTTTTTTTTTTTTTTTTTTTT");
     timeLength = (timeFinish.getTime() - timeStart.getTime()) / 1000;
     //timeLength = Math.ceil(timeLength);
     sec = (timeLength % 60).toFixed();
@@ -271,7 +270,6 @@ generateWord = function (event) {
 
     lengthOfTemporaryWord = wordOfMonkey.length;
     vowel = wordOfMonkey[1];
-    console.log(wordOfMonkey, wordOfMonkey[0], "!!!!!!!!!!!!!!")
     workMemory = Array();
 
     while (lengthOfTemporaryWord < lengthOfMonkeyWord) {
@@ -283,7 +281,6 @@ generateWord = function (event) {
                 index = index + 1;
             };
         };
-        console.log(workMemory);
         max = 0;
         for (let i = 0; i < workMemory.length; i++) {
             if (workMemory[i][1] > max) { max = workMemory[i][1] };
@@ -296,7 +293,6 @@ generateWord = function (event) {
                     &&
                     wordOfMonkey[lengthOfTemporaryWord] == wordOfMonkey[lengthOfTemporaryWord - 1])) { workMemory.splice(i, 1) };
         };
-        console.log(workMemory);
 
         if (workMemory.length == 0) {
             lengthOfTemporaryWord = lengthOfMonkeyWord;
@@ -308,16 +304,7 @@ generateWord = function (event) {
             vowel = workMemory[numberOfMonkey][0][1];
             wordOfMonkey = wordOfMonkey + vowel;
             lengthOfTemporaryWord = lengthOfTemporaryWord + 1;
-        }
-
-        console.log(wordOfMonkey, lengthOfTemporaryWord,
-            vowel,
-            wordOfMonkey[lengthOfTemporaryWord - 1],
-            wordOfMonkey[lengthOfTemporaryWord - 2],
-            "hello");
-
-        console.log(wordOfMonkey[lengthOfTemporaryWord - 2], wordOfMonkey[lengthOfTemporaryWord - 1], vowel)
-        console.log(wordOfMonkey);
+        };
     };
 
     if (workMemory.length == 0) {
@@ -337,7 +324,6 @@ numero = Number();
 remove = function (event) {
     numero = event.path[1].children[0].getAttribute("name");
     temporaryContainer.splice(numero, 1);
-    console.log("remove", event);
     target = event.path[1];
     area = event.path[2];
     area.removeChild(target, event);
@@ -353,7 +339,6 @@ remove = function (event) {
 };
 
 notation = function () {
-    console.log("notation");
     place = document.querySelector("#notations");
     trow = document.createElement("tr");
     place.appendChild(trow);
@@ -549,7 +534,6 @@ repeat = function (event) {
         runningNumber = previousRunningNumber;
         charNumber = previousCharNumber
     };
-    console.log(ev, runningNumber, charNumber);
     runningNumber = parseInt(runningNumber);
     charNumber = parseInt(charNumber);
     previousCharNumber = charNumber;
@@ -632,6 +616,7 @@ repeat = function (event) {
     };
     rep = false;
     isItRepeating = false;
+    distMaxOriginal = distMax;
 };
 
 fillLoopTable = function () {
@@ -645,16 +630,22 @@ fillLoopTable = function () {
     sec = Math.ceil(sec);
     min = Math.floor(timeExpiredAll / 60);
 
+    myArrayMax = 0;
+    myArrayIndex=0;
+    for (let i = 0; i < myArray.length; i++) {
+        if (myArray[i]> myArrayMax){ myArrayMax = myArray[i]; myArrayIndex=i;};
+    };
+
     document.querySelector("#numberOfAllRunning").innerHTML = runningNumber;
     document.querySelector("#numberOfWords").innerHTML = totalNumberOfWords
     document.querySelector("#averageNumberOfWords").innerHTML = (totalNumberOfWords / runningNumber).toFixed(2);
     document.querySelector("#averageNumberOfWords").style["background-color"] = "#7ee4e4";
     document.querySelector("#shortestListLength").innerHTML = minimum;
     document.querySelector("#shortestListValue").innerHTML = distribution[minimum];
-    document.querySelector("#longestListLength").innerHTML = maximum;
+    document.querySelector("#longestListLength").innerHTML = distribution.length;
     document.querySelector("#longestListValue").innerHTML = distribution[distribution.length - 1];
-    document.querySelector("#mostFrequentedListLength").innerHTML = distMaxPlace;
-    document.querySelector("#mostFrequentedListValue").innerHTML = distMax;
+    document.querySelector("#mostFrequentedListLength").innerHTML = myArrayIndex;
+    document.querySelector("#mostFrequentedListValue").innerHTML = myArrayMax;
     document.querySelector("#runTime").innerHTML = `${min} min. ${sec} sec.`;
 
     document.querySelector("#explantation1").innerHTML = `A majom most ${wordLength} betű hosszúságú szavakat keresett.`
@@ -991,7 +982,7 @@ backToBasicGraph = function () {
 
 
 estimateFunction = function (event) {
-    if (wasDistMaxChanged == true) { distMax = distMaxForTable };
+    if (wasDistMaxChanged) { distMax = distMaxForTable };
     //odaszínezi a közelítő függvény grafikonját az oszlopgrafikonra
 
     //if (needErase == true && hypOrLog == "log") { eraseGraphLog() };
@@ -1001,7 +992,6 @@ estimateFunction = function (event) {
 
     ev = event;
     if (want == false) {
-        console.log(ev);
         //base=parseFloat(event.path[1][0].value)
         valueOne = parseFloat(event.path[1][0].value);
         valueTwo = parseFloat(event.path[1][1].value);
@@ -1075,7 +1065,7 @@ ev = ""
 
 valueOfFunctionLog = Number()
 estimateFunctionLog = function (event) {
-    if (wasDistMaxChanged == true) { distMax = distMaxForTable };
+    if (wasMerge == true) { distMax = distMaxForTable };
     //odaszínezi a közelítő függvény grafikonját az oszlopgrafikonra
 
     //if (needErase == true && hypOrLog == "log") { eraseGraphLog() };
@@ -1102,11 +1092,6 @@ estimateFunctionLog = function (event) {
     if (needErase == true) { eraseGraph() };
 
     formulaOfTheFunction();
-
-    ev = event;
-    console.log(ev, base, valueOne, valueTwo, valueThree);
-
-
     /*for (let i = 1; i < distMax; i++) {
         valueOfFunctionLog = logarithm(base, valueOne, valueTwo, valueThree, i);
         for (let j = 0; j < distribution.length; j++)
@@ -1195,32 +1180,58 @@ makeTableAndColoring = function () {
         area.removeChild(element);
     };
 
+    myArray = Array();
+    for (let i = 0; i < averageArray.length; i++) { myArray[i] = averageArray[i][0] };
+
+    for (let i = 0; i < distribution.length; i++) {
+        distributionCopy[i] = distribution[i];
+    };
 
     while (distributionCopy.length > 100) {
-        //bizonyos méret felett összevon sorokat és oszlopokat, ezzel gyorsítja a futásidőt a grafikon ábrázolásánál;
+
+        //bizonyos méret felett összevonja oszlopokat (felezi azok számát), ezzel gyorsítja a futásidőt a grafikon ábrázolásánál; beállítás: 100, azaz max 100 lesz az oszlopok száma
         console.log("tömörítés -- oszlopokok összevonása a táblázatban!");
         wasMerge = true;
         distributionCopy2 = Array();
+
         for (let i = 0; i < Math.ceil(distributionCopy.length / 2) - 1; i++) {
             distributionCopy2[i] = Math.max(distributionCopy[2 * i], distributionCopy[2 * i + 1])
-            console.log("22222222222", distributionCopy2[i]);
         };
-
         distributionCopy = Array();
         for (let i = 0; i < distributionCopy2.length; i++) {
             distributionCopy[i] = distributionCopy2[i];
-
         };
+        wasMerge = true;
+        wasMaximumChanged = true;
     };
 
+
+
+    /*distMaxForTable = 0;
+    for (let i = 0; i < distributionCopy.length) {
+        if (distributionCopy[i] > distMaxForTable) { distMaxForTable = distributionCopy[i] };
+    };*/
+
     distMaxForTable = distMax;
-    if (distMax > 100) {
-        factorOfMerge = Math.ceil(distMax / 50);
-        wasMerge = true; wasDistMaxChanged = true;
+    while (distMaxForTable > 100) {
+        //Tömöríti a táblázat sorait; minden ciklusnál megfelezi őket; beállítás: 100; max. 100 lesz a sorok száma
         console.log("tömörítés -- sorok összevonása a táblázatban!");
+        for (let i = 0; i < distributionCopy[i]; i++) { distributionCopy[i] = Math.ceil(distributionCopy[i] / 2) };
+        distMaxForTable = Math.ceil(distMaxForTable);
+        wasMerge = true;
+        wasDistMaxChanged = true;
+    };
+
+
+    /*distMaxForTable = distMax;
+    if (distMax > 400) {
+        factorOfMerge = Math.ceil(distMax / 50);
+        wasMerge = true;
+        //wasDistMaxChanged = true;
+        console.log("tömörítés -- sorok összevonása a táblázatban!");
+
         for (let i = 0; i < distributionCopy.length; i++) {
             distributionCopy[i] = Math.ceil(distributionCopy[i] / factorOfMerge);
-            console.log(factorOfMerge, distributionCopy);
         };
 
         distMaxForTable = 0;
@@ -1229,12 +1240,9 @@ makeTableAndColoring = function () {
                 distMaxForTable = distributionCopy[i]
             };
         };
+    };*/
 
-    };
-    console.log("FINISH");
 
-    myArray = Array();
-    for (let i = 0; i < averageArray.length; i++) { myArray[i] = averageArray[i][0] };
 
     //pixWidth = Math.ceil(600 / maximum);
     //pixHeight = Math.ceil(400 / distMax);
@@ -1275,10 +1283,9 @@ makeTableAndColoring = function () {
     if (wasMerge == true) {
         document.querySelector("#merge").style.display = "initial"
         document.querySelector("#merge").style["font-size"] = "12px"
-        console.log("ACTIVE");
         document.querySelector("#merge1").innerHTML = "Figyelem!"
         document.querySelector("#merge1").style["background-color"] = "#FADADD";
-        document.querySelector("#merge2").innerHTML = ` A program gyorsítása és a táblázat megfelelő méretben történő megrajzolása miatt a táblázat sorai és oszlopai arányosan össze lettek vonva. Jelennleg ${distMax} oszlop helyett ${distMaxForTable} oszlop, a ${distribution.length} sor helyett pedig ${distributionCopy.length} sor van.`
+        document.querySelector("#merge2").innerHTML = ` A program gyorsítása és a táblázat megfelelő méretben történő megrajzolása miatt a táblázat sorai és oszlopai arányosan össze lettek vonva. Jelennleg ${distMax} sor helyett ${distMaxForTable} sor, a ${distribution.length} oszlop helyett pedig ${distributionCopy.length} oszlop van.`
     };
     if (wasMerge == false) {
         document.querySelector("#merge").style.display = "none";
@@ -1335,7 +1342,6 @@ makeTheSecondTable = function () {
         area = document.querySelector("#graphicSecond");
         element = document.querySelectorAll("#graphicSecond tr")[borderNumber - 1 - i];
         area.removeChild(element);
-        console.log("HOSSZ:", document.querySelectorAll("#graphicSecond tr").length);
     };
 
     //pixWidth = Math.ceil(600 / maximum);
@@ -1541,7 +1547,6 @@ search = function () {
     wordForSearch = event.path[0].textContent;
     wordForSearch = "\"" + wordForSearch + "\""
     wordNumber = event.path[0].rowIndex;
-    console.log("szó keresése: ", wordForSearch);
     wordNumber = parseInt(wordNumber);
     rowList[wordNumber].style["font-weight"] = "500";
     rowList[lastWordNumber].style["font-weight"] = "";
