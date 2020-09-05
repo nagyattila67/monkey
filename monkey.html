@@ -69,7 +69,8 @@
                                 milliárd évre van szükség. Ez az időtartam nagyságrendileg az univerzum életkorához
                                 (13,8 milliárd év)
                                 áll közel.
-                                Ha tehát az ősrobbanás pillanatában indult volna el a programunk, akkor az azóta eltelt
+                                Ha tehát az ősrobbanás pillanatában indult volna el a programunk, akkor - nagy átlagban
+                                - az azóta eltelt
                                 felfoghatatlan hosszúságú idő ellenére sem talált volna még egyetlen 13 betű hosszúságú
                                 értelmes szót sem.</small>
                         </li>
@@ -330,14 +331,13 @@
                     </p>
                     <p>Azaz a grafikon azt mutatja meg, hogy az első 1000 futás során futásonként hány betűsorozatot
                         gépelt le a majom. Az egyes oszlopok az egyes gépelési sorozatok, ahol az oszlop magassága
-                        jelzi azt, hogy milyen hosszú volt a gépelés, azaz hány értelmetlen jelsorotat után kapott a
+                        jelzi azt, hogy milyen hosszú volt a gépelés, azaz hány értelmetlen jelsorozat után kapott a
                         majom egy értelmes szót.
                     </p>
                     <p>Tulajdonképpen egy fésűmintázatot látunk, ahol a különböző magasságú fésűfogak teljesen
                         véletlenszerűen követik egymást és semmilyen szabályosság nem mutatható ki ebben a
                         magasságsorozatban - azon túl, hogy minél magasabb egy oszlop, annál ritkábban fordul elő.
                     </p>
-                    <p id="mergeFirst"><span id="mergeFirst1"></span id="mergeFirst2"></p>
                 </div>
                 <div class="row">
                     <div id="forTableSecond" class="col col-12">
@@ -438,12 +438,65 @@
                         </table>
                     </div>
                 </div>
+                <div id="rowForFullDistribution" class="row">
+                    <div class="col-9">
+                        <p>Kérem a teljes eloszlásfüggvény <i>'az ennyi sort tartalmazó listából - ennyi van'</i>
+                            értékpárjainak felsorolását! A táblázat <i><span id="valueCouple"> - </span></i> értékpárt
+                            tartalmaz.
+
+                    </div>
+                    <div class="col-3">
+                        <button id="wantFullDistributionButton" type="button" class="btn btn-secondary btn-sm"
+                            onclick="wantFullDistributionTable()">Mutat</button>
+                    </div>
+
+                    <div  id="divForAllDistribution">
+
+                    </div>
+                    <div style="display:none" class="nav justify-content-center" id="distributionButtons">
+                        <button id="distributionStart" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distStart()">az elejére</button>
+                        <button id="distributionBack" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distBack()">&#8678</button>
+                        <button id="distributionFoward" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distFow()">&#8680</button>
+                        <button id="distributionLast" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distLast()">a végére</button>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-9">
+                        <p>Kérem a tömörítetlen oszlopgrafikon felrajzolását! <i>(A grafikon <span
+                                    id="colsNumb">-</span>
+                                oszlopot és
+                                <span id="rowsNumb">-</span> sort fog tartalmazni és az elkészítésének becsült ideje:
+                                <span id="withoutCompressTimeMin">- </span><span> min. </span><span
+                                    id="withOutCompressTimeSec">-
+
+                                    ( A táblázat elkészítésének a becsült ideje:
+                                    <span id="fullGraphTimeMin">- </span><span> min. </span><span
+                                        id="fullGraphTimeSec">-
+                                    </span><span> sec.</span> )</p>
+                        </span><span> sec.</span>)</i></p>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="wantFullGraph()">Mutat</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div style="display:none" id="forFullTable" class="col col-12">
+                        <table class="fullTable" id="graphic">
+                        </table>
+                    </div>
+                </div>
                 <div class="row">
                     <div id="forEnvelope" class="col-6">
                         <h6>Burkológörbe felrajzolása:</h6>
                         <p>Ha akarja, megkeresheti az oszlopgrafikon burkológörbéjét!</p>
-                        <p>Javasoljuk, első alkalommal
-                            használja a program által felajánlott alapbeállítást. Ekkor Ön egy <i>'szép'</i>, könnyen
+                        <p><span style="background-color:#FADADD">Javasoljuk, első alkalommal
+                                használja a program által felajánlott alapbeállítást.</span> Ekkor Ön egy <i>'szép'</i>,
+                            könnyen
                             áttekinthető eloszlásfüggvényt kap.</p>
                         <p> Ezzel a beállítással a grafikon még egésszében kifér a képernyőre, így nem lesz tömörítve,
                             tehát a pontos eloszlást mutatja majd. </p>
@@ -603,7 +656,7 @@
                 </div>
                 <div id="kindOfDistributions">
                     <div class="row">
-                        <h5>Eloszlástípusok:</h5>
+                        <h5>Eloszlás típusok:</h5>
                     </div>
                     <div class="row">
                         <div>
@@ -624,6 +677,7 @@
                                 egyre
                                 kevesebb van. Ezeknél a <i>'szép'</i> eloszlásoknál meg tudjuk keresni a burkológörbét.
                             </p>
+                            </br>
                         </div>
                         <div>
                             <img name="kindOfDistImg" class=" float-left" width="250" src="img\example2_800_5.png"
@@ -644,7 +698,8 @@
                             </p>
                             <p>Viszont csak 800 listánk lesz, amit 98 325 különböző magasságlehetőség között kell
                                 elosztanunk. Így sok magasság lesz, ahova nem jut lista - itt 0 magasságú az oszlop a
-                                grafikonon. <span id="infoAboutCol">(Valójában az oszlopok 99%-a ilyen - 0 magasságú -, de ez most
+                                grafikonon. <span id="infoAboutCol">(Valójában az oszlopok 99%-a ilyen - 0 magasságú -,
+                                    de ez most
                                     nem látszik az oszlopok összevonása - a tömörítés - miatt.)</span>
                             </p>
                             <p>Hasonlóan sok
@@ -665,10 +720,239 @@
                                 'jól járt', amelyikbe csak egy 'golyó' jutott.</p>
                         </div>
 
+
+
                     </div>
+                    <div>
+                        <div class="row">
 
+                        </div>
+                    </div>
                 </div>
-
+                <div id="notNiceDistribution">
+                    <h5>A <i>'nem szép'</i> eloszlás</h5>
+                    <p>De hogyan is néz ki egy <i>nem szép</i> eloszlás oszlopgrafikonja, ha nem tömörítjük
+                        a táblázatot? Pl. nézzünk egy konkrét eloszlást <i>'a majom öt betűs szavakat keres 500-szor'
+                            beállítással.</i>
+                    </p>
+                    <p>A
+                        program ezzel a beállítással kb. egy órán keresztül futna, majd kapnánk egy
+                        beláthatatlanul hosszú grafikont. Most nézzünk helyette egy előre lefuttatott eredményt!
+                    </p>
+                    <p>Ha elkezdenénk vízszintesen görgetni a grafikont, akkor különböző hosszúságú üres részek után
+                        mindig egy-egy
+                        1 magasságú oszlopohoz jutnánk el, majd újabb hosszabb-rövidebb görgetés után ismét
+                        egy ugyanilyen magasságú oszlopot találnánk. S összesen 500 ilyen 1 magasságú oszlop lenne
+                        elosztva a grafikon - 98 325
+                        egység hosszúságú - ürességében.</p>
+                    <p>Nézzük meg ennek a konkrétan lefuttatott sorozat grafikonjának az első 200 helyét! Láthatjuk,
+                        hogy az 1 magasságú oszlopok eléggé 'gyéren' helyezkednek el rajta.</p>
+                    <div id="first200">
+                        <p>
+                            1: 0
+                            2: 0
+                            3: 0
+                            4: 0
+                            5: 0
+                            6: 0
+                            7: 0
+                            8: 0
+                            9: 0
+                            10: 0
+                            11: 0
+                            12: 0
+                            <span style="color:red"><strong>13: 1</strong></span>
+                            14: 0
+                            15: 0
+                            16: 0
+                            17: 0
+                            18: 0
+                            19: 0
+                            20: 0
+                            21: 0
+                            22: 0
+                            23: 0
+                            24: 0
+                            25: 0
+                            26: 0
+                            27: 0
+                            28: 0
+                            29: 0
+                            30: 0
+                            31: 0
+                            32: 0
+                            33: 0
+                            34: 0
+                            35: 0
+                            36: 0
+                            37: 0
+                            38: 0
+                            39: 0
+                            40: 0
+                            41: 0
+                            42: 0
+                            43: 0
+                            44: 0
+                            45: 0
+                            46: 0
+                            47: 0
+                            48: 0
+                            49: 0
+                            50: 0
+                            51: 0
+                            52: 0
+                            53: 0
+                            54: 0
+                            55: 0
+                            56: 0
+                            57: 0
+                            58: 0
+                            59: 0
+                            60: 0
+                            61: 0
+                            62: 0
+                            63: 0
+                            64: 0
+                            65: 0
+                            66: 0
+                            67: 0
+                            68: 0
+                            69: 0
+                            70: 0
+                            71: 0
+                            72: 0
+                            73: 0
+                            74: 0
+                            75: 0
+                            76: 0
+                            77: 0
+                            78: 0
+                            79: 0
+                            80: 0
+                            81: 0
+                            82: 0
+                            83: 0
+                            <span style="color:red"><strong>84: 1</strong></span>
+                            85: 0
+                            86: 0
+                            87: 0
+                            88: 0
+                            89: 0
+                            90: 0
+                            91: 0
+                            92: 0
+                            93: 0
+                            94: 0
+                            95: 0
+                            96: 0
+                            97: 0
+                            98: 0
+                            99: 0
+                            100: 0
+                            101: 0
+                            102: 0
+                            103: 0
+                            104: 0
+                            105: 0
+                            106: 0
+                            107: 0
+                            108: 0
+                            109: 0
+                            110: 0
+                            111: 0
+                            112: 0
+                            113: 0
+                            114: 0
+                            115: 0
+                            116: 0
+                            117: 0
+                            118: 0
+                            119: 0
+                            120: 0
+                            121: 0
+                            <span style="color:red"><strong>122: 1</strong></span>
+                            123: 0
+                            124: 0
+                            125: 0
+                            126: 0
+                            127: 0
+                            128: 0
+                            129: 0
+                            130: 0
+                            131: 0
+                            132: 0
+                            133: 0
+                            134: 0
+                            135: 0
+                            136: 0
+                            137: 0
+                            138: 0
+                            139: 0
+                            140: 0
+                            141: 0
+                            142: 0
+                            143: 0
+                            144: 0
+                            145: 0
+                            146: 0
+                            147: 0
+                            148: 0
+                            149: 0
+                            150: 0
+                            151: 0
+                            152: 0
+                            153: 0
+                            154: 0
+                            155: 0
+                            156: 0
+                            157: 0
+                            158: 0
+                            159: 0
+                            160: 0
+                            161: 0
+                            162: 0
+                            163: 0
+                            164: 0
+                            165: 0
+                            166: 0
+                            167: 0
+                            168: 0
+                            169: 0
+                            170: 0
+                            171: 0
+                            172: 0
+                            173: 0
+                            174: 0
+                            175: 0
+                            176: 0
+                            177: 0
+                            <span style="color:red"><strong>178: 1</strong></span>
+                            179: 0
+                            180: 0
+                            181: 0
+                            182: 0
+                            183: 0
+                            184: 0
+                            185: 0
+                            186: 0
+                            <span style="color:red"><strong>187: 1</strong></span>
+                            188: 0
+                            189: 0
+                            190: 0
+                            <span style="color:red"><strong>191: 1</strong></span>
+                            192: 0
+                            193: 0
+                            194: 0
+                            195: 0
+                            196: 0
+                            197: 0
+                            198: 0
+                            199: 0
+                            200: 0
+                        </p>
+                    </div>
+                    <p>Ha meg akarja nézni egy gépelés sorozat esetén ezt az eloszlást, azt <a href="/monkey.html#rowForFullDistribution">ide kattintva</a> teheti meg.</p>
+                </div>
 
 
 

@@ -1,5 +1,6 @@
 body{background-color:#f6f6f6}
 h2{margin-left:16px;}
+h5{margin:11px;padding:10px;}
 #divForMotto{margin-right:20px}
 p{text-align:justify}
 img{margin:0px 20px 20px;}
@@ -56,8 +57,26 @@ button[name='rising']{width:35px;height:35px;margin:8px;padding:5px;}
 .wrapping button{margin:5px;}
 .infoAboutJump{line-height:14px;font-size:14px;}
 #infoAboutCol{font-size:13px;}
-#kindOfDistributions{margin:0px; padding: 10px 30px 10px 30px; border:1px solid #a8a8a8; background-color:}
+#kindOfDistributions{margin:10px 0px 10px; padding: 10px 30px 10px 30px; border:1px solid #a8a8a8; background-color:#f1f1f1}
 img[name='kindOfDistImg']{margin-bottom:0px;}
+#notNiceDistribution{margin:0px; padding: 10px 30px 10px 30px; border:1px solid #a8a8a8; background-color:#f1f1f1}
+#first200{font-size:12px; border:1px solid #a8a8a8;padding:10px;background-color:#cbe7cb}
+#first200 p{margin-bottom:0px}
+#rowForFullDistribution{border:solid 1px #a8a8a8;padding:10px}
+#allDistribution{max-height:340px; overflow:auto; border:1px solid #a8a8a8;padding:10px; background-color:#cbe7cb}
+#distributionButtons{margin:0px;}
+#distributionButtons button{margin:10px 10px 0px;min-width:60px;height:33px;}
+#distributionButtons [name='arrow']{font-size:25px;line-height:1px;padding:0px 0px 3px}
+
+
+
+
+
+
+
+
+
+
 
 
 
