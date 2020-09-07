@@ -27,6 +27,7 @@ totalNumberOfCurrents = 0;
 needMemory = false;
 wasMerge = false;
 timeLine = Array();
+wasDistanceGraph = false;
 
 time = function (timeStart, timeFinish) {
     timeLength = (timeFinish.getTime() - timeStart.getTime()) / 1000;
@@ -517,8 +518,7 @@ previousCharNumber = Number();
 previousRunningNumber = Number();
 //clearing = "false";
 repeat = function (event) {
-    wasRepeating = true;
-    if (wasHide == "no") { hideDistribution() };
+
     needErase = false;
     wasMerge = false;
     wasMaximumChanged = false;
@@ -585,6 +585,12 @@ repeat = function (event) {
         };
     };
 
+    //valójában distSum = runningNumber
+    distSum = 0;
+    for (let i = 0; i < distribution.length; i++) {
+        distSum = distSum + distribution[i];
+    };
+
     distributionCopy = Array();
     for (let i = 0; i < distribution.length; i++) {
         distributionCopy[i] = distribution[i];
@@ -612,6 +618,9 @@ repeat = function (event) {
     timeLength = timeLength / averageArray.length
     console.log(timeLength, " sec");*/
 
+    rep = false;
+    isItRepeating = false;
+    distMaxOriginal = distMax;
     if (displayNow == true) {
         makeTableAndColoring();
         console.log("első grafikon elkészült");
@@ -620,11 +629,17 @@ repeat = function (event) {
         fillLoopTable();
         console.log("második grafikon elkészült");
     };
-    rep = false;
-    isItRepeating = false;
-    distMaxOriginal = distMax;
     document.querySelector("#valueCouple").innerHTML = distribution.length - 1;
-    //tellMeFullGraphTimeApprox();
+    wasRepeating = true;
+    wasHiddenFullGraph = false;
+    if (wasHide == "no") { hideDistribution() };
+    if (wasWantFullGraph == true) {
+        hideFullGraph();
+        removeFullGraph();
+        wasHiddenFullGraph = false;
+    };
+    makeDistanceMatrix();
+    distanceStart();
 };
 
 fillLoopTable = function () {
@@ -652,8 +667,8 @@ fillLoopTable = function () {
     document.querySelector("#shortestListValue").innerHTML = distribution[minimum];
     document.querySelector("#longestListLength").innerHTML = distribution.length;
     document.querySelector("#longestListValue").innerHTML = distribution[distribution.length - 1];
-    document.querySelector("#mostFrequentedListLength").innerHTML = myArrayIndex;
-    document.querySelector("#mostFrequentedListValue").innerHTML = myArrayMax;
+    document.querySelector("#mostFrequentedListLength").innerHTML = distMaxPlace;
+    document.querySelector("#mostFrequentedListValue").innerHTML = distribution[distMaxPlace];
     document.querySelector("#runTime").innerHTML = `${min} min. ${sec} sec.`;
 
     document.querySelector("#explantation1").innerHTML = `A majom most ${wordLength} betű hosszúságú szavakat keresett.`
@@ -1170,16 +1185,6 @@ formulaOfTheFunction = function () {
 //elkészíti az üres táblázatot
 makeTableAndColoring = function () {
 
-    /*distributionCopy = Array();
-    for (let i = 0; i < distribution.length; i++) {
-        distributionCopy[i] = distribution[i];
- 
-    };
-    distributionCopy2 = Array();
-    for (let i = 0; i < distribution.length; i++) {
-        distributionCopy2[i] = distribution[i];
-    };*/
-
     //tisztítás: újraklikkelésnél eltávollítja az odarakott cellákat, hogy üres legyen a table
     borderNumber = document.querySelectorAll("#graphic tr").length;
     for (let i = 0; i < borderNumber; i++) {
@@ -1213,18 +1218,8 @@ makeTableAndColoring = function () {
         wasMaximumChanged = true;
     };
 
-
-
-    /*distMaxForTable = 0;
-    for (let i = 0; i < distributionCopy.length) {
-        if (distributionCopy[i] > distMaxForTable) { distMaxForTable = distributionCopy[i] };
-    };*/
-
     distMaxForTable = distMax;
 
-    //for (i = 0; i < distributionCopy.length; i++) {
-    //    distributionHighestValue
-    //};
     while (distMaxForTable > 100) {
         //Tömöríti a táblázat sorait; minden ciklusnál megfelezi őket; beállítás: 100; max. 100 lesz a sorok száma
         console.log("tömörítés -- sorok összevonása a táblázatban!");
@@ -1234,28 +1229,6 @@ makeTableAndColoring = function () {
         wasMerge = true;
         wasDistMaxChanged = true;
     };
-
-
-    /*distMaxForTable = distMax;
-    if (distMax > 400) {
-        factorOfMerge = Math.ceil(distMax / 50);
-        wasMerge = true;
-        //wasDistMaxChanged = true;
-        console.log("tömörítés -- sorok összevonása a táblázatban!");
-
-        for (let i = 0; i < distributionCopy.length; i++) {
-            distributionCopy[i] = Math.ceil(distributionCopy[i] / factorOfMerge);
-        };
-
-        distMaxForTable = 0;
-        for (let i = 0; i < distributionCopy.length; i++) {
-            if (distributionCopy[i] > distMaxForTable) {
-                distMaxForTable = distributionCopy[i]
-            };
-        };
-    };*/
-
-
 
     //pixWidth = Math.ceil(600 / maximum);
     //pixHeight = Math.ceil(400 / distMax);
@@ -1303,7 +1276,133 @@ makeTableAndColoring = function () {
     if (wasMerge == false) {
         document.querySelector("#merge").style.display = "none";
     };
+    littleInfoForFullGraph();
 };
+
+wasWantFullGraph = false;
+
+littleInfoForFullGraph = function () {
+    //tellMeFullGraphTimeApprox();
+    secForFullGraph = (distribution.length * distMax) * 0.0004;
+    min = Math.floor(secForFullGraph / 60);
+    sec = (secForFullGraph % 60).toFixed(0);
+
+    if (wasMerge == true) {
+        document.querySelector("#infoForFullGraph").innerHTML = `A  grafikon ${distribution.length - 1} oszlopot és ${distMaxOriginal} sort fog tartalmazni.`
+
+        document.querySelector("#timeFullGraph1").innerHTML = "";
+        document.querySelector("#timeFullGraph2").innerHTML = "";
+
+        if (charNumber < 5) {
+            document.querySelector("#timeFullGraph1").innerHTML = `${min} min.${sec} sec.`;
+        };
+        if (charNumber == 5) {
+            document.querySelector("#timeFullGraph2").innerHTML = "több mint 5 perc!";
+        };
+        if (charNumber > 5) {
+            document.querySelector("#timeFullGraph2").innerHTML = "több mint egy óra";
+        };
+
+
+    };
+
+    document.querySelector("#wantFullGraphButton").disabled = false;
+    console.log("distMaxOriginal: ", distMaxOriginal);
+
+    if (wasMerge == false) {
+        document.querySelector("#infoForFullGraph").innerHTML = "A grafikonon nem történt tömörítés, ezért ez a funkció most ki van kapcsolva.";
+        document.querySelector("#wantFullGraphButton").disabled = true;
+    };
+};
+
+wasHiddenFullGraph = false;
+wantFullGraph = function () {
+    timeFullGraphStart = new Date();
+
+    wasWantFullGraph = true;
+    document.querySelector("#rowForFullTable").style.display = "initial";
+    document.querySelector("#wantFullGraphButton").innerHTML = "elrejt";
+    document.querySelector("#wantFullGraphButton").setAttribute("onclick", "hideFullGraph()");
+
+    //elkészíti az üres táblázatot
+    if (wasHiddenFullGraph == false) {
+        myArray = Array();
+        for (let i = 0; i < averageArray.length; i++) { myArray[i] = averageArray[i][0] };
+
+        for (let i = 0; i < distribution.length; i++) {
+            distributionCopy[i] = distribution[i];
+        };
+
+        //pixWidth = Math.ceil(600 / maximum);
+        //pixHeight = Math.ceil(400 / distMax);
+        pixHeight = "1px";
+        pixWidth = "1px";
+
+        maximum = distributionCopy.length - 1;
+        //táblázat elkészítése
+        for (let i = 0; i <= distMaxForTable; i++) {
+            place = document.querySelector("#fullGraphic");
+            dataRow = document.createElement("tr");
+            place.appendChild(dataRow)
+            sector = document.querySelectorAll("#fullGraphic tr")[i];
+            for (let j = 0; j < maximum - 1; j++) {
+                dataCell = document.createElement("td");
+                sector.appendChild(dataCell);
+                dataCell.style.width = `${pixWidth}px`;
+                dataCell.style.height = `${pixHeight}px`;
+                dataCell.style.margin = "0px";
+                dataCell.style.padding = "0px";
+                dataCell.style["background-color"] = "#dbdbdb";
+            };
+        };
+
+        //kiszínezi a cellákat alulról haladva       
+        let k = distMaxForTable;
+        while (k > 0) {
+            for (let j = 0; j < maximum - 1; j++) {
+                dataCell = document.querySelectorAll("#fullGraphic tr")[k].children[j];
+                if (distributionCopy[j] != 0) { dataCell.style["background"] = "#f00c93"; distributionCopy[j] = distributionCopy[j] - 1 };
+            };
+            k = k - 1;
+            //clearing = true;
+        };
+
+    };
+    timeFullGraphFinish = new Date();
+    timeFullGraph = (timeFullGraphFinish.getTime() - timeFullGraphStart.getTime()) / 1000;
+
+    minReal = Math.floor(timeFullGraph / 60);
+    secReal = (timeFullGraph % 60).toFixed(0);
+
+    document.querySelector("#realTimeForFullGraph").innerHTML = `Grafikon felrajzolásának tényleges ideje: ${minReal} min.${secReal} sec.`;
+    document.querySelector("#infoForFullGraph2").innerHTML = `Ezen a grafikonon ${Math.floor(distribution.length / distributionCopy2.length)} oszlop felel meg a tömörített grafikon egy oszlopának.`;
+};
+
+hideFullGraph = function () {
+    console.log("hide");
+    document.querySelector("#rowForFullTable").style.display = "none";
+    document.querySelector("#wantFullGraphButton").innerHTML = "mutat";
+    document.querySelector("#wantFullGraphButton").setAttribute("onclick", "wantFullGraph()");
+    wasHiddenFullGraph = true;
+};
+
+removeFullGraph = function () {
+    if (wasWantFullGraph = true) {
+        document.querySelector("#rowForFullTable").style.display = "none";
+        document.querySelector("#wantFullGraphButton").innerHTML = "mutat";
+        document.querySelector("#wantFullGraphButton").setAttribute("onclick", "wantFullGraph()");
+        //tisztítás: klikkelésnél eltávollítja az odarakott cellákat, hogy üres legyen a table
+        borderNumber = document.querySelectorAll("#fullGraphic tr").length;
+        for (let i = 0; i < borderNumber; i++) {
+            area = document.querySelector("#fullGraphic");
+            element = document.querySelectorAll("#fullGraphic tr")[borderNumber - 1 - i];
+            area.removeChild(element);
+        };
+        wasWantFullGraph = false;
+    };
+};
+
+
 
 wasHide = "";
 lastElement = 0;
@@ -1395,34 +1494,9 @@ wantFullDistributionTable = function () {
         fullDistTime = fullDistTime / 1000;
         console.log(fullDistTime, " sec");
         createDistributionSpans();
+
+
     };
-
-
-
-
-};
-
-tellMeFullGraphTimeApprox = function () {
-    //a teljes táblázat felírásához hány karaktert (számjegyet!!) kell kiírni, ui. ettől függ a kiírás futási ideje
-    unit = 0;
-    x = distribution.length;
-    for (let i = 1; i < x.toString().length + 1; i++) {
-        unit
-            = (x - (10 ** (x.toString().length - 1))) * (x.toString().length) + 10 ** (x.toString().length - 1)
-    };
-    unitFirst = unit;
-    unit = unit + 4 * x;
-    fullDistTimeApprox = Math.floor(unit / 1934);
-
-    //unit=distribution.length*((distribution.length).toString().length+4);
-    //fullDistTimeApprox = Math.floor(unit);
-
-    distTimeSec = Math.ceil((fullDistTimeApprox % 60));
-    distTimeMin = Math.floor(fullDistTimeApprox / 60);
-    document.querySelector("#fullGraphTimeMin").innerHTML = distTimeMin;
-    document.querySelector("#fullGraphTimeMin").style["background-color"] = "#FADADD";
-    document.querySelector("#fullGraphTimeSec").innerHTML = distTimeSec;
-    document.querySelector("#fullGraphTimeSec").style["background-color"] = "#FADADD";
 };
 
 hideDistribution = function () {
@@ -1521,8 +1595,6 @@ makeTheSecondTable = function () {
         };
     };
 
-
-
     console.log("a második táblázat elkészült!!!!");
 
     k = maximum - 1;
@@ -1547,6 +1619,166 @@ makeTheSecondTable = function () {
     document.querySelector("#graphicSecond").style.width = `${myArray.length}px`
 
     timeFinishingAll = new Date();
+};
+
+distanceMatrix = Array();
+makeDistanceMatrix = function () {
+    let k = 0;
+    let index = 0;
+    let indexNull = 0;
+    for (let i = 0; i < distribution.length - 1; i++) {
+        if (distribution[i] == 0 && distribution[i + 1] == 0) {
+            k = k + 1;
+        };
+        if (distribution[i] == 0 && distribution[i + 1] != 0) {
+            k = k + 1;
+            distanceMatrix[index] = k;
+            index = index + 1;
+            k = 0;
+        };
+        /*if (distribution[i] != 0 && distribution[i] != 0) {
+
+            if (indexNull > 0) {
+                distanceMatrix[index] = 0;
+                index = index + 1;
+            };
+            indexNull = indexNull + 1;
+        };*/
+    };
+};
+
+createDistanceMatrixSpans = function () {
+    for (let i = 0; i < 101; i++) {
+        console.log("create");
+        newSpan = document.createElement("span");
+        newSpan.setAttribute("name", i);
+        document.querySelector("#distanceTable").appendChild(newSpan);
+    };
+};
+
+showDistanceMatrix = function (firstElement, lastElement) {
+    if (wasDistanceMatrixClick == false) { createDistanceMatrixSpans(); };
+    wasDistanceMatrixClick = true;
+
+
+    console.log("show");
+    for (let i = 0; i < 100; i++) {
+        area = document.querySelector(`#distanceTable span[name='${i}']`)
+        if (firstElement + i < distanceMatrix.length) {
+            area.innerHTML = `${distanceMatrix[firstElement + i]}; `
+            console.log("yes");
+        };
+    };
+    document.querySelector("#emptiness1").innerHTML = runningNumber;
+    document.querySelector("#emptiness2").innerHTML = distribution.length;
+    document.querySelector("#emptiness3").innerHTML = distribution[distribution.length - 1]
+    document.querySelector("#emptiness4").innerHTML = runningNumber;
+    document.querySelector("#emptiness5").innerHTML = distribution.length;
+    document.querySelector("#emptiness1").style["background"] = "#FADADD"
+    document.querySelector("#emptiness2").style["background"] = "#FADADD"
+    document.querySelector("#emptiness3").style["background"] = "#FADADD"
+    document.querySelector("#emptiness4").style["background"] = "#FADADD"
+    document.querySelector("#emptiness5").style["background"] = "#FADADD"
+};
+
+wasDistanceMatrixClick = false;
+distanceStart = function () {
+    console.log("distStart");
+    if (distanceMatrix.length < 100) { lastElement = distanceMatrix.length }
+    else { lastElement = 100 };
+    firstElement = 0;
+    showDistanceMatrix(firstElement, lastElement);
+};
+
+distanceBack = function () {
+    if (firstElement - 100 > 0) {
+        firstElement = firstElement - 100;
+    }
+    else { lastElement = 1 }
+
+    showTheDistanceMatrix(firstElement, lastElement);
+};
+distanceFow = function () {
+    if (firstElement + 100 < distanceMatrix.length) {
+        firstElement = firstElement + 100;
+        if (firstElement + 100 < distanceMatrix.length) {
+            lastElement = firstElement + 100;
+        }
+        else { lastElement = distanceMatrix.length }
+    };
+    showTheDistanceMatrix(firstElement, lastElement);
+};
+borderElement = 0;
+distanceLast = function () {
+    borderElement = (Math.floor(distanceMatrix.length / 100)) * 100;
+    firstElement = borderElement;
+    lastElement = firstElement + 100;
+    showTheDistanceMatrix(firstElement, lastElement);
+};
+
+
+
+showTheDistanceGraph = function () {
+    createDistanceMatrixSpans();
+
+    timeDistanceStart = new Date();
+
+    wasDistanceGraph = true;
+    document.querySelector("#buttonForDistanceGraph").disabled = "true";
+
+    maxDistance = 0;
+    for (let i = 0; i < distanceMatrix.length; i++) {
+        if (distanceMatrix[i] > maxDistance) { maxDistance = distanceMatrix[i] };
+    };
+
+    distanceMatrixCopy = Array();
+    for (let i = 0; i < distanceMatrix.length; i++) {
+        distanceMatrixCopy[i] = distanceMatrix[i]
+    };
+
+    //elkészíti az üres táblázatot
+
+    pixHeight = "1px";
+    pixWidth = "1px";
+
+    maximum = distanceMatrixCopy.length;
+    //táblázat elkészítése
+    for (let i = 0; i < maximum; i++) {
+        place = document.querySelector("#distanceGraph");
+        dataRow = document.createElement("tr");
+        place.appendChild(dataRow)
+        sector = document.querySelectorAll("#distanceGraph tr")[i];
+        for (let j = 0; j < maxDistance; j++) {
+            dataCell = document.createElement("td");
+            sector.appendChild(dataCell);
+            dataCell.style.width = `${pixWidth}px`;
+            dataCell.style.height = `${pixHeight}px`;
+            dataCell.style.margin = "0px";
+            dataCell.style.padding = "0px";
+            dataCell.style["background-color"] = "#dbdbdb";
+        };
+    };
+
+    //kiszínezi a cellákat alulról haladva       
+    let k = maximum - 1;
+    while (k >= 0) {
+        for (let j = 0; j < maxDistance - 1; j++) {
+            dataCell = document.querySelectorAll("#distanceGraph tr")[k].children[j];
+            if (distanceMatrixCopy[j] != 0) { dataCell.style["background"] = "#f00c93"; distanceMatrixCopy[j] = distanceMatrixCopy[j] - 1 };
+
+        };
+        k = k - 1;
+        //clearing = true;
+    };
+
+    timeDistanceFinish = new Date();
+    timeDistance = (timeDistanceFinish.getTime() - timeDistanceStart.getTime()) / 1000;
+
+    minReal = Math.floor(timeDistance / 60);
+    secReal = (timeDistance % 60).toFixed(0);
+
+    /*document.querySelector("#realTimeForFullGraph").innerHTML = `Grafikon felrajzolásának tényleges ideje: ${minReal} min.${secReal} sec.`;
+    document.querySelector("#infoForFullGraph2").innerHTML = `Ezen a grafikonon ${Math.floor(distribution.length / distributionCopy2.length)} oszlop felel meg a tömörített grafikon egy oszlopának.`;*/
 };
 
 

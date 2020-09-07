@@ -67,6 +67,23 @@ img[name='kindOfDistImg']{margin-bottom:0px;}
 #distributionButtons{margin:0px;}
 #distributionButtons button{margin:10px 10px 0px;min-width:60px;height:33px;}
 #distributionButtons [name='arrow']{font-size:25px;line-height:1px;padding:0px 0px 3px}
+#rowForFullGraph{border:solid 1px #a8a8a8;padding:10px;}
+#forFullTable{overflow:scroll;margin:0px 0px 0px;width:auto;height:400px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
+#fullGraphic{border-collapse:initial;width:max-content;min-height:400px;}
+#fullGraphic td{border:none; width:1px;height:3px;}
+#rowForFullGraph p{margin:10px 20px 1px}
+#rowForFullGraph p{margin:0px 20px 0px;}
+#rowForFullDistribution p{margin:0px}
+#divForDistanceTable{border:1px solid #8a8a8a; padding:10px;}
+#distanceTable{max-height:340px; padding:10px; border:1px solid #a8a8a8;overflow:auto;background-color:#cbe7cb;}
+#divForShowDistanceGraph{border:1px solid #a8a8a8;padding:10px}
+
+
+
+
+
+
+
 
 
 

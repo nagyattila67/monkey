@@ -424,7 +424,7 @@
                         </i>
                     </div>
                 </div>
-                <div class="row">
+                <div id="hypOrLogFunc" class="row">
                     <p>A következő grafikon azt mutatja meg, hogy az egyes szóhosszúságú listákból hány darab van.
                         Az
                         első oszlop magassága mutatja, hogy hány egyszavas listánk van. A második oszlopé, hogy hány
@@ -450,7 +450,7 @@
                             onclick="wantFullDistributionTable()">Mutat</button>
                     </div>
 
-                    <div  id="divForAllDistribution">
+                    <div id="divForAllDistribution">
 
                     </div>
                     <div style="display:none" class="nav justify-content-center" id="distributionButtons">
@@ -465,25 +465,121 @@
 
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-9">
-                        <p>Kérem a tömörítetlen oszlopgrafikon felrajzolását! <i>(A grafikon <span
-                                    id="colsNumb">-</span>
-                                oszlopot és
-                                <span id="rowsNumb">-</span> sort fog tartalmazni és az elkészítésének becsült ideje:
-                                <span id="withoutCompressTimeMin">- </span><span> min. </span><span
-                                    id="withOutCompressTimeSec">-
-
-                                    ( A táblázat elkészítésének a becsült ideje:
-                                    <span id="fullGraphTimeMin">- </span><span> min. </span><span
-                                        id="fullGraphTimeSec">-
-                                    </span><span> sec.</span> )</p>
-                        </span><span> sec.</span>)</i></p>
+                <div id="rowForFullGraph" class="row">
+                    <div class="row">
+                        <div class="col-9">
+                            <p>Kérem a tömörítetlen oszlopgrafikon felrajzolását! A grafikon felrajzolásának az ideje:
+                                <span id="timeFullGraph1"> - </span><strong><span id="timeFullGraph2"></span></strong>.
+                            </p>
+                            <p><i><span id="infoForFullGraph"></span></i></p>
+                        </div>
+                        <div class="col-3">
+                            <button id="wantFullGraphButton" type="button" class="btn btn-secondary btn-sm"
+                                onclick="wantFullGraph()">Mutat</button>
+                        </div>
                     </div>
-                    <div class="col-3">
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="wantFullGraph()">Mutat</button>
+
+
+                </div>
+
+                <div style="display:none" id="rowForFullTable" class="row">
+
+                    <div id="forFullTable">
+                        <table class="fullTable" id="fullGraphic">
+                        </table>
+
+                    </div>
+
+                    <div class="row">
+
+                        <p><span id="realTimeForFullGraph"></span></p>
+                        <p><span id="infoForFullGraph2"></span></p>
+
+                    </div>
+
+                </div>
+
+
+
+
+                <div id="divForDistanceTable" class="row">
+                    <div class="col">
+                        <p>Összesen tehát <span id="emptiness1">
+                                &#8212 </span> darab szólistánk van. A listákat úgy tesszük sorba,
+                            hogy az első kupacban az összesen egy szót tartalmazó listák vannak. A második kupacban az
+                            összesen két szót tartalmazó listák vannak. És így tovább - egészen az utolsó - jelen
+                            esetben a <span id="emptiness2">
+                                &#8212
+                            </span>. sorszámú - helyig, amely most <span id="emptiness3"> &#8212 </span> db. listát
+                            tartalmaz.
+                            Tehát összesen <span id="emptiness4">
+                                &#8212 </span> hely között kell elosztanunk <span id="emptiness5">
+                                &#8212 </span> db. listát.</span>.</p>
+                        <p>Amennyiben ez a két érték lényegesen eltér
+                            egymástól <i>(négy vagy annál több betűs szavak keresése esetén)</i>, akkor nagyon sok hely
+                            között
+                            kell
+                            kiosztanunk nagyon kevés listát. Azaz az egyes listakupacok között néhol nagyon hosszú
+                            ürességek
+                            fognak tátongani.</p>
+                        <p>A következő táblázat azt mutatja meg, hogy milyen hosszúak ezek az egymást követő
+                            ürességek, amelyeket néhol egy-egy papírkupac szakít meg.</p>
+                        <P>Figyelem! Ennek a táblázatnak csak négy vagy annál több betűs szavak keresésének a sorozata
+                            esetén
+                            van
+                            jelentősége!</P>
+                        <!--<span>Kérem a távolságtáblázatot!</span>
+                    <button id="buttonForDistanceTable" type="button" class="btn btn-secondary btn-sm"
+                        onclick="distanceStart()">Mutat</button>-->
+
+                        <div class="row">
+                            <div class="col">
+                                <div id="distanceTable"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="row nav justify-content-center" id="distributionButtons">
+                            <div class="col">
+                                <button id="distanceStart" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distStart()">az
+                                    elejére</button>
+                                <button id="distanceBack" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distBack()">&#8678</button>
+                                <button id="distanceFoward" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distFow()">&#8680</button>
+                                <button id="distanceLast" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distLast()">a
+                                    végére</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div id="divForShowDistanceGraph" class="row">
+                    <div class="col-8">
+                        <p>A következő oszlopgrafikon azt mutatja meg, hogy milyen hosszúságú ürességek követik egymást
+                            az egyes kupacok mözött. (Ennek a grafikonnak csak négy betűnél hosszabb szókeresés
+                            sorozatok esetén van jelentősége!) Klikkeljen a 'mutasd!' gombra!</p>
+                    </div>
+                    <div class="col-4">
+                        <button id="buttonForDistanceGraph" type="button" class="btn btn-secondary btn-sm"
+                            onclick="showTheDistanceGraph()">Mutasd!</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div id="distanceMatrixGraph">
+                            <table id="distanceGraph">
+
+                        </table>
+                        </div>
+                    </div>
+                </div>
+                
+
+
                 <div class="row">
                     <div style="display:none" id="forFullTable" class="col col-12">
                         <table class="fullTable" id="graphic">
@@ -951,7 +1047,8 @@
                             200: 0
                         </p>
                     </div>
-                    <p>Ha meg akarja nézni egy gépelés sorozat esetén ezt az eloszlást, azt <a href="/monkey.html#rowForFullDistribution">ide kattintva</a> teheti meg.</p>
+                    <p>Ha meg akarja nézni egy gépelés sorozat esetén ezt az eloszlást, azt <a
+                            href="/monkey.html#rowForFullDistribution">ide kattintva</a> teheti meg.</p>
                 </div>
 
 
@@ -1018,10 +1115,11 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-            </div>
         </div>
-        <div class="col-0 col-sm-1 col-md-1"></div>
+        <div class="row">
+        </div>
+    </div>
+    <div class="col-0 col-sm-1 col-md-1"></div>
     </div>
     <div class="row m-3"></div>
 
