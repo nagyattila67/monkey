@@ -28,6 +28,8 @@ needMemory = false;
 wasMerge = false;
 timeLine = Array();
 wasDistanceGraph = false;
+hideDistanceGraphOrNot = ""
+hideClickCounter = 0;
 
 time = function (timeStart, timeFinish) {
     timeLength = (timeFinish.getTime() - timeStart.getTime()) / 1000;
@@ -80,9 +82,11 @@ word = function () {
     wordNumber = Number();
     lastWordNumber = Number();
     wordABC = "";
+    //charNumber=Number();
 
     area = document.querySelector("#getWord");
-    if (rep == false) { wordLength = event.path[2].children[1].children[0]["value"]; wordLength = parseInt(wordLength); }
+    /*if (rep == false) { wordLength = event.path[2].children[1].children[0]["value"]; wordLength = parseInt(wordLength); }*/
+    if (rep == false) { wordLength = document.querySelector("#keremASzot").value; wordLength = parseInt(wordLength); }
     if (rep == true) { wordLength = charNumber };
     if (wordLength > 8 || wordLength < 1) {
         alert("Minimum 1, maximum 7 betű! Hét betű esetén két órán át is futhat a progran!");
@@ -460,14 +464,17 @@ beFaster = function () {
 };
 
 timeCounting = function () {
-    if (startCounting == true) {
-        runningNumberForInfo = document.querySelector("#futasSzam").value;;
+    /*if (startCounting == true) {
+        runningNumberForInfo = document.querySelector("#futasSzam").value;
         charNumberForInfo = document.querySelector("#karakterSzam").value
     }
     else {
         runningNumberForInfo = event.path[1][0].value;
         charNumberForInfo = event.path[1][1].value;
-    };
+    };*/
+
+    runningNumberForInfo = document.querySelector("#futasSzam").value;
+    charNumberForInfo = document.querySelector("#karakterSzam").value
 
     runningNumberForInfo = parseInt(runningNumberForInfo);
     charNumberForInfo = parseInt(charNumberForInfo);
@@ -518,7 +525,7 @@ previousCharNumber = Number();
 previousRunningNumber = Number();
 //clearing = "false";
 repeat = function (event) {
-
+    hideClickCounter = 0; showTheDistanceGraph();
     needErase = false;
     wasMerge = false;
     wasMaximumChanged = false;
@@ -533,8 +540,10 @@ repeat = function (event) {
     ev = event;
 
     if (isItRepeating == false) {
-        runningNumber = event.path[4].children[0].children[0].children[1].value;
-        charNumber = event.path[4].children[0].children[0].children[3].value;
+        //runningNumber = event.path[4].children[0].children[0].children[1].value;
+        //charNumber = event.path[4].children[0].children[0].children[3].value;
+        runningNumber = document.querySelector("#futasSzam").value;
+        charNumber = document.querySelector("#karakterSzam").value
     }
     if (isItRepeating == true) {
         runningNumber = previousRunningNumber;
@@ -638,8 +647,17 @@ repeat = function (event) {
         removeFullGraph();
         wasHiddenFullGraph = false;
     };
+    document.querySelector("#buttonForDistanceGraph").setAttribute("onclick", "showTheDistanceGraph()");
+    document.querySelector("#buttonForDistanceGraph").innerHTML = "Mutat";
+    distanceMatrix = Array();
+    distanceMatrixAllElementCount = 0;
     makeDistanceMatrix();
+
     distanceStart();
+    if (wasShowingDistanceGraph == true) { removeRowsFromDistanceGraph() };
+    timeDistance = 0;
+    makeDistributionDistance();
+
 };
 
 fillLoopTable = function () {
@@ -688,7 +706,7 @@ fillLoopTable = function () {
     document.querySelector("#explantation9").style["background-color"] = "#7ee4e4"
     document.querySelector("#explantation9").innerHTML = "a két érték"
     document.querySelector("#explantation10").innerHTML = " annál jobban meközelítheti egymást."
-    document.querySelector("#explantation11").innerHTML = `Jelenleg az eltérés: ${(Math.abs(result - (totalNumberOfWords / runningNumber).toFixed(2)).toFixed(2))}`;
+    document.querySelector("#explantation11").innerHTML = `Jelenleg az eltérés: ${(Math.abs(100 - (result / (totalNumberOfWords / runningNumber) * 100))).toFixed(2)} %`;
 };
 base = Number();
 valueOne = Number();
@@ -711,7 +729,6 @@ eraseGraph = function () {
             document.querySelectorAll("#graphic tr")[previousAssistantArray[i][0]].children[previousAssistantArray[i][1]].style["background-color"] = "#dbdbdb";
         };
     };
-
     assistantArray = Array();
     needErase = false;
 };
@@ -771,7 +788,6 @@ jumpUp0 = function (event) {
         document.querySelector("#wrapping0").style.position = "static";
     };
     jumping0 = jumping0 + 1;
-
 };
 
 jumping1 = 0;
@@ -790,7 +806,6 @@ jumpUp1 = function (event) {
         document.querySelector("#wrapping1").style.position = "static";
     };
     jumping1 = jumping1 + 1;
-
 };
 
 jumping2 = 0;
@@ -1003,7 +1018,6 @@ backToBasicGraph = function () {
     };
 };
 
-
 estimateFunction = function (event) {
     if (wasDistMaxChanged) { distMax = distMaxForTable };
     //odaszínezi a közelítő függvény grafikonját az oszlopgrafikonra
@@ -1154,7 +1168,6 @@ estimateFunctionLog = function (event) {
     previousValueTwo = valueTwo;
     previousValueThree = valueThree;
 
-
     let k = distMax;
     while (k > 0) {
         for (let j = 0; j < maximum - 1; j++) {
@@ -1223,7 +1236,6 @@ makeTableAndColoring = function () {
     while (distMaxForTable > 100) {
         //Tömöríti a táblázat sorait; minden ciklusnál megfelezi őket; beállítás: 100; max. 100 lesz a sorok száma
         console.log("tömörítés -- sorok összevonása a táblázatban!");
-        console.log("distMaxForTable: ", distMaxForTable);
         for (let i = 0; i < distributionCopy[i]; i++) { distributionCopy[i] = Math.ceil(distributionCopy[i] / 2) };
         distMaxForTable = Math.ceil(distMaxForTable / 2);
         wasMerge = true;
@@ -1234,8 +1246,6 @@ makeTableAndColoring = function () {
     //pixHeight = Math.ceil(400 / distMax);
     pixHeight = "1px";
     pixWidth = "1px";
-
-
 
     maximum = distributionCopy.length - 1;
     //táblázat elkészítése
@@ -1302,12 +1312,10 @@ littleInfoForFullGraph = function () {
         if (charNumber > 5) {
             document.querySelector("#timeFullGraph2").innerHTML = "több mint egy óra";
         };
-
-
     };
 
     document.querySelector("#wantFullGraphButton").disabled = false;
-    console.log("distMaxOriginal: ", distMaxOriginal);
+
 
     if (wasMerge == false) {
         document.querySelector("#infoForFullGraph").innerHTML = "A grafikonon nem történt tömörítés, ezért ez a funkció most ki van kapcsolva.";
@@ -1366,7 +1374,6 @@ wantFullGraph = function () {
             k = k - 1;
             //clearing = true;
         };
-
     };
     timeFullGraphFinish = new Date();
     timeFullGraph = (timeFullGraphFinish.getTime() - timeFullGraphStart.getTime()) / 1000;
@@ -1379,7 +1386,6 @@ wantFullGraph = function () {
 };
 
 hideFullGraph = function () {
-    console.log("hide");
     document.querySelector("#rowForFullTable").style.display = "none";
     document.querySelector("#wantFullGraphButton").innerHTML = "mutat";
     document.querySelector("#wantFullGraphButton").setAttribute("onclick", "wantFullGraph()");
@@ -1402,20 +1408,17 @@ removeFullGraph = function () {
     };
 };
 
-
-
 wasHide = "";
 lastElement = 0;
 fistElement = 0;
 distStart = function () {
-    console.log("distStart");
-    if (distribution.length < 100) { lastElement = distribution.length }
-    else { lastElement = 100 };
+    //if (distribution.length < 100) { lastElement = distribution.length }
+    //else { lastElement = 100 };
     firstElement = 1;
-    fillTheDistributionTable(firstElement, lastElement);
+    fillTheDistributionTable(firstElement);
 
 };
-fillTheDistributionTable = function (firstElement, lastElement) {
+fillTheDistributionTable = function (firstElement) {
     for (let i = 1; i < 101; i++) {
         area = document.querySelector(`#allDistribution span[name='${i}']`)
         if (firstElement + i < distribution.length + 1) {
@@ -1437,7 +1440,7 @@ distBack = function () {
     }
     else { lastElement = 1 }
 
-    fillTheDistributionTable(firstElement, lastElement);
+    fillTheDistributionTable(firstElement);
 };
 distFow = function () {
     if (firstElement + 100 < distribution.length) {
@@ -1447,7 +1450,7 @@ distFow = function () {
         }
         else { lastElement = distribution.length }
     };
-    fillTheDistributionTable(firstElement, lastElement);
+    fillTheDistributionTable(firstElement);
 
 };
 borderElement = 0;
@@ -1455,7 +1458,7 @@ distLast = function () {
     borderElement = (Math.floor(distribution.length / 100)) * 100;
     firstElement = borderElement;
     lastElement = firstElement + 100;
-    fillTheDistributionTable(firstElement, lastElement);
+    fillTheDistributionTable(firstElement);
 };
 
 createDistributionSpans = function () {
@@ -1487,21 +1490,17 @@ wantFullDistributionTable = function () {
         document.querySelector("#wantFullDistributionButton").innerHTML = "Elrejt";
         document.querySelector("#wantFullDistributionButton").setAttribute("onclick", "hideDistribution()");
 
-
         wasHide = "no";
         fullDistFinishTime = new Date;
         fullDistTime = fullDistFinishTime - fullDistStartTime;
         fullDistTime = fullDistTime / 1000;
         console.log(fullDistTime, " sec");
         createDistributionSpans();
-
-
     };
 };
 
 hideDistribution = function () {
     wasHide = "yes";
-
     document.querySelector("#divForAllDistribution").style.display = "none";
     document.querySelector("#distributionButtons").style.display = "none";
     document.querySelector("#wantFullDistributionButton").innerHTML = "Mutat";
@@ -1613,16 +1612,15 @@ makeTheSecondTable = function () {
 
         //distributionCopy2-re szükség van?
         //clearing-re szükség van?
-
-
     };
     document.querySelector("#graphicSecond").style.width = `${myArray.length}px`
-
     timeFinishingAll = new Date();
 };
 
 distanceMatrix = Array();
+isThereDistanceMatrix = "no"
 makeDistanceMatrix = function () {
+    isThereDistanceMatrix = "yes";
     let k = 0;
     let index = 0;
     let indexNull = 0;
@@ -1645,23 +1643,25 @@ makeDistanceMatrix = function () {
             indexNull = indexNull + 1;
         };*/
     };
+    maxDistancePage = Math.ceil(distanceMatrix.length / 100);
+    distanceMatrixAllElementCount = 0;
+    for (let i = 0; i < distanceMatrix.length; i++) {
+        distanceMatrixAllElementCount = distanceMatrixAllElementCount + distanceMatrix[i];
+    };
 };
 
 createDistanceMatrixSpans = function () {
     for (let i = 0; i < 101; i++) {
-        console.log("create");
         newSpan = document.createElement("span");
         newSpan.setAttribute("name", i);
         document.querySelector("#distanceTable").appendChild(newSpan);
     };
 };
 
-showDistanceMatrix = function (firstElement, lastElement) {
+showDistanceMatrix = function (firstElement, lastElement, pageOfDistanceTable) {
     if (wasDistanceMatrixClick == false) { createDistanceMatrixSpans(); };
     wasDistanceMatrixClick = true;
 
-
-    console.log("show");
     for (let i = 0; i < 100; i++) {
         area = document.querySelector(`#distanceTable span[name='${i}']`)
         if (firstElement + i < distanceMatrix.length) {
@@ -1669,25 +1669,38 @@ showDistanceMatrix = function (firstElement, lastElement) {
             console.log("yes");
         };
     };
+    document.querySelector("#distanceTablePage").innerHTML = `- ${pageOfDistanceTable} -`;
+    document.querySelector("#distanceAllPage").innerHTML = `${maxDistancePage}`;
     document.querySelector("#emptiness1").innerHTML = runningNumber;
     document.querySelector("#emptiness2").innerHTML = distribution.length;
     document.querySelector("#emptiness3").innerHTML = distribution[distribution.length - 1]
-    document.querySelector("#emptiness4").innerHTML = runningNumber;
-    document.querySelector("#emptiness5").innerHTML = distribution.length;
+    document.querySelector("#emptiness4").innerHTML = distribution.length;
+    document.querySelector("#emptiness5").innerHTML = runningNumber;
     document.querySelector("#emptiness1").style["background"] = "#FADADD"
     document.querySelector("#emptiness2").style["background"] = "#FADADD"
     document.querySelector("#emptiness3").style["background"] = "#FADADD"
     document.querySelector("#emptiness4").style["background"] = "#FADADD"
     document.querySelector("#emptiness5").style["background"] = "#FADADD"
-};
+    document.querySelector("#distanceLength").innerHTML = distanceMatrix.length;
 
+    document.querySelector("#distGraphEstimateTime").innerHTML = "";
+    document.querySelector("#distGraphEstimateTime2").innerHTML = "";
+    if (charNumber == 2) { document.querySelector("#distGraphEstimateTime").innerHTML = "1 sec." };
+
+    if (charNumber == 3) { document.querySelector("#distGraphEstimateTime").innerHTML = "1 sec." };
+    if (charNumber == 4) { document.querySelector("#distGraphEstimateTime2").innerHTML = "10 perc" };
+    if (charNumber == 5) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
+    if (charNumber == 6) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
+    if (charNumber == 7) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
+
+};
 wasDistanceMatrixClick = false;
 distanceStart = function () {
-    console.log("distStart");
     if (distanceMatrix.length < 100) { lastElement = distanceMatrix.length }
     else { lastElement = 100 };
     firstElement = 0;
-    showDistanceMatrix(firstElement, lastElement);
+    pageOfDistanceTable = 1;
+    showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable);
 };
 
 distanceBack = function () {
@@ -1695,8 +1708,8 @@ distanceBack = function () {
         firstElement = firstElement - 100;
     }
     else { lastElement = 1 }
-
-    showTheDistanceMatrix(firstElement, lastElement);
+    if (pageOfDistanceTable > 1) { pageOfDistanceTable -= 1 }
+    showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable);
 };
 distanceFow = function () {
     if (firstElement + 100 < distanceMatrix.length) {
@@ -1706,25 +1719,55 @@ distanceFow = function () {
         }
         else { lastElement = distanceMatrix.length }
     };
-    showTheDistanceMatrix(firstElement, lastElement);
+    if (pageOfDistanceTable < maxDistancePage) { pageOfDistanceTable += 1 };
+    showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable);
 };
 borderElement = 0;
 distanceLast = function () {
     borderElement = (Math.floor(distanceMatrix.length / 100)) * 100;
     firstElement = borderElement;
     lastElement = firstElement + 100;
-    showTheDistanceMatrix(firstElement, lastElement);
+    pageOfDistanceTable = maxDistancePage;
+    showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable);
 };
 
+hideTheDistanceGraph = function () {
+    if (hideDistanceGraphOrNot == "no" && hideClickCounter % 2 == 0) {
+        document.querySelector("#rowForDistanceGraph").style.display = "none"
+        document.querySelector("#buttonForDistanceGraph").innerHTML = "Mutat";
+        hideDistanceGraphOrNot = "yes"
+    };
+    if (hideDistanceGraphOrNot = "yes" && hideClickCounter % 2 == 1) {
+        document.querySelector("#rowForDistanceGraph").style.display = "initial";
+        document.querySelector("#buttonForDistanceGraph").innerHTML = "Elrejt";
+        hideDistanceGraphOrNot = "no"
+    };
+    hideClickCounter += 1;
+};
 
+removeRowsFromDistanceGraph = function () {
+    index = document.querySelector("#distanceGraph").childElementCount;
+    area = document.querySelector("#distanceGraph");
+    for (let i = 1; i < index + 1; i++) {
+        sector = document.querySelectorAll("#distanceGraph tr")[index - i];
+        area.removeChild(sector);
+    };
+    document.querySelector("#rowForDistanceGraph").style.display = "none";
+};
 
+hideDistanceGraphOrNot = "";
+wasShowingDistanceGraph = false;
 showTheDistanceGraph = function () {
-    createDistanceMatrixSpans();
+    wasShowingDistanceGraph = true;
 
-    timeDistanceStart = new Date();
+    document.querySelector("#rowForDistanceGraph").style.display = "initial";
+    document.querySelector("#buttonForDistanceGraph").innerHTML = "Elrejt";
+    document.querySelector("#buttonForDistanceGraph").setAttribute("onclick", "hideTheDistanceGraph()");
+    hideDistanceGraphOrNot = "no";
+    hideClickCounter = 0;
+    timeDistanceStart1 = new Date();
 
-    wasDistanceGraph = true;
-    document.querySelector("#buttonForDistanceGraph").disabled = "true";
+    //document.querySelector("#buttonForDistanceGraph").disabled = "true";
 
     maxDistance = 0;
     for (let i = 0; i < distanceMatrix.length; i++) {
@@ -1738,31 +1781,33 @@ showTheDistanceGraph = function () {
 
     //elkészíti az üres táblázatot
 
-    pixHeight = "1px";
-    pixWidth = "1px";
+    distPixHeight = "1px";
+    distPixWidth = "1px";
 
     maximum = distanceMatrixCopy.length;
     //táblázat elkészítése
-    for (let i = 0; i < maximum; i++) {
+    for (let i = 0; i < maxDistance; i++) {
         place = document.querySelector("#distanceGraph");
         dataRow = document.createElement("tr");
         place.appendChild(dataRow)
         sector = document.querySelectorAll("#distanceGraph tr")[i];
-        for (let j = 0; j < maxDistance; j++) {
+        for (let j = 0; j < distanceMatrix.length; j++) {
             dataCell = document.createElement("td");
             sector.appendChild(dataCell);
-            dataCell.style.width = `${pixWidth}px`;
-            dataCell.style.height = `${pixHeight}px`;
+            dataCell.style.width = `${distPixWidth}px`;
+            dataCell.style.height = `${distPixHeight}px`;
             dataCell.style.margin = "0px";
             dataCell.style.padding = "0px";
             dataCell.style["background-color"] = "#dbdbdb";
         };
     };
+    timeDistanceStart2 = new Date();
+
 
     //kiszínezi a cellákat alulról haladva       
-    let k = maximum - 1;
+    let k = maxDistance - 1;
     while (k >= 0) {
-        for (let j = 0; j < maxDistance - 1; j++) {
+        for (let j = 0; j < distanceMatrix.length; j++) {
             dataCell = document.querySelectorAll("#distanceGraph tr")[k].children[j];
             if (distanceMatrixCopy[j] != 0) { dataCell.style["background"] = "#f00c93"; distanceMatrixCopy[j] = distanceMatrixCopy[j] - 1 };
 
@@ -1771,14 +1816,99 @@ showTheDistanceGraph = function () {
         //clearing = true;
     };
 
-    timeDistanceFinish = new Date();
-    timeDistance = (timeDistanceFinish.getTime() - timeDistanceStart.getTime()) / 1000;
 
-    minReal = Math.floor(timeDistance / 60);
-    secReal = (timeDistance % 60).toFixed(0);
+    if (isThereDistanceMatrix == "yes") {
 
-    /*document.querySelector("#realTimeForFullGraph").innerHTML = `Grafikon felrajzolásának tényleges ideje: ${minReal} min.${secReal} sec.`;
-    document.querySelector("#infoForFullGraph2").innerHTML = `Ezen a grafikonon ${Math.floor(distribution.length / distributionCopy2.length)} oszlop felel meg a tömörített grafikon egy oszlopának.`;*/
+        timeDistanceFinish = new Date();
+        timeDistance1 = (timeDistanceStart2.getTime() - timeDistanceStart1.getTime()) / 1000;
+        timeDistance2 = (timeDistanceFinish.getTime() - timeDistanceStart2.getTime()) / 1000;
+
+        timeDistance = timeDistance1 + timeDistance2;
+        minReal = Math.floor(timeDistance / 60);
+        secReal = (timeDistance % 60).toFixed(0);
+
+        document.querySelector("#realTimeForDistanceGraph").innerHTML = `Grafikon felrajzolásának tényleges ideje: ${minReal} min.${secReal} sec.`;
+        document.querySelector("#infoForDistanceGraph").innerHTML = `Ezen a grafikonon ${Math.floor(distribution.length / distributionCopy2.length)} oszlop felel meg a tömörített grafikon egy oszlopának.`;
+
+
+        console.log(timeDistance1, " ", timeDistance2);
+        console.log(distanceMatrix.length, " ", distanceMatrixAllElementCount, "", maxDistance);
+    };
+
+
+};
+
+makeDistributionDistance = function () {
+    distributionDistance = Array();
+    distanceMax = 0;
+    for (let i = 0; i < distanceMatrix.length; i++) {
+        if (distanceMatrix[i] > distanceMax) { distanceMax = distanceMatrix[i] };
+    };
+    for (let i = 0; i < distanceMax; i++) {
+        distributionDistance[i] = 0;
+    };
+    for (let i = 0; i < distanceMax; i++) {
+        for (let j = 0; j < distanceMatrix.length; j++) {
+            if (distanceMatrix[j] == i) {
+                distributionDistance[i] += 1
+            };
+        };
+    };
+    distributionDistanceShort = Array();
+    let index = 0;
+    for (let i = 0; i < distributionDistance.length; i++) {
+        if (distributionDistance[i] != 0) {
+            distributionDistanceShort[index] = distributionDistance[i];
+            index = index + 1;
+        };
+    };
+};
+
+distributionDistanceTable
+
+createDistributionDistanceSpans = function () {
+    for (let i = 0; i < 101; i++) {
+        newSpan = document.createElement("span");
+        newSpan.setAttribute("name", i);
+        document.querySelector("#distributionDistanceTable").appendChild(newSpan);
+    };
+};
+
+showDistributionDistance = function (firstElement, lastElement, pageOfDistanceTable) {
+    if (wasDistanceMatrixClick == false) { createDistanceMatrixSpans(); };
+    wasDistanceMatrixClick = true;
+
+    for (let i = 0; i < 100; i++) {
+        area = document.querySelector(`#distanceTable span[name='${i}']`)
+        if (firstElement + i < distanceMatrix.length) {
+            area.innerHTML = `${distanceMatrix[firstElement + i]}; `
+            console.log("yes");
+        };
+    };
+    document.querySelector("#distanceTablePage").innerHTML = `- ${pageOfDistanceTable} -`;
+    document.querySelector("#distanceAllPage").innerHTML = `${maxDistancePage}`;
+    document.querySelector("#emptiness1").innerHTML = runningNumber;
+    document.querySelector("#emptiness2").innerHTML = distribution.length;
+    document.querySelector("#emptiness3").innerHTML = distribution[distribution.length - 1]
+    document.querySelector("#emptiness4").innerHTML = distribution.length;
+    document.querySelector("#emptiness5").innerHTML = runningNumber;
+    document.querySelector("#emptiness1").style["background"] = "#FADADD"
+    document.querySelector("#emptiness2").style["background"] = "#FADADD"
+    document.querySelector("#emptiness3").style["background"] = "#FADADD"
+    document.querySelector("#emptiness4").style["background"] = "#FADADD"
+    document.querySelector("#emptiness5").style["background"] = "#FADADD"
+    document.querySelector("#distanceLength").innerHTML = distanceMatrix.length;
+
+    document.querySelector("#distGraphEstimateTime").innerHTML = "";
+    document.querySelector("#distGraphEstimateTime2").innerHTML = "";
+    if (charNumber == 2) { document.querySelector("#distGraphEstimateTime").innerHTML = "1 sec." };
+
+    if (charNumber == 3) { document.querySelector("#distGraphEstimateTime").innerHTML = "1 sec." };
+    if (charNumber == 4) { document.querySelector("#distGraphEstimateTime2").innerHTML = "10 perc" };
+    if (charNumber == 5) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
+    if (charNumber == 6) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
+    if (charNumber == 7) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
+
 };
 
 

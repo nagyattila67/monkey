@@ -86,8 +86,8 @@
                                     <label>A szó hossza legyen</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input class="form-control form-control-sm" id="wordLength" type="number" min="1"
-                                        max="7" value="4">
+                                    <input id="keremASzot" class="form-control form-control-sm" id="wordLength"
+                                        type="number" min="1" max="7" value="4">
                                 </div>
                                 <div class="col-auto">
                                     <label>betű!</label>
@@ -439,31 +439,41 @@
                     </div>
                 </div>
                 <div id="rowForFullDistribution" class="row">
-                    <div class="col-9">
-                        <p>Kérem a teljes eloszlásfüggvény <i>'az ennyi sort tartalmazó listából - ennyi van'</i>
-                            értékpárjainak felsorolását! A táblázat <i><span id="valueCouple"> - </span></i> értékpárt
-                            tartalmaz.
+
+                    <div class="row">
+                        <div id="colForFullDistribution" class="col-9">
+                            <p>Kérem a teljes eloszlásfüggvény <i>'az ennyi sort tartalmazó listából - ennyi
+                                    van'</i>
+                                értékpárjainak felsorolását! A táblázat <i><span id="valueCouple"> - </span></i>
+                                értékpárt
+                                tartalmaz.
+
+                        </div>
+                        <div class="col-3">
+                            <button id="wantFullDistributionButton" type="button" class="btn btn-secondary btn-sm"
+                                onclick="wantFullDistributionTable()">Mutat</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div id="divForAllDistribution">
+
+                        </div>
+                        <div style="display:none" class="nav justify-content-center" id="distributionButtons">
+                            <button id="distributionStart" type="button" class="btn btn-secondary btn-sm"
+                                onclick="distStart()">az elejére</button>
+                            <button id="distributionBack" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                                onclick="distBack()">&#8678</button>
+                            <button id="distributionFoward" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                                onclick="distFow()">&#8680</button>
+                            <button id="distributionLast" type="button" class="btn btn-secondary btn-sm"
+                                onclick="distLast()">a végére</button>
+
+                        </div>
 
                     </div>
-                    <div class="col-3">
-                        <button id="wantFullDistributionButton" type="button" class="btn btn-secondary btn-sm"
-                            onclick="wantFullDistributionTable()">Mutat</button>
-                    </div>
 
-                    <div id="divForAllDistribution">
 
-                    </div>
-                    <div style="display:none" class="nav justify-content-center" id="distributionButtons">
-                        <button id="distributionStart" type="button" class="btn btn-secondary btn-sm"
-                            onclick="distStart()">az elejére</button>
-                        <button id="distributionBack" name="arrow" type="button" class="btn btn-secondary btn-sm"
-                            onclick="distBack()">&#8678</button>
-                        <button id="distributionFoward" name="arrow" type="button" class="btn btn-secondary btn-sm"
-                            onclick="distFow()">&#8680</button>
-                        <button id="distributionLast" type="button" class="btn btn-secondary btn-sm"
-                            onclick="distLast()">a végére</button>
-
-                    </div>
                 </div>
                 <div id="rowForFullGraph" class="row">
                     <div class="row">
@@ -531,595 +541,697 @@
                         <!--<span>Kérem a távolságtáblázatot!</span>
                     <button id="buttonForDistanceTable" type="button" class="btn btn-secondary btn-sm"
                         onclick="distanceStart()">Mutat</button>-->
-
                         <div class="row">
-                            <div class="col">
-                                <div id="distanceTable"></div>
-                            </div>
-
+                            <div class="col">A táblázat összesen <span id="distanceLength">&#8212 </span> adatot
+                                tartalmaz <span id=distanceAllPage> - </span> oldalon.
+                                (Oldalanként 100 adat.)</div>
                         </div>
 
                         <div class="row nav justify-content-center" id="distributionButtons">
                             <div class="col">
                                 <button id="distanceStart" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="distStart()">az
+                                    onclick="distanceStart()">az
                                     elejére</button>
                                 <button id="distanceBack" name="arrow" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="distBack()">&#8678</button>
+                                    onclick="distanceBack()">&#8678</button>
                                 <button id="distanceFoward" name="arrow" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="distFow()">&#8680</button>
+                                    onclick="distanceFow()">&#8680</button>
                                 <button id="distanceLast" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="distLast()">a
+                                    onclick="distanceLast()">a
                                     végére</button>
                             </div>
                         </div>
+                        <div id="rowForDistanceTable" class="row">
+                            <div id="colForDistanceTable" class="col col-12">
+                                <p style="text-align:center" id="distanceTablePage"></p>
+                                <p id="distanceTable">
+                                </p>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
 
                 <div id="divForShowDistanceGraph" class="row">
                     <div class="col-8">
                         <p>A következő oszlopgrafikon azt mutatja meg, hogy milyen hosszúságú ürességek követik egymást
-                            az egyes kupacok mözött. (Ennek a grafikonnak csak négy betűnél hosszabb szókeresés
-                            sorozatok esetén van jelentősége!) Klikkeljen a 'mutasd!' gombra!</p>
+                            az egyes kupacok mözött. <span style="font-size:13px">(Ennek a grafikonnak csak négy betűnél
+                                hosszabb szókeresés
+                                sorozatok esetén van jelentősége!)</span> Klikkeljen a <i>'mutat'</i> gombra!</p>
                     </div>
                     <div class="col-4">
                         <button id="buttonForDistanceGraph" type="button" class="btn btn-secondary btn-sm"
-                            onclick="showTheDistanceGraph()">Mutasd!</button>
+                            onclick="showTheDistanceGraph()">Mutat</button>
+                        <p>A grafikon elkészítésének várható ideje: <span
+                                id="distGraphEstimateTime"></span><strong><span
+                                    id="distGraphEstimateTime2"></span></strong></p>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col">
-                        <div id="distanceMatrixGraph">
-                            <table id="distanceGraph">
-
+                <div style="display:none" id="rowForDistanceGraph" class="row">
+                    <div id="colForDistanceGraph" class="col col-12">
+                        <table id="distanceGraph">
                         </table>
-                        </div>
+
                     </div>
-                </div>
-                
 
-
-                <div class="row">
+                    <small><span id=realTimeForDistanceGraph></span>
+                        <span id=infoForDistanceGraph></span></small>
+                    <!--<div class="row">
                     <div style="display:none" id="forFullTable" class="col col-12">
                         <table class="fullTable" id="graphic">
                         </table>
-                    </div>
+                    </div>-->
+
                 </div>
-                <div class="row">
-                    <div id="forEnvelope" class="col-6">
-                        <h6>Burkológörbe felrajzolása:</h6>
-                        <p>Ha akarja, megkeresheti az oszlopgrafikon burkológörbéjét!</p>
-                        <p><span style="background-color:#FADADD">Javasoljuk, első alkalommal
-                                használja a program által felajánlott alapbeállítást.</span> Ekkor Ön egy <i>'szép'</i>,
-                            könnyen
-                            áttekinthető eloszlásfüggvényt kap.</p>
-                        <p> Ezzel a beállítással a grafikon még egésszében kifér a képernyőre, így nem lesz tömörítve,
-                            tehát a pontos eloszlást mutatja majd. </p>
-                        <p> Klikkeljen az <i>'alapbeállítás'</i> gombra, s ekkor a szókeresés
-                            300-szor le fog futni egymás után '<i>a majom kétbetűs szavakat keres</i>' beállítással. Ez
-                            kb. 10 másodpercig tart majd.</p>
-                        <button type="button" class="btn btn-primary btn-sm" onclick="preparation()">alapbeállítás
-                        </button>
-                        <p> Ezután kattintson a <i>'hiperbolikus'</i> vagy <i>'logaritmikus'</i> gombra. Ekkor
-                            megjelenik a burkológörbe, amit a zöld nyilakkal tud mozgatni. </p>
 
-                    </div>
-                    <div id="wrapping0" class="col-8">
+                <div id="divForDistanceTable" class="row">
+                    <div class="col">
+                        <p>Összesen tehát <span id="emptiness6">
+                                &#8212 </span> darab ürességünk van. Ezeknek az ürességeknek szintén megvizsgálhatjuk az
+                            eloszlását. Hány darab <i>'egy hosszúságú'</i> ürességünk van? Hány darab <i>'kettő
+                                hosszúságú'</i> ürességünk van? És így tovább. Ezt az eloszlást mutatja a következő
+                            táblázat.
+                        </p>
+                        <P>Figyelem! Ennek a táblázatnak csak négy vagy annál több betűs szavak keresésének a sorozata
+                            esetén
+                            van
+                            jelentősége!</P>
+                        <!--<span>Kérem a távolságtáblázatot!</span>
+                    <button id="buttonForDistanceTable" type="button" class="btn btn-secondary btn-sm"
+                        onclick="distanceStart()">Mutat</button>-->
                         <div class="row">
-                            <button name="chooseGraph" type="button" onclick="wantHyp()"
-                                class="btn btn-success btn-sm">hiperbolikus</button>
-                            <button name="chooseGraph" type="button" onclick="wantLog()"
-                                class="btn btn-success btn-sm">logaritmikus</button>
-                        </div>
-                        <div class="row">
-
-                            <table>
-                                <tr>
-                                    <td></td>
-                                    <td><button name="arrow" type="button" onclick="up()"
-                                            class="btn btn-success btn-sm">&#8679</button></td>
-                                    <td></td>
-                                    <td rowspan="3"><button name="backToStart" type="button"
-                                            onclick="backToBasicGraph()" class="btn btn-success btn-sm">&#11119</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><button name="arrow" type="button" onclick="left()"
-                                            class="btn btn-success btn-sm">&#8678</button></td>
-                                    <td></td>
-                                    <td><button name="arrow" type="button" onclick="right()"
-                                            class="btn btn-success btn-sm">&#8680</button></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td><button name="arrow" type="button" onclick="down()"
-                                            class="btn btn-success btn-sm">&#8681</button></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </table>
-
-
-                        </div>
-                        <div class="row">
-                            <p>meredekség:</p>
-                        </div>
-                        <div class="row">
-
-                            <button name="rising" type="button" onclick="risingUpUp()"
-                                class="btn btn-success btn-sm">++</button>
-                            <button name="rising" type="button" onclick="risingUp()"
-                                class="btn btn-success btn-sm">+</button>
-                            <button name="rising" type="button" onclick="risingDown()"
-                                class="btn btn-success btn-sm">-</button>
-                            <button name="rising" type="button" onclick="risingDownDown()"
-                                class="btn btn-success btn-sm">--</button>
-
-                        </div>
-                        <div class="row">
-                            <p>a függvény:</p>
-                        </div>
-                        <div class="row">
-                            <p><strong><span id="howFunctionLooksLike1"></span><sub><span id="base"></span></sub><span
-                                        id="howFunctionLooksLike2"></span></strong></p>
-                        </div>
-                        <div class="row">
-                            <button id="jump0" name="skipToBetterPlace" type="button" class="btn btn-danger btn-sm"
-                                onclick="jumpUp0()">Ugrás</button>
-                        </div>
-                        <div class="row">
-                            <p id="jumpInfo0" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez a blokk
-                                    felugrik
-                                    a képernyő
-                                    jobb felső sarkába,
-                                    így ha odagörget a grafikonhoz, akkor is használni tudja.</i></p>
+                            <div class="col">A táblázat összesen <span id="distanceLength">&#8212 </span> adatot
+                                tartalmaz <span id=distanceAllPage> - </span> oldalon.
+                                (Oldalanként 100 adat.)</div>
                         </div>
 
-                    </div>
-                </div>
-                <div class="row">
-                    <h6>Beállíthatja a burkológörbét a függvény konkrét megadásával is.</h6>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <form id="wrapping1" class="wrapping">
-                            <div class="row">
-                                <p>Hiperbolikus burkológörbe (javasolt beállítással):</p>
+                        <div class="row nav justify-content-center" id="distributionButtons">
+                            <div class="col">
+                                <button id="distanceStart" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distanceStart()">az
+                                    elejére</button>
+                                <button id="distanceBack" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distanceBack()">&#8678</button>
+                                <button id="distanceFoward" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distanceFow()">&#8680</button>
+                                <button id="distanceLast" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distanceLast()">a
+                                    végére</button>
                             </div>
-                            <div class="row">
-                                <p><input type="number" id="H1" name="one" style="width:60px"
-                                        value="5">*maximum/(x+<input type="number" id="H2" name="two" style="width:60px"
-                                        value="2"> ) + <input type="number" id="H3" name="three" style="width:60px"
-                                        value="-4">
+                        </div>
+                        <div id="rowForDistributionDistanceTable" class="row">
+                            <div id="colForDistributionDistanceTable" class="col col-12">
+                                <p style="text-align:center" id="distributionDistanceTablePage"></p>
+                                <p id="distributionDistanceTable">
                                 </p>
                             </div>
-                            <div class="row">
-                                <button disabled id="estimateFunc" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="estimateFunction(event)">Mehet</button>
-                                <button disabled id="functionAppr" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="decisionAboutErase()">Töröl</button>
-                                <button id="jump1" name="skipToBetterPlace" type="button" class="btn btn-danger btn-sm"
-                                    onclick="jumpUp1()">Ugrás</button>
-                            </div>
-
-                            <div class="row">
-                                <p id="jumpInfo1" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez a blokk
-                                        felugrik a képernyő
-                                        jobb felső sarkába,
-                                        így ha odagörget a grafikonhoz, akkor is használni tudja.</i></p>
-                            </div>
-
-                        </form>
-                    </div>
-                    <div class="col-6">
-                        <form id="wrapping2" class="wrapping">
-                            <div class="row">
-                                <p>Logaritmikus burkológörbe (javasolt beállítással</p> - <span
-                                    style="font-size:12px">Javasoljuk
-                                    még az alap: 0,87; konstansok: 1, -27, 0 beállítást</span>):
-                            </div>
-                            <div class="row">
-                                <p>Logaritmus alapja: <input type="number" id="LBase" name="logBase" style="width:60px"
-                                        value="0.5">
-                                </p>
-                            </div>
-                            <div class="row">
-                                <p><input type="number" id="L1" name="one" style="width:60px" value="5">log(x+<input
-                                        type="number" id="L2" name="two" style="width:60px" value="-28"> ) + <input
-                                        type="number" id="L3" name="three" style="width:60px" value="0">
-                                </p>
-                            </div>
-                            <div class="row">
-                                <button disabled id="estimateFuncLog" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="estimateFunctionLog(event)">Mehet</button>
-                                <button disabled id="functionApprLog" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="decisionAboutErase()">Töröl</button>
-                                <button id="jump2" name="skipToBetterPlace" type="button" class="btn btn-danger btn-sm"
-                                    onclick="jumpUp2()">Ugrás</button>
-                            </div>
-                            <div class="row">
-                                <p id="jumpInfo2" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez a blokk
-                                        felugrik a képernyő
-                                        jobb felső sarkába,
-                                        így ha odagörget a grafikonhoz, akkor is használni tudja.</i></p>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row">
-                </div>
-                <div id="kindOfDistributions">
-                    <div class="row">
-                        <h5>Eloszlás típusok:</h5>
-                    </div>
-                    <div class="row">
-                        <div>
-                            <img name="kindOfDistImg" class="float-left" width="250" src="img\example1_100_2.png"
-                                alt="eloszlás: 2 betűs szó 100-szor">
-                            <p>Ez egy <i>'szép'</i> eloszlás. A program a <i>'majom két betűs szavakat keres'</i>
-                                beállítással lett lefuttatva
-                                100-szor.</p>
-                            <p>Összesen 36 oszlopunk van, s az egyes oszlopok magasságai: <i>0, 9, 13, 8, 3, 8, 6, 6, 6,
-                                    5,
-                                    4, 3, 4, 4, 3, 0, 2,
-                                    0, 2, 1, 1, 2, 1, 1, 1, 0, 0, 0, 0, 2, 1, 1, 0, 0, 1, 1, 0 . </i></p>
-                            <p>Jól látható, hogy <i>'az elsőre talált egy értelmes szót</i> esetből 9 db. van. A
-                                <i>másodjára
-                                    talált egy értelmes szót</i> esetből 13 db. van, s ez a legmagasabb oszlop. A
-                                <i>'harmadjára talál egy értelmes szót'</i> esetből 8 db. van. És így tovább. Láthatjuk,
-                                hogy <u>az oszlopok magassága fokozatosan csökken</u>, azaz az egyre hosszabb listákból
-                                egyre
-                                kevesebb van. Ezeknél a <i>'szép'</i> eloszlásoknál meg tudjuk keresni a burkológörbét.
-                            </p>
-                            </br>
-                        </div>
-                        <div>
-                            <img name="kindOfDistImg" class=" float-left" width="250" src="img\example2_800_5.png"
-                                alt="eloszlás: 5 betűs szó 800-szor">
-                            <p>A majom most <i> 5 betűs szavakat keresett 800-szor egymás után.</i> A leghosszabb
-                                próbálkozása 98 325 sor
-                                volt.
-                            <p>Ez azt jelenti, hogy
-                                98 325 oszlop áll egymás mellett az eredeti grafikonon. <span id="infoAboutCol">(Persze
-                                    itt
-                                    most az oszlopok össze
-                                    lettek vonva, egy oszlop 1024 egymás melletti eredeti oszlopot jelöl, s az
-                                    oszlopcsoportot
-                                    képviselő oszlop magassága azonos a csoport legmagasabb oszlopának a magasságával. -
-                                    De
-                                    mindettől most
-                                    tekintsünk el.)</span>
-                            </p>
-                            <p>Viszont csak 800 listánk lesz, amit 98 325 különböző magasságlehetőség között kell
-                                elosztanunk. Így sok magasság lesz, ahova nem jut lista - itt 0 magasságú az oszlop a
-                                grafikonon. <span id="infoAboutCol">(Valójában az oszlopok 99%-a ilyen - 0 magasságú -,
-                                    de ez most
-                                    nem látszik az oszlopok összevonása - a tömörítés - miatt.)</span>
-                            </p>
-                            <p>Hasonlóan sok
-                                oszlopmagasságnak csak egy-egy lista jut, s ezek lesznek az 1
-                                magasságú oszlopok. Végül akad néhány <i>'szerencsésebb'</i> oszlopmagasság is,
-                                amelyeknek
-                                két-két
-                                lista jutott, s ezek a 2 magasságú oszlopok. S láthatjuk azt is, hogy éppenséggel egy
-                                oszlopmagasságunk sincs, amelynek három vagy több lista jutott volna. </p>
-                            </p>
-                            <p>Mindez azt eredményezi, hogy az oszlopgrafikon <i>'ki van lapítva'</i>, azaz itt már
-                                <u>nem csökken az oszlopok magassága</u> a listahossz függvényéban.</p>
-                            <p>Vegyük észre, hogy a két grafikon között az a lényeges különbség, hogy az elsőnél 100
-                                'golyót' kellett szétosztani 38 dobozba, s így volt olyan doboz, amibe sok golyó jutott.
-                                A
-                                második esetben viszont 800 'golyót' kellett elosztani 98 325 dobozba, így még az a
-                                doboz is
-                                'jól járt', amelyikbe csak egy 'golyó' jutott.</p>
                         </div>
 
-
-
-                    </div>
-                    <div>
-                        <div class="row">
-
-                        </div>
                     </div>
                 </div>
-                <div id="notNiceDistribution">
-                    <h5>A <i>'nem szép'</i> eloszlás</h5>
-                    <p>De hogyan is néz ki egy <i>nem szép</i> eloszlás oszlopgrafikonja, ha nem tömörítjük
-                        a táblázatot? Pl. nézzünk egy konkrét eloszlást <i>'a majom öt betűs szavakat keres 500-szor'
-                            beállítással.</i>
-                    </p>
-                    <p>A
-                        program ezzel a beállítással kb. egy órán keresztül futna, majd kapnánk egy
-                        beláthatatlanul hosszú grafikont. Most nézzünk helyette egy előre lefuttatott eredményt!
-                    </p>
-                    <p>Ha elkezdenénk vízszintesen görgetni a grafikont, akkor különböző hosszúságú üres részek után
-                        mindig egy-egy
-                        1 magasságú oszlopohoz jutnánk el, majd újabb hosszabb-rövidebb görgetés után ismét
-                        egy ugyanilyen magasságú oszlopot találnánk. S összesen 500 ilyen 1 magasságú oszlop lenne
-                        elosztva a grafikon - 98 325
-                        egység hosszúságú - ürességében.</p>
-                    <p>Nézzük meg ennek a konkrétan lefuttatott sorozat grafikonjának az első 200 helyét! Láthatjuk,
-                        hogy az 1 magasságú oszlopok eléggé 'gyéren' helyezkednek el rajta.</p>
-                    <div id="first200">
-                        <p>
-                            1: 0
-                            2: 0
-                            3: 0
-                            4: 0
-                            5: 0
-                            6: 0
-                            7: 0
-                            8: 0
-                            9: 0
-                            10: 0
-                            11: 0
-                            12: 0
-                            <span style="color:red"><strong>13: 1</strong></span>
-                            14: 0
-                            15: 0
-                            16: 0
-                            17: 0
-                            18: 0
-                            19: 0
-                            20: 0
-                            21: 0
-                            22: 0
-                            23: 0
-                            24: 0
-                            25: 0
-                            26: 0
-                            27: 0
-                            28: 0
-                            29: 0
-                            30: 0
-                            31: 0
-                            32: 0
-                            33: 0
-                            34: 0
-                            35: 0
-                            36: 0
-                            37: 0
-                            38: 0
-                            39: 0
-                            40: 0
-                            41: 0
-                            42: 0
-                            43: 0
-                            44: 0
-                            45: 0
-                            46: 0
-                            47: 0
-                            48: 0
-                            49: 0
-                            50: 0
-                            51: 0
-                            52: 0
-                            53: 0
-                            54: 0
-                            55: 0
-                            56: 0
-                            57: 0
-                            58: 0
-                            59: 0
-                            60: 0
-                            61: 0
-                            62: 0
-                            63: 0
-                            64: 0
-                            65: 0
-                            66: 0
-                            67: 0
-                            68: 0
-                            69: 0
-                            70: 0
-                            71: 0
-                            72: 0
-                            73: 0
-                            74: 0
-                            75: 0
-                            76: 0
-                            77: 0
-                            78: 0
-                            79: 0
-                            80: 0
-                            81: 0
-                            82: 0
-                            83: 0
-                            <span style="color:red"><strong>84: 1</strong></span>
-                            85: 0
-                            86: 0
-                            87: 0
-                            88: 0
-                            89: 0
-                            90: 0
-                            91: 0
-                            92: 0
-                            93: 0
-                            94: 0
-                            95: 0
-                            96: 0
-                            97: 0
-                            98: 0
-                            99: 0
-                            100: 0
-                            101: 0
-                            102: 0
-                            103: 0
-                            104: 0
-                            105: 0
-                            106: 0
-                            107: 0
-                            108: 0
-                            109: 0
-                            110: 0
-                            111: 0
-                            112: 0
-                            113: 0
-                            114: 0
-                            115: 0
-                            116: 0
-                            117: 0
-                            118: 0
-                            119: 0
-                            120: 0
-                            121: 0
-                            <span style="color:red"><strong>122: 1</strong></span>
-                            123: 0
-                            124: 0
-                            125: 0
-                            126: 0
-                            127: 0
-                            128: 0
-                            129: 0
-                            130: 0
-                            131: 0
-                            132: 0
-                            133: 0
-                            134: 0
-                            135: 0
-                            136: 0
-                            137: 0
-                            138: 0
-                            139: 0
-                            140: 0
-                            141: 0
-                            142: 0
-                            143: 0
-                            144: 0
-                            145: 0
-                            146: 0
-                            147: 0
-                            148: 0
-                            149: 0
-                            150: 0
-                            151: 0
-                            152: 0
-                            153: 0
-                            154: 0
-                            155: 0
-                            156: 0
-                            157: 0
-                            158: 0
-                            159: 0
-                            160: 0
-                            161: 0
-                            162: 0
-                            163: 0
-                            164: 0
-                            165: 0
-                            166: 0
-                            167: 0
-                            168: 0
-                            169: 0
-                            170: 0
-                            171: 0
-                            172: 0
-                            173: 0
-                            174: 0
-                            175: 0
-                            176: 0
-                            177: 0
-                            <span style="color:red"><strong>178: 1</strong></span>
-                            179: 0
-                            180: 0
-                            181: 0
-                            182: 0
-                            183: 0
-                            184: 0
-                            185: 0
-                            186: 0
-                            <span style="color:red"><strong>187: 1</strong></span>
-                            188: 0
-                            189: 0
-                            190: 0
-                            <span style="color:red"><strong>191: 1</strong></span>
-                            192: 0
-                            193: 0
-                            194: 0
-                            195: 0
-                            196: 0
-                            197: 0
-                            198: 0
-                            199: 0
-                            200: 0
+
+                <div id="divForShowDistributionDistanceGraph" class="row">
+                    <div class="col-8">
+                        <p>A következő oszlopgrafikon azt mutatja meg, hogy <i>'a milyen hosszúságú ürességekből
+                                hány darab van.'</i> Így az első oszlop magassága azt mutatja, hogy az <i>'egy
+                                hosszúságú'</i> ürességből hány darab van. A második oszlop magasságáé pedig,
+                            hogy a <i>'kettő hosszúságú'</i> ürességből hány darab van. És így tovább.
+                            <span style="font-size:13px">(Ennek a grafikonnak csak négy betűnél hosszabb szókeresés
+                                sorozatok esetén van jelentősége!)</span> Klikkeljen a <i>'mutat'</i> gombra!
                         </p>
                     </div>
-                    <p>Ha meg akarja nézni egy gépelés sorozat esetén ezt az eloszlást, azt <a
-                            href="/monkey.html#rowForFullDistribution">ide kattintva</a> teheti meg.</p>
+                    <div class="col-4">
+                        <button id="buttonForDistributionDistanceGraph" type="button" class="btn btn-secondary btn-sm"
+                            onclick="showTheDistributionDistanceGraph()">Mutat</button>
+                        <p>A grafikon elkészítésének várható ideje: <span
+                                id="distributionDistanceGraphEstimateTime"></span><strong><span
+                                    id="distributionDistanceGraphEstimateTime2"></span></strong></p>
+                    </div>
                 </div>
 
 
 
+                <div style="display:none" id="rowForDistributionDistanceGraph" class="row">
+                    <div id="colForDistributionDistanceGraph" class="col col-12">
+                        <table id="distributionDistanceGraph">
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div id="forEnvelope" class="col-6">
+                            <h6>Burkológörbe felrajzolása:</h6>
+                            <p>Ha akarja, megkeresheti az oszlopgrafikon burkológörbéjét!</p>
+                            <p><span style="background-color:#FADADD">Javasoljuk, első alkalommal
+                                    használja a program által felajánlott alapbeállítást.</span> Ekkor Ön egy
+                                <i>'szép'</i>,
+                                könnyen
+                                áttekinthető eloszlásfüggvényt kap.</p>
+                            <p> Ezzel a beállítással a grafikon még egésszében kifér a képernyőre, így nem lesz
+                                tömörítve,
+                                tehát a pontos eloszlást mutatja majd. </p>
+                            <p> Klikkeljen az <i>'alapbeállítás'</i> gombra, s ekkor a szókeresés
+                                300-szor le fog futni egymás után '<i>a majom kétbetűs szavakat keres</i>' beállítással.
+                                Ez
+                                kb. 10 másodpercig tart majd.</p>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="preparation()">alapbeállítás
+                            </button>
+                            <p> Ezután kattintson a <i>'hiperbolikus'</i> vagy <i>'logaritmikus'</i> gombra. Ekkor
+                                megjelenik a burkológörbe, amit a zöld nyilakkal tud mozgatni. </p>
+
+                        </div>
+                        <div id="wrapping0" class="col-8">
+                            <div class="row">
+                                <button name="chooseGraph" type="button" onclick="wantHyp()"
+                                    class="btn btn-success btn-sm">hiperbolikus</button>
+                                <button name="chooseGraph" type="button" onclick="wantLog()"
+                                    class="btn btn-success btn-sm">logaritmikus</button>
+                            </div>
+                            <div class="row">
+
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                        <td><button name="arrow" type="button" onclick="up()"
+                                                class="btn btn-success btn-sm">&#8679</button></td>
+                                        <td></td>
+                                        <td rowspan="3"><button name="backToStart" type="button"
+                                                onclick="backToBasicGraph()"
+                                                class="btn btn-success btn-sm">&#11119</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><button name="arrow" type="button" onclick="left()"
+                                                class="btn btn-success btn-sm">&#8678</button></td>
+                                        <td></td>
+                                        <td><button name="arrow" type="button" onclick="right()"
+                                                class="btn btn-success btn-sm">&#8680</button></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><button name="arrow" type="button" onclick="down()"
+                                                class="btn btn-success btn-sm">&#8681</button></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
 
 
+                            </div>
+                            <div class="row">
+                                <p>meredekség:</p>
+                            </div>
+                            <div class="row">
 
-                <div class="row">
-                    <form class="form-inline">
-                        <label class="mt-1">A találatok küldése a szervernek:</label>
-                        <button disabled type="button" id="send-data" class="btn btn-secondary btn-sm"
-                            onclick=sendData()>Küld</button>
-                    </form>
-                </div>
+                                <button name="rising" type="button" onclick="risingUpUp()"
+                                    class="btn btn-success btn-sm">++</button>
+                                <button name="rising" type="button" onclick="risingUp()"
+                                    class="btn btn-success btn-sm">+</button>
+                                <button name="rising" type="button" onclick="risingDown()"
+                                    class="btn btn-success btn-sm">-</button>
+                                <button name="rising" type="button" onclick="risingDownDown()"
+                                    class="btn btn-success btn-sm">--</button>
 
-                <div class="row">
-                    <p>A memória mérete jelenleg: <span id="monkeyMemorySize">-</span></p>
-                    <p>Az eddigi összes (eredményes) futás száma: <span id="numberOfRunnings">-</span></p>
-                    <button type="button" class="btn btn-secondary btn-sm" onclick=goToRepeat()>Újabb futtatás
-                        ugyanannyiszor</button>
-                </div>
+                            </div>
+                            <div class="row">
+                                <p>a függvény:</p>
+                            </div>
+                            <div class="row">
+                                <p><strong><span id="howFunctionLooksLike1"></span><sub><span
+                                                id="base"></span></sub><span id="howFunctionLooksLike2"></span></strong>
+                                </p>
+                            </div>
+                            <div class="row">
+                                <button id="jump0" name="skipToBetterPlace" type="button" class="btn btn-danger btn-sm"
+                                    onclick="jumpUp0()">Ugrás</button>
+                            </div>
+                            <div class="row">
+                                <p id="jumpInfo0" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez a blokk
+                                        felugrik
+                                        a képernyő
+                                        jobb felső sarkába,
+                                        így ha odagörget a grafikonhoz, akkor is használni tudja.</i></p>
+                            </div>
 
-                <div class="row">
-                    <form class="form-inline">
-                        <label>A szó hossza legyen:</label>
-                        <input type="number" class="form-control form-control-sm" style="width:100px" min="2" max="10"
-                            value="8">
-                        <label> betű!</label>
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="generateWord(event)">Kérek
-                            egy
-                            szót!</button>
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="generateWordRnd(event)">Véletlen
-                            hosszúságú szót kérek!</button>
-                    </form>
-                </div>
-                <div class="row">
-                    <p>Íme a szó: <span id="generatedWord"></span> </p>
-                </div>
-                <div class="row">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h6>Beállíthatja a burkológörbét a függvény konkrét megadásával is.</h6>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <form id="wrapping1" class="wrapping">
+                                <div class="row">
+                                    <p>Hiperbolikus burkológörbe (javasolt beállítással):</p>
+                                </div>
+                                <div class="row">
+                                    <p><input type="number" id="H1" name="one" style="width:60px"
+                                            value="5">*maximum/(x+<input type="number" id="H2" name="two"
+                                            style="width:60px" value="2"> ) + <input type="number" id="H3" name="three"
+                                            style="width:60px" value="-4">
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <button disabled id="estimateFunc" type="button" class="btn btn-secondary btn-sm"
+                                        onclick="estimateFunction(event)">Mehet</button>
+                                    <button disabled id="functionAppr" type="button" class="btn btn-secondary btn-sm"
+                                        onclick="decisionAboutErase()">Töröl</button>
+                                    <button id="jump1" name="skipToBetterPlace" type="button"
+                                        class="btn btn-danger btn-sm" onclick="jumpUp1()">Ugrás</button>
+                                </div>
 
-                    <div class="col-6">
+                                <div class="row">
+                                    <p id="jumpInfo1" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez a
+                                            blokk
+                                            felugrik a képernyő
+                                            jobb felső sarkába,
+                                            így ha odagörget a grafikonhoz, akkor is használni tudja.</i></p>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="col-6">
+                            <form id="wrapping2" class="wrapping">
+                                <div class="row">
+                                    <p>Logaritmikus burkológörbe (javasolt beállítással</p> - <span
+                                        style="font-size:12px">Javasoljuk
+                                        még az alap: 0,87; konstansok: 1, -27, 0 beállítást</span>):
+                                </div>
+                                <div class="row">
+                                    <p>Logaritmus alapja: <input type="number" id="LBase" name="logBase"
+                                            style="width:60px" value="0.5">
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p><input type="number" id="L1" name="one" style="width:60px" value="5">log(x+<input
+                                            type="number" id="L2" name="two" style="width:60px" value="-28"> ) + <input
+                                            type="number" id="L3" name="three" style="width:60px" value="0">
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <button disabled id="estimateFuncLog" type="button" class="btn btn-secondary btn-sm"
+                                        onclick="estimateFunctionLog(event)">Mehet</button>
+                                    <button disabled id="functionApprLog" type="button" class="btn btn-secondary btn-sm"
+                                        onclick="decisionAboutErase()">Töröl</button>
+                                    <button id="jump2" name="skipToBetterPlace" type="button"
+                                        class="btn btn-danger btn-sm" onclick="jumpUp2()">Ugrás</button>
+                                </div>
+                                <div class="row">
+                                    <p id="jumpInfo2" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez a
+                                            blokk
+                                            felugrik a képernyő
+                                            jobb felső sarkába,
+                                            így ha odagörget a grafikonhoz, akkor is használni tudja.</i></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                    </div>
+                    <div id="kindOfDistributions">
                         <div class="row">
-                            <label>Tetszik a szó, jegyezzük fel!<small> A szó eltávolítása a táblázatból: klikkeljen
-                                    rá
-                                    egyet!</small></label>
-                            <button type="button" class="btn btn-secondary btn-sm btn-block"
-                                onclick="notation(event)">Rajta!</button>
+                            <h5>Eloszlás típusok:</h5>
                         </div>
                         <div class="row">
-                            <button type="button" class="btn btn-secondary btn-sm" onclick="writeSentence()">Kérek
-                                egy
-                                mondatot
-                                a
-                                kedvenc szavakból!</button>
+                            <div>
+                                <img name="kindOfDistImg" class="float-left" width="250" src="img\example1_100_2.png"
+                                    alt="eloszlás: 2 betűs szó 100-szor">
+                                <p>Ez egy <i>'szép'</i> eloszlás. A program a <i>'majom két betűs szavakat keres'</i>
+                                    beállítással lett lefuttatva
+                                    100-szor.</p>
+                                <p>Összesen 36 oszlopunk van, s az egyes oszlopok magasságai: <i>0, 9, 13, 8, 3, 8, 6,
+                                        6, 6,
+                                        5,
+                                        4, 3, 4, 4, 3, 0, 2,
+                                        0, 2, 1, 1, 2, 1, 1, 1, 0, 0, 0, 0, 2, 1, 1, 0, 0, 1, 1, 0 . </i></p>
+                                <p>Jól látható, hogy <i>'az elsőre talált egy értelmes szót</i> esetből 9 db. van. A
+                                    <i>másodjára
+                                        talált egy értelmes szót</i> esetből 13 db. van, s ez a legmagasabb oszlop. A
+                                    <i>'harmadjára talál egy értelmes szót'</i> esetből 8 db. van. És így tovább.
+                                    Láthatjuk,
+                                    hogy <u>az oszlopok magassága fokozatosan csökken</u>, azaz az egyre hosszabb
+                                    listákból
+                                    egyre
+                                    kevesebb van. Ezeknél a <i>'szép'</i> eloszlásoknál meg tudjuk keresni a
+                                    burkológörbét.
+                                </p>
+                                </br>
+                            </div>
+                            <div>
+                                <img name="kindOfDistImg" class=" float-left" width="250" src="img\example2_800_5.png"
+                                    alt="eloszlás: 5 betűs szó 800-szor">
+                                <p>A majom most <i> 5 betűs szavakat keresett 800-szor egymás után.</i> A leghosszabb
+                                    próbálkozása 98 325 sor
+                                    volt.
+                                <p>Ez azt jelenti, hogy
+                                    98 325 oszlop áll egymás mellett az eredeti grafikonon. <span
+                                        id="infoAboutCol">(Persze
+                                        itt
+                                        most az oszlopok össze
+                                        lettek vonva, egy oszlop 1024 egymás melletti eredeti oszlopot jelöl, s az
+                                        oszlopcsoportot
+                                        képviselő oszlop magassága azonos a csoport legmagasabb oszlopának a
+                                        magasságával. -
+                                        De
+                                        mindettől most
+                                        tekintsünk el.)</span>
+                                </p>
+                                <p>Viszont csak 800 listánk lesz, amit 98 325 különböző magasságlehetőség között kell
+                                    elosztanunk. Így sok magasság lesz, ahova nem jut lista - itt 0 magasságú az oszlop
+                                    a
+                                    grafikonon. <span id="infoAboutCol">(Valójában az oszlopok 99%-a ilyen - 0 magasságú
+                                        -,
+                                        de ez most
+                                        nem látszik az oszlopok összevonása - a tömörítés - miatt.)</span>
+                                </p>
+                                <p>Hasonlóan sok
+                                    oszlopmagasságnak csak egy-egy lista jut, s ezek lesznek az 1
+                                    magasságú oszlopok. Végül akad néhány <i>'szerencsésebb'</i> oszlopmagasság is,
+                                    amelyeknek
+                                    két-két
+                                    lista jutott, s ezek a 2 magasságú oszlopok. S láthatjuk azt is, hogy éppenséggel
+                                    egy
+                                    oszlopmagasságunk sincs, amelynek három vagy több lista jutott volna. </p>
+                                </p>
+                                <p>Mindez azt eredményezi, hogy az oszlopgrafikon <i>'ki van lapítva'</i>, azaz itt már
+                                    <u>nem csökken az oszlopok magassága</u> a listahossz függvényéban.</p>
+                                <p>Vegyük észre, hogy a két grafikon között az a lényeges különbség, hogy az elsőnél 100
+                                    'golyót' kellett szétosztani 38 dobozba, s így volt olyan doboz, amibe sok golyó
+                                    jutott.
+                                    A
+                                    második esetben viszont 800 'golyót' kellett elosztani 98 325 dobozba, így még az a
+                                    doboz is
+                                    'jól járt', amelyikbe csak egy 'golyó' jutott.</p>
+                            </div>
 
-                            <div id="divForSentence">
-                                <p><span id="sentence">-</span></p>
+
+
+                        </div>
+                        <div>
+                            <div class="row">
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-1"></div>
-                    <div id="divForNotations" class="col-5">
-                        <table id="notations" class="table table-small"></table>
+                    <div id="notNiceDistribution">
+                        <h5>A <i>'nem szép'</i> eloszlás</h5>
+                        <p>De hogyan is néz ki egy <i>nem szép</i> eloszlás oszlopgrafikonja, ha nem tömörítjük
+                            a táblázatot? Pl. nézzünk egy konkrét eloszlást <i>'a majom öt betűs szavakat keres
+                                500-szor'
+                                beállítással.</i>
+                        </p>
+                        <p>A
+                            program ezzel a beállítással kb. egy órán keresztül futna, majd kapnánk egy
+                            beláthatatlanul hosszú grafikont. Most nézzünk helyette egy előre lefuttatott eredményt!
+                        </p>
+                        <p>Ha elkezdenénk vízszintesen görgetni a grafikont, akkor különböző hosszúságú üres részek után
+                            mindig egy-egy
+                            1 magasságú oszlopohoz jutnánk el, majd újabb hosszabb-rövidebb görgetés után ismét
+                            egy ugyanilyen magasságú oszlopot találnánk. S összesen 500 ilyen 1 magasságú oszlop lenne
+                            elosztva a grafikon - 98 325
+                            egység hosszúságú - ürességében.</p>
+                        <p>Nézzük meg ennek a konkrétan lefuttatott sorozat grafikonjának az első 200 helyét! Láthatjuk,
+                            hogy az 1 magasságú oszlopok eléggé 'gyéren' helyezkednek el rajta.</p>
+                        <div id="first200">
+                            <p>
+                                1: 0
+                                2: 0
+                                3: 0
+                                4: 0
+                                5: 0
+                                6: 0
+                                7: 0
+                                8: 0
+                                9: 0
+                                10: 0
+                                11: 0
+                                12: 0
+                                <span style="color:red"><strong>13: 1</strong></span>
+                                14: 0
+                                15: 0
+                                16: 0
+                                17: 0
+                                18: 0
+                                19: 0
+                                20: 0
+                                21: 0
+                                22: 0
+                                23: 0
+                                24: 0
+                                25: 0
+                                26: 0
+                                27: 0
+                                28: 0
+                                29: 0
+                                30: 0
+                                31: 0
+                                32: 0
+                                33: 0
+                                34: 0
+                                35: 0
+                                36: 0
+                                37: 0
+                                38: 0
+                                39: 0
+                                40: 0
+                                41: 0
+                                42: 0
+                                43: 0
+                                44: 0
+                                45: 0
+                                46: 0
+                                47: 0
+                                48: 0
+                                49: 0
+                                50: 0
+                                51: 0
+                                52: 0
+                                53: 0
+                                54: 0
+                                55: 0
+                                56: 0
+                                57: 0
+                                58: 0
+                                59: 0
+                                60: 0
+                                61: 0
+                                62: 0
+                                63: 0
+                                64: 0
+                                65: 0
+                                66: 0
+                                67: 0
+                                68: 0
+                                69: 0
+                                70: 0
+                                71: 0
+                                72: 0
+                                73: 0
+                                74: 0
+                                75: 0
+                                76: 0
+                                77: 0
+                                78: 0
+                                79: 0
+                                80: 0
+                                81: 0
+                                82: 0
+                                83: 0
+                                <span style="color:red"><strong>84: 1</strong></span>
+                                85: 0
+                                86: 0
+                                87: 0
+                                88: 0
+                                89: 0
+                                90: 0
+                                91: 0
+                                92: 0
+                                93: 0
+                                94: 0
+                                95: 0
+                                96: 0
+                                97: 0
+                                98: 0
+                                99: 0
+                                100: 0
+                                101: 0
+                                102: 0
+                                103: 0
+                                104: 0
+                                105: 0
+                                106: 0
+                                107: 0
+                                108: 0
+                                109: 0
+                                110: 0
+                                111: 0
+                                112: 0
+                                113: 0
+                                114: 0
+                                115: 0
+                                116: 0
+                                117: 0
+                                118: 0
+                                119: 0
+                                120: 0
+                                121: 0
+                                <span style="color:red"><strong>122: 1</strong></span>
+                                123: 0
+                                124: 0
+                                125: 0
+                                126: 0
+                                127: 0
+                                128: 0
+                                129: 0
+                                130: 0
+                                131: 0
+                                132: 0
+                                133: 0
+                                134: 0
+                                135: 0
+                                136: 0
+                                137: 0
+                                138: 0
+                                139: 0
+                                140: 0
+                                141: 0
+                                142: 0
+                                143: 0
+                                144: 0
+                                145: 0
+                                146: 0
+                                147: 0
+                                148: 0
+                                149: 0
+                                150: 0
+                                151: 0
+                                152: 0
+                                153: 0
+                                154: 0
+                                155: 0
+                                156: 0
+                                157: 0
+                                158: 0
+                                159: 0
+                                160: 0
+                                161: 0
+                                162: 0
+                                163: 0
+                                164: 0
+                                165: 0
+                                166: 0
+                                167: 0
+                                168: 0
+                                169: 0
+                                170: 0
+                                171: 0
+                                172: 0
+                                173: 0
+                                174: 0
+                                175: 0
+                                176: 0
+                                177: 0
+                                <span style="color:red"><strong>178: 1</strong></span>
+                                179: 0
+                                180: 0
+                                181: 0
+                                182: 0
+                                183: 0
+                                184: 0
+                                185: 0
+                                186: 0
+                                <span style="color:red"><strong>187: 1</strong></span>
+                                188: 0
+                                189: 0
+                                190: 0
+                                <span style="color:red"><strong>191: 1</strong></span>
+                                192: 0
+                                193: 0
+                                194: 0
+                                195: 0
+                                196: 0
+                                197: 0
+                                198: 0
+                                199: 0
+                                200: 0
+                            </p>
+                        </div>
+                        <p>Ha meg akarja nézni egy gépelés sorozat esetén ezt az eloszlást, azt <a
+                                href="/monkey.html#rowForFullDistribution">ide kattintva</a> teheti meg.</p>
+                    </div>
+
+
+
+
+
+
+                    <div class="row">
+                        <form class="form-inline">
+                            <label class="mt-1">A találatok küldése a szervernek:</label>
+                            <button disabled type="button" id="send-data" class="btn btn-secondary btn-sm"
+                                onclick=sendData()>Küld</button>
+                        </form>
+                    </div>
+
+                    <div class="row">
+                        <p>A memória mérete jelenleg: <span id="monkeyMemorySize">-</span></p>
+                        <p>Az eddigi összes (eredményes) futás száma: <span id="numberOfRunnings">-</span></p>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick=goToRepeat()>Újabb futtatás
+                            ugyanannyiszor</button>
+                    </div>
+
+                    <div class="row">
+                        <form class="form-inline">
+                            <label>A szó hossza legyen:</label>
+                            <input type="number" class="form-control form-control-sm" style="width:100px" min="2"
+                                max="10" value="8">
+                            <label> betű!</label>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="generateWord(event)">Kérek
+                                egy
+                                szót!</button>
+                            <button type="button" class="btn btn-secondary btn-sm"
+                                onclick="generateWordRnd(event)">Véletlen
+                                hosszúságú szót kérek!</button>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <p>Íme a szó: <span id="generatedWord"></span> </p>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-6">
+                            <div class="row">
+                                <label>Tetszik a szó, jegyezzük fel!<small> A szó eltávolítása a táblázatból: klikkeljen
+                                        rá
+                                        egyet!</small></label>
+                                <button type="button" class="btn btn-secondary btn-sm btn-block"
+                                    onclick="notation(event)">Rajta!</button>
+                            </div>
+                            <div class="row">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="writeSentence()">Kérek
+                                    egy
+                                    mondatot
+                                    a
+                                    kedvenc szavakból!</button>
+
+                                <div id="divForSentence">
+                                    <p><span id="sentence">-</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1"></div>
+                        <div id="divForNotations" class="col-5">
+                            <table id="notations" class="table table-small"></table>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+            </div>
         </div>
-        <div class="row">
-        </div>
-    </div>
-    <div class="col-0 col-sm-1 col-md-1"></div>
+        <div class="col-0 col-sm-1 col-md-1"></div>
     </div>
     <div class="row m-3"></div>
 
