@@ -525,7 +525,7 @@ previousCharNumber = Number();
 previousRunningNumber = Number();
 //clearing = "false";
 repeat = function (event) {
-    if (wasRepeating == true) { removeDistanceMatrixSpan(); removeDistributionDistanceSpans(); removeDistributionDistanceSpans2() };
+    if (wasRepeating == true) { removeDistanceMatrixSpan(); removeDistributionDistanceSpans(); removeDistanceMatrixSpans2() };
     hideClickCounter = 0; showTheDistanceGraph();
     needErase = false;
     wasMerge = false;
@@ -661,6 +661,10 @@ repeat = function (event) {
     distributionDistanceStart();
     if (wasShowingDistanceGraph == true) { removeRowsFromDistanceGraph() };
     timeDistance = 0;
+
+    document.querySelector("#divForAllDistribution");
+    hideDistribution();
+    wasHide = "";
 
 };
 
@@ -1480,7 +1484,7 @@ wantFullDistributionTable = function () {
         /*if (wasHide == "yes") { document.querySelector("#rowForAllDistribution").style.display = "initial";wasHide="no" };
         if (wasHide == "no") { document.querySelector("#rowForAllDistribution").style.display = "none";wasHide="yes" };*/
 
-       
+
 
         createDistributionP();
         //newP = document.createElement("p");
@@ -1511,8 +1515,19 @@ hideDistribution = function () {
     document.querySelector("#divForAllDistribution").style.display = "none";
     document.querySelector("#distributionButtons").style.display = "none";
     document.querySelector("#wantFullDistributionButton").innerHTML = "Mutat";
-    document.querySelector("#wantFullDistributionButton").setAttribute("onclick", "wantFullDistributionTable()");
+    document.querySelector("#wantFullDistributionButton").setAttribute("onclick", "showDistribution()");
     //removeDistributionP();
+};
+
+showDistribution = function () {
+    if (wasHide == "") { wantFullDistributionTable(); };
+    if (wasHide == "yes") {
+        wasHide = "no";
+        document.querySelector("#divForAllDistribution").style.display = "initial";
+        document.querySelector("#distributionButtons").style.display = "initial";
+        document.querySelector("#wantFullDistributionButton").innerHTML = "Elrejt";
+        document.querySelector("#wantFullDistributionButton").setAttribute("onclick", "hideDistribution()");
+    };
 };
 
 removeDistributionP = function () {
@@ -1691,7 +1706,7 @@ showDistanceMatrix = function (firstElement, lastElement, pageOfDistanceTable) {
         };
     };
     document.querySelector("#distanceTablePage").innerHTML = `- ${pageOfDistanceTable} -`;
-    document.querySelector("#distanceAllPage").innerHTML = `${maxDistancePage}`;
+    //document.querySelector("#distanceAllPage").innerHTML = `${maxDistancePage}`;
     document.querySelector("#emptiness1").innerHTML = runningNumber;
     document.querySelector("#emptiness2").innerHTML = distribution.length;
     document.querySelector("#emptiness3").innerHTML = distribution[distribution.length - 1]
@@ -1702,7 +1717,7 @@ showDistanceMatrix = function (firstElement, lastElement, pageOfDistanceTable) {
     document.querySelector("#emptiness3").style["background"] = "#FADADD"
     document.querySelector("#emptiness4").style["background"] = "#FADADD"
     document.querySelector("#emptiness5").style["background"] = "#FADADD"
-    document.querySelector("#distanceLength").innerHTML = distanceMatrix.length;
+    //document.querySelector("#distanceLength").innerHTML = distanceMatrix.length;
 
 
 
@@ -1727,7 +1742,7 @@ distanceStart = function () {
 };
 
 distanceBack = function () {
-    if (firstElement - 100 > 0) {
+    if (firstElement - 99 > 0) {
         firstElement = firstElement - 100;
     }
     else { lastElement = 1 }
@@ -1885,10 +1900,18 @@ makeDistributionDistance = function () {
             index = index + 1;
         };
     };
-    makeDistributionDistance2();
+    maxDistancePage = Math.ceil(distributionDistance.length / 100);
+    distanceMatrixAllElementCount = 0;
+    for (let i = 0; i < distanceMatrix.length; i++) {
+        distanceMatrixAllElementCount = distanceMatrixAllElementCount + distanceMatrix[i];
+    };
+    //makeDistributionDistance2();
+    makeDistanceMatrix2();
     document.querySelector("#numberOfEmptiness").innerHTML = distanceMatrix.length;
     document.querySelector("#kindOfEmptiness").innerHTML = distributionDistanceShort.length;
     document.querySelector("#longestEmptiness").innerHTML = distanceMax;
+    document.querySelector("#distributionDistanceLength").innerHTML = distributionDistance.length;
+    document.querySelector("#distributionDistanceAllPage").innerHTML = maxDistancePage;
 };
 
 //distributionDistanceTable
@@ -1917,8 +1940,12 @@ showDistributionDistance = function (firstElement, lastElement, pageOfDistanceTa
     for (let i = 0; i < 100; i++) {
         area = document.querySelector(`#distributionDistanceTable span[name='${i}']`)
         if (firstElement + i < distributionDistance.length) {
-            area.innerHTML = `${distributionDistance[firstElement + i]}; `
-            console.log("yes");
+            area.innerHTML = `${firstElement + i + 1} - ${distributionDistance[firstElement + i]}; `
+        };
+        if (firstElement + i > distributionDistance.length - 1) { area.innerHTML = "" };
+        if (distributionDistance[firstElement + i] !== 0) { area.style["background-color"] = "#fadadd" };
+        if (distributionDistance[firstElement + i] == 0) {
+            area.style["background-color"] = "#cbe7cb"
         };
     };
     document.querySelector("#distributionDistanceTablePage").innerHTML = `- ${pageOfDistanceTable} -`;
@@ -1951,10 +1978,10 @@ distributionDistanceStart = function () {
     firstElement = 0;
     pageOfDistanceTable = 1;
     showDistributionDistance(firstElement, lastElement, pageOfDistanceTable);
-    showDistributionDistance2(firstElement, lastElement, pageOfDistanceTable);
+    showDistanceMatrix2(firstElement, lastElement, pageOfDistanceTable);
 };
 distributionDistanceBack = function () {
-    if (firstElement - 100 > 0) {
+    if (firstElement - 99 > 0) {
         firstElement = firstElement - 100;
     }
     else { lastElement = 1 }
@@ -1981,7 +2008,7 @@ distributionDistanceLast = function () {
     showDistributionDistance(firstElement, lastElement, pageOfDistanceTable);
 };
 
-makeDistributionDistance2 = function () {
+makeDistributionDistance22 = function () {
     distributionDistance2 = Array();
     distanceMax2 = 0;
     for (let i = 0; i < distributionDistance.length; i++) {
@@ -2005,37 +2032,77 @@ makeDistributionDistance2 = function () {
             index = index + 1;
         };
     };
+    document.querySelector("#emptiness6").innerHTML = distanceMatrix.length;
+    document.querySelector("#emptiness7").innerHTML = distanceMax;
 };
 
-createDistributionDistanceSpans2 = function () {
+distanceMatrix2 = Array();
+isThereDistanceMatrix2 = "no"
+makeDistanceMatrix2 = function () {
+    distanceMatrix2 = Array();
+    isThereDistanceMatrix2 = "yes";
+    let k = 0;
+    let index = 0;
+    let indexNull = 0;
+    for (let i = 0; i < distributionDistance.length - 1; i++) {
+        if (distributionDistance[i] == 0 && distributionDistance[i + 1] == 0) {
+            k = k + 1;
+        };
+        if (distributionDistance[i] == 0 && distributionDistance[i + 1] != 0) {
+            k = k + 1;
+            distanceMatrix2[index] = k;
+            index = index + 1;
+            k = 0;
+        };
+        /*if (distribution[i] != 0 && distribution[i] != 0) {
+
+            if (indexNull > 0) {
+                distanceMatrix[index] = 0;
+                index = index + 1;
+            };
+            indexNull = indexNull + 1;
+        };*/
+    };
+    maxDistancePage2 = Math.ceil(distanceMatrix2.length / 100);
+    distanceMatrixAllElementCount2 = 0;
+    for (let i = 0; i < distanceMatrix2.length; i++) {
+        distanceMatrixAllElementCount2 = distanceMatrixAllElementCount2 + distanceMatrix2[i];
+    };
+};
+
+createDistanceMatrixSpans2 = function () {
     for (let i = 0; i < 101; i++) {
         newSpan = document.createElement("span");
         newSpan.setAttribute("name", i);
-        document.querySelector("#distributionDistanceTable2").appendChild(newSpan);
+        document.querySelector("#distanceMatrixTable2").appendChild(newSpan);
     };
 };
 
-removeDistributionDistanceSpans2 = function () {
-    let area = document.querySelector("#colForDistributionDistanceTable2");
-    let sector = document.querySelector("#colForDistributionDistanceTable2").lastElementChild;
+removeDistanceMatrixSpans2 = function () {
+    let area = document.querySelector("#colForDistanceMatrixTable2");
+    let sector = document.querySelector("#colForDistanceMatrixTable2").lastElementChild;
     area.removeChild(sector);
     let newP = document.createElement("p");
-    newP.setAttribute("id", "distributionDistanceTable2");
+    newP.setAttribute("id", "distanceMatrixTable2");
     area.appendChild(newP);
-    createDistributionDistanceSpans2();
+    createDistanceMatrixSpans2();
 };
 
-showDistributionDistance2 = function (firstElement, lastElement, pageOfDistanceTable) {
-    createDistributionDistanceSpans2();
+showDistanceMatrix2 = function (firstElement, lastElement, pageOfDistanceTable) {
+    createDistanceMatrixSpans2();
 
     for (let i = 0; i < 100; i++) {
-        area = document.querySelector(`#distributionDistanceTable2 span[name='${i}']`)
-        if (firstElement + i < distributionDistance2.length) {
-            area.innerHTML = `${distributionDistance2[firstElement + i]}; `
+        area = document.querySelector(`#distanceMatrixTable2 span[name = '${i}']`)
+        if (firstElement + i < distanceMatrix2.length) {
+            area.innerHTML = `${distanceMatrix2[firstElement + i]}; `
             console.log("yes2");
         };
     };
-    document.querySelector("#distributionDistanceTablePage2").innerHTML = `- ${pageOfDistanceTable} -`;
+    document.querySelector("#distanceMatrixTablePage2").innerHTML = `- ${pageOfDistanceTable} -`;
+    document.querySelector("#emptiness8").innerHTML = `${distanceMatrix2[0]}`;
+    document.querySelector("#emptiness9").innerHTML = distanceMatrix2[1];
+    document.querySelector("#emptiness10").innerHTML = distanceMatrix[distanceMatrix.length - 1];
+    document.querySelector("#emptiness11").innerHTML = distanceMatrix2[distanceMatrix2.length - 1];
     //document.querySelector("#emptiness1").innerHTML = runningNumber;
     //document.querySelector("#emptiness3").innerHTML = distribution[distribution.length - 1]
     //document.querySelector("#emptiness4").innerHTML = distribution.length;
@@ -2057,42 +2124,165 @@ showDistributionDistance2 = function (firstElement, lastElement, pageOfDistanceT
     //if (charNumber == 6) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
     //if (charNumber == 7) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
 
+    needAgainCleaning = true;
+    againAndAgain();
+
 };
 
-distributionDistanceStart2 = function () {
-    if (distributionDistance2.length < 100) { lastElement = distributionDistance2.length }
+distanceMatrixStart2 = function () {
+    if (distanceMatrix2.length < 100) { lastElement = distanceMatrix2.length }
     else { lastElement = 100 };
     firstElement = 0;
     pageOfDistanceTable = 1;
-    showDistributionDistance2(firstElement, lastElement, pageOfDistanceTable);
+    showDistanceMatrix2(firstElement, lastElement, pageOfDistanceTable);
 };
-distributionDistanceBack2 = function () {
+distanceMatrixBack2 = function () {
     if (firstElement - 100 > 0) {
         firstElement = firstElement - 100;
     }
     else { lastElement = 1 }
     if (pageOfDistanceTable > 1) { pageOfDistanceTable -= 1 }
-    showDistributionDistance2(firstElement, lastElement, pageOfDistanceTable);
+    showDistanceMatrix2(firstElement, lastElement, pageOfDistanceTable);
 };
-distributionDistanceFow2 = function () {
-    if (firstElement + 100 < distributionDistance2.length) {
+distanceMatrixFow2 = function () {
+    if (firstElement + 100 < distanceMatrix22.length) {
         firstElement = firstElement + 100;
-        if (firstElement + 100 < distributionDistance2.length) {
+        if (firstElement + 100 < distanceMatrix22.length) {
             lastElement = firstElement + 100;
         }
-        else { lastElement = distributionDistance2.length }
+        else { lastElement = distanceMatrix22.length }
     };
     if (pageOfDistanceTable < maxDistancePage) { pageOfDistanceTable += 1 };
-    showDistributionDistance2(firstElement, lastElement, pageOfDistanceTable);
+    showDistanceMatrix2(firstElement, lastElement, pageOfDistanceTable);
 };
 borderElement = 0;
-distributionDistanceLast2 = function () {
-    borderElement = (Math.floor(distributionDistance2.length / 100)) * 100;
+distanceMatrixLast2 = function () {
+    borderElement = (Math.floor(distanceMatrix2.length / 100)) * 100;
     firstElement = borderElement;
     lastElement = firstElement + 100;
     pageOfDistanceTable = maxDistancePage;
-    showDistributionDistance2(firstElement, lastElement, pageOfDistanceTable);
+    showDistanceMatrix2(firstElement, lastElement, pageOfDistanceTable);
 };
+
+wasCreatedNewAgainP = false;
+dmSerialNumber = 0;
+needAgainCleaning = false;
+allDistanceMatrixInOne = Array();
+againAndAgain = function () {
+    console.log("again");
+
+
+    if (needAgainCleaning == true && wasCreatedNewAgainP == true) {
+        wasCreatedNewAgainP = false;
+        let area = document.querySelector("#colForMoreDistanceMatrix");
+        let sector = document.querySelector("#moreDistanceMatrix");
+        area.removeChild(sector);
+        let newDiv = document.createElement("div");
+        area.appendChild(newDiv);
+        newDiv.setAttribute("id", "moreDistanceMatrix");
+    };
+
+
+    if (needAgainCleaning == true && wasCreatedNewAgainP == false) {
+        needAgainCleaning == false;
+        allDistanceMatrixInOne = Array();
+        distanceMatrixBasic = distanceMatrix2.slice();
+        disributionDistanceBasic = distributionDistance.slice();
+        distanceIndex = distanceMatrix2.length;
+        makeDistributionDistanceNew();
+    };
+
+    if (needAgainCleaning == false && wasCreatedNewAgainP == true) {
+        while (distanceIndex != 1) {
+            console.log("while");
+            console.log(distanceIndex);
+            console.log(distanceMatrixNew);
+            disributionDistanceBasic = distributionDistanceNew.slice();
+            distanceMatrixBasic = distanceMatrixNew.slice();
+            makeDistributionDistanceNew();
+            distanceIndex = distanceMatrixNew.length;
+        };
+    };
+
+
+    /*makeDistributionDistanceNew();
+    disributionDistanceBasic = distributionDistanceNew.slice();
+    makeDistanceMatrixNew();
+    distanceIndex = distanceMatrixNew.length;
+    console.log(distanceIndex);*/
+
+
+
+
+    dmSerialNumber += 1;
+};
+
+
+
+
+
+makeDistributionDistanceNew = function () {
+    distributionDistanceNew = Array();
+    distanceMax = 0;
+    for (let i = 0; i < distanceMatrixBasic.length; i++) {
+        if (distanceMatrixBasic[i] > distanceMax) { distanceMax = distanceMatrixBasic[i] };
+    };
+    for (let i = 0; i < distanceMax; i++) {
+        distributionDistanceNew[i] = 0;
+    };
+    for (let i = 1; i < distanceMax + 1; i++) {
+        for (let j = 0; j < distanceMatrixBasic.length; j++) {
+            if (distanceMatrixBasic[j] == i) {
+                distributionDistanceNew[i - 1] += 1
+            };
+        };
+    };
+    makeDistanceMatrixNew();
+};
+
+
+makeDistanceMatrixNew = function () {
+    console.log("makeDistanceMatrixNew");
+    distanceMatrixNew = Array();
+    let k = 0;
+    let index = 0;
+    let indexNull = 0;
+
+    for (let i = 0; i < distributionDistanceNew.length - 1; i++) {
+        if (distributionDistanceNew[i] == 0 && distributionDistanceNew[i + 1] == 0) {
+            k = k + 1;
+        };
+        if (distributionDistanceNew[i] == 0 && distributionDistanceNew[i + 1] != 0) {
+            k = k + 1;
+            distanceMatrixNew[index] = k;
+            index = index + 1;
+            k = 0;
+        };
+        console.log(distanceMatrixNew);
+    };
+
+    let area = document.querySelector("#moreDistanceMatrix");
+    newP = document.createElement("p");
+    area.appendChild(newP);
+    wasCreatedNewAgainP = true;
+
+    for (let i = 0; i < distanceMatrixNew.length; i++) {
+        newSpan = document.createElement("span");
+        sector = document.querySelector("#colForMoreDistanceMatrix").lastElementChild;
+        sector.appendChild(newSpan);
+        newSpan.innerHTML = `${distanceMatrixNew[i]}, `
+    };
+    allDistanceMatrixInOne[dmSerialNumber] = distanceMatrixNew;
+    dmSerialNumber += 1;
+    distanceIndex = distanceMatrixNew.length;
+    //againAndAgain();
+};
+
+
+
+
+
+
 
 
 

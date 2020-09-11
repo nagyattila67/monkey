@@ -534,21 +534,51 @@
                             fognak tátongani.</p>
                         <p>A következő táblázat azt mutatja meg, hogy milyen hosszúak ezek az egymást követő
                             ürességek, amelyeket néhol egy-egy papírkupac szakít meg.</p>
-                        <P>Figyelem! Ennek a táblázatnak csak négy vagy annál több betűs szavak keresésének a sorozata
+                        <P style="font-size:13px">Figyelem! Ennek a táblázatnak csak négy vagy annál több betűs szavak
+                            keresésének a sorozata
                             esetén
                             van
                             jelentősége!</P>
-                        <!--<span>Kérem a távolságtáblázatot!</span>
-                    <button id="buttonForDistanceTable" type="button" class="btn btn-secondary btn-sm"
-                        onclick="distanceStart()">Mutat</button>-->
-                        <div class="row">
-                            <div class="col">A táblázat összesen <span id="distanceLength">&#8212 </span> adatot
-                                tartalmaz <span id=distanceAllPage> - </span> oldalon.
-                                (Oldalanként 100 adat.)</div>
-                        </div>
 
-                        <div class="row nav justify-content-center" id="distributionButtons">
-                            <div class="col">
+                        <table class="table table-sm table-bordered table-striped table-small">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p>Ennyi üresség követi egymást: </p>
+                                    </td>
+                                    <td><span id="numberOfEmptiness"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>Ennyi féle hosszúságú üresség van:
+                                            <span style="font-size:13px">(Ugyanolyan hosszúságú üresség többször is
+                                                előfordulhat)</span></p>
+                                    </td>
+                                    <td><span id="kindOfEmptiness"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>A leghosszabb üresség hossza:
+                                            <span style="font-size:13px">(Ez a szám az ürességek számához képest
+                                                rendkívül nagy is lehet, mert sok olyan ürességhossz lehetséges,
+                                                amelynek az előfordulása nulla.)</span></p>
+                                        </p>
+                                    </td>
+                                    <td><span id="longestEmptiness"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="text-align:center"><strong>Az egymást követő ürességek hosszúságai:</strong></p>
+                        <div id="rowForDistanceTable" class="row">
+                            <div id="colForDistanceTable" class="col col-12">
+                                <p style="text-align:center" id="distanceTablePage"></p>
+                                <p id="distanceTable">
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="row " id="distributionButtons">
+                            <div class="col nav justify-content-center">
                                 <button id="distanceStart" type="button" class="btn btn-secondary btn-sm"
                                     onclick="distanceStart()">az
                                     elejére</button>
@@ -561,20 +591,7 @@
                                     végére</button>
                             </div>
                         </div>
-                        <p><strong>Az egymást követő ürességek hossza:</strong></p>
-                        <p>Ennyi üresség követi egymást: <span id="numberOfEmptiness"></span></p>
-                        <p>Ennyi féle hosszúságú üresség van: <span id="kindOfEmptiness">. <span
-                                    style="font-size:13px">(Ugyanolyan hosszúságú üresség többször is
-                                    előfordulhat</span></p>
-                        <p>A leghosszabb üresség hossza: <span id="longestEmptiness"></span></p>
-                        <div id="rowForDistanceTable" class="row">
-                            <div id="colForDistanceTable" class="col col-12">
-                                <p style="text-align:center" id="distanceTablePage"></p>
-                                <p id="distanceTable">
-                                </p>
-                            </div>
 
-                        </div>
 
                     </div>
                 </div>
@@ -615,40 +632,23 @@
                 <div id="divForDistanceTable" class="row">
                     <div class="col">
                         <p>Összesen tehát <span id="emptiness6">
-                                &#8212 </span> darab ürességünk van. Ezeknek az ürességeknek szintén megvizsgálhatjuk az
-                            eloszlását. Hány darab <i>'egy hosszúságú'</i> ürességünk van? Hány darab <i>'kettő
+                                &#8212 </span> darab ürességünk van, amelyek <span id="emptiness7"></span> hosszúság
+                            között lettek felosztva úgy, hogy több ürességnek is lehet ugyanaz a hosszúsága, s lesz
+                            olyan ürességhossz, amit nem valósít meg egy üresség se.</p>
+                        <p>Most is megkérdezhetjük: hány darab <i>'egy hosszúságú'</i> ürességünk van? Hány darab
+                            <i>'kettő
                                 hosszúságú'</i> ürességünk van? És így tovább. Ezt az eloszlást mutatja a következő
                             táblázat.
                         </p>
-                        <P>Figyelem! Ennek a táblázatnak csak négy vagy annál több betűs szavak keresésének a sorozata
-                            esetén
-                            van
-                            jelentősége!</P>
-                        <!--<span>Kérem a távolságtáblázatot!</span>
-                    <button id="buttonForDistanceTable" type="button" class="btn btn-secondary btn-sm"
-                        onclick="distanceStart()">Mutat</button>-->
                         <div class="row">
-                            <div class="col">A táblázat összesen <span id="distributionDistanceLength">&#8212 </span>
-                                adatot
-                                tartalmaz <span id=distributionDistanceAllPage> - </span> oldalon.
-                                (Oldalanként 100 adat.)</div>
-                        </div>
-
-                        <div class="row nav justify-content-center" id="distributionButtons">
                             <div class="col">
-                                <button id="distanceStart" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="distanceStart()">az
-                                    elejére</button>
-                                <button id="distanceBack" name="arrow" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="distanceBack()">&#8678</button>
-                                <button id="distanceFoward" name="arrow" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="distanceFow()">&#8680</button>
-                                <button id="distanceLast" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="distanceLast()">a
-                                    végére</button>
+                                <p>A táblázat összesen <span id="distributionDistanceLength">&#8212 </span>
+                                    adatot
+                                    tartalmaz <span id=distributionDistanceAllPage> - </span> oldalon.
+                                    <span style="font-size:13px">(Oldalanként 100 adat.)</span></p>
                             </div>
                         </div>
-                        <p><strong>Az ürességek eloszlása hossz szerint:</strong></p>
+                        <p style="text-align:center"><strong>Az ürességek eloszlása hossz szerint:</strong></p>
                         <div id="rowForDistributionDistanceTable" class="rowForTable row">
                             <div id="colForDistributionDistanceTable" class="colForTable col col-12">
                                 <p style="text-align:center" id="distributionDistanceTablePage"></p>
@@ -656,40 +656,59 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="row " id="distributionButtons">
+                            <div class="col nav justify-content-center">
+                                <button id="distanceStart" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distributionDistanceStart()">az
+                                    elejére</button>
+                                <button id="distanceBack" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distributionDistanceBack()">&#8678</button>
+                                <button id="distanceFoward" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distributionDistanceFow()">&#8680</button>
+                                <button id="distanceLast" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distributionDistanceLast()">a
+                                    végére</button>
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
 
                 <div id="divForDistanceTable2" class="rowForBorder row">
                     <div class="colForBorder col">
-                        <p>Összesen tehát <span id="emptiness6">
+                        <p>Összesen tehát <span id="emptiness7">
                                 &#8212 </span> darab ürességünk van. Ezeknek az ürességeknek az eloszlásában viszont
-                            újabb
-                            ürességeket fedezhetünk fel és azoknak is megvizsgálhatjuk az üresség eloszlását!
+                            újabb ürességeket fedezhetünk, s így megnézhetjük ezeknek az ürességeknek a sorozatát is! A
+                            következő táblázatból látszik, hogy <i>először egy <span id="emptiness8"> &#8212 </span>
+                                hosszúságú</i> üresség jelenik meg, majd azt <i>követi egy <span id="emptiness9"> &#8212
+                                </span>
+                                hosszúságú</i> üresség, s így tovább.
                         </p>
-
-                        <div class="row nav justify-content-center" id="distributionButtons2">
-                            <div class="col">
+                        <p style="text-align:center"><strong>Az ürességek eloszlásában található ürességek
+                                eloszlása:</strong></p>
+                        <div id="rowForDistanceMatrixTable2" class="rowForTable row">
+                            <div id="colForDistanceMatrixTable2" class="colForTable col col-12">
+                                <p style="text-align:center" id="distanceMatrixTablePage2"></p>
+                                <p id="distanceMatrixTable2" class="table">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row " id="distributionButtons2">
+                            <div class="col nav justify-content-center">
                                 <button id="distanceStart2" type="button" name="arrow2" class="btn btn-secondary btn-sm"
                                     onclick="distanceStart()">az
                                     elejére</button>
                                 <button id="distanceBack2" name="arrow2" type="button" class="btn btn-secondary btn-sm"
                                     onclick="distanceBack()">&#8678</button>
-                                <button id="distanceFoward2" name="arrow2" type="button2" class="btn btn-secondary btn-sm"
-                                    onclick="distanceFow()">&#8680</button>
+                                <button id="distanceFoward2" name="arrow2" type="button2"
+                                    class="btn btn-secondary btn-sm" onclick="distanceFow()">&#8680</button>
                                 <button id="distanceLast2" type="button" name="arrow2" class="btn btn-secondary btn-sm"
                                     onclick="distanceLast()">
                                     végére</button>
                             </div>
                         </div>
-                        <p><strong>Az ürességek eloszlása hossz szerint:</strong></p>
-                        <div id="rowForDistributionDistanceTable2" class="rowForTable row">
-                            <div id="colForDistributionDistanceTable2" class="colForTable col col-12">
-                                <p style="text-align:center" id="distributionDistanceTablePage2"></p>
-                                <p id="distributionDistanceTable2" class="table">
-                                </p>
-                            </div>
-                        </div>
+
 
                     </div>
                 </div>
@@ -716,7 +735,17 @@
                     </div>
                 </div>
 
-
+                <div id="rowForMoreDistanceMatrix" class="row">
+                    <div id="colForMoreDistanceMatrix" class="col">
+                        <p>Eddig két ürességvizsgálatot végeztünk, ahol a legnagyobb ürességek száma rendre <span
+                                id="emptiness10"> &#8212 </span> és <span id="emptiness11"> &#8212 </span> lett.
+                            Láthatjuk, hogy az érték mintegy a felére csökkent. Most addig végezzük az
+                            ürességvizsgálatokat újra és újra, míg az érték 1-re nem csökken, s megvizsgáljuk ezt a
+                            sorozatot.
+                        </p>
+                        <div id="moreDistanceMatrix"></div>
+                    </div>
+                </div>
 
                 <div style="display:none" id="rowForDistributionDistanceGraph" class=" row">
                     <div id="colForDistributionDistanceGraph" class=" col col-12">
