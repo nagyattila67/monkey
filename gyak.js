@@ -30,6 +30,8 @@ timeLine = Array();
 wasDistanceGraph = false;
 hideDistanceGraphOrNot = ""
 hideClickCounter = 0;
+firstRun = true;
+clickCounterForAgain = 0;
 
 time = function (timeStart, timeFinish) {
     timeLength = (timeFinish.getTime() - timeStart.getTime()) / 1000;
@@ -2101,8 +2103,8 @@ showDistanceMatrix2 = function (firstElement, lastElement, pageOfDistanceTable) 
     document.querySelector("#distanceMatrixTablePage2").innerHTML = `- ${pageOfDistanceTable} -`;
     document.querySelector("#emptiness8").innerHTML = `${distanceMatrix2[0]}`;
     document.querySelector("#emptiness9").innerHTML = distanceMatrix2[1];
-    document.querySelector("#emptiness10").innerHTML = distanceMatrix[distanceMatrix.length - 1];
-    document.querySelector("#emptiness11").innerHTML = distanceMatrix2[distanceMatrix2.length - 1];
+    document.querySelector("#emptiness10").innerHTML = distanceMatrix.length;
+    document.querySelector("#emptiness11").innerHTML = distanceMatrix2.length;
     //document.querySelector("#emptiness1").innerHTML = runningNumber;
     //document.querySelector("#emptiness3").innerHTML = distribution[distribution.length - 1]
     //document.querySelector("#emptiness4").innerHTML = distribution.length;
@@ -2124,8 +2126,6 @@ showDistanceMatrix2 = function (firstElement, lastElement, pageOfDistanceTable) 
     //if (charNumber == 6) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
     //if (charNumber == 7) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
 
-    needAgainCleaning = true;
-    againAndAgain();
 
 };
 
@@ -2164,16 +2164,37 @@ distanceMatrixLast2 = function () {
     showDistanceMatrix2(firstElement, lastElement, pageOfDistanceTable);
 };
 
+showMoreDistance = function () {
+    needCleaning = true;
+    console.log("ürességelosztlás táblázatok készítése");
+    againAndAgain();
+    document.querySelector("#rowForMoreDistanceMatrix").style.display = "initial";
+    document.querySelector("#moreDistanceButton").innerHTML = "Elrejt";
+    document.querySelector("#moreDistanceButton").setAttribute("onclick", "hideMoreDistance()");
+};
+
+hideMoreDistance = function () {
+    document.querySelector("#rowForMoreDistanceMatrix").style.display = "none";
+    document.querySelector("#moreDistanceButton").innerHTML = "Mutat";
+    document.querySelector("#moreDistanceButton").setAttribute("onclick", "showMoreDistance()");
+};
+
+
+
+
+
+
 wasCreatedNewAgainP = false;
 dmSerialNumber = 0;
-needAgainCleaning = false;
+needCleaning = false;
 allDistanceMatrixInOne = Array();
+displayCounter = 0;
 againAndAgain = function () {
-    console.log("again");
 
-
-    if (needAgainCleaning == true && wasCreatedNewAgainP == true) {
-        wasCreatedNewAgainP = false;
+    if (needCleaning == true && clickCounterForAgain != 0) {
+        displayCounter = 0;
+        allDistanceMatrixInOne = Array();
+        dmSerialNumber = 0;
         let area = document.querySelector("#colForMoreDistanceMatrix");
         let sector = document.querySelector("#moreDistanceMatrix");
         area.removeChild(sector);
@@ -2182,44 +2203,20 @@ againAndAgain = function () {
         newDiv.setAttribute("id", "moreDistanceMatrix");
     };
 
-
-    if (needAgainCleaning == true && wasCreatedNewAgainP == false) {
-        needAgainCleaning == false;
-        allDistanceMatrixInOne = Array();
+    if (needCleaning == true) {
         distanceMatrixBasic = distanceMatrix2.slice();
         disributionDistanceBasic = distributionDistance.slice();
-        distanceIndex = distanceMatrix2.length;
+        distanceIndex = distanceMatrixBasic.length;
+        needCleaning = false;
         makeDistributionDistanceNew();
     };
 
-    if (needAgainCleaning == false && wasCreatedNewAgainP == true) {
-        while (distanceIndex != 1) {
-            console.log("while");
-            console.log(distanceIndex);
-            console.log(distanceMatrixNew);
-            disributionDistanceBasic = distributionDistanceNew.slice();
-            distanceMatrixBasic = distanceMatrixNew.slice();
-            makeDistributionDistanceNew();
-            distanceIndex = distanceMatrixNew.length;
-        };
+    if (needCleaning == false) {
+        disributionDistanceBasic = distributionDistanceNew.slice();
+        distanceMatrixBasic = distanceMatrixNew.slice();
+        makeDistributionDistanceNew();
     };
-
-
-    /*makeDistributionDistanceNew();
-    disributionDistanceBasic = distributionDistanceNew.slice();
-    makeDistanceMatrixNew();
-    distanceIndex = distanceMatrixNew.length;
-    console.log(distanceIndex);*/
-
-
-
-
-    dmSerialNumber += 1;
 };
-
-
-
-
 
 makeDistributionDistanceNew = function () {
     distributionDistanceNew = Array();
@@ -2240,9 +2237,7 @@ makeDistributionDistanceNew = function () {
     makeDistanceMatrixNew();
 };
 
-
 makeDistanceMatrixNew = function () {
-    console.log("makeDistanceMatrixNew");
     distanceMatrixNew = Array();
     let k = 0;
     let index = 0;
@@ -2258,28 +2253,345 @@ makeDistanceMatrixNew = function () {
             index = index + 1;
             k = 0;
         };
-        console.log(distanceMatrixNew);
+    };
+    displayDistanceMatrix();
+};
+
+
+displayDistanceMatrix = function () {
+
+    sums = Array();
+    if (displayCounter == 0) {
+        area = document.querySelector("#moreDistanceMatrix");
+        newP = document.createElement("p");
+        area.appendChild(newP);
+        sumOfEmptiness = 0;
+        for (let i = 0; i < distanceMatrix.length; i++) {
+            sumOfEmptiness = sumOfEmptiness + distanceMatrix[i];
+        };
+        sums[0] = sumOfEmptiness;
+        newSpan = document.createElement("span");
+        sector = document.querySelector("#colForMoreDistanceMatrix").lastElementChild;
+        sector.appendChild(newSpan);
+        newSpan.innerHTML = `táblázat fent, utolsó eleme: ${distanceMatrix[distanceMatrix.length - 1]}  - ürességek száma: ${distanceMatrix.length}, összeg: ${sumOfEmptiness}, `
+        area = document.querySelector("#moreDistanceMatrix");
+        newP = document.createElement("p");
+        area.appendChild(newP);
+        sumOfEmptiness = 0;
+        for (let i = 0; i < distanceMatrix2.length; i++) {
+            sumOfEmptiness = sumOfEmptiness + distanceMatrix2[i];
+        };
+        sums[1] = sumOfEmptiness;
+        newSpan = document.createElement("span");
+        sector = document.querySelector("#colForMoreDistanceMatrix").lastElementChild;
+        sector.appendChild(newSpan);
+        newSpan.innerHTML = `táblázat fent, utolsó eleme: ${distanceMatrix2[distanceMatrix2.length - 1]} - ürességek száma: ${distanceMatrix2.length}, összeg: ${sumOfEmptiness}, `
     };
 
-    let area = document.querySelector("#moreDistanceMatrix");
+    displayCounter = displayCounter + 1;
+    sumOfEmptiness = 0;
+
+    for (let i = 0; i < distanceMatrixNew.length; i++) {
+        sumOfEmptiness = sumOfEmptiness + distanceMatrixNew[i];
+    };
+
+    area = document.querySelector("#moreDistanceMatrix");
     newP = document.createElement("p");
     area.appendChild(newP);
     wasCreatedNewAgainP = true;
 
-    for (let i = 0; i < distanceMatrixNew.length; i++) {
-        newSpan = document.createElement("span");
-        sector = document.querySelector("#colForMoreDistanceMatrix").lastElementChild;
-        sector.appendChild(newSpan);
-        newSpan.innerHTML = `${distanceMatrixNew[i]}, `
+    for (let i = 0; i < distanceMatrixNew.length + 2; i++) {
+        if (i == distanceMatrixNew.length + 1) {
+            newSpan.innerHTML = `ürességek száma: ${distanceMatrixNew.length}, összeg: ${sumOfEmptiness}, `
+        }
+        else {
+            newSpan = document.createElement("span");
+            sector = document.querySelector("#colForMoreDistanceMatrix").lastElementChild;
+            sector.appendChild(newSpan);
+            newSpan.innerHTML = `${distanceMatrixNew[i]}, `
+        };
     };
+
     allDistanceMatrixInOne[dmSerialNumber] = distanceMatrixNew;
     dmSerialNumber += 1;
     distanceIndex = distanceMatrixNew.length;
-    //againAndAgain();
+    clickCounterForAgain += 1;
+    if (distanceIndex > 1) { againAndAgain() };
+};
+
+for (let i = 0; i < 21; i++) {
+    area = document.querySelector("#simulatedBook");
+    sector = document.createElement("p");
+    area.appendChild(sector);
+    sector.setAttribute("name", `${i}`);
+};
+actualSimulatedPage = Array();
+digitS = String();
+digitHexS = String();
+expressionHexSdigitHTMLS = String();
+expressionHexS = String();
+expressionHTMLS = String();
+expressionABCS = String();
+
+simulationMemory = Array();
+simulatedPage = 1376544666922514;
+
+bookSimulation = function () {
+    firstSimulation = true;
+    simulationMemoryIndex = 0;
+    lastPageWordsNumber = Math.floor(Math.random() * 40) + 1;
+    simulatePage();
+    showSimulatedPage();
+    wasSimulation = true;
+};
+
+wasSimulation = false;
+showSimulatedPage = function () {
+    if (wasSimulation == true) {
+        if (actualSimulatedPage.length < 41) {
+            for (let i = 0; i < 41; i++) {
+                document.querySelectorAll("#simulatedBook p")[i+1].innerHTML = "";
+            };
+        };
+    };
+    document.querySelectorAll("#simulatedBook p")[0].innerHTML = `- ${simulatedPage} -`
+    for (let i = 1; i < actualSimulatedPage.length; i++) {
+        document.querySelectorAll("#simulatedBook p")[i+1].innerHTML = actualSimulatedPage[i];
+    };
+
+    firstSimulation = false;
+    contentOfSimulationMemory = Object();
+    contentOfSimulationMemory.id = `${simulatedPage}`
+    contentOfSimulationMemory.page = actualSimulatedPage;
+    simulationMemory[simulationMemoryIndex] = contentOfSimulationMemory;
+    simulationMemoryIndex = simulationMemoryIndex + 1;
+};
+
+wordLengthS = 13;
+simulatePage = function () {
+    actualSimulatedPage = Array();
+    actualSimulatedPage[0] = "";
+    if (firstSimulation == true) { maxTurnS = lastPageWordsNumber }
+    else { maxTurnS = 40 };
+    for (let k = 1; k < `${maxTurnS + 1}`; k++) {
+        expressionHexS = "";
+        expressionABCS = "";
+        for (let i = 1; i < (wordLengthS + 1); i++) {
+
+            // a digit egy decimális szám
+            digitS = Math.floor(Math.random() * 35);
+            //betűk 'A'-tól 'Z'-ig
+            if (digitS >= 0 && digitS <= 25) { digitS = digitS + 65 }
+            //'Ö" betű 0xD6
+            if (digitS == 26) { digitS = 214 }
+            //'Ü' betű 0xDC
+            if (digitS == 27) { digitS = 220 }
+            //'Ő' betű 0x150
+            if (digitS == 28) { digitS = 336 }
+            //'Ű' betű 0x368
+            if (digitS == 29) { digitS = 368 }
+            //'É' betű 0xc9
+            if (digitS == 30) { digitS = 201 }
+            //'Í' betű 0xcd
+            if (digitS == 31) { digitS = 205 }
+            //'Ó' betű 0xd3
+            if (digitS == 32) { digitS = 211 }
+            //'Á' betű 0xc1
+            if (digitS == 33) { digitS = 193 }
+            //'Ú' betű 0xda
+            if (digitS == 34) { digitS = 218 }
+
+            digitHexS = digitS.toString(16);
+            digitHexS = "\\" + "x" + digitHexS
+            expressionHexS = expressionHexS + digitHexS;
+
+            digitHTMLS = `&#${digitS}`
+            expressionHTMLS = expressionHTMLS + digitHTMLS;
+
+            digitABCS = String.fromCharCode(digitS);
+            expressionABCS = expressionABCS + digitABCS;
+        };
+        actualSimulatedPage[k] = expressionABCS;
+
+    };
+    if (firstSimulation == true) {
+        beFasterForSimulation();
+        simulationIndex = Math.floor(Math.random() * szavakTempSim.length)
+        lastSimulatedWord = szavakTempSim[simulationIndex];
+        actualSimulatedPage[lastPageWordsNumber] = lastSimulatedWord;
+    }
+    else {
+        lastSimulatedWord = szavakTempSim[simulationIndex];
+        actualSimulatedPage[lastPageWordsNumber] = lastSimulatedWord;
+    };
+
+};
+
+beFasterForSimulation = function () {
+    szavakTempSim = Array();
+    szavakHexTempSim = Array();
+    let j = 0;
+    for (let i = 0; i < szavak.length; i++) {
+        if (szavak[i].length == wordLengthS) {
+            szavakTempSim[j] = szavak[i];
+            szavakHexTempSim[j] = szavakHex[i];
+            j = j + 1;
+        };
+    };
+    return (szavakTempSim, szavakHexTempSim);
 };
 
 
 
+
+
+word_ = function () {
+
+    //miért nem működik??????????
+    //document.querySelector("#status").innerHTML == "A majom éppen gépel"
+
+    wasClick = true;
+    timeStart = "";
+    timeFinish = "";
+    timeFinishTemp = "";
+    timeLength = 0;
+    min = 0; sec = 0;
+    whatDoesMonkeyDo = "";
+    records = Array();
+    expression = "";
+    digit = "";
+    hit = false;
+    turn = 0;
+    wordCounter = 0;
+    sheetCounter = 0;
+    volumeCounter = 0;
+    thickness = 0;
+    km = 0; m = 0; cm = 0;
+    memory = Array();
+    memoryABC = Array();
+    page = 0;
+    maxPage = 0;
+    firstWordIndex = Number();
+    goal = String();
+    wordForSearch = String();
+    wordNumber = Number();
+    lastWordNumber = Number();
+    wordABC = "";
+    //charNumber=Number();
+
+    area = document.querySelector("#getWord");
+    /*if (rep == false) { wordLength = event.path[2].children[1].children[0]["value"]; wordLength = parseInt(wordLength); }*/
+    if (rep == false) { wordLength = document.querySelector("#keremASzot").value; wordLength = parseInt(wordLength); }
+    if (rep == true) { wordLength = charNumber };
+    if (wordLength > 8 || wordLength < 1) {
+        alert("Minimum 1, maximum 7 betű! Hét betű esetén két órán át is futhat a progran!");
+        wordLength = 4;
+        document.querySelector("#wordLength").value = "4"
+    };
+    area.style.display = "initial";
+    goToPage = String();
+
+    if (wordLength != previousWordLength) { beFaster() };
+    previousWordLength = wordLength;
+
+
+    //if(hit==false && turn==0){document.querySelector("#status").setAttribute("innerHTML","A majom //////éppen gépel");}
+
+    //hány sor után adja fel a majom
+    maxTurn = 100000000
+
+    while (hit == false && turn < maxTurn) {
+        if (turn == 0) { timeStart = new Date(); };
+
+        expressionHTML = "";
+        digitHTML = "";
+        expressionHex = ""
+        digitHex = "";
+        expressionABC = "";
+        digitABC = "";
+        //turn = turn + 1; áttettem a végéra
+        for (let i = 1; i < (wordLength + 1); i++) {
+
+            // a digit egy decimális szám
+            digit = Math.floor(Math.random() * 35);
+            //betűk 'A'-tól 'Z'-ig
+            if (digit >= 0 && digit <= 25) { digit = digit + 65 }
+            //'Ö" betű 0xD6
+            if (digit == 26) { digit = 214 }
+            //'Ü' betű 0xDC
+            if (digit == 27) { digit = 220 }
+            //'Ő' betű 0x150
+            if (digit == 28) { digit = 336 }
+            //'Ű' betű 0x368
+            if (digit == 29) { digit = 368 }
+            //'É' betű 0xc9
+            if (digit == 30) { digit = 201 }
+            //'Í' betű 0xcd
+            if (digit == 31) { digit = 205 }
+            //'Ó' betű 0xd3
+            if (digit == 32) { digit = 211 }
+            //'Á' betű 0xc1
+            if (digit == 33) { digit = 193 }
+            //'Ú' betű 0xda
+            if (digit == 34) { digit = 218 }
+
+            digitHex = digit.toString(16);
+            digitHex = "\\" + "x" + digitHex
+            expressionHex = expressionHex + digitHex;
+
+            digitHTML = `&#${digit}`
+            expressionHTML = expressionHTML + digitHTML;
+
+            digitABC = String.fromCharCode(digit);
+            expressionABC = expressionABC + digitABC;
+
+            //kikapcsolva, mert ötszörösére növeli a program által használt memóriát
+            //memory[turn] = expressionHTML;
+            if (wordLength < 8) { memoryABC[turn] = expressionABC; }
+            //console.log("digit: ", digit, " digitHEX: ", digitHex, " expressionHEX: ", expressionHex, " turn: ", turn);
+        };
+
+
+
+        for (let k = 0; k < szavakHex.length; k++) {
+            if (expressionHex == szavakHex[k]) {
+                index = szavakHex.findIndex(x => x == expressionHex);
+                hit = true;
+                if (cons == true && displayNow == true) { console.log("TALÁLAT!!!!! ", turn, "ciklus után. A szó: ", szavak[index]); };
+                timeFinish = new Date();
+                timeExpired = (timeFinish - timeStart) / 1000;
+            };
+        };
+
+        if (turn == maxTurn) {
+            hit = true;
+            if (cons = true && displayNow == true) { console.log("FELAD!!!!! ", turn, "ciklus után") };
+            timeFinish = new Date();
+        };
+
+        if (turn == 0 && cons == true && displayNow == true) { console.log("A betűkombinációk kirakása elindult.") }
+
+        if (turn % 100000 == 0) {
+            if (turn != 0 && cons == true && displayNow == true) {
+                timeFinishTemp = new Date();
+                time(timeStart, timeFinishTemp);
+                if (cons == true) { console.log(turn, "ciklus futott le eddig", `${min} perc, ${sec} másodperc alatt`) };
+            };
+        };
+        turn = turn + 1;
+    };
+
+    //timeFinish2 = new Date();
+    place = document.querySelector("#word");
+    turn = parseInt(turn);
+
+    if (displayNow == true) { displayResultOfTyping(place, expressionHTML, hit, turn, maxTurn) };
+    if (displayNow == true) { displayWord() };
+
+    learn(expressionHex);
+
+    return expressionHex, expressionHTML, digit, digitHex, sheetCounter, hit, turn, timeLength;
+};
 
 
 

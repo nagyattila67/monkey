@@ -51,28 +51,36 @@
                 </div>
                 <div class="row">
                     <ul id="littleInfo">
-                        <li><small>Egy 5 betűs értelmes szó létrehozása a programnak átlagosan 7 másodpercig
+                        <li><small>A program egy 2.1 GHz-s processzorral rendelkező gépen egy másodperc alatt átlagosan
+                                10 000 betűt képes 'legépelni'.</small></li>
+                        <li><small>Egy 5 betűs értelmes szó létrehozása a programnak átlagosan 6 másodpercig
                                 tart.</small></li>
                         <li><small>Egy 6 betűs értelmes szó létrehozásához kb. 3 percre van szüksége a
                                 programnak.</small></li>
-                        <li><small>Egy 7 betűs értelmes szó létrehozása már 108 percig tart tart.</small></li>
-                        <li><small>Egy 8 betűs értelmes szó létrehozásához átlagosan 63 órán keresztül kellene futnia a
+                        <li><small>Egy 7 betűs értelmes szó létrehozása már 96 percig tart tart.</small></li>
+                        <li><small>Egy 8 betűs értelmes szó létrehozásához átlagosan 57 órán keresztül kellene futnia a
                                 programnak.</small></li>
                         <li><small>Minden újabb betű <em>35-szörösére</em> emeli a program futásának az átlagos
-                                időtartamát, hiszen az ábécé - amit a program használ - 35 betűből áll.</small></li>
-                        <li><small>Egy 9 betűs értelmes szó megtalálásához a programnak már 110 napra lenne szüksége, s
-                                a teleírt kötetek egymásra pakolva 788 méter tennének ki. Ez megközelíti a világ
-                                legmagasabb felhőkarcolójának a magasságát, a Burdzs Kalifa-ét, amely Dubajban található
-                                (828 m).</small></li>
+                                időtartamát, hiszen az ábécé - amit a program használ - 35 betűből áll. De ez az
+                                időtartam attól is függ - kisebb mértékben -, hogy hány - adott számú betűt tartalmazó -
+                                szó
+                                szerepel a program által használt szószedetben.</small></li>
+                        <li><small>Egy 9 betűs értelmes szó megtalálásához a programnak már 98 napra lenne szüksége, s a
+                                teleírt kötetek egymásra pakolva 7 887 méter tennének ki. Ez a könyvrakás <i>tízszer</i>
+                                olyan magas lenne, mint a világ legmagasabb felhőkarcolója, a Burdzs Kalifa, amely
+                                Dubajban található (828 m).</small></li>
                         <li><small>Egy 13 betűből álló értelmes szó - pl.: <i>'asztrofizikus'</i> - megtalálásához
-                                átlagosan 20
-                                milliárd évre van szükség. Ez az időtartam nagyságrendileg az univerzum életkorához
-                                (13,8 milliárd év)
-                                áll közel.
-                                Ha tehát az ősrobbanás pillanatában indult volna el a programunk, akkor - nagy átlagban
-                                - az azóta eltelt
-                                felfoghatatlan hosszúságú idő ellenére sem talált volna még egyetlen 13 betű hosszúságú
-                                értelmes szót sem.</small>
+                                nagyjából 2,2 millió évre lenne szükség.</small>
+                        </li>
+                        <li><small>Egy 15 betűből álló értelmes szó - pl.: <i>'tengeralattjáró'</i> - kirakásához
+                                átlagosan 9 milliárd évre van szükség. Ez az időtartam nagyságrendileg az univerzum
+                                életkorával (13,8 milliárd év) áll egy csoportban. Ez azt jelenti, hogy ha az ősrobbanás
+                                pillanatában indult volna el a programunk, akkor - nagy átlagban - az azóta eltelt
+                                felfoghatatlan hosszúságú idő ellenére is csak egy darab 15 betű hosszúságú értelmes
+                                szót talált volna, s jelenleg a második ilyen szót keresné nagyjából azóta, hogy az első
+                                prokarióta egysejtűek megjelentek a földön. S a második 15 betűs értelmes szót nagyjából
+                                akkor fogja megtalálni, mikorra a nap már vörös óriássá változott, s felforralt mindent
+                                a Föld felszínén..</small>
                         </li>
                     </ul>
                 </div>
@@ -229,7 +237,7 @@
                             <div class="row">
                                 <p id="volumeInfo">Az Ön kötetei a <span id="firstPage">-</span> oldaltól a(z) <span
                                         id="lastPage">-</span>
-                                    oldalig terjednek.</p>
+                                    oldalig terjednek. Egy oldal 40 sor terjedelmű.</p>
                             </div>
                         </form>
 
@@ -734,25 +742,39 @@
                                     id="distributionDistanceGraphEstimateTime2"></span></strong></p>
                     </div>
                 </div>
+                <div class="row rowNeedBorder">
+                    <div class="col colNeedBorder">
+                        <div id="" class="row">
+                            <div id="" class="col">
+                                <div><button id="moreDistanceButton" style="float:right" type="button"
+                                        class="btn btn-secondary btn-sm" onclick="showMoreDistance()">Kérem</button>
+                                    <p>Eddig két ürességvizsgálatot végeztünk, ahol rendre <i><span id="emptiness10">
+                                                &#8212 </span> db.</i>,
+                                        ill. <i><span id="emptiness11"> &#8212 </span> db.</i> üresség követte egymást.
+                                        Ezt az eljárást
+                                        addig ismételhetjük meg újra és újra, míg az ürességek száma le nem csökken
+                                        1-re, s ekkor
+                                        megvizsgálhatjuk az így kapott sorozatot.
+                                    </p>
+                                </div>
 
-                <div id="rowForMoreDistanceMatrix" class="row">
-                    <div id="colForMoreDistanceMatrix" class="col">
-                        <p>Eddig két ürességvizsgálatot végeztünk, ahol a legnagyobb ürességek száma rendre <span
-                                id="emptiness10"> &#8212 </span> és <span id="emptiness11"> &#8212 </span> lett.
-                            Láthatjuk, hogy az érték mintegy a felére csökkent. Most addig végezzük az
-                            ürességvizsgálatokat újra és újra, míg az érték 1-re nem csökken, s megvizsgáljuk ezt a
-                            sorozatot.
-                        </p>
-                        <div id="moreDistanceMatrix"></div>
+                                <div style="display:none" id="rowForMoreDistanceMatrix" class="rowForTable row">
+                                    <div id="colForMoreDistanceMatrix" class="colForTable col">
+                                        <div id="moreDistanceMatrix" class="table"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display:none" id="rowForDistributionDistanceGraph" class="rowForTable row">
+                            <div id="colForDistributionDistanceGraph" class="colForTable col col-12">
+                                <table id="distributionDistanceGraph" class="table">
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div style="display:none" id="rowForDistributionDistanceGraph" class=" row">
-                    <div id="colForDistributionDistanceGraph" class=" col col-12">
-                        <table id="distributionDistanceGraph">
-                        </table>
-                    </div>
-                </div>
 
                 <div class="row">
                     <div id="forEnvelope" class="col-6">
@@ -1298,16 +1320,134 @@
                         <table id="notations" class="table table-small"></table>
                     </div>
                 </div>
+
+
+
+
+                <div class="row">
+                    <div class="col">
+                        <h5>A szólista szimulálása</h5>
+                    </div>
+                </div>
+                <div class="row">
+
+
+                    <div class="col col-7">
+
+                        <p>Láttuk azt, hogy egy 13 betűből álló értelmes szó létrehozásához a programnak átlagosan 2,2
+                            millió
+                            évre
+                            lenne szüksége. Ez a könyv összesen 1,3 billiárd - egész pontosan: 1 376 544 666 922 514 -
+                            oldalt
+                            tartalmazna.
+                        </p>
+                        <p>Nekünk nyilván nincs 2,2
+                            millió évünk, hogy lefutassuk ezt a programot. Azonban a számítógép képes ezt a könyvet
+                            szimulálni a
+                            számunkra úgy, hogy bárhol belelapozhassunk!</p>
+                        <p>
+                            Képzeljünk el egy szimulált könyvet, ami egy regényt tartalmaz. Ennek a könyvnek minden
+                            oldala üres.
+                            Viszont ha bárhol kinyitjuk, akkor azon az oldalpáron azonnal megjelenik egy szöveg, mintha
+                            az
+                            mindig is ott lett volna, s ez a szöveg a könyv becsukása után is ott marad. Azaz ha újra
+                            ugyanott
+                            nyitjuk ki a könyvet, akkor ugyanazt a szövegrészt látjuk, s nem gondolnánk, hogy a szöveg
+                            csak
+                            akkor jött létre, amikor azon a helyen először kinyitotta valaki a könyvet. S ugyanúgy azt
+                            sem
+                            sejtenénk, hogy azok az
+                            oldalak, ahol még senki sem nyitotta ki ezt a könyvet, valójában teljesen üresek.</p>
+                        <p>
+                            Azaz a számítógép nem használ se memóriát, se erőforrást a könyv létrehozására addig, amíg
+                            azt
+                            valaki kézbe nem veszi, s bele nem lapoz. S a számítógép ekkor is csak annyi oldalt készít
+                            el, s
+                            őriz
+                            meg, amennyit egy belelapozó személy már látott belőle. Ez előny a könyvet szimuláló gép
+                            számára,
+                            hiszen nem kell 2,2 millió évig futnia, valahányszor elindítjuk az a programot, továbbá
+                            pedig az
+                            alkalmazást használó személy
+                            soha nem tudna annyit lapozni a könyvben, hogy a gép teljes memóriája végig teleíródjon.
+                        </p>
+                        <p>Ha ebben kételkednénk, akkor jusson eszünkbe, hogy ez a könyv 300 oldalas kötetekkel számolva
+                            4 588 482 223 075 kötetből áll. Egész életünk nem lenne elég ahhoz, hogy a köteteket
+                            tartalmazó polc
+                            mentén végigsétáljunk! (Kb. 114 ezerszer érné körbe a Föld egyenlítőjét.)</p>
+                        <p>Természetesen, ha újraindítja a programot, akkor egy új könyv fog generálódni!</p>
+                        <button id="simulationOfTheBook" type="button" class="btn btn-secondary btn-sm"
+                            onclick="bookSimulation()">A könyv szimulálása
+                        </button>
+
+                    </div>
+
+                    <div class="col col-5">
+
+
+                        <div id="rowForAllDistribution" class="row">
+                            <div id="divForAllDistribution" class="col">
+
+                            </div>
+                            <div class="nav justify-content-center" id="distributionButtons">
+                                <button id="distributionStart" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distStart()">az
+                                    elejére</button>
+                                <button id="distributionBack" name="arrow" type="button"
+                                    class="btn btn-secondary btn-sm" onclick="distBack()">&#8678</button>
+                                <button id="distributionFoward" name="arrow" type="button"
+                                    class="btn btn-secondary btn-sm" onclick="distFow()">&#8680</button>
+                                <button id="distributionLast" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="distLast()">a
+                                    végére</button>
+
+                            </div>
+                            <div class="form-row align-items-center">
+                                <div class="col-auto">
+                                    <button id="skip" type="button" class="btn btn-secondary btn-sm"
+                                        onclick="skipToPage(event)">Ugrás a</button>
+                                </div>
+                                <div class="col-auto">
+                                    <input id="pageInput" type="number" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-auto">
+                                    <label for="pageInput">oldalra</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col">
+                                <div id="rowForSimulatedBook" class="row rowNeedBorder">
+                                    <div id="colForSimulatedBook" class="col colNeedBorder">
+                                        <div id="simulatedBook">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
             </div>
+
+
         </div>
-        <div class="row">
-        </div>
-    </div>
-    <div class="col-0 col-sm-1 col-md-1"></div>
+
+        <div class="col-0 col-sm-1 col-md-1"></div>
     </div>
     <div class="row m-3"></div>
 
-    <script src="/gyak.js"></script>
+    <script src="/gyak.js">
+    </script>
 </body>
 
 </html>

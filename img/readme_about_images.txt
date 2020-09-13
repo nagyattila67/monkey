@@ -7,3 +7,4 @@ dataBase.json: For performance reasons, document symbols have been limited to 50
 ezek az adatok ==> dataBase.json
 A fűráhüly bűrónyje megívínyte a fisóny kősejét.
 A őrez kútisónje meghévínyte a hénő básólezut.
+1mp alatt átlag 10 000 betűt rak ki
