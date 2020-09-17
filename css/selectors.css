@@ -20,6 +20,8 @@ img{margin:0px 20px 20px;}
 #result p{ margin:5px; padding:1px }
 #hossz{margin:0px;padding:2px}
 #result{margin: 0px 0px 40px}
+#howManyLettersRow{overflow:auto; padding:5px;border:1px solid #a8a8a8; background-color:#f1f1f1;}
+#howManyLetters tr{background-color:#f6e4f7}
 .row{margin:10px 0px 0px 10px; padding:0px}
 .form{margin:0px;padding:0px}
 label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
@@ -41,10 +43,12 @@ label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
 #divForNotations{overflow:auto;border:1px solid #a8a8a8;background-color:#dbdbdb;max-height:300px;max-width:300px;}
 #divForSentence{min-height:100px;}
 #sentence{background-color:#FADADD}
-#wrapping0{max-width:230px;padding:10px;}
-#wrapping0{border:1px solid #a8a8a8; background-color:#cbe7cb;}
-#wrapping0 .row{margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;}
-#wrapping0 p{padding:0px; margin:5px;}
+#wrapping0Col{width:auto;z-index:1}
+#wrapping0Col .row{margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;}
+#wrapping0Col p{padding:0px; margin:5px;}
+#wrapping0Form{width:200px}
+#wrapping1Form{width:200px;height:px}
+#wrapping2Form{width:200px;height:px}
 button[name='chooseGraph']{margin:5px;}
 button[name='arrow']{width:35px;height:35px;margin:7px;padding:0px;font-size:20px;}
 button[name='backToStart']{width:35px;height:125px;}
@@ -86,13 +90,27 @@ img[name='kindOfDistImg']{margin-bottom:0px;}
 .colForTable{margin:10px;padding:10px;}
 #rowForDistributionDistanceTable2{margin:1px}
 button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;}
-#rowForAllDistribution{margin:1px}
-.rowNeedBorder{border:1px solid #a8a8a8; background-color:#f0f0f0}
-#moreDistanceButton{margin:10px 30px 10px 30px;width:90px}
-#simulatedBook p[name='0']{margin:25px}
-#simulatedBook p{text-align:center;font-size:13px;line-height:10px}
-#rowForSimulatedBook{width:220px}
-#colForSimulatedBook{height:1020px}
+.colForSimulatedBook{padding-top:15px;height:470px;margin:3px;border:1px solid #a8a8a8;background-color:#f0f0f0;}
+.simulatedBook{width:130px}
+.simulatedBook p[name='0']{margin:20px 0px 25px 0px;}
+.simulatedBook p[name='21']{margin:20px 0px 0px 0px;}
+.simulatedBook p{margin:10px;text-align:center;font-size:12px;line-height:10px}
+#simulatedPageInput{width:100px}
+.simulationRow{margin:10px}
+.simulationCol button{margin:1px;}
+.simulationCol input{margin-bottom:10px;}
+.simulationCol p{margin:1px}
+.simulationCol p{margin:1px;text-align:center}
+.simulationCol small{margin:1px}
+.simulationCol p{margin:1px;text-align:center}
+.simulationCol small{margin:1px}
+#exampleForGauss{background-color:#ffe7d3}
+#Gauss{margin:5px 5px -4px 15px}
+#problemRow{padding:10px 10px 0px 10px;border:1px solid #a8a8a8}
+
+
+
+
 
 
 

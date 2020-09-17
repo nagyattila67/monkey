@@ -8,3 +8,4 @@ ezek az adatok ==> dataBase.json
 A fűráhüly bűrónyje megívínyte a fisóny kősejét.
 A őrez kútisónje meghévínyte a hénő básólezut.
 1mp alatt átlag 10 000 betűt rak ki
+Gauss görge kép forrása: https://regi.tankonyvtar.hu/hu/tartalom/tamop425/0046_valoszinusegszamitas_es_statisztika/ch04s03.html
