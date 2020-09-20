@@ -20,6 +20,12 @@ img{margin:0px 20px 20px;}
 #result p{ margin:5px; padding:1px }
 #hossz{margin:0px;padding:2px}
 #result{margin: 0px 0px 40px}
+.result{background-color:#f6e4f7}
+#forTest{padding:0px 0px 0px 0px;margin:10px 0px 0px 0px;}
+#forTest input{margin:0px 10px 0px 0px;max-width:100px}
+#forTest label{margin:0px}
+#howManyWords p{margin:10px 0px 0px 0px;}
+#howManyWordsButton{margin:0px 0px 3px 0px;}
 #howManyLettersRow{overflow:auto; padding:5px;border:1px solid #a8a8a8; background-color:#f1f1f1;}
 #howManyLetters tr{background-color:#f6e4f7}
 .row{margin:10px 0px 0px 10px; padding:0px}
@@ -107,6 +113,22 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;}
 #exampleForGauss{background-color:#ffe7d3}
 #Gauss{margin:5px 5px -4px 15px}
 #problemRow{padding:10px 10px 0px 10px;border:1px solid #a8a8a8}
+
+.tableGraphic{border:solid 1px #a8a8a8;width:inherit;height:auto;min-height:100px;max-height:100px;background-color:#dbdbdb;}
+#graphic1{border-collapse:separate;}
+#graphic1 td{width:10px;}
+
+#test1{border-collapse:separate;}
+#test1 td{width:10px;}
+#run100FirstButton{margin:0px 20px 5px;padding:px;}
+#infoForRun100FirtsButton{margin:1px;padding:1px}
+#charNumberForTest{width:50px}
+#runningNumberForTest{width:70px}
+#letsRun100{margin:10px}
+#divForRunning100{padding:10px 10px 10px;margin:0px 5px 20px;border:solid 1px ;background-color:#dbdbdb;}
+
+
+
 
 
 

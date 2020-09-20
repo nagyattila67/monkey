@@ -432,7 +432,12 @@
                         </i>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div id="forTable" class="col col-12">
+                        <table class="table" id="graphic">
+                        </table>
+                    </div>
+                </div>
                 <div id="howManyLettersRow" class="row">
                     <div id="howManyLettersCol" class="col">
                         <p>Ha látni szeretné, hogy az egyes betűszámok esetén hány betűkombináció lehetséges és
@@ -450,9 +455,43 @@
                                 </tr>
                             </thead>
                             <tbody id="howManyLettersBody"></tbody>
-
                         </table>
-                       
+                        <div id="howManyWords" style="display:none" class="row">
+                            <br>
+                            <p>Itt ellenőrizheti, hogy nem tartalmaz-e hibát a program a véletlen betűsorok
+                                generálásakor.</p>
+                            <p> Valóban annyi véletlenül felírt betűsorra jut-e egy értelmes szó,
+                                mint ahogyan azt a fenti táblázat mutatja? Beállíthatja a karaktersorozat és a generált
+                                szólista hosszát.</p>
+                            <p>Pl. két karakterből álló 907 'szót' tartalmazó listán átlagosan 100 értelmes szónak kell
+                                szerepelnie. <small>Csak 2, 3 vagy 4 betűből álló karaktersorozatok esetén működik ez a
+                                    funkció, különben a program túl hosszú ideig futna.</small></p>
+                            <div class="input-group row" id="forTest">
+                                <div class="col-3">
+                                    <label for="karakterSzamForTest">Karakterek száma: </label>
+                                </div>
+                                <div class="col-2">
+                                    <input id="karakterSzamForTest" onchange="setListLength()"
+                                        class="form-control form-control-sm" type="number" min="2" max="4" value="2">
+                                </div>
+                                <div class="col-3">
+                                    <label for="sorSzamForTest">Sorok száma: </label>
+                                </div>
+                                <div class="col-2">
+                                    <input id="sorSzamForTest" class="form-control form-control-sm" type="number"
+                                        step="100" min="100" value="907">
+                                </div>
+                                <div class="col-2">
+                                    <button id="howManyWordsButton" type="button" class="btn btn-secondary btn-sm"
+                                        onclick="howManyWords()">Mutat</button>
+                                </div>
+                            </div>
+                            <p>Ennyi értelmes szónak kell lennie a listán: <span class="result" id="itShouldBe"></span>
+                            </p>
+                            <p>A kattintásra most ennyit generált a program: <span
+                                    style="background-color:rgb(126,228,228)" class="result" id="thisIsReally"></span>
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -487,7 +526,7 @@
                             </p>
                         </div>
 
-                        <p>Most pedig nézzünk megy egy <i>'a majom két betűs szavakat rak ki 500-szor'</i> eloszlást!
+                        <p>Most pedig nézzünk megy egy <i>'a majom két betűs szavakat rak ki 100-szor'</i> eloszlást!
                             Ekkor a
                             leggyakoribb
                             szóhossz a 35<sup>2</sup>/135, azaz 1225/135=9.07. <small>(Az összes kétbetűs variáció 35
@@ -495,50 +534,74 @@
                             Tehát
                             átlagosan 9 kirakásra jut egy-egy értelmes szó.</p>
                         <p>Azt várnánk, hogy az eloszlást mutató
-                            oszlopgrafikonon a legmagasabb oszlop általában a kilencesnél lesz, majd tőle jobbra és
+                            oszlopgrafikonon a legmagasabb oszlop a kilencedik lesz, majd tőle jobbra és
                             balra egyre csökkennek a magasságok, azaz a Gauss eloszlás grafikonját kapjuk meg. Azonban
                             nem ez történik!
                         </p>
                         <p>
+                        <p><img id="Gauss" src="/img/example3_2_100.png"
+                                alt="a majom 2 betűs szavakat keresett 100-szor" width="250" style="float:left">
                             Az oszlopgrafikonra pillantva azonnal szembetűnik, hogy itt nem egy Gauss eloszlásról van
                             szó,
-                            amelynek a maximuma a 9-nél van. Itt a maximum az első elemnél van, azaz a majom
-                            túlságosan is gyakran már elsőre kirak egy értelmes szót! S úgyanígy <i>'a második, a harmadik a
-                                negyedik esetre is kirak egy értelmes szót'</i> oszlopok magassága is nagyobb a vártnál!
+                            amelynek a maximuma a 9-nél van. Itt az oszlopok magassága rendre: 7, 8, 17, 11, 6, 10, 7,
+                            4, 5, 1, 1, 1, 2, 4, 0, 4, 1, 0, 1, 2, 0, 2, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+                            1, 1.
                         </p>
-                        <p>Ez hogy lehetséges? Honnan tudja a majom, hogy hogyan kell kirakni egy értelmes szót? Hogy
-                            sikerülhet neki szignifikánsan sokszor az, ami - nagy átlagban - csak kilencedik alkalomra
-                            sikerülhetne neki?</p>
-                        <p>Ennek az értelmezésére vegyünk egy szemléletes példát!</p>
-                        <div id="exampleForGauss">
-                            <p>Tegyük fel, hogy az emberek átlagos magassága 1.82 méter. Továbbá tegyük fel, hogy a
-                                legnagyobb - és rendszeresen előforduló magasság az 5,82 méter. Azaz az utcán
-                                rendszeresen találkozhatunk - igaz, nem túl gyakran - 5,82 méter magasságú személyekkel.
-                            </p>
-                            <p>Az ő magasságuk eltérése az átlagos magasságtól 4 méter (felfelé). Ha viszont a természet
-                                igazságos akar lenni a magasságok elosztásában, akkor léteznie kell - egy kevés - olyan
-                                embernek is, akinek a magassága ugyancsak 4 méterrel tér el az átlagtól, de
-                                <i>lefelé</i>!
-                                Azaz az ő magasságuk 1,82 - 4 = - 2,18 méter lesz!
-                            </p>
-                            <p>Ez viszont lehetetlen. Negatív magasság nem létezik. Sőt! Kell léteznie egy minimális
-                                magasságnak, ami alatt a
-                                szervezet, a csontrendszer, a vázizomzat működésképtelenné válna. Mondjuk, legyen ez a
-                                határ az 1 méter.</p>
-                            <p>Ebben az esetben - ha a természet továbbra is ragaszkodik ahhoz, hogy igazságosan járjon
-                                el - akkor a -2,18 méter és az 1 méter közé eső magasságú személyeknek valamilyen létező
-                                magasságot kell kiosztania. Ekkor ezeket a személyeket elhelyezi valamilyen rendben a
-                                legalacsonyabb létező személyek között, azaz ezzel megnöveli az ő számukat.</p>
-                            <p>Azaz a természet a Gauss görbének az 1 méteres határvonaltól balra eső részét levágja, s
-                                az egyes levágott oszlopokat ráhelyezi a már létező oszlopokra, s ezzel megnövel azok
-                                magasságát. Ezzel viszont a Gauss görbe - határvonaltól jobbra lévő - megmaradó
-                                grafikonja is elveszti a Gauss görbe formáját és egy magasról induló, egyre süllyedő
-                                görbe alakját veszi fel.</p>
+                        <p>Persze bármelyik - az oszlopgrafikonon ábrázolt - sorozat bármennyire eltérhet az átlagtól,
+                            hiszen erről szól a véletlen. Például az is bekövetkezhetne, hogy a majom egy véletlen
+                            futássorozatnál mind a százszor elsőre értelmes szót rak ki.
+                        </p>
+                        <p>
+                        <p><img id="Gauss" src="/img/example4_2_100_100.png"
+                                alt="a majom 2 betűs szavakat keresett 100-szor átlagos eloszlása 100 ismétlésre"
+                                width="250" style="float:left">Most azonban nem erről van szó! Ha ugyanis
+                            <i>100-szor</i> lefuttatjuk <i>'a majom kétbetűs
+                                szavakat rak ki 100-szor'</i> sorozatot, s vesszük az oszlopgrafikonok átlagát, akkor a
+                            következő grafikont kapjuk meg. Ezen pedig jól látható, hogy leggyakrabban a majom már
+                            elsőre talált egy értelmes kétbetűs kifejezést, s onnantól kezdve csökken az oszlopok
+                            magassága. (Ennél az átlagsorozatnál az oszlopok magassága rendre: 11, 10, 9, 8, 7, 6, 6, 5,
+                            4, 4, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.</p>
+                        <p>Ha akarja, Ön is ellenőrizheti, hogy hogyan néz ki egy ilyen átlag grafikon. Klikkeljen a
+                            <i>'Mehet!'</i> gombra, és a program lefuttatja Önnek 100-szor <i>'a majom kétbetűs szavakat
+                                keres százszor'</i> sorozatot!</p>
+                        <button id="run100FirstButton" type="button" class="btn btn-secondary btn-sm"
+                            onclick="running100First()">Mehet!</button>
+                        <span id="infoForRun100FirtsButton">Futásidő: 1 perc.</span>
+
+                        <div class="row">
+                            <div id="forTest1" class="col col-12">
+                                <table class="table tableGraphic" id="test1">
+                                </table>
+                            </div>
                         </div>
+                        <hr>
+                        <p>Az átlag leghosszabb betűsorozata: <span id="run100TestLength"> - </span>.</p>
+                        <p><img id="Gauss" src="/img/Gauss_gorbe.png" alt="Gauss eloszlás görbéje" width="250"
+                                style="float:right">Ha ismét vetünk egy pillantást az ideális Gauss eloszlás
+                            grafikonjára, láthatjuk, hogy az eloszlás szimmetrikus. Nevezzük el a középső - legmagasabb
+                            - oszlopot az eloszlás maximumának. Látjuk, hogy a maximumtól jobbra és balra egyre távolabb
+                            lévő oszloppárok magassága nagyjából megegyezik. S ha úgy képzeljük el, hogy az egyes oszlopok
+                            téglákból épülnek fel, akkor az is igaz, hogy a maximum két oldalán két lévő oszlophalmaz
+                            közelítőleg azonos számú téglából épül fel.</p>
+                        <p>Azaz a maximumtól jobbra is, balra is ugyanannyi <i>'tégla'</i> kell a két oszlopsor
+                            felépítéséhez.
+                        </p>
+                        <p>Most pedig futtassuk le a <i>'majom n-betűs szavakat keres m-szer'</i> beállítással a
+                            programot!</p>
+                        <p>Ekkor láthatjuk, hogy a várt maximumnál nemcsak, hogy nem lesz maximum, de még a 'várt
+                            maximum' előtt és után lévő szólisták - azaz a <i>téglák</i> száma - sem egyezik meg!
+                        </p>
+                        <div id="divForRunning100">
+                            <label>A majom most</label>
+                            <input id="charNumberForTest" type="number" min="2" max="4" value="2">
+                            <label>betűs szavakat keres</label>
+                            <input id="runningNumberForTest" type="number" min="" max="" value="100">
+                            <label>-szor.</label>
 
-
-                        <button id="run100" type="button" class="btn btn-secondary btn-sm"
-                        onclick="running100()">100-szor lefuttatja az 500/2-t</button>
+                            <button id="letsRun100Button" type="button" class="btn btn-secondary btn-sm"
+                                onclick="runningForProblems()">Mehet!</button>
+                            <span id="infoForLetsRun100Button">Futásidő: min. ? perc.</span>
+                        </div>
 
                         <table class="table table-striped table-sm table-bordered">
                             <tbody>
@@ -551,7 +614,7 @@
                                     <td><span id="monkeyHowManyTimes"> - </span></td>
                                 </tr>
                                 <tr>
-                                    <td>A listák (elvileg) átlagos szószáma:</td>
+                                    <td>A listák (elvileg) átlagos szószáma (a várt maximum):</td>
                                     <td><span id="averageListLength"> - </span></td>
                                 </tr>
 
@@ -573,35 +636,133 @@
                                 </tr>
                                 <tr>
                                     <td>Arányuk (rövidebbek száma / hosszabbak száma):</td>
-                                    <td><span id="proportion"> - </span></td>
+                                    <td><span style="background-color:rgb(126, 228, 228)" id="proportion"> - </span>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>A leghosszabb lista szószámának a fele:</td>
-                                    <td><span id="halfOfLongestListLength"> - </span></td>
+                                    <td>Az a szólistahossz, aminél a rövidebb és hosszabb szólisták száma egyenlő:</td>
+                                    <td><span id="halfingListLength"> - </span></td>
                                 </tr>
                                 <tr>
                                     <td>Ebből ennyi van:</td>
-                                    <td><span id="halfOfLongestListNumber"> - </span></td>
+                                    <td><span id="halfingListNumber"> - </span></td>
                                 </tr>
                                 <tr>
-                                    <td>A leghosszabb lista szószámának a felénél rövidebb szószámú listák száma:</td>
-                                    <td><span id="shorterListNumber2"> - </span></td>
+                                    <td>Ennél a szószámnál rövidebb szószámú listák száma:</td>
+                                    <td><span id="shorterThanHalfListNumber"> - </span></td>
                                 </tr>
                                 <tr>
-                                    <td>A leghosszabb lista szószámának a felénél rövidebb szószámú listák száma:</td>
-                                    <td><span id="longerListNumber2"> - </span></td>
+                                    <td>Ennél a listánál hosszabb szószámú listák száma:</td>
+                                    <td><span id="longerThanHalfListNumber"> - </span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Érdekes, hogy a várt átlagnál rövidebb és hosszabb szólisták számának az aránya a futtatások
+                            számának a növelésével egy 1,7 körüli értékhez tart. Itt láthat pár példát az értékére, de
+                            Ön is lefuttathatja a <i>"100-szor fusson le 'a majom 2 betűs szavakat keres 500-szor'
+                                keresés"</i>-t.
+                        </p>
+                        <table class="table table-success table-sm table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>100/100/2</td>
+                                    <td>1.74184</td>
                                 </tr>
                                 <tr>
-                                    <td>Arányuk (rövidebbek száma / hosszabbak száma):</td>
-                                    <td><span id="proportion2"> - </span></td>
+                                    <td>100/100/2</td>
+                                    <td>1.75205</td>
+                                </tr>
+                                <tr>
+                                    <td>100/100/3</td>
+                                    <td>1.67154</td>
+                                </tr>
+                                <tr>
+                                    <td>500/100/3</td>
+                                    <td>1.75202</td>
+                                </tr>
+                                <tr>
+                                    <td>100/100/4</td>
+                                    <td>1.88746</td>
+                                </tr>
+                                <tr>
+                                    <td>100/200/4</td>
+                                    <td>1.75712</td>
+                                </tr>
+                                <tr>
+                                    <td>10/100/5</td>
+                                    <td>1.77653</td>
                                 </tr>
                             </tbody>
 
                         </table>
+                        <button id="run100Button" type="button" class="btn btn-secondary btn-sm"
+                            onclick="running100_500_2()">
+                            100-szor lefuttatja az 500/2-t</button>
+                        <span id="infoForRun100Button">Futásidő: 4 perc.</span>
+                        <p>A várt maximumnál rövidebb és hosszabb szólisták számának az aránya: <span
+                                style="background-color:rgb(126, 228, 228)" id="averageProp"> - </span></p>
+
+
 
 
                     </div>
                 </div>
+                <p></p>
+
+                <p>Ez hogy lehetséges? Honnan tudja a majom, hogy hogyan kell kirakni egy értelmes szót? Hogy
+                    sikerülhet neki szignifikánsan sokszor az, ami - nagy átlagban - csak kilencedik alkalomra
+                    sikerülhetne neki?</p>
+                <p>Ennek az értelmezésére vegyünk egy szemléletes példát!</p>
+                <div id="exampleForGauss">
+                    <p>Tegyük fel, hogy az emberek átlagos magassága 1.82 méter. Továbbá tegyük fel, hogy a
+                        legnagyobb - és rendszeresen előforduló magasság az 5,82 méter. Azaz az utcán
+                        rendszeresen találkozhatunk - igaz, nem túl gyakran - 5,82 méter magasságú személyekkel.
+                    </p>
+                    <p>Az ő magasságuk eltérése az átlagos magasságtól 4 méter (felfelé). Ha viszont a természet
+                        igazságos akar lenni a magasságok elosztásában, akkor léteznie kell - egy kevés - olyan
+                        embernek is, akinek a magassága ugyancsak 4 méterrel tér el az átlagtól, de
+                        <i>lefelé</i>!
+                        Azaz az ő magasságuk 1,82 - 4 = - 2,18 méter lesz!
+                    </p>
+                    <p>Ez viszont lehetetlen. Negatív magasság nem létezik. Sőt! Kell léteznie egy minimális
+                        magasságnak, ami alatt a
+                        szervezet, a csontrendszer, a vázizomzat működésképtelenné válna. Mondjuk, legyen ez a
+                        határ az 1 méter.</p>
+                    <p>Ebben az esetben - ha a természet továbbra is ragaszkodik ahhoz, hogy igazságosan járjon
+                        el - akkor a -2,18 méter és az 1 méter közé eső magasságú személyeknek valamilyen létező
+                        magasságot kell kiosztania. Ekkor ezeket a személyeket elhelyezi valamilyen rendben a
+                        legalacsonyabb létező személyek között, azaz ezzel megnöveli az ő számukat.</p>
+                    <p>Azaz a természet a Gauss görbének az 1 méteres határvonaltól balra eső részét levágja, s
+                        az egyes levágott oszlopokat ráhelyezi a már létező oszlopokra, s ezzel megnövel azok
+                        magasságát. Ezzel viszont a Gauss görbe - határvonaltól jobbra lévő - megmaradó
+                        grafikonja is elveszti a Gauss görbe formáját és egy magasról induló, egyre süllyedő
+                        görbe alakját veszi fel.</p>
+                </div>
+
+
+                <button id="run100" type="button" class="btn btn-secondary btn-sm" onclick="runningForHow()">a hogyan</button>
+
+                <div class="row">
+                    <div id="forTable1" class="forTableGraphic col col-12">
+                        <table class="tableGraphic" id="graphic1">
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="forTable2" class="forTableGraphic col col-12">
+                        <table class="tableGraphic" id="graphic2">
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="forTable3" class="forTableGraphic col col-12">
+                        <table class="tableGraphic" id="graphic3">
+                        </table>
+                    </div>
+                </div>
+
+
+
 
 
 
@@ -1079,7 +1240,7 @@
                                         <a href="/monkey.html#skipToGraphic"><button id="jump0" name="skipToBetterPlace"
                                                 type="button" class="btn btn-danger btn-sm"
                                                 onclick="jumpUp()">Ugrás</button></a>
-                                        <button disabled id="functionAppr" type="button"
+                                        <button disabled id="functionAppr1" type="button"
                                             class="btn btn-secondary btn-sm"
                                             onclick="decisionAboutErase()">Töröl</button>
                                     </div>
@@ -1120,7 +1281,7 @@
                                 <div class="row">
                                     <button disabled id="estimateFunc" type="button" class="btn btn-secondary btn-sm"
                                         onclick="estimateFunction(event)">Mehet</button>
-                                    <button disabled id="functionAppr" type="button" class="btn btn-secondary btn-sm"
+                                    <button disabled id="functionAppr2" type="button" class="btn btn-secondary btn-sm"
                                         onclick="decisionAboutErase()">Töröl</button>
                                     <a href="/monkey.html#skipToGraphic"><button id="jump1" name="skipToBetterPlace"
                                             type="button" class="btn btn-danger btn-sm"
@@ -1662,7 +1823,7 @@
                                 <p>A könyv szimulálásakor Ön először az utolsó oldalt fogja látni, s ennek az utolsó
                                     sorában
                                     lesz az első
-                                    olyan értelmes szóval, amire 2,2 millió év keresés után bukkant rá a program.
+                                    olyan értelmes szó, amire 2,2 millió év keresés után bukkant rá a program.
                                 </p>
                                 <p>Természetesen, ha újraindítja a programot, akkor ez a könyv törlődik a
                                     memóriából!</p>
