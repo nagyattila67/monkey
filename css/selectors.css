@@ -114,9 +114,8 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;}
 #Gauss{margin:5px 5px -4px 15px}
 #problemRow{padding:10px 10px 0px 10px;border:1px solid #a8a8a8}
 
-.tableGraphic{border:solid 1px #a8a8a8;width:inherit;height:auto;min-height:100px;max-height:100px;background-color:#dbdbdb;}
-#graphic1{border-collapse:separate;}
-#graphic1 td{width:10px;}
+.tableGraphic{border-collapse:separate;border:solid 1px #a8a8a8;width:600px;height:auto;min-height:100px;max-height:100px;background-color:#dbdbdb;}
+.tableGraphic td{width:10px;}
 
 #test1{border-collapse:separate;}
 #test1 td{width:10px;}

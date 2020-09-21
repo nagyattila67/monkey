@@ -934,7 +934,156 @@ forHow = false;
 runningForHow = function () {
     forHow = true;
     running100();
-    makeTableAndColoring5();
+    distributionCopy5 = Array();
+    distributionCopy6 = Array();
+
+    for (let i = 0; i < 2 * distributionCopy3.length; i++) {
+        if (i < distributionCopy3.length) {
+            distributionCopy5[i] = 0;
+        }
+        else { distributionCopy5[i] = distributionCopy3[i - distributionCopy3.length] }
+    };
+    //distributionCopy6 = distributionCopy3.slice(0);
+    distributionCopy6 = distributionCopy3.slice(0)
+    maximum = distributionCopy5.length - 1;
+    distMax6 = 0;
+    for (let i = 0; i < distributionCopy6.length; i++) {
+        if (distMax6 < distributionCopy6[i]) {
+            distMax6 = distributionCopy6[i];
+        };
+    };
+    graphic = 1;
+    distributionCopyBasic1 = distributionCopy5.slice(0)
+    distributionCopyBasic2 = distributionCopy6.slice(0)
+    makeTable5();
+    coloreTable5();
+
+    distributionCopy7 = distributionCopy5.slice(0);
+    distributionCopy8 = Array();
+    for (let i = halfingBorderOriginal - halfingList; i < halfingBorderOriginal; i++) {
+        distributionCopy7[i] = 0;
+    };
+    distributionCopy8 = distributionCopy7.slice();
+    graphic = 2;
+    distributionCopyBasic1 = distributionCopy7.slice(0)
+    distributionCopyBasic2 = distributionCopy8.slice(0)
+    makeTable5();
+    coloreTable5();
+
+
+    distributionCopy9 = Array();
+    distributionCopy10 = Array();
+
+    for (let i = 0; i < distributionCopy5.length; i++) {
+        if (i >= halfingBorderOriginal) { distributionCopy9[i] = distributionCopy5[i] }
+        if (2 * halfingBorderOriginal - distributionCopy5.length <= i && i < halfingBorderOriginal) { distributionCopy9[i] = distributionCopy5[2 * halfingBorderOriginal - i] }
+        if (i <= 2 * halfingBorderOriginal - distributionCopy5.length) { distributionCopy9[i] = 0 }
+    };
+    distributionCopy10 = distributionCopy9.slice(0);
+    graphic = 3;
+    distributionCopyBasic1 = distributionCopy9.slice(0)
+    distributionCopyBasic2 = distributionCopy10.slice(0)
+    makeTable5();
+    coloreTable5();
+
+    distributionCopy11 = distributionCopy9.slice(0);
+    distributionCopy12 = Array();
+    restElements = 0;
+    for (let i = 0; i < halfingBorderOriginal - halfingList; i++) {
+        restElements = restElements + distributionCopy11[i];
+        distributionCopy11[i] = 0;
+    };
+    distributionCopy12 = distributionCopy11.slice(0);
+    graphic = 4;
+    distributionCopyBasic1 = distributionCopy11.slice(0)
+    distributionCopyBasic2 = distributionCopy12.slice(0)
+    makeTable5();
+    coloreTable5();
+    document.querySelector("#restFromList").innerHTML = restElements;
+    document.querySelector("#restFromList").style["background-color"] = "#ffc0da";
+
+    distributionCopy13 = distributionCopy11.slice(0);
+    distributionCopy14 = Array();
+
+    while (restElements > 0) {
+        for (let i = 0; i < halfingList; i++) {
+            if (restElements > halfingList - i) {
+                distributionCopy13[halfingBorderOriginal - halfingList + i] = distributionCopy13[halfingBorderOriginal - halfingList + i] + halfingList - i;
+                restElements = restElements - halfingList + i;
+                console.log(restElements);
+            }
+            if (restElements > 0 && restElements < halfingList - i) {
+                distributionCopy13[halfingBorderOriginal - halfingList + i] = distributionCopy13[halfingBorderOriginal - halfingList + i] + restElements;
+                restElements = 0;
+            };
+            ;
+        };
+    };
+    distributionCopy14 = distributionCopy13.slice(0);
+    graphic = 5;
+    distributionCopyBasic1 = distributionCopy13.slice(0)
+    distributionCopyBasic2 = distributionCopy14.slice(0)
+    makeTable5();
+    coloreTable5();
+
+    graphic = 6;
+    distributionCopyBasic1 = distributionCopy5.slice(0)
+    distributionCopyBasic2 = distributionCopy6.slice(0)
+    makeTable5();
+    coloreTable5();
+
+
+};
+
+coloreTable5 = function () {
+    //kiszínezi a cellákat alulról haladva
+
+    if (graphic == 1) { halfingBorderOriginal = distributionCopyBasic2.length + halfingList };
+    halfingBorder = distributionCopyBasic2.length + halfingList
+    let k = distMax6;
+    while (k > 0) {
+
+        for (let j = 0; j < maximum + 1; j++) {
+            if (graphic == 1) {
+                dataCell = document.querySelectorAll("#graphic1 tr")[k].children[halfingBorderOriginal - halfingList - 1]; dataCell.style["background-color"] = "#ffff00"
+            };
+            if (graphic == 2) {
+                dataCell = document.querySelectorAll("#graphic2 tr")[k].children[halfingBorderOriginal - halfingList - 1]; dataCell.style["background-color"] = "#ffff00"
+            };
+            if (graphic == 3) {
+                dataCell = document.querySelectorAll("#graphic3 tr")[k].children[halfingBorderOriginal - halfingList - 1]; dataCell.style["background-color"] = "#ffff00"
+            };
+            if (graphic == 4) {
+                dataCell = document.querySelectorAll("#graphic4 tr")[k].children[halfingBorderOriginal - halfingList - 1]; dataCell.style["background-color"] = "#ffff00"
+            };
+            if (graphic == 5) {
+                dataCell = document.querySelectorAll("#graphic5 tr")[k].children[halfingBorderOriginal - halfingList - 1]; dataCell.style["background-color"] = "#ffff00"
+            };
+            if (graphic == 6) {
+                dataCell = document.querySelectorAll("#graphic6 tr")[k].children[halfingBorderOriginal - halfingList - 1]; dataCell.style["background-color"] = "#ffff00"
+            };
+            if (graphic == 1) { dataCell = document.querySelectorAll("#graphic1 tr")[k].children[j] };
+            if (graphic == 2) { dataCell = document.querySelectorAll("#graphic2 tr")[k].children[j] };
+            if (graphic == 3) { dataCell = document.querySelectorAll("#graphic3 tr")[k].children[j] };
+            if (graphic == 4) { dataCell = document.querySelectorAll("#graphic4 tr")[k].children[j] };
+            if (graphic == 5) { dataCell = document.querySelectorAll("#graphic5 tr")[k].children[j] };
+            if (graphic == 6) { dataCell = document.querySelectorAll("#graphic6 tr")[k].children[j] };
+            if (distributionCopyBasic1[j] != 0) {
+                dataCell.style["background"] = "#f00c93"; distributionCopyBasic1[j] = distributionCopyBasic1[j] - 1;
+                if (j == halfingBorderOriginal) {
+                    dataCell.style["background-color"] = "#a700a7";
+                };
+            };
+        };
+        k = k - 1;
+    };
+
+    if (graphic == 1) { document.querySelector("#graphic1").style["font-size"] = `${50 / distMax}px` };
+    if (graphic == 2) { document.querySelector("#graphic2").style["font-size"] = `${50 / distMax}px` };
+    if (graphic == 3) { document.querySelector("#graphic3").style["font-size"] = `${50 / distMax}px` };
+    if (graphic == 4) { document.querySelector("#graphic4").style["font-size"] = `${50 / distMax}px` };
+    if (graphic == 5) { document.querySelector("#graphic5").style["font-size"] = `${50 / distMax}px` };
+    if (graphic == 6) { document.querySelector("#graphic6").style["font-size"] = `${50 / distMax}px` };
     forHow = false;
 };
 wasRunning100 = false; finalDistribution = [0];
@@ -1115,78 +1264,120 @@ makeTableAndColoringTest = function () {
 };
 
 
-makeTableAndColoring5 = function () {
-    /*if (testRunning == true) {
-        for (let i = 0; i < finalDistribution.length; i++) {
-            finalDistribution[i] = Math.round(finalDistribution[i] / futasSzamOfTest);
-        };
-        distributionCopy5 = finalDistribution.slice(0);
-        distributionCopy6 = distributionCopy5.slice(0);
-    };*/
-    //if (testRunning == false) {
-    distributionCopy5 = distributionCopy3.slice(0);
-    distributionCopy6 = distributionCopy5.slice(0)
-    for (let i = 0; i < 2 * distributionCopy6.length; i++) {
-        if (i < distributionCopy6.length + 1) {
-            distributionCopy5[i] = 0;
-        }
-        else { distributionCopy5[i] = distributionCopy6[i - distributionCopy6.length] }
-    };
+makeTable5 = function () {
 
-    //};
 
-    //distributionCopy5=distribution.splice(0);
     //tisztítás: újraklikkelésnél eltávollítja az odarakott cellákat, hogy üres legyen a table
-    borderNumber = document.querySelectorAll("#graphic1 tr").length;
+    if (graphic == 1) { borderNumber = document.querySelectorAll("#graphic1 tr").length };
+    //if (graphic == 2) { borderNumber = document.querySelectorAll("#graphic2 tr").length };
+    //if (graphic == 3) { borderNumber = document.querySelectorAll("#graphic3 tr").length };
+    //if (graphic == 4) { borderNumber = document.querySelectorAll("#graphic4 tr").length };
     if (testRunning == true) {
         distMax = 0;
-        for (let i = 0; i < distributionCopy5.length; i++) {
-            if (distributionCopy5[i] > distMax) {
-                distMax = distributionCopy5[i];
+        for (let i = 0; i < distributionBasic1.length; i++) {
+            if (distributionCopyBasic1[i] > distMax) {
+                distMax = distributionCopyBasic1[i];
             };
         };
     };
-    distMax5 = distMax;
-
-    //if(testrunning=true){distrbutionCopy5=finalDistribution.slice(0)}
+    //distMax5 = distMax;
 
 
-    for (let i = 0; i < borderNumber; i++) {
-        area = document.querySelector("#graphic1");
-        element = document.querySelectorAll("#graphic1 tr")[borderNumber - 1 - i];
-        area.removeChild(element);
+    if (graphic == 1) {
+        for (let i = 0; i < borderNumber; i++) {
+            area = document.querySelector("#graphic1");
+            element = document.querySelectorAll("#graphic1 tr")[borderNumber - 1 - i];
+            area.removeChild(element);
+        };
+    };
+    if (graphic == 2) {
+        for (let i = 0; i < borderNumber; i++) {
+            area = document.querySelector("#graphic2");
+            element = document.querySelectorAll("#graphic2 tr")[borderNumber - 1 - i];
+            area.removeChild(element);
+        };
+    };
+    if (graphic == 3) {
+        for (let i = 0; i < borderNumber; i++) {
+            area = document.querySelector("#graphic3");
+            element = document.querySelectorAll("#graphic3 tr")[borderNumber - 1 - i];
+            area.removeChild(element);
+        };
+    };
+    if (graphic == 4) {
+        for (let i = 0; i < borderNumber; i++) {
+            area = document.querySelector("#graphic4");
+            element = document.querySelectorAll("#graphic4 tr")[borderNumber - 1 - i];
+            area.removeChild(element);
+        };
+    };
+    if (graphic == 5) {
+        for (let i = 0; i < borderNumber; i++) {
+            area = document.querySelector("#graphic5");
+            element = document.querySelectorAll("#graphic5 tr")[borderNumber - 1 - i];
+            area.removeChild(element);
+        };
+    };
+    if (graphic == 6) {
+        for (let i = 0; i < borderNumber; i++) {
+            area = document.querySelector("#graphic6");
+            element = document.querySelectorAll("#graphic6 tr")[borderNumber - 1 - i];
+            area.removeChild(element);
+        };
     };
 
-    //myArray5 = Array();
-    //for (let i = 0; i < averageArray.length; i++) { myArray5[i] = averageArray[i][0] };
-
-    //distributionCopy5 = distribution.slice(0);
-    //distributionCopy6 = distribution.slice(0);
-    //for (let i = 0; i < distribution.length; i++) {
-    //    distributionCopy5[i] = distribution[i];
-    //};
-
-    //pixWidth = Math.ceil(600 / maximum);
-    //pixHeight = Math.ceil(400 / distMax);
     pixHeight = "1px";
     pixWidth = "1px";
 
-
-
-    maximum = distributionCopy5.length - 1;
+    /*maximum = distributionCopy5.length - 1;
     distMax6 = 0;
     for (let i = 0; i < distributionCopy6.length; i++) {
         if (distMax6 < distributionCopy6[i]) {
             distMax6 = distributionCopy6[i];
         };
-    };
+    };*/
+
     //táblázat elkészítése
     //for (let i = 0; i <= distMax; i++) {
     for (let i = 0; i <= distMax6; i++) {
-        place = document.querySelector("#graphic1");
+        if (graphic == 1) {
+            place = document.querySelector("#graphic1");
+        };
+        if (graphic == 2) {
+            place = document.querySelector("#graphic2");
+        };
+        if (graphic == 3) {
+            place = document.querySelector("#graphic3");
+        };
+        if (graphic == 4) {
+            place = document.querySelector("#graphic4");
+        };
+        if (graphic == 5) {
+            place = document.querySelector("#graphic5");
+        };
+        if (graphic == 6) {
+            place = document.querySelector("#graphic6");
+        };
         dataRow = document.createElement("tr");
-        place.appendChild(dataRow)
-        sector = document.querySelectorAll("#graphic1 tr")[i];
+        place.appendChild(dataRow);
+        if (graphic == 1) {
+            sector = document.querySelectorAll("#graphic1 tr")[i];
+        };
+        if (graphic == 2) {
+            sector = document.querySelectorAll("#graphic2 tr")[i];
+        };
+        if (graphic == 3) {
+            sector = document.querySelectorAll("#graphic3 tr")[i];
+        };
+        if (graphic == 4) {
+            sector = document.querySelectorAll("#graphic4 tr")[i];
+        };
+        if (graphic == 5) {
+            sector = document.querySelectorAll("#graphic5 tr")[i];
+        };
+        if (graphic == 6) {
+            sector = document.querySelectorAll("#graphic6 tr")[i];
+        };
         for (let j = 0; j < maximum + 1; j++) {
             dataCell = document.createElement("td");
             sector.appendChild(dataCell);
@@ -1198,33 +1389,7 @@ makeTableAndColoring5 = function () {
         };
     };
 
-    //kiszínezi a cellákat alulról haladva
 
-    /*let k = distMax5;
-    while (k > 0) {
-        for (let j = 0; j < maximum + 1; j++) {
-            dataCell = document.querySelectorAll("#graphic1 tr")[k].children[j];
-            if (distributionCopy5[j] != 0) { dataCell.style["background"] = "#f00c93"; distributionCopy5[j] = distributionCopy5[j] - 1 };
-        };
-        k = k - 1;
-    };*/
-    let k = distMax6;
-    while (k > 0) {
-        for (let j = 0; j < maximum + 1; j++) {
-            dataCell = document.querySelectorAll("#graphic1 tr")[k].children[j];
-            if (distributionCopy5[j] != 0) { dataCell.style["background"] = "#f00c93"; distributionCopy5[j] = distributionCopy5[j] - 1 };
-            if (j == distributionCopy6.length + halfingList) {
-                dataCell.innerHTML = "&#9553";
-            };
-            if (j == distributionCopy6.length) {
-                dataCell.innerHTML = "&#9168";
-                dataCell.style["background"] = "#67818a"
-            }
-        };
-        k = k - 1;
-        //clearing = true;
-    };
-    document.querySelector("#graphic1").style["font-size"] = `${50 / distMax}px`;
 };
 
 
