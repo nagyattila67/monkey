@@ -1,24 +1,28 @@
 body{background-color:#f6f6f6}
+.bgLight{background-color:#f5f5f5}
+.smallBorder{border:1px solid #a8a8a8;padding:10px}
+smallBorder div{margin:0px;}
 h2{margin-left:16px;}
 h5{margin:11px;padding:10px;}
 #divForMotto{margin-right:20px}
 p{text-align:justify}
-img{margin:0px 20px 20px;}
+img{margin-left: 20px;}
 #littleInfo{margin:0px; padding: 10px 10px 10px 30px; border:1px solid #a8a8a8; background-color:#f1f1f1}
 #setting1{margin:1px;padding: 10px 10px 10px 30px; border:1px;border:1px solid #a8a8a8; background-color:#f1f1f1;}
 #word{font-weight:bolder}
 #pageInput{width:90px;margin-bottom:11px;}    
 #wordLength{width:50px}
 #consoleInfo{font-size:11px}
-#pages{width:100px; height:800px;margin:0px; padding: 10px 0px 10px; border:1px solid #a8a8a8; background-color:#f1f1f1; text-align:center;}
+#pages{height:800px;margin:0px 0px 0px -14px; padding: 10px 0px 10px; border:1px solid #a8a8a8; background-color:#f1f1f1; text-align:center;}
 #wordTable{text-align:center; font-size:13px;}
-.btn{margin:8px;margin-bottom:18px;}
+.btnMargin{margin-bottom:10px;}
 #volumeInfo{font-size:12px;}
 #please{margin-bottom:8px;}
 #result td{ vertical-align:center; margin:0px;padding:5px;}
 #result button{ margin:4px; }S
 #result p{ margin:5px; padding:1px }
-#hossz{margin:0px;padding:2px}
+#hossz button{margin:0px}
+#hossz p{margin:0px}
 #result{margin: 0px 0px 40px}
 .result{background-color:#f6e4f7}
 #forTest{padding:0px 0px 0px 0px;margin:10px 0px 0px 0px;}
@@ -28,7 +32,7 @@ img{margin:0px 20px 20px;}
 #howManyWordsButton{margin:0px 0px 3px 0px;}
 #howManyLettersRow{overflow:auto; padding:5px;border:1px solid #a8a8a8; background-color:#f1f1f1;}
 #howManyLetters tr{background-color:#f6e4f7}
-.row{margin:10px 0px 0px 10px; padding:0px}
+row{margin:10px 0px 0px 10px; padding:0px}
 .form{margin:0px;padding:0px}
 label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
 #szohossz{margin:0px 0px 0px;padding:20px 0px 20px 0px;}
@@ -38,8 +42,8 @@ label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
 #forTable{overflow:auto; width:640px;height:400px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
 #graphic{overflow:auto;border-collapse:initial;width:max-content;min-width:600px;min-height:400px;}
 #graphic td{border:none; width:1px;height:3px;}
-#forTableSecond{margin-left:12px;overflow:auto;height:200px; min-width:600px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
-#graphicSecond{height:min-content;min-height:150px;max-width:1000px;}
+#forTableSecond{overflow:auto;height:150px; min-width:600px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
+#graphicSecond{height:min-content;}
 #graphicSecond td{border:none;width:3px;height:3px;}
 .loopInfo{font-size:11px}
 #generatedWord{background-color:#FADADD}
@@ -72,7 +76,7 @@ img[name='kindOfDistImg']{margin-bottom:0px;}
 #notNiceDistribution{margin:0px; padding: 10px 30px 10px 30px; border:1px solid #a8a8a8; background-color:#f1f1f1}
 #first200{font-size:12px; border:1px solid #a8a8a8;padding:10px;background-color:#cbe7cb}
 #first200 p{margin-bottom:0px}
-#rowForFullDistribution{border:solid 1px #a8a8a8;padding:10px}
+rowForFullDistribution{border:solid 1px #a8a8a8;padding:10px}
 #allDistribution{max-height:340px; overflow:auto; border:1px solid #a8a8a8;padding:10px; background-color:#cbe7cb}
 #distributionButtons{margin:0px;}
 #distributionButtons button{margin:10px 10px 0px;min-width:60px;height:33px;}
@@ -84,7 +88,7 @@ img[name='kindOfDistImg']{margin-bottom:0px;}
 #rowForFullGraph p{margin:10px 20px 1px}
 #rowForFullGraph p{margin:0px 20px 0px;}
 #rowForFullDistribution p{margin:0px}
-#divForDistanceTable{border:1px solid #8a8a8a; padding:10px;}
+divForDistanceTable{border:1px solid #8a8a8a; padding:10px;}
 #colForDistanceTable{max-height:340px; padding:10px; border:1px solid #a8a8a8;overflow:auto;background-color:#cbe7cb;}
 #divForShowDistanceGraph{border:1px solid #a8a8a8;padding:10px}
 #colForDistanceGraph{overflow:auto;min-width:600px;height:400px;}
@@ -114,8 +118,17 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;}
 #Gauss{margin:5px 5px -4px 15px}
 #problemRow{padding:10px 10px 0px 10px;border:1px solid #a8a8a8}
 
-.tableGraphic{border-collapse:separate;border:solid 1px #a8a8a8;width:600px;height:auto;min-height:100px;max-height:100px;background-color:#dbdbdb;}
-.tableGraphic td{width:10px;}
+.divForGraphic{overflow:scroll;max-width:600px;}
+.tableGraphic{margin:5px;border-collapse:separate;border:solid 1px #a8a8a8;width:max-content; min-width:600px; height:auto;min-height:100px;max-height:100px;background-color:#dbdbdb;}
+.tableGraphic td{width:1px;}
+
+.rowBorder{margin:10px;padding:20px;border:1px solid #a8a8a8;}
+.innerBorderWithPink{margin:10px;padding:20px;border:1px solid #a8a8a8;background-color:#ffe7d3;}
+.rowBackgroundLight{background-color:#fcfcfc;};
+
+#run100-button{margin:5px}
+#twoLetters{margin:6px}
+#threeLetters{margin:6px;}
 
 #test1{border-collapse:separate;}
 #test1 td{width:10px;}
@@ -126,7 +139,7 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;}
 #letsRun100{margin:10px}
 #divForRunning100{padding:10px 10px 10px;margin:0px 5px 20px;border:solid 1px ;background-color:#dbdbdb;}
 
-
+.try{margin: 0px 10px 15px 0px}
 
 
 
