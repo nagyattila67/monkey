@@ -1,5 +1,9 @@
-body{background-color:#f6f6f6}
-.bgLight{background-color:#f5f5f5}
+body{background-color:#f6f6f6;}
+p{font-size:19px;}
+span{font-size:19px;}
+li small{font-size:15px;}
+.bgLight{background-color:#fbfbfb}
+.bgDarker{ background-color:#f1f1f1}
 .smallBorder{border:1px solid #a8a8a8;padding:10px}
 smallBorder div{margin:0px;}
 h2{margin-left:16px;}
@@ -8,14 +12,15 @@ h5{margin:11px;padding:10px;}
 p{text-align:justify}
 img{margin-left: 20px;}
 #littleInfo{margin:0px; padding: 10px 10px 10px 30px; border:1px solid #a8a8a8; background-color:#f1f1f1}
-#setting1{margin:1px;padding: 10px 10px 10px 30px; border:1px;border:1px solid #a8a8a8; background-color:#f1f1f1;}
+#setting1{margin:0px 0px 20px 0px;padding: 10px 10px 10px 30px; border:1px;border:1px solid #a8a8a8; background-color:#f1f1f1;}
 #word{font-weight:bolder}
 #pageInput{width:90px;margin-bottom:11px;}    
 #wordLength{width:50px}
 #consoleInfo{font-size:11px}
-#pages{height:800px;margin:0px 0px 0px -14px; padding: 10px 0px 10px; border:1px solid #a8a8a8; background-color:#f1f1f1; text-align:center;}
+#pages{max-width:200px;height:800px;margin:0px 0px 0px -14px; padding: 10px 0px 10px; border:1px solid #a8a8a8; background-color:#f1f1f1; text-align:center;padding:5px;}
 #wordTable{text-align:center; font-size:13px;}
 .btnMargin{margin-bottom:10px;}
+.searching{margin:1px 1px 5px 1px}
 #volumeInfo{font-size:12px;}
 #please{margin-bottom:8px;}
 #result td{ vertical-align:center; margin:0px;padding:5px;}
@@ -38,11 +43,15 @@ label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
 #szohossz{margin:0px 0px 0px;padding:20px 0px 20px 0px;}
 #searchEngines{display:inline}
 #wordTable tr:first-child{height: 25px}
+.needMarginRight{margin-right:10px}
+#displayMatchingList{overflow:auto;height:100px;border:1px solid #a8a8a8;margin:5px 0px 5px 0px;padding:5px}
 #explantation{border:1px solid #a8a8a8;background-color:#f0f0f0;}
-#forTable{overflow:auto; width:640px;height:400px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
-#graphic{overflow:auto;border-collapse:initial;width:max-content;min-width:600px;min-height:400px;}
+#forTable{overflow:auto;height:400px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;margin-bottom:15px;}
+#graphic{overflow:auto;border-collapse:initial;border-spacing:1px; min-height:400px;}
 #graphic td{border:none; width:1px;height:3px;}
-#forTableSecond{overflow:auto;height:150px; min-width:600px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
+#allDistribution{max-height:340px; overflow:auto; margin:0px 15px 10px;border:1px solid #a8a8a8;padding:10px; background-color:#cbe7cb}
+#allDistributionButtons{margin-left:15px}
+#forTableSecond{overflow:auto;height:150px;margin-bottom:15px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
 #graphicSecond{height:min-content;}
 #graphicSecond td{border:none;width:3px;height:3px;}
 .loopInfo{font-size:11px}
@@ -53,6 +62,13 @@ label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
 #divForNotations{overflow:auto;border:1px solid #a8a8a8;background-color:#dbdbdb;max-height:300px;max-width:300px;}
 #divForSentence{min-height:100px;}
 #sentence{background-color:#FADADD}
+#match100div p{margin:0px}
+#match100div button{margin:10px 0px 10px 10px}
+#match100div label{margin:10px 0px 10px 10px}
+#match100div input{margin:10px 0px 10px 10px}
+#displaySeries{margin:10px}
+#match100div span{margin:10px 0px 10px 10px}
+.littlePaddingBottom{padding-bottom:8px}
 #wrapping0Col{width:auto;z-index:1}
 #wrapping0Col .row{margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;}
 #wrapping0Col p{padding:0px; margin:5px;}
@@ -71,22 +87,20 @@ button[name='rising']{width:35px;height:35px;margin:8px;padding:5px;}
 .wrapping button{margin:5px;}
 .infoAboutJump{line-height:14px;font-size:14px;}
 #infoAboutCol{font-size:13px;}
-#kindOfDistributions{margin:10px 0px 10px; padding: 10px 30px 10px 30px; border:1px solid #a8a8a8; background-color:#f1f1f1}
-img[name='kindOfDistImg']{margin-bottom:0px;}
-#notNiceDistribution{margin:0px; padding: 10px 30px 10px 30px; border:1px solid #a8a8a8; background-color:#f1f1f1}
-#first200{font-size:12px; border:1px solid #a8a8a8;padding:10px;background-color:#cbe7cb}
-#first200 p{margin-bottom:0px}
+#kindOfDistributions h5{margin-bottom:20px}
+#kindOfDistributions{margin-bottom:20px;}
+#notNiceDistribution{margin-bottom:20px;}
+img[name='kindOfDistImg']{margin:0px 15px 0px 0px;}
+#notNiceDistribution img{margin:0px 15px 10px 0px}
 rowForFullDistribution{border:solid 1px #a8a8a8;padding:10px}
-#allDistribution{max-height:340px; overflow:auto; border:1px solid #a8a8a8;padding:10px; background-color:#cbe7cb}
+
 #distributionButtons{margin:0px;}
 #distributionButtons button{margin:10px 10px 0px;min-width:60px;height:33px;}
 #distributionButtons [name='arrow']{font-size:25px;line-height:1px;padding:0px 0px 3px}
-#rowForFullGraph{border:solid 1px #a8a8a8;padding:10px;}
-#forFullTable{overflow:scroll;margin:0px 0px 0px;width:auto;height:400px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
-#fullGraphic{border-collapse:initial;width:max-content;min-height:400px;}
-#fullGraphic td{border:none; width:1px;height:3px;}
-#rowForFullGraph p{margin:10px 20px 1px}
-#rowForFullGraph p{margin:0px 20px 0px;}
+#rowForFullGraph{margin:0px;border:solid 1px #a8a8a8;padding:10px;}
+#forFullTable{overflow:scroll;margin:0px 0px 0px;width:auto;height:300px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
+#fullGraphic{border-collapse:initial;min-height:280px;width:max-content}
+#fullGraphic td{border:none; width:10px;height:10px;}
 #rowForFullDistribution p{margin:0px}
 divForDistanceTable{border:1px solid #8a8a8a; padding:10px;}
 #colForDistanceTable{max-height:340px; padding:10px; border:1px solid #a8a8a8;overflow:auto;background-color:#cbe7cb;}
