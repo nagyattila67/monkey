@@ -285,8 +285,10 @@
                                         a kiválasztott betűt, a többi betű helyére pedig tegyen egy-egy '
                                         &#10038' jelet.
                                         <br><br>
-                                        <small>Pl.: <span id="matchExample">a 'H&#10038K' - azokat a karaktersorokat listázza ki, ahol az
-                                            első karakter a 'H', a harmadik pedig a 'K'.</span> (Ha nem tölti ki teljesen
+                                        <small>Pl.: <span id="matchExample">a 'H&#10038K' - azokat a karaktersorokat
+                                                listázza ki, ahol az
+                                                első karakter a 'H', a harmadik pedig a 'K'.</span> (Ha nem tölti ki
+                                            teljesen
                                             az input mezőt, akkor a program '&#10038' karakterekkel fogja feltölteni a
                                             fennmaradó
                                             üres
@@ -314,15 +316,12 @@
                             <p>Magyarázat: A majom összesen <span id="match1">-</span> karaktersorozatot írt le, mire
                                 megtalálta az első <span id="match2">-</span> betűből álló értelmes szót. Az ábécé
                                 35
-                                betűs, ezért 35<sup><span id="match3">-</span></sup> = <span id="match4">-</span>
-                                db.
-                                olyan
-                                lehetséges betűsorozat van, amelyik ennyi betűből áll. A lista szószámát elosztva
-                                ezzel
-                                a
-                                számmal megkapjuk azt, hogy ez a betűsorozat hány értelmetlen karaktersorozatonként
-                                fordul
-                                elő.
+                                betűs, ezért ugyanaz a(z) <span id="match3"></span> betűből álló karaktercsoport
+                                átlagosan 35<sup><span id="match4">kitevő</span></sup> = <span id="match5"></span>
+                                szavanként fordul
+                                elő, azaz a(z) <span id="match6">-</span> szó között nagy átlagban
+                                <span id="match7"> - </span> / 35<sup><span id="match8">kitevő</span></sup> = <span
+                                    id="match9">eredmény</span> db. található belőlük.
                             </p>
 
                             <div"match100div">
@@ -377,10 +376,37 @@
                                             az eredményt kaptuk:</p>
                                         <p class="littlePaddingBottom">A számsorozat: <span id="seriesTwo"></span>
                                         </p>
-                                        <p>Magyarázat: egy <span id="match1">-</span> betűből álló értelmes szó
-                                            megtalálásához általában <span id="match2">- </span> kell leírni.
-                                            Mivel az ábécé - amit használunk - 35 betűs, a sorozatból minden 35. szó
+                                        <p>Magyarázat: A(z) <span id="match10"> - </span> db. számú futás során a listák
+                                            átlagos hossza <span id="match11"> - </span> lett. Továbbá - mivel az ábécé
+                                            35 betűből áll - az <i>n</i> db. karatkert tartalmazó karakterláncok száma
+                                            35<sup>n</sup>. Ha ezzel az értékkel elosztjuk a szólisták átlaghosszát,
+                                            akkor
+                                            megkapjuk azt, hogy adott <i>n</i> karakterszám esetén hány egyezés lesz.
+                                        <p>
                                         </p>
+                                        <p>Ezeknek az átlagoknak a sorozata a következő: <span id="match12"> -
+                                            </span><span id="match13"> - </span><span id="match14"> - </span><span
+                                                id="match15"> - </span>
+                                        </p>
+                                        <div id="matchControl">
+                                            <p>Ellenőrzés: a <i>szavak(n)</i> értéke legyen
+                                                azoknak a szavaknak a száma a szótárban, amelyek n betűből állnak. Mivel
+                                                az
+                                                ábécénk 35 betűs, ezért 35<sup>n</sup> / szavak(n) értéke adja meg, hogy
+                                                átlagosan hány n betűből álló értelmetlen karaktersor után kapunk egy
+                                                értelmes szót.</p>
+                                            <p>Az n = <span id="match20">-</span> esetben ennek az értéke: 35<sup><span
+                                                        id="match21"> - </span></sup> / <span id="match22"> - </span> =
+                                                <span id="match23"> - </span>, ahol <span id="match24"> - </span> a
+                                                szótárunkban található <span id="match25"> - </span> betűhosszúságú
+                                                szavak
+                                                száma.
+                                            </p>
+                                            <p>Ugyanakkor mi azt kaptuk, hogy <span id="match26"> - </span> számú futás
+                                                esetén a szólisták átlagos hossza:
+                                                <span id="match27"></span>. Az eltérés: <span id="match28"> - </span>%.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                         </div>

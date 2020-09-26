@@ -244,14 +244,20 @@ word = function () {
     learn(expressionHex);
     if (onlyOneWord == true) { document.querySelector("#matchingInput").setAttribute("maxlength", `${wordLength}`) };
 
-    exampleForMatch="";
+    exampleForMatch = "";
     for (let k = 0; k < wordLength - 1; k++) {
         exampleForMatch = exampleForMatch + "&#10038"
     };
     document.querySelector("#matchExample").innerHTML = `a(z) ${memoryABC[turn - 1][0]}${exampleForMatch} azokat a karaktersorozatokat listázza ki, ahol az első karakter a ${memoryABC[turn - 1][0]}, a többi pedig tetszőleges`;
     document.querySelector("#matchingInput").value = memoryABC[turn - 1][0];
-    lookingForMatch();
+    if (isLookingForMatch == false) {
+        textForSearch = memoryABC[turn - 1][0];
+        lookingForMatch(textForSearch);
+        displayMatching();
+    };
+    if (isLookingForMatch == true) {
 
+    };
     return expressionHex, expressionHTML, digit, digitHex, sheetCounter, hit, turn, timeLength, memoryABC;
 };
 
@@ -513,12 +519,12 @@ displayWord = function () {
     addSearchingEvent();
     wordForSearch = rowList[main].innerHTML;
 };
-
+allLengthOfMemoryABC = Array();
 matchingArray = Array();
 previousMatchLength = 0;
 jujj = 0;
 isLookingForMatch = false;
-lookingForMatch = function () {
+lookingForMatch = function (textForSearch) {
 
     console.log("matching");
     matchingList = Array();
@@ -580,12 +586,27 @@ lookingForMatch = function () {
         };
     };
 
+
+
+    //document.querySelector("#match5").innerHTML = `${(turn / (35 ** textForSearchOriginal2)).toFixed(1)}`;
+    //document.querySelector("#match5").innerHTML = "";
+    //document.querySelector("#match6").innerHTML = 35 ** charNumber;
+    //document.querySelector("#match2").innerHTML = (35 ** charNumber) / numberOfWordsInDictionary[charNumber];
+};
+
+displayMatching = function () {
+    if (isLookingForMatch == true) { textForSearch = memoryABC[turn - 1][0]; lookingForMatch(textForSearch); };
     document.querySelector("#match1").innerHTML = turn;
     document.querySelector("#match2").innerHTML = charNumber;
-    document.querySelector("#match3").innerHTML = charNumber;
-    document.querySelector("#match4").innerHTML = 35 ** charNumber;
-    document.querySelector("#match5").innerHTML = 35 ** charNumber;
-    document.querySelector("#match2").innerHTML = (35 ** charNumber) / numberOfWordsInDictionary[charNumber];
+    document.querySelector("#match3").innerHTML = textForSearchOriginal2.length;
+    document.querySelector("#match4").innerHTML = textForSearchOriginal2.length;
+    document.querySelector("#match5").innerHTML = 35 ** textForSearchOriginal2.length;
+    document.querySelector("#match6").innerHTML = turn;
+    document.querySelector("#match7").innerHTML = turn;
+    document.querySelector("#match8").innerHTML = textForSearchOriginal2.length;
+    document.querySelector("#match9").innerHTML = (turn / 35 ** textForSearchOriginal2.length).toFixed(1);
+    document.querySelector("#match9").style["background-color"] = "#FADADD";
+    document.querySelector("#foundMatches").style["background-color"] = "#FADADD";
 };
 
 
@@ -599,6 +620,7 @@ match100Numbers = function () {
     console.log(charNumber);
     return repetitionNumberForMatch, charNumber
 };
+averageMemoryABCLength = 0;
 lookingForMatch100 = function () {
     repetitionNumberForMatch = document.querySelector("#match100RepNumber").value
     charNumber = document.querySelector("#match100CharNumber").value
@@ -607,6 +629,7 @@ lookingForMatch100 = function () {
     console.log(repetitionNumberForMatch, charNumber)
     rep = true;
     isLookingForMatch = true;
+    isLookingForMatch100 = true;
     matchingList100 = Array();
     matchingList100second = Array();
     myTestText = "ABCDEFGHI"
@@ -614,11 +637,13 @@ lookingForMatch100 = function () {
         matchingList100[i] = 0
         matchingList100second[i] = 0
     };
+    averageMemoryABCLength = 0;
     for (let k = 0; k < repetitionNumberForMatch; k++) {
         console.log("rep: ", k)
         console.log("CHAR", charNumber);
         word();
         textForSearch = memoryABC[turn - 1]
+        averageMemoryABCLength = averageMemoryABCLength + memoryABC.length;
 
         for (let i = 0; i < charNumber - 1; i++) {
             textForSearch = "";
@@ -626,7 +651,7 @@ lookingForMatch100 = function () {
                 textForSearch = textForSearch + expressionABC[n];
             };
             console.log("textForSearch", textForSearch);
-            lookingForMatch();
+            lookingForMatch(textForSearch);
             console.log(matchingList);
             matchingList100[i] = matchingList100[i] + matchingList.length;
         };
@@ -638,7 +663,7 @@ lookingForMatch100 = function () {
                 textForSearch = textForSearch + myTestText[n];
             };
             console.log(textForSearch);
-            lookingForMatch();
+            lookingForMatch(textForSearch);
             console.log(matchingList);
             matchingList100second[i] = matchingList100second[i] + matchingList.length;
         };
@@ -651,7 +676,10 @@ lookingForMatch100 = function () {
     for (let k = 0; k < charNumber - 1; k++) {
         matchingList100second[k] = Math.round(matchingList100second[k] / repetitionNumberForMatch);
     };
-    isLookingForMatch = false;
+
+    averageMemoryABCLength = (averageMemoryABCLength / repetitionNumberForMatch).toFixed(1);
+
+
     console.log(matchingList100);
     console.log(matchingList100second);
     series1 = "";
@@ -667,6 +695,37 @@ lookingForMatch100 = function () {
     document.querySelector("#seriesOne").style["background-color"] = "#FADADD";
     document.querySelector("#seriesTwo").style["background-color"] = "#FADADD";
     document.querySelector("#displaySeries").style.display = "initial";
+
+
+    document.querySelector("#match10").innerHTML = repetitionNumberForMatch;
+    document.querySelector("#match11").innerHTML = averageMemoryABCLength;
+
+    document.querySelector("#match13").style["background-color"] = "#FBFBFB"
+    document.querySelector("#match14").style["background-color"] = "#FBFBFB"
+    document.querySelector("#match15").style["background-color"] = "#FBFBFB"
+    document.querySelector("#match13").innerHTML = "";
+    document.querySelector("#match14").innerHTML = "";
+    document.querySelector("#match15").innerHTML = "";
+
+    document.querySelector("#match20").innerHTML = charNumber;
+    document.querySelector("#match21").innerHTML = charNumber;
+    document.querySelector("#match22").innerHTML = numberOfWordsInDictionary[charNumber];
+    document.querySelector("#match23").innerHTML = (35 ** charNumber / numberOfWordsInDictionary[charNumber]).toFixed(1);
+    document.querySelector("#match24").innerHTML = numberOfWordsInDictionary[charNumber];
+    document.querySelector("#match25").innerHTML = charNumber;
+    document.querySelector("#match26").innerHTML = repetitionNumberForMatch;
+    document.querySelector("#match27").innerHTML = averageMemoryABCLength;
+    matchingPercentage=(100-(((35 ** charNumber / numberOfWordsInDictionary[charNumber]).toFixed(1))/averageMemoryABCLength)*100).toFixed(2)
+    document.querySelector("#match28").innerHTML = Math.abs(matchingPercentage);
+
+    if (charNumber) { document.querySelector("#match12").innerHTML = `${(averageMemoryABCLength / 35).toFixed(1)}`; document.querySelector("#match12").style["background-color"] = "#FADADD"; };
+    if (charNumber > 2) { document.querySelector("#match13").innerHTML = `, ${(averageMemoryABCLength / 35 ** 2).toFixed(1)}`; document.querySelector("#match13").style["background-color"] = "#FADADD"; };
+    if (charNumber > 3) { document.querySelector("#match14").innerHTML = `, ${(averageMemoryABCLength / 35 ** 3).toFixed(1)}`; document.querySelector("#match14").style["background-color"] = "#FADADD"; };
+    if (charNumber > 4) { document.querySelector("#match15").innerHTML = `, ${(averageMemoryABCLength / 35 ** 4).toFixed(1)}`; document.querySelector("#match15").style["background-color"] = "#FADADD"; };
+
+    displayMatching();
+    isLookingForMatch = false;
+    isLookingForMatch100 = false;
 
 
 
