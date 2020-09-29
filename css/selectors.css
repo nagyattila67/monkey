@@ -5,6 +5,7 @@ li small{font-size:15px;}
 .bgLight{background-color:#fbfbfb}
 .bgDarker{ background-color:#f1f1f1}
 .smallBorder{border:1px solid #a8a8a8;padding:10px}
+.littleMarginTop{margin-top:15px}
 smallBorder div{margin:0px;}
 h2{margin-left:16px;}
 h5{margin:11px;padding:10px;}
@@ -34,6 +35,7 @@ img{margin-left: 20px;}
 #forTest input{margin:0px 10px 0px 0px;max-width:100px}
 #forTest label{margin:0px}
 #howManyWords p{margin:10px 0px 0px 0px;}
+#forTest label p{margin-top:0px}
 #howManyWordsButton{margin:0px 0px 3px 0px;}
 #howManyLettersRow{overflow:auto; padding:5px;border:1px solid #a8a8a8; background-color:#f1f1f1;}
 #howManyLetters tr{background-color:#f6e4f7}
@@ -71,6 +73,13 @@ label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
 .littlePaddingBottom{padding-bottom:8px}
 #wrapping0Col{width:auto;z-index:1}
 #matchControl{padding:10px 10px 1px 10px;background-color:#dfdfdf;}
+#checkRunDiv label{margin-left:15px}
+#checkRunDiv input{margin-left:15px}
+#checkRunDiv button{margin-left:20px}
+
+
+
+
 #wrapping0Col .row{margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;}
 #wrapping0Col p{padding:0px; margin:5px;}
 #wrapping0Form{width:200px}

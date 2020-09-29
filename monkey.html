@@ -113,7 +113,7 @@
                                 value="4">
                             <label class="ml-3">betű!</label>
                             <button id="please" type="button" class="ml-3 btn btn-secondary btn-sm"
-                                onclick="word()">Kérem a
+                                onclick="runWord()">Kérem a
                                 szót!</button>
                             <p class="ml-3">Futásidő: <span id="wordTime"> - sec.</span></p>
                         </form>
@@ -338,12 +338,7 @@
                                             megegyezik
                                             a
                                             talált
-                                            szóval. Azaz az értelmetlen karaktersorozatok listáján hány olyan 'szó'
-                                            van,
-                                            amelynek az
-                                            első (az első és a második, az első és a második és a harmadik, stb)
-                                            karaktere
-                                            megegyezik a megtalált értelmes szó megfelelő karakterével.</p>
+                                            szóval.</p>
                                         <button type="button" class="needMarginRight btn btn-secondary btn-sm searching"
                                             onclick="lookingForMatch100()">
                                             Mehet!
@@ -353,8 +348,10 @@
                                             style="width:80px" min="1" value="100">
                                         <label>Karakterszám: </label>
                                         <input oninput="match100Numbers()" id="match100CharNumber" type="number"
-                                            style="width:50px" min="1" max="5" value="4">
-                                        <span>Futásidő: <span id="matchRunningTime"></span></span>
+                                            style="width:50px" min="2" max="5" value="4">
+                                        <span>Futásidő: <span id="matchRunningTime"></span> </span>
+                                        <br>
+                                        <span>Futás tényleges ideje: <span id="matchRunningTimeInReal"></span> </span>
                                     </div>
                                 </div>
 
@@ -406,15 +403,171 @@
                                                 esetén a szólisták átlagos hossza:
                                                 <span id="match27"></span>. Az eltérés: <span id="match28"> - </span>%.
                                             </p>
+                                            <table type="table" class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>betűk száma</th>
+                                                        <th>futások száma</th>
+                                                        <th>szólisták átlagos hosszának várt értéke</th>
+                                                        <th>szólisták átlagos hosszának tényleges</th>
+                                                        <th>ezek eltérése</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td span id="match20_">-</td>
+                                                        <td span id="match26_">-</td>
+                                                        <td span id="match23_">-</td>
+                                                        <td id="match27_">-</td>
+                                                        <td id="match28_">-</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                         </div>
                     </div>
+
                 </div>
 
 
+                <div id="howManyLettersRow" class="row littleMarginTop">
+                    <div id="howManyLettersCol" class="col littleMarginTop">
+                        <p>Ha látni szeretné, hogy az egyes betűszámok esetén hány betűkombináció lehetséges és
+                            ezek között hány értelmes szó van, akkor kattintson a 'Mutat' gombra!</p>
+                        <button id="howManyLettersButton" type="button" class="btn btn-secondary btn-sm mb-3"
+                            onclick="showHowManyLetters()">Mutat</button>
+                        <table id="howManyLetters" style="display:none"
+                            class="table table-striped table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>a betűk száma</th>
+                                    <th>ennyi variáció rakható ki</th>
+                                    <th>ezekből ennyi az értelmes szó</th>
+                                    <th>hány variációra jut egy értelmes szó?</th>
+                                </tr>
+                            </thead>
+                            <tbody id="howManyLettersBody"></tbody>
+                        </table>
+                        <div id="howManyWords" style="display:none" class="row">
+                            <div class="row">
+                                <div class="col smallBorder littleMarginTop">
+                                    <p class="mt-3 mb-3">Itt ellenőrizheti ezeket az értékeket tetszés szerinti
+                                        beállításokkal: </p>
 
+                                    <div id="checkRunDiv">
+                                        <label>
+                                            <p>futások száma:</p>
+                                        </label>;
+                                        <input oninput="checkRunTimeCount()" id="checkRunRunNumber" type="number" ;
+                                            min="1" style="width:80px" value="1000">
+                                        <label>
+                                            <p>karakterek száma:</p>
+                                        </label>
+                                        <input oninput="checkRunTimeCount()" id="checkRunCharNum" type="number"
+                                            style="width:50px" min="2" value="3">
+                                        <button type="button" onclick="checkRuns()"
+                                            class="btn btm-sm btn-secondary mb-3" onclick="checkRuns()">Mehet!</button>
+                                        <table class="table table-sm">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <p>Becsült futásidő: <span id="checkRunTime"> - </span></p>
+                                                    </td>
+                                                    <td>
+                                                        <p>Tényleges futásidő: <span id="checkRunTimeReal"> - </span>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                        <table class="table table-sm table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <p>Lista becsült hossza</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>Lista tényleges hossza</p>
+                                                    </td>
+                                                    <td>
+                                                        <p>Eltérés:</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span id="approximatedListLengthForCheckRun"></span></td>
+                                                    <td><span id="averageListLengthDuringCheckRun"> - </span></td>
+                                                    <td><span id="checkRunDifference"> - </span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col smallBorder littleMarginTop">
+                                    <p> Valóban annyi véletlenül felírt betűsorra jut-e egy értelmes szó,
+                                        mint ahogyan azt a fenti táblázat mutatja? Az ellenőrzéshez beállíthatja a
+                                        karaktersorozat és a
+                                        generált
+                                        szólista hosszát.</p>
+                                    <p>Pl. két karakterből álló 907 'szót' tartalmazó listán átlagosan 100 értelmes
+                                        szónak kell
+                                        szerepelnie. <small>Csak 2, 3 vagy 4 betűből álló karaktersorozatok esetén
+                                            működik ez a
+                                            funkció, különben a program túl hosszú ideig futna.</small></p>
+                                    <div class="input-group row mt-3" id="forTest">
+                                        <div class="col-3">
+                                            <label for="karakterSzamForTest">
+                                                <p>Karakterek száma:</p>
+                                            </label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input id="karakterSzamForTest" onchange="setListLength()"
+                                                class="form-control form-control-sm" type="number" min="2" max="4"
+                                                value="2">
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="sorSzamForTest">
+                                                <p>Sorok száma:</p>
+                                            </label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input id="sorSzamForTest" class="form-control form-control-sm"
+                                                type="number" step="100" min="100" value="907">
+                                        </div>
+                                        <div class="col-2">
+                                            <button id="howManyWordsButton" type="button"
+                                                class="btn btn-secondary btn-sm" onclick="howManyWords()">Mutat</button>
+                                        </div>
+                                    </div>
+                                    <table class="table table-sm table-bordered">
+                                        <tr>
+                                            <td>
+                                                <p>Ennyi értelmes szónak kell lennie a listán:</p>
+                                            </td>
+                                            <td>
+                                                <p><span style="background-color:rgb(126,228,228)" class="result"
+                                                        id="thisIsReally"></span></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>A kattintásra most ennyit generált a program:</p>
+                                            </td>
+                                            <td><span class="result" id="itShouldBe"></span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
 
 
                 <div class="row bgLight smallBorder mt-3 mb-3">
@@ -968,68 +1121,7 @@
                     mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 
 
-                    <div id="howManyLettersRow" class="row">
-                        <div id="howManyLettersCol" class="col">
-                            <p>Ha látni szeretné, hogy az egyes betűszámok esetén hány betűkombináció lehetséges és
-                                ezek között hány értelmes szó van, akkor kattintson a 'Mutat' gombra!</p>
-                            <button id="howManyLettersButton" type="button" class="btn btn-secondary btn-sm"
-                                onclick="showHowManyLetters()">Mutat</button>
-                            <table id="howManyLetters" style="display:none"
-                                class="table table-striped table-sm table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>a betűk száma</th>
-                                        <th>ennyi variáció rakható ki</th>
-                                        <th>ezekből ennyi az értelmes szó</th>
-                                        <th>hány variációra jut egy értelmes szó?</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="howManyLettersBody"></tbody>
-                            </table>
-                            <div id="howManyWords" style="display:none" class="row">
-                                <br>
-                                <p>Itt ellenőrizheti, hogy nem tartalmaz-e hibát a program a véletlen betűsorok
-                                    generálásakor.</p>
-                                <p> Valóban annyi véletlenül felírt betűsorra jut-e egy értelmes szó,
-                                    mint ahogyan azt a fenti táblázat mutatja? Beállíthatja a karaktersorozat és a
-                                    generált
-                                    szólista hosszát.</p>
-                                <p>Pl. két karakterből álló 907 'szót' tartalmazó listán átlagosan 100 értelmes
-                                    szónak kell
-                                    szerepelnie. <small>Csak 2, 3 vagy 4 betűből álló karaktersorozatok esetén
-                                        működik ez a
-                                        funkció, különben a program túl hosszú ideig futna.</small></p>
-                                <div class="input-group row" id="forTest">
-                                    <div class="col-3">
-                                        <label for="karakterSzamForTest">Karakterek száma: </label>
-                                    </div>
-                                    <div class="col-2">
-                                        <input id="karakterSzamForTest" onchange="setListLength()"
-                                            class="form-control form-control-sm" type="number" min="2" max="4"
-                                            value="2">
-                                    </div>
-                                    <div class="col-3">
-                                        <label for="sorSzamForTest">Sorok száma: </label>
-                                    </div>
-                                    <div class="col-2">
-                                        <input id="sorSzamForTest" class="form-control form-control-sm" type="number"
-                                            step="100" min="100" value="907">
-                                    </div>
-                                    <div class="col-2">
-                                        <button id="howManyWordsButton" type="button" class="btn btn-secondary btn-sm"
-                                            onclick="howManyWords()">Mutat</button>
-                                    </div>
-                                </div>
-                                <p>Ennyi értelmes szónak kell lennie a listán: <span class="result"
-                                        id="itShouldBe"></span>
-                                </p>
-                                <p>A kattintásra most ennyit generált a program: <span
-                                        style="background-color:rgb(126,228,228)" class="result"
-                                        id="thisIsReally"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+
 
                     <div id="problemRow" class="row">
                         <div id="problemCol" class="col">
