@@ -18,6 +18,41 @@
         <div class="row">
             <div class="col-0 col-sm-1 col-md-1 col-lg-1 noPadding"></div>
             <div class="col-12 col-sm-10 col-md-10 col-lg-10 noPadding">
+
+
+                <div class="row">
+                    <div class="col-6">
+                        <label>Szóhossz:</label>
+                        <input id="szoHosszInLine" type="number" min="1" max="8" value="4">
+                        <label>betű</label>
+                        <button id="please" type="button" class="ml-3 btn btn-secondary btn-sm"
+                            onclick="writeInLine()">Kérem a
+                            szót!</button>
+
+                        <label>Ezt a szót kérem:</label>
+                        <input id="searchThisWord" type="text" maxlength=6>
+                        <button id="pleaseThis" type="button" class="ml-3 btn btn-secondary btn-sm"
+                            onclick="searchInLine()">Kérem a
+                            szót!</button>
+
+                        <p>A megtalált szó: <span id="foundWord"> - </span></p>
+                        <p>A leírt betűk száma: <span id="numberOfLetters"> - </span></p>
+                    </div>
+
+                    <div class="col-6">
+                        <div id="divForFinalString">
+                            <p id="placeForFinalString"></p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
                 <div class="row mt-3 mb-3">
                     <h2>Majom az írógépnél</h2>
                 </div>
@@ -25,8 +60,8 @@
                     <p id="motto"><i>'A fűráhüly bűrónyje megívínyte a fisóny kősejét.'</i></p>
                 </div>
                 <div class="row bgLight smallBorder">
-                    <p><img class="float-right" src="img/Chimpanzee_seated_at_typewriter_500px.png" width="400" ;
-                            alt="Majom az írógépnél">Egy majom ül egy
+                    <p><img id="monkey" class="float-right" src="img/Chimpanzee_seated_at_typewriter_500px.png"
+                            width="400" ; alt="Majom az írógépnél">Egy majom ül egy
                         írógép előtt. Az írógépen csak nagybetűk és egy sorváltó billenytű
                         van. A majom egymás után nyomkodja az írógépen az ábécé betűt, majd időnként új sort
                         kezd.
@@ -348,7 +383,7 @@
                                             style="width:80px" min="1" value="100">
                                         <label>Karakterszám: </label>
                                         <input oninput="match100Numbers()" id="match100CharNumber" type="number"
-                                            style="width:50px" min="2" max="5" value="4">
+                                            style="width:50px" min="1" max="6" value="4">
                                         <span>Futásidő: <span id="matchRunningTime"></span> </span>
                                         <br>
                                         <span>Futás tényleges ideje: <span id="matchRunningTimeInReal"></span> </span>
@@ -488,10 +523,10 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <p>Lista becsült hossza</p>
+                                                        <p>Listák átlagos hosszának becsült értéke</p>
                                                     </td>
                                                     <td>
-                                                        <p>Lista tényleges hossza</p>
+                                                        <p>Listák átlagos hosszának tényleges értéke</p>
                                                     </td>
                                                     <td>
                                                         <p>Eltérés:</p>
@@ -716,12 +751,11 @@
                         </div>
                         <p id="merge" style="display:initial"><i><span id="merge1"></span> <span id="merge2"></span></i>
                         </p>
+                        <hr id="skipToHere">
                         <div id="forTable">
                             <table class="table" id="graphic">
                             </table>
                         </div>
-
-
                         <div class="row">
                             <div id="colForFullDistribution" class="col-9">
                                 <p>Kérem a teljes eloszlásfüggvény <i>'az ennyi sort tartalmazó listából - ennyi
@@ -784,7 +818,7 @@
                     <div class="col-auto">
                         <h5>Eloszlás típusok:</h5>
 
-                        <img name="kindOfDistImg" class="float-left" width="250" src="img\example1_100_2.png"
+                        <img name="kindOfDistImg" class="Gauss float-left" width="250" src="img\example1_100_2.png"
                             alt="eloszlás: 2 betűs szó 100-szor">
                         <p>Ez egy <i>'szép eloszlás'</i>. A program a <i>'majom két betűs szavakat
                                 keres'</i>
@@ -811,8 +845,9 @@
 
 
 
-                        <p><img name="kindOfDistImg" class=" float-left" width="250" src="img\example2_800_5.png"
-                                alt="eloszlás: 5 betűs szó 800-szor">Ez pedig egy <i>'nem szép eloszlás</i>: a majom
+                        <img name="kindOfDistImg" class="Gauss float-left" width="250" src="img\example2_800_5.png"
+                            alt="eloszlás: 5 betűs szó 800-szor">
+                        <p>Ez pedig egy <i>'nem szép eloszlás</i>: a majom
                             most <i> 5 betűs szavakat keresett 800-szor
                                 egymás után.</i> A
                             leghosszabb
@@ -881,7 +916,7 @@
                         program ezzel a beállítással kb. egy órán keresztül futna, majd kapnánk egy
                         beláthatatlanul hosszú grafikont. Most nézzünk helyette egy előre lefuttatott eredményt!
                     </p>
-                    <img class="float-left" src="img/first200.png" width="500" ; alt="Az eloszlás első 200 eleme">
+                    <img class="Gauss float-left" src="img/first200.png" width="500" ; alt="Az eloszlás első 200 eleme">
                     <p>Ha
                         elkezdenénk vízszintesen görgetni a grafikont, akkor különböző hosszúságú üres részek
                         után
@@ -903,547 +938,565 @@
 
 
 
-            <div>
-                <div id="skipBackToBurkologorbe" class="row bgLight smallBorder">
-                    <h6>Burkológörbe felrajzolása:</h6>
+
+            <div class="row bgLight smallBorder">
+                <div class="col">
+                    <h5>Burkológörbe felrajzolása:</h5>
                     <div class="row">
-                        <p><img style="float:left" src="/img/logaritmikus_burkolo.png" alt="logaritmikus burkológörbe"
-                                width="250">
-                            A képen <i>'a majom 3 betűs szavakat keres 1000-szer'</i> eloszlás oszlopgrafikonjait
-                            látjuk.
-                            Az első oszlop magasága jelzi, hogy hány olyan eset volt, ahol a majom elsőre talált egy
-                            értelmes szót. A második oszlop magassága pedig azt, amikor a majom második szava már
-                            értelmes lett a keresés során. És így tovább. Erre az oszlopgrafikonra ráhelyezhetünk
-                            egy
-                            burkológörbét. Ennek az eloszlásnak a burkológörbéje a képen a
-                            <i>y=7log<sub>1/2</sub>(x-29)</i>
-                            függvény grafikonja.</p>
-                        <p>Azt vehetjük észre, hogy ezeknek az eloszlásoknak a burológörbéje - a <i>szép
-                                eloszlások</i>
-                            esetén - logaritmikus, s jórészt a logaritmus alapja az 1/2.</p>
-                        <p>Egy szám 1/2 alapú logaritmusa az a szám, amire az 1/2-et kell emelni, hogy megkapjuk azt
-                            a
-                            számot.</p>
+                        <div class="col-auto">
+                            <img id="logBurk" class="Gauss" style="float:left" src="/img/logaritmikus_burkolo.png"
+                                alt="logaritmikus burkológörbe" width="250">
+                            <p> A képen <i>'a majom 3 betűs szavakat keres 1000-szer'</i> eloszlás oszlopgrafikonjait
+                                látjuk.
+                                Az első oszlop magasága jelzi, hogy hány olyan eset volt, amikor a majom elsőre talált
+                                egy
+                                értelmes szót. A második oszlop magassága pedig azoknak az eseteknek a száma, amikor a
+                                majom másodikra talált egy értelmes szót. És így tovább. Erre az oszlopgrafikonra
+                                ráhelyezhetünk
+                                egy
+                                burkológörbét. Ez a burkológörge az
+                                <i>y=5.2log<sub>1/2</sub>(x-22)</i>
+                                függvény.</p>
+                            <p>Az alábbi applikációvalval bármelyik <i>'szép eloszlásra'</i> megkereshetjük az eloszlás
+                                - akár hiperbolikus, akár logaritmikus - burkológörbéjét.</p>
+                        </div>
                     </div>
-                    <div id="forEnvelope" class="col-8">
-                        <p>Ha akarja, megkeresheti az oszlopgrafikon burkológörbéjét!</p>
-                        <p><span style="background-color:#FADADD">Javasoljuk, első alkalommal
-                                használja a program által felajánlott alapbeállítást.</span> Ekkor Ön egy
-                            <i>'szép'</i>,
-                            könnyen
-                            áttekinthető eloszlásfüggvényt kap.</p>
-                        <p> Ezzel a beállítással a grafikon még egésszében kifér a képernyőre, így nem lesz
-                            tömörítve,
-                            tehát a pontos eloszlást mutatja majd. </p>
-                        <p> Klikkeljen az <i>'alapbeállítás'</i> gombra, s ekkor a szókeresés
-                            300-szor le fog futni egymás után '<i>a majom kétbetűs szavakat keres</i>' beállítással.
-                            Ez
-                            kb. 10 másodpercig tart majd.</p>
-                        <button type="button" class="btn btn-primary btn-sm" onclick="preparation()">alapbeállítás
-                        </button>
-                        <p> Ezután kattintson a <i>'hiperbolikus'</i> vagy <i>'logaritmikus'</i> gombra. Ekkor
-                            megjelenik a burkológörbe, amit a zöld nyilakkal tud mozgatni. </p>
-
+                    <div class="row">
+                        <div id="forEnvelope" class="col-auto">
+                            <p><span style="background-color:#FADADD">Javasoljuk, első alkalommal
+                                    használja a program által felajánlott alapbeállítást.</span> Ekkor Ön egy
+                                <i>'szép'</i>,
+                                könnyen
+                                áttekinthető eloszlásfüggvényt kap.</p>
+                            <p> Ezzel a beállítással a grafikon még egésszében kifér a képernyőre, így nem lesz
+                                tömörítve,
+                                tehát a pontos eloszlást mutatja majd. </p>
+                            <p> Klikkeljen az <i>'alapbeállítás'</i> gombra, s ekkor a szókeresés
+                                300-szor le fog futni egymás után '<i>a majom kétbetűs szavakat keres</i>' beállítással.
+                                Ez
+                                kb. 10 másodpercig tart majd.</p>
+                            <button id="alapbeallitas" type="button" class="btn btn-primary btn-sm"
+                                onclick="preparation()">alapbeállítás
+                            </button>
+                            <p> Ezután kattintson a lentebb látható alkalmazások valamelyikének a piros <span
+                                    style="color:red">'ugrás'</span> gombjára, s az
+                                applikációk felugranak az eloszlás grafikonja mellé. Ott a jobb oldali applikációval
+                                tudja felrajzolni a hiperbolikus vagy logaritmikus burkológörbét, amit aztán a zöld
+                                nyilakkal tud mozgatni.</p>
+                            <p> A másik két - bal oldali - applikációval pedig a burkológörbe
+                                függvényét a konkrét paraméterek beállításával tudja megadni.
+                            </p>
+                        </div>
                     </div>
+                </div>
+                <div class="row">
                     <div id="wrapping0Col" class="col-4">
-                        <form id="wrapping0Form" class="wrapping">
-                            <div class="row" id="wrapping0Row">
-                                <div class="row">
-                                    <button name="chooseGraph" type="button" onclick="wantHyp()"
-                                        class="btn btn-success btn-sm">hiperbolikus</button>
-                                    <button name="chooseGraph" type="button" onclick="wantLog()"
-                                        class="btn btn-success btn-sm">logaritmikus</button>
-                                </div>
-                                <div class="row">
-                                    <table>
-                                        <tr>
-                                            <td></td>
-                                            <td><button name="arrow" type="button" onclick="up()"
-                                                    class="btn btn-success btn-sm">&#8679</button></td>
-                                            <td></td>
-                                            <td rowspan="3"><button name="backToStart" type="button"
-                                                    onclick="backToBasicGraph()"
-                                                    class="btn btn-success btn-sm">&#11119</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><button name="arrow" type="button" onclick="left()"
-                                                    class="btn btn-success btn-sm">&#8678</button></td>
-                                            <td></td>
-                                            <td><button name="arrow" type="button" onclick="right()"
-                                                    class="btn btn-success btn-sm">&#8680</button></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td><button name="arrow" type="button" onclick="down()"
-                                                    class="btn btn-success btn-sm">&#8681</button></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="row">
-                                    <p>meredekség:</p>
-                                </div>
-                                <div class="row">
-                                    <button name="rising" type="button" onclick="risingUpUp()"
-                                        class="btn btn-success btn-sm">++</button>
-                                    <button name="rising" type="button" onclick="risingUp()"
-                                        class="btn btn-success btn-sm">+</button>
-                                    <button name="rising" type="button" onclick="risingDown()"
-                                        class="btn btn-success btn-sm">-</button>
-                                    <button name="rising" type="button" onclick="risingDownDown()"
-                                        class="btn btn-success btn-sm">--</button>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <p>a függvény:</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <p><strong><span id="howFunctionLooksLike1"></span><sub><span
-                                                        id="base"></span></sub><span
-                                                    id="howFunctionLooksLike2"></span></strong>
-                                        </p>
+                        <form id="wrapping0Form" class="wrapping ml-3">
 
-                                        <p><span id="displayOrNot" style="display:none">max: <span id="max"> -
-                                                </span></span></p>
-                                    </div>
+                            <div class="row">
+                                <button name="chooseGraph" type="button" onclick="wantHyp()"
+                                    class="btn btn-success btn-sm">hiperbolikus</button>
+                                <button name="chooseGraph" type="button" onclick="wantLog()"
+                                    class="btn btn-success btn-sm">logaritmikus</button>
+                            </div>
+                            <div class="row">
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                        <td><button name="arrow" type="button" onclick="up()"
+                                                class="btn btn-success btn-sm">&#8679</button></td>
+                                        <td></td>
+                                        <td rowspan="3"><button name="backToStart" type="button"
+                                                onclick="backToBasicGraph()"
+                                                class="btn btn-success btn-sm">&#11119</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><button name="arrow" type="button" onclick="left()"
+                                                class="btn btn-success btn-sm">&#8678</button></td>
+                                        <td></td>
+                                        <td><button name="arrow" type="button" onclick="right()"
+                                                class="btn btn-success btn-sm">&#8680</button></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><button name="arrow" type="button" onclick="down()"
+                                                class="btn btn-success btn-sm">&#8681</button></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <p>meredekség:</p>
+                            </div>
+                            <div class="row">
+                                <button name="rising" type="button" onclick="risingUpUp()"
+                                    class="btn btn-success btn-sm">++</button>
+                                <button name="rising" type="button" onclick="risingUp()"
+                                    class="btn btn-success btn-sm">+</button>
+                                <button name="rising" type="button" onclick="risingDown()"
+                                    class="btn btn-success btn-sm">-</button>
+                                <button name="rising" type="button" onclick="risingDownDown()"
+                                    class="btn btn-success btn-sm">--</button>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p>a függvény:</p>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p><strong><span id="howFunctionLooksLike1"></span><sub><span
+                                                    id="base"></span></sub><span
+                                                id="howFunctionLooksLike2"></span></strong>
+                                    </p>
 
-                                <div class="row">
-                                    <div class="col">
-                                        <a href="/monkey.html#skipToGraphic"><button id="jump0" name="skipToBetterPlace"
-                                                type="button" class="btn btn-danger btn-sm"
-                                                onclick="jumpUp()">Ugrás</button></a>
-                                        <button disabled id="functionAppr1" type="button"
-                                            class="btn btn-secondary btn-sm"
-                                            onclick="decisionAboutErase()">Töröl</button>
-                                    </div>
+                                    <p><span id="displayOrNot" style="display:none">max: <span id="max"> -
+                                            </span></span></p>
                                 </div>
-                                <div class="row">
-                                    <p id="jumpInfo0" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez
-                                            a
-                                            blokk
-                                            felugrik
-                                            a képernyő
-                                            jobb felső sarkába,
-                                            így ha odagörget a grafikonhoz, akkor is használni tudja.</i></p>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a href="/monkey.html#skipToGraphic"><button id="jump0" name="skipToBetterPlace"
+                                            type="button" class="btn btn-danger btn-sm"
+                                            onclick="jumpUp()">Ugrás</button></a>
+                                    <button disabled id="functionAppr1" type="button" class="btn btn-secondary btn-sm"
+                                        onclick="decisionAboutErase()">Töröl</button>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <p id="jumpInfo0" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez a
+                                        három blokk
+                                        felugrik az eloszlás oszlopgrafikonjához..</i></p>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div id="wrapping1Col" class="col-4">
+                        <form id="wrapping1Form" class="wrapping ml-3">
+                            <div class="row">
+                                <p>Hiperbolikus burkológörbe</p>
+                            </div>
+                            <div class="row">
+                                <p><input type="number" id="H1" name="one" style="width:60px"
+                                        value="5">maximum/(x+<input type="number" id="H2" name="two" style="width:60px"
+                                        value="2"> ) + <input type="number" id="H3" name="three" style="width:60px"
+                                        value="-4">
+                                </p>
+                                <p>maximum: <span id="maximum2"> - </span></p>
+                            </div>
+                            <div class="row">
+                                <button disabled id="estimateFunc" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="estimateFunction(event)">Mehet</button>
+                                <button disabled id="functionAppr2" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="decisionAboutErase()">Töröl</button>
+                                <a href="/monkey.html#skipToGraphic"><button id="jump1" name="skipToBetterPlace"
+                                        type="button" class="btn btn-danger btn-sm"
+                                        onclick="jumpUp()">Ugrás</button></a>
+                            </div>
+
+                            <div class="row">
+                                <p id="jumpInfo1" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez a három
+                                        blokk
+                                        felugrik az eloszlás oszlopgrafikonjához.</i></p>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div id="wrapping2Col" class="col-4">
+                        <form id="wrapping2Form" class="wrapping ml-3">
+                            <div class="row">
+                                <p>Logaritmikus burkológörbe
+                                    <!--(javasolt beállítással</p> - <span
+                                        style="font-size:12px">Javasoljuk
+                                        még az alap: 0,87; konstansok: 1, -27, 0 beállítást</span>):-->
+                            </div>
+                            <div class="row">
+                                <p>Logaritmus alapja: <input type="number" id="LBase" name="logBase" style="width:60px"
+                                        value="0.5">
+                                </p>
+                            </div>
+                            <div class="row">
+                                <p><input type="number" id="L1" name="one" style="width:60px" value="5">log(x+<input
+                                        type="number" id="L2" name="two" style="width:60px" value="-28"> ) + <input
+                                        type="number" id="L3" name="three" style="width:60px" value="0">
+                                </p>
+                            </div>
+                            <div class="row">
+                                <button disabled id="estimateFuncLog" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="estimateFunctionLog(event)">Mehet</button>
+                                <button disabled id="functionApprLog" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="decisionAboutErase()">Töröl</button>
+                                <a href="/monkey.html#skipToGraphic"><button id="jump2" name="skipToBetterPlace"
+                                        type="button" class="btn btn-danger btn-sm"
+                                        onclick="jumpUp()">Ugrás</button></a>
+                            </div>
+                            <div class="row">
+                                <p id="jumpInfo2" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez a három
+                                        blokk
+                                        felugrik az eloszlás oszlopgrafikonjához.</i></p>
                             </div>
                         </form>
                     </div>
+                </div>
+            </div>
+            <div id="problemRow" class="row littleMarginTop">
+                <div id="problemCol" class="col">
+                    <p>
+                        A képen a normális eloszlás grafikonját, az ún. Gauss görbét látjuk. Az
+                        értelmezéséhez
+                        nézzünk egy
+                        példa:</p>
+                    <div id="exampleForGauss">
+                        <p><img class="imgMarginLeft" src="/img/Gauss_gorbe.png" alt="Gauss eloszlás görbéje"
+                                width="250" style="float:right">
+                            Vegyük egy népcsoport tagjainak a magasságát. A legtöbb ember közülük átlagos
+                            magassággal
+                            fog
+                            rendelkezni. Az ő számukat jelzi a legmagasabb - <i>a középső</i> - oszlop. Az
+                            átlagnál 10
+                            cm-rel
+                            magasabb vagy 10 cm-rel alacsonyabb emberek kevesebben
+                            vannak. Ez a két oszlop lesz a legmagasabb oszlop két közvetlen szomszédja. Ez a
+                            két
+                            szomszédos oszlop
+                            értelemszerűen alacsonyabb, de egymással - várhatóan - azonos magasságúak. (<a
+                                target="blank"
+                                href="https://regi.tankonyvtar.hu/hu/tartalom/tamop425/0046_valoszinusegszamitas_es_statisztika/ch04s03.html">A
+                                kép forrása</a>)
+                        </p>
+                        <p>Ugyanígy, ha minél jobban
+                            távolodunk (bármelyik irányba is) a középső oszloptól (az átlagmagasságtól),
+                            akkor egyre
+                            alacsonyabb oszlopokat
+                            kapunk. Azaz mindig egyre és egyre kevesebb olyan személy lesz, akinek a
+                            magassága még
+                            jobban eltér az átlagostól - akár felfelé, akár lefelé.
+                        </p>
+                    </div>
 
+                    <p>Most pedig nézzünk megy egy <i>'a majom két betűs szavakat rak ki 100-szor'</i>
+                        eloszlást!
+                        Ekkor a
+                        leggyakoribb
+                        szóhossz a 35<sup>2</sup>/135, azaz 1225/135=9.07. <small>(Az összes kétbetűs
+                            variáció 35
+                            karakterből:35<sup>2</sup>, a szótárban található két betűs szavak száma:
+                            135.)</small>
+                        Tehát
+                        átlagosan 9 kirakásra jut egy-egy értelmes szó.</p>
+                    <p>Azt várnánk, hogy az eloszlást mutató
+                        oszlopgrafikonon a legmagasabb oszlop a kilencedik lesz, majd tőle jobbra és
+                        balra egyre csökkennek a magasságok, azaz a Gauss eloszlás grafikonját kapjuk meg.
+                        Azonban
+                        nem ez történik!
+                    </p>
+                    <p>
+                    <p><img class="Gauss" src="/img/example3_2_100.png" alt="a majom 2 betűs szavakat keresett 100-szor"
+                            width="250" style="float:left">
+                        Az oszlopgrafikonra pillantva azonnal szembetűnik, hogy itt nem egy Gauss
+                        eloszlásról van
+                        szó,
+                        amelynek a maximuma a 9-nél van. Itt az oszlopok magassága rendre: 7, 8, 17, 11, 6,
+                        10, 7,
+                        4, 5, 1, 1, 1, 2, 4, 0, 4, 1, 0, 1, 2, 0, 2, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0,
+                        0, 0, 0,
+                        1, 1.
+                    </p>
+                    <p>Persze bármelyik - az oszlopgrafikonon ábrázolt - sorozat bármennyire eltérhet az
+                        átlagtól,
+                        hiszen erről szól a véletlen. Például az is bekövetkezhetne, hogy a majom egy
+                        véletlen
+                        futássorozatnál mind a százszor elsőre értelmes szót rak ki.
+                    </p>
+                    <p>
+                        <img class="Gauss" src="/img/example4_2_100_100.png"
+                            alt="a majom 2 betűs szavakat keresett 100-szor átlagos eloszlása 100 ismétlésre"
+                            width="250" style="float:left">
+                    <p>Most azonban nem erről van szó! Ha ugyanis
+                        <i>100-szor</i> lefuttatjuk <i>'a majom kétbetűs
+                            szavakat rak ki 100-szor'</i> sorozatot, s vesszük az oszlopgrafikonok átlagát,
+                        akkor a
+                        következő grafikont kapjuk meg. Ezen pedig jól látható, hogy leggyakrabban a majom
+                        már
+                        elsőre talált egy értelmes kétbetűs kifejezést, s onnantól kezdve csökken az
+                        oszlopok
+                        magassága. (Ennél az átlagsorozatnál az oszlopok magassága rendre: 11, 10, 9, 8, 7,
+                        6, 6, 5,
+                        4, 4, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.</p>
+                    <p>Ha akarja, Ön is ellenőrizheti, hogy hogyan néz ki egy ilyen átlag grafikon.
+                        Klikkeljen a
+                        <i>'Mehet!'</i> gombra, és a program lefuttatja Önnek 100-szor <i>'a majom két betűs
+                            szavakat
+                            keres százszor'</i> sorozatot!</p>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><button id="run100FirstButton" type="button" class="btn btn-secondary btn-sm"
+                                        onclick="running100First()">Mehet!</button></td>
+                                <td><span id="infoForRun100FirtsButton">Futásidő: 1 perc. </span></td>
+                                <td> <span> Az átlag leghosszabb betűsorozata: <span id="run100TestLength"> -
+                                        </span>.</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
 
 
 
                     <div class="row">
-                        <h6 id="skipBackToBurkologorbe2">Beállíthatja a burkológörbét a függvény konkrét megadásával
-                            is.</h6>
-                        <div id="wrapping1Col" class="col-6">
-                            <form id="wrapping1Form" class="wrapping">
-                                <div class="row">
-                                    <p>Hiperbolikus burkológörbe</p>
-                                </div>
-                                <div class="row">
-                                    <p><input type="number" id="H1" name="one" style="width:60px"
-                                            value="5">maximum/(x+<input type="number" id="H2" name="two"
-                                            style="width:60px" value="2"> ) + <input type="number" id="H3" name="three"
-                                            style="width:60px" value="-4">
-                                    </p>
-                                    <p>maximum: <span id="maximum2"> - </span></p>
-                                </div>
-                                <div class="row">
-                                    <button disabled id="estimateFunc" type="button" class="btn btn-secondary btn-sm"
-                                        onclick="estimateFunction(event)">Mehet</button>
-                                    <button disabled id="functionAppr2" type="button" class="btn btn-secondary btn-sm"
-                                        onclick="decisionAboutErase()">Töröl</button>
-                                    <a href="/monkey.html#skipToGraphic"><button id="jump1" name="skipToBetterPlace"
-                                            type="button" class="btn btn-danger btn-sm"
-                                            onclick="jumpUp()">Ugrás</button></a>
-                                </div>
-
-                                <div class="row">
-                                    <p id="jumpInfo1" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez
-                                            a
-                                            blokk
-                                            felugrik a képernyő
-                                            jobb felső sarkába,
-                                            így ha odagörget a grafikonhoz, akkor is használni tudja.</i></p>
-                                </div>
-
-                            </form>
-                        </div>
-                        <div id="wrapping2Col" class="col-6">
-                            <form id="wrapping2Form" class="wrapping">
-                                <div class="row">
-                                    <p>Logaritmikus burkológörbe
-                                        <!--(javasolt beállítással</p> - <span
-                                        style="font-size:12px">Javasoljuk
-                                        még az alap: 0,87; konstansok: 1, -27, 0 beállítást</span>):-->
-                                </div>
-                                <div class="row">
-                                    <p>Logaritmus alapja: <input type="number" id="LBase" name="logBase"
-                                            style="width:60px" value="0.5">
-                                    </p>
-                                </div>
-                                <div class="row">
-                                    <p><input type="number" id="L1" name="one" style="width:60px" value="5">log(x+<input
-                                            type="number" id="L2" name="two" style="width:60px" value="-28"> ) + <input
-                                            type="number" id="L3" name="three" style="width:60px" value="0">
-                                    </p>
-                                </div>
-                                <div class="row">
-                                    <button disabled id="estimateFuncLog" type="button" class="btn btn-secondary btn-sm"
-                                        onclick="estimateFunctionLog(event)">Mehet</button>
-                                    <button disabled id="functionApprLog" type="button" class="btn btn-secondary btn-sm"
-                                        onclick="decisionAboutErase()">Töröl</button>
-                                    <a href="/monkey.html#skipToGraphic"><button id="jump2" name="skipToBetterPlace"
-                                            type="button" class="btn btn-danger btn-sm"
-                                            onclick="jumpUp()">Ugrás</button></a>
-                                </div>
-                                <div class="row">
-                                    <p id="jumpInfo2" class="infoAboutJump"><i>Ha az ugrás gombra kattint, akkor ez
-                                            a
-                                            blokk
-                                            felugrik a képernyő
-                                            jobb felső sarkába,
-                                            így ha odagörget a grafikonhoz, akkor is használni tudja.</i></p>
-                                </div>
-                            </form>
+                        <div id="forTest1" class="col col-12">
+                            <table class="table tableGraphic" id="test1">
+                            </table>
                         </div>
                     </div>
+                    <p>Itt pedig egy <i>'a majom három betűs szavakat keres százszor'</i> sorozat átlag grafikonját
+                        látjuk.</p>
+                    <img class="img-fluid mb-3" src="/img/example5_3_100_100.jpg"
+                        alt="a majom 3 betűs szavakat keresett 100-szor átlagos eloszlása 100 ismétlésre" height="100"
+                        style="float:lef">
 
+                </div>
+            </div>
+            <div id="problemRow" class="row littleMarginTop">
+                <div class="col">
+                    <p><img class="imgMarginLeft" src="/img/Gauss_gorbe.png" alt="Gauss eloszlás görbéje" width="250"
+                            style="float:right">Ha ismét vetünk egy pillantást az ideális Gauss eloszlás
+                        grafikonjára, láthatjuk, hogy az eloszlás szimmetrikus. Nevezzük el a középső -
+                        legmagasabb
+                        - oszlopot az eloszlás maximumának. Látjuk, hogy az illusztráción a maximumtól jobbra és balra
+                        egyre
+                        távolabb
+                        lévő oszloppárok magassága nagyjából megegyezik. S ha úgy képzeljük el, hogy az
+                        egyes
+                        oszlopok
+                        téglákból épülnek fel, akkor az is igaz, hogy a maximum két oldalán két lévő
+                        oszlophalmaz
+                        közelítőleg azonos számú téglából épül fel.</p>
+                    <p>Azaz a maximumtól jobbra is, balra is ugyanannyi <i>'tégla'</i> kell a két oszlopsor
+                        felépítéséhez.
+                    </p>
+                    <p>Most pedig futtassuk le a <i>'majom n-betűs szavakat keres m-szer'</i> beállítással a
+                        programot!</p>
+                    <p>Ekkor láthatjuk, hogy a várt maximumnál nemcsak, hogy nem lesz maximum, de még a
+                        'várt
+                        maximum' előtt és után lévő szólisták - azaz a <i>téglák</i> száma - sem egyezik
+                        meg!
+                    </p>
+                    <div id="divForRunning100">
+                        <label>A majom most</label>
+                        <input oninput="forProblemsInput()" id="charNumberForTest" type="number" min="2" max="6"
+                            value="2">
+                        <label>betűs szavakat keres</label>
+                        <input oninput="forProblemsInput()" id="runningNumberForTest" type="number" min="" max=""
+                            value="100">
+                        <label>-szor.</label>
 
-                    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-
-
-
-
-                    <div id="problemRow" class="row">
-                        <div id="problemCol" class="col">
-                            <p>
-                                A képen a normális eloszlás grafikonját, az ún. Gauss görbét látjuk. Az
-                                értelmezéséhez
-                                nézzünk egy
-                                példa:</p>
-                            <div id="exampleForGauss">
-                                <p><img id="Gauss" src="/img/Gauss_gorbe.png" alt="Gauss eloszlás görbéje" width="250"
-                                        style="float:right">
-                                    Vegyük egy népcsoport tagjainak a magasságát. A legtöbb ember közülük átlagos
-                                    magassággal
-                                    fog
-                                    rendelkezni. Az ő számukat jelzi a legmagasabb - <i>a középső</i> - oszlop. Az
-                                    átlagnál 10
-                                    cm-rel
-                                    magasabb vagy 10 cm-rel alacsonyabb emberek kevesebben
-                                    vannak. Ez a két oszlop lesz a legmagasabb oszlop két közvetlen szomszédja. Ez a
-                                    két
-                                    szomszédos oszlop
-                                    értelemszerűen alacsonyabb, de egymással - várhatóan - azonos magasságúak. (<a
-                                        target="blank"
-                                        href="https://regi.tankonyvtar.hu/hu/tartalom/tamop425/0046_valoszinusegszamitas_es_statisztika/ch04s03.html">A
-                                        kép forrása</a>)
-                                </p>
-                                <p>Ugyanígy, ha minél jobban
-                                    távolodunk (bármelyik irányba is) a középső oszloptól (az átlagmagasságtól),
-                                    akkor egyre
-                                    alacsonyabb oszlopokat
-                                    kapunk. Azaz mindig egyre és egyre kevesebb olyan személy lesz, akinek a
-                                    magassága még
-                                    jobban eltér az átlagostól - akár felfelé, akár lefelé.
-                                </p>
-                            </div>
-
-                            <p>Most pedig nézzünk megy egy <i>'a majom két betűs szavakat rak ki 100-szor'</i>
-                                eloszlást!
-                                Ekkor a
-                                leggyakoribb
-                                szóhossz a 35<sup>2</sup>/135, azaz 1225/135=9.07. <small>(Az összes kétbetűs
-                                    variáció 35
-                                    karakterből:35<sup>2</sup>, a szótárban található két betűs szavak száma:
-                                    135.)</small>
-                                Tehát
-                                átlagosan 9 kirakásra jut egy-egy értelmes szó.</p>
-                            <p>Azt várnánk, hogy az eloszlást mutató
-                                oszlopgrafikonon a legmagasabb oszlop a kilencedik lesz, majd tőle jobbra és
-                                balra egyre csökkennek a magasságok, azaz a Gauss eloszlás grafikonját kapjuk meg.
-                                Azonban
-                                nem ez történik!
-                            </p>
-                            <p>
-                            <p><img id="Gauss" src="/img/example3_2_100.png"
-                                    alt="a majom 2 betűs szavakat keresett 100-szor" width="250" style="float:left">
-                                Az oszlopgrafikonra pillantva azonnal szembetűnik, hogy itt nem egy Gauss
-                                eloszlásról van
-                                szó,
-                                amelynek a maximuma a 9-nél van. Itt az oszlopok magassága rendre: 7, 8, 17, 11, 6,
-                                10, 7,
-                                4, 5, 1, 1, 1, 2, 4, 0, 4, 1, 0, 1, 2, 0, 2, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0,
-                                0, 0, 0,
-                                1, 1.
-                            </p>
-                            <p>Persze bármelyik - az oszlopgrafikonon ábrázolt - sorozat bármennyire eltérhet az
-                                átlagtól,
-                                hiszen erről szól a véletlen. Például az is bekövetkezhetne, hogy a majom egy
-                                véletlen
-                                futássorozatnál mind a százszor elsőre értelmes szót rak ki.
-                            </p>
-                            <p>
-                            <p><img id="Gauss" src="/img/example4_2_100_100.png"
-                                    alt="a majom 2 betűs szavakat keresett 100-szor átlagos eloszlása 100 ismétlésre"
-                                    width="250" style="float:left">Most azonban nem erről van szó! Ha ugyanis
-                                <i>100-szor</i> lefuttatjuk <i>'a majom kétbetűs
-                                    szavakat rak ki 100-szor'</i> sorozatot, s vesszük az oszlopgrafikonok átlagát,
-                                akkor a
-                                következő grafikont kapjuk meg. Ezen pedig jól látható, hogy leggyakrabban a majom
-                                már
-                                elsőre talált egy értelmes kétbetűs kifejezést, s onnantól kezdve csökken az
-                                oszlopok
-                                magassága. (Ennél az átlagsorozatnál az oszlopok magassága rendre: 11, 10, 9, 8, 7,
-                                6, 6, 5,
-                                4, 4, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.</p>
-                            <p>Ha akarja, Ön is ellenőrizheti, hogy hogyan néz ki egy ilyen átlag grafikon.
-                                Klikkeljen a
-                                <i>'Mehet!'</i> gombra, és a program lefuttatja Önnek 100-szor <i>'a majom kétbetűs
-                                    szavakat
-                                    keres százszor'</i> sorozatot!</p>
-                            <button id="run100FirstButton" type="button" class="btn btn-secondary btn-sm"
-                                onclick="running100First()">Mehet!</button>
-                            <span id="infoForRun100FirtsButton">Futásidő: 1 perc.</span>
-
-                            <div class="row">
-                                <div id="forTest1" class="col col-12">
-                                    <table class="table tableGraphic" id="test1">
-                                    </table>
-                                </div>
-                            </div>
-                            <hr>
-                            <p>Az átlag leghosszabb betűsorozata: <span id="run100TestLength"> - </span>.</p>
-                            <p><img id="Gauss" src="/img/Gauss_gorbe.png" alt="Gauss eloszlás görbéje" width="250"
-                                    style="float:right">Ha ismét vetünk egy pillantást az ideális Gauss eloszlás
-                                grafikonjára, láthatjuk, hogy az eloszlás szimmetrikus. Nevezzük el a középső -
-                                legmagasabb
-                                - oszlopot az eloszlás maximumának. Látjuk, hogy a maximumtól jobbra és balra egyre
-                                távolabb
-                                lévő oszloppárok magassága nagyjából megegyezik. S ha úgy képzeljük el, hogy az
-                                egyes
-                                oszlopok
-                                téglákból épülnek fel, akkor az is igaz, hogy a maximum két oldalán két lévő
-                                oszlophalmaz
-                                közelítőleg azonos számú téglából épül fel.</p>
-                            <p>Azaz a maximumtól jobbra is, balra is ugyanannyi <i>'tégla'</i> kell a két oszlopsor
-                                felépítéséhez.
-                            </p>
-                            <p>Most pedig futtassuk le a <i>'majom n-betűs szavakat keres m-szer'</i> beállítással a
-                                programot!</p>
-                            <p>Ekkor láthatjuk, hogy a várt maximumnál nemcsak, hogy nem lesz maximum, de még a
-                                'várt
-                                maximum' előtt és után lévő szólisták - azaz a <i>téglák</i> száma - sem egyezik
-                                meg!
-                            </p>
-                            <div id="divForRunning100">
-                                <label>A majom most</label>
-                                <input id="charNumberForTest" type="number" min="2" max="4" value="2">
-                                <label>betűs szavakat keres</label>
-                                <input id="runningNumberForTest" type="number" min="" max="" value="100">
-                                <label>-szor.</label>
-
-                                <button id="letsRun100Button" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="runningForProblems()">Mehet!</button>
-                                <span id="infoForLetsRun100Button">Futásidő: min. ? perc.</span>
-                            </div>
-
-                            <table class="table table-striped table-sm table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td>A majom ennyi betűszámú szavakat keresett :</td>
-                                        <td><span id="monkeyWordLength"> - </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ennyiszer:</td>
-                                        <td><span id="monkeyHowManyTimes"> - </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>A listák (elvileg) átlagos szószáma (a várt maximum):</td>
-                                        <td><span id="averageListLength"> - </span></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Ebből ennyi van:</td>
-                                        <td><span id="averageListNumber"> - </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>A leghosszabb lista szószáma:</td>
-                                        <td><span id="longestListNumber"> - </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Az átlagos szószámnál kevesebb szószámú listák száma:</td>
-                                        <td><span id="shorterListNumber"> - </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Az átlagos szószámnál nagyobb szószámú listák száma:</td>
-                                        <td><span id="longerListNumber"> - </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Arányuk (rövidebbek száma / hosszabbak száma):</td>
-                                        <td><span style="background-color:rgb(126, 228, 228)" id="proportion"> -
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Az a szólistahossz, aminél a rövidebb és hosszabb szólisták száma
-                                            egyenlő:</td>
-                                        <td><span id="halfingListLength"> - </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ebből ennyi van:</td>
-                                        <td><span id="halfingListNumber"> - </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ennél a szószámnál rövidebb szószámú listák száma:</td>
-                                        <td><span id="shorterThanHalfListNumber"> - </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ennél a listánál hosszabb szószámú listák száma:</td>
-                                        <td><span id="longerThanHalfListNumber"> - </span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <p>Érdekes, hogy a várt átlagnál rövidebb és hosszabb szólisták számának az aránya a
-                                futtatások
-                                számának a növelésével egy 1,7 körüli értékhez tart. Itt láthat pár példát az
-                                értékére, de
-                                Ön is lefuttathatja egymás után pl. <i>50-szer</i> a programot <i>'a majom 2 betűs
-                                    szavakat
-                                    keres 100-szor'</i> - vagy más, tesztőleges beállítással.
-                            </p>
-                            <table class="table table-success table-sm table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td>100/100/2</td>
-                                        <td>1.74184</td>
-                                    </tr>
-                                    <tr>
-                                        <td>100/100/2</td>
-                                        <td>1.75205</td>
-                                    </tr>
-                                    <tr>
-                                        <td>100/100/3</td>
-                                        <td>1.67154</td>
-                                    </tr>
-                                    <tr>
-                                        <td>500/100/3</td>
-                                        <td>1.75202</td>
-                                    </tr>
-                                    <tr>
-                                        <td>100/100/4</td>
-                                        <td>1.88746</td>
-                                    </tr>
-                                    <tr>
-                                        <td>100/200/4</td>
-                                        <td>1.75712</td>
-                                    </tr>
-                                    <tr>
-                                        <td>10/100/5</td>
-                                        <td>1.77653</td>
-                                    </tr>
-                                </tbody>
-
-                            </table>
-                            <button id="run100Button" type="button" class="btn btn-secondary btn-sm"
-                                onclick="running100_500_2()">
-                                100-szor lefuttatja az 500/2-t</button>
-                            <label>Ismétlés szám: </label>
-                            <input oninput="changeRunning100Input()" id="runRepNumb" type="number" style="width:70px"
-                                value="50">
-                            <label>Futás szám:</label>
-                            <input oninput="changeRunning100Input()" id="runNumb" type="number" style="width:70px"
-                                value="100">
-                            <label>Szóhossz: </label>
-                            <input oninput="changeRunning100Input()" id="runCharNumb" type="number" style="width:40px"
-                                value="2">
-                            <span id="infoForRun100Button">Futásidő: <span id="runInfoMin"> - </span> min.</span>
-
-                            <table class="table table-success table-sm table-bordered">
-                                <tbody>
-                                    <tr>
-                                        <td>A várt maximumnál rövidebb és hosszabb szólisták számának az aránya:
-                                        </td>
-                                        <td><span style="background-color:rgb(126, 228, 228)" id="averageProp"> -
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Azoknak a szólistahosszaknak az átlaga, aminél a rövidebb és hosszabb
-                                            szólisták
-                                            száma
-                                            egyenlő az adott ismétléssorozatban:</p>
-                                        </td>
-                                        <td><span id="forFinalHalfing"> - </span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <p> </p>
-                        </div>
-                    </div>
-                    <div class="row rowBorder rowBackgroundLight">
-                        <div class="col">
-                            <p>Ez hogy lehetséges? Honnan tudja a majom, hogy hogyan kell kirakni egy értelmes szót?
-                                Hogy
-                                sikerülhet neki szignifikánsan sokszor az, ami - nagy átlagban - csak kilencedik
-                                alkalomra
-                                sikerülhetne neki?</p>
-                            <p>Ennek az értelmezésére vegyünk egy szemléletes példát!</p>
-                            <div id="exampleForGauss">
-                                <p>Tegyük fel, hogy az emberek átlagos magassága 1.82 méter. Továbbá tegyük fel,
-                                    hogy a
-                                    legnagyobb - és rendszeresen előforduló magasság az 5,82 méter. Azaz az utcán
-                                    rendszeresen találkozhatunk - igaz, nem túl gyakran - 5,82 méter magasságú
-                                    személyekkel.
-                                </p>
-                                <p>Az ő magasságuk eltérése az átlagos magasságtól 4 méter (felfelé). Ha viszont a
-                                    természet
-                                    igazságos akar lenni a magasságok elosztásában, akkor léteznie kell - egy kevés
-                                    - olyan
-                                    embernek is, akinek a magassága ugyancsak 4 méterrel tér el az átlagtól, de
-                                    <i>lefelé</i>!
-                                    Azaz az ő magasságuk 1,82 - 4 = - 2,18 méter lesz!
-                                </p>
-                                <p>Ez viszont lehetetlen. Negatív magasság nem létezik. Sőt! Kell léteznie egy
-                                    minimális
-                                    magasságnak, ami alatt a
-                                    szervezet, a csontrendszer, a vázizomzat működésképtelenné válna. Mondjuk,
-                                    legyen ez a
-                                    határ az 1 méter.</p>
-                                <p>Ebben az esetben - ha a természet továbbra is ragaszkodik ahhoz, hogy igazságosan
-                                    járjon
-                                    el - akkor a -2,18 méter és az 1 méter közé eső magasságú személyeknek
-                                    valamilyen létező
-                                    magasságot kell kiosztania. Ekkor ezeket a személyeket elhelyezi valamilyen
-                                    rendben a
-                                    legalacsonyabb létező személyek között, azaz ezzel megnöveli az ő számukat.</p>
-                                <p>Azaz a természet a Gauss görbének az 1 méteres határvonaltól balra eső részét
-                                    levágja, s
-                                    az egyes levágott oszlopokat ráhelyezi a már létező oszlopokra, s ezzel megnövel
-                                    azok
-                                    magasságát. Ezzel viszont a Gauss görbe - határvonaltól jobbra lévő - megmaradó
-                                    grafikonja is elveszti a Gauss görbe formáját és egy magasról induló, egyre
-                                    süllyedő
-                                    görbe alakját veszi fel.</p>
-                            </div>
-                        </div>
-
-
+                        <button id="letsRun100Button" type="button" class="btn btn-secondary btn-sm"
+                            onclick="runningForProblems()">Mehet!</button>
+                        <span>Futásidő: <span id="infoForLetsRun100Button"> - </span></span>
                     </div>
 
-                    <div class="row rowBorder rowBackgroundLight">
-                        <div class="row">
-                            <div class="col-10">
-                                Most pedig tekintsünk egy véletlen eloszlást, s nézzük meg, hogy hogyan hozta létre
+                    <table class="table table-striped table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>A majom ennyi betűszámú szavakat keresett :</td>
+                                <td><span id="monkeyWordLength"> - </span></td>
+                            </tr>
+                            <tr>
+                                <td>Ennyiszer:</td>
+                                <td><span id="monkeyHowManyTimes"> - </span></td>
+                            </tr>
+                            <tr>
+                                <td>A listák (elvileg) átlagos szószáma (a várt maximum):</td>
+                                <td><span id="averageListLength"> - </span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Ebből ennyi van:</td>
+                                <td><span id="averageListNumber"> - </span></td>
+                            </tr>
+                            <tr>
+                                <td>A leghosszabb lista szószáma:</td>
+                                <td><span id="longestListNumber"> - </span></td>
+                            </tr>
+                            <tr>
+                                <td>Az átlagos szószámnál kevesebb szószámú listák száma:</td>
+                                <td><span id="shorterListNumber"> - </span></td>
+                            </tr>
+                            <tr>
+                                <td>Az átlagos szószámnál nagyobb szószámú listák száma:</td>
+                                <td><span id="longerListNumber"> - </span></td>
+                            </tr>
+                            <tr>
+                                <td>Arányuk (rövidebbek száma / hosszabbak száma):</td>
+                                <td><span style="background-color:rgb(126, 228, 228)" id="proportion"> -
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Az a szólistahossz, aminél a rövidebb és hosszabb szólisták száma
+                                    egyenlő:</td>
+                                <td><span id="halfingListLength"> - </span></td>
+                            </tr>
+                            <tr>
+                                <td>Ebből ennyi van:</td>
+                                <td><span id="halfingListNumber"> - </span></td>
+                            </tr>
+                            <tr>
+                                <td>Ennél a szószámnál rövidebb szószámú listák száma:</td>
+                                <td><span id="shorterThanHalfListNumber"> - </span></td>
+                            </tr>
+                            <tr>
+                                <td>Ennél a listánál hosszabb szószámú listák száma:</td>
+                                <td><span id="longerThanHalfListNumber"> - </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Érdekes, hogy a várt átlagnál rövidebb és hosszabb szólisták számának az aránya a
+                        futtatások
+                        számának a növelésével egy 1,7 körüli értékhez tart. Itt láthat pár példát az
+                        értékére, de
+                        Ön is lefuttathatja egymás után pl. <i>50-szer</i> a programot <i>'a majom 2 betűs
+                            szavakat
+                            keres 100-szor'</i> - vagy más, tetszőleges beállítással.
+                    </p>
+                    <table class="table table-success table-sm table-bordered">
+                        <tbody>
+                            <thead>
+                                <tr>
+                                    <td>Futtatás paraméterei</td>
+                                    <td>rövidebb / hosszabb</td>
+                                    <td>Várt maximum</td>
+                                    <td>Tényleges maximum</td>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>100/100/2</td>
+                                <td>1.71267</td>
+                                <td>9</td>
+                                <td>5.5</td>
+                            </tr>
+                            <tr>
+                                <td>1000/100/3</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>100/500/4</td>
+                                <td>1.74923</td>
+                                <td>877</td>
+                                <td>603.4</td>
+                            </tr>
+                            <tr>
+                                <td>50/100/5</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <button id="run100Button" type="button" class="btn btn-secondary btn-sm"
+                        onclick="running100_500_2()">
+                        100-szor lefuttatja az 500/2-t</button>
+                    <label>Ismétlés szám: </label>
+                    <input oninput="changeRunning100Input()" id="runRepNumb" type="number" style="width:70px"
+                        value="50">
+                    <label>Futás szám:</label>
+                    <input oninput="changeRunning100Input()" id="runNumb" type="number" style="width:70px" value="100">
+                    <label>Szóhossz: </label>
+                    <input oninput="changeRunning100Input()" id="runCharNumb" type="number" style="width:40px"
+                        value="2">
+                    <span id="infoForRun100Button">Futásidő: <span id="runInfoMin"> - </span></span>
+
+                    <table id="vartMaximum" class="table table-success table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>A várt maximumnál rövidebb és hosszabb szólisták számának az aránya:
+                                </td>
+                                <td><span style="background-color:rgb(126, 228, 228)" id="averageProp"> -
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Várt maximum:</p>
+                                </td>
+                                <td><span id="forApproximatedFinalHalfing"> - </span></td>
+                            </tr>
+                            <tr>
+                                <td>Azoknak a szólistahosszaknak az átlaga, aminél a rövidebb és hosszabb
+                                    szólisták
+                                    száma
+                                    egyenlő az adott ismétléssorozatban (tényleges maximum):</p>
+                                </td>
+                                <td><span id="forFinalHalfing"> - </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p> </p>
+                </div>
+            </div>
+            <div class="row rowBorder rowBackgroundLight">
+                <div class="col">
+                    <p>Ez hogy lehetséges? Honnan tudja a majom, hogy hogyan kell kirakni egy értelmes szót?
+                        Hogy
+                        sikerülhet neki szignifikánsan sokszor az, ami - nagy átlagban - csak kilencedik
+                        alkalomra
+                        sikerülhetne neki?</p>
+                    <p>Ennek az értelmezésére vegyünk egy szemléletes példát!</p>
+                    <div id="exampleForGauss">
+                        <p>Tegyük fel, hogy az emberek átlagos magassága 1.82 méter. Továbbá tegyük fel,
+                            hogy a
+                            legnagyobb - és rendszeresen előforduló magasság az 5,82 méter. Azaz az utcán
+                            rendszeresen találkozhatunk - igaz, nem túl gyakran - 5,82 méter magasságú
+                            személyekkel.
+                        </p>
+                        <p>Az ő magasságuk eltérése az átlagos magasságtól 4 méter (felfelé). Ha viszont a
+                            természet
+                            igazságos akar lenni a magasságok elosztásában, akkor léteznie kell - egy kevés
+                            - olyan
+                            embernek is, akinek a magassága ugyancsak 4 méterrel tér el az átlagtól, de
+                            <i>lefelé</i>!
+                            Azaz az ő magasságuk 1,82 - 4 = - 2,18 méter lesz!
+                        </p>
+                        <p>Ez viszont lehetetlen. Negatív magasság nem létezik. Sőt! Kell léteznie egy
+                            minimális
+                            magasságnak, ami alatt a
+                            szervezet, a csontrendszer, a vázizomzat működésképtelenné válna. Mondjuk,
+                            legyen ez a
+                            határ az 1 méter.</p>
+                        <p>Ebben az esetben - ha a természet továbbra is ragaszkodik ahhoz, hogy igazságosan
+                            járjon
+                            el - akkor a -2,18 méter és az 1 méter közé eső magasságú személyeknek
+                            valamilyen létező
+                            magasságot kell kiosztania. Ekkor ezeket a személyeket elhelyezi valamilyen
+                            rendben a
+                            legalacsonyabb létező személyek között, azaz ezzel megnöveli az ő számukat.</p>
+                        <p>Azaz a természet a Gauss görbének az 1 méteres határvonaltól balra eső részét
+                            levágja, s
+                            az egyes levágott oszlopokat ráhelyezi a már létező oszlopokra, s ezzel megnövel
+                            azok
+                            magasságát. Ezzel viszont a Gauss görbe - határvonaltól jobbra lévő - megmaradó
+                            grafikonja is elveszti a Gauss görbe formáját és egy magasról induló, egyre
+                            süllyedő
+                            görbe alakját veszi fel.</p>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row rowBorder rowBackgroundLight">
+                <div class="col">
+
+
+                    <div class="row">
+                        <div class="col-10">
+                            <p>Most pedig tekintsünk egy véletlen eloszlást, s nézzük meg, hogy hogyan hozta létre
                                 azt a
                                 majom
                                 egy
@@ -1453,65 +1506,62 @@
                                 is, hogy <i>ha egy 3 méter hosszú kötélből 5 métert levágok, akkor hány méter
                                     kötelem
                                     marad?</i>
-                                Klikkeljen a <i>'Mehet'</i> gombra!
-                            </div>
-                            <div class="col-2">
-                                <div class="container">
-                                    <div class="row">
-                                        <div="col">
-                                            <button onclick="chooseCharNumb()" id="run100-button" type="button"
-                                                class="btn btn-secondary btn-sm">Mehet</button>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="row">
-                                        <input type="radio" name="letter" id="twoLetters" checked value="2"> <label
-                                            for="twoLetters"> 2
-                                            betű</label>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <input type="radio" name="letter" id="threeLetters" value="3"> <label
-                                            for="threeLetters"> 3
-                                            betű</label>
-                                    </div>
-                                </div>
-                            </div>
+                                Klikkeljen a <i>'Mehet'</i> gombra! <small>(Futásidő: 2 betű - 3 mp; 3 betű - 44
+                                    mp)</small></p>
                         </div>
-
-
-                        <div class="row forTableGraphic">
-                            <div id="forTable1" class="col">
-                                <p>
-                                <div style="float:right" class="divForGraphic">
-                                    <table class="tableGraphic" id="graphic1">
-                                    </table>
+                        <div class="col-2">
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <button onclick="chooseCharNumb()" id="run100-button" type="button"
+                                        class="btn btn-secondary btn-sm">Mehet</button>
                                 </div>
-                                A majom most ezt, a képen látható <i>két betűs szavak keresése 500-szor</i>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col">
+                                    <input type="radio" name="letter" id="twoLetters" checked value="2"> <label
+                                        for="twoLetters"> 2
+                                        betű</label>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col">
+                                    <input type="radio" name="letter" id="threeLetters" value="3"> <label
+                                        for="threeLetters"> 3
+                                        betű</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div id="forTable1" class="col forTableGraphic2">
+                            <div style="float:right" class="divForGraphic">
+                                <table class="tableGraphic" id="graphic1">
+                                </table>
+                            </div>
+                            <p>A majom most ezt, a képen látható <i>két betűs szavak keresése 500-szor</i>
                                 eloszlást
                                 fogja elkészíteni
                                 lépésről-lépésre. Az
                                 első oszlopban az 1 szóhosszúságú listák vannak, a második oszlop magasságát a 2
                                 szóhosszúságú
                                 listák száma adja, s így tovább.
-                                </p>
-                            </div>
                         </div>
-                        <p>Most pedig nézzük meg, hogyan készültek el a listák abban a világban,
-                            ahol negatív magasságú emberek, s negatív hosszúságú listák is léteznek! </p>
-                        <div class="row forTableGraphic">
-                            <div id="forTable2" class="col">
-                                <p>
-                                <div style="float:right" class="divForGraphic">
-                                    <table class="tableGraphic" id="graphic2">
-                                    </table>
-                                </div>
-                                A majom először
+                    </div>
+                    <p>Most pedig nézzük meg, hogyan készültek el a listák abban a világban,
+                        ahol negatív magasságú emberek, s negatív hosszúságú listák is léteznek! </p>
+                    <div class="row">
+                        <div id="forTable2" class="col forTableGraphic2">
+                            <p>
+                            <div style="float:right" class="divForGraphic">
+                                <table class="tableGraphic" id="graphic2">
+                                </table>
+                            </div>
+                            <p>A majom először
                                 kiválasztja, hogy hol legyen az eloszlás maximuma (esetünkben ez most a(z)
-                                <strong><span id="holamax"> -
-                                    </span></strong>), majd elkészíti az azoktól jobbra eső - a
+                                <span id="holamax"> -
+                                </span>), majd elkészíti az azoktól jobbra eső - a
                                 maximumnál hosszabb - listákat, s oszlopokba rakja azokat. A grafikonon a sárga
                                 oszlop jelzi
                                 a
@@ -1519,725 +1569,752 @@
                                 oszlop pedig
                                 a
                                 készülő eloszlás maximumát mutatja.
-                                </p>
-                            </div>
+                            </p>
                         </div>
-                        <div class="row forTableGraphic">
-                            <div id="forTable3" class="col">
-                                <p>
-                                <div style="float:right" class="divForGraphic">
-                                    <table class="tableGraphic" id="graphic3">
-                                    </table>
-                                </div>
-                                Ezután a majom elkészíti a bal oldali listák oszlopait is úgy, hogy azok a jobb
+                    </div>
+                    <div class="row">
+                        <div id="forTable3" class="col forTableGraphic2">
+                            <p>
+                            <div style="float:right" class="divForGraphic">
+                                <table class="tableGraphic" id="graphic3">
+                                </table>
+                            </div>
+                            <p>Ezután a majom elkészíti a bal oldali listák oszlopait is úgy, hogy azok a jobb
                                 oldalon
                                 lévő oszlopok tükörképei legyenek. Természetesen ezek között lesznek
                                 negatív hosszúságú listák is, s ezeknek az oszlopai a sárga tengelytől balra
                                 helyezkednek
                                 el.
                                 Ezzel a majom tulajdonképpen egy szabályos Gauss eloszlást hozott létre.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="row forTableGraphic">
-                            <div id="forTable4" class=" col">
-                                <p>
-                                <div style="float:right" class="divForGraphic">
-                                    <table class="tableGraphic" id="graphic4">
-                                    </table>
-                                </div>
-                                De a mi világunkban nincs megengedve az, hogy negatív hosszúságú listák is
-                                létezhessenek, ezért a majom összeszedi azokat, s kiveszi a szépen elrendezett Gauss
-                                eloszlásból. Ekkor már csak
-                                a mi valóságunkban is létező listák alkotják a látható Gauss eloszlás oszlopait.
-                                </p>
-
-                            </div>
-                        </div>
-
-
-                        <div class="row forTableGraphic">
-                            <div id="skipToGraphic">
-                                <p>A következő grafikon azt mutatja meg, hogy az egyes szóhosszúságú
-                                    listákból
-                                    hány darab van.
-                                    Az
-                                    első oszlop magassága mutatja, hogy hány egyszavas listánk van. A második
-                                    oszlopé, hogy
-                                    hány
-                                    kétszavas listánk van, és így tovább. </p>
-                            </div>
-                            <div id="forTable5" class=" col">
-                                <p>
-                                <div style="float:right" class="divForGraphic">
-                                    <table class="tableGraphic" id="graphic5">
-                                    </table>
-                                </div>
-                                <div style="float:right" class="divForGraphic">
-                                    <table class="tableGraphic" id="graphic6">
-                                    </table>
-                                </div>
-
-                                Viszont ekkor a majomnak maradt <strong><span id="restFromList"> - </span></strong>
-                                db.
-                                virtuális listája, amivel kezdenie kell valamit! A majom tehát fogja ezt a kupacot,
-                                és
-                                elhelyezi
-                                azokat a valóságban is létező listák között úgy, hogy a maximumnál rövidebb szószámú
-                                listák
-                                oszlopait tölti fel velük véletlenszerűen - figyelve arra, hogy minél kisebb az
-                                oszlophoz
-                                tartozó szószám, annál több listát helyezzen oda a megmaradt listái közül.
-
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p><img style="float:right" src="/img/example_oszlopok_epitese.png"
-                                        alt="eloszlásvizsgálat" width="250">A képen <i>'a majom kétbetűs szavakat
-                                        keres 500-szor</i> beállítás egy
-                                    konkrét
-                                    lefutása során megvalósult eloszlást láthatjuk, alatta pedig ezen eloszlás jobb
-                                    oldalából
-                                    - a fenti szabály szerint - konstruált eloszlás van. Néha viszont olyan
-                                    eloszláspárt
-                                    kapunk, amelyek jócskán eltérnek egymástól, s ez kételyt ébreszthet, hogy a
-                                    'természet'
-                                    valóban
-                                    úgy építi fel az eloszlásokat, 'ahogyan mi azt elképzeljük'.</p>
-                                <p>Itt most szerencsénk volt: a két eloszlás hasonlít egymásra - nem túl nagy az
-                                    eltérés. De
-                                    hogy
-                                    nézhet ki ez a 'nagy átlag' szerint?</p>
-                                <p><img style="float:right" src="/img/example_oszlopok_epitese_500_500_2.png"
-                                        alt="eloszlásvizsgálat" width="250">Ezt mutatja meg a következő képpár. Most
-                                    500-szor
-                                    futtatuk le egymás után <i>'a majom kétbetűs szavakat keres 500-szor</i>
-                                    beállítással a
-                                    programot, s kaptunk 500 - 500 eredeti és konstruált eloszlást. Mindkét
-                                    eloszláscsoportban
-                                    vettük
-                                    az egyes oszlopok átlagértékét, s itt láthatjuk ezt a két 'átlageloszlást'.
-                                    Észre lehet
-                                    venni,
-                                    hogy a két oszlopgrafikon alig tér el egymástól. Így akár még az is lehetséges,
-                                    hogy a
-                                    'természet' hasonlóan kontruálja meg az eloszlást, ahogy mi is tettük.</p>
-                                <div class="row">
-                                    <div class="col-10">
-                                        <p>Ha akarja, Ön is lefuttathatja így a programot a kívánt beállítással, s
-                                            megnézheti az
-                                            eredményt
-                                            ha ide kattint: </p>
-                                    </div>
-                                    <div class="col-2">
-                                        <button onclick="tryYourself()" id="tryYourselfButton" type="button"
-                                            class="btn btn-secondary btn-sm">Katt!</button>
-                                    </div>
-                                </div>
-
-                                <div id="tryYourselfDiv" style="display:none">
-                                    <div class="innerBorderWithPink">
-                                        <div class="row forTableGraphic">
-                                            <div class="col">
-                                                <label class="try">Ismétlések száma:</label>
-                                                <input oninput="tryRunTime()" value="500" class="try" id="tryRep"
-                                                    type="number" style="width:80px">
-                                                <label class="try">Futások száma:</label>
-                                                <input oninput="tryRunTime()" value="500" class="try" type="number"
-                                                    id="tryRun" style="width:80px">
-                                                <label class="try">Betűk száma:</label>
-                                                <input oninput="tryRunTime()" value="2" class="try" type="number"
-                                                    id="tryLetter" style="width:80px">
-                                                <button class="try" onclick="tryYourselfRun()" id="tryYourselfButton"
-                                                    type="button" class="btn btn-secondary btn-sm">Katt!</button>
-                                                <span>Futásidő: <span id="tryRunTimeSpan"> - </span>perc.</span>
-                                            </div>
-                                        </div>
-                                        <div class="row forTableGraphic">
-                                            <div id="forTable7" class=" col">
-                                                <div style="float:right" class="divForGraphic">
-                                                    <table class="tableGraphic" id="graphic7">
-                                                    </table>
-                                                </div>
-                                                <div style="float:right" class="divForGraphic">
-                                                    <table class="tableGraphic" id="graphic8">
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </p>
                         </div>
                     </div>
 
-                    <div id="rowForFullDistribution" class="row rowBorder">
-                        <div id="divForDistanceTable" class="row">
-                            <div class="col">
-                                <p>Összesen tehát <span id="emptiness1">
-                                        &#8212 </span> darab szólistánk van. A listákat úgy tesszük sorba,
-                                    hogy az első kupacban az összesen egy szót tartalmazó listák vannak. A második
-                                    kupacban
-                                    az
-                                    összesen két szót tartalmazó listák vannak. És így tovább - egészen az utolsó -
-                                    jelen
-                                    esetben a <span id="emptiness2">
-                                        &#8212
-                                    </span>. sorszámú - helyig, amely most <span id="emptiness3"> &#8212 </span> db.
-                                    listát
-                                    tartalmaz.
-                                    Tehát összesen <span id="emptiness4">
-                                        &#8212 </span> hely között kell elosztanunk <span id="emptiness5">
-                                        &#8212 </span> db. listát.</span>.</p>
-                                <p>Amennyiben ez a két érték lényegesen eltér
-                                    egymástól <i>(négy vagy annál több betűs szavak keresése esetén)</i>, akkor
-                                    nagyon sok
-                                    hely
-                                    között
-                                    kell
-                                    kiosztanunk nagyon kevés listát. Azaz az egyes listakupacok között néhol nagyon
-                                    hosszú
-                                    ürességek
-                                    fognak tátongani.</p>
-                                <p>A következő táblázat azt mutatja meg, hogy milyen hosszúak ezek az egymást követő
-                                    ürességek, amelyeket néhol egy-egy papírkupac szakít meg.</p>
-                                <P style="font-size:13px">Figyelem! Ennek a táblázatnak csak négy vagy annál több
-                                    betűs
-                                    szavak
-                                    keresésének a sorozata
-                                    esetén
-                                    van
-                                    jelentősége!</P>
-
-                                <table class="table table-sm table-bordered table-striped table-small">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <p>Ennyi üresség követi egymást: </p>
-                                            </td>
-                                            <td><span id="numberOfEmptiness"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p>Ennyi féle hosszúságú üresség van:
-                                                    <span style="font-size:13px">(Ugyanolyan hosszúságú üresség
-                                                        többször is
-                                                        előfordulhat)</span></p>
-                                            </td>
-                                            <td><span id="kindOfEmptiness"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p>A leghosszabb üresség hossza:
-                                                    <span style="font-size:13px">(Ez a szám az ürességek számához
-                                                        képest
-                                                        rendkívül nagy is lehet, mert sok olyan ürességhossz
-                                                        lehetséges,
-                                                        amelynek az előfordulása nulla.)</span></p>
-                                                </p>
-                                            </td>
-                                            <td><span id="longestEmptiness"></span></td>
-                                        </tr>
-                                    </tbody>
+                    <div class="row">
+                        <div id="forTable4" class="col forTableGraphic2">
+                            <p>
+                            <div style="float:right" class="divForGraphic">
+                                <table class="tableGraphic" id="graphic4">
                                 </table>
-                                <p style="text-align:center"><strong>Az egymást követő ürességek
-                                        hosszúságai:</strong></p>
-                                <div id="rowForDistanceTable" class="row">
-                                    <div id="colForDistanceTable" class="col col-12">
-                                        <p style="text-align:center" id="distanceTablePage"></p>
-                                        <p id="distanceTable">
-                                        </p>
-                                    </div>
-
-                                </div>
-                                <div class="row " id="distributionButtons">
-                                    <div class="col nav justify-content-center">
-                                        <button id="distanceStart" type="button" class="btn btn-secondary btn-sm"
-                                            onclick="distanceStart()">az
-                                            elejére</button>
-                                        <button id="distanceBack" name="arrow" type="button"
-                                            class="btn btn-secondary btn-sm" onclick="distanceBack()">&#8678</button>
-                                        <button id="distanceFoward" name="arrow" type="button"
-                                            class="btn btn-secondary btn-sm" onclick="distanceFow()">&#8680</button>
-                                        <button id="distanceLast" type="button" class="btn btn-secondary btn-sm"
-                                            onclick="distanceLast()">a
-                                            végére</button>
-                                    </div>
-                                </div>
-
-
                             </div>
-                        </div>
-
-                        <div id="divForShowDistanceGraph" class="row">
-                            <div class="col-8">
-                                <p>A következő oszlopgrafikon azt mutatja meg, hogy milyen hosszúságú ürességek
-                                    követik
-                                    egymást
-                                    az egyes kupacok mözött. <span style="font-size:13px">(Ennek a grafikonnak csak
-                                        négy
-                                        betűnél
-                                        hosszabb szókeresés
-                                        sorozatok esetén van jelentősége!)</span> Klikkeljen a <i>'mutat'</i>
-                                    gombra!</p>
-                            </div>
-                            <div class="col-4">
-                                <button id="buttonForDistanceGraph" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="showTheDistanceGraph()">Mutat</button>
-                                <p>A grafikon elkészítésének várható ideje: <span
-                                        id="distGraphEstimateTime"></span><strong><span
-                                            id="distGraphEstimateTime2"></span></strong></p>
-                            </div>
-                        </div>
-
-                        <div style="display:none" id="rowForDistanceGraph" class="row">
-                            <div id="colForDistanceGraph" class="col col-12">
-                                <table id="distanceGraph">
-                                </table>
-
-                            </div>
-
-                            <small><span id=realTimeForDistanceGraph></span>
-                                <span id=infoForDistanceGraph></span></small>
-                            <!--<div class="row">
-                    <div style="display:none" id="forFullTable" class="col col-12">
-                        <table class="fullTable" id="graphic">
-                        </table>
-                    </div>-->
+                            <p>De a mi világunkban nincs megengedve az, hogy negatív hosszúságú listák is
+                                létezhessenek, ezért a majom összeszedi azokat, s kiveszi a szépen elrendezett Gauss
+                                eloszlásból. Ekkor már csak
+                                a mi valóságunkban is létező listák alkotják a látható Gauss eloszlás oszlopait.
+                            </p>
 
                         </div>
+                    </div>
 
-                        <div id="divForDistanceTable" class="row">
-                            <div class="col">
-                                <p>Összesen tehát <span id="emptiness6">
-                                        &#8212 </span> darab ürességünk van, amelyek <span id="emptiness7"></span>
-                                    hosszúság
-                                    között lettek felosztva úgy, hogy több ürességnek is lehet ugyanaz a hosszúsága,
-                                    s lesz
-                                    olyan ürességhossz, amit nem valósít meg egy üresség se.</p>
-                                <p>Most is megkérdezhetjük: hány darab <i>'egy hosszúságú'</i> ürességünk van? Hány
-                                    darab
-                                    <i>'kettő
-                                        hosszúságú'</i> ürességünk van? És így tovább. Ezt az eloszlást mutatja a
-                                    következő
-                                    táblázat.
-                                </p>
-                                <div class="row">
-                                    <div class="col">
-                                        <p>A táblázat összesen <span id="distributionDistanceLength">&#8212 </span>
-                                            adatot
-                                            tartalmaz <span id=distributionDistanceAllPage> - </span> oldalon.
-                                            <span style="font-size:13px">(Oldalanként 100 adat.)</span></p>
+
+                    <div class="row ">
+
+                        <div class="col forTableGraphic2">
+                            <p>A következő grafikon azt mutatja meg, hogy az egyes szóhosszúságú
+                                listákból
+                                hány darab van.
+                                Az
+                                első oszlop magassága mutatja, hogy hány egyszavas listánk van. A második
+                                oszlopé, hogy
+                                hány
+                                kétszavas listánk van, és így tovább. </p>
+
+                            <div id="forTable5">
+                                <div style="float:right">
+                                    <p style="text-align:center">A kreált eloszlás:</p>
+                                    <div class="divForGraphic">
+
+                                        <table class="tableGraphic" id="graphic5">
+                                        </table>
+
                                     </div>
-                                </div>
-                                <p style="text-align:center"><strong>Az ürességek eloszlása hossz szerint:</strong>
-                                </p>
-                                <div id="rowForDistributionDistanceTable" class="rowForTable row">
-                                    <div id="colForDistributionDistanceTable" class="colForTable col col-12">
-                                        <p style="text-align:center" id="distributionDistanceTablePage"></p>
-                                        <p id="distributionDistanceTable" class="table">
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row " id="distributionButtons">
-                                    <div class="col nav justify-content-center">
-                                        <button id="distanceStart" type="button" class="btn btn-secondary btn-sm"
-                                            onclick="distributionDistanceStart()">az
-                                            elejére</button>
-                                        <button id="distanceBack" name="arrow" type="button"
-                                            class="btn btn-secondary btn-sm"
-                                            onclick="distributionDistanceBack()">&#8678</button>
-                                        <button id="distanceFoward" name="arrow" type="button"
-                                            class="btn btn-secondary btn-sm"
-                                            onclick="distributionDistanceFow()">&#8680</button>
-                                        <button id="distanceLast" type="button" class="btn btn-secondary btn-sm"
-                                            onclick="distributionDistanceLast()">a
-                                            végére</button>
+                                    <p style="text-align:center">Az eredeti eloszlás:</p>
+                                    <div class="divForGraphic">
+
+                                        <table class="tableGraphic" id="graphic6">
+                                        </table>
+
                                     </div>
                                 </div>
 
 
-                            </div>
-                        </div>
+                                <p>Viszont ekkor a majomnak maradt <span id="restFromList"> -
+                                    </span>
+                                    db.
+                                    virtuális listája, amivel kezdenie kell valamit! A majom tehát fogja ezt a
+                                    kupacot,
+                                    és
+                                    elhelyezi
+                                    azokat a valóságban is létező listák között úgy, hogy a maximumnál rövidebb
+                                    szószámú
+                                    listák
+                                    oszlopait tölti fel velük véletlenszerűen - figyelve arra, hogy minél kisebb az
+                                    oszlophoz
+                                    tartozó szószám, annál több listát helyezzen oda a megmaradt listái közül.
 
-                        <div id="divForDistanceTable2" class="rowForBorder row">
-                            <div class="colForBorder col">
-                                <p>Összesen tehát <span id="emptiness7">
-                                        &#8212 </span> darab ürességünk van. Ezeknek az ürességeknek az eloszlásában
-                                    viszont
-                                    újabb ürességeket fedezhetünk, s így megnézhetjük ezeknek az ürességeknek a
-                                    sorozatát
-                                    is! A
-                                    következő táblázatból látszik, hogy <i>először egy <span id="emptiness8"> &#8212
-                                        </span>
-                                        hosszúságú</i> üresség jelenik meg, majd azt <i>követi egy <span
-                                            id="emptiness9">
-                                            &#8212
-                                        </span>
-                                        hosszúságú</i> üresség, s így tovább.
-                                </p>
-                                <p style="text-align:center"><strong>Az ürességek eloszlásában található ürességek
-                                        eloszlása:</strong></p>
-                                <div id="rowForDistanceMatrixTable2" class="rowForTable row">
-                                    <div id="colForDistanceMatrixTable2" class="colForTable col col-12">
-                                        <p style="text-align:center" id="distanceMatrixTablePage2"></p>
-                                        <p id="distanceMatrixTable2" class="table">
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row " id="distributionButtons2">
-                                    <div class="col nav justify-content-center">
-                                        <button id="distanceStart2" type="button" name="arrow2"
-                                            class="btn btn-secondary btn-sm" onclick="distanceStart()">az
-                                            elejére</button>
-                                        <button id="distanceBack2" name="arrow2" type="button"
-                                            class="btn btn-secondary btn-sm" onclick="distanceBack()">&#8678</button>
-                                        <button id="distanceFoward2" name="arrow2" type="button2"
-                                            class="btn btn-secondary btn-sm" onclick="distanceFow()">&#8680</button>
-                                        <button id="distanceLast2" type="button" name="arrow2"
-                                            class="btn btn-secondary btn-sm" onclick="distanceLast()">
-                                            végére</button>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                        <div id="divForShowDistributionDistanceGraph" class="row">
-                            <div class="col-8">
-                                <p>A következő oszlopgrafikon ezt a táblázatot rajzolja meg oszlopgrafikon
-                                    formájában.
-
-
-                                    azt mutatja meg, hogy <i>'a milyen hosszúságú ürességekből
-                                        hány darab van.'</i> Így az első oszlop magassága azt mutatja, hogy az
-                                    <i>'egy
-                                        hosszúságú'</i> ürességből hány darab van. A második oszlop magasságáé
-                                    pedig,
-                                    hogy a <i>'kettő hosszúságú'</i> ürességből hány darab van. És így tovább.
-                                    <span style="font-size:13px">(Ennek a grafikonnak csak négy betűnél hosszabb
-                                        szókeresés
-                                        sorozatok esetén van jelentősége!)</span> Klikkeljen a <i>'mutat'</i>
-                                    gombra!
                                 </p>
                             </div>
-                            <div class="col-4">
-                                <button id="buttonForDistributionDistanceGraph" type="button"
-                                    class="btn btn-secondary btn-sm"
-                                    onclick="showTheDistributionDistanceGraph()">Mutat</button>
-                                <p>A grafikon elkészítésének várható ideje: <span
-                                        id="distributionDistanceGraphEstimateTime"></span><strong><span
-                                            id="distributionDistanceGraphEstimateTime2"></span></strong></p>
-                            </div>
                         </div>
-                        <div class="row rowNeedBorder">
-                            <div class="col colNeedBorder">
-                                <div id="" class="row">
-                                    <div id="" class="col">
-                                        <div><button id="moreDistanceButton" style="float:right" type="button"
-                                                class="btn btn-secondary btn-sm"
-                                                onclick="showMoreDistance()">Kérem</button>
-                                            <p>Eddig két ürességvizsgálatot végeztünk, ahol rendre <i><span
-                                                        id="emptiness10">
-                                                        &#8212 </span> db.</i>,
-                                                ill. <i><span id="emptiness11"> &#8212 </span> db.</i> üresség
-                                                követte
-                                                egymást.
-                                                Ezt az eljárást
-                                                addig ismételhetjük meg újra és újra, míg az ürességek száma le nem
-                                                csökken
-                                                1-re, s ekkor
-                                                megvizsgálhatjuk az így kapott sorozatot.
-                                            </p>
-                                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <img class="littleImgRight" style="float:right" src="/img/example_oszlopok_epitese.png"
+                                alt="eloszlásvizsgálat" width="250">
+                            <p>A képen <i>'a majom kétbetűs szavakat
+                                    keres 500-szor</i> beállítás egy
+                                konkrét
+                                lefutása során megvalósult eloszlást láthatjuk, alatta pedig ezen
+                                eloszlás
+                                jobb
+                                oldalából
+                                - a fenti szabály szerint - konstruált eloszlás van. Néha viszont olyan
+                                eloszláspárt
+                                kapunk, amelyek jócskán eltérnek egymástól, s ez kételyt ébreszthet,
+                                hogy a
+                                'természet'
+                                valóban
+                                úgy építi fel az eloszlásokat, 'ahogyan mi azt elképzeljük'.</p>
+                            <p>Itt most szerencsénk volt: a két eloszlás hasonlít egymásra - nem túl
+                                nagy az
+                                eltérés. De
+                                hogy
+                                nézhet ki ez a 'nagy átlag' szerint?</p>
+                            <p><img class="littleImgRight" style="float:right"
+                                    src="/img/example_oszlopok_epitese_500_500_2.png" alt="eloszlásvizsgálat"
+                                    width="250">Ezt mutatja meg a következő
+                                képpár.
+                                Most
+                                500-szor
+                                futtatuk le egymás után <i>'a majom kétbetűs szavakat keres 500-szor</i>
+                                beállítással a
+                                programot, s kaptunk 500 - 500 eredeti és konstruált eloszlást. Mindkét
+                                eloszláscsoportban
+                                vettük
+                                az egyes oszlopok átlagértékét, s itt láthatjuk ezt a két
+                                'átlageloszlást'.
+                                Észre lehet
+                                venni,
+                                hogy a két oszlopgrafikon alig tér el egymástól. Így akár még az is
+                                lehetséges,
+                                hogy a
+                                'természet' hasonlóan kontruálja meg az eloszlást, ahogy mi is tettük.
+                            </p>
+                        </div>
+                    </div>
 
-                                        <div style="display:none" id="rowForMoreDistanceMatrix" class="rowForTable row">
-                                            <div id="colForMoreDistanceMatrix" class="colForTable col">
-                                                <div id="moreDistanceMatrix" class="table"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="row">
+                        <div class="col-10">
+                            <p>Ha akarja, Ön is lefuttathatja így a programot a kívánt beállítással, s
+                                megnézheti az
+                                eredményt
+                                ha ide kattint: </p>
+                        </div>
+                        <div class="col-2">
+                            <button onclick="tryYourself()" id="tryYourselfButton" type="button"
+                                class="btn btn-secondary btn-sm">Katt!</button>
+                        </div>
+                    </div>
+                    <div id="tryYourselfDiv" style="display:none">
+                        <div class="innerBorderWithPink">
+                            <div class="row forTableGraphic">
+                                <div class="col">
+                                    <label class="try">Ismétlések száma:</label>
+                                    <input oninput="tryRunTime()" value="500" class="try" id="tryRep" type="number"
+                                        style="width:80px">
+                                    <label class="try">Futások száma:</label>
+                                    <input oninput="tryRunTime()" value="500" class="try" type="number" id="tryRun"
+                                        style="width:80px">
+                                    <label class="try">Betűk száma:</label>
+                                    <input oninput="tryRunTime()" value="2" class="try" type="number" id="tryLetter"
+                                        style="width:80px">
+                                    <button class="try" onclick="tryYourselfRun()" id="tryYourselfButton" type="button"
+                                        class="btn btn-secondary btn-sm">Katt!</button>
+                                    <span>Futásidő: <span id="tryRunTimeSpan"> - </span>perc.</span>
                                 </div>
-
-                                <div style="display:none" id="rowForDistributionDistanceGraph" class="rowForTable row">
-                                    <div id="colForDistributionDistanceGraph" class="colForTable col col-12">
-                                        <table id="distributionDistanceGraph" class="table">
+                            </div>
+                            <div class="row forTableGraphic">
+                                <div id="forTable7" class=" col">
+                                    <div style="float:right" class="divForGraphic">
+                                        <table class="tableGraphic" id="graphic7">
+                                        </table>
+                                    </div>
+                                    <div style="float:right" class="divForGraphic">
+                                        <table class="tableGraphic" id="graphic8">
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    </div>
+    </div>
 
 
 
 
+    hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+    <div id="rowForFullDistribution" class="row rowBorder">
+        <div id="divForDistanceTable" class="row">
+            <div class="col">
+                <p>Összesen tehát <span id="emptiness1">
+                        &#8212 </span> darab szólistánk van. A listákat úgy tesszük sorba,
+                    hogy az első kupacban az összesen egy szót tartalmazó listák vannak. A második
+                    kupacban
+                    az
+                    összesen két szót tartalmazó listák vannak. És így tovább - egészen az utolsó -
+                    jelen
+                    esetben a <span id="emptiness2">
+                        &#8212
+                    </span>. sorszámú - helyig, amely most <span id="emptiness3"> &#8212 </span> db.
+                    listát
+                    tartalmaz.
+                    Tehát összesen <span id="emptiness4">
+                        &#8212 </span> hely között kell elosztanunk <span id="emptiness5">
+                        &#8212 </span> db. listát.</span>.</p>
+                <p>Amennyiben ez a két érték lényegesen eltér
+                    egymástól <i>(négy vagy annál több betűs szavak keresése esetén)</i>, akkor
+                    nagyon sok
+                    hely
+                    között
+                    kell
+                    kiosztanunk nagyon kevés listát. Azaz az egyes listakupacok között néhol nagyon
+                    hosszú
+                    ürességek
+                    fognak tátongani.</p>
+                <p>A következő táblázat azt mutatja meg, hogy milyen hosszúak ezek az egymást követő
+                    ürességek, amelyeket néhol egy-egy papírkupac szakít meg.</p>
+                <P style="font-size:13px">Figyelem! Ennek a táblázatnak csak négy vagy annál több
+                    betűs
+                    szavak
+                    keresésének a sorozata
+                    esetén
+                    van
+                    jelentősége!</P>
 
-                    hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-
-
-
-
-
-                    <p>Ha meg akarja nézni egy gépelés sorozat esetén ezt az eloszlást, azt <a
-                            href="/monkey.html#rowForFullDistribution">ide kattintva</a> teheti meg.</p>
-
-
-
-
-
-                    <div class="row">
-                        <form class="form-inline">
-                            <label class="mt-1">A találatok küldése a szervernek:</label>
-                            <button disabled type="button" id="send-data" class="btn btn-secondary btn-sm"
-                                onclick=sendData()>Küld</button>
-                        </form>
-                    </div>
-
-                    <div class="row">
-                        <p>A memória mérete jelenleg: <span id="monkeyMemorySize">-</span></p>
-                        <p>Az eddigi összes (eredményes) futás száma: <span id="numberOfRunnings">-</span></p>
-                        <button type="button" class="btn btn-secondary btn-sm" onclick=goToRepeat()>Újabb futtatás
-                            ugyanannyiszor</button>
-                    </div>
-
-                    <div class="row">
-                        <form class="form-inline">
-                            <label>A szó hossza legyen:</label>
-                            <input type="number" class="form-control form-control-sm" style="width:100px" min="2"
-                                max="10" value="8">
-                            <label> betű!</label>
-                            <button type="button" class="btn btn-secondary btn-sm" onclick="generateWord(event)">Kérek
-                                egy
-                                szót!</button>
-                            <button type="button" class="btn btn-secondary btn-sm"
-                                onclick="generateWordRnd(event)">Véletlen
-                                hosszúságú szót kérek!</button>
-                        </form>
-                    </div>
-                    <div class="row">
-                        <p>Íme a szó: <span id="generatedWord"></span> </p>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-6">
-                            <div class="row">
-                                <label>Tetszik a szó, jegyezzük fel!<small> A szó eltávolítása a táblázatból:
-                                        klikkeljen
-                                        rá
-                                        egyet!</small></label>
-                                <button type="button" class="btn btn-secondary btn-sm btn-block"
-                                    onclick="notation(event)">Rajta!</button>
-                            </div>
-                            <div class="row">
-                                <button type="button" class="btn btn-secondary btn-sm" onclick="writeSentence()">Kérek
-                                    egy
-                                    mondatot
-                                    a
-                                    kedvenc szavakból!</button>
-
-                                <div id="divForSentence">
-                                    <p><span id="sentence">-</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-1"></div>
-                        <div id="divForNotations" class="col-5">
-                            <table id="notations" class="table table-small"></table>
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="row">
-                        <div class="col">
-                            <h5>A szólista szimulálása</h5>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="row">
-                            <div class="col">
-                                <p>Láttuk azt, hogy egy 13 betűből álló értelmes szó létrehozásához a programnak
-                                    átlagosan
-                                    2,2
-                                    millió
-                                    évre
-                                    lenne szüksége. Ez a könyv összesen 1,3 billiárd - egész pontosan:
-                                    1 376 544 666 922 514
-                                    -
-                                    oldalt
-                                    tartalmazna.
+                <table class="table table-sm table-bordered table-striped table-small">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>Ennyi üresség követi egymást: </p>
+                            </td>
+                            <td><span id="numberOfEmptiness"></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Ennyi féle hosszúságú üresség van:
+                                    <span style="font-size:13px">(Ugyanolyan hosszúságú üresség
+                                        többször is
+                                        előfordulhat)</span></p>
+                            </td>
+                            <td><span id="kindOfEmptiness"></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>A leghosszabb üresség hossza:
+                                    <span style="font-size:13px">(Ez a szám az ürességek számához
+                                        képest
+                                        rendkívül nagy is lehet, mert sok olyan ürességhossz
+                                        lehetséges,
+                                        amelynek az előfordulása nulla.)</span></p>
                                 </p>
-
-                                <p>Nekünk nyilván nincs 2,2
-                                    millió évünk, hogy lefutassuk ezt a programot. Azonban a számítógép képes ezt a
-                                    könyvet
-                                    szimulálni a
-                                    számunkra úgy, hogy bárhol belelapozhassunk!</p>
-                                <p>
-                            </div>
-                        </div>
-                        <div class="row">
-
-
-                            <div class="col col-6">
-                                <p>
-                                    Képzeljünk el egy szimulált könyvet, ami egy regényt tartalmaz. Ennek a könyvnek
-                                    minden
-                                    oldala üres.
-                                    Viszont ha bárhol kinyitjuk, akkor azon az oldalpáron azonnal megjelenik egy
-                                    szöveg,
-                                    mintha
-                                    az
-                                    mindig is ott lett volna, s ez a szöveg a könyv becsukása után is ott marad.
-                                    Azaz ha
-                                    újra
-                                    ugyanott
-                                    nyitjuk ki a könyvet, akkor ugyanazt a szövegrészt látjuk, s nem gondolnánk,
-                                    hogy a
-                                    szöveg
-                                    csak
-                                    akkor jött létre, amikor azon a helyen először kinyitotta valaki a könyvet. S
-                                    ugyanúgy
-                                    azt
-                                    sem
-                                    sejtenénk, hogy azok az
-                                    oldalak, ahol még senki sem nyitotta ki ezt a könyvet, valójában teljesen
-                                    üresek.</p>
-                                </p>
-
-                                <p>
-                                    Azaz a számítógép nem használ se memóriát, se erőforrást a könyv létrehozására
-                                    addig,
-                                    amíg
-                                    azt
-                                    valaki kézbe nem veszi, s bele nem lapoz. S a számítógép ekkor is csak annyi
-                                    oldalt
-                                    készít
-                                    el, s
-                                    őriz
-                                    meg, amennyit egy belelapozó személy már látott belőle. Ez előny a könyvet
-                                    szimuláló gép
-                                    számára,
-                                    hiszen nem kell 2,2 millió évig futnia, valahányszor elindítjuk az a programot,
-                                    továbbá
-                                    pedig az
-                                    alkalmazást használó személy
-                                    soha nem tudna annyit lapozni a könyvben, hogy a gép teljes memóriája végig
-                                    teleíródjon.
-                                </p>
-                                <p>Ha ebben kételkednénk, akkor jusson eszünkbe, hogy ez a könyv 300 oldalas
-                                    kötetekkel
-                                    számolva
-                                    4 588 482 223 075 kötetből áll. Egész életünk nem lenne elég ahhoz, hogy a
-                                    köteteket
-                                    tartalmazó polc
-                                    mentén végigsétáljunk! (Kb. 114 ezerszer érné körbe a Föld egyenlítőjét.)</p>
-                                <p>A könyv szimulálásakor Ön először az utolsó oldalt fogja látni, s ennek az utolsó
-                                    sorában
-                                    lesz az első
-                                    olyan értelmes szó, amire 2,2 millió év keresés után bukkant rá a program.
-                                </p>
-                                <p>Természetesen, ha újraindítja a programot, akkor ez a könyv törlődik a
-                                    memóriából!</p>
-
-
-                            </div>
-
-                            <div class="col col-6">
-
-                                <div id="rowForAllDistribution" class="row simulationRow">
-                                    <div id="divForAllDistribution" class="col simulationCol">
-
-                                        <button id="simulationOfTheBook" type="button"
-                                            class="btn btn-primary btn-block btn-sm" onclick="bookSimulation()">A
-                                            könyv
-                                            szimulálása
-                                        </button>
-
-
-                                    </div>
-                                </div>
-
-                                <div class="row justify-content-center simulationRow">
-                                    <div class="col-auto simulationCol">
-                                        <label>Ugrás a(z) </label>
-                                    </div>
-                                    <div class="col-auto simulationCol">
-                                        <input id="simulatedPageInput" type="number"
-                                            class="form-control form-control-sm" min="0" max="1376544666922514">
-                                    </div>
-                                    <div class="col-auto simulationCol">
-                                        <label for="simulatedPageInput">oldalra:</label>
-                                    </div>
-                                    <div class="col-auto simulationCol">
-                                        <button id="skip" type="button" class="btn btn-secondary btn-sm"
-                                            onclick="skipToSimulatedPage(event)">Ugrás!</button>
-                                    </div>
-
-                                </div>
-                                <div class="row form-row justify-content-center simulation">
-
-
-                                    <div class="col-auto simulationCol">
-                                        <button id="skipToRandomPage" type="button" class="btn btn-secondary btn-sm"
-                                            onclick="randomPage(event)">Ugrás egy véletlen oldalra</button>
-                                    </div>
-
-                                </div>
-
-                                <div class="row justify-content-center simulationRow" id="distributionButtons">
-                                    <div class="col-auto simulationCol">
-                                        <button id="allDistributionStart" type="button" class="btn btn-secondary btn-sm"
-                                            onclick="allDistStart()">az
-                                            elejére</button>
-                                        <button id="allDistributionBack" name="arrow" type="button"
-                                            class="btn btn-secondary btn-sm" onclick="allDistBack()">&#8678</button>
-                                        <button id="allDistributionFoward" name="arrow" type="button"
-                                            class="btn btn-secondary btn-sm" onclick="allDistFow()">&#8680</button>
-                                        <button id="allDistributionLast" type="button" class="btn btn-secondary btn-sm"
-                                            onclick="allDistLast()">a
-                                            végére</button>
-                                        <p><small>A memória mérete jelenleg: <span id="sizeOfMemory"> 0</span>
-                                                tétel.</small></p>
-                                        <p><small>Ez<span class="t"></span> az oldal<span class="t"></span> <span
-                                                    id="statusOfPage"></span></small></p>
-                                    </div>
-                                </div>
-
-                                <div id="rowForSimulatedBook" class="row justify-content-center rowForSimulatedBook">
-                                    <div id="colForSimulatedBook1" class="col-auto colForSimulatedBook">
-                                        <div id="simulatedBook1" class="simulatedBook">
-                                        </div>
-                                    </div>
-                                    <div id="colForSimulatedBook2" class="col-auto colForSimulatedBook">
-                                        <div id="simulatedBook2" class="simulatedBook">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-
+                            </td>
+                            <td><span id="longestEmptiness"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="text-align:center"><strong>Az egymást követő ürességek
+                        hosszúságai:</strong></p>
+                <div id="rowForDistanceTable" class="row">
+                    <div id="colForDistanceTable" class="col col-12">
+                        <p style="text-align:center" id="distanceTablePage"></p>
+                        <p id="distanceTable">
+                        </p>
                     </div>
 
                 </div>
-
-
-
+                <div class="row " id="distributionButtons">
+                    <div class="col nav justify-content-center">
+                        <button id="distanceStart" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distanceStart()">az
+                            elejére</button>
+                        <button id="distanceBack" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distanceBack()">&#8678</button>
+                        <button id="distanceFoward" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distanceFow()">&#8680</button>
+                        <button id="distanceLast" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distanceLast()">a
+                            végére</button>
+                    </div>
+                </div>
 
 
             </div>
         </div>
+
+        <div id="divForShowDistanceGraph" class="row">
+            <div class="col-8">
+                <p>A következő oszlopgrafikon azt mutatja meg, hogy milyen hosszúságú ürességek
+                    követik
+                    egymást
+                    az egyes kupacok mözött. <span style="font-size:13px">(Ennek a grafikonnak csak
+                        négy
+                        betűnél
+                        hosszabb szókeresés
+                        sorozatok esetén van jelentősége!)</span> Klikkeljen a <i>'mutat'</i>
+                    gombra!</p>
+            </div>
+            <div class="col-4">
+                <button id="buttonForDistanceGraph" type="button" class="btn btn-secondary btn-sm"
+                    onclick="showTheDistanceGraph()">Mutat</button>
+                <p>A grafikon elkészítésének várható ideje: <span id="distGraphEstimateTime"></span><strong><span
+                            id="distGraphEstimateTime2"></span></strong></p>
+            </div>
+        </div>
+
+        <div style="display:none" id="rowForDistanceGraph" class="row">
+            <div id="colForDistanceGraph" class="col col-12">
+                <table id="distanceGraph">
+                </table>
+
+            </div>
+
+            <small><span id=realTimeForDistanceGraph></span>
+                <span id=infoForDistanceGraph></span></small>
+            <!--<div class="row">
+                    <div style="display:none" id="forFullTable" class="col col-12">
+                        <table class="fullTable" id="graphic">
+                        </table>
+                    </div>-->
+
+        </div>
+
+        <div id="divForDistanceTable" class="row">
+            <div class="col">
+                <p>Összesen tehát <span id="emptiness6">
+                        &#8212 </span> darab ürességünk van, amelyek <span id="emptiness7"></span>
+                    hosszúság
+                    között lettek felosztva úgy, hogy több ürességnek is lehet ugyanaz a hosszúsága,
+                    s lesz
+                    olyan ürességhossz, amit nem valósít meg egy üresség se.</p>
+                <p>Most is megkérdezhetjük: hány darab <i>'egy hosszúságú'</i> ürességünk van? Hány
+                    darab
+                    <i>'kettő
+                        hosszúságú'</i> ürességünk van? És így tovább. Ezt az eloszlást mutatja a
+                    következő
+                    táblázat.
+                </p>
+                <div class="row">
+                    <div class="col">
+                        <p>A táblázat összesen <span id="distributionDistanceLength">&#8212 </span>
+                            adatot
+                            tartalmaz <span id=distributionDistanceAllPage> - </span> oldalon.
+                            <span style="font-size:13px">(Oldalanként 100 adat.)</span></p>
+                    </div>
+                </div>
+                <p style="text-align:center"><strong>Az ürességek eloszlása hossz szerint:</strong>
+                </p>
+                <div id="rowForDistributionDistanceTable" class="rowForTable row">
+                    <div id="colForDistributionDistanceTable" class="colForTable col col-12">
+                        <p style="text-align:center" id="distributionDistanceTablePage"></p>
+                        <p id="distributionDistanceTable" class="table">
+                        </p>
+                    </div>
+                </div>
+                <div class="row " id="distributionButtons">
+                    <div class="col nav justify-content-center">
+                        <button id="distanceStart" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distributionDistanceStart()">az
+                            elejére</button>
+                        <button id="distanceBack" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distributionDistanceBack()">&#8678</button>
+                        <button id="distanceFoward" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distributionDistanceFow()">&#8680</button>
+                        <button id="distanceLast" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distributionDistanceLast()">a
+                            végére</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div id="divForDistanceTable2" class="rowForBorder row">
+            <div class="colForBorder col">
+                <p>Összesen tehát <span id="emptiness7">
+                        &#8212 </span> darab ürességünk van. Ezeknek az ürességeknek az eloszlásában
+                    viszont
+                    újabb ürességeket fedezhetünk, s így megnézhetjük ezeknek az ürességeknek a
+                    sorozatát
+                    is! A
+                    következő táblázatból látszik, hogy <i>először egy <span id="emptiness8"> &#8212
+                        </span>
+                        hosszúságú</i> üresség jelenik meg, majd azt <i>követi egy <span id="emptiness9">
+                            &#8212
+                        </span>
+                        hosszúságú</i> üresség, s így tovább.
+                </p>
+                <p style="text-align:center"><strong>Az ürességek eloszlásában található ürességek
+                        eloszlása:</strong></p>
+                <div id="rowForDistanceMatrixTable2" class="rowForTable row">
+                    <div id="colForDistanceMatrixTable2" class="colForTable col col-12">
+                        <p style="text-align:center" id="distanceMatrixTablePage2"></p>
+                        <p id="distanceMatrixTable2" class="table">
+                        </p>
+                    </div>
+                </div>
+                <div class="row " id="distributionButtons2">
+                    <div class="col nav justify-content-center">
+                        <button id="distanceStart2" type="button" name="arrow2" class="btn btn-secondary btn-sm"
+                            onclick="distanceStart()">az
+                            elejére</button>
+                        <button id="distanceBack2" name="arrow2" type="button" class="btn btn-secondary btn-sm"
+                            onclick="distanceBack()">&#8678</button>
+                        <button id="distanceFoward2" name="arrow2" type="button2" class="btn btn-secondary btn-sm"
+                            onclick="distanceFow()">&#8680</button>
+                        <button id="distanceLast2" type="button" name="arrow2" class="btn btn-secondary btn-sm"
+                            onclick="distanceLast()">
+                            végére</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div id="divForShowDistributionDistanceGraph" class="row">
+            <div class="col-8">
+                <p>A következő oszlopgrafikon ezt a táblázatot rajzolja meg oszlopgrafikon
+                    formájában.
+
+
+                    azt mutatja meg, hogy <i>'a milyen hosszúságú ürességekből
+                        hány darab van.'</i> Így az első oszlop magassága azt mutatja, hogy az
+                    <i>'egy
+                        hosszúságú'</i> ürességből hány darab van. A második oszlop magasságáé
+                    pedig,
+                    hogy a <i>'kettő hosszúságú'</i> ürességből hány darab van. És így tovább.
+                    <span style="font-size:13px">(Ennek a grafikonnak csak négy betűnél hosszabb
+                        szókeresés
+                        sorozatok esetén van jelentősége!)</span> Klikkeljen a <i>'mutat'</i>
+                    gombra!
+                </p>
+            </div>
+            <div class="col-4">
+                <button id="buttonForDistributionDistanceGraph" type="button" class="btn btn-secondary btn-sm"
+                    onclick="showTheDistributionDistanceGraph()">Mutat</button>
+                <p>A grafikon elkészítésének várható ideje: <span
+                        id="distributionDistanceGraphEstimateTime"></span><strong><span
+                            id="distributionDistanceGraphEstimateTime2"></span></strong></p>
+            </div>
+        </div>
+        <div class="row rowNeedBorder">
+            <div class="col colNeedBorder">
+                <div id="" class="row">
+                    <div id="" class="col">
+                        <div><button id="moreDistanceButton" style="float:right" type="button"
+                                class="btn btn-secondary btn-sm" onclick="showMoreDistance()">Kérem</button>
+                            <p>Eddig két ürességvizsgálatot végeztünk, ahol rendre <i><span id="emptiness10">
+                                        &#8212 </span> db.</i>,
+                                ill. <i><span id="emptiness11"> &#8212 </span> db.</i> üresség
+                                követte
+                                egymást.
+                                Ezt az eljárást
+                                addig ismételhetjük meg újra és újra, míg az ürességek száma le nem
+                                csökken
+                                1-re, s ekkor
+                                megvizsgálhatjuk az így kapott sorozatot.
+                            </p>
+                        </div>
+
+                        <div style="display:none" id="rowForMoreDistanceMatrix" class="rowForTable row">
+                            <div id="colForMoreDistanceMatrix" class="colForTable col">
+                                <div id="moreDistanceMatrix" class="table"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:none" id="rowForDistributionDistanceGraph" class="rowForTable row">
+                    <div id="colForDistributionDistanceGraph" class="colForTable col col-12">
+                        <table id="distributionDistanceGraph" class="table">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+
+
+
+
+
+    <p>Ha meg akarja nézni egy gépelés sorozat esetén ezt az eloszlást, azt <a
+            href="/monkey.html#rowForFullDistribution">ide kattintva</a> teheti meg.</p>
+
+
+
+
+
+    <div class="row">
+        <form class="form-inline">
+            <label class="mt-1">A találatok küldése a szervernek:</label>
+            <button disabled type="button" id="send-data" class="btn btn-secondary btn-sm"
+                onclick=sendData()>Küld</button>
+        </form>
+    </div>
+
+    <div class="row">
+        <p>A memória mérete jelenleg: <span id="monkeyMemorySize">-</span></p>
+        <p>Az eddigi összes (eredményes) futás száma: <span id="numberOfRunnings">-</span></p>
+        <button type="button" class="btn btn-secondary btn-sm" onclick=goToRepeat()>Újabb futtatás
+            ugyanannyiszor</button>
+    </div>
+
+    <div class="row">
+        <form class="form-inline">
+            <label>A szó hossza legyen:</label>
+            <input type="number" class="form-control form-control-sm" style="width:100px" min="2" max="10" value="8">
+            <label> betű!</label>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="generateWord(event)">Kérek
+                egy
+                szót!</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="generateWordRnd(event)">Véletlen
+                hosszúságú szót kérek!</button>
+        </form>
+    </div>
+    <div class="row">
+        <p>Íme a szó: <span id="generatedWord"></span> </p>
+    </div>
+    <div class="row">
+
+        <div class="col-6">
+            <div class="row">
+                <label>Tetszik a szó, jegyezzük fel!<small> A szó eltávolítása a táblázatból:
+                        klikkeljen
+                        rá
+                        egyet!</small></label>
+                <button type="button" class="btn btn-secondary btn-sm btn-block"
+                    onclick="notation(event)">Rajta!</button>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="writeSentence()">Kérek
+                    egy
+                    mondatot
+                    a
+                    kedvenc szavakból!</button>
+
+                <div id="divForSentence">
+                    <p><span id="sentence">-</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+        <div id="divForNotations" class="col-5">
+            <table id="notations" class="table table-small"></table>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col">
+            <h5>A szólista szimulálása</h5>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="row">
+            <div class="col">
+                <p>Láttuk azt, hogy egy 13 betűből álló értelmes szó létrehozásához a programnak
+                    átlagosan
+                    2,2
+                    millió
+                    évre
+                    lenne szüksége. Ez a könyv összesen 1,3 billiárd - egész pontosan:
+                    1 376 544 666 922 514
+                    -
+                    oldalt
+                    tartalmazna.
+                </p>
+
+                <p>Nekünk nyilván nincs 2,2
+                    millió évünk, hogy lefutassuk ezt a programot. Azonban a számítógép képes ezt a
+                    könyvet
+                    szimulálni a
+                    számunkra úgy, hogy bárhol belelapozhassunk!</p>
+                <p>
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col col-6">
+                <p>
+                    Képzeljünk el egy szimulált könyvet, ami egy regényt tartalmaz. Ennek a könyvnek
+                    minden
+                    oldala üres.
+                    Viszont ha bárhol kinyitjuk, akkor azon az oldalpáron azonnal megjelenik egy
+                    szöveg,
+                    mintha
+                    az
+                    mindig is ott lett volna, s ez a szöveg a könyv becsukása után is ott marad.
+                    Azaz ha
+                    újra
+                    ugyanott
+                    nyitjuk ki a könyvet, akkor ugyanazt a szövegrészt látjuk, s nem gondolnánk,
+                    hogy a
+                    szöveg
+                    csak
+                    akkor jött létre, amikor azon a helyen először kinyitotta valaki a könyvet. S
+                    ugyanúgy
+                    azt
+                    sem
+                    sejtenénk, hogy azok az
+                    oldalak, ahol még senki sem nyitotta ki ezt a könyvet, valójában teljesen
+                    üresek.</p>
+                </p>
+
+                <p>
+                    Azaz a számítógép nem használ se memóriát, se erőforrást a könyv létrehozására
+                    addig,
+                    amíg
+                    azt
+                    valaki kézbe nem veszi, s bele nem lapoz. S a számítógép ekkor is csak annyi
+                    oldalt
+                    készít
+                    el, s
+                    őriz
+                    meg, amennyit egy belelapozó személy már látott belőle. Ez előny a könyvet
+                    szimuláló gép
+                    számára,
+                    hiszen nem kell 2,2 millió évig futnia, valahányszor elindítjuk az a programot,
+                    továbbá
+                    pedig az
+                    alkalmazást használó személy
+                    soha nem tudna annyit lapozni a könyvben, hogy a gép teljes memóriája végig
+                    teleíródjon.
+                </p>
+                <p>Ha ebben kételkednénk, akkor jusson eszünkbe, hogy ez a könyv 300 oldalas
+                    kötetekkel
+                    számolva
+                    4 588 482 223 075 kötetből áll. Egész életünk nem lenne elég ahhoz, hogy a
+                    köteteket
+                    tartalmazó polc
+                    mentén végigsétáljunk! (Kb. 114 ezerszer érné körbe a Föld egyenlítőjét.)</p>
+                <p>A könyv szimulálásakor Ön először az utolsó oldalt fogja látni, s ennek az utolsó
+                    sorában
+                    lesz az első
+                    olyan értelmes szó, amire 2,2 millió év keresés után bukkant rá a program.
+                </p>
+                <p>Természetesen, ha újraindítja a programot, akkor ez a könyv törlődik a
+                    memóriából!</p>
+
+
+            </div>
+
+            <div class="col col-6">
+
+                <div id="rowForAllDistribution" class="row simulationRow">
+                    <div id="divForAllDistribution" class="col simulationCol">
+
+                        <button id="simulationOfTheBook" type="button" class="btn btn-primary btn-block btn-sm"
+                            onclick="bookSimulation()">A
+                            könyv
+                            szimulálása
+                        </button>
+
+
+                    </div>
+                </div>
+
+                <div class="row justify-content-center simulationRow">
+                    <div class="col-auto simulationCol">
+                        <label>Ugrás a(z) </label>
+                    </div>
+                    <div class="col-auto simulationCol">
+                        <input id="simulatedPageInput" type="number" class="form-control form-control-sm" min="0"
+                            max="1376544666922514">
+                    </div>
+                    <div class="col-auto simulationCol">
+                        <label for="simulatedPageInput">oldalra:</label>
+                    </div>
+                    <div class="col-auto simulationCol">
+                        <button id="skip" type="button" class="btn btn-secondary btn-sm"
+                            onclick="skipToSimulatedPage(event)">Ugrás!</button>
+                    </div>
+
+                </div>
+                <div class="row form-row justify-content-center simulation">
+
+
+                    <div class="col-auto simulationCol">
+                        <button id="skipToRandomPage" type="button" class="btn btn-secondary btn-sm"
+                            onclick="randomPage(event)">Ugrás egy véletlen oldalra</button>
+                    </div>
+
+                </div>
+
+                <div class="row justify-content-center simulationRow" id="distributionButtons">
+                    <div class="col-auto simulationCol">
+                        <button id="allDistributionStart" type="button" class="btn btn-secondary btn-sm"
+                            onclick="allDistStart()">az
+                            elejére</button>
+                        <button id="allDistributionBack" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                            onclick="allDistBack()">&#8678</button>
+                        <button id="allDistributionFoward" name="arrow" type="button" class="btn btn-secondary btn-sm"
+                            onclick="allDistFow()">&#8680</button>
+                        <button id="allDistributionLast" type="button" class="btn btn-secondary btn-sm"
+                            onclick="allDistLast()">a
+                            végére</button>
+                        <p><small>A memória mérete jelenleg: <span id="sizeOfMemory"> 0</span>
+                                tétel.</small></p>
+                        <p><small>Ez<span class="t"></span> az oldal<span class="t"></span> <span
+                                    id="statusOfPage"></span></small></p>
+                    </div>
+                </div>
+
+                <div id="rowForSimulatedBook" class="row justify-content-center rowForSimulatedBook">
+                    <div id="colForSimulatedBook1" class="col-auto colForSimulatedBook">
+                        <div id="simulatedBook1" class="simulatedBook">
+                        </div>
+                    </div>
+                    <div id="colForSimulatedBook2" class="col-auto colForSimulatedBook">
+                        <div id="simulatedBook2" class="simulatedBook">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+    </div>
+
+
+
+
+
+
+    </div>
     </div>
     <div id="skipToGraphic2" class="col-0 col-sm-1 col-md-1 col-lg-1 noPadding"></div>
 

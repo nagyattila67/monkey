@@ -53,6 +53,129 @@ for (let i = 0; i < 41; i++) {
     area.appendChild(tableRow);
 };
 
+writeInLine = function () {
+    charNumbInLine = document.querySelector("#szoHosszInLine").value;
+    charNumbInLine = parseInt(charNumbInLine);
+    thisWord = "";
+    runWriteInLine(charNumbInLine, thisWord);
+};
+
+first = true;
+runWriteInLine = function (charNumbInLine, thisWord) {
+    finishLine = false
+
+    wordLine = Array();
+    digitABC = "";
+    resultWordLine = "";
+
+    n = 0
+    sz2=Array();
+    sz3=Array();
+    while (finishLine == false) {
+        makeLetter();
+        digitABC = String.fromCharCode(digit);
+        wordLine[n] = digitABC;
+        n = n + 1;
+        if(n%10000==0){console.log(n)};
+
+        if (wordLine.length >= charNumbInLine) {
+            lastLetters = "";
+            for (let k = 0; k < charNumbInLine; k++) {
+                lastLetters = lastLetters + wordLine[wordLine.length - charNumbInLine + k];
+            };
+
+            for (let h = 0; h < szavakByLength[charNumbInLine].length; h++) {
+                if ((thisWord == "" && lastLetters == (szavakByLength[charNumbInLine])[h]) || lastLetters == thisWord) {
+                    resultWordLine = lastLetters;
+                    finishLine = true;
+                };
+            };
+        };
+        document.querySelector("#foundWord").innerHTML = resultWordLine;
+        document.querySelector("#foundWord").style["background-color"] = "#FADADD"
+        document.querySelector("#numberOfLetters").innerHTML = wordLine.length;
+    };
+
+    area = document.querySelector("#divForFinalString")
+    sector = document.querySelector("#placeForFinalString");
+    if (first == false) {
+        area.removeChild(sector);
+        newP = document.createElement("p");
+        newP.setAttribute("id", "placeForFinalString");
+        area.appendChild(newP)
+    };
+
+    for (let i = 0; i < wordLine.length; i++) {
+        newSpan1 = document.createElement("span");
+        newSpan2 = document.createElement("span");
+        sector = document.querySelector("#placeForFinalString");
+        sector.appendChild(newSpan1);
+        sector.appendChild(newSpan2);
+        newSpan1.innerHTML = `${wordLine[i]}`;
+        newSpan2.innerHTML = " ";
+        if (i > wordLine.length - charNumbInLine - 1) {
+            newSpan1.style["background-color"] = "#FADADD";
+            newSpan2.style["background-color"] = "#FADADD";
+        };
+        first = false;
+    };
+
+
+
+    //finalString=wordLine.toLocaleString();
+
+    /*finalString="";
+    for(let i=0;i<wordLine.length;i++){
+        finalString=finalString+wordLine[i];
+    };
+    document.querySelector("#placeForFinalString").innerHTML=finalString;
+*/
+};
+
+searchInLine = function () {
+    stopSearch = false;
+    if (document.querySelector("#searchThisWord").value == "") { alert("Ön nem írt be egy betűt sem a keresőmezőbe!") };
+    thisWord = document.querySelector("#searchThisWord").value;
+    thisWord = thisWord.toUpperCase();
+    document.querySelector("#searchThisWord").value = thisWord;
+    charNumbInLine = thisWord.length;
+    for (let i = 0; i < szavakByLength[charNumbInLine].length; i++) {
+        if ((szavakByLength[charNumbInLine])[i] == `${thisWord}`) {
+            stopSearch = true;
+            break;
+        };
+    };
+    if (stopSearch == false) { alert("Nincs ilyen szó a majom szótárában") };
+    if (stopSearch == false){document.querySelector("#searchThisWord").value="";};
+    if (stopSearch == true) { runWriteInLine(charNumbInLine, thisWord) };
+};
+
+makeLetter = function () {
+    // a digit egy decimális szám
+    digit = Math.floor(Math.random() * 35);
+    //betűk 'A'-tól 'Z'-ig
+    if (digit >= 0 && digit <= 25) { digit = digit + 65 }
+    //'Ö" betű 0xD6
+    if (digit == 26) { digit = 214 }
+    //'Ü' betű 0xDC
+    if (digit == 27) { digit = 220 }
+    //'Ő' betű 0x150
+    if (digit == 28) { digit = 336 }
+    //'Ű' betű 0x368
+    if (digit == 29) { digit = 368 }
+    //'É' betű 0xc9
+    if (digit == 30) { digit = 201 }
+    //'Í' betű 0xcd
+    if (digit == 31) { digit = 205 }
+    //'Ó' betű 0xd3
+    if (digit == 32) { digit = 211 }
+    //'Á' betű 0xc1
+    if (digit == 33) { digit = 193 }
+    //'Ú' betű 0xda
+    if (digit == 34) { digit = 218 }
+    return digit;
+};
+
 makeWord = function (wordLength) {
     expressionHTML = "";
     digitHTML = "";
@@ -62,28 +185,7 @@ makeWord = function (wordLength) {
     digitABC = "";
     for (let i = 1; i < (wordLength + 1); i++) {
 
-        // a digit egy decimális szám
-        digit = Math.floor(Math.random() * 35);
-        //betűk 'A'-tól 'Z'-ig
-        if (digit >= 0 && digit <= 25) { digit = digit + 65 }
-        //'Ö" betű 0xD6
-        if (digit == 26) { digit = 214 }
-        //'Ü' betű 0xDC
-        if (digit == 27) { digit = 220 }
-        //'Ő' betű 0x150
-        if (digit == 28) { digit = 336 }
-        //'Ű' betű 0x368
-        if (digit == 29) { digit = 368 }
-        //'É' betű 0xc9
-        if (digit == 30) { digit = 201 }
-        //'Í' betű 0xcd
-        if (digit == 31) { digit = 205 }
-        //'Ó' betű 0xd3
-        if (digit == 32) { digit = 211 }
-        //'Á' betű 0xc1
-        if (digit == 33) { digit = 193 }
-        //'Ú' betű 0xda
-        if (digit == 34) { digit = 218 }
+        makeLetter();
 
         digitHex = digit.toString(16);
         digitHex = "\\" + "x" + digitHex
@@ -464,7 +566,10 @@ displayWord = function () {
 
     time(timeStart, timeFinish);
 
-    if (min == 0) { document.querySelector("#timeCount").innerHTML = `${sec} másodperc` }
+    if (min == 0) {
+        if (sec == 0) { sec = 1 };
+        document.querySelector("#timeCount").innerHTML = `${sec} másodperc`
+    }
     else { document.querySelector("#timeCount").innerHTML = `${min} perc, ${sec} másodperc` };
 
     if (volumeCounter >= 200) {
@@ -571,19 +676,21 @@ lookingForMatch = function (textForSearch) {
                 matchingListNumero = matchingListNumero + 1;
             };
         };
-        area = document.querySelector("#displayMatchingList")
-        for (let i = 0; i < previousMatchLength; i++) {
-            sector = document.querySelector("#displayMatchingList span");
-            area.removeChild(sector);
+        if (displayNow == true) {
+            area = document.querySelector("#displayMatchingList")
+            for (let i = 0; i < previousMatchLength; i++) {
+                sector = document.querySelector("#displayMatchingList span");
+                area.removeChild(sector);
+            };
+            for (let i = 0; i < matchingList.length; i++) {
+                sector = document.createElement("span");
+                area.appendChild(sector);
+                if (i < matchingList.length - 1) { sector.innerHTML = `${matchingList[i]}, ` }
+                else { sector.innerHTML = `${matchingList[i]}` };
+            }
+            previousMatchLength = matchingList.length;
+            document.querySelector("#foundMatches").innerHTML = matchingList.length
         };
-        for (let i = 0; i < matchingList.length; i++) {
-            sector = document.createElement("span");
-            area.appendChild(sector);
-            if (i < matchingList.length - 1) { sector.innerHTML = `${matchingList[i]}, ` }
-            else { sector.innerHTML = `${matchingList[i]}` };
-        }
-        previousMatchLength = matchingList.length;
-        document.querySelector("#foundMatches").innerHTML = matchingList.length;
     };
     textForSearchOriginal2 = "";
     for (let i = 0; i < textForSearchOriginal.length; i++) {
@@ -593,7 +700,7 @@ lookingForMatch = function (textForSearch) {
     };
 
 
-    if (isLookingForMatch == false) displayMatching();
+    if (isLookingForMatch == false && displayNow == true) displayMatching();
     //document.querySelector("#match5").innerHTML = `${(turn / (35 ** textForSearchOriginal2)).toFixed(1)}`;
     //document.querySelector("#match5").innerHTML = "";
     //document.querySelector("#match6").innerHTML = 35 ** charNumber;
@@ -604,20 +711,47 @@ displayMatching = function () {
     if (isLookingForMatch == true) { textForSearch = memoryABC[turn - 1][0]; lookingForMatch(textForSearch); };
     document.querySelector("#match1").innerHTML = turn;
     document.querySelector("#match2").innerHTML = charNumber;
-    document.querySelector("#match3").innerHTML = textForSearchOriginal.length;
-    document.querySelector("#match4").innerHTML = textForSearchOriginal.length;
-    document.querySelector("#match5").innerHTML = 35 ** textForSearchOriginal.length;
+    document.querySelector("#match3").innerHTML = textForSearchOriginal2.length;
+    document.querySelector("#match4").innerHTML = textForSearchOriginal2.length;
+    document.querySelector("#match5").innerHTML = 35 ** textForSearchOriginal2.length;
     document.querySelector("#match6").innerHTML = turn;
     document.querySelector("#match7").innerHTML = turn;
-    document.querySelector("#match8").innerHTML = textForSearchOriginal.length;
-    document.querySelector("#match9").innerHTML = (turn / 35 ** textForSearchOriginal.length).toFixed(1);
+    document.querySelector("#match8").innerHTML = textForSearchOriginal2.length;
+    document.querySelector("#match9").innerHTML = (turn / 35 ** textForSearchOriginal2.length).toFixed(1);
     document.querySelector("#match9").style["background-color"] = "#FADADD";
     document.querySelector("#foundMatches").style["background-color"] = "#FADADD";
 };
 
 repetitionNumberForMatch = document.querySelector("#match100RepNumber").value
+
+countRunTime = function (charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max) {
+    if (charNumber < 7 || charNumber >= min && isNaN(charNumber) == false || charNumber == parseInt) {
+        if (charNumber == 1) { sec1 = 0.00137 * repetitionNumberForMatch };
+        if (charNumber == 2) { sec1 = 0.01148 * repetitionNumberForMatch };
+        if (charNumber == 3) { sec1 = 0.0509 * repetitionNumberForMatch };
+        if (charNumber == 4) { sec1 = 0.527 * repetitionNumberForMatch };
+        if (charNumber == 5) { sec1 = 7.944 * repetitionNumberForMatch };
+        if (charNumber == 6) { sec1 = 138 * repetitionNumberForMatch };
+        if (charNumber == 7) { sec1 = 1364 * repetitionNumberForMatch };
+        if (charNumber == 8) { sec1 = 47740 * repetitionNumberForMatch };
+        //timeCountingMethod(repetitionNumberForMatch, charNumber);
+        hour1 = 0;
+        min1 = 0;
+        sec1 = Math.floor(sec1 * howManyRepetition);
+        if (sec1 == 0) { sec1 = 1 };
+        if (sec1 >= 60) { min1 = Math.ceil(sec1 / 60); sec1 = sec1 % 60 };
+        if (min1 >= 60) { hour1 = Math.ceil(min1 / 60); min1 = sec1 % 60 };
+        if (hour1 == 0) { sector.innerHTML = `${min1} perc, ${sec1} mp.` };
+        if (hour1 > 0) { sector.innerHTML = `${hour1} óra, ${min1} perc` };
+
+    }
+    if (charNumber > max || charNumber < min || isNaN(charNumber) == true || charNumber != parseInt(charNumber)) { sector.innerHTML = "no way"; };
+
+    return hour1, min1, sec1
+};
+
 match100Numbers = function () {
-    console.log(charNumber);
+    howManyRepetition = 1;
     charNumber = document.querySelector("#match100CharNumber").value
     charNumber = parseInt(charNumber);
 
@@ -627,24 +761,11 @@ match100Numbers = function () {
     repetitionNumberForMatch = parseInt(repetitionNumberForMatch);
     document.querySelector("#matchBetuSzam").innerHTML = document.querySelector("#match100CharNumber").value;
 
-    if (charNumber < 7 || charNumber > 1 && isNaN(charNumber) == false || charNumber == parseInt) {
-        if (charNumber == 2) { sec1 = 0.01148 * repetitionNumberForMatch };
-        if (charNumber == 3) { sec1 = 0.0509 * repetitionNumberForMatch };
-        if (charNumber == 4) { sec1 = 0.527 * repetitionNumberForMatch };
-        if (charNumber == 5) { sec1 = 7.5 * repetitionNumberForMatch };
-        //timeCountingMethod(repetitionNumberForMatch, charNumber);
-        hour1 = 0;
-        min1 = 0;
-        sec1 = Math.floor(sec1);
-        if (sec1 >= 60) { min1 = Math.ceil(sec1 / 60); sec1 = sec1 % 60 };
-        if (min1 >= 60) { hour1 = Math.ceil(min1 / 60); min1 = sec1 % 60 };
-        if (hour1 == 0) { document.querySelector("#matchRunningTime").innerHTML = `${min1} perc, ${sec1} mp.` };
-        if (hour1 > 0) { document.querySelector("#matchRunningTime").innerHTML = `${hour1} óra, ${min1} perc` };
+    sector = document.querySelector("#matchRunningTime");
+    min = 1;
+    max = 5;
 
-    }
-    if (charNumber > 6 || charNumber < 2 || isNaN(charNumber) == true || charNumber != parseInt(charNumber)) {
-        document.querySelector("#matchRunningTime").innerHTML = "Fiam, maga kifogta Dél-Amerikát, sallala.";
-    };
+    countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max)
 
     return repetitionNumberForMatch, charNumber;
 
@@ -653,7 +774,8 @@ match100Numbers = function () {
 averageMemoryABCLength = 0;
 mehet = true;
 lookingForMatch100 = function () {
-    if (charNumber > 6 || charNumber < 2 || isNaN(charNumber) == true || charNumber != parseInt(charNumber)) {
+    displayNow = false;
+    if (charNumber > 6 || charNumber < 1 || isNaN(charNumber) == true || charNumber != parseInt(charNumber)) {
         alert("Karakterszám min: 2, max: 6, egész szám, plíz!");
         document.querySelector("#match100CharNumber").value = 4;
         charNumber = 4;
@@ -665,7 +787,6 @@ lookingForMatch100 = function () {
         charNumber = document.querySelector("#match100CharNumber").value
         repetitionNumberForMatch = parseInt(repetitionNumberForMatch);
         charNumber = parseInt(charNumber);
-        console.log(repetitionNumberForMatch, charNumber)
         rep = true;
         isLookingForMatch = true;
         isLookingForMatch100 = true;
@@ -678,39 +799,28 @@ lookingForMatch100 = function () {
         };
         averageMemoryABCLength = 0;
         for (let k = 0; k < repetitionNumberForMatch; k++) {
-            console.log("rep: ", k)
-
             word(charNumber);
             textForSearch = memoryABC[turn - 1]
             //averageMemoryABCLength = averageMemoryABCLength + memoryABC.length;
             averageMemoryABCLength = averageMemoryABCLength + turn - 1;
-            console.log("CHAR", charNumber);
-            console.log("averageMemoryABCLength", averageMemoryABCLength);
 
             for (let i = 0; i < charNumber - 1; i++) {
                 textForSearch = "";
                 for (let n = 0; n < i + 1; n++) {
                     textForSearch = textForSearch + expressionABC[n];
                 };
-                //console.log("textForSearch", textForSearch);
                 lookingForMatch(textForSearch);
-                //console.log(matchingList);
                 matchingList100[i] = matchingList100[i] + matchingList.length;
             };
-            //console.log(matchingList100);
             textForSearch = myTestText;
             for (let i = 0; i < charNumber - 1; i++) {
                 textForSearch = "";
                 for (let n = 0; n < i + 1; n++) {
                     textForSearch = textForSearch + myTestText[n];
                 };
-                //console.log(textForSearch);
                 lookingForMatch(textForSearch);
-                //console.log(matchingList);
                 matchingList100second[i] = matchingList100second[i] + matchingList.length;
             };
-            //console.log(matchingList100);
-            //console.log(matchingList100second);
         };
         for (let k = 0; k < charNumber - 1; k++) {
             matchingList100[k] = Math.round(matchingList100[k] / repetitionNumberForMatch);
@@ -720,10 +830,6 @@ lookingForMatch100 = function () {
         };
 
         averageMemoryABCLength = (averageMemoryABCLength / repetitionNumberForMatch).toFixed(1);
-
-
-        console.log(matchingList100);
-        console.log(matchingList100second);
 
         series1 = "";
         series2 = "";
@@ -797,6 +903,7 @@ lookingForMatch100 = function () {
         if (hourLFM100 == 0) { document.querySelector("#matchRunningTimeInReal").innerHTML = `${minLFM100} perc, ${secLFM100} mp` };
         if (hourLFM100 > 0) { document.querySelector("#matchRunningTimeInReal").innerHTML = `${hourLFM100} óra, ${minLFM100} perc` };
     };
+    displayNow = true;
 };
 
 checkRunTimeCount = function () {
@@ -839,7 +946,6 @@ checkRuns = function () {
         foundWordArray[i] = expressionABC;
         averageListLengthDuringCheckRun = averageListLengthDuringCheckRun + turn;
         allForCheckLength[i] = turn;
-        console.log("checkRuns: ", i, " length: ", turn, " averageLength: ", averageListLengthDuringCheckRun)
     };
     timeFoundFinish = new Date();
     timeFoundFinish = timeFoundFinish.getTime();
@@ -880,7 +986,6 @@ szavakTemp = Array();
 szavakHexTemp = Array();
 beFaster = function () {
     szavakTemp = Array();
-    console.log("programot gyorsító ideiglenes tömb létrehozása");
     let j = 0;
     for (let i = 0; i < szavak.length; i++) {
         if (szavak[i].length == wordLength) {
@@ -889,7 +994,6 @@ beFaster = function () {
             j = j + 1;
         };
     };
-    console.log(szavakTemp.length, szavakHexTemp.length, wordLength);
     return (szavakTemp, szavakHexTemp);
 };
 timeCounting = function () {
@@ -898,14 +1002,19 @@ timeCounting = function () {
 
     runningNumberForInfo = parseInt(runningNumberForInfo);
     charNumberForInfo = parseInt(charNumberForInfo);
+    sector = document.querySelector("#timeInfo");
+    howManyRepetition = 1;
+    min = 1;
+    max = 8;
+    countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max)
 
-    timeCountingMethod(runningNumberForInfo, charNumberForInfo);
+    /*timeCountingMethod(runningNumberForInfo, charNumberForInfo);
 
     if (isNaN(min1) == true || isNaN(sec1) == true) {
         min1 = "-"; sec1 = "-";
     };
 
-    document.querySelector("#timeInfo").innerHTML = `${min1} min, ${sec1} sec`;
+    document.querySelector("#timeInfo").innerHTML = `${min1} min, ${sec1} sec`;*/
     document.querySelector("#timeInfo").style["background-color"] = "#7ee4e4";
 };
 
@@ -964,13 +1073,19 @@ timeCountingMethod = function (runningNumberForInfo, charNumberForInfo) {
 wordTimeCount = function () {
     charNumber = document.querySelector("#keremASzot").value;
     charNumber = parseInt(charNumber);
-    timeCountingMethod(1, charNumber);
+    repetitionNumberForMatch = 1;
+    howManyRepetition = 1;
+    sector = document.querySelector("#wordTime");
+    min = 1;
+    max = 8;
+    countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max)
+    /*timeCountingMethod(1, charNumber);
     if (min1 == 0) {
         document.querySelector("#wordTime").innerHTML = `${sec1} sec.`
     };
     if (min1 > 0) {
         document.querySelector("#wordTime").innerHTML = `${min1} min.`
-    }
+    }*/
 };
 wordTimeCount();
 
@@ -1025,9 +1140,9 @@ repeat = function (event) {
     for (let i = 0; i < runningNumber; i++) {
         if (repeatCount == runningNumber - 1) { displayNow = true };
 
-        wordLength = document.querySelector("#karakterSzam").value;
-        wordLength = parseInt(wordLength);
-        word(wordLength);
+        charNumber = document.querySelector("#karakterSzam").value;
+        charNumber = parseInt(charNumber);
+        word(charNumber);
         repeatCount = repeatCount + 1;
         averageArray[i][0] = turn;
         //averageArray[i][1] = timeLength;
@@ -1100,7 +1215,6 @@ repeat = function (event) {
     //wordLength = document.querySelector("#keremASzot").value;
     //wordLength = parseInt(wordLength);
     isItRepeating = false;
-    console.log("REPEAT");
 
     if (testRunning == false) {
         distMaxOriginal = distMax;
@@ -1337,13 +1451,25 @@ setListLength = function () {
 isRunning100First = false;
 running100First = function () {
     isRunning100First = true;
-    betuSzamOfTest = 2;
+    //betuSzamOfTest = 2;
+    //futasSzamOfTest=100;
     running100(futasSzamOfTest, betuSzamOfTest);
     testRunning = true;
     makeTableAndColoringTest();
     isRunning100First = false;
     testRunning = false;
 };
+
+forProblemsInput = function () {
+    futasSzamOfTestPr = 1;
+    betuSzamOfTestPr = document.querySelector("#charNumberForTest").value;
+    futasSzamPr = document.querySelector("#runningNumberForTest").value;
+    sectorPr = infoForLetsRun100Button;
+    min = 1;
+    max = 5;
+    countRunTime(betuSzamOfTestPr, futasSzamPr, futasSzamOfTestPr, sectorPr, min, max);
+};
+forProblemsInput();
 
 testRunning = false
 forProblems = false
@@ -1359,13 +1485,14 @@ running100_500_2 = function () {
     isRunning100 = true;
     betuSzamOfTest = 2
     running100(futasSzamOfTest, betuSzamOfTest);
-    document.querySelector("#averageProp").innerHTML = averageProportionFinal.toFixed(5);
+    document.querySelector("#averageProp").innerHTML = averageProportionFinal.toFixed(2);
+    myLength_ = Math.floor(35 ** betuSzamOfTest / numberOfWordsInDictionary[betuSzamOfTest]);
+    document.querySelector("#forApproximatedFinalHalfing").innerHTML = myLength_;
     document.querySelector("#forFinalHalfing").innerHTML = finalHalfing.toFixed(2);
     isRunning100 = false;
 };
 
 chooseCharNumb = function () {
-    console.log("fut");
     if (document.querySelector("#twoLetters").checked == true) { charValue = document.querySelector("#twoLetters").value };
     if (document.querySelector("#threeLetters").checked == true) { charValue = document.querySelector("#threeLetters").value };
     charValue = parseInt(charValue);
@@ -1491,19 +1618,15 @@ runningForHow = function (betuSzamOfTest) {
         rndNumber = rndNumber + i;
         arrayForRndNumber[i] = i;
     };
-    console.log(restElements);
     while (restElements > 0) {
         for (let j = 0; j < halfingList - 1; j++) {
-            console.log(j);
             rndValue = Math.ceil(Math.random() * (halfingList - j));
             if (rndValue <= restElements) {
                 distributionCopy13[halfingBorderOriginal - halfingList + j] = distributionCopy13[halfingBorderOriginal - halfingList + j] + rndValue;
                 restElements = restElements - rndValue
-                console.log(halfingList - j, rndValue, restElements);
             }
             else {
                 distributionCopy13["kettő", halfingBorderOriginal - halfingList + j] + restElements;
-                console.log(restElements);
                 restElements = 0
             };
         };
@@ -1595,7 +1718,6 @@ runningForHow100 = function (uccsoRound, tryRunNumber, betuSzamOfTest) {
 
 
     for (let i = 0; i < uccsoRound; i++) {
-        console.log("round: ", i);
         if (i == 0) {
             finalDistribution5 = allDistribution[0][0].slice(0);
             myActualBorder5 = allDistribution[0][2] - allDistribution[0][3];
@@ -1613,7 +1735,6 @@ runningForHow100 = function (uccsoRound, tryRunNumber, betuSzamOfTest) {
                 if (isNaN(allDistribution[i][0][k]) == true) { allDistribution[i][0][k] = 0 }
                 //finalDistribution5[k] = finalDistribution5[k] + allDistribution[i][0][k];
             };
-            console.log(myActualBorder5, finalDistribution5)
         };
     };
 
@@ -1769,16 +1890,20 @@ coloreTable5 = function () {
 wasRunning100 = false; finalDistribution = [0];
 
 changeRunning100Input = function () {
-    console.log("input");
     futasSzamOfTest = document.querySelector("#runRepNumb").value;
     futasSzam = document.querySelector("#runNumb").value;
     betuSzamOfTest = document.querySelector("#runCharNumb").value;
-    document.querySelector("#run100Button").innerHTML = `${futasSzamOfTest}-szor lefuttatja a(z) ${futasSzam}/${betuSzamOfTest}-t`;
-    timeCountingMethod(futasSzam, betuSzamOfTest);
-    min = futasSzamOfTest * min1 + Math.round((futasSzamOfTest * sec1) / 60);
-    if (min == 0) { document.querySelector("#runInfoMin").innerHTML = "kevesebb mint 1" }
-    else { document.querySelector("#runInfoMin").innerHTML = min };
+    document.querySelector("#run100Button").innerHTML = `${futasSzamOfTest}-szer lefuttatja a(z) ${futasSzam}/${betuSzamOfTest}-t`;
+    sector = document.querySelector("#runInfoMin");
+    min = 1;
+    max = 5;
 
+    countRunTime(betuSzamOfTest, futasSzam, futasSzamOfTest, sector, min, max);
+
+    //timeCountingMethod(futasSzam, betuSzamOfTest);
+    //min = futasSzamOfTest * min1 + Math.round((futasSzamOfTest * sec1) / 60);
+    //if (min == 0) { document.querySelector("#runInfoMin").innerHTML = "kevesebb mint 1" }
+    //else { document.querySelector("#runInfoMin").innerHTML = min };
 };
 
 
@@ -1799,7 +1924,7 @@ running100 = function (futasSzamOfTest, charValue) {
     halfingListArray = Array();
     halfIndex = 0
     if (isRunning100First == true) {
-        futasSzamOfTest = 10;
+        futasSzamOfTest = 100;
         futasSzam = 100;
         betuSzamOfTest = 2;
     };
@@ -1820,7 +1945,7 @@ running100 = function (futasSzamOfTest, charValue) {
     //document.querySelector("#karakterSzam").innerHTML = betuSzamOfTest;
     //countTheLetters(betuSzamOfTest);
     numberOfWordsInDictionary[betuSzamOfTest];
-    myLength = Math.floor(35 ** betuSzamOfTest / numberOfSzavak);
+    myLength = Math.floor(35 ** betuSzamOfTest / numberOfWordsInDictionary[betuSzamOfTest]);
     proportionArray = Array();
     howManyArray = Array();
     for (let i = 0; i < futasSzamOfTest; i++) {
@@ -1842,11 +1967,9 @@ running100 = function (futasSzamOfTest, charValue) {
         myLittleArray = [howManyShorter, howManyLonger];
         howManyArray[i] = myLittleArray;
         proportionArray[i] = proportion;
-        console.log(i, " - ", proportion);
 
         countTheHalfListLength();
         halfListArray[i] = halfingList;
-
 
         for (let i = 0; i < distribution.length; i++) {
             if (finalDistribution.length < i + 1) {
@@ -1855,7 +1978,6 @@ running100 = function (futasSzamOfTest, charValue) {
             finalDistribution[i] = finalDistribution[i] + distribution[i];
         };
         finalDistributionOriginal = finalDistribution.slice(0);
-        console.log("finalDistribution", finalDistribution);
         halfingListArray[halfIndex] = halfingList;
         halfIndex = halfIndex + 1
         finalHalfing = 0;
@@ -1902,11 +2024,11 @@ makeTableAndColoringTest = function () {
 
     if (testRunning == false) {
         distributionCopy5 = Array();
-        for (let i = 0; i < 2 * distribution6.length; i++) {
-            if (i < distribution6.length + 1) {
+        for (let i = 0; i < 2 * distributionCopy6.length; i++) {
+            if (i < distributionCopy6.length + 1) {
                 distributionCopy5[i] = 0;
             }
-            else { distributionCopy5[i] = distribution6[i - distribution6.length] }
+            else { distributionCopy5[i] = distributionCopy6[i - distributionCopy6.length] }
         };
     };
     distributionCopy6 = distributionCopy5.slice(0);
@@ -2245,8 +2367,8 @@ jumpUp = function () {
 jumping0 = 0;
 jumpUp0 = function (event) {
     if (jumping0 % 2 == 0) {
-        document.querySelector("#jump0").parentElement.setAttribute("href", "/monkey.html#skipToGraphic");
-        document.querySelector("#jump0").innerHTML = "Vissza";
+        document.querySelector("#jump0").parentElement.setAttribute("href", "/monkey.html#skipToHere");
+        document.querySelector("#jump0").innerHTML = "Ugorj vissza!";
         document.querySelector("#jumpInfo0").style.display = "none";
         document.querySelector("#wrapping0Col").style.position = "fixed";
         document.querySelector("#wrapping0Col").style.top = "1px";
@@ -2255,7 +2377,7 @@ jumpUp0 = function (event) {
         document.querySelector("#wrapping0Col").style.opacity = "0.8";
     };
     if (jumping0 % 2 == 1) {
-        document.querySelector("#jump0").parentElement.setAttribute("href", "/monkey.html#skipBackToBurkologorbe");
+        document.querySelector("#jump0").parentElement.setAttribute("href", "/monkey.html#alapbeallitas");
         document.querySelector("#jump0").innerHTML = "Ugrás";
         document.querySelector("#jumpInfo0").style.display = "initial";
         document.querySelector("#wrapping0Col").style.position = "static";
@@ -2268,8 +2390,8 @@ jumpUp0 = function (event) {
 jumping1 = 0;
 jumpUp1 = function (event) {
     if (jumping1 % 2 == 0) {
-        document.querySelector("#jump1").parentElement.setAttribute("href", "/monkey.html#skipToGraphic");
-        document.querySelector("#jump1").innerHTML = "Vissza";
+        document.querySelector("#jump1").parentElement.setAttribute("href", "/monkey.html#skipToHere");
+        document.querySelector("#jump1").innerHTML = "Ugorj vissza!";
         document.querySelector("#jumpInfo1").style.display = "none";
         document.querySelector("#wrapping1Col").style.position = "fixed";
         document.querySelector("#wrapping1Col").style.top = "1px";
@@ -2279,7 +2401,7 @@ jumpUp1 = function (event) {
 
     };
     if (jumping1 % 2 == 1) {
-        document.querySelector("#jump1").parentElement.setAttribute("href", "/monkey.html#skipBackToBurkologorbe");
+        document.querySelector("#jump1").parentElement.setAttribute("href", "/monkey.html#alapbeallitas");
         document.querySelector("#jump1").innerHTML = "Ugrás";
         document.querySelector("#jumpInfo1").style.display = "initial";
         document.querySelector("#wrapping1Col").style.position = "static";
@@ -2292,8 +2414,8 @@ jumpUp1 = function (event) {
 jumping2 = 0;
 jumpUp2 = function (event) {
     if (jumping2 % 2 == 0) {
-        document.querySelector("#jump2").parentElement.setAttribute("href", "/monkey.html#skipToGraphic");
-        document.querySelector("#jump2").innerHTML = "Vissza";
+        document.querySelector("#jump2").parentElement.setAttribute("href", "/monkey.html#skipToHere");
+        document.querySelector("#jump2").innerHTML = "Ugorj vissza!";
         document.querySelector("#jumpInfo2").style.display = "none";
         document.querySelector("#wrapping2Col").style.position = "fixed";
         document.querySelector("#wrapping2Col").style.bottom = "1px";
@@ -2303,7 +2425,7 @@ jumpUp2 = function (event) {
 
     };
     if (jumping2 % 2 == 1) {
-        document.querySelector("#jump2").parentElement.setAttribute("href", "/monkey.html#skipBackToBurkologorbe");
+        document.querySelector("#jump2").parentElement.setAttribute("href", "/monkey.html#alapbeallitas");
         document.querySelector("#jump2").innerHTML = "Ugrás";
         document.querySelector("#jumpInfo2").style.display = "initial";
         document.querySelector("#wrapping2Col").style.position = "static";
@@ -2995,7 +3117,6 @@ wantFullDistributionTable = function () {
         fullDistFinishTime = new Date;
         fullDistTime = fullDistFinishTime - fullDistStartTime;
         fullDistTime = fullDistTime / 1000;
-        console.log(fullDistTime, " sec");
         createDistributionSpans();
     };
 };
@@ -3113,8 +3234,6 @@ makeTheSecondTable = function () {
 
     k = maximum - 1;
     while (k > 0) {
-        console.log("COLORING!! ", k)
-
         for (let j = 0; j < myBorder; j++) {
             dataCell = document.querySelectorAll("#graphicSecond tr")[k].children[j];
             if (myArray2[j] != 0) {
@@ -3358,13 +3477,7 @@ showTheDistanceGraph = function () {
 
         document.querySelector("#realTimeForDistanceGraph").innerHTML = `Grafikon felrajzolásának tényleges ideje: ${minReal} min.${secReal} sec.`;
         document.querySelector("#infoForDistanceGraph").innerHTML = `Ezen a grafikonon ${Math.floor(distribution.length / distributionCopy2.length)} oszlop felel meg a tömörített grafikon egy oszlopának.`;
-
-
-        console.log(timeDistance1, " ", timeDistance2);
-        console.log(distanceMatrix.length, " ", distanceMatrixAllElementCount, "", maxDistance);
     };
-
-
 };
 
 makeDistributionDistance = function () {
@@ -4448,3 +4561,27 @@ match100Numbers();
 data = document.querySelector("#checkRunCharNum").value;
 data = parseInt(data);
 document.querySelector("#approximatedListLengthForCheckRun").innerHTML = ((35 ** data) / numberOfWordsInDictionary[data]).toFixed(2);
+
+szavakByLength = Array();
+makeSzavakByLength = function () {
+    szavakByLength = Array();
+    for (let i = 0; i < maxLengthOfWords + 1; i++) {
+        szavakByLength[i] = Array();
+    };
+
+    for (let n = 0; n < szavak.length; n++) {
+        szo = szavak[n];
+        szoHossz = szavak[n].length;
+        ilyenHosszuSzavakTombjeHossza = szavakByLength[szoHossz].length;
+        szavakByLength[szoHossz][ilyenHosszuSzavakTombjeHossza] = szo;
+        //console.log(szo, n);
+    };
+};
+makeSzavakByLength();
+console.log("betöltöttem");
+
+
+
+
+
+

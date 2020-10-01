@@ -10,8 +10,8 @@ smallBorder div{margin:0px;}
 h2{margin-left:16px;}
 h5{margin:11px;padding:10px;}
 #divForMotto{margin-right:20px}
+#monkey{margin-left:20px}
 p{text-align:justify}
-img{margin-left: 20px;}
 #littleInfo{margin:0px; padding: 10px 10px 10px 30px; border:1px solid #a8a8a8; background-color:#f1f1f1}
 #setting1{margin:0px 0px 20px 0px;padding: 10px 10px 10px 30px; border:1px;border:1px solid #a8a8a8; background-color:#f1f1f1;}
 #word{font-weight:bolder}
@@ -77,8 +77,8 @@ label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
 #checkRunDiv input{margin-left:15px}
 #checkRunDiv button{margin-left:20px}
 
-
-
+.forTableGraphic2{padding:0px 15px 0px 15px}
+.littleImgRight{margin:10px 0px 0px 15px}
 
 #wrapping0Col .row{margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;}
 #wrapping0Col p{padding:0px; margin:5px;}
@@ -96,11 +96,11 @@ button[name='rising']{width:35px;height:35px;margin:8px;padding:5px;}
 .wrapping input{margin:3px}
 .wrapping button{margin:5px;}
 .infoAboutJump{line-height:14px;font-size:14px;}
+#alapbeallitas{margin:0px 0px 15px 15px}
 #infoAboutCol{font-size:13px;}
 #kindOfDistributions h5{margin-bottom:20px}
 #kindOfDistributions{margin-bottom:20px;}
 #notNiceDistribution{margin-bottom:20px;}
-img[name='kindOfDistImg']{margin:0px 15px 0px 0px;}
 #notNiceDistribution img{margin:0px 15px 10px 0px}
 rowForFullDistribution{border:solid 1px #a8a8a8;padding:10px}
 
@@ -139,12 +139,14 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;}
 .simulationCol p{margin:1px;text-align:center}
 .simulationCol small{margin:1px}
 #exampleForGauss{background-color:#ffe7d3}
-#Gauss{margin:5px 5px -4px 15px}
+.Gauss{margin-right:15px}
+.imgMarginLeft{margin-left:15px}
 #problemRow{padding:10px 10px 0px 10px;border:1px solid #a8a8a8}
 
-.divForGraphic{overflow:scroll;max-width:600px;}
-.tableGraphic{margin:5px;border-collapse:separate;border:solid 1px #a8a8a8;width:max-content; min-width:600px; height:auto;min-height:100px;max-height:100px;background-color:#dbdbdb;}
+.divForGraphic{margin:10px 0px 0px 15px;overflow:scroll;max-width:600px;}
+.tableGraphic{margin:0px;border-collapse:separate;border:solid 1px #a8a8a8;width:max-content; min-width:600px; height:auto;min-height:100px;max-height:100px;background-color:#dbdbdb;}
 .tableGraphic td{width:1px;}
+
 
 .rowBorder{margin:10px;padding:20px;border:1px solid #a8a8a8;}
 .innerBorderWithPink{margin:10px;padding:20px;border:1px solid #a8a8a8;background-color:#ffe7d3;}
@@ -164,8 +166,10 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;}
 #divForRunning100{padding:10px 10px 10px;margin:0px 5px 20px;border:solid 1px ;background-color:#dbdbdb;}
 
 .try{margin: 0px 10px 15px 0px}
+#run100Button{display:block;margin:25px 0px 15px 0px;}
+#vartMaximum{margin-top:15px}
 
-
+#placeForFinalString{overflow:auto;width:500px;height:290px}
 
 
 
