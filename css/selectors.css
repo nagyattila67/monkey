@@ -169,8 +169,16 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;}
 #run100Button{display:block;margin:25px 0px 15px 0px;}
 #vartMaximum{margin-top:15px}
 
-#placeForFinalString{overflow:auto;width:500px;height:290px}
+#divForFinalString{overflow:auto; width:501px;height:290px;background-color:#dbdbdb;}}
+#placeForFinalString{width:500px;height:290px}
+#divForFinalWords{overflow:auto; width:501px;height:290px;background-color:#dbdbdb;}}
+#placeForFinalWords{width:500px;height:290px}
 
+#divForKetBetus{overflow:auto;width:900px;height:103px}
+
+#divForHaromBetus{overflow:auto;width:900px;height:103px}
+
+#divForNegyBetus{overflow:auto;width:900px;height:103px}
 
 
 

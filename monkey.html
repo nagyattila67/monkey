@@ -45,6 +45,54 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mt-3" id="ketBetus">
+                            <p><span style="background-color:#FBEC5D">A betűsorozatban található
+                                    két betűs szavak száma: <span id="ketBetusSzama"> - </span></span> </p>
+                            <div class="bgDarker smallBorder littleMarginTop" id="divForKetBetus">
+                                <p id="placeForKetBetus"></p>
+                            </div>
+                        </div>
+                        <div class="mt-3" id="haromBetus">
+                            <p><span style="border: solid 1px red">A betűsorozatban található három betűs szavak száma:
+                                    <span id="haromBetusSzama"> - </span>
+                                    <div class="bgDarker smallBorder littleMarginTop" id="divForHaromBetus">
+                                        <p id="placeForHaromBetus"></p>
+                                    </div>
+                        </div>
+
+                        <div class="mt-3" id="negyBetus">
+                            <p style="display:inline"><span style="color:#0b9e0b">A betűsorozatban található négy betűs
+                                    szavak száma: <span id="negyBetusSzama"> - </span></span> </p>
+                            <div class="bgDarker smallBorder littleMarginTop" id="divForNegyBetus">
+                                <p id="placeForNegyBetus"></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <label>Ismétlések száma</label>
+                        <input id="repInLine" type="number" value="1000">
+                        <label>Szóhossz:</label>
+                        <input id="repSzoHosszInLine" type="number" min="1" max="8" value="3">
+                        <label>betű</label>
+                        <button id="repPlease" type="button" class="ml-3 btn btn-secondary btn-sm"
+                            onclick="repWriteInLine()">Kérem a
+                            szót!</button>
+                        <p>átlagbetűszám:<span id="repInLineAtlag"></span></p>
+                        <p>legnagyobb betűszám:<span id="repInLineMax"></span></p>
+                    </div>
+                    <div class="col-6">
+
+                        <div id="divForFinalWords">
+                            <p id="placeForFinalWords"></p>
+                        </div>
+
+                    </div>
+                </div>
 
 
 

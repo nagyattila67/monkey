@@ -57,7 +57,63 @@ writeInLine = function () {
     charNumbInLine = document.querySelector("#szoHosszInLine").value;
     charNumbInLine = parseInt(charNumbInLine);
     thisWord = "";
+    if (charNumbInLine > 5) { noRecordInLine = true }
+    else { noRecordLine = false };
     runWriteInLine(charNumbInLine, thisWord);
+    ennyiBetusSzavak();
+    noRecordInLine = false;
+};
+
+noRecordInLine = false;
+firstFW = true;
+repWIL = false;
+repWriteInLine = function () {
+    repWIL = true;
+    charNumbInLine = document.querySelector("#repSzoHosszInLine").value;
+    charNumbInLine = parseInt(charNumbInLine);
+    repNumbInLine = document.querySelector("#repInLine").value;
+    repNumbInLine = parseInt(repNumbInLine);
+    thisWord = "";
+    noRecordInLine = true;
+    allLastLetters = Array();
+    writeInLineLength = 0;
+    averageWriteInLineLength = 0;
+    maxWriteInLineLength = 0;
+    for (let g = 0; g < repNumbInLine; g++) {
+        runWriteInLine(charNumbInLine, thisWord);
+        allLastLetters[g] = lastLetters;
+        writeInLineLength = writeInLineLength + n - 1;
+        if (maxWriteInLineLength < n) { maxWriteInLineLength = n }
+    };
+    averageWriteInLineLength = Math.round(writeInLineLength / repNumbInLine);
+    document.querySelector("#repInLineAtlag").innerHTML = averageWriteInLineLength;
+    document.querySelector("#repInLineMax").innerHTML = maxWriteInLineLength;
+
+
+
+    area = document.querySelector("#divForFinalWords")
+    sector = document.querySelector("#placeForFinalWords");
+    if (firstFW == false) {
+        area.removeChild(sector);
+        newP = document.createElement("p");
+        newP.setAttribute("id", "placeForFinalWords");
+        area.appendChild(newP)
+    };
+
+    for (let i = 0; i < allLastLetters.length; i++) {
+        newSpan1 = document.createElement("span");
+        newSpan2 = document.createElement("span");
+        sector = document.querySelector("#placeForFinalWords");
+        sector.appendChild(newSpan1);
+        sector.appendChild(newSpan2);
+        newSpan1.innerHTML = `${allLastLetters[i]},`;
+        newSpan2.innerHTML = " ";
+
+        firstFW = false;
+    };
+
+    repWIL = false;
+    noRecordInLine = false;
 };
 
 first = true;
@@ -69,15 +125,24 @@ runWriteInLine = function (charNumbInLine, thisWord) {
     resultWordLine = "";
 
     n = 0
-    sz2=Array();
-    sz3=Array();
+    sz2 = Array();
+    sz3 = Array();
     while (finishLine == false) {
         makeLetter();
         digitABC = String.fromCharCode(digit);
-        wordLine[n] = digitABC;
+        if (noRecordInLine == false) {
+            wordLine[n] = digitABC;
+            if (n % 10000 == 0) { console.log(n); };
+        };
+        if (noRecordInLine == true) {
+            {
+                for (z = 0; z < charNumbInLine - 1; z++) {
+                    wordLine[z] = wordLine[z + 1];
+                };
+                wordLine[z] = digitABC
+            };
+        };
         n = n + 1;
-        if(n%10000==0){console.log(n)};
-
         if (wordLine.length >= charNumbInLine) {
             lastLetters = "";
             for (let k = 0; k < charNumbInLine; k++) {
@@ -91,34 +156,46 @@ runWriteInLine = function (charNumbInLine, thisWord) {
                 };
             };
         };
+    };
+
+
+    if (repWIL == false) {
         document.querySelector("#foundWord").innerHTML = resultWordLine;
         document.querySelector("#foundWord").style["background-color"] = "#FADADD"
-        document.querySelector("#numberOfLetters").innerHTML = wordLine.length;
-    };
+        document.querySelector("#numberOfLetters").innerHTML = n;
 
-    area = document.querySelector("#divForFinalString")
-    sector = document.querySelector("#placeForFinalString");
-    if (first == false) {
-        area.removeChild(sector);
-        newP = document.createElement("p");
-        newP.setAttribute("id", "placeForFinalString");
-        area.appendChild(newP)
-    };
-
-    for (let i = 0; i < wordLine.length; i++) {
-        newSpan1 = document.createElement("span");
-        newSpan2 = document.createElement("span");
+        area = document.querySelector("#divForFinalString")
         sector = document.querySelector("#placeForFinalString");
-        sector.appendChild(newSpan1);
-        sector.appendChild(newSpan2);
-        newSpan1.innerHTML = `${wordLine[i]}`;
-        newSpan2.innerHTML = " ";
-        if (i > wordLine.length - charNumbInLine - 1) {
-            newSpan1.style["background-color"] = "#FADADD";
-            newSpan2.style["background-color"] = "#FADADD";
+        if (first == false) {
+            area.removeChild(sector);
+            newP = document.createElement("p");
+            newP.setAttribute("id", "placeForFinalString");
+            area.appendChild(newP)
         };
-        first = false;
+
+        if (noRecordInLine == true) {
+            newP = document.createElement("p");
+            sector = document.querySelector("#placeForFinalString");
+            sector.appendChild(newP);
+            newP.innerHTML = `${charNumbInLine} betűszámú keresésnél a program már csak a találatot jegyzi meg, hogy ne terhelje túl a számítógép RAM memóriáját, ami lefagyást okozna. A megtalált szó:`;
+        };
+
+        for (let i = 0; i < wordLine.length; i++) {
+            newSpan1 = document.createElement("span");
+            newSpan2 = document.createElement("span");
+            sector = document.querySelector("#placeForFinalString");
+            sector.appendChild(newSpan1);
+            sector.appendChild(newSpan2);
+            newSpan1.innerHTML = `${wordLine[i]}`;
+            newSpan2.innerHTML = " ";
+            if (i > wordLine.length - charNumbInLine - 1) {
+                newSpan1.style["background-color"] = "#FADADD";
+                newSpan2.style["background-color"] = "#FADADD";
+            };
+            first = false;
+        };
     };
+
 
 
 
@@ -130,6 +207,146 @@ runWriteInLine = function (charNumbInLine, thisWord) {
     };
     document.querySelector("#placeForFinalString").innerHTML=finalString;
 */
+    return n, lastLetters;
+};
+
+firstKetBetus = true;
+firstHaromBetus = true;
+firstNegyBetus = true;
+ennyiBetusSzavak = function (charNumbInLine) {
+    ketBetusSzavak = Array();
+    haromBetusSzavak = Array();
+    negyBetusSzavak = Array();
+
+    wordIndex = 0;
+
+    for (let i = 0; i < wordLine.length - 1; i++) {
+        myWord = wordLine[i] + wordLine[i + 1];
+        for (let j = 0; j < szavakByLength[2].length; j++) {
+            if (myWord == (szavakByLength[2])[j]) {
+                ketBetusSzavak[wordIndex] = myWord;
+                wordIndex = wordIndex + 1;
+                document.querySelectorAll("#placeForFinalString span")[2 * i].style["background-color"] = "#FBEC5D";
+                document.querySelectorAll("#placeForFinalString span")[2 * i + 1].style["background-color"] = "#FBEC5D";
+                document.querySelectorAll("#placeForFinalString span")[2 * i + 2].style["background-color"] = "#FBEC5D";
+            };
+        };
+    };
+    document.querySelector("#ketBetusSzama").innerHTML =`${ketBetusSzavak.length} `;
+
+    if (firstKetBetus == false) {
+        area = document.querySelector("#divForKetBetus")
+        sector = document.querySelector("#placeForKetBetus");
+        if (first == false) {
+            area.removeChild(sector);
+            newP = document.createElement("p");
+            newP.setAttribute("id", "placeForKetBetus");
+            area.appendChild(newP)
+        };
+    };
+
+    for (let i = 0; i < ketBetusSzavak.length; i++) {
+        newSpan1 = document.createElement("span");
+        newSpan2 = document.createElement("span");
+        sector = document.querySelector("#placeForKetBetus");
+        sector.appendChild(newSpan1);
+        sector.appendChild(newSpan2);
+        newSpan1.innerHTML = `${ketBetusSzavak[i]}`;
+        if (i != ketBetusSzavak.length - 1) { newSpan2.innerHTML = ", " };
+    };
+
+
+
+    firstKetBetus = false;
+
+    wordIndex = 0;
+    for (let i = 0; i < wordLine.length - 2; i++) {
+        myWord = wordLine[i] + wordLine[i + 1] + wordLine[i+2];
+        for (let j = 0; j < szavakByLength[3].length; j++) {
+            if (myWord == (szavakByLength[3])[j]) {
+                haromBetusSzavak[wordIndex] = myWord;
+                wordIndex = wordIndex + 1;
+                document.querySelectorAll("#placeForFinalString span")[2 * i].style["border-top"] = "solid 1px #ff0000";
+                document.querySelectorAll("#placeForFinalString span")[2 * i].style["border-left"]= "solid 1px #ff0000";
+                document.querySelectorAll("#placeForFinalString span")[2 * i].style["border-bottom"] = "solid 1px #ff0000";
+                document.querySelectorAll("#placeForFinalString span")[2 * i+1].style["border-top"]= "solid 1px #ff0000";
+                document.querySelectorAll("#placeForFinalString span")[2 * i+1].style["border-bottom"] = "solid 1px #ff0000";
+                document.querySelectorAll("#placeForFinalString span")[2 * i + 2].style["border-top"] = "solid 1px #ff0000";
+                document.querySelectorAll("#placeForFinalString span")[2 * i + 2].style["border-bottom"] = "solid 1px #ff0000";
+                document.querySelectorAll("#placeForFinalString span")[2 * i + 3].style["border-top"] = "solid 1px #ff0000";
+                document.querySelectorAll("#placeForFinalString span")[2 * i + 3].style["border-bottom"] = "solid 1px #ff0000";
+                document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style["border-top"] = "solid 1px #ff0000";
+                document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style["border-right"] = "solid 1px #ff0000";
+                document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style["border-bottom"] = "solid 1px #ff0000";
+            };
+        };
+    };
+    document.querySelector("#haromBetusSzama").innerHTML = `${haromBetusSzavak.length} `;
+
+    if (firstHaromBetus == false) {
+        area = document.querySelector("#divForHaromBetus")
+        sector = document.querySelector("#placeForHaromBetus");
+        if (first == false) {
+            area.removeChild(sector);
+            newP = document.createElement("p");
+            newP.setAttribute("id", "placeForHaromBetus");
+            area.appendChild(newP)
+        };
+    };
+
+    for (let i = 0; i < haromBetusSzavak.length; i++) {
+        newSpan1 = document.createElement("span");
+        newSpan2 = document.createElement("span");
+        sector = document.querySelector("#placeForHaromBetus");
+        sector.appendChild(newSpan1);
+        sector.appendChild(newSpan2);
+        newSpan1.innerHTML = `${haromBetusSzavak[i]}`;
+        if (i != haromBetusSzavak.length - 1) { newSpan2.innerHTML = ", " };
+    };
+    firstHaromBetus = false;
+
+
+
+
+    wordIndex = 0;
+    for (let i = 0; i < wordLine.length - 2; i++) {
+        myWord = wordLine[i] + wordLine[i + 1] + wordLine[i+2] + wordLine[i+3];
+        for (let j = 0; j < szavakByLength[4].length; j++) {
+            if (myWord == (szavakByLength[4])[j]) {
+                negyBetusSzavak[wordIndex] = myWord;
+                wordIndex = wordIndex + 1;
+                document.querySelectorAll("#placeForFinalString span")[2 * i].style.color="#0b9e0b"
+                document.querySelectorAll("#placeForFinalString span")[2 * i + 2].style.color = "#0b9e0b";
+                document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style.color = "#0b9e0b";
+                document.querySelectorAll("#placeForFinalString span")[2 * i + 6].style.color = "#0b9e0b";
+            };
+        };
+    };
+    document.querySelector("#negyBetusSzama").innerHTML = negyBetusSzavak.length;
+
+    if (firstNegyBetus == false) {
+        area = document.querySelector("#divForNegyBetus")
+        sector = document.querySelector("#placeForNegyBetus");
+        if (first == false) {
+            area.removeChild(sector);
+            newP = document.createElement("p");
+            newP.setAttribute("id", "placeForNegyBetus");
+            area.appendChild(newP)
+        };
+    };
+
+    for (let i = 0; i < negyBetusSzavak.length; i++) {
+        newSpan1 = document.createElement("span");
+        newSpan2 = document.createElement("span");
+        sector = document.querySelector("#placeForNegyBetus");
+        sector.appendChild(newSpan1);
+        sector.appendChild(newSpan2);
+        newSpan1.innerHTML = `${negyBetusSzavak[i]}`;
+        if (i != negyBetusSzavak.length - 1) { newSpan2.innerHTML = ", " };
+    };
+    firstNegyBetus = false;
+
+
 };
 
 searchInLine = function () {
@@ -146,7 +363,7 @@ searchInLine = function () {
         };
     };
     if (stopSearch == false) { alert("Nincs ilyen szó a majom szótárában") };
-    if (stopSearch == false){document.querySelector("#searchThisWord").value="";};
+    if (stopSearch == false) { document.querySelector("#searchThisWord").value = ""; };
     if (stopSearch == true) { runWriteInLine(charNumbInLine, thisWord) };
 };
 
