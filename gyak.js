@@ -60,7 +60,7 @@ writeInLine = function () {
     if (charNumbInLine > 5) { noRecordInLine = true }
     else { noRecordLine = false };
     runWriteInLine(charNumbInLine, thisWord);
-    ennyiBetusSzavak();
+    ennyiBetusSzavakFunction(charNumbInLine);
     noRecordInLine = false;
 };
 
@@ -213,14 +213,209 @@ runWriteInLine = function (charNumbInLine, thisWord) {
 firstKetBetus = true;
 firstHaromBetus = true;
 firstNegyBetus = true;
-ennyiBetusSzavak = function (charNumbInLine) {
-    ketBetusSzavak = Array();
-    haromBetusSzavak = Array();
-    negyBetusSzavak = Array();
+
+
+showEnnyiBetusFunction = function () {
+    document.querySelector("#ennyiBetusHelye").style.display = "initial";
+    document.querySelector("#ennyiBetusButton").innerHTML = "Elrejt";
+    document.querySelector("#ennyiBetusButton").setAttribute("onclick", "hideEnnyiBetusFunction()");
+    document.querySelector("#ennyiBetus").setAttribute("style", "display:initial");
+    moreThan5Betus();
+};
+hideEnnyiBetusFunction = function () {
+    document.querySelector("#ennyiBetusHelye").style.display = "none";
+    document.querySelector("#ennyiBetusButton").innerHTML = "Mutasd!";
+    document.querySelector("#ennyiBetusButton").setAttribute("onclick", "showEnnyiBetusFunction()");
+    document.querySelector("#ennyiBetus").setAttribute("style", "display:none");
+};
+
+ennyi=0;
+
+moreThan5Betus = function () {
+    area = document.querySelector("#ennyiBetusHelye");
+    sector = document.querySelector("#ennyiBetus");
+    area.removeChild(sector);
+    newDiv = document.createElement("div");
+    area.appendChild(newDiv);
+    newDiv.id="ennyiBetus";
+    newDiv = document.createElement("div");
+    area=document.querySelector("#ennyiBetus");
+    area.appendChild(newDiv);
+    newDiv.id = `${ennyi}Betus`;
+    newDiv.className = "mt-3";
+    //newSpan
+};
+
+
+
+ennyiBetusSzavakFunction = function (charNumbInLine) {
+
+    ennyiBetusSzavak = Array();
+    repetitedEnnyiBetusSzavak = Array();
+    ennyiBetusSzavak[0] = Array();
+    ennyiBetusSzavak[1] = Array();
+
+    if (charNumbInLine > 4) { document.querySelector("#ennyiBetusButton").disabled = false };
+
+    //for (f = 2; f < charNumbInLine+1; f++) {
+    for (f = 2; f < 23; f++) {
+        ennyiBetusSzavak[f] = Array();
+        repetitedEnnyiBetusSzavak[f] = Array();
+        wordIndex = 0;
+        for (let i = 0; i < wordLine.length - 1; i++) {
+            myWord = "";
+            for (let z = 0; z < f; z++) {
+                myWord = myWord + wordLine[i + z];
+            };
+
+
+            for (let j = 0; j < szavakByLength[f].length; j++) {
+                if (myWord == (szavakByLength[f])[j]) {
+                    (ennyiBetusSzavak[f])[wordIndex] = myWord;
+                    wordIndex = wordIndex + 1;
+                    document.querySelectorAll("#placeForFinalString span")[2 * i].style["background-color"] = "#FBEC5D";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 1].style["background-color"] = "#FBEC5D";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 2].style["background-color"] = "#FBEC5D";
+                };
+            };
+        };
+
+        if (f == 5) { console.log("ennyi");ennyi = 5 };
+
+
+
+
+        firstEnnyiBetus = false;
+
+        if (f == 2) {
+            sector = document.querySelector("#placeForKetBetus");
+            document.querySelector("#ketBetusSzama").innerHTML = `${(ennyiBetusSzavak[f]).length} `;
+
+        };
+        if (f == 3) {
+            sector = document.querySelector("#placeForHaromBetus");
+            document.querySelector("#haromBetusSzama").innerHTML = `${(ennyiBetusSzavak[f]).length} `;
+
+        };
+        if (f == 4) {
+            sector = document.querySelector("#placeForNegyBetus");
+            document.querySelector("#negyBetusSzama").innerHTML = `${(ennyiBetusSzavak[f]).length} `;
+
+        };
+
+        if (f == 2) {
+            area = document.querySelector("#divForKetBetus")
+            sector = document.querySelector("#placeForKetBetus");
+            if (firstEnnyiBetus == false) {
+                area.removeChild(sector);
+                newP = document.createElement("p");
+                newP.setAttribute("id", "placeForKetBetus");
+                area.appendChild(newP)
+            };
+        };
+        if (f == 3) {
+            area = document.querySelector("#divForHaromBetus")
+            sector = document.querySelector("#placeForHaromBetus");
+            if (firstEnnyiBetus == false) {
+                area.removeChild(sector);
+                newP = document.createElement("p");
+                newP.setAttribute("id", "placeForHaromBetus");
+                area.appendChild(newP)
+            };
+        };
+        if (f == 4) {
+            area = document.querySelector("#divForNegyBetus")
+            sector = document.querySelector("#placeForNegyBetus");
+            if (firstEnnyiBetus == false) {
+                area.removeChild(sector);
+                newP = document.createElement("p");
+                newP.setAttribute("id", "placeForNegyBetus");
+                area.appendChild(newP)
+            };
+        };
+
+        if (f == 2) {
+            for (let i = 0; i < (ennyiBetusSzavak[f]).length; i++) {
+                newSpan1 = document.createElement("span");
+                newSpan2 = document.createElement("span");
+                sector = document.querySelector("#placeForKetBetus");
+                sector.appendChild(newSpan1);
+                sector.appendChild(newSpan2);
+                newSpan1.innerHTML = `${(ennyiBetusSzavak[2])[i]}`;
+                if (i != (ennyiBetusSzavak[f]).length - 1) { newSpan2.innerHTML = ", " };
+            };
+        };
+
+        if (f == 3) {
+            for (let i = 0; i < (ennyiBetusSzavak[f]).length; i++) {
+                newSpan1 = document.createElement("span");
+                newSpan2 = document.createElement("span");
+                sector = document.querySelector("#placeForHaromBetus");
+                sector.appendChild(newSpan1);
+                sector.appendChild(newSpan2);
+                newSpan1.innerHTML = `${(ennyiBetusSzavak[f])[i]}`;
+                if (i != (ennyiBetusSzavak[f]).length - 1) { newSpan2.innerHTML = ", " };
+            };
+        };
+
+        if (f == 4) {
+            for (let i = 0; i < (ennyiBetusSzavak[f]).length; i++) {
+                newSpan1 = document.createElement("span");
+                newSpan2 = document.createElement("span");
+                sector = document.querySelector("#placeForNegyBetus");
+                sector.appendChild(newSpan1);
+                sector.appendChild(newSpan2);
+                newSpan1.innerHTML = `${(ennyiBetusSzavak[f])[i]}`;
+                if (i != (ennyiBetusSzavak[f]).length - 1) { newSpan2.innerHTML = ", " };
+            };
+        };
+
+
+
+
+
+
+        repetitedEnnyiBetusSzavak[f] = Array();
+        (repetitedEnnyiBetusSzavak[f])[0] = "";
+        (repetitedEnnyiBetusSzavak[f])[1] = "";
+        REBSzIndex = 2;
+        for (let i = 0; i < (ennyiBetusSzavak[f]).length; i++) {
+            item = (ennyiBetusSzavak[f])[i];
+            itemCounter = 1;
+            for (let j = i + 1; j < (ennyiBetusSzavak[f]).length; j++) {
+                if ((ennyiBetusSzavak[f])[i] == (ennyiBetusSzavak[f])[j]) {
+                    itemCounter = itemCounter + 1
+                };
+            };
+            //console.log("most", itemCounter);
+            if (itemCounter > 1) {
+                itemIsRegisteredAlready = false;
+                for (k = 0; k < (repetitedEnnyiBetusSzavak[f]).length; k++) {
+                    if (((repetitedEnnyiBetusSzavak[f])[k])[0] == item) {
+                        itemIsRegisteredAlready = true;
+                        console.log(itemIsRegisteredAlready, item, itemCounter);
+                    };
+
+                };
+                if (itemIsRegisteredAlready == false) {
+                    (repetitedEnnyiBetusSzavak[f])[REBSzIndex] = Array();
+                    ((repetitedEnnyiBetusSzavak[f])[REBSzIndex])[0] = item;
+                    ((repetitedEnnyiBetusSzavak[f])[REBSzIndex])[1] = itemCounter;
+                    REBSzIndex = REBSzIndex + 1;
+                };
+            };
+        };
+
+    };
+
+
+    //ketBetusSzavak = Array();
+    //haromBetusSzavak = Array();
+    //negyBetusSzavak = Array();
 
     wordIndex = 0;
 
-    for (let i = 0; i < wordLine.length - 1; i++) {
+    /*for (let i = 0; i < wordLine.length - 1; i++) {
         myWord = wordLine[i] + wordLine[i + 1];
         for (let j = 0; j < szavakByLength[2].length; j++) {
             if (myWord == (szavakByLength[2])[j]) {
@@ -232,8 +427,8 @@ ennyiBetusSzavak = function (charNumbInLine) {
             };
         };
     };
-    document.querySelector("#ketBetusSzama").innerHTML =`${ketBetusSzavak.length} `;
-
+    document.querySelector("#ketBetusSzama").innerHTML = `${ketBetusSzavak.length} `;
+    
     if (firstKetBetus == false) {
         area = document.querySelector("#divForKetBetus")
         sector = document.querySelector("#placeForKetBetus");
@@ -244,7 +439,7 @@ ennyiBetusSzavak = function (charNumbInLine) {
             area.appendChild(newP)
         };
     };
-
+    
     for (let i = 0; i < ketBetusSzavak.length; i++) {
         newSpan1 = document.createElement("span");
         newSpan2 = document.createElement("span");
@@ -254,97 +449,130 @@ ennyiBetusSzavak = function (charNumbInLine) {
         newSpan1.innerHTML = `${ketBetusSzavak[i]}`;
         if (i != ketBetusSzavak.length - 1) { newSpan2.innerHTML = ", " };
     };
-
-
-
+    
     firstKetBetus = false;
-
-    wordIndex = 0;
-    for (let i = 0; i < wordLine.length - 2; i++) {
-        myWord = wordLine[i] + wordLine[i + 1] + wordLine[i+2];
-        for (let j = 0; j < szavakByLength[3].length; j++) {
-            if (myWord == (szavakByLength[3])[j]) {
-                haromBetusSzavak[wordIndex] = myWord;
-                wordIndex = wordIndex + 1;
-                document.querySelectorAll("#placeForFinalString span")[2 * i].style["border-top"] = "solid 1px #ff0000";
-                document.querySelectorAll("#placeForFinalString span")[2 * i].style["border-left"]= "solid 1px #ff0000";
-                document.querySelectorAll("#placeForFinalString span")[2 * i].style["border-bottom"] = "solid 1px #ff0000";
-                document.querySelectorAll("#placeForFinalString span")[2 * i+1].style["border-top"]= "solid 1px #ff0000";
-                document.querySelectorAll("#placeForFinalString span")[2 * i+1].style["border-bottom"] = "solid 1px #ff0000";
-                document.querySelectorAll("#placeForFinalString span")[2 * i + 2].style["border-top"] = "solid 1px #ff0000";
-                document.querySelectorAll("#placeForFinalString span")[2 * i + 2].style["border-bottom"] = "solid 1px #ff0000";
-                document.querySelectorAll("#placeForFinalString span")[2 * i + 3].style["border-top"] = "solid 1px #ff0000";
-                document.querySelectorAll("#placeForFinalString span")[2 * i + 3].style["border-bottom"] = "solid 1px #ff0000";
-                document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style["border-top"] = "solid 1px #ff0000";
-                document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style["border-right"] = "solid 1px #ff0000";
-                document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style["border-bottom"] = "solid 1px #ff0000";
+    
+    repetitedKetBetusSzavak = Array();
+    for (let i = 0; i < ketBetusSzavak.length; i++) {
+        item2 = ketBetusSzavak[i];
+        item2Counter = 1;
+        RKBSzIndex = 0
+        for (let j = i + 1; j < ketBetusSzavak.length; j++) {
+            if (ketBetusSzavak[i] == ketBetusSzavak[j]) {
+                item2Counter = item2Counter + 1
+            };
+        };
+        if (item2Counter > 1) {
+            item2IsAlone = true;
+            for (k = 0; k < repetitedKetBetusSzavak.length; k++) {
+                if (repetitedKetBetusSzavak[k] == item2) {
+                    item2IsAlone = false;
+                };
+            };
+            if (item2IsAlone) {
+                repetitedKetBetusSzavak[RKBSzIndex] = Array();
+                repetitedKetBetusSzavak[RKBSzIndex][0] = item2;
+                repetitedKetBetusSzavak[RKBSzIndex][1] = item2Counter;
+                RKBSzIndex = RKBSzIndex + 1;
             };
         };
     };
-    document.querySelector("#haromBetusSzama").innerHTML = `${haromBetusSzavak.length} `;
+    */
 
-    if (firstHaromBetus == false) {
-        area = document.querySelector("#divForHaromBetus")
-        sector = document.querySelector("#placeForHaromBetus");
-        if (first == false) {
-            area.removeChild(sector);
-            newP = document.createElement("p");
-            newP.setAttribute("id", "placeForHaromBetus");
-            area.appendChild(newP)
+    if (f == 3) {
+        wordIndex = 0;
+        for (let i = 0; i < wordLine.length - 2; i++) {
+            myWord = wordLine[i] + wordLine[i + 1] + wordLine[i + 2];
+            for (let j = 0; j < szavakByLength[3].length; j++) {
+                if (myWord == (szavakByLength[3])[j]) {
+                    //haromBetusSzavak[wordIndex] = myWord;
+                    wordIndex = wordIndex + 1;
+                    document.querySelectorAll("#placeForFinalString span")[2 * i].style["border-top"] = "solid 1px #ff0000";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i].style["border-left"] = "solid 1px #ff0000";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i].style["border-bottom"] = "solid 1px #ff0000";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 1].style["border-top"] = "solid 1px #ff0000";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 1].style["border-bottom"] = "solid 1px #ff0000";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 2].style["border-top"] = "solid 1px #ff0000";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 2].style["border-bottom"] = "solid 1px #ff0000";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 3].style["border-top"] = "solid 1px #ff0000";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 3].style["border-bottom"] = "solid 1px #ff0000";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style["border-top"] = "solid 1px #ff0000";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style["border-right"] = "solid 1px #ff0000";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style["border-bottom"] = "solid 1px #ff0000";
+                };
+            };
+            document.querySelector("#haromBetusSzama").innerHTML = `${haromBetusSzavak.length} `;
+
+            /* if (firstHaromBetus == false) {
+                 area = document.querySelector("#divForHaromBetus")
+                 sector = document.querySelector("#placeForHaromBetus");
+                 if (firstHaromBetus == false) {
+                     area.removeChild(sector);
+                     newP = document.createElement("p");
+                     newP.setAttribute("id", "placeForHaromBetus");
+                     area.appendChild(newP)
+                 };
+             };
+ 
+             for (let i = 0; i < haromBetusSzavak.length; i++) {
+                 newSpan1 = document.createElement("span");
+                 newSpan2 = document.createElement("span");
+                 sector = document.querySelector("#placeForHaromBetus");
+                 sector.appendChild(newSpan1);
+                 sector.appendChild(newSpan2);
+                 newSpan1.innerHTML = `${haromBetusSzavak[i]}`;
+                 if (i != haromBetusSzavak.length - 1) { newSpan2.innerHTML = ", " };
+             };
+             firstHaromBetus = false;*/
         };
+
+
+
+
+
+
     };
 
-    for (let i = 0; i < haromBetusSzavak.length; i++) {
-        newSpan1 = document.createElement("span");
-        newSpan2 = document.createElement("span");
-        sector = document.querySelector("#placeForHaromBetus");
-        sector.appendChild(newSpan1);
-        sector.appendChild(newSpan2);
-        newSpan1.innerHTML = `${haromBetusSzavak[i]}`;
-        if (i != haromBetusSzavak.length - 1) { newSpan2.innerHTML = ", " };
-    };
-    firstHaromBetus = false;
-
-
-
-
-    wordIndex = 0;
-    for (let i = 0; i < wordLine.length - 2; i++) {
-        myWord = wordLine[i] + wordLine[i + 1] + wordLine[i+2] + wordLine[i+3];
-        for (let j = 0; j < szavakByLength[4].length; j++) {
-            if (myWord == (szavakByLength[4])[j]) {
-                negyBetusSzavak[wordIndex] = myWord;
-                wordIndex = wordIndex + 1;
-                document.querySelectorAll("#placeForFinalString span")[2 * i].style.color="#0b9e0b"
-                document.querySelectorAll("#placeForFinalString span")[2 * i + 2].style.color = "#0b9e0b";
-                document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style.color = "#0b9e0b";
-                document.querySelectorAll("#placeForFinalString span")[2 * i + 6].style.color = "#0b9e0b";
+    if (f == 4) {
+        wordIndex = 0;
+        for (let i = 0; i < wordLine.length - 2; i++) {
+            myWord = wordLine[i] + wordLine[i + 1] + wordLine[i + 2] + wordLine[i + 3];
+            for (let j = 0; j < szavakByLength[4].length; j++) {
+                if (myWord == (szavakByLength[4])[j]) {
+                    //negyBetusSzavak[wordIndex] = myWord;
+                    wordIndex = wordIndex + 1;
+                    document.querySelectorAll("#placeForFinalString span")[2 * i].style.color = "#0b9e0b"
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 2].style.color = "#0b9e0b";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style.color = "#0b9e0b";
+                    document.querySelectorAll("#placeForFinalString span")[2 * i + 6].style.color = "#0b9e0b";
+                };
             };
         };
-    };
-    document.querySelector("#negyBetusSzama").innerHTML = negyBetusSzavak.length;
+        document.querySelector("#negyBetusSzama").innerHTML = negyBetusSzavak.length;
 
-    if (firstNegyBetus == false) {
-        area = document.querySelector("#divForNegyBetus")
-        sector = document.querySelector("#placeForNegyBetus");
-        if (first == false) {
-            area.removeChild(sector);
-            newP = document.createElement("p");
-            newP.setAttribute("id", "placeForNegyBetus");
-            area.appendChild(newP)
-        };
-    };
+        /* if (firstNegyBetus == false) {
+             area = document.querySelector("#divForNegyBetus")
+             sector = document.querySelector("#placeForNegyBetus");
+             if (firstNegyBetus == false) {
+                 area.removeChild(sector);
+                 newP = document.createElement("p");
+                 newP.setAttribute("id", "placeForNegyBetus");
+                 area.appendChild(newP)
+             };
+         };
+ 
+         for (let i = 0; i < negyBetusSzavak.length; i++) {
+             newSpan1 = document.createElement("span");
+             newSpan2 = document.createElement("span");
+             sector = document.querySelector("#placeForNegyBetus");
+             sector.appendChild(newSpan1);
+             sector.appendChild(newSpan2);
+             newSpan1.innerHTML = `${negyBetusSzavak[i]}`;
+             if (i != negyBetusSzavak.length - 1) { newSpan2.innerHTML = ", " };
+         };
+         firstNegyBetus = false;*/
 
-    for (let i = 0; i < negyBetusSzavak.length; i++) {
-        newSpan1 = document.createElement("span");
-        newSpan2 = document.createElement("span");
-        sector = document.querySelector("#placeForNegyBetus");
-        sector.appendChild(newSpan1);
-        sector.appendChild(newSpan2);
-        newSpan1.innerHTML = `${negyBetusSzavak[i]}`;
-        if (i != negyBetusSzavak.length - 1) { newSpan2.innerHTML = ", " };
     };
-    firstNegyBetus = false;
 
 
 };
@@ -1226,11 +1454,11 @@ timeCounting = function () {
     countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max)
 
     /*timeCountingMethod(runningNumberForInfo, charNumberForInfo);
-
+ 
     if (isNaN(min1) == true || isNaN(sec1) == true) {
         min1 = "-"; sec1 = "-";
     };
-
+ 
     document.querySelector("#timeInfo").innerHTML = `${min1} min, ${sec1} sec`;*/
     document.querySelector("#timeInfo").style["background-color"] = "#7ee4e4";
 };
