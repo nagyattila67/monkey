@@ -38,6 +38,7 @@
                         <p>A megtalált szó: <span id="foundWord"> - </span></p>
                         <p>A leírt betűk száma: <span id="numberOfLetters"> - </span></p>
                         <p><span id="commentForNumberOfLetters"> - </span></p>
+                        <p>Futásidő: <span id="szoHosszTime"> - </span></p>
                     </div>
 
                     <div class="col-6">
@@ -52,20 +53,26 @@
                         <div class="mt-3" id="ketBetus">
                             <p><span style="background-color:#FBEC5D">A teljes betűsorozatban található
                                     két betűs szavak száma: <span id="ketBetusSzama"> - </span></span> </p>
+                            <p>Ezek közül a legtöbbet ismételt: <span id="mostFrequentlyRepetited2"><span> -
+                                    </span></span></p>
                             <div class="bgDarker smallBorder littleMarginTop" id="divForKetBetus">
                                 <p id="placeForKetBetus"></p>
                             </div>
                         </div>
                         <div class="mt-3" id="haromBetus">
-                            <p><span style="border: solid 1px red">A teljes betűsorozatban található három betűs szavak száma:
+                            <p><span style="border: solid 1px red">A teljes betűsorozatban található három betűs szavak
+                                    száma:
                                     <span id="haromBetusSzama"> - </span>
+                                    <p>Ezek közül a legtöbbet ismételt: <span id="mostFrequentlyRepetited3"><span> -
+                                            </span></span></p>
                                     <div class="bgDarker smallBorder littleMarginTop" id="divForHaromBetus">
                                         <p id="placeForHaromBetus"></p>
                                     </div>
                         </div>
 
                         <div class="mt-3" id="negyBetus">
-                            <p style="display:inline"><span style="color:#0b9e0b">A teljes betűsorozatban található négy betűs
+                            <p style="display:inline"><span style="color:#0b9e0b">A teljes betűsorozatban található négy
+                                    betűs
                                     szavak száma: <span id="negyBetusSzama"> - </span></span> </p>
                             <div class="bgDarker smallBorder littleMarginTop" id="divForNegyBetus">
                                 <p id="placeForNegyBetus"></p>
@@ -1369,8 +1376,9 @@
                                 <td><span id="monkeyHowManyTimes"> - </span></td>
                             </tr>
                             <tr>
-                                <td>A listák (elvileg) átlagos szószáma (a várt maximum):</td>
-                                <td><span id="averageListLength"> - </span></td>
+                                <td style="background-color:#ffcccc">A listák (elvileg) átlagos szószáma (a várt
+                                    maximum):</td>
+                                <td style="background-color:#ffcccc"><span id="averageListLength"> - </span></td>
                             </tr>
 
                             <tr>
@@ -1396,9 +1404,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Az a szólistahossz, aminél a rövidebb és hosszabb szólisták száma
+                                <td style="background-color:#ffcccc">Az a szólistahossz, aminél a rövidebb és hosszabb
+                                    szólisták száma
                                     egyenlő:</td>
-                                <td><span id="halfingListLength"> - </span></td>
+                                <td style="background-color:#ffcccc"><span id="halfingListLength"> - </span></td>
                             </tr>
                             <tr>
                                 <td>Ebből ennyi van:</td>
@@ -1669,14 +1678,6 @@
                     <div class="row ">
 
                         <div class="col forTableGraphic2">
-                            <p>A következő grafikon azt mutatja meg, hogy az egyes szóhosszúságú
-                                listákból
-                                hány darab van.
-                                Az
-                                első oszlop magassága mutatja, hogy hány egyszavas listánk van. A második
-                                oszlopé, hogy
-                                hány
-                                kétszavas listánk van, és így tovább. </p>
 
                             <div id="forTable5">
                                 <div style="float:right">

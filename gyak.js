@@ -54,6 +54,7 @@ for (let i = 0; i < 41; i++) {
 };
 
 writeInLine = function () {
+    writeInLineTimeStart = new Date();
     charNumbInLine = document.querySelector("#szoHosszInLine").value;
     charNumbInLine = parseInt(charNumbInLine);
     thisWord = "";
@@ -102,8 +103,8 @@ repWriteInLine = function () {
     };
 
     for (let i = 0; i < allLastLetters.length; i++) {
-        newSpan1 = document.createElement("span");
-        newSpan2 = document.createElement("span");
+        let newSpan1 = document.createElement("span");
+        let newSpan2 = document.createElement("span");
         sector = document.querySelector("#placeForFinalWords");
         sector.appendChild(newSpan1);
         sector.appendChild(newSpan2);
@@ -120,6 +121,7 @@ repWriteInLine = function () {
 first = true;
 voltMarHosszabb = false;
 runWriteInLine = function (charNumbInLine, thisWord) {
+
     ennyiBetusSzavak = Array();
     repetitedEnnyiBetusSzavak = Array();
     ennyiBetusSzavak[0] = Array();
@@ -218,8 +220,8 @@ runWriteInLine = function (charNumbInLine, thisWord) {
         };
 
         for (let i = 0; i < wordLine.length; i++) {
-            newSpan1 = document.createElement("span");
-            newSpan2 = document.createElement("span");
+            let newSpan1 = document.createElement("span");
+            let newSpan2 = document.createElement("span");
             sector = document.querySelector("#placeForFinalString");
             sector.appendChild(newSpan1);
             sector.appendChild(newSpan2);
@@ -233,16 +235,17 @@ runWriteInLine = function (charNumbInLine, thisWord) {
         };
     };
 
-
-    ennyiBetusSzavakFunction(charNumbInLine);
-    colorEnnyiBetusSzavak(charNumbInLine);
-
-
+    if (repWIL == false) {
+        ennyiBetusSzavakFunction(charNumbInLine);
+        colorEnnyiBetusSzavak(charNumbInLine);
+    };
 
     if (voltMarHosszabb == true) {
-        area = document.querySelector("#hosszabbak");
-        weDontWantIt = document.createElement("hosszabbakBelseje");
-        area.appendChild(weDontWantIt);
+        if (document.querySelector("#hosszabbakBelseje").children.length > 0) {
+            area = document.querySelector("#hosszabbak");
+            weDontWantIt = document.querySelector("#hosszabbakBelseje");
+            area.removeChild(weDontWantIt);
+        };
     };
 
     mutatHosszabbatIs = false;
@@ -297,7 +300,7 @@ moreThan4Betus = function () {
     newDiv.id = "hosszabbakBelseje";
 
     for (let i = 5; i < ennyiBetusSzavak.length; i++) {
-        if (ennyiBetusSzavak[i] != 0) {
+        if (ennyiBetusSzavak[i].length != 0) {
 
             area = document.querySelector("#hosszabbakBelseje");
             ennyi = i;
@@ -312,19 +315,47 @@ moreThan4Betus = function () {
 
             for (let j = 0; j < ennyiBetusSzavak[i].length; j++) {
 
-                newSpan1 = document.createElement("span");
-                newSpan2 = document.createElement("span");
+                let newSpan1 = document.createElement("span");
+                let newSpan2 = document.createElement("span");
                 sector.appendChild(newSpan1);
                 sector.appendChild(newSpan2);
                 newSpan1.innerHTML = `${(ennyiBetusSzavak[i])[j]}`;
-                newSpan2.innerHTML = " ";
+                if (j < ennyiBetusSzavak[i].length - 1) {
+                    newSpan2.innerHTML = ", "
+                };
             };
         };
     };
+    writeInLineTimeFinish = new Date();
+    writeInLineTime = (writeInLineTimeFinish.getTime() - writeInLineTimeStart.getTime()) / 1000;
+    sec1 = writeInLineTime;
+
+    hour1 = 0;
+    min1 = 0;
+    sec1 = Math.floor(sec1);
+    sector = document.querySelector("#szoHosszTime");
+    if (sec1 == 0) { sec1 = 1 };
+    if (sec1 >= 60) { min1 = Math.ceil(sec1 / 60); sec1 = sec1 % 60 };
+    if (min1 >= 60) { hour1 = Math.ceil(min1 / 60); min1 = sec1 % 60 };
+    if (hour1 == 0) { sector.innerHTML = `${min1} perc, ${sec1} mp.` };
+    if (hour1 > 0) { sector.innerHTML = `${hour1} óra, ${min1} perc` };
+
 };
 
 ennyiBetusSzavakFunction = function (charNumbInLine) {
+
+    for (let k = 0; k < 23; k++) {
+        (repetitedEnnyiBetusSzavak[f]) = Array();
+    };
+
+
+    //(repetitedEnnyiBetusSzavak[f])[0] = "";
+    //(repetitedEnnyiBetusSzavak[f])[1] = "";
+
+
+    REBSzIndex = 2;
     for (f = 2; f < 23; f++) {
+        REBSzIndex = 0;
         for (let i = 0; i < wordLine.length - 1; i++) {
             myWord = "";
             for (let z = 0; z < f; z++) {
@@ -333,6 +364,21 @@ ennyiBetusSzavakFunction = function (charNumbInLine) {
             mehet = true;
             for (let k = 0; k < (ennyiBetusSzavak)[f].length; k++) {
                 if ((ennyiBetusSzavak[f])[k] == myWord) { mehet = false };
+            };
+            if (mehet == false) {
+                itemIsRegisteredAlready = false;
+                for (k = 2; k < (repetitedEnnyiBetusSzavak[f]).length; k++) {
+                    if (((repetitedEnnyiBetusSzavak[f])[k])[0] == myWord) {
+                        ((repetitedEnnyiBetusSzavak[f])[k])[1] = ((repetitedEnnyiBetusSzavak[f])[k])[1] + 1;
+                        itemIsRegisteredAlready = true;
+                    };
+                };
+                if (itemIsRegisteredAlready == false) {
+                    (repetitedEnnyiBetusSzavak[f])[REBSzIndex] = Array();
+                    ((repetitedEnnyiBetusSzavak[f])[REBSzIndex])[0] = myWord;
+                    ((repetitedEnnyiBetusSzavak[f])[REBSzIndex])[1] = 2;
+                    REBSzIndex = REBSzIndex + 1;
+                };
             };
 
             if (mehet == true) {
@@ -344,13 +390,99 @@ ennyiBetusSzavakFunction = function (charNumbInLine) {
                 };
             };
         };
+        if (f == 2) { ismetlesek2() };
+        if (f == 3) { ismetlesek3() };
     };
 };
 
+ismetlesek2 = function () {
+    //sector = document.querySelector("#placeForKetBetus");
+    document.querySelector("#ketBetusSzama").innerHTML = `${(ennyiBetusSzavak[f]).length} `;
+    maxRep2 = 0;
+    for (let k = 2; k < repetitedEnnyiBetusSzavak[2].length; k++) {
+        if (((repetitedEnnyiBetusSzavak[2])[k])[1] > maxRep2) {
+            maxRep2 = (repetitedEnnyiBetusSzavak[2][k])[1];
+        };
+    };
+
+};
+
+displayIsmetlesek2 = function () {
+    area = document.querySelector("#mostFrequentlyRepetited2");
+    index = document.querySelector("#mostFrequentlyRepetited2").children.length
+    for (let i = 0; i < index; i++) {
+
+        sector = document.querySelector("#mostFrequentlyRepetited2 span");
+        area.removeChild(sector);
+    };
+    if (maxRep2 > 0) {
+        area = document.querySelector("#mostFrequentlyRepetited2");
+        for (let k = 2; k < repetitedEnnyiBetusSzavak[2].length; k++) {
+            if (((repetitedEnnyiBetusSzavak[2])[k])[1] == 2) {
+                let newSpan1 = document.createElement("span");
+                let newSpan2 = document.createElement("span");
+                area.appendChild(newSpan1);
+                area.appendChild(newSpan2);
+                newSpan1.innerHTML = `${repetitedEnnyiBetusSzavak[2][k][0]} (${repetitedEnnyiBetusSzavak[2][k][1]})`;
+                newSpan2.innerHTML = ", ";
+            };
+        };
+        if (document.querySelector("#mostFrequentlyRepetited2").children.length > 0) {
+            sector = document.querySelector("#mostFrequentlyRepetited2 :last-child")
+            area.removeChild(sector);
+        };
+    };
+};
+
+ismetlesek3 = function () {
+    //sector = document.querySelector("#placeForKetBetus");
+    document.querySelector("#haromBetusSzama").innerHTML = `${(ennyiBetusSzavak[f]).length} `;
+    maxRep3 = 0;
+    for (let k = 2; k < repetitedEnnyiBetusSzavak[3].length; k++) {
+        if (((repetitedEnnyiBetusSzavak[3])[k])[1] > maxRep3) {
+            maxRep3 = (repetitedEnnyiBetusSzavak[3][k])[1];
+        };
+    };
+
+};
+
+displayIsmetlesek3 = function () {
+    area = document.querySelector("#mostFrequentlyRepetited3");
+    index = document.querySelector("#mostFrequentlyRepetited3").children.length
+    for (let i = 0; i < index; i++) {
+
+        sector = document.querySelector("#mostFrequentlyRepetited3 span");
+        area.removeChild(sector);
+    };
+    if (maxRep3 > 0) {
+        area = document.querySelector("#mostFrequentlyRepetited3");
+        for (let k = 2; k < repetitedEnnyiBetusSzavak[3].length; k++) {
+            if (((repetitedEnnyiBetusSzavak[3])[k])[1] == maxRep3) {
+                let newSpan1 = document.createElement("span");
+                let newSpan2 = document.createElement("span");
+                area.appendChild(newSpan1);
+                area.appendChild(newSpan2);
+                newSpan1.innerHTML = `${repetitedEnnyiBetusSzavak[3][k][0]} (${repetitedEnnyiBetusSzavak[3][k][1]})`;
+                newSpan2.innerHTML = ", ";
+            };
+        };
+        sector = document.querySelector("#mostFrequentlyRepetited3 :last-child")
+        area.removeChild(sector);
+    };
+    if (maxRep3 == 0) {
+        area = document.querySelector("#mostFrequentlyRepetited3");
+        let newSpan = document.createElement("span");
+        newSpan.innerHTML = " - "
+        area.appendChild(newSpan);
+    };
+};
 
 colorEnnyiBetusSzavak = function (charNumbInLine) {
+
     //for (f = 2; f < charNumbInLine+1; f++) {
     for (f = 2; f < 23; f++) {
+        if (f == 2) { displayIsmetlesek2() };
+        if (f == 3) { displayIsmetlesek3() };
         //ennyiBetusSzavak[f] = Array();
         //repetitedEnnyiBetusSzavak[f] = Array();
         //wordIndex = 0;
@@ -375,11 +507,7 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
 
         firstEnnyiBetus = false;
 
-        if (f == 2) {
-            sector = document.querySelector("#placeForKetBetus");
-            document.querySelector("#ketBetusSzama").innerHTML = `${(ennyiBetusSzavak[f]).length} `;
 
-        };
         if (f == 3) {
             sector = document.querySelector("#placeForHaromBetus");
             //document.querySelector("#haromBetusSzama").innerHTML = `${(ennyiBetusSzavak[f]).length} `;
@@ -426,8 +554,8 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
 
         if (f == 2) {
             for (let i = 0; i < (ennyiBetusSzavak[f]).length; i++) {
-                newSpan1 = document.createElement("span");
-                newSpan2 = document.createElement("span");
+                let newSpan1 = document.createElement("span");
+                let newSpan2 = document.createElement("span");
                 sector = document.querySelector("#placeForKetBetus");
                 sector.appendChild(newSpan1);
                 sector.appendChild(newSpan2);
@@ -438,8 +566,8 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
 
         if (f == 3) {
             for (let i = 0; i < (ennyiBetusSzavak[f]).length; i++) {
-                newSpan1 = document.createElement("span");
-                newSpan2 = document.createElement("span");
+                let newSpan1 = document.createElement("span");
+                let newSpan2 = document.createElement("span");
                 sector = document.querySelector("#placeForHaromBetus");
                 sector.appendChild(newSpan1);
                 sector.appendChild(newSpan2);
@@ -450,8 +578,8 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
 
         if (f == 4) {
             for (let i = 0; i < (ennyiBetusSzavak[f]).length; i++) {
-                newSpan1 = document.createElement("span");
-                newSpan2 = document.createElement("span");
+                let newSpan1 = document.createElement("span");
+                let newSpan2 = document.createElement("span");
                 sector = document.querySelector("#placeForNegyBetus");
                 sector.appendChild(newSpan1);
                 sector.appendChild(newSpan2);
@@ -465,34 +593,34 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
 
 
 
-        repetitedEnnyiBetusSzavak[f] = Array();
-        (repetitedEnnyiBetusSzavak[f])[0] = "";
-        (repetitedEnnyiBetusSzavak[f])[1] = "";
-        REBSzIndex = 2;
-        for (let i = 0; i < (ennyiBetusSzavak[f]).length; i++) {
-            item = (ennyiBetusSzavak[f])[i];
-            itemCounter = 1;
-            for (let j = i + 1; j < (ennyiBetusSzavak[f]).length; j++) {
-                if ((ennyiBetusSzavak[f])[i] == (ennyiBetusSzavak[f])[j]) {
-                    itemCounter = itemCounter + 1
-                };
-            };
-            if (itemCounter > 1) {
-                itemIsRegisteredAlready = false;
-                for (k = 0; k < (repetitedEnnyiBetusSzavak[f]).length; k++) {
-                    if (((repetitedEnnyiBetusSzavak[f])[k])[0] == item) {
-                        itemIsRegisteredAlready = true;
-                    };
-
-                };
-                if (itemIsRegisteredAlready == false) {
-                    (repetitedEnnyiBetusSzavak[f])[REBSzIndex] = Array();
-                    ((repetitedEnnyiBetusSzavak[f])[REBSzIndex])[0] = item;
-                    ((repetitedEnnyiBetusSzavak[f])[REBSzIndex])[1] = itemCounter;
-                    REBSzIndex = REBSzIndex + 1;
-                };
-            };
-        };
+        /*   repetitedEnnyiBetusSzavak[f] = Array();
+           (repetitedEnnyiBetusSzavak[f])[0] = "";
+           (repetitedEnnyiBetusSzavak[f])[1] = "";
+           REBSzIndex = 2;
+           for (let i = 0; i < (ennyiBetusSzavak[f]).length; i++) {
+               item = (ennyiBetusSzavak[f])[i];
+               itemCounter = 1;
+               for (let j = i + 1; j < (ennyiBetusSzavak[f]).length; j++) {
+                   if ((ennyiBetusSzavak[f])[i] == (ennyiBetusSzavak[f])[j]) {
+                       itemCounter = itemCounter + 1
+                   };
+               };
+               if (itemCounter > 1) {
+                   itemIsRegisteredAlready = false;
+                   for (k = 0; k < (repetitedEnnyiBetusSzavak[f]).length; k++) {
+                       if (((repetitedEnnyiBetusSzavak[f])[k])[0] == item) {
+                           itemIsRegisteredAlready = true;
+                       };
+   
+                   };
+                   if (itemIsRegisteredAlready == false) {
+                       (repetitedEnnyiBetusSzavak[f])[REBSzIndex] = Array();
+                       ((repetitedEnnyiBetusSzavak[f])[REBSzIndex])[0] = item;
+                       ((repetitedEnnyiBetusSzavak[f])[REBSzIndex])[1] = itemCounter;
+                       REBSzIndex = REBSzIndex + 1;
+                   };
+               };
+           };*/
 
         if (f == 3) {
             //(wordIndex[f]) = 0;
@@ -519,7 +647,7 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
                         document.querySelectorAll("#placeForFinalString span")[2 * i + 4].style["border-bottom"] = "solid 1px #ff0000";
                     };
                 };
-                document.querySelector("#haromBetusSzama").innerHTML = `${haromBetusSzavak.length} `;
+                //document.querySelector("#haromBetusSzama").innerHTML = `${haromBetusSzavak.length} `;
             };
         };
 
@@ -529,7 +657,8 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
                 myWord = wordLine[i] + wordLine[i + 1] + wordLine[i + 2] + wordLine[i + 3];
                 for (let j = 0; j < szavakByLength[4].length; j++) {
                     if (myWord == (szavakByLength[4])[j]) {
-                        //negyBetusSzavak[wordIndex] = myWord;
+                        negyBetusSzavak[(wordIndex[f])] = myWord;
+                        //haromBetusSzavak[hbsz] = myWord] = myWord;
                         (wordIndex[f]) = (wordIndex[f]) + 1;
                         document.querySelectorAll("#placeForFinalString span")[2 * i].style.color = "#0b9e0b"
                         document.querySelectorAll("#placeForFinalString span")[2 * i + 2].style.color = "#0b9e0b";
@@ -538,7 +667,7 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
                     };
                 };
             };
-            document.querySelector("#negyBetusSzama").innerHTML = negyBetusSzavak.length;
+            //document.querySelector("#negyBetusSzama").innerHTML = negyBetusSzavak.length;
         };
 
 
@@ -615,6 +744,7 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
         };
     };
     */
+
 };
 searchInLine = function () {
     stopSearch = false;
@@ -735,7 +865,7 @@ word = function (wordLength) {
     area.style.display = "initial";
     goToPage = String();
 
-    if (wordLength != previousWordLength) { beFaster() };
+    //if (wordLength != previousWordLength) { beFaster() };
     previousWordLength = wordLength;
 
 
@@ -1466,9 +1596,9 @@ goToRepeat = function () {
 };
 
 //Összegyűjti a 'charNumb' hosszúságú szavakat egy ideiglenes tömbbe, s ebből fog újra és újra keresni, nem pedig a teljes 'szavak' tömbből
-szavakTemp = Array();
+//szavakTemp = Array();
 szavakHexTemp = Array();
-beFaster = function () {
+/*beFaster = function () {
     szavakTemp = Array();
     let j = 0;
     for (let i = 0; i < szavak.length; i++) {
@@ -1479,7 +1609,7 @@ beFaster = function () {
         };
     };
     return (szavakTemp, szavakHexTemp);
-};
+};*/
 timeCounting = function () {
     runningNumberForInfo = document.querySelector("#futasSzam").value;
     charNumberForInfo = document.querySelector("#karakterSzam").value
@@ -1767,18 +1897,18 @@ fillLoopTable = function (wordLength) {
     document.querySelector("#mostFrequentedListValue").innerHTML = distribution[distMaxPlace];
     document.querySelector("#runTime").innerHTML = `${min} min.${sec} sec.`;
 
-    document.querySelector("#explantation1").innerHTML = `A majom most ${wordLength} betű hosszúságú szavakat keresett.`
-    result = (35 ** wordLength / szavakTemp.length).toFixed(2);
+    document.querySelector("#explantation1").innerHTML = `A majom most ${charNumber} betű hosszúságú szavakat keresett.`
+    result = (35 ** charNumber / szavakByLength[charNumber].length).toFixed(2);
 
     document.querySelector("#explantation2").innerHTML = "A 35 betűből álló ábécéből 35";
-    document.querySelector("#explantation3").innerHTML = `${wordLength} `;
-    document.querySelector("#explantation4").innerHTML = ` = ${35 ** wordLength} darab ${wordLength} betű hosszúságú szó rakható ki.A szótárban pedig összesen ${szavakTemp.length} db.${wordLength} betű hosszúságú szó szerepel.`
+    document.querySelector("#explantation3").innerHTML = `${charNumber} `;
+    document.querySelector("#explantation4").innerHTML = ` = ${35 ** charNumber} darab ${charNumber} betű hosszúságú szó rakható ki.A szótárban pedig összesen ${szavakByLength[charNumber].length} db.${charNumber} betű hosszúságú szó szerepel.`
 
-    document.querySelector("#explantation5").innerHTML = `Ha a két értéket elosztjuk egymással, akkor a ${35 ** wordLength} /  ${szavakTemp.length} =`
-    result = (35 ** wordLength / szavakTemp.length).toFixed(2);
+    document.querySelector("#explantation5").innerHTML = `Ha a két értéket elosztjuk egymással, akkor a ${35 ** charNumber} /  ${szavakByLength[charNumber].length} =`
+    result = (35 ** charNumber / szavakByLength[charNumber].length).toFixed(2);
     document.querySelector("#explantation6").style["background-color"] = "#7ee4e4";
     document.querySelector("#explantation6").innerHTML = `${result}`
-    document.querySelector("#explantation7").innerHTML = ` értéket kapjuk, ami azt mutatja meg, hogy a majomnak hány értelmetlen betűcsoportot kell átlagosan leírnia, hogy végül egy értelmes szóhóz jusson. Ez lesz a ${wordLength} hosszúságú szavakat tartalmazó szólisták átlagos terjedelme.`
+    document.querySelector("#explantation7").innerHTML = ` értéket kapjuk, ami azt mutatja meg, hogy a majomnak hány értelmetlen betűcsoportot kell átlagosan leírnia, hogy végül egy értelmes szóhóz jusson. Ez lesz a ${charNumber} hosszúságú szavakat tartalmazó szólisták átlagos terjedelme.`
 
     document.querySelector("#explantation8").innerHTML = "Minél jobban növeljük a futások számát, "
     document.querySelector("#explantation9").style["background-color"] = "#7ee4e4"
@@ -5001,7 +5131,7 @@ transform();
 
 wordLength = 4;
 previousWordLength = wordLength;
-beFaster();
+//beFaster();
 startCounting = true; timeCounting();
 
 /*numberOfSzavak = 0;

@@ -180,8 +180,8 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;}
 
 #divForNegyBetus{overflow:auto;width:900px;height:103px}
 
-.ennyiBetusDiv{margin-left:15px;width:900px;}
-#hosszabbakBelseje p{margin-left:15px;}
+.ennyiBetusDiv{overflow:auto;margin-left:15px;width:900px;height:103px;}
+#hosszabbakBelseje p{margin:15px 0px 0px 15px}
 #nincsHosszabb{margin:15px 0px 0px 15px;}
 
 
