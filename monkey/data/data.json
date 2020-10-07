@@ -1,0 +1,34 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "name": "Kovács János",
+        "email": "kovacs@gmail.com"
+      },
+      {
+        "id": 2,
+        "name": "Szabó Piroska",
+        "email": "szabo@gmail.com"
+      },
+      {
+        "id": 3,
+        "name": "Nagy Ferenc",
+        "email": "nagy@gmail.com"
+      },
+      {
+        "id": 4,
+        "name": "Molnár János",
+        "email": "molnar@gmail.com"
+      },
+      {
+        "id": 5,
+        "name": "Kiskunszeghalmi Ottó",
+        "email": "kiskun@hotmail.com"
+      },
+      {
+        "name": "ffggg",
+        "email": "gghhhhhh",
+        "id": 6
+      }
+    ]
+  }
