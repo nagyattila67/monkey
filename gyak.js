@@ -1730,6 +1730,34 @@ timeCounting = function () {
     document.querySelector("#timeInfo").style["background-color"] = "#7ee4e4";
 };
 
+
+timeCounting2 = function () {
+    let runningNumberForInfo = document.querySelector("#futasSzam2").value;
+    let charNumberForInfo = document.querySelector("#karakterSzam2").value
+
+    runningNumberForInfo = parseInt(runningNumberForInfo);
+    charNumberForInfo = parseInt(charNumberForInfo);
+    sector = document.querySelector("#timeInfo2");
+    howManyRepetition = 1;
+    min = 1;
+    max = 8;
+    countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max)
+
+    /*timeCountingMethod(runningNumberForInfo, charNumberForInfo);
+ 
+    if (isNaN(min1) == true || isNaN(sec1) == true) {
+        min1 = "-"; sec1 = "-";
+    };
+ 
+    document.querySelector("#timeInfo").innerHTML = `${min1} min, ${sec1} sec`;*/
+    document.querySelector("#timeInfo2").style["background-color"] = "#7ee4e4";
+};
+timeCounting2();
+
+
+
+
+
 timeCountingMethod = function (runningNumberForInfo, charNumberForInfo) {
     /*if (startCounting == true) {
         runningNumberForInfo = document.querySelector("#futasSzam").value;
@@ -1807,7 +1835,74 @@ previousCharNumber = Number();
 previousRunningNumber = Number();
 //clearing = "false";
 halfingListArray = Array;
-repeat = function (event) {
+
+runningNumber2 = document.querySelector("#futasSzam2").value;
+runningNumber2 = parseInt(runningNumber2);
+charNumber2 = document.querySelector("#karakterSzam2").value;
+charNumber2 = parseInt(charNumber2);
+repeat2 = function () {
+    averageArray2 = Array();
+    distribution2 = Array();
+    runningNumber2 = document.querySelector("#futasSzam2").value;
+    runningNumber2 = parseInt(runningNumber2);
+    charNumber2 = document.querySelector("#karakterSzam2").value;
+    charNumber2 = parseInt(charNumber2);
+
+    for (let i = 0; i < runningNumber2; i++) {
+        word(charNumber2);
+        repeatCount = repeatCount + 1;
+        averageArray2[i] = turn;
+    };
+
+    maximum2 = 0;
+    for (let i = 0; i < averageArray2.length; i++) {
+        if (maximum2 < averageArray2[i]) {
+            maximum2 = averageArray2[i];
+        };
+    };
+
+    distribution2 = Array();
+    for (let i = 0; i <= maximum2; i++) {
+        distribution2[i] = 0;
+        for (let j = 0; j < averageArray2.length; j++) {
+            if (averageArray2[j] == i) {
+                distribution2[i] = distribution2[i] + 1;
+            };
+        };
+    };
+    //a 0-dik sorszámú elem azt mutatja, hogy hány 0 hosszúságú lista van, de mivel ilyen nincs, kirakjuk a tömbből
+    distribution2.shift();
+    distribution = distribution2.slice(0);
+
+    distributionCopy = Array();
+    for (let i = 0; i < distribution.length; i++) {
+        distributionCopy[i] = distribution[i];
+
+    }
+    distributionCopy2 = Array();
+    for (let i = 0; i < distribution.length; i++) {
+        distributionCopy2[i] = distribution[i];
+    };
+
+    charNumber = charNumber2;
+    runningNumber = runningNumber2;
+    distanceMatrix = Array();
+    distanceMatrixAllElementCount = 0;
+    makeDistanceMatrix(distribution);
+    distanceStart();
+    makeDistributionDistance();
+    distributionDistanceStart();
+
+
+    //makeDistanceMatrix(distribution);
+    whereEmptinessInDistribution(distribution);
+};
+
+
+
+
+repeat = function () {
+
 
     if (wasRepeating == true) { removeDistanceMatrixSpan(); removeDistributionDistanceSpans(); removeDistanceMatrixSpans2() };
     hideClickCounter = 0; showTheDistanceGraph();
@@ -1821,8 +1916,6 @@ repeat = function (event) {
     timeStartReally = new Date();
     averageArray = Array();
     rep = true;
-
-    ev = event;
 
     if (isItRepeating == false) {
         //runningNumber = event.path[4].children[0].children[0].children[1].value;
@@ -1852,8 +1945,8 @@ repeat = function (event) {
     for (let i = 0; i < runningNumber; i++) {
         if (repeatCount == runningNumber - 1) { displayNow = true };
 
-        charNumber = document.querySelector("#karakterSzam").value;
-        charNumber = parseInt(charNumber);
+        //charNumber = document.querySelector("#karakterSzam").value;
+        //charNumber = parseInt(charNumber);
         word(charNumber);
         repeatCount = repeatCount + 1;
         averageArray[i][0] = turn;
@@ -3714,7 +3807,7 @@ wantFullGraph = function () {
     secReal = (timeFullGraph % 60).toFixed(0);
 
     document.querySelector("#realTimeForFullGraph").innerHTML = `Grafikon felrajzolásának tényleges ideje: ${minReal} min.${secReal} sec.`;
-    document.querySelector("#infoForFullGraph2").innerHTML = `Ezen a grafikonon ${Math.floor(distribution.length / distributionCopy2.length)} oszlop felel meg a tömörített grafikon egy oszlopának.`;
+    /*document.querySelector("#infoForFullGraph2").innerHTML = `Ezen a grafikonon ${Math.floor(distribution.length / distributionCopy2.length)} oszlop felel meg a tömörített grafikon egy oszlopának.`;*/
 };
 
 hideFullGraph = function () {
@@ -3964,7 +4057,7 @@ makeTheSecondTable = function () {
 
 distanceMatrix = Array();
 isThereDistanceMatrix = "no"
-makeDistanceMatrix = function () {
+makeDistanceMatrix = function (distribution) {
     distanceMatrix = Array();
     isThereDistanceMatrix = "yes";
     let k = 0;
@@ -4016,6 +4109,33 @@ removeDistanceMatrixSpan = function () {
 
 };
 
+whereEmptinessInDistribution = function (distribution2) {
+
+    let area = document.querySelector("#hiddenEmptiness");
+    let sector = document.querySelector("#forHiddenEmptinessSpan");
+    area.removeChild(sector);
+    newDiv = document.createElement("div");
+    newDiv.id = "forHiddenEmptinessSpan";
+    area.appendChild(newDiv);
+
+    for (let i = 0; i < distribution2.length; i++) {
+        let area = document.querySelector("#forHiddenEmptinessSpan");
+        let newSpan1 = document.createElement("span");
+        let newSpan2 = document.createElement("span");
+        newSpan1.innerHTML = distribution2[i]
+        if (i != distribution2.length - 1) { newSpan2.innerHTML = ", " };
+        if (distribution2[i] == 0) {
+            newSpan1.style["background-color"] = "#cbe7cb";
+            newSpan2.style["background-color"] = "#cbe7cb"
+        };
+        area.appendChild(newSpan1);
+        area.appendChild(newSpan2);
+    };
+
+
+    document.querySelector("#hiddenEmptiness")
+};
+
 
 showDistanceMatrix = function (firstElement, lastElement, pageOfDistanceTable) {
     if (wasDistanceMatrixClick == false) { createDistanceMatrixSpans(); };
@@ -4030,6 +4150,7 @@ showDistanceMatrix = function (firstElement, lastElement, pageOfDistanceTable) {
     document.querySelector("#distanceTablePage").innerHTML = `- ${pageOfDistanceTable} -`;
     //document.querySelector("#distanceAllPage").innerHTML = `${maxDistancePage}`;
     document.querySelector("#emptiness1").innerHTML = runningNumber;
+    document.querySelector("#emptiness1_").innerHTML = charNumber;
     document.querySelector("#emptiness2").innerHTML = distribution.length;
     document.querySelector("#emptiness3").innerHTML = distribution[distribution.length - 1]
     document.querySelector("#emptiness4").innerHTML = distribution.length;
@@ -4192,6 +4313,44 @@ showTheDistanceGraph = function () {
     };
 };
 
+dgWasRun = false;
+wrapDistanceGraph = function () {
+    indexTRow = document.querySelectorAll("#colForDistanceGraph tr").length;
+    indexTData = document.querySelector("#colForDistanceGraph tr").children.length;
+    DG1 = document.querySelector("#dg1").value;
+    DG1 = parseFloat(DG1);
+    DG2 = document.querySelector("#dg2").value;
+    DG2 = parseFloat(DG2);
+    DG3 = document.querySelector("#dg3").value;
+    DG3 = parseFloat(DG3);
+    DG4 = document.querySelector("#dg4").value;
+    DG4 = parseFloat(DG4);
+
+
+    forDG = Array();
+
+    for (let i = 0; i < indexTRow; i++) {
+        for (let j = 0; j < indexTData; j++) {
+
+        };
+    };
+
+    for (let i = 0; i < indexTRow; i++) {
+        for (let j = 0; j < indexTData; j++) {
+
+            myValue = indexTRow-Math.floor(DG1 * (DG2 ** (j + DG3)) + DG4);
+
+            document.querySelectorAll("#colForDistanceGraph tr")[myValue].children[j].style["background-color"] = "#000000";
+            myArray = Array();
+            myArray[0] = i;
+            myArray[1] = j;
+            forDG[forDG.length] = myArray;
+
+        };
+    };
+    dgWasRun = true
+};
+
 makeDistributionDistance = function () {
     distributionDistance = Array();
     distanceMax = 0;
@@ -4228,6 +4387,9 @@ makeDistributionDistance = function () {
     document.querySelector("#longestEmptiness").innerHTML = distanceMax;
     document.querySelector("#distributionDistanceLength").innerHTML = distributionDistance.length;
     document.querySelector("#distributionDistanceAllPage").innerHTML = maxDistancePage;
+    document.querySelector("#egyHosszu").innerHTML = distribution[0];
+    document.querySelector("#ketHosszu").innerHTML = distribution[1];
+    document.querySelector("#haromHosszu").innerHTML = distribution[2];
 };
 
 //distributionDistanceTable

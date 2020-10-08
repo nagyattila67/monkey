@@ -2,10 +2,13 @@ body{background-color:#f6f6f6;}
 p{font-size:19px;}
 span{font-size:19px;}
 li small{font-size:15px;}
-.bgLight{background-color:#fbfbfb}
+.bgLight{background-color:#f8f8f8}
 .bgDarker{ background-color:#f1f1f1}
+.bgLight{background-color:#f8f8f8}
+.bgWhite{background-color:#ffffff}
 .smallBorder{border:1px solid #a8a8a8;padding:10px}
 .littleMarginTop{margin-top:15px}
+
 smallBorder div{margin:0px;}
 h2{margin-left:16px;}
 h5{margin:11px;padding:10px;}
@@ -13,7 +16,7 @@ h5{margin:11px;padding:10px;}
 #monkey{margin-left:20px}
 p{text-align:justify}
 #littleInfo{margin:0px; padding: 10px 10px 10px 30px; border:1px solid #a8a8a8; background-color:#f1f1f1}
-#setting1{margin:0px 0px 20px 0px;padding: 10px 10px 10px 30px; border:1px;border:1px solid #a8a8a8; background-color:#f1f1f1;}
+.setting1{margin:0px 0px 20px 0px;padding: 10px 10px 10px 30px; border:1px;border:1px solid #a8a8a8; background-color:#f1f1f1;}
 #word{font-weight:bolder}
 #pageInput{width:90px;margin-bottom:11px;}    
 #wordLength{width:50px}
@@ -105,7 +108,7 @@ button[name='rising']{width:35px;height:35px;margin:8px;padding:5px;}
 rowForFullDistribution{border:solid 1px #a8a8a8;padding:10px}
 
 #distributionButtons{margin:0px;}
-#distributionButtons button{margin:10px 10px 0px;min-width:60px;height:33px;}
+#distributionButtons button{margin:10px 10px 15px;min-width:60px;height:33px;}
 #distributionButtons [name='arrow']{font-size:25px;line-height:1px;padding:0px 0px 3px}
 #rowForFullGraph{margin:0px;border:solid 1px #a8a8a8;padding:10px;}
 #forFullTable{overflow:scroll;margin:0px 0px 0px;width:auto;height:300px;border:1px solid #a8a8a8;background-color:#dbdbdb;border-spacing:0px;}
@@ -113,17 +116,23 @@ rowForFullDistribution{border:solid 1px #a8a8a8;padding:10px}
 #fullGraphic td{border:none; width:10px;height:10px;}
 #rowForFullDistribution p{margin:0px}
 divForDistanceTable{border:1px solid #8a8a8a; padding:10px;}
-#colForDistanceTable{max-height:340px; padding:10px; border:1px solid #a8a8a8;overflow:auto;background-color:#cbe7cb;}
+
+
+#colForDistributionDistanceTable{min-height:100px;max-height:340px}
+#colForDistanceMatrixTable2{min-height:100px;max-height:340px;margin:0px}
+
+
+#colForDistanceTable{min-height:100px;max-height:340px; padding:10px; border:1px solid #a8a8a8;overflow:auto;background-color:#cbe7cb;}
 #divForShowDistanceGraph{border:1px solid #a8a8a8;padding:10px}
 #colForDistanceGraph{overflow:auto;min-width:600px;height:400px;}
 #distanceGraph{overflow:auto;min-width:600px;height:400px;width:max-content;background-color:#dbdbdb}
 #distanceGraph td{width:3px;height:3px;border:solid 1px #dbdbdb}
 #distGraphEstimateTime{background-color:#7ee4e4}
-.colForTable{max-height:340px; padding:10px; border:1px solid #a8a8a8;overflow:auto;background-color:#cbe7cb;}
+.colForTable{min-height:100px;max-height:340px; padding:10px; border:1px solid #a8a8a8;overflow:auto;background-color:#cbe7cb;}
 .colForBorder{border:1px solid #a8a8a8;padding:10px}
 .colForTable{margin:10px;padding:10px;}
 #rowForDistributionDistanceTable2{margin:1px}
-button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;}
+button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:10px;}
 .colForSimulatedBook{padding-top:15px;height:470px;margin:3px;border:1px solid #a8a8a8;background-color:#f0f0f0;}
 .simulatedBook{width:130px}
 .simulatedBook p[name='0']{margin:20px 0px 25px 0px;}
@@ -182,6 +191,7 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;}
 
 .ennyiBetusDiv{overflow:auto;max-width:900px;height:103px;}
 #hosszabbakBelseje p{margin:15px 0px 0px 0px}
+#hiddenEmptiness{height:100px; overflow:auto;}
 
 
 
