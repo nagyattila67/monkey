@@ -99,8 +99,8 @@ displayTime = function (sec1, sector) {
     hour1 = 0;
     min1 = 0;
     sec1 = Math.ceil(sec1);
-    if (sec1 >= 60) { min1 = Math.ceil(sec1 / 60); sec1 = sec1 % 60 };
-    if (min1 >= 60) { hour1 = Math.ceil(min1 / 60); min1 = sec1 % 60 };
+    if (sec1 >= 60) { min1 = Math.floor(sec1 / 60); sec1 = sec1 % 60 };
+    if (min1 >= 60) { hour1 = Math.floor(min1 / 60); min1 = sec1 % 60 };
     if (hour1 == 0 && min1 == 0) { sector.innerHTML = `${sec1} mp.` };
     if (hour1 == 0 && min1 > 0) { sector.innerHTML = `${min1} perc, ${sec1} mp.` };
     if (hour1 > 0) { sector.innerHTML = `${hour1} óra, ${min1} perc` };
@@ -1030,7 +1030,7 @@ word = function (wordLength) {
             if (expressionHex == szavakHex[k]) {
                 index = szavakHex.findIndex(x => x == expressionHex);
                 hit = true;
-                if (cons == true && displayNow == true) { console.log("TALÁLAT!!!!! ", turn, "ciklus után. A szó: ", szavak[index]); };
+                if (cons == true && displayNow == true && noConsole == false) { console.log("TALÁLAT!!!!! ", turn, "ciklus után. A szó: ", szavak[index]); };
                 timeFinish = new Date();
                 timeExpired = (timeFinish - timeStart) / 1000;
             };
@@ -1042,7 +1042,7 @@ word = function (wordLength) {
             timeFinish = new Date();
         };
 
-        if (turn == 0 && cons == true && displayNow == true) { console.log("A betűkombinációk kirakása elindult.") }
+        if (turn == 0 && cons == true && displayNow == true && noConsole == false) { console.log("A betűkombinációk kirakása elindult.") }
 
         if (turn % 100000 == 0) {
             if (turn != 0 && cons == true && displayNow == true) {
@@ -1840,7 +1840,23 @@ runningNumber2 = document.querySelector("#futasSzam2").value;
 runningNumber2 = parseInt(runningNumber2);
 charNumber2 = document.querySelector("#karakterSzam2").value;
 charNumber2 = parseInt(charNumber2);
+noConsole = false
 repeat2 = function () {
+    /*if (hideDistanceGraphOrNot == "no") {
+        hideClickCounter = 0;
+        hideTheDistanceGraph();
+    };*/
+    removeRowsFromDistanceGraph();
+    document.querySelector("#buttonForDistanceGraph").setAttribute("onclick", "showTheDistanceGraph()");
+
+    if (hideDistanceGraphOrNot == "no") {
+        hideClickCounter = 0;
+        hideTheDistanceGraph();
+    };
+
+    console.log("ürességvizsgálat elindult");
+    noConsole = true;
+    timeRepeat2Start = new Date;
     averageArray2 = Array();
     distribution2 = Array();
     runningNumber2 = document.querySelector("#futasSzam2").value;
@@ -1862,14 +1878,26 @@ repeat2 = function () {
     };
 
     distribution2 = Array();
-    for (let i = 0; i <= maximum2; i++) {
+    /*for (let i = 0; i <= maximum2; i++) {
         distribution2[i] = 0;
         for (let j = 0; j < averageArray2.length; j++) {
             if (averageArray2[j] == i) {
                 distribution2[i] = distribution2[i] + 1;
             };
         };
+    };*/
+
+    distMax2 = 0;
+    for (let i = 0; i <= maximum2; i++) {
+        distribution2[i] = 0;
+        for (let j = 0; j < averageArray2.length; j++) {
+            if (averageArray2[j] == i) {
+                distribution2[i] = distribution2[i] + 1;
+            };
+            if (distribution2[i] > distMax2) { distMax2 = distribution2[i]; };
+        };
     };
+
     //a 0-dik sorszámú elem azt mutatja, hogy hány 0 hosszúságú lista van, de mivel ilyen nincs, kirakjuk a tömbből
     distribution2.shift();
     distribution = distribution2.slice(0);
@@ -1884,18 +1912,33 @@ repeat2 = function () {
         distributionCopy2[i] = distribution[i];
     };
 
+
+
     charNumber = charNumber2;
     runningNumber = runningNumber2;
     distanceMatrix = Array();
     distanceMatrixAllElementCount = 0;
     makeDistanceMatrix(distribution);
+
+    maxDistance = 0;
+    for (let i = 0; i < distanceMatrix.length; i++) {
+        if (distanceMatrix[i] > maxDistance) { maxDistance = distanceMatrix[i] };
+    };
+
     distanceStart();
     makeDistributionDistance();
     distributionDistanceStart();
 
 
+
     //makeDistanceMatrix(distribution);
     whereEmptinessInDistribution(distribution);
+    timeRepeat2Finish = new Date;
+    timeRepeat2 = (timeRepeat2Finish - timeRepeat2Start) / 1000;
+    console.log(timeRepeat2);
+    displayDistributionDistance();
+    noConsole = false;
+
 };
 
 
@@ -1905,14 +1948,15 @@ repeat = function () {
 
 
     if (wasRepeating == true) { removeDistanceMatrixSpan(); removeDistributionDistanceSpans(); removeDistanceMatrixSpans2() };
-    hideClickCounter = 0; showTheDistanceGraph();
+    hideClickCounter = 0;
+
     needErase = false;
     wasMerge = false;
     wasMaximumChanged = false;
     wasDistMaxChanged = false;
     repeatCount = 0;
     displayNow = false;
-    console.log("Az ismétlések elindultak. Csak az utolsó ismétlés találatát fogja látni.")
+    if (noConsole == false) { console.log("Az ismétlések elindultak. Csak az utolsó ismétlés találatát fogja látni.") };
     timeStartReally = new Date();
     averageArray = Array();
     rep = true;
@@ -2044,7 +2088,7 @@ repeat = function () {
         document.querySelector("#buttonForDistanceGraph").innerHTML = "Mutat";
         distanceMatrix = Array();
         distanceMatrixAllElementCount = 0;
-        makeDistanceMatrix();
+        makeDistanceMatrix(distribution);
         distanceStart();
         makeDistributionDistance();
         distributionDistanceStart();
@@ -4145,7 +4189,8 @@ showDistanceMatrix = function (firstElement, lastElement, pageOfDistanceTable) {
         area = document.querySelector(`#distanceTable span[name='${i}']`)
         if (firstElement + i < distanceMatrix.length) {
             area.innerHTML = `${distanceMatrix[firstElement + i]}; `
-        };
+        }
+        else { area.innerHTML = " " };
     };
     document.querySelector("#distanceTablePage").innerHTML = `- ${pageOfDistanceTable} -`;
     //document.querySelector("#distanceAllPage").innerHTML = `${maxDistancePage}`;
@@ -4166,13 +4211,21 @@ showDistanceMatrix = function (firstElement, lastElement, pageOfDistanceTable) {
 
     document.querySelector("#distGraphEstimateTime").innerHTML = "";
     document.querySelector("#distGraphEstimateTime2").innerHTML = "";
-    if (charNumber == 2) { document.querySelector("#distGraphEstimateTime").innerHTML = "1 sec." };
 
-    if (charNumber == 3) { document.querySelector("#distGraphEstimateTime").innerHTML = "1 sec." };
+    let timeDGE = maxDistance * distanceMatrix.length * 0.002;
+    sector = document.querySelector("#distGraphEstimateTime");
+    displayTime(timeDGE, sector);
+
+    /*if (charNumber == 3) { document.querySelector("#distGraphEstimateTime").innerHTML = "1 sec." };
     if (charNumber == 4) { document.querySelector("#distGraphEstimateTime2").innerHTML = "10 perc" };
     if (charNumber == 5) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
     if (charNumber == 6) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
-    if (charNumber == 7) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
+    if (charNumber == 7) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };*/
+
+    //let time = distribution.length * distMax2 * 0.001;
+    //sector = document.querySelector("#distGraphEstimateTime2");
+    //displayTime(time, sector);
+
 
 };
 wasDistanceMatrixClick = false;
@@ -4208,6 +4261,7 @@ distanceLast = function () {
     borderElement = (Math.floor(distanceMatrix.length / 100)) * 100;
     firstElement = borderElement;
     lastElement = firstElement + 100;
+    if (lastElement > distanceMatrix.length) { lastElement = distanceMatrix.length }
     pageOfDistanceTable = maxDistancePage;
     showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable);
 };
@@ -4240,6 +4294,15 @@ hideDistanceGraphOrNot = "";
 wasShowingDistanceGraph = false;
 showTheDistanceGraph = function () {
     wasShowingDistanceGraph = true;
+
+    if (charNumber == 3) {
+        document.querySelector("#dg1").value = 0.01;
+        document.querySelector("#dg2").value = 1.21
+    }
+    if (charNumber == 4) {
+        document.querySelector("#dg1").value = 0.0001;
+        document.querySelector("#dg2").value = 1.17
+    }
 
     document.querySelector("#rowForDistanceGraph").style.display = "initial";
     document.querySelector("#buttonForDistanceGraph").innerHTML = "Elrejt";
@@ -4309,12 +4372,27 @@ showTheDistanceGraph = function () {
         secReal = (timeDistance % 60).toFixed(0);
 
         document.querySelector("#realTimeForDistanceGraph").innerHTML = `Grafikon felrajzolásának tényleges ideje: ${minReal} min.${secReal} sec.`;
-        document.querySelector("#infoForDistanceGraph").innerHTML = `Ezen a grafikonon ${Math.floor(distribution.length / distributionCopy2.length)} oszlop felel meg a tömörített grafikon egy oszlopának.`;
+        /*(distribution.length / distributionCopy2.length)} oszlop felel meg a tömörített grafikon egy oszlopának.`;*/
+    };
+    if (charNumber > 2) {
+        document.querySelector("#wrapDistanceButton").disabled = false;
+        document.querySelector("#distGraphInactive").style.display = "initial";
+    }
+    else {
+        document.querySelector("#wrapDistanceButton").default = true;
+        document.querySelector("#distGraphInactive").style.display = "initial";
     };
 };
 
 dgWasRun = false;
+
+
+thisWas = Array();
 wrapDistanceGraph = function () {
+
+
+  
+
     indexTRow = document.querySelectorAll("#colForDistanceGraph tr").length;
     indexTData = document.querySelector("#colForDistanceGraph tr").children.length;
     DG1 = document.querySelector("#dg1").value;
@@ -4335,17 +4413,34 @@ wrapDistanceGraph = function () {
         };
     };
 
+    if (thisWas.length > 0) {
+        for (let k = 0; k < thisWas.length - 3; k++) {
+            document.querySelectorAll("#colForDistanceGraph tr")[thisWas[k]].children[thisWas[k + 1]].style["background-color"] = thisWas[k+2];
+            //console.log(thisWas[k+2]);
+            k = k + 2;
+        };
+    };
+
+    //thisWas = Array();
+    //theColorWas="";
+
+
+
+
     for (let i = 0; i < indexTRow; i++) {
         for (let j = 0; j < indexTData; j++) {
 
-            myValue = indexTRow-Math.floor(DG1 * (DG2 ** (j + DG3)) + DG4);
+            myValue = indexTRow - Math.floor(DG1 * (DG2 ** (j + DG3)) + DG4);
 
+            theColorWas=document.querySelectorAll("#colForDistanceGraph tr")[myValue].children[j].style["background-color"];
             document.querySelectorAll("#colForDistanceGraph tr")[myValue].children[j].style["background-color"] = "#000000";
             myArray = Array();
             myArray[0] = i;
             myArray[1] = j;
             forDG[forDG.length] = myArray;
-
+            thisWas[thisWas.length] = myValue;
+            thisWas[thisWas.length] = j;
+            thisWas[thisWas.length] =theColorWas;
         };
     };
     dgWasRun = true
@@ -4382,9 +4477,20 @@ makeDistributionDistance = function () {
     };
     //makeDistributionDistance2();
     makeDistanceMatrix2();
+
+
+    sumOfDistributionDistance = 0
+    for (let i = 0; i < distributionDistance.length; i++) {
+        sumOfDistributionDistance = sumOfDistributionDistance + distributionDistance[i];
+    };
+};
+
+displayDistributionDistance = function () {
     document.querySelector("#numberOfEmptiness").innerHTML = distanceMatrix.length;
     document.querySelector("#kindOfEmptiness").innerHTML = distributionDistanceShort.length;
     document.querySelector("#longestEmptiness").innerHTML = distanceMax;
+    sector = document.querySelector("#realTimeEmptiness");
+    displayTime(timeRepeat2, sector);
     document.querySelector("#distributionDistanceLength").innerHTML = distributionDistance.length;
     document.querySelector("#distributionDistanceAllPage").innerHTML = maxDistancePage;
     document.querySelector("#egyHosszu").innerHTML = distribution[0];
@@ -5142,7 +5248,7 @@ word_ = function () {
             if (expressionHex == szavakHex[k]) {
                 index = szavakHex.findIndex(x => x == expressionHex);
                 hit = true;
-                if (cons == true && displayNow == true) { console.log("TALÁLAT!!!!! ", turn, "ciklus után. A szó: ", szavak[index]); };
+                if (cons == true && displayNow == true && noConsole == false) { console.log("TALÁLAT!!!!! ", turn, "ciklus után. A szó: ", szavak[index]); };
                 timeFinish = new Date();
                 timeExpired = (timeFinish - timeStart) / 1000;
             };
@@ -5154,7 +5260,7 @@ word_ = function () {
             timeFinish = new Date();
         };
 
-        if (turn == 0 && cons == true && displayNow == true) { console.log("A betűkombinációk kirakása elindult.") }
+        if (turn == 0 && cons == true && displayNow == true && noConsole == false) { console.log("A betűkombinációk kirakása elindult.") }
 
         if (turn % 100000 == 0) {
             if (turn != 0 && cons == true && displayNow == true) {

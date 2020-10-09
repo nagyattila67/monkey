@@ -1737,7 +1737,7 @@
                                             style="width:100px" min="1" max="1000000" value="100">
                                         <label>Karakterek száma:</label>
                                         <input id="karakterSzam2" type="number" class="form-control form-control-sm"
-                                            style="width:100px" min="1" max="7" value="4">
+                                            style="width:100px" min="1" max="7" value="3">
 
                                     </form>
                                 </div>
@@ -1761,7 +1761,8 @@
                             <div class="row">
                                 <div class="col">
                                     <p>Így tehát most <span id="emptiness1">
-                                            &#8212 </span> darab <span id="emptiness1_"> - </span> betűs 'szavakból' álló szólistánk van. A listákat úgy tesszük sorba,
+                                            &#8212 </span> darab <span id="emptiness1_"> - </span> betűs 'szavakból'
+                                        álló szólistánk van. A listákat úgy tesszük sorba,
                                         hogy az első kupacban az összesen egy szót tartalmazó listák vannak. A második
                                         kupacban
                                         az
@@ -1829,6 +1830,14 @@
                                                 </td>
                                                 <td><span id="longestEmptiness"></span></td>
                                             </tr>
+                                            <tr>
+                                                <td>
+                                                    <p>Tényleges futásidő:</p>
+                                                </td>
+                                                <td>
+                                                    <span id="realTimeEmptiness"></span>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <div class="row smallBorder ml-0 mr-0 mt-2 mb-2">
@@ -1879,56 +1888,84 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
-
-
-
                         </div>
                     </div>
 
                     <div id="divForShowDistanceGraph" class="row mt-2 mb-2 mr-0 ml-0">
-                        <div class="col-8">
-                            <p>A következő oszlopgrafikon azt mutatja meg, hogy milyen hosszúságú ürességek
-                                követik
-                                egymást
-                                az egyes kupacok mözött. <span style="font-size:13px">(Ennek a grafikonnak csak
-                                    négy
-                                    betűnél
-                                    hosszabb szókeresés
-                                    sorozatok esetén van jelentősége!)</span> Klikkeljen a <i>'mutat'</i>
-                                gombra!</p>
-                        </div>
-                        <div class="col-4">
-                            <button id="buttonForDistanceGraph" type="button" class="btn btn-secondary btn-sm"
-                                onclick="showTheDistanceGraph()">Mutat</button>
-                            <p>A grafikon elkészítésének várható ideje: <span
-                                    id="distGraphEstimateTime"></span><strong><span
-                                        id="distGraphEstimateTime2"></span></strong></p>
-                        </div>
-                    </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <p><img id="monkey" class="float-right " src="img/uresseg_eloszlas.jpg" width="400"
+                                            ; alt="ürességek eloszlása">A kép egy <i>'a majom négy betűs szavakat keres
+                                            100-szor'</i> kereséssorozat ürességeloszlását mutatja. Láthatjuk, hogy az
+                                        ürességek hosszát jelképező oszlopok magasságának a növekedése egy exponenciális
+                                        trendet mutat. Az oszlopok lassan kezdenek növekedni, majd hirtelen a vége felé
+                                        extrém módon megnőnek. A képen az utolsó oszlopok magasságai: 11, 27, 188, 419,
+                                        682, 51, 676. (A kép teteje le van vágva.)</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-8">
+                                    <p>A következő oszlopgrafikon azt mutatja meg, hogy milyen hosszúságú ürességek
+                                        követik
+                                        egymást
+                                        az egyes kupacok mözött. <span style="font-size:13px">(Ennek a grafikonnak csak
+                                            négy
+                                            betűnél
+                                            hosszabb szókeresés
+                                            sorozatok esetén van jelentősége!)</span> Klikkeljen a <i>'mutat'</i>
+                                        gombra! <span style="color:red">Vigyázzon, 1 000 / 4 felett a művelet túlságosan
+                                            is memóriaigényes, lefagyhat a gépe!</span></p>
+                                </div>
+                                <div class="col-4">
+                                    <button id="buttonForDistanceGraph" type="button" class="btn btn-secondary btn-sm"
+                                        onclick="showTheDistanceGraph()">Mutat</button>
+                                    <p>A grafikon elkészítésének várható ideje: <span
+                                            id="distGraphEstimateTime"></span><strong><span
+                                                id="distGraphEstimateTime2"></span></strong></p>
+                                </div>
+                            </div>
 
-                    <div style="display:none" id="rowForDistanceGraph" class="row">
-                        <div id="colForDistanceGraph" class="col col-12">
-                            <table id="distanceGraph">
-                            </table>
-                            <p>A burkológörbe megrajzolása <small>(Ez a funkció csak min. 4 karakterszám esetén van aktiválva!)</small></p>
-                            <p>y = <input style="width:100px" type="number" id="dg1" value="1"> * <input style="width:100px" type="number" id="dg2" value="2.718">
-                                <sup>x + <input style="width:100px" type="number" id="dg3" value="1"></sup> + <input style="width:100px" type="number" id="dg4" value="1">
-                            </p>
-                            <button onclick="wrapDistanceGraph()" type="button">Mehet</button>
 
-                        </div>
+                            <div style="display:none" id="rowForDistanceGraph" class="row">
+                                <div id="colForDistanceGraph" class="col col-12">
+                                    <table id="distanceGraph">
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="mt-2">A burkológörbe megrajzolása:</p>
+                                        <p id="distGraphInactive" style="display:none">A funkció csak legalább 3 karakterszám esetén aktív.</p>
+                                        <br>
+                                        <p style="display:inline">y = <input style="width:100px" type="number" id="dg1"
+                                                value="0.0001"> * (<input style="width:100px" type="number" id="dg2"
+                                                value="1.17">)
+                                            <sup>x + <input style="width:100px" type="number" id="dg3" value="0"></sup>
+                                            + <input style="width:100px" type="number" id="dg4" value="1">
+                                        </p>
+                                        <button class="mb-3" style="display:inline" id="wrapDistanceButton" disabled
+                                            onclick="wrapDistanceGraph()" type="button">Mehet</button>
+                                        <div>
+                                            <small><span id=realTimeForDistanceGraph></span>
+                                                <span id=infoForDistanceGraph></span></small>
+                                        </div>
 
-                        <small><span id=realTimeForDistanceGraph></span>
-                            <span id=infoForDistanceGraph></span></small>
-                        <!--<div class="row">
+                                    </div>
+                                </div>
+
+                                <!--<div class="row">
                     <div style="display:none" id="forFullTable" class="col col-12">
                         <table class="fullTable" id="graphic">
                         </table>
                     </div>-->
+
+                            </div>
+                        </div>
+
+
 
                     </div>
 
