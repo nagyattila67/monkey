@@ -4126,7 +4126,7 @@ makeDistanceMatrix = function (distribution) {
             indexNull = indexNull + 1;
         };*/
     };
-    maxDistancePage = Math.ceil(distanceMatrix.length / 100);
+    maxDistancePageDM = Math.ceil(distanceMatrix.length / 100);
     distanceMatrixAllElementCount = 0;
     for (let i = 0; i < distanceMatrix.length; i++) {
         distanceMatrixAllElementCount = distanceMatrixAllElementCount + distanceMatrix[i];
@@ -4240,20 +4240,22 @@ distanceStart = function () {
 distanceBack = function () {
     if (firstElement - 99 > 0) {
         firstElement = firstElement - 100;
+        if (pageOfDistanceTable > 1) { pageOfDistanceTable -= 1 }
     }
     else { lastElement = 1 }
-    if (pageOfDistanceTable > 1) { pageOfDistanceTable -= 1 }
+
     showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable);
 };
 distanceFow = function () {
     if (firstElement + 100 < distanceMatrix.length) {
         firstElement = firstElement + 100;
+        if (pageOfDistanceTable < maxDistancePageDM) { pageOfDistanceTable += 1 };
         if (firstElement + 100 < distanceMatrix.length) {
             lastElement = firstElement + 100;
         }
         else { lastElement = distanceMatrix.length }
     };
-    if (pageOfDistanceTable < maxDistancePage) { pageOfDistanceTable += 1 };
+
     showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable);
 };
 borderElement = 0;
@@ -4261,8 +4263,11 @@ distanceLast = function () {
     borderElement = (Math.floor(distanceMatrix.length / 100)) * 100;
     firstElement = borderElement;
     lastElement = firstElement + 100;
-    if (lastElement > distanceMatrix.length) { lastElement = distanceMatrix.length }
-    pageOfDistanceTable = maxDistancePage;
+    if (lastElement > distanceMatrix.length) {
+        lastElement = distanceMatrix.length;
+
+    }
+    pageOfDistanceTable = maxDistancePageDM;
     showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable);
 };
 
@@ -4389,10 +4394,6 @@ dgWasRun = false;
 
 thisWas = Array();
 wrapDistanceGraph = function () {
-
-
-  
-
     indexTRow = document.querySelectorAll("#colForDistanceGraph tr").length;
     indexTData = document.querySelector("#colForDistanceGraph tr").children.length;
     DG1 = document.querySelector("#dg1").value;
@@ -4403,44 +4404,35 @@ wrapDistanceGraph = function () {
     DG3 = parseFloat(DG3);
     DG4 = document.querySelector("#dg4").value;
     DG4 = parseFloat(DG4);
-
-
     forDG = Array();
-
-    for (let i = 0; i < indexTRow; i++) {
-        for (let j = 0; j < indexTData; j++) {
-
-        };
-    };
-
     if (thisWas.length > 0) {
         for (let k = 0; k < thisWas.length - 3; k++) {
-            document.querySelectorAll("#colForDistanceGraph tr")[thisWas[k]].children[thisWas[k + 1]].style["background-color"] = thisWas[k+2];
-            //console.log(thisWas[k+2]);
+            document.querySelectorAll("#colForDistanceGraph tr")[thisWas[k]].children[thisWas[k + 1]].style["background-color"] = thisWas[k + 2];
             k = k + 2;
         };
     };
-
-    //thisWas = Array();
-    //theColorWas="";
-
-
-
-
     for (let i = 0; i < indexTRow; i++) {
+        myValues = Array();
         for (let j = 0; j < indexTData; j++) {
 
             myValue = indexTRow - Math.floor(DG1 * (DG2 ** (j + DG3)) + DG4);
-
-            theColorWas=document.querySelectorAll("#colForDistanceGraph tr")[myValue].children[j].style["background-color"];
-            document.querySelectorAll("#colForDistanceGraph tr")[myValue].children[j].style["background-color"] = "#000000";
-            myArray = Array();
-            myArray[0] = i;
-            myArray[1] = j;
-            forDG[forDG.length] = myArray;
-            thisWas[thisWas.length] = myValue;
-            thisWas[thisWas.length] = j;
-            thisWas[thisWas.length] =theColorWas;
+            myValues[myValues.length] = myValue;
+        };
+        for (let j in myValues) {
+            //myValue = indexTRow - Math.floor(DG1 * (DG2 ** (j + DG3)) + DG4);
+            if (i == myValues[j]) {
+                myValue = myValues[j];
+                theColorWas = "";
+                theColorWas = document.querySelectorAll("#colForDistanceGraph tr")[myValue].children[j].style["background-color"];
+                myArray = Array();
+                myArray[0] = i;
+                myArray[1] = j;
+                forDG[forDG.length] = myArray;
+                thisWas[thisWas.length] = myValue;
+                thisWas[thisWas.length] = j;
+                thisWas[thisWas.length] = theColorWas;
+                document.querySelectorAll("#colForDistanceGraph tr")[myValue].children[j].style["background-color"] = "#000000";
+            };
         };
     };
     dgWasRun = true
