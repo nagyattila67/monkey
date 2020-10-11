@@ -193,6 +193,11 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #hosszabbakBelseje p{margin:15px 0px 0px 0px}
 #hiddenEmptiness{height:100px; overflow:auto;}
 
+#divForDistributionDistanceGraph{overflow:auto;width:900px;height:200px;background-color:#dbdbdb}
+#distributionDistanceGraph td{border:solid 1px #dbdbdb;}
+
+
+
 
 
 
