@@ -196,6 +196,10 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #divForDistributionDistanceGraph{overflow:auto;width:900px;height:200px;background-color:#dbdbdb}
 #distributionDistanceGraph td{border:solid 1px #dbdbdb;}
 
+#divForLetterSkip{overflow:auto;height:500px}
+#tableForLetterSkip{height:500px}
+#divForFoundWords{overflow:auto;height:250px}
+
 
 
 

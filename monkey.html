@@ -2046,8 +2046,6 @@
                                     hosszúságú'</i> ürességből hány darab van. A második oszlop magasságáé
                                 pedig,
                                 hogy a <i>'kettő hosszúságú'</i> ürességből hány darab van. És így tovább.
-                                Klikkeljen a <i>'mutat'</i>
-                                gombra!
                             </p>
                         </div>
                         <!--<div class="col-2">
@@ -2115,7 +2113,180 @@
                 </div>
             </div>
 
-            <div class="row smallBorder">
+
+
+
+            <div class="row smallBorder bgDarker mt-3 p-5">
+                <div class="col">
+                    <h5>A szólista szimulálása</h5>
+                </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <p>Láttuk azt, hogy egy 13 betűből álló értelmes szó létrehozásához a programnak
+                            átlagosan
+                            2,2
+                            millió
+                            évre
+                            lenne szüksége. Ez a könyv összesen 1,3 billiárd - egész pontosan:
+                            1 376 544 666 922 514
+                            -
+                            oldalt
+                            tartalmazna.
+                        </p>
+
+                        <p>Nekünk nyilván nincs 2,2
+                            millió évünk, hogy lefutassuk ezt a programot. Azonban a számítógép képes ezt a
+                            könyvet
+                            szimulálni a
+                            számunkra úgy, hogy bárhol belelapozhassunk!</p>
+                        <p>
+                    </div>
+                </div>
+                <div class="row">
+
+
+                    <div class="col col-6">
+                        <p>
+                            Képzeljünk el egy szimulált könyvet, ami egy regényt tartalmaz. Ennek a könyvnek
+                            minden
+                            oldala üres.
+                            Viszont ha bárhol kinyitjuk, akkor azon az oldalpáron azonnal megjelenik egy
+                            szöveg,
+                            mintha
+                            az
+                            mindig is ott lett volna, s ez a szöveg a könyv becsukása után is ott marad.
+                            Azaz ha
+                            újra
+                            ugyanott
+                            nyitjuk ki a könyvet, akkor ugyanazt a szövegrészt látjuk, s nem gondolnánk,
+                            hogy a
+                            szöveg
+                            csak
+                            akkor jött létre, amikor azon a helyen először kinyitotta valaki a könyvet. S
+                            ugyanúgy
+                            azt
+                            sem
+                            sejtenénk, hogy azok az
+                            oldalak, ahol még senki sem nyitotta ki ezt a könyvet, valójában teljesen
+                            üresek.</p>
+                        </p>
+
+                        <p>
+                            Azaz a számítógép nem használ se memóriát, se erőforrást a könyv létrehozására
+                            addig,
+                            amíg
+                            azt
+                            valaki kézbe nem veszi, s bele nem lapoz. S a számítógép ekkor is csak annyi
+                            oldalt
+                            készít
+                            el, s
+                            őriz
+                            meg, amennyit egy belelapozó személy már látott belőle. Ez előny a könyvet
+                            szimuláló gép
+                            számára,
+                            hiszen nem kell 2,2 millió évig futnia, valahányszor elindítjuk az a programot,
+                            továbbá
+                            pedig az
+                            alkalmazást használó személy
+                            soha nem tudna annyit lapozni a könyvben, hogy a gép teljes memóriája végig
+                            teleíródjon.
+                        </p>
+                        <p>Ha ebben kételkednénk, akkor jusson eszünkbe, hogy ez a könyv 300 oldalas
+                            kötetekkel
+                            számolva
+                            4 588 482 223 075 kötetből áll. Egész életünk nem lenne elég ahhoz, hogy a
+                            köteteket
+                            tartalmazó polc
+                            mentén végigsétáljunk! (Kb. 114 ezerszer érné körbe a Föld egyenlítőjét.)</p>
+                        <p>A könyv szimulálásakor Ön először az utolsó oldalt fogja látni, s ennek az utolsó
+                            sorában
+                            lesz az első
+                            olyan értelmes szó, amire 2,2 millió év keresés után bukkant rá a program.
+                        </p>
+                        <p>Természetesen, ha újraindítja a programot, akkor ez a könyv törlődik a
+                            memóriából!</p>
+
+
+                    </div>
+
+                    <div class="col col-6">
+
+                        <div id="rowForAllDistribution" class="row simulationRow">
+                            <div id="divForAllDistribution" class="col simulationCol">
+
+                                <button id="simulationOfTheBook" type="button" class="btn btn-primary btn-block btn-sm"
+                                    onclick="bookSimulation()">A
+                                    könyv
+                                    szimulálása
+                                </button>
+
+
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center simulationRow">
+                            <div class="col-auto simulationCol">
+                                <label>Ugrás a(z) </label>
+                            </div>
+                            <div class="col-auto simulationCol">
+                                <input id="simulatedPageInput" type="number" class="form-control form-control-sm"
+                                    min="0" max="1376544666922514">
+                            </div>
+                            <div class="col-auto simulationCol">
+                                <label for="simulatedPageInput">oldalra:</label>
+                            </div>
+                            <div class="col-auto simulationCol">
+                                <button id="skip" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="skipToSimulatedPage(event)">Ugrás!</button>
+                            </div>
+
+                        </div>
+                        <div class="row form-row justify-content-center simulation">
+
+
+                            <div class="col-auto simulationCol">
+                                <button id="skipToRandomPage" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="randomPage(event)">Ugrás egy véletlen oldalra</button>
+                            </div>
+
+                        </div>
+
+                        <div class="row justify-content-center simulationRow" id="distributionButtons">
+                            <div class="col-auto simulationCol">
+                                <button id="allDistributionStart" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="allDistStart()">az
+                                    elejére</button>
+                                <button id="allDistributionBack" name="arrow" type="button"
+                                    class="btn btn-secondary btn-sm" onclick="allDistBack()">&#8678</button>
+                                <button id="allDistributionFoward" name="arrow" type="button"
+                                    class="btn btn-secondary btn-sm" onclick="allDistFow()">&#8680</button>
+                                <button id="allDistributionLast" type="button" class="btn btn-secondary btn-sm"
+                                    onclick="allDistLast()">a
+                                    végére</button>
+                                <p><small>A memória mérete jelenleg: <span id="sizeOfMemory"> 0</span>
+                                        tétel.</small></p>
+                                <p><small>Ez<span class="t"></span> az oldal<span class="t"></span> <span
+                                            id="statusOfPage"></span></small></p>
+                            </div>
+                        </div>
+
+                        <div id="rowForSimulatedBook" class="row justify-content-center rowForSimulatedBook">
+                            <div id="colForSimulatedBook1" class="col-auto colForSimulatedBook">
+                                <div id="simulatedBook1" class="simulatedBook">
+                                </div>
+                            </div>
+                            <div id="colForSimulatedBook2" class="col-auto colForSimulatedBook">
+                                <div id="simulatedBook2" class="simulatedBook">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row smallBorder mt-3">
                 <div class="col">
                     <div class="row">
                         <div class="col">
@@ -2321,262 +2492,163 @@
             </div>
 
 
-
-            hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-
-
-
-
-
-            <p>Ha meg akarja nézni egy gépelés sorozat esetén ezt az eloszlást, azt <a
-                    href="/monkey.html#rowForFullDistribution">ide kattintva</a> teheti meg.</p>
-
-
-
-
-
-            <div class="row">
-                <form class="form-inline">
-                    <label class="mt-1">A találatok küldése a szervernek:</label>
-                    <button disabled type="button" id="send-data" class="btn btn-secondary btn-sm"
-                        onclick=sendData()>Küld</button>
-                </form>
-            </div>
-
-            <div class="row">
-                <p>A memória mérete jelenleg: <span id="monkeyMemorySize">-</span></p>
-                <p>Az eddigi összes (eredményes) futás száma: <span id="numberOfRunnings">-</span></p>
-                <button type="button" class="btn btn-secondary btn-sm" onclick=goToRepeat()>Újabb futtatás
-                    ugyanannyiszor</button>
-            </div>
-
-            <div class="row">
-                <form class="form-inline">
-                    <label>A szó hossza legyen:</label>
-                    <input type="number" class="form-control form-control-sm" style="width:100px" min="2" max="10"
-                        value="8">
-                    <label> betű!</label>
-                    <button type="button" class="btn btn-secondary btn-sm" onclick="generateWord(event)">Kérek
-                        egy
-                        szót!</button>
-                    <button type="button" class="btn btn-secondary btn-sm" onclick="generateWordRnd(event)">Véletlen
-                        hosszúságú szót kérek!</button>
-                </form>
-            </div>
-            <div class="row">
-                <p>Íme a szó: <span id="generatedWord"></span> </p>
-            </div>
-            <div class="row">
-
-                <div class="col-6">
-                    <div class="row">
-                        <label>Tetszik a szó, jegyezzük fel!<small> A szó eltávolítása a táblázatból:
-                                klikkeljen
-                                rá
-                                egyet!</small></label>
-                        <button type="button" class="btn btn-secondary btn-sm btn-block"
-                            onclick="notation(event)">Rajta!</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="writeSentence()">Kérek
-                            egy
-                            mondatot
-                            a
-                            kedvenc szavakból!</button>
-
-                        <div id="divForSentence">
-                            <p><span id="sentence">-</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-1"></div>
-                <div id="divForNotations" class="col-5">
-                    <table id="notations" class="table table-small"></table>
-                </div>
-            </div>
-
-
-
-
-            <div class="row">
+            <div class="row smallBorder mt-3">
                 <div class="col">
-                    <h5>A szólista szimulálása</h5>
+                    <div class="row">
+                        <div class="col">
+                            <p>A majom most generál egy oldalnyi szövegek betűközök nélkül, s a <i>'Biblia kódja'</i>
+                                eljárással
+                                megkeresi a benne lévő <i>'rejtett'</i> tartalmat.</p>
+                            <p>Ez a módszer a <i>betűugrásos</i> olvasás, ami azt jelenti, hogy pl. 5-ös betűugrással a
+                                program mindig csak az ötödik
+                                betűket olvassa össze a szövegben, s így keres értelmes szavakat. (A megtalált szavak
+                                mellett zárójelben látja a betűugrások számát.)</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-8">
+                            <label>
+                                <p>Minimum ennyi betűs szavakat keressen:</p>
+                            </label>
+                            <input style="width:100px" id="minEnnyiBetusSzavakatKeres" type="number" min="2" value="4">
+                            <br>
+                            <label>
+                                <p>Maximum ennyi betűs szavakat keressen:</p>
+                            </label>
+                            <input style="width:100px" id="maxEnnyiHosszu" type="number" min="2" value="4">
+                            <br>
+                            <label>
+                                <p>Minimum ennyit ugorjon:</p>
+                            </label>
+                            <br>
+                            <input style="width:100px" id="minSkip" type="number" min="2" value="2">
+                            <label>
+                                <p>Maximum ennyit ugorjon:</p>
+                            </label>
+                            <br>
+                            <input style="width:100px" id="maxSkip" type="number" min="2" value="10">
+                            <button class="ml-3 mb-3" type="button" onclick="doLetterSkip()">Mehet!</button>
+                            <p>Klikkeljen a kiválasztott szóra, s a program megmutatja a generált oldalon a
+                                betűugrásokat!</p>
+                        </div>
+                        <div id="colForFoundWords" class="col-4">
+                            <div id="divForFoundWords" class="smallBorder bgLight">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div id="divForLetterSkip" class="smallBorder bgLight">
+                                <table id="tableForLetterSkip">
+                                    <tbody id="tbodyForLetterSkip">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
 
-                <div class="row">
-                    <div class="col">
-                        <p>Láttuk azt, hogy egy 13 betűből álló értelmes szó létrehozásához a programnak
-                            átlagosan
-                            2,2
-                            millió
-                            évre
-                            lenne szüksége. Ez a könyv összesen 1,3 billiárd - egész pontosan:
-                            1 376 544 666 922 514
-                            -
-                            oldalt
-                            tartalmazna.
-                        </p>
+            <div class="row smallBorder mt-3">
+                <div class="col">
+                    <!--<div class="row">
+                        <form class="form-inline">
+                            <label class="mt-1">A találatok küldése a szervernek:</label>
+                            <button disabled type="button" id="send-data" class="btn btn-secondary btn-sm"
+                                onclick=sendData()>Küld</button>
+                        </form>
+                    </div>-->
+                    <class="row">
+                        <class="col">
+                            <p>A majom szeretne kevesebb gépeléssel több banánhoz jutni. Rájön arra, hogy bizonyos
+                                betűkombinációk leütése esetén gyorsabban talál rá egy értelmes szóra, s így gyakrabban
+                                jut banánhoz.</p>
+                            <p>Most a program is ezt fogja csinálni. <span id="infoGoToRepRun"></span>-szer lefuttatja a
+                                <span id="infoGoToRepChar"></span> betűszámú keresést, s közben felépít egy adatbázist,
+                                hogy a találatokban milyen betűkettősök fordulnak elő, s a továbbiakban ezt a memóriát
+                                használja a szavak kirakásakor. Így persze ugyanúgy értelmetlen karaktersorozatokat fog
+                                kirakni, de ezek között nagyobb lesz az értelmes szavak előfordulásának az esélye.</p>
 
-                        <p>Nekünk nyilván nincs 2,2
-                            millió évünk, hogy lefutassuk ezt a programot. Azonban a számítógép képes ezt a
-                            könyvet
-                            szimulálni a
-                            számunkra úgy, hogy bárhol belelapozhassunk!</p>
-                        <p>
-                    </div>
-                </div>
-                <div class="row">
+                            <label>Betűk száma:</label>
+                            <input id="charNumGoToRep" style="width:50px" oninput="infoForGoToRep()" type="number" min="2" max="5"
+                                value="3">
+                            <label>Ismétlések száma:</label>
+                            <input id="runNumGoToRep" style="width:100px" oninput="infoForGoToRep()" type="number" min="1" value="1000">
+                            <button class="ml-3" onclick="goToRepeat()" type="button">Mehet</button>
+                            </class>
+                            </class>
 
-
-                    <div class="col col-6">
-                        <p>
-                            Képzeljünk el egy szimulált könyvet, ami egy regényt tartalmaz. Ennek a könyvnek
-                            minden
-                            oldala üres.
-                            Viszont ha bárhol kinyitjuk, akkor azon az oldalpáron azonnal megjelenik egy
-                            szöveg,
-                            mintha
-                            az
-                            mindig is ott lett volna, s ez a szöveg a könyv becsukása után is ott marad.
-                            Azaz ha
-                            újra
-                            ugyanott
-                            nyitjuk ki a könyvet, akkor ugyanazt a szövegrészt látjuk, s nem gondolnánk,
-                            hogy a
-                            szöveg
-                            csak
-                            akkor jött létre, amikor azon a helyen először kinyitotta valaki a könyvet. S
-                            ugyanúgy
-                            azt
-                            sem
-                            sejtenénk, hogy azok az
-                            oldalak, ahol még senki sem nyitotta ki ezt a könyvet, valójában teljesen
-                            üresek.</p>
-                        </p>
-
-                        <p>
-                            Azaz a számítógép nem használ se memóriát, se erőforrást a könyv létrehozására
-                            addig,
-                            amíg
-                            azt
-                            valaki kézbe nem veszi, s bele nem lapoz. S a számítógép ekkor is csak annyi
-                            oldalt
-                            készít
-                            el, s
-                            őriz
-                            meg, amennyit egy belelapozó személy már látott belőle. Ez előny a könyvet
-                            szimuláló gép
-                            számára,
-                            hiszen nem kell 2,2 millió évig futnia, valahányszor elindítjuk az a programot,
-                            továbbá
-                            pedig az
-                            alkalmazást használó személy
-                            soha nem tudna annyit lapozni a könyvben, hogy a gép teljes memóriája végig
-                            teleíródjon.
-                        </p>
-                        <p>Ha ebben kételkednénk, akkor jusson eszünkbe, hogy ez a könyv 300 oldalas
-                            kötetekkel
-                            számolva
-                            4 588 482 223 075 kötetből áll. Egész életünk nem lenne elég ahhoz, hogy a
-                            köteteket
-                            tartalmazó polc
-                            mentén végigsétáljunk! (Kb. 114 ezerszer érné körbe a Föld egyenlítőjét.)</p>
-                        <p>A könyv szimulálásakor Ön először az utolsó oldalt fogja látni, s ennek az utolsó
-                            sorában
-                            lesz az első
-                            olyan értelmes szó, amire 2,2 millió év keresés után bukkant rá a program.
-                        </p>
-                        <p>Természetesen, ha újraindítja a programot, akkor ez a könyv törlődik a
-                            memóriából!</p>
-
-
-                    </div>
-
-                    <div class="col col-6">
-
-                        <div id="rowForAllDistribution" class="row simulationRow">
-                            <div id="divForAllDistribution" class="col simulationCol">
-
-                                <button id="simulationOfTheBook" type="button" class="btn btn-primary btn-block btn-sm"
-                                    onclick="bookSimulation()">A
-                                    könyv
-                                    szimulálása
-                                </button>
-
-
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-center simulationRow">
-                            <div class="col-auto simulationCol">
-                                <label>Ugrás a(z) </label>
-                            </div>
-                            <div class="col-auto simulationCol">
-                                <input id="simulatedPageInput" type="number" class="form-control form-control-sm"
-                                    min="0" max="1376544666922514">
-                            </div>
-                            <div class="col-auto simulationCol">
-                                <label for="simulatedPageInput">oldalra:</label>
-                            </div>
-                            <div class="col-auto simulationCol">
-                                <button id="skip" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="skipToSimulatedPage(event)">Ugrás!</button>
+                            <div class="row">
+                                <p>A memória mérete jelenleg: <span id="monkeyMemorySize">-</span></p>
+                                <p>Az eddigi összes (eredményes) futás száma: <span id="numberOfRunnings">-</span></p>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick=goToRepeat()>Újabb
+                                    futtatás
+                                    ugyanannyiszor</button>
                             </div>
 
-                        </div>
-                        <div class="row form-row justify-content-center simulation">
-
-
-                            <div class="col-auto simulationCol">
-                                <button id="skipToRandomPage" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="randomPage(event)">Ugrás egy véletlen oldalra</button>
+                            <div class="row">
+                                <form class="form-inline">
+                                    <label>A szó hossza legyen:</label>
+                                    <input type="number" class="form-control form-control-sm" style="width:100px"
+                                        min="2" max="10" value="8">
+                                    <label> betű!</label>
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                        onclick="generateWord(event)">Kérek
+                                        egy
+                                        szót!</button>
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                        onclick="generateWordRnd(event)">Véletlen
+                                        hosszúságú szót kérek!</button>
+                                </form>
                             </div>
-
-                        </div>
-
-                        <div class="row justify-content-center simulationRow" id="distributionButtons">
-                            <div class="col-auto simulationCol">
-                                <button id="allDistributionStart" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="allDistStart()">az
-                                    elejére</button>
-                                <button id="allDistributionBack" name="arrow" type="button"
-                                    class="btn btn-secondary btn-sm" onclick="allDistBack()">&#8678</button>
-                                <button id="allDistributionFoward" name="arrow" type="button"
-                                    class="btn btn-secondary btn-sm" onclick="allDistFow()">&#8680</button>
-                                <button id="allDistributionLast" type="button" class="btn btn-secondary btn-sm"
-                                    onclick="allDistLast()">a
-                                    végére</button>
-                                <p><small>A memória mérete jelenleg: <span id="sizeOfMemory"> 0</span>
-                                        tétel.</small></p>
-                                <p><small>Ez<span class="t"></span> az oldal<span class="t"></span> <span
-                                            id="statusOfPage"></span></small></p>
+                            <div class="row">
+                                <p>Íme a szó: <span id="generatedWord"></span> </p>
                             </div>
-                        </div>
+                            <div class="row">
 
-                        <div id="rowForSimulatedBook" class="row justify-content-center rowForSimulatedBook">
-                            <div id="colForSimulatedBook1" class="col-auto colForSimulatedBook">
-                                <div id="simulatedBook1" class="simulatedBook">
+                                <div class="col-6">
+                                    <div class="row">
+                                        <label>Tetszik a szó, jegyezzük fel!<small> A szó eltávolítása a táblázatból:
+                                                klikkeljen
+                                                rá
+                                                egyet!</small></label>
+                                        <button type="button" class="btn btn-secondary btn-sm btn-block"
+                                            onclick="notation(event)">Rajta!</button>
+                                    </div>
+                                    <div class="row">
+                                        <button type="button" class="btn btn-secondary btn-sm"
+                                            onclick="writeSentence()">Kérek
+                                            egy
+                                            mondatot
+                                            a
+                                            kedvenc szavakból!</button>
+
+                                        <div id="divForSentence">
+                                            <p><span id="sentence">-</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1"></div>
+                                <div id="divForNotations" class="col-5">
+                                    <table id="notations" class="table table-small"></table>
                                 </div>
                             </div>
-                            <div id="colForSimulatedBook2" class="col-auto colForSimulatedBook">
-                                <div id="simulatedBook2" class="simulatedBook">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-
-
-
             </div>
+
+
+
+
+
+
+
+
 
         </div>
-
-
-
 
 
 

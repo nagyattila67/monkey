@@ -35,6 +35,9 @@ clickCounterForAgain = 0;
 onlyOneWord = true;
 memoryABC = Array();
 numberOfWordsInDictionary = Array();
+ketBetusSzavak = Array();
+haromBetusSzavak = Array();
+negyBetusSzavak = Array();
 
 time = function (timeStart, timeFinish) {
     timeLength = (timeFinish.getTime() - timeStart.getTime()) / 1000;
@@ -597,6 +600,8 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
             sector = document.querySelector("#placeForHaromBetus");
             //document.querySelector("#haromBetusSzama").innerHTML = `${(ennyiBetusSzavak[f]).length} `;
             document.querySelector("#haromBetusSzama").innerHTML = `${(ennyiBetusSzavak[3]).length} `;
+            //((wordLine.length - 1) / (35 ** 3 / szavakByLength[3].length)).toFixed(2);
+
             document.querySelector("#different3Letters").innerHTML = `${haromBetusSzavak.length} `;
             document.querySelector("#ennyi7").innerHTML = wordLine.length;
             document.querySelector("#ennyi8").innerHTML = wordLine.length - 1
@@ -846,20 +851,22 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
 };
 searchInLine = function () {
     stopSearch = false;
-    if (document.querySelector("#searchThisWord").value == "") { alert("Ön nem írt be egy betűt sem a keresőmezőbe!") };
-    thisWord = document.querySelector("#searchThisWord").value;
-    thisWord = thisWord.toUpperCase();
-    document.querySelector("#searchThisWord").value = thisWord;
-    charNumbInLine = thisWord.length;
-    for (let i = 0; i < szavakByLength[charNumbInLine].length; i++) {
-        if ((szavakByLength[charNumbInLine])[i] == `${thisWord}`) {
-            stopSearch = true;
-            break;
+    if (document.querySelector("#searchThisWord").value == "") { alert("Ön nem írt be egy betűt sem a keresőmezőbe!") }
+    else {
+        thisWord = document.querySelector("#searchThisWord").value;
+        thisWord = thisWord.toUpperCase();
+        document.querySelector("#searchThisWord").value = thisWord;
+        charNumbInLine = thisWord.length;
+        for (let i = 0; i < szavakByLength[charNumbInLine].length; i++) {
+            if ((szavakByLength[charNumbInLine])[i] == `${thisWord}`) {
+                stopSearch = true;
+                break;
+            };
         };
+        if (stopSearch == false) { alert("Nincs ilyen szó a majom szótárában") };
+        if (stopSearch == false) { document.querySelector("#searchThisWord").value = ""; };
+        if (stopSearch == true) { runWriteInLine(charNumbInLine, thisWord) };
     };
-    if (stopSearch == false) { alert("Nincs ilyen szó a majom szótárában") };
-    if (stopSearch == false) { document.querySelector("#searchThisWord").value = ""; };
-    if (stopSearch == true) { runWriteInLine(charNumbInLine, thisWord) };
 };
 
 makeLetter = function () {
@@ -1082,38 +1089,7 @@ word = function (wordLength) {
     return expressionHex, expressionHTML, digit, digitHex, sheetCounter, hit, turn, timeLength, memoryABC;
 };
 
-learn = function (expressionHex) {
-    //learning tömb elemei [két betű / gyakoriság:hány szóban fordult eddig elő / a szóban hányadik betűhelyen kezdődött ez a kétbetűs rész / hány betűs volt a szó]
-    if (expressionHex.length > 4) {
-        index = szavakHex.findIndex(x => x == expressionHex);
-        hungWord = szavak[index];
-        for (let i = 0; i < hungWord.length - 1; i++) {
-            learnThis = hungWord[i] + hungWord[i + 1];
-            doIt = true;
-            k = 0;
-            while (doIt == true && k < learning.length) {
-                if (learnThis == learning[k][0]) { doIt = false }
-                k = k + 1;
-            };
-            if (doIt == true) {
-                learnThis = learnThis;
-                nowHere = learning.length;
-                myValue = 1;
-                learning[nowHere] = [learnThis, myValue, i + 1, hungWord.length];
-            }
-            else {
-                k = k - 1;
-                learning[k][1] = learning[k][1] + 1;
-            };
-        };
-        totalNumberOfCurrents = totalNumberOfCurrents + 1;
-    };
 
-    learningForPost = learning;
-    document.querySelector("#monkeyMemorySize").innerHTML = `${learning.length} karakterkettős.`
-    document.querySelector("#monkeyMemorySize").style["background-color"] = "#FADADD";
-    document.querySelector("#numberOfRunnings").innerHTML = totalNumberOfCurrents;
-};
 
 sendData = function () {
     luggage = learningForPost;
@@ -1685,14 +1661,57 @@ checkRuns = function () {
 
 
 
-
-
-
-isItRepeating = false;
-goToRepeat = function () {
-    isItRepeating = true;
-    repeat();
+infoForGoToRep = function () {
+    charNumRep = document.querySelector("#charNumGoToRep").value;
+    charNumRep = parseInt(charNumRep);
+    runNumRep = document.querySelector("#runNumGoToRep").value;
+    runNumRep = parseInt(runNumRep);
+    document.querySelector("#infoGoToRepRun").innerHTML = runNumRep;
+    document.querySelector("#infoGoToRepChar").innerHTML = charNumRep;
 };
+infoForGoToRep();
+
+
+goToRepeat = function () {
+    for (let i = 0; i < runNumRep; i++) {
+        word(charNumRep);
+        learn(expressionABC);
+    };
+};
+
+learn = function (expressionHex) {
+    //learning tömb elemei [két betű / gyakoriság:hány szóban fordult eddig elő / a szóban hányadik betűhelyen kezdődött ez a kétbetűs rész / hány betűs volt a szó]
+    if (expressionHex.length > 4) {
+        index = szavakHex.findIndex(x => x == expressionHex);
+        hungWord = szavak[index];
+        for (let i = 0; i < hungWord.length - 1; i++) {
+            learnThis = hungWord[i] + hungWord[i + 1];
+            doIt = true;
+            k = 0;
+            while (doIt == true && k < learning.length) {
+                if (learnThis == learning[k][0]) { doIt = false }
+                k = k + 1;
+            };
+            if (doIt == true) {
+                learnThis = learnThis;
+                nowHere = learning.length;
+                myValue = 1;
+                learning[nowHere] = [learnThis, myValue, i + 1, hungWord.length];
+            }
+            else {
+                k = k - 1;
+                learning[k][1] = learning[k][1] + 1;
+            };
+        };
+        totalNumberOfCurrents = totalNumberOfCurrents + 1;
+    };
+
+    learningForPost = learning;
+    document.querySelector("#monkeyMemorySize").innerHTML = `${learning.length} karakterkettős.`
+    document.querySelector("#monkeyMemorySize").style["background-color"] = "#FADADD";
+    document.querySelector("#numberOfRunnings").innerHTML = totalNumberOfCurrents;
+};
+
 
 //Összegyűjti a 'charNumb' hosszúságú szavakat egy ideiglenes tömbbe, s ebből fog újra és újra keresni, nem pedig a teljes 'szavak' tömbből
 //szavakTemp = Array();
@@ -5213,10 +5232,194 @@ skipToSimulatedPage = function () {
     else (checkSimulationMemory(simulatedPage));
 };
 
+placeForLetterSkip = function () {
+    tdNumber = 1;
+    sor = 40;
+    betu = 30;
+    for (let i = 0; i < sor; i++) {
+        newTr = document.createElement("tr");
+        area = document.querySelector("#tbodyForLetterSkip");
+        area.appendChild(newTr);
+        for (let j = 0; j < betu; j++) {
+            newTd = document.createElement("td");
+            newTr.appendChild(newTd);
+            newTd.setAttribute("name", tdNumber);
+            tdNumber = tdNumber + 1;
+        };
+    };
+};
+placeForLetterSkip();
+
+makeDigit = function () {
+    digit = Math.floor(Math.random() * 35);
+    //betűk 'A'-tól 'Z'-ig
+    if (digit >= 0 && digit <= 25) { digit = digit + 65 }
+    //'Ö" betű 0xD6
+    if (digit == 26) { digit = 214 }
+    //'Ü' betű 0xDC
+    if (digit == 27) { digit = 220 }
+    //'Ő' betű 0x150
+    if (digit == 28) { digit = 336 }
+    //'Ű' betű 0x368
+    if (digit == 29) { digit = 368 }
+    //'É' betű 0xc9
+    if (digit == 30) { digit = 201 }
+    //'Í' betű 0xcd
+    if (digit == 31) { digit = 205 }
+    //'Ó' betű 0xd3
+    if (digit == 32) { digit = 211 }
+    //'Á' betű 0xc1
+    if (digit == 33) { digit = 193 }
+    //'Ú' betű 0xda
+    if (digit == 34) { digit = 218 }
+    digitHex = digit.toString(16);
+    digitHex = "\\" + "x" + digitHex
+    digitHTML = `&#${digit}`
+    digitABC = String.fromCharCode(digit);
+    return digitABC;
+};
+
+firstLetterSkip = 0;
+doLetterSkip = function () {
+    if (firstLetterSkip != 0) {
+        area = document.querySelector("tableForLetterSkip");
+        sector = document.querySelector("tableForLetterSkip tbody");
+        area.removeChild(sector);
+        newTbody = document.createElement("tbody");
+        area.appendChild(newTbody);
+        newTbody.id = "tbodyForLetterSkip";
+        placeForLetterSkip();
+        firstLetterSkip = firstLetterSkip + 1;
+    }
+    for (let i = 0; i < sor * betu; i++) {
+        makeDigit();
+        document.querySelectorAll("#tbodyForLetterSkip td")[i].innerHTML = digitABC;
+        document.querySelectorAll("#tbodyForLetterSkip td")[i].style["background-color"] = "#f8f8f8";
+    };
+    skipToFoundWords();
+};
+
+skipToFoundWords = function () {
+    minEnnyi = document.querySelector("#minEnnyiBetusSzavakatKeres").value;
+    minEnnyi = parseInt(minEnnyi);
+    maxEnnyi = document.querySelector("#maxEnnyiHosszu").value;
+    maxEnnyi = parseInt(maxEnnyi);
+    minEnnyitUgrik = document.querySelector("#minSkip").value;
+    minEnnyitUgrik = parseInt(minEnnyitUgrik);
+    maxEnnyitUgrik = document.querySelector("#maxSkip").value;
+    maxEnnyitUgrik = parseInt(maxEnnyitUgrik);
+    wordLine = Array();
+    wordLinePlaces = Array();
+    foundWords = Array();
+    foundWordsSkips = Array();
+    foundWordPlaces = Array();
+
+    for (let ennyitUgrik = minEnnyitUgrik; ennyitUgrik < maxEnnyitUgrik; ennyitUgrik++) {
+
+        for (let difference = 0; difference < ennyitUgrik; difference++) {
+            for (let i = 0; i < Math.floor((sor * betu) / ennyitUgrik); i++) {
+                ennyiedik = ennyitUgrik * i + 1 + difference;
+                wordLine[i] = Array();
+                wordLine[i][0] = document.querySelector(`#tbodyForLetterSkip td[name='${ennyiedik}']`).innerHTML;
+                wordLine[i][1] = ennyiedik;
+            };
+
+            for (let ennyibetu = minEnnyi; ennyibetu < maxEnnyi + 1; ennyibetu++) {
+
+                for (let d = 0; d < wordLine.length - ennyibetu; d++) {
+                    wordLineNow = "";
+                    wordLineNowPlaces = Array();
+                    for (let g = 0; g < ennyibetu; g++) {
+                        wordLineNow = wordLineNow + wordLine[d + g][0];
+                        wordLineNowPlaces[wordLineNowPlaces.length] = wordLine[d + g][1];
+                        if (wordLineNow.length >= minEnnyi) {
+                            //console.log(wordLineNow);
+                            for (let j = 0; j < (szavakByLength[wordLineNow.length]).length; j++) {
+                                notYet = true;
+                                if (szavakByLength[wordLineNow.length][j] == wordLineNow) {
+                                    for (let s = 0; s < foundWords.length; s++) {
+                                        if (wordLineNow == foundWords[s]) {
+                                            notYet = false;
+                                        };
+                                    };
+                                    if (notYet == true) {
+                                        foundWords[foundWords.length] = wordLineNow;
+                                        foundWordsSkips[foundWords.length] = ennyitUgrik;
+                                        foundWordPlaces[foundWords.length] = wordLineNowPlaces.slice(0);
+                                    };
+                                    break;
+                                };
+                            };
+                        };
+                    };
+                };
+
+            };
+        };
+    };
+    displayFoundWords();
+};
+
+displayFoundWords = function () {
+    if (document.querySelectorAll("#divForFoundWords").length > 0) {
+        area = document.querySelector("#colForFoundWords");
+        sector = document.querySelector("#divForFoundWords");
+        area.removeChild(sector);
+        newDiv = document.createElement("div");
+        area.appendChild(newDiv);
+        newDiv.setAttribute("id", "divForFoundWords");
+        newDiv.setAttribute("class", "smallBorder bgLight");
+    };
+    if (foundWords.length == 0) {
+        area = document.querySelector("#divForFoundWords");
+        newSpan1 = document.createElement("span");
+        newSpan1.innerHTML = "nincs találat";
+        area.appendChild(newSpan1);
+    };
+    for (let i = 0; i < foundWords.length; i++) {
+        newSpan1 = document.createElement("span");
+        newSpan1.setAttribute("name", i);
+        newSpan1.setAttribute("onclick", "showSkipping(this)");
+        newSpan1.innerHTML = foundWords[i];
+        newSpan2 = document.createElement("span");
+        newSpan2.setAttribute("name", i)
+        newSpan2.innerHTML = ` (${foundWordsSkips[i + 1]})`
+        newSpan3 = document.createElement("span");
+        newSpan3.setAttribute("name", i)
+        if (i < foundWords.length - 1) { newSpan3.innerHTML = ", " };
+        area = document.querySelector("#divForFoundWords")
+        area.appendChild(newSpan1);
+        area.appendChild(newSpan2);
+        area.appendChild(newSpan3);
+    };
+};
+
+previousPlaces = Array();
+previousNumber = 0;
+showSkipping = function (here) {
+    number = here.getAttribute("name");
+    number = parseInt(number) + 1;
+    if (previousPlaces.length > 0) {
+        for (let i = 0; i < previousPlaces.length; i++) {
+            numberHere = previousPlaces[i]
+            document.querySelector(`#tbodyForLetterSkip td[name='${numberHere}']`).style["background-color"] = "#f8f8f8";
+        };
+        document.querySelector(`#divForFoundWords span[name='${previousNumber - 1}']`).style["background-color"] = "#f8f8f8";
+    };
+    previousPlaces = Array();
+
+    for (let i = 0; i < foundWordPlaces[number].length; i++) {
+        numberHere = foundWordPlaces[number][i];
+        previousPlaces[i] = foundWordPlaces[number][i];
+        document.querySelector(`#tbodyForLetterSkip td[name='${numberHere}']`).style["background-color"] = "#ffff00";
+    };
+    document.querySelector(`#divForFoundWords span[name='${number - 1}']`).style["background-color"] = "#ffff00";
+    previousNumber = number;
+};
+
 word2 = function () {
 
 };
-
 
 word_ = function () {
 
@@ -5361,7 +5564,7 @@ word_ = function () {
     if (displayNow == true) { displayResultOfTyping(place, expressionHTML, hit, turn, maxTurn) };
     if (displayNow == true) { displayWord() };
 
-    learn(expressionHex);
+    //learn(expressionHex);
 
     return expressionHex, expressionHTML, digit, digitHex, sheetCounter, hit, turn, timeLength;
 };
