@@ -2528,7 +2528,8 @@
                             </label>
                             <br>
                             <input style="width:100px" id="maxSkip" type="number" min="2" value="10">
-                            <button class="ml-3 mb-3" type="button" onclick="doLetterSkip()">Mehet!</button>
+                            <button class="btn btn-secondary btn-sm ml-3 mb-3" type="button"
+                                onclick="doLetterSkip()">Mehet!</button>
                             <p>Klikkeljen a kiválasztott szóra, s a program megmutatja a generált oldalon a
                                 betűugrásokat!</p>
                         </div>
@@ -2562,74 +2563,138 @@
                                 onclick=sendData()>Küld</button>
                         </form>
                     </div>-->
-                    <class="row">
-                        <class="col">
-                            <p>A majom szeretne kevesebb gépeléssel több banánhoz jutni. Rájön arra, hogy bizonyos
+                    <div class="row">
+                        <div class="col -8">
+                            <p>A majom szeretne kevesebb gépeléssel több banánhoz jutni. S rá is jött arra, hogy
+                                bizonyos
                                 betűkombinációk leütése esetén gyorsabban talál rá egy értelmes szóra, s így gyakrabban
                                 jut banánhoz.</p>
-                            <p>Most a program is ezt fogja csinálni. <span id="infoGoToRepRun"></span>-szer lefuttatja a
-                                <span id="infoGoToRepChar"></span> betűszámú keresést, s közben felépít egy adatbázist,
-                                hogy a találatokban milyen betűkettősök fordulnak elő, s a továbbiakban ezt a memóriát
-                                használja a szavak kirakásakor. Így persze ugyanúgy értelmetlen karaktersorozatokat fog
-                                kirakni, de ezek között nagyobb lesz az értelmes szavak előfordulásának az esélye.</p>
-
+                            <p>A program is ugyanezt a tanulást végezte, miközben Ön a programot futtatta. Minden
+                                értelmes szó létrejöttekor lemásolta egy adatbázisba az adott szóban található
+                                betűpárokat, s itt jobbra láthatja a feljegyzett betűkettősöket.
+                            </p>
+                            <p>A program által használt ábécé 35 betűs, ebből 14 db. a magánhangzó és 21 db. a
+                                mássalhangzó. Az ezekből kirakható kettős karakterek száma 2*14*21 = 588.
+                            </p>
+                            <table class="table table-small">
+                                <tbody>
+                                    <tr>
+                                        <td>Az eddidi futások száma</td>
+                                        <td><span id="numberOfRunnings">-</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>A memória mérete jelenleg:</td>
+                                        <td><span id="monkeyMemorySize">-</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>Ha akarja, a program ismét lefuttathat <span id="infoGoToRepRun"></span>-szor egy
+                                <span id="infoGoToRepChar"></span> betűszámú keresést, hogy így növelje a memóriája
+                                tartalmát. A memóriába újonnan bekerült betűkettősök sárga színnel lesznek kiemelve.
+                            </p>
+                        </div>
+                        <div class="col-4 smallBorder bgDarker" id="divForShowMemory">
+                            <div id="showMemory"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
                             <label>Betűk száma:</label>
-                            <input id="charNumGoToRep" style="width:50px" oninput="infoForGoToRep()" type="number" min="2" max="5"
-                                value="3">
+                            <input id="charNumGoToRep" style="width:50px" oninput="infoForGoToRep()" type="number"
+                                min="2" max="5" value="3">
                             <label>Ismétlések száma:</label>
-                            <input id="runNumGoToRep" style="width:100px" oninput="infoForGoToRep()" type="number" min="1" value="1000">
-                            <button class="ml-3" onclick="goToRepeat()" type="button">Mehet</button>
-                            </class>
-                            </class>
-
+                            <input id="runNumGoToRep" style="width:100px" oninput="infoForGoToRep()" type="number"
+                                min="1" value="100">
+                            <button style="display:inline" class="btn btn-secondary btn-sm ml-3 mr-3"
+                                onclick="goToRepeat()" type="button">Mehet</button>
+                            <p style="display:inline">Futásidő: <span id="appTimeGTR"> - </span></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row smallBorder bgLightSilver">
+                        <div class="col">
                             <div class="row">
-                                <p>A memória mérete jelenleg: <span id="monkeyMemorySize">-</span></p>
-                                <p>Az eddigi összes (eredményes) futás száma: <span id="numberOfRunnings">-</span></p>
-                                <button type="button" class="btn btn-secondary btn-sm" onclick=goToRepeat()>Újabb
-                                    futtatás
-                                    ugyanannyiszor</button>
-                            </div>
-
-                            <div class="row">
-                                <form class="form-inline">
-                                    <label>A szó hossza legyen:</label>
-                                    <input type="number" class="form-control form-control-sm" style="width:100px"
-                                        min="2" max="10" value="8">
-                                    <label> betű!</label>
-                                    <button type="button" class="btn btn-secondary btn-sm"
-                                        onclick="generateWord(event)">Kérek
-                                        egy
-                                        szót!</button>
-                                    <button type="button" class="btn btn-secondary btn-sm"
-                                        onclick="generateWordRnd(event)">Véletlen
-                                        hosszúságú szót kérek!</button>
-                                </form>
+                                <div class="col">
+                                    <p>A program most lefuttat <span id="infoGoToRepRun2"></span>-szor egy
+                                        <span id="infoGoToRepChar2"></span> betűszámú keresést úgy, hogy minden 10.
+                                        futás végén
+                                        megvizsgálja, hogy mennyivel nőtt meg a tanulás során feljegyzett kettős
+                                        karakterek
+                                        száma.</p>
+                                    <p>Figyelem! Ebben az esetben a program <span style="color:red">lenullázza</span> a 'majom meóriáját', s előről
+                                        kezdi meg a memória felépítését, hogy meg tudja vizsgálni annak a növekedését
+                                        lépésről-lépésre. (A fenti táblázat pedig az újonnan felépített memória karakterkettőseit fogja mutatni.)</p>
+                                </div>
                             </div>
                             <div class="row">
-                                <p>Íme a szó: <span id="generatedWord"></span> </p>
+                                <div class="col">
+                                    <label>Betűk száma:</label>
+                                    <input id="charNumGoToRep2" style="width:50px" oninput="infoForGoToRep2()"
+                                        type="number" min="2" max="5" value="3">
+                                    <label>Ismétlések száma:</label>
+                                    <input id="runNumGoToRep2" style="width:100px" oninput="infoForGoToRep2()"
+                                        type="number" min="1" value="100">
+                                    <button style="display:inline" class="btn btn-secondary btn-sm ml-3 mr-3"
+                                        onclick="goToRepeat2()" type="button">Mehet</button>
+                                    <p style="display:inline">Futásidő: <span id="appTimeGTR2"> - </span></p>
+                                </div>
                             </div>
                             <div class="row">
+                                <div class="col smallBorder bgLight" id="divForSyllabes">
+                                    <div id="forSyllabes"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                                <div class="col-6">
-                                    <div class="row">
-                                        <label>Tetszik a szó, jegyezzük fel!<small> A szó eltávolítása a táblázatból:
-                                                klikkeljen
-                                                rá
-                                                egyet!</small></label>
-                                        <button type="button" class="btn btn-secondary btn-sm btn-block"
-                                            onclick="notation(event)">Rajta!</button>
-                                    </div>
-                                    <div class="row">
+
+
+
+                    <hr>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <p>Itt próbálhatja ki, hogy a program milyen 'értelmesebb hangzású'
+                                        szavakat tud generálni ennek az adatbázisnak a segítségével.</p>
+                                    <form class="form-inline" id="formForGenereteWord">
+                                        <label>A szó hossza legyen:</label>
+                                        <input type="number" class="form-control form-control-sm" style="width:100px"
+                                            min="2" max="10" value="5">
+                                        <label> betű!</label>
                                         <button type="button" class="btn btn-secondary btn-sm"
-                                            onclick="writeSentence()">Kérek
+                                            onclick="generateWord(event)">Kérek
                                             egy
-                                            mondatot
-                                            a
-                                            kedvenc szavakból!</button>
+                                            szót!</button>
+                                        <button type="button" class="btn btn-secondary btn-sm"
+                                            onclick="generateWordRnd(event)">Véletlen
+                                            hosszúságú szót kérek!</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <p>Íme a szó: <span id="generatedWord"></span> </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Tetszik a szó, jegyezzük fel!</label>
+                                    <button type="button" class="btn btn-secondary ml-3 btn-sm"
+                                        onclick="notation(event)">Feljegyez!</button>
+                                    <p><small> A szó eltávolítása a táblázatból:
+                                            klikkeljen
+                                            rá
+                                            egyet!</small></p>
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                        onclick="writeSentence()">Kérek
+                                        egy
+                                        mondatot
+                                        a
+                                        kedvenc szavakból!</button>
 
-                                        <div id="divForSentence">
-                                            <p><span id="sentence">-</span></p>
-                                        </div>
+                                    <div id="divForSentence">
+                                        <p class="mt-3"><span id="sentence">-</span></p>
                                     </div>
                                 </div>
                                 <div class="col-1"></div>
@@ -2637,28 +2702,28 @@
                                     <table id="notations" class="table table-small"></table>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
                 </div>
+
+
+
             </div>
-
-
-
-
-
-
-
-
-
         </div>
+        <div id="skipToGraphic2" class="col-0 col-sm-1 col-md-1 col-lg-1 noPadding"></div>
 
 
 
-    </div>
-    </div>
-    <div id="skipToGraphic2" class="col-0 col-sm-1 col-md-1 col-lg-1 noPadding"></div>
-
-
-
-    <div class="row m-3"></div>
+        <div class="row m-3"></div>
 
 
 

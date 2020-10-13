@@ -4,7 +4,7 @@ span{font-size:19px;}
 li small{font-size:15px;}
 .bgLight{background-color:#f8f8f8}
 .bgDarker{ background-color:#f1f1f1}
-.bgLight{background-color:#f8f8f8}
+.bgLightSilver{background-color:#fbfbfb}
 .bgWhite{background-color:#ffffff}
 .smallBorder{border:1px solid #a8a8a8;padding:10px}
 .littleMarginTop{margin-top:15px}
@@ -64,7 +64,7 @@ label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
 #send-data{margin-bottom:0px}
 #notations{display:inline;}
 #notations td{padding:6px;}
-#divForNotations{overflow:auto;border:1px solid #a8a8a8;background-color:#dbdbdb;max-height:300px;max-width:300px;}
+#divForNotations{overflow:auto;border:1px solid #a8a8a8;background-color:#dbdbdb;max-height:300px;max-width:300px;line-height:10px;}
 #divForSentence{min-height:100px;}
 #sentence{background-color:#FADADD}
 #match100div p{margin:0px}
@@ -199,6 +199,16 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #divForLetterSkip{overflow:auto;height:500px}
 #tableForLetterSkip{height:500px}
 #divForFoundWords{overflow:auto;height:250px}
+#divForShowMemory{overflow:auto;height:500px;}
+
+#formForGenereteWord label{margin-right:10px;}
+#formForGenereteWord input{margin-right:10px;}
+#formForGenereteWord button{margin-right:10px;}
+
+#divForSyllabes{margin:10px;overflow:auto;}
+#forSyllabes{height:55px}
+
+
 
 
 

@@ -1038,7 +1038,7 @@ word = function (wordLength) {
             if (expressionHex == szavakHex[k]) {
                 index = szavakHex.findIndex(x => x == expressionHex);
                 hit = true;
-                if (cons == true && displayNow == true && noConsole == false) { console.log("TALÁLAT!!!!! ", turn, "ciklus után. A szó: ", szavak[index]); };
+                if (cons == true && displayNow == true && noConsole == false && isItGoToRepeat == false) { console.log("TALÁLAT!!!!! ", turn, "ciklus után. A szó: ", szavak[index]); };
                 timeFinish = new Date();
                 timeExpired = (timeFinish - timeStart) / 1000;
             };
@@ -1050,7 +1050,7 @@ word = function (wordLength) {
             timeFinish = new Date();
         };
 
-        if (turn == 0 && cons == true && displayNow == true && noConsole == false) { console.log("A betűkombinációk kirakása elindult.") }
+        if (turn == 0 && cons == true && displayNow == true && noConsole == false && isItGoToRepeat == false) { console.log("A betűkombinációk kirakása elindult.") }
 
         if (turn % 100000 == 0) {
             if (turn != 0 && cons == true && displayNow == true) {
@@ -1118,8 +1118,6 @@ generateWordRnd = function () {
 //az eddig tanultak alapján generál egy új szót
 generateWord = function (event) {
     let gotIt = false;
-    ev = event;
-    console.log("GENERATE");
     monkeyNumber = Number();
     wordOfMonkey = String();
     nextStep = String();
@@ -1133,7 +1131,6 @@ generateWord = function (event) {
             gotIt = true;
         };
     };
-
     lengthOfTemporaryWord = wordOfMonkey.length;
     vowel = wordOfMonkey[1];
     workMemory = Array();
@@ -1220,13 +1217,33 @@ notation = function () {
 };
 
 writeSentence = function () {
-    if (document.querySelectorAll("#notations tr").length > 4) {
-        sentenceOfMonkey = temporaryContainer[0] + " " +
-            temporaryContainer[1] + "JE MEG" + temporaryContainer[2] + "TE A " +
-            temporaryContainer[3] + " " + temporaryContainer[4] + "T.";
+    if (temporaryContainer.length > 4) {
+        number = temporaryContainer.length;
+        numbers = Array();
+        while (numbers.length < 5) {
+            if (numbers.length == 0) {
+                myNumber = Math.floor(Math.random() * number);
+                numbers[numbers.length] = myNumber;
+            }
+            else {
+                goFoward = false;
+                while (goFoward == false) {
+                    goFoward = true;
+                    myNumber = Math.floor(Math.random() * number);
+                    for (let i = 0; i < numbers.length; i++) {
+                        if (numbers[i] == myNumber) {
+                            goFoward = false;
+                        };
+                    };
+                    if (goFoward == true) { numbers[numbers.length] = myNumber };
+                };
+            };
+        };
+        sentenceOfMonkey = temporaryContainer[numbers[0]] + " " +
+            temporaryContainer[numbers[1]] + "JE MEG" + temporaryContainer[numbers[2]] + "TE A " +
+            temporaryContainer[numbers[3]] + " " + temporaryContainer[numbers[4]] + "T.";
         sentenceOfMonkey = sentenceOfMonkey.toLowerCase();
         sentenceOfMonkey = "A " + sentenceOfMonkey;
-
 
         document.querySelector("#sentence").innerHTML = sentenceOfMonkey;
     }
@@ -1325,8 +1342,6 @@ previousMatchLength = 0;
 jujj = 0;
 isLookingForMatch = false;
 lookingForMatch = function (textForSearch) {
-
-    //console.log("matching");
     matchingList = Array();
     matchingListNumero = 0;
     textForSearchOriginal = "";
@@ -1668,19 +1683,112 @@ infoForGoToRep = function () {
     runNumRep = parseInt(runNumRep);
     document.querySelector("#infoGoToRepRun").innerHTML = runNumRep;
     document.querySelector("#infoGoToRepChar").innerHTML = charNumRep;
+
+    sec = 0;
+    if (charNumRep == 2) { sec = charNumRep * runNumRep * 0.02329 };
+    if (charNumRep == 3) { sec = charNumRep * runNumRep * 0.057311 };
+    if (charNumRep == 4) { sec = charNumRep * runNumRep * 0.471291 };
+    sector = document.querySelector("#appTimeGTR");
+    if (sec > 0) { displayTime(sec, sector) }
+    else { sector.innerHTML = "sok" };
+    sector.style["background-color"] = "#7EE4E4";
 };
 infoForGoToRep();
-
-
+charNumRep = document.querySelector("#charNumGoToRep").value;
+charNumRep = parseInt(charNumRep);
+runNumRep = document.querySelector("#runNumGoToRep").value;
+runNumRep = parseInt(runNumRep);
 goToRepeat = function () {
+    goToRepeat1(charNumRep, runNumRep);
+};
+
+isItGoToRepeat = false;
+goToRepeat1 = function (charNumRep, runNumRep) {
+    timeGTRStart = new Date();
+    timeGTRStart = timeGTRStart.getTime();
+    isItGoToRepeat = true;
     for (let i = 0; i < runNumRep; i++) {
         word(charNumRep);
         learn(expressionABC);
+    };
+    if (isItGoToRepeat == true) {
+        for (let i = 0; i < learning.length; i++) {
+            learning[i][4] = "notNew";
+        };
+    };
+    isItGoToRepeat = false;
+    timeGTRFinish = new Date();
+    timeGTRFinish = timeGTRFinish.getTime();
+    timeGTR = (timeGTRFinish - timeGTRStart) / 1000;
+};
+
+infoForGoToRep2 = function () {
+    charNumRep2 = document.querySelector("#charNumGoToRep2").value;
+    charNumRep2 = parseInt(charNumRep2);
+    runNumRep2 = document.querySelector("#runNumGoToRep2").value;
+    runNumRep2 = parseInt(runNumRep2);
+    if (runNumRep2 % 10 == 0) {
+        document.querySelector("#infoGoToRepRun2").innerHTML = runNumRep2;
+        document.querySelector("#infoGoToRepChar2").innerHTML = charNumRep2
+    };
+
+    sec = 0;
+    if (charNumRep2 == 2) { sec = charNumRep2 * runNumRep2 * 0.02329 };
+    if (charNumRep2 == 3) { sec = charNumRep2 * runNumRep2 * 0.057311 };
+    if (charNumRep2 == 4) { sec = charNumRep2 * runNumRep2 * 0.471291 };
+    sector = document.querySelector("#appTimeGTR2");
+    if (sec > 0) { displayTime(sec, sector) }
+    else { sector.innerHTML = "sok" };
+    sector.style["background-color"] = "#7EE4E4";
+};
+infoForGoToRep2();
+
+thisIsGoToRep2 = false;
+goToRepeat2 = function () {
+    console.log("az ismétlés elindult");
+    learning = Array();
+    totalNumberOfCurrents = 0;
+    thisIsGoToRep2 = true;
+    isItGoToRepeat = true;
+    if (runNumRep2 % 10 != 0) {
+        runNumRep2 = 100;
+        document.querySelector("#runNumGoToRep2").value = runNumRep2;
+        alert("A futások számának 10-zel oszthatónak kell lennie!")
+    };
+    syllabes = Array();
+    finish = runNumRep2 / 10;
+    for (let h = 0; h < finish; h++) {
+        goToRepeat1(charNumRep2, 10);
+        syllabes[syllabes.length] = learning.length;
+    };
+    thisIsGoToRep2 = false;
+    isItGoToRepeat = false;
+    displaySyllabes();
+    showTheMemory();
+};
+
+displaySyllabes = function () {
+    area = document.querySelector("#divForSyllabes");
+    sector = document.querySelector("#forSyllabes");
+    area.removeChild(sector);
+    newDiv = document.createElement("div");
+    newDiv.id = "forSyllabes";
+    area.appendChild(newDiv);
+
+    area = document.querySelector("#forSyllabes")
+    for (let i = 0; i < syllabes.length; i++) {
+        newSpan1 = document.createElement("span");
+        newSpan1.innerHTML = syllabes[i];
+        area.appendChild(newSpan1);
+        newSpan2 = document.createElement("span");
+        newSpan2.innerHTML = ", ";
+        if (i < syllabes.length - 1) { area.appendChild(newSpan2) };
     };
 };
 
 learn = function (expressionHex) {
     //learning tömb elemei [két betű / gyakoriság:hány szóban fordult eddig elő / a szóban hányadik betűhelyen kezdődött ez a kétbetűs rész / hány betűs volt a szó]
+
     if (expressionHex.length > 4) {
         index = szavakHex.findIndex(x => x == expressionHex);
         hungWord = szavak[index];
@@ -1695,8 +1803,13 @@ learn = function (expressionHex) {
             if (doIt == true) {
                 learnThis = learnThis;
                 nowHere = learning.length;
+                learning[nowHere] = Array();
                 myValue = 1;
-                learning[nowHere] = [learnThis, myValue, i + 1, hungWord.length];
+                learning[nowHere][0] = learnThis;
+                learning[nowHere][1] = myValue;
+                learning[nowHere][2] = i + 1;
+                learning[nowHere][3] = hungWord.length;
+                if (isItGoToRepeat == true) { learning[nowHere][4] = "new" };
             }
             else {
                 k = k - 1;
@@ -1710,8 +1823,36 @@ learn = function (expressionHex) {
     document.querySelector("#monkeyMemorySize").innerHTML = `${learning.length} karakterkettős.`
     document.querySelector("#monkeyMemorySize").style["background-color"] = "#FADADD";
     document.querySelector("#numberOfRunnings").innerHTML = totalNumberOfCurrents;
+    if (thisIsGoToRep2 == false) { showTheMemory() };
 };
 
+memoryIsShown = false;
+showTheMemory = function () {
+    learning.sort();
+    if (memoryIsShown == true) {
+        area = document.querySelector("#divForShowMemory");
+        sector = document.querySelector("#showMemory");
+        area.removeChild(sector);
+        newDiv = document.createElement("div");
+        newDiv.setAttribute("id", "showMemory");
+        area.appendChild(newDiv);
+    };
+    area = document.querySelector("#showMemory");
+    for (let i = 0; i < learning.length; i++) {
+        newSpan1 = document.createElement("span");
+        newSpan1.innerHTML = (learning[i])[0];
+        if (isItGoToRepeat == true) {
+            if (learning[i][4] == "new") { newSpan1.style["background-color"] = "#ffff00" };
+        };
+        area.appendChild(newSpan1);
+        newSpan2 = document.createElement("span");
+        newSpan2.innerHTML = ", ";
+        if (i < learning.length - 1) {
+            area.appendChild(newSpan2)
+        };
+    };
+    memoryIsShown = true;
+};
 
 //Összegyűjti a 'charNumb' hosszúságú szavakat egy ideiglenes tömbbe, s ebből fog újra és újra keresni, nem pedig a teljes 'szavak' tömbből
 //szavakTemp = Array();
@@ -1962,7 +2103,6 @@ repeat2 = function () {
     whereEmptinessInDistribution(distribution);
     timeRepeat2Finish = new Date;
     timeRepeat2 = (timeRepeat2Finish - timeRepeat2Start) / 1000;
-    console.log(timeRepeat2);
     displayDistributionDistance();
     noConsole = false;
     if (itWasMoreDistance == true) {
@@ -1971,9 +2111,10 @@ repeat2 = function () {
     };
     createDistributionDistanceGraph();
 };
+isItRepeating = false;
 repeat = function () {
 
-    if (wasRepeating == true) { removeDistanceMatrixSpan(); removeDistributionDistanceSpans(); removeDistanceMatrixSpans2() };
+    if (wasRepeating == true) { removeDistanceMatrixSpan(); removeDistributionDistanceSpans(); removeDistanceMatrixSpan() };
     hideClickCounter = 0;
 
     needErase = false;
@@ -5545,7 +5686,7 @@ word_ = function () {
             timeFinish = new Date();
         };
 
-        if (turn == 0 && cons == true && displayNow == true && noConsole == false) { console.log("A betűkombinációk kirakása elindult.") }
+        if (turn == 0 && cons == true && displayNow == true && noConsole == false && isItGoToRepeat == false) { console.log("A betűkombinációk kirakása elindult.") }
 
         if (turn % 100000 == 0) {
             if (turn != 0 && cons == true && displayNow == true) {
