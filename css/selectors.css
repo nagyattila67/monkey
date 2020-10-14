@@ -178,9 +178,9 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #run100Button{display:block;margin:25px 0px 15px 0px;}
 #vartMaximum{margin-top:15px}
 
-#divForFinalString{overflow:auto; width:501px;height:290px;background-color:#dbdbdb;}}
+#divForFinalString{overflow:auto; width:501px;height:290px;background-color:#dbdbdb;}
 #placeForFinalString{width:500px;height:290px}
-#divForFinalWords{overflow:auto; max-width:800px;height:310px;background-color:#dbdbdb;}}
+#divForFinalWords{overflow:auto; max-width:800px;height:310px;background-color:#dbdbdb;}
 #placeForFinalWords{width:500px;height:290px}
 
 #divForKetBetus{overflow:auto;max-width:900px;height:103px}
@@ -199,7 +199,7 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #divForLetterSkip{overflow:auto;height:500px}
 #tableForLetterSkip{height:500px}
 #divForFoundWords{overflow:auto;height:250px}
-#divForShowMemory{overflow:auto;height:500px;}
+#divForShowMemory{overflow:auto;height:612px;}
 
 #formForGenereteWord label{margin-right:10px;}
 #formForGenereteWord input{margin-right:10px;}
@@ -207,6 +207,12 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 
 #divForSyllabes{margin:10px;overflow:auto;}
 #forSyllabes{height:55px}
+
+#divForSyllabesGraph{overflow:auto;height:400px;}
+#forSyllabesGraph td{padding:1px;max-height:3px;border:solid 1px #f8f8f8;}
+
+
+
 
 
 

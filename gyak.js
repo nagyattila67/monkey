@@ -1112,17 +1112,24 @@ generateWordRnd = function () {
     random = true;
     myRndNumber = Math.ceil(Math.random() * 10);
     myRndNumber = myRndNumber + 2;
-    generateWord();
+    generateWord(myRndNumber);
 };
 
 //az eddig tanultak alapján generál egy új szót
-generateWord = function (event) {
+generateWord = function (myRndNumber) {
     let gotIt = false;
     monkeyNumber = Number();
     wordOfMonkey = String();
     nextStep = String();
-    if (random == false) { lengthOfMonkeyWord = event.path[1].children[1].value }
-    else { lengthOfMonkeyWord = myRndNumber }
+
+    if (makingDictionary == false) {
+        if (random == false) { lengthOfMonkeyWord = document.querySelector("#szohosszOfMonkey").value }
+        else { lengthOfMonkeyWord = myRndNumber }
+    };
+    if (makingDictionary == true) {
+        lengthOfMonkeyWord = myRndNumber;
+    };
+
 
     while (gotIt == false) {
         monkeyNumber = Math.floor(Math.random() * learning.length);
@@ -1170,11 +1177,12 @@ generateWord = function (event) {
         };
     };
 
-    if (workMemory.length == 0) {
+    if (workMemory.length == 0 && makingDictionary == false) {
         document.querySelector("#generatedWord").innerHTML = `${wordOfMonkey} - csak eddig jutottam!`
-    }
-    else { document.querySelector("#generatedWord").innerHTML = wordOfMonkey }
+    };
+    if (workMemory.length != 0 && makingDictionary == false) { document.querySelector("#generatedWord").innerHTML = wordOfMonkey }
     random = false;
+    return wordOfMonkey;
 };
 
 clearNotation = function () {
@@ -1249,6 +1257,29 @@ writeSentence = function () {
     }
     else { alert("Legalább öt szónak kell lennie a listáján!") }
 };
+
+makingDictionary = false;
+makeDictionary = function () {
+    dictionaryOfMonkey = Array();
+    makingDictionary = true;
+
+    numberOfWords = document.querySelector("#numberOfWordsInDictionary").value;
+    numberOfWords = parseInt(numberOfWords);
+    for (let i = 0; i < numberOfWords; i++) {
+        random = true;
+        myRndNumber = Math.ceil(Math.random() * 10);
+        myRndNumber = myRndNumber + 2;
+        generateWord(myRndNumber);
+        dictionaryOfMonkey[dictionaryOfMonkey.length] = wordOfMonkey;
+    };
+    dictionaryOfMonkey.sort();
+    makingDictionary = false;
+};
+
+
+
+
+
 
 displayResultOfTyping = function (place, expressionHTML, hit, turn, maxTurn) {
 
@@ -1684,20 +1715,25 @@ infoForGoToRep = function () {
     document.querySelector("#infoGoToRepRun").innerHTML = runNumRep;
     document.querySelector("#infoGoToRepChar").innerHTML = charNumRep;
 
+
     sec = 0;
-    if (charNumRep == 2) { sec = charNumRep * runNumRep * 0.02329 };
-    if (charNumRep == 3) { sec = charNumRep * runNumRep * 0.057311 };
-    if (charNumRep == 4) { sec = charNumRep * runNumRep * 0.471291 };
+    if (charNumRep == 2) { sec = runNumRep * 0.02329 };
+    if (charNumRep == 3) { sec = runNumRep * 0.0489 };
+    if (charNumRep == 4) { sec = runNumRep * 0.471291 };
+    if (charNumRep == 5) { sec = runNumRep * 8.822 };
+    if (charNumRep == 6) { sec = runNumRep * 13.478 };
     sector = document.querySelector("#appTimeGTR");
     if (sec > 0) { displayTime(sec, sector) }
     else { sector.innerHTML = "sok" };
     sector.style["background-color"] = "#7EE4E4";
+    document.querySelector("#appTimeGTRReal").innerHTML = " - ";
 };
 infoForGoToRep();
 charNumRep = document.querySelector("#charNumGoToRep").value;
 charNumRep = parseInt(charNumRep);
 runNumRep = document.querySelector("#runNumGoToRep").value;
 runNumRep = parseInt(runNumRep);
+
 goToRepeat = function () {
     goToRepeat1(charNumRep, runNumRep);
 };
@@ -1709,9 +1745,8 @@ goToRepeat1 = function (charNumRep, runNumRep) {
     isItGoToRepeat = true;
     for (let i = 0; i < runNumRep; i++) {
         word(charNumRep);
-        learn(expressionABC);
     };
-    if (isItGoToRepeat == true) {
+    if (isItGoToRepeat == true && fromOninput == false) {
         for (let i = 0; i < learning.length; i++) {
             learning[i][4] = "notNew";
         };
@@ -1720,6 +1755,10 @@ goToRepeat1 = function (charNumRep, runNumRep) {
     timeGTRFinish = new Date();
     timeGTRFinish = timeGTRFinish.getTime();
     timeGTR = (timeGTRFinish - timeGTRStart) / 1000;
+    sector = document.querySelector("#appTimeGTRReal");
+    displayTime(timeGTR, sector);
+
+
 };
 
 infoForGoToRep2 = function () {
@@ -1727,15 +1766,20 @@ infoForGoToRep2 = function () {
     charNumRep2 = parseInt(charNumRep2);
     runNumRep2 = document.querySelector("#runNumGoToRep2").value;
     runNumRep2 = parseInt(runNumRep2);
+    examNumRep2 = document.querySelector("#examinNumGoToRep2").value;
+    examNumRep2 = parseInt(examNumRep2);
+    document.querySelector("#infoGoToRepExamine2").innerHTML = examNumRep2;
     if (runNumRep2 % 10 == 0) {
         document.querySelector("#infoGoToRepRun2").innerHTML = runNumRep2;
         document.querySelector("#infoGoToRepChar2").innerHTML = charNumRep2
     };
 
     sec = 0;
-    if (charNumRep2 == 2) { sec = charNumRep2 * runNumRep2 * 0.02329 };
-    if (charNumRep2 == 3) { sec = charNumRep2 * runNumRep2 * 0.057311 };
-    if (charNumRep2 == 4) { sec = charNumRep2 * runNumRep2 * 0.471291 };
+    if (charNumRep2 == 2) { sec = runNumRep2 * 0.02329 };
+    if (charNumRep2 == 3) { sec = runNumRep2 * 0.0489 };
+    if (charNumRep2 == 4) { sec = runNumRep2 * 0.471291 };
+    if (charNumRep2 == 5) { sec = runNumRep2 * 8.822 };
+    if (charNumRep2 == 6) { sec = runNumRep2 * 13.478 };
     sector = document.querySelector("#appTimeGTR2");
     if (sec > 0) { displayTime(sec, sector) }
     else { sector.innerHTML = "sok" };
@@ -1745,26 +1789,35 @@ infoForGoToRep2();
 
 thisIsGoToRep2 = false;
 goToRepeat2 = function () {
+    timeGTR2Start = new Date;
+    timeGTR2Start = timeGTR2Start.getTime();
+
     console.log("az ismétlés elindult");
     learning = Array();
     totalNumberOfCurrents = 0;
     thisIsGoToRep2 = true;
     isItGoToRepeat = true;
-    if (runNumRep2 % 10 != 0) {
+    ennyienkenNezzeMeg = examNumRep2;
+    if (runNumRep2 % ennyienkenNezzeMeg != 0) {
         runNumRep2 = 100;
         document.querySelector("#runNumGoToRep2").value = runNumRep2;
         alert("A futások számának 10-zel oszthatónak kell lennie!")
     };
     syllabes = Array();
-    finish = runNumRep2 / 10;
+    finish = runNumRep2 / ennyienkenNezzeMeg;
     for (let h = 0; h < finish; h++) {
-        goToRepeat1(charNumRep2, 10);
+        goToRepeat1(charNumRep2, ennyienkenNezzeMeg);
         syllabes[syllabes.length] = learning.length;
     };
     thisIsGoToRep2 = false;
     isItGoToRepeat = false;
     displaySyllabes();
-    showTheMemory();
+    ranking();
+    timeGTR2Finish = new Date;
+    timeGTR2Finish = timeGTR2Finish.getTime();
+    timeGTR2 = (timeGTR2Finish - timeGTR2Start) / 1000;
+    sector = document.querySelector("#appTimeGTRReal2");
+    displayTime(timeGTR2, sector);
 };
 
 displaySyllabes = function () {
@@ -1784,12 +1837,47 @@ displaySyllabes = function () {
         newSpan2.innerHTML = ", ";
         if (i < syllabes.length - 1) { area.appendChild(newSpan2) };
     };
+    displaySyllabesGraph();
+};
+
+displaySyllabesGraph = function () {
+    area = document.querySelector("#tableForSyllabesGraph");
+    sector = document.querySelector("#forSyllabesGraph")
+    area.removeChild(sector);
+    newTbody = document.createElement("tbody");
+    newTbody.id = "forSyllabesGraph";
+    area.appendChild(newTbody);
+
+    syllabesMax = 0;
+    for (let i = 0; i < syllabes.length; i++) {
+        if (syllabes[i] > syllabesMax) {
+            syllabesMax = syllabes[i];
+        };
+    };
+
+    for (let i = 0; i < syllabesMax; i++) {
+        area = document.querySelector("#forSyllabesGraph");
+        newTr = document.createElement("tr");
+        area.appendChild(newTr);
+        for (let j = 0; j < syllabes.length; j++) {
+            newTd = document.createElement("td");
+            newTr.appendChild(newTd);
+        };
+    };
+
+    for (let i = 0; i < syllabesMax; i++) {
+        for (let j = 0; j < syllabes.length; j++) {
+            if (i <= syllabes[j]) {
+                document.querySelectorAll("#forSyllabesGraph tr")[syllabesMax - i - 1].children[j].style["background-color"] = "#F00C93"
+            };
+        };
+    };
 };
 
 learn = function (expressionHex) {
     //learning tömb elemei [két betű / gyakoriság:hány szóban fordult eddig elő / a szóban hányadik betűhelyen kezdődött ez a kétbetűs rész / hány betűs volt a szó]
 
-    if (expressionHex.length > 4) {
+    if (expressionHex.length > 1) {
         index = szavakHex.findIndex(x => x == expressionHex);
         hungWord = szavak[index];
         for (let i = 0; i < hungWord.length - 1; i++) {
@@ -1823,12 +1911,69 @@ learn = function (expressionHex) {
     document.querySelector("#monkeyMemorySize").innerHTML = `${learning.length} karakterkettős.`
     document.querySelector("#monkeyMemorySize").style["background-color"] = "#FADADD";
     document.querySelector("#numberOfRunnings").innerHTML = totalNumberOfCurrents;
-    if (thisIsGoToRep2 == false) { showTheMemory() };
+    if (thisIsGoToRep2 == false) { ranking() };
 };
 
+fromOninput = false;
+rankingFromOninput = function () {
+    fromOninput = true;
+    ranking();
+    fromOninput = false;
+};
+
+ranking = function () {
+    if (document.querySelector("#abc").checked == true) {
+        learning.sort();
+        showTheMemory(learning);
+        /*for (let i = 0; i < learning.length; i++) {
+            if (learning[i][5] == "new") {
+                document.querySelectorAll("#showMemory span")[3 * i].style["background-color"] = "#ffff00";
+                document.querySelectorAll("#showMemory span")[3 * i + 1].style["background-color"] = "#ffff00";
+                if (3 * i + 2 < learning.length - 1) { document.querySelectorAll("#showMemory span")[3 * i + 2].style["background-color"] = "#ffff00" };
+                newSpan2.style["background-color"] = "#ffff00"
+            };
+        };*/
+    };
+    if (document.querySelector("#frequence").checked == true) {
+        max = 0;
+        for (let i = 0; i < learning.length; i++) {
+            if (max < learning[i][1]) {
+                max = learning[i][1];
+            };
+        };
+        frequenceArray = Array();
+        for (let i = 0; i < max; i++) {
+            myArray = Array();
+            for (let j = 0; j < learning.length; j++) {
+                if (learning[j][1] == max - i) {
+                    myArray[myArray.length] = learning[j];
+                };
+            };
+            myArray.sort();
+            frequenceArray[frequenceArray.length] = myArray;
+        };
+        frequenceArrayLong = Array();
+        for (let i = 0; i < max; i++) {
+            for (let j = 0; j < frequenceArray[i].length; j++) {
+                frequenceArrayLong[frequenceArrayLong.length] = frequenceArray[i][j];
+            };
+        };
+        showTheMemory(frequenceArrayLong);
+        /*for (let i = 0; i < learning.length; i++) {
+            if (learning[i][5] == "new") {
+                document.querySelectorAll("#showMemory span")[3 * i].style["background-color"] = "#ffff00";
+                document.querySelectorAll("#showMemory span")[3 * i + 1].style["background-color"] = "#ffff00";
+                if (3 * i + 2 < learning.length - 1) { document.querySelectorAll("#showMemory span")[3 * i + 2].style["background-color"] = "#ffff00" };
+                newSpan2.style["background-color"] = "#ffff00"
+            };
+        };*/
+    };
+};
+
+
 memoryIsShown = false;
-showTheMemory = function () {
-    learning.sort();
+showTheMemory = function (learning) {
+
     if (memoryIsShown == true) {
         area = document.querySelector("#divForShowMemory");
         sector = document.querySelector("#showMemory");
@@ -1841,14 +1986,22 @@ showTheMemory = function () {
     for (let i = 0; i < learning.length; i++) {
         newSpan1 = document.createElement("span");
         newSpan1.innerHTML = (learning[i])[0];
-        if (isItGoToRepeat == true) {
-            if (learning[i][4] == "new") { newSpan1.style["background-color"] = "#ffff00" };
-        };
         area.appendChild(newSpan1);
         newSpan2 = document.createElement("span");
-        newSpan2.innerHTML = ", ";
+        newSpan2.innerHTML = ` (${learning[i][1]})`;
+        area.appendChild(newSpan2);
+        newSpan3 = document.createElement("span");
+        newSpan3.innerHTML = ", ";
         if (i < learning.length - 1) {
-            area.appendChild(newSpan2)
+            area.appendChild(newSpan3)
+        };
+        if (isItGoToRepeat == true) {
+            if (learning[i][4] == "new") {
+                newSpan1.style["background-color"] = "#ffff00";
+                newSpan2.style["background-color"] = "#ffff00";
+                //learning[i][5] = "new";
+            }
+            //else { learning[i][5] = "notNew"; }
         };
     };
     memoryIsShown = true;
@@ -4765,7 +4918,7 @@ distributionDistanceLast = function () {
 /*hideTheDistributionDistanceGraph = function () {
     document.querySelector("#buttonForDistributionDistanceGraph").innerHTML = "Mutat";
 };
-
+ 
 firstShowDistributionDistanceGraph = true;
 showTheDistributionDistanceGraph = function () {
     if (firstShowDistributionDistanceGraph == true) {

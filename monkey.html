@@ -2564,7 +2564,7 @@
                         </form>
                     </div>-->
                     <div class="row">
-                        <div class="col -8">
+                        <div class="col">
                             <p>A majom szeretne kevesebb gépeléssel több banánhoz jutni. S rá is jött arra, hogy
                                 bizonyos
                                 betűkombinációk leütése esetén gyorsabban talál rá egy értelmes szóra, s így gyakrabban
@@ -2574,8 +2574,45 @@
                                 betűpárokat, s itt jobbra láthatja a feljegyzett betűkettősöket.
                             </p>
                             <p>A program által használt ábécé 35 betűs, ebből 14 db. a magánhangzó és 21 db. a
-                                mássalhangzó. Az ezekből kirakható kettős karakterek száma 2*14*21 = 588.
+                                mássalhangzó. Az ezekből kirakható kettős karakterek száma 2*14*21 = 588. (Ennyi
+                                betűkettős lehetséges ahol <i> mássalhangzó</i> és <i>magánhangzó</i> áll egymás
+                                mellett.)
                             </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col -8">
+                            <p>Egy konkrét méréssorozatnál program az első 10 000 futásra ennyi karakterkettőst
+                                detektált:</p>
+                            <table class="table table-small">
+                                <tbody>
+                                    <tr>
+                                        <td>Karakterek száma:</td>
+                                        <td>Futások száma:</td>
+                                        <td>Betűkettősök száma:</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>10 000</td>
+                                        <td>134</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>10 000</td>
+                                        <td>433</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>10 000</td>
+                                        <td>599</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>10 000</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <table class="table table-small">
                                 <tbody>
                                     <tr>
@@ -2588,10 +2625,15 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <p>Ha akarja, a program ismét lefuttathat <span id="infoGoToRepRun"></span>-szor egy
-                                <span id="infoGoToRepChar"></span> betűszámú keresést, hogy így növelje a memóriája
-                                tartalmát. A memóriába újonnan bekerült betűkettősök sárga színnel lesznek kiemelve.
-                            </p>
+                            <p>A betűkettősök mellett zárójelben lévő szám azt mutatja meg, hogy a majom a tanulás során
+                                hányszor találkozott az adott betűkettőssel.</p>
+                            <p>A betűkettősök felsorolása legyen: </p>
+                            <p class="ml-5"><input oninput="rankingFromOninput()" id="abc" type="radio" name="sorrend"
+                                    checked> ábécé sorrendben. <small>(A program által használt ábécében az ékezetes
+                                    betűk
+                                    az ábécé végén helyezkednek el!)</small></p>
+                            <p class="ml-5"><input oninput="rankingFromOninput()" id="frequence" type="radio"
+                                    name="sorrend"> előfordulásuk száma szerint.</p>
                         </div>
                         <div class="col-4 smallBorder bgDarker" id="divForShowMemory">
                             <div id="showMemory"></div>
@@ -2599,15 +2641,20 @@
                     </div>
                     <div class="row">
                         <div class="col">
+                            <p>Ha akarja, a program ismét lefuttathat <span id="infoGoToRepRun"></span>-szor egy
+                                <span id="infoGoToRepChar"></span> betűszámú keresést, hogy így növelje a memóriája
+                                tartalmát. A memóriába újonnan bekerült betűkettősök sárga színnel lesznek kiemelve.
+                            </p>
                             <label>Betűk száma:</label>
                             <input id="charNumGoToRep" style="width:50px" oninput="infoForGoToRep()" type="number"
-                                min="2" max="5" value="3">
+                                min="2" max="6" value="3">
                             <label>Ismétlések száma:</label>
                             <input id="runNumGoToRep" style="width:100px" oninput="infoForGoToRep()" type="number"
                                 min="1" value="100">
                             <button style="display:inline" class="btn btn-secondary btn-sm ml-3 mr-3"
                                 onclick="goToRepeat()" type="button">Mehet</button>
-                            <p style="display:inline">Futásidő: <span id="appTimeGTR"> - </span></p>
+                            <p style="display:inline">Becsült futásidő: <span id="appTimeGTR"> - </span></p>
+                            <p style="display:inline"> - Tényleges futásidő: <span id="appTimeGTRReal"> - </span></p>
                         </div>
                     </div>
                     <hr>
@@ -2615,33 +2662,59 @@
                         <div class="col">
                             <div class="row">
                                 <div class="col">
-                                    <p>A program most lefuttat <span id="infoGoToRepRun2"></span>-szor egy
-                                        <span id="infoGoToRepChar2"></span> betűszámú keresést úgy, hogy minden 10.
+
+                                    <p><img id="monkey" class="float-right mt-2" src="img/increasing1.jpg" width="350" ;
+                                            alt="betűkettősök számának növekedése">Ha akarja, akkor a program most
+                                        lefuttat <span id="infoGoToRepRun2"></span>-szor egy
+                                        <span id="infoGoToRepChar2"></span> betűszámú keresést úgy, hogy minden <span
+                                            id="infoGoToRepExamine2"></span>.
                                         futás végén
-                                        megvizsgálja, hogy mennyivel nőtt meg a tanulás során feljegyzett kettős
-                                        karakterek
-                                        száma.</p>
-                                    <p>Figyelem! Ebben az esetben a program <span style="color:red">lenullázza</span> a 'majom meóriáját', s előről
+                                        megvizsgálja, hogy mennyivel nőtt meg a tanulás során feljegyzett betűkettősök
+                                        száma.<br><br>
+                                        A jobb oldali ábrán lévő grafikon egy ilyen futtatás eredményét mutatja. A majon
+                                        1 000-szer keresett 3 betűs szavakat, s a program minden 10. keresés után
+                                        megnézte, hogy hány betűkettős található a memóriában. Az oszlopok magasságának
+                                        a növekedése mutatja 10 keresésenként a memória növekedést.
+
+                                    </p>
+
+
+                                    <p></p>
+                                    <p>Figyelem! Ebben az esetben a program <span style="color:red">lenullázza</span> a
+                                        'majom meóriáját', s előről
                                         kezdi meg a memória felépítését, hogy meg tudja vizsgálni annak a növekedését
-                                        lépésről-lépésre. (A fenti táblázat pedig az újonnan felépített memória karakterkettőseit fogja mutatni.)</p>
+                                        lépésről-lépésre. (A fenti táblázat pedig az újonnan felépített memória
+                                        karakterkettőseit fogja mutatni.)</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label>Betűk száma:</label>
                                     <input id="charNumGoToRep2" style="width:50px" oninput="infoForGoToRep2()"
-                                        type="number" min="2" max="5" value="3">
+                                        type="number" min="2" max="6" value="3">
                                     <label>Ismétlések száma:</label>
                                     <input id="runNumGoToRep2" style="width:100px" oninput="infoForGoToRep2()"
                                         type="number" min="1" value="100">
+                                    <label>Ennyi ismétlésenként vizsgálja a növekedést:</label>
+                                    <input id="examinNumGoToRep2" style="width:100px" oninput="infoForGoToRep2()"
+                                        type="number" min="1" value="10">
                                     <button style="display:inline" class="btn btn-secondary btn-sm ml-3 mr-3"
                                         onclick="goToRepeat2()" type="button">Mehet</button>
                                     <p style="display:inline">Futásidő: <span id="appTimeGTR2"> - </span></p>
+                                    <p style="display:inline"> - Tényleges futásidő: <span id="appTimeGTRReal2"> -
+                                        </span></p>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col smallBorder bgLight" id="divForSyllabes">
+                            <div class="row smallBorder bgLight mt-3">
+                                <div class="col" id="divForSyllabes">
                                     <div id="forSyllabes"></div>
+                                </div>
+                            </div>
+                            <div class="row mt-3" id="divForSyllabesGraph">
+                                <div class="col smallBorder bgLight">
+                                    <table id="tableForSyllabesGraph" class="table">
+                                        <tbody id="forSyllabesGraph"></tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -2659,7 +2732,7 @@
                                         szavakat tud generálni ennek az adatbázisnak a segítségével.</p>
                                     <form class="form-inline" id="formForGenereteWord">
                                         <label>A szó hossza legyen:</label>
-                                        <input type="number" class="form-control form-control-sm" style="width:100px"
+                                        <input id="szohosszOfMonkey" type="number" class="form-control form-control-sm" style="width:100px"
                                             min="2" max="10" value="5">
                                         <label> betű!</label>
                                         <button type="button" class="btn btn-secondary btn-sm"
@@ -2704,7 +2777,15 @@
                             </div>
                         </div>
                     </div>
-
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <p>Most pedig a majom készítsen egy <input id="numberOfWordsInDictionary" type="number"
+                                    min="100" value="10000"> szóból álló szószedetet!</p>
+                            <button type="button" class="btn btn-secondary btn-sm"
+                                onclick="makeDictionary()">Mehet</button>
+                        </div>
+                    </div>
 
 
 
