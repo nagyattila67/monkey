@@ -1274,7 +1274,75 @@ makeDictionary = function () {
     };
     dictionaryOfMonkey.sort();
     makingDictionary = false;
+    checkDictionaryOfMonkey();
 };
+
+duplicated = Array();
+checkDictionaryOfMonkey = function () {
+    duplicated = Array();
+    for (let i = 0; i < dictionaryOfMonkey.length; i++) {
+
+        for (let j = i + 1; j < dictionaryOfMonkey.length; j++) {
+            if (dictionaryOfMonkey[i] == dictionaryOfMonkey[j] && dictionaryOfMonkey[i] != "404") {
+                for (let k = 0; k < duplicated.length; k++) {
+                    if (dictionaryOfMonkey[j] == duplicated[k][0]) {
+                        duplicated[k][1] = duplicated[k][1] + 1;
+                    }
+                    else {
+                        myArrayCDOM = Array();
+                        myArrayCDOM[0] = dictionaryOfMonkey[i];
+                        myArrayCDOM[1] = 1;
+                        duplicated[duplicated.length] = myArrayCDOM;
+                    };
+                };
+                dictionaryOfMonkey[j] = "404";
+            };
+        };
+    };
+    dictionaryOfMonkeyFinal = Array();
+    for (let i = 0; i < dictionaryOfMonkey.length; i++) {
+        if (dictionaryOfMonkey[i] != "404") {
+            dictionaryOfMonkeyFinal[dictionaryOfMonkeyFinal.length] = dictionaryOfMonkey[i];
+        };
+    };
+    searchHungarianWords();
+};
+
+hungarianWordsOfMonkey = Array();
+searchHungarianWords = function () {
+    hungarianWordsOfMonkey = Array();
+    hungarianWordsOfMonkey[0]=Array();
+    hungarianWordsOfMonkey[0][0]="";
+    hungarianWordsOfMonkey[0][0]=0;
+    hungarianWordsOfMonkey2 = Array();
+    for (let i = 0; i < dictionaryOfMonkeyFinal.length; i++) {
+        for (let k = 0; k < szavak.length; k++) {
+            if (dictionaryOfMonkeyFinal[i] == szavak[k]) {
+                for (let n = 0; n < hungarianWordsOfMonkey.length; n++) {
+                  doIt=true;
+                    if (dictionaryOfMonkeyFinal[i] == hungarianWordsOfMonkey[n][0]) {
+                        hungarianWordsOfMonkey[n][1] = hungarianWordsOfMonkey[n][1] + 1;
+                        doIt=false;
+                        break;
+                    };
+                };
+                if(doIt==true) {
+                    myArrayHWOM = Array();
+                    myArrayHWOM[0] = dictionaryOfMonkeyFinal[i];
+                    myArrayHWOM[1] = 1;
+                    hungarianWordsOfMonkey[hungarianWordsOfMonkey.length] = myArrayHWOM;
+                };
+                hungarianWordsOfMonkey2[hungarianWordsOfMonkey2.length] = dictionaryOfMonkeyFinal[i];
+                console.log("yes");
+            };
+        };
+    };
+    hungarianWordsOfMonkey.shift();
+};
+
+
+
+
 
 
 
