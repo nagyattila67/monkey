@@ -1273,6 +1273,7 @@ makeDictionary = function () {
         dictionaryOfMonkey[dictionaryOfMonkey.length] = wordOfMonkey;
     };
     dictionaryOfMonkey.sort();
+    dictionaryOfMonkey2 = dictionaryOfMonkey.slice();
     makingDictionary = false;
     checkDictionaryOfMonkey();
 };
@@ -1306,33 +1307,49 @@ checkDictionaryOfMonkey = function () {
         };
     };
     searchHungarianWords();
+    displayDictionaryOfMonkey();
+    displayDictionaryInfo();
+    displayHungarianDictionaryOfMonkey();
+};
+
+displayDictionaryInfo = function () {
+    document.querySelector("#infoDictionary1").innerHTML = dictionaryOfMonkey.length;
+    document.querySelector("#infoDictionary2").innerHTML = dictionaryOfMonkeyFinal.length;
+    document.querySelector("#infoDictionary3").innerHTML = dictionaryOfMonkey.length - dictionaryOfMonkeyFinal.length;
+    document.querySelector("#infoDictionary4").innerHTML = hungarianWordsOfMonkey.length;
+    document.querySelector("#infoDictionary5").innerHTML = ((hungarianWordsOfMonkey2.length / dictionaryOfMonkey.length) * 100).toFixed(2);
+    document.querySelector("#infoDictionary5").style["background-color"] = "#FADADD";
+    document.querySelector("#infoDictionary6").innerHTML = dictionaryOfMonkeyFinal.length;
+    document.querySelector("#infoDictionary7").innerHTML = hungarianWordsOfMonkey.length;
+    document.querySelector("#infoDictionary6").style["background-color"]="#FADADD"
+    document.querySelector("#infoDictionary7").style["background-color"]="#FADADD"
 };
 
 hungarianWordsOfMonkey = Array();
 searchHungarianWords = function () {
     hungarianWordsOfMonkey = Array();
-    hungarianWordsOfMonkey[0]=Array();
-    hungarianWordsOfMonkey[0][0]="";
-    hungarianWordsOfMonkey[0][0]=0;
+    hungarianWordsOfMonkey[0] = Array();
+    hungarianWordsOfMonkey[0][0] = "";
+    hungarianWordsOfMonkey[0][0] = 0;
     hungarianWordsOfMonkey2 = Array();
-    for (let i = 0; i < dictionaryOfMonkeyFinal.length; i++) {
+    for (let i = 0; i < dictionaryOfMonkey2.length; i++) {
         for (let k = 0; k < szavak.length; k++) {
-            if (dictionaryOfMonkeyFinal[i] == szavak[k]) {
+            if (dictionaryOfMonkey2[i] == szavak[k]) {
                 for (let n = 0; n < hungarianWordsOfMonkey.length; n++) {
-                  doIt=true;
-                    if (dictionaryOfMonkeyFinal[i] == hungarianWordsOfMonkey[n][0]) {
+                    doIt = true;
+                    if (dictionaryOfMonkey2[i] == hungarianWordsOfMonkey[n][0]) {
                         hungarianWordsOfMonkey[n][1] = hungarianWordsOfMonkey[n][1] + 1;
-                        doIt=false;
-                        break;
+                        doIt = false;
+                        //break;
                     };
                 };
-                if(doIt==true) {
+                if (doIt == true) {
                     myArrayHWOM = Array();
-                    myArrayHWOM[0] = dictionaryOfMonkeyFinal[i];
+                    myArrayHWOM[0] = dictionaryOfMonkey2[i];
                     myArrayHWOM[1] = 1;
                     hungarianWordsOfMonkey[hungarianWordsOfMonkey.length] = myArrayHWOM;
                 };
-                hungarianWordsOfMonkey2[hungarianWordsOfMonkey2.length] = dictionaryOfMonkeyFinal[i];
+                hungarianWordsOfMonkey2[hungarianWordsOfMonkey2.length] = dictionaryOfMonkey2[i];
                 console.log("yes");
             };
         };
@@ -1340,8 +1357,53 @@ searchHungarianWords = function () {
     hungarianWordsOfMonkey.shift();
 };
 
+displayDictionary = function (mainArea, sectorId, dictionary) {
+    area = mainArea;
+    sector = document.querySelector(`#${sectorId}`);
+    area.removeChild(sector);
+    newDiv = document.createElement("div");
+    newDiv.id = "dictionaryMonkey";
+    area.appendChild(newDiv);
+    sector = newDiv;
+    for (let i = 0; i < dictionary.length; i++) {
+        span1 = document.createElement("span");
+        span1.style.display = "block";
+        span1.innerHTML = dictionary[i];
+        sector.appendChild(span1);
+    };
+};
 
+displayDictionaryWithRepetition = function (mainArea, sectorId, dictionary) {
+    area = mainArea;
+    sector = document.querySelector(`#${sectorId}`);
+    area.removeChild(sector);
+    newDiv = document.createElement("div");
+    newDiv.id = `${sectorId}`;
+    area.appendChild(newDiv);
+    sector = newDiv;
+    for (let i = 0; i < dictionary.length; i++) {
+        span1 = document.createElement("span");
+        span1.style.display = "block";
+        if (dictionary[i][1] == 1) { span1.innerHTML = `${dictionary[i][0]}` };
+        if (dictionary[i][1] > 1) { span1.innerHTML = `${dictionary[i][0]} (${dictionary[i][1]})` };
+        sector.appendChild(span1);
+    };
+};
 
+displayHungarianDictionaryOfMonkey = function () {
+    mainArea = document.querySelector("#divForDictionaryMonkeyRep");
+    sectorId = "dictionaryMonkeyRep";
+    dictionary = hungarianWordsOfMonkey;
+    displayDictionaryWithRepetition(mainArea, sectorId, dictionary);
+
+};
+
+displayDictionaryOfMonkey = function () {
+    mainArea = document.querySelector("#divForDictionaryMonkey");
+    sectorId = "dictionaryMonkey";
+    dictionary = dictionaryOfMonkeyFinal;
+    displayDictionary(mainArea, sectorId, dictionary);
+};
 
 
 

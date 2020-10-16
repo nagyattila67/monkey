@@ -2874,15 +2874,46 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="row">
+                    <div class="row smallBorder">
                         <div class="col">
-                            <p>Most pedig a majom készítsen egy <input id="numberOfWordsInDictionary" type="number"
-                                    min="100" value="1000"> szóból álló szószedetet!</p>
-                            <button type="button" class="btn btn-secondary btn-sm"
-                                onclick="makeDictionary()">Mehet</button>
+                            <div class="row">
+                                <div class="col">
+                                    <p>Most pedig a majom készítsen egy <input id="numberOfWordsInDictionary"
+                                            type="number" min="100" value="1000"> szóból álló szószedetet!</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-4">
+                                    <button type="button" class="btn btn-secondary btn-sm mb-3"
+                                        onclick="makeDictionary()">Mehet</button>
+                                    <p>A program most <span id="infoDictionary1"> - </span> 'szót' állított elő.
+                                        <br><br>Ezek között
+                                        <span id="infoDictionary2"> - </span> db. 'szó' van, mivel a szóismétlések
+                                        száma: <span id="infoDictionary3"> - </span>.
+                                        <br><br>
+                                        Ezek között <span id="infoDictionary4"> - </span>
+                                        értelmes magyar szó található.
+                                        <br><br>
+                                        A létrehozott 'szavak' <span id="infoDictionary5"> - </span> %-a értelmes szó.
+                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Az előállított 'szavak' - <span id="infoDictionary6"> - </span> db.</p>
+                                    <div id="divForDictionaryMonkey">
+                                        <div id="dictionaryMonkey">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <p>Az értelmes szavak (zárójelben az ismétlések száma) - <span id="infoDictionary7"> - </span> db.</p>
+                                    <div id="divForDictionaryMonkeyRep">
+                                        <div id="dictionaryMonkeyRep">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
 
 
 
