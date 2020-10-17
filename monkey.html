@@ -2819,6 +2819,14 @@
                     </div>
 
 
+
+
+
+
+
+
+
+
                     <hr>
                     <div class="row mt-3">
                         <div class="col">
@@ -2843,102 +2851,131 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col">
-                                    <p>Íme a szó: <span id="generatedWord"></span> </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <label>Tetszik a szó, jegyezzük fel!</label>
-                                    <button type="button" class="btn btn-secondary ml-3 btn-sm"
-                                        onclick="notation(event)">Feljegyez!</button>
-                                    <p><small> A szó eltávolítása a táblázatból:
-                                            klikkeljen
-                                            rá
-                                            egyet!</small></p>
-                                    <button type="button" class="btn btn-secondary btn-sm"
-                                        onclick="writeSentence()">Kérek
-                                        egy
-                                        mondatot
-                                        a
-                                        kedvenc szavakból!</button>
+                                    <div class="row">
+                                        <div class="col" id="notationInput">
+                                            <div style="display:inline-block">
+                                                <p>Íme a szó:</p>
+                                            </div>
+                                            <div style="text-align:center;display:inline-block;width:250px"
+                                                id="generatedWord"> - </div>
+                                            <div style="display:inline-block">
+                                                <p> - Minden szót jegyezzen fel! </p>
+                                            </div>
+                                            <div style="display:inline-block">
+                                                <input style="display:inline" oninput="notitionOrNot()" id="noteAll"
+                                                    type="checkbox" class="control-input" checked>
+                                            </div>
+                                            <div style="display:inline">(Az opció bejelölése esetén a
+                                                program az összes szószedet-készítés összes eredményét feljegyzi. A jegyzéket az
+                                                'ürít' gombbal tudja üríteni.)
+                                            </div>
 
-                                    <div id="divForSentence">
-                                        <p class="mt-3"><span id="sentence">-</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-6">
+                                            <label>Tetszik a szó, jegyezzük fel!</label>
+                                            <button id="notationButton" disabled type="button"
+                                                class="btn btn-secondary ml-3 btn-sm"
+                                                onclick="notation()">Feljegyez!</button>
+                                            <label>A teljes táblázat ürítése:</label>
+                                            <button id="emptyNotationButton" type="button"
+                                                class="btn btn-secondary ml-3 btn-sm"
+                                                onclick="doEmptyTheNotation()">Kiürít!</button>
+                                            <p><small> A szó eltávolítása a táblázatból:
+                                                    klikkeljen
+                                                    rá
+                                                    egyet!</small></p>
+                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                onclick="writeSentence()">Kérek
+                                                egy
+                                                mondatot
+                                                a
+                                                feljegyzett szavakból!</button>
+
+                                            <div id="divForSentence">
+                                                <p class="mt-3"><span id="sentence">-</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-1"></div>
+                                        <div id="divForNotations" class="col-5">
+                                            <div id="notations">
+
+                                            </div>
+                                            <!--<table id="notations" class="table table-small"></table>-->
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-1"></div>
-                                <div id="divForNotations" class="col-5">
-                                    <table id="notations" class="table table-small"></table>
-                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row smallBorder">
-                        <div class="col">
-                            <div class="row">
+                            <hr>
+                            <div class="row smallBorder">
                                 <div class="col">
-                                    <p>Most pedig a majom készítsen egy <input id="numberOfWordsInDictionary"
-                                            type="number" min="100" value="1000"> szóból álló szószedetet!</p>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-4">
-                                    <button type="button" class="btn btn-secondary btn-sm mb-3"
-                                        onclick="makeDictionary()">Mehet</button>
-                                    <p>A program most <span id="infoDictionary1"> - </span> 'szót' állított elő.
-                                        <br><br>Ezek között
-                                        <span id="infoDictionary2"> - </span> db. 'szó' van, mivel a szóismétlések
-                                        száma: <span id="infoDictionary3"> - </span>.
-                                        <br><br>
-                                        Ezek között <span id="infoDictionary4"> - </span>
-                                        értelmes magyar szó található.
-                                        <br><br>
-                                        A létrehozott 'szavak' <span id="infoDictionary5"> - </span> %-a értelmes szó.
-                                    </p>
-                                </div>
-                                <div class="col-4">
-                                    <p>Az előállított 'szavak' - <span id="infoDictionary6"> - </span> db.</p>
-                                    <div id="divForDictionaryMonkey">
-                                        <div id="dictionaryMonkey">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p>Most pedig a majom készítsen egy <input id="numberOfWordsInDictionary"
+                                                    type="number" min="100" value="1000"> szóból álló szószedetet!</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-4">
+                                            <button type="button" class="btn btn-secondary btn-sm mb-3"
+                                                onclick="makeDictionary()">Mehet</button>
+                                            <p>A program most <span id="infoDictionary1"> - </span> 'szót' állított elő.
+                                                <br><br>Ezek között
+                                                <span id="infoDictionary2"> - </span> db. 'szó' van, mivel a
+                                                szóismétlések
+                                                száma: <span id="infoDictionary3"> - </span>.
+                                                <br><br>
+                                                Ezek között <span id="infoDictionary4"> - </span>
+                                                értelmes magyar szó található.
+                                                <br><br>
+                                                A létrehozott 'szavak' <span id="infoDictionary5"> - </span> %-a
+                                                értelmes szó.
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p>Az előállított 'szavak' - <span id="infoDictionary6"> - </span> db.</p>
+                                            <div id="divForDictionaryMonkey">
+                                                <div id="dictionaryMonkey">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <p>Az értelmes szavak (zárójelben az ismétlések száma) - <span
+                                                    id="infoDictionary7"> - </span> db.</p>
+                                            <div id="divForDictionaryMonkeyRep">
+                                                <div id="dictionaryMonkeyRep">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <p>Az értelmes szavak (zárójelben az ismétlések száma) - <span id="infoDictionary7"> - </span> db.</p>
-                                    <div id="divForDictionaryMonkeyRep">
-                                        <div id="dictionaryMonkeyRep">
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
+
+
+
+
+
+
+
                         </div>
+
+
+
                     </div>
-
-
-
-
-
-
-
                 </div>
+                <div id="skipToGraphic2" class="col-0 noPadding"></div>
+
+
+
+                <div class="row m-3"></div>
 
 
 
             </div>
         </div>
-        <div id="skipToGraphic2" class="col-0 col-sm-1 col-md-1 col-lg-1 noPadding"></div>
-
-
-
-        <div class="row m-3"></div>
-
-
-
-    </div>
-    </div>
-    <script src="/gyak.js">
-    </script>
+        <script src="/gyak.js">
+        </script>
 </body>
 
 </html>

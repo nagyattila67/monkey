@@ -1,5 +1,7 @@
 body{background-color:#f6f6f6;}
 p{font-size:19px;}
+label{font-size:19px;}
+
 span{font-size:19px;}
 li small{font-size:15px;}
 .bgMyGreen{background-color:#cbe7cb;}
@@ -63,9 +65,9 @@ label{margin:0px 0px 0px; padding:0px 0px 0px 0px;}
 .loopInfo{font-size:11px}
 #generatedWord{background-color:#FADADD}
 #send-data{margin-bottom:0px}
-#notations{display:inline;}
-#notations td{padding:6px;}
-#divForNotations{overflow:auto;border:1px solid #a8a8a8;background-color:#dbdbdb;max-height:300px;max-width:300px;line-height:10px;}
+
+#notations {padding:6px;}
+#divForNotations{overflow:auto;border:1px solid #a8a8a8;background-color:#dbdbdb;height:300px;max-width:250px;line-height:25px;}
 #divForSentence{min-height:100px;}
 #sentence{background-color:#FADADD}
 #match100div p{margin:0px}
@@ -197,7 +199,7 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #divForDistributionDistanceGraph{overflow:auto;width:900px;height:200px;background-color:#dbdbdb}
 #distributionDistanceGraph td{border:solid 1px #dbdbdb;}
 
-#divForLetterSkip{overflow:auto;height:500px}
+#divForLetterSkip{overflow:auto;height:500px;max-width:900px}
 #tableForLetterSkip{height:500px}
 #divForFoundWords{overflow:auto;height:250px}
 #divForShowMemory{overflow:auto;height:612px;}
@@ -215,7 +217,8 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #divForDictionaryMonkey{background-color:#f8f8f8;border:solid 1px #dbdbdb;height:600px;overflow:auto}
 #divForDictionaryMonkeyRep{background-color:#f8f8f8;border:solid 1px #dbdbdb;height:542px;overflow:auto}
 
-
+#notationInput p{margin-bottom:1px;}
+#noteAll{margin:0px;width: 20px; height: 20px;vertical-align:middle}
 
 
 
