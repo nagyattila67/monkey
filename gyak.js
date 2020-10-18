@@ -1116,78 +1116,89 @@ generateWordRnd = function () {
 };
 
 //az eddig tanultak alapján generál egy új szót
+noMore = false;
+dictionaryOfMonkeyAllWord = Array();
 generateWord = function (myRndNumber) {
-    let gotIt = false;
-    monkeyNumber = Number();
-    wordOfMonkey = String();
-    nextStep = String();
+    noMore = false;
 
-    if (makingDictionary == false) {
-        if (random == false) { lengthOfMonkeyWord = document.querySelector("#szohosszOfMonkey").value }
-        else { lengthOfMonkeyWord = myRndNumber }
-    };
-    if (makingDictionary == true) {
-        lengthOfMonkeyWord = myRndNumber;
-    };
+    if (learning.length == 0) { alert("A tanulómemória üres. Először futtasson egy 'a majom ˝ennyi˝ betűs szavakat keres ˝ennyiszer˝' keresést!"); noMore = true; }
+    if (noMore == false) {
 
 
-    while (gotIt == false) {
-        monkeyNumber = Math.floor(Math.random() * learning.length);
-        if (learning[monkeyNumber][2] = 1) {
-            wordOfMonkey = learning[monkeyNumber][0];
-            gotIt = true;
+        let gotIt = false;
+        monkeyNumber = Number();
+        wordOfMonkey = String();
+        nextStep = String();
+
+        if (makingDictionary == false) {
+            if (random == false) { lengthOfMonkeyWord = document.querySelector("#szohosszOfMonkey").value }
+            else { lengthOfMonkeyWord = myRndNumber }
         };
-    };
-    lengthOfTemporaryWord = wordOfMonkey.length;
-    vowel = wordOfMonkey[1];
-    workMemory = Array();
+        if (makingDictionary == true) {
+            lengthOfMonkeyWord = myRndNumber;
+        };
 
-    while (lengthOfTemporaryWord < lengthOfMonkeyWord) {
-        index = 0;
-        workMemory = Array();
-        for (let i = 0; i < learning.length; i++) {
-            if (learning[i][0][0] == vowel) {
-                workMemory[index] = learning[i];
-                index = index + 1;
+
+        while (gotIt == false) {
+            monkeyNumber = Math.floor(Math.random() * learning.length);
+            if (learning[monkeyNumber][2] = 1) {
+                wordOfMonkey = learning[monkeyNumber][0];
+                gotIt = true;
             };
         };
-        max = 0;
-        for (let i = 0; i < workMemory.length; i++) {
-            if (workMemory[i][1] > max) { max = workMemory[i][1] };
+        lengthOfTemporaryWord = wordOfMonkey.length;
+        vowel = wordOfMonkey[1];
+        workMemory = Array();
+
+        while (lengthOfTemporaryWord < lengthOfMonkeyWord) {
+            index = 0;
+            workMemory = Array();
+            for (let i = 0; i < learning.length; i++) {
+                if (learning[i][0][0] == vowel) {
+                    workMemory[index] = learning[i];
+                    index = index + 1;
+                };
+            };
+            max = 0;
+            for (let i = 0; i < workMemory.length; i++) {
+                if (workMemory[i][1] > max) { max = workMemory[i][1] };
+            };
+
+            for (let i = 0; i < workMemory.length; i++) {
+                if (workMemory[i][1] < max
+                    ||
+                    (workMemory[i][0][1] == wordOfMonkey[lengthOfTemporaryWord]
+                        &&
+                        wordOfMonkey[lengthOfTemporaryWord] == wordOfMonkey[lengthOfTemporaryWord - 1])) { workMemory.splice(i, 1) };
+            };
+
+            if (workMemory.length == 0) {
+                lengthOfTemporaryWord = lengthOfMonkeyWord;
+                //wordOfMonkey = wordOfMonkey + " - Csak eddig jutottam!"
+            }
+            else {
+                numberOfMonkey = Math.floor(Math.random() * workMemory.length);
+
+                vowel = workMemory[numberOfMonkey][0][1];
+                wordOfMonkey = wordOfMonkey + vowel;
+                lengthOfTemporaryWord = lengthOfTemporaryWord + 1;
+            };
         };
 
-        for (let i = 0; i < workMemory.length; i++) {
-            if (workMemory[i][1] < max
-                ||
-                (workMemory[i][0][1] == wordOfMonkey[lengthOfTemporaryWord]
-                    &&
-                    wordOfMonkey[lengthOfTemporaryWord] == wordOfMonkey[lengthOfTemporaryWord - 1])) { workMemory.splice(i, 1) };
+        if (workMemory.length == 0 && makingDictionary == false) {
+            document.querySelector("#generatedWord").innerHTML = `${wordOfMonkey} - csak eddig jutottam!`
         };
+        if (workMemory.length != 0 && makingDictionary == false) { document.querySelector("#generatedWord").innerHTML = wordOfMonkey }
+        random = false;
 
-        if (workMemory.length == 0) {
-            lengthOfTemporaryWord = lengthOfMonkeyWord;
-            //wordOfMonkey = wordOfMonkey + " - Csak eddig jutottam!"
-        }
-        else {
-            numberOfMonkey = Math.floor(Math.random() * workMemory.length);
-
-            vowel = workMemory[numberOfMonkey][0][1];
-            wordOfMonkey = wordOfMonkey + vowel;
-            lengthOfTemporaryWord = lengthOfTemporaryWord + 1;
+        if (document.querySelector("#noteAll").checked == true) {
+            notation(wordOfMonkey);
         };
+        dictionaryOfMonkeyAllWord[dictionaryOfMonkeyAllWord.length] = wordOfMonkey;
+        return wordOfMonkey;
     };
-
-    if (workMemory.length == 0 && makingDictionary == false) {
-        document.querySelector("#generatedWord").innerHTML = `${wordOfMonkey} - csak eddig jutottam!`
-    };
-    if (workMemory.length != 0 && makingDictionary == false) { document.querySelector("#generatedWord").innerHTML = wordOfMonkey }
-    random = false;
-
-    if (document.querySelector("#noteAll").checked == true) {
-        notation(wordOfMonkey);
-    };
-    return wordOfMonkey;
 };
+
 
 notitionOrNot = function () {
     if (document.querySelector("#noteAll").checked == true) { document.querySelector("#notationButton").disabled = true };
@@ -1291,30 +1302,78 @@ writeSentence = function () {
     else { alert("Legalább öt szónak kell lennie a listáján!") }
 };
 
-makingDictionary = false;
-makeDictionary = function () {
-    dictionaryOfMonkey = Array();
-    dictionaryOfMonkeyOriginal=Array();
-    makingDictionary = true;
+makeDictAll = false;
+makeDictionaryAll = function () {
+    makeDictAll = true;
+    dictionaryOfMonkeyOriginal2 = dictionaryOfMonkeyOriginal.slice(0);
+    dictionaryOfMonkeyOriginal2.sort();
+    dictionaryOfMonkeyOriginal2_2 = dictionaryOfMonkeyOriginal2.slice();
+    checkDictionaryOfMonkey(dictionaryOfMonkeyOriginal2);
+    searchHungarianWords(dictionaryOfMonkeyOriginal2_2);
+    displayDictionaryOfMonkey();
+    displayDictionaryInfo();
+    displayHungarianDictionaryOfMonkey();
+    makeDictAll = false;
+};
 
-    numberOfWords = document.querySelector("#numberOfWordsInDictionary").value;
-    numberOfWords = parseInt(numberOfWords);
-    for (let i = 0; i < numberOfWords; i++) {
-        random = true;
-        myRndNumber = Math.ceil(Math.random() * 10);
-        myRndNumber = myRndNumber + 2;
-        generateWord(myRndNumber);
-        dictionaryOfMonkey[dictionaryOfMonkey.length] = wordOfMonkey;
-        dictionaryOfMonkeyOriginal[dictionaryOfMonkeyOriginal.length] = wordOfMonkey;
-    };
-    dictionaryOfMonkey.sort();
+makeDictionary = function () {
+    makeDictionaryFunction();
+    checkDictionaryOfMonkey(dictionaryOfMonkey);
     dictionaryOfMonkey2 = dictionaryOfMonkey.slice();
-    makingDictionary = false;
-    checkDictionaryOfMonkey();
+    searchHungarianWords(dictionaryOfMonkey2);
+    displayDictionaryOfMonkey();
+    displayDictionaryInfo();
+    displayHungarianDictionaryOfMonkey();
+    document.querySelector("#plsAllDict").disabled=false;
+};
+
+deleteDictionaries = function(){
+    dictionaryOfMonkeyAllWord=Array();
+    dictionaryOfMonkeyOriginal=Array();
+    dictionaryOfMonkeyOriginal2=Array();
+    dictionaryOfMonkeyFinal=Array();
+    hungarianWordsOfMonkey2=Array();  
+    hungarianWordsOfMonkey=Array();
+    dictionaryOfMonkey=Array();
+    makeDictAll = true;
+    displayDictionaryInfo();
+    makeDictAll = false;
+    document.querySelector("#plsAllDict").disabled=true;
+    displayDictionaryOfMonkey();
+    displayHungarianDictionaryOfMonkey();
+};
+
+makingDictionary = false;
+dictionaryOfMonkeyOriginal = Array();
+dictionaryOfMonkey = Array();
+
+makeDictionaryFunction = function () {
+    noMore = false;
+
+    if (learning.length == 0) { alert("A tanulómemória üres. Először futtasson egy 'a majom ˝ennyi˝ betűs szavakat keres ˝ennyiszer˝' keresést!"); noMore = true; }
+    if (noMore == false) {
+        dictionaryOfMonkey = Array();
+        makingDictionary = true;
+
+        numberOfWords = document.querySelector("#numberOfWordsInDictionary").value;
+        numberOfWords = parseInt(numberOfWords);
+        for (let i = 0; i < numberOfWords; i++) {
+            random = true;
+            myRndNumber = Math.ceil(Math.random() * 10);
+            myRndNumber = myRndNumber + 2;
+            generateWord(myRndNumber);
+            dictionaryOfMonkey[dictionaryOfMonkey.length] = wordOfMonkey;
+            dictionaryOfMonkeyOriginal[dictionaryOfMonkeyOriginal.length] = wordOfMonkey;
+        };
+        dictionaryOfMonkey.sort();
+
+        makingDictionary = false;
+
+    };
 };
 
 duplicated = Array();
-checkDictionaryOfMonkey = function () {
+checkDictionaryOfMonkey = function (dictionaryOfMonkey) {
     duplicated = Array();
     for (let i = 0; i < dictionaryOfMonkey.length; i++) {
 
@@ -1341,32 +1400,72 @@ checkDictionaryOfMonkey = function () {
             dictionaryOfMonkeyFinal[dictionaryOfMonkeyFinal.length] = dictionaryOfMonkey[i];
         };
     };
-    searchHungarianWords();
-    displayDictionaryOfMonkey();
-    displayDictionaryInfo();
-    displayHungarianDictionaryOfMonkey();
+    //searchHungarianWords();
+    //displayDictionaryOfMonkey();
+    //displayDictionaryInfo();
+    //displayHungarianDictionaryOfMonkey();
 };
 
 displayDictionaryInfo = function () {
-    document.querySelector("#infoDictionary1").innerHTML = dictionaryOfMonkey.length;
+
+    if (makeDictAll == false) {
+        document.querySelector("#infoDictionary1").innerHTML = `${dictionaryOfMonkey.length} 'szót' állított elő.`;
+        document.querySelector("#infoDictionary3").innerHTML = dictionaryOfMonkey.length - dictionaryOfMonkeyFinal.length;
+        document.querySelector("#infoDictionary8").innerHTML = `${((dictionaryOfMonkeyFinal.length / dictionaryOfMonkey.length) * 100).toFixed(2)}`
+        document.querySelector("#infoDictionary5").innerHTML = ((hungarianWordsOfMonkey2.length / dictionaryOfMonkeyAllWord.length) * 100).toFixed(2);
+        document.querySelector("#infoDictionary6").innerHTML = ((hungarianWordsOfMonkey.length / dictionaryOfMonkeyFinal.length) * 100).toFixed(2);
+    };
+    if (makeDictAll == true) {
+        document.querySelector("#infoDictionary1").innerHTML = `az összes eddigi szószedetet ${dictionaryOfMonkeyOriginal2.length} db. 'szavát' megvizsgálja`;
+        //document.querySelector("#infoDictionary2").innerHTML =dictionaryOfMonkeyOriginal2_2.length;
+        document.querySelector("#infoDictionary3").innerHTML = dictionaryOfMonkeyOriginal2.length - dictionaryOfMonkeyFinal.length;
+        if(dictionaryOfMonkeyOriginal2.length!=0){document.querySelector("#infoDictionary8").innerHTML = `${((dictionaryOfMonkeyFinal.length / dictionaryOfMonkeyOriginal2.length) * 100).toFixed(2)}`}
+        else{document.querySelector("#infoDictionary8").innerHTML =" - "};
+        //document.querySelector("#infoDictionary5").innerHTML = ((hungarianWordsOfMonkey2.length / dictionaryOfMonkey.length) * 100).toFixed(2);
+        if(dictionaryOfMonkeyOriginal2.length!=0){document.querySelector("#infoDictionary5").innerHTML = ((hungarianWordsOfMonkey2.length / dictionaryOfMonkeyOriginal2.length) * 100).toFixed(2);}
+        else{document.querySelector("#infoDictionary5").innerHTML=" - "}
+        if(dictionaryOfMonkey.length!=0){document.querySelector("#infoDictionary6").innerHTML = ((hungarianWordsOfMonkey.length / dictionaryOfMonkeyFinal.length) * 100).toFixed(2);}
+        else{document.querySelector("#infoDictionary6").innerHTML=" - "};
+    };
     document.querySelector("#infoDictionary2").innerHTML = dictionaryOfMonkeyFinal.length;
-    document.querySelector("#infoDictionary3").innerHTML = dictionaryOfMonkey.length - dictionaryOfMonkeyFinal.length;
+    document.querySelector("#infoDictionary10").innerHTML = dictionaryOfMonkeyFinal.length;
     document.querySelector("#infoDictionary4").innerHTML = hungarianWordsOfMonkey.length;
-    document.querySelector("#infoDictionary5").innerHTML = ((hungarianWordsOfMonkey2.length / dictionaryOfMonkey.length) * 100).toFixed(2);
+
     document.querySelector("#infoDictionary5").style["background-color"] = "#FADADD";
-    document.querySelector("#infoDictionary6").innerHTML = dictionaryOfMonkeyFinal.length;
+    //document.querySelector("#infoDictionary6").innerHTML = dictionaryOfMonkeyFinal.length;
     document.querySelector("#infoDictionary7").innerHTML = hungarianWordsOfMonkey.length;
     document.querySelector("#infoDictionary6").style["background-color"] = "#FADADD"
     document.querySelector("#infoDictionary7").style["background-color"] = "#FADADD"
+    document.querySelector("#infoDictionary10").style["background-color"] = "#FADADD"
+    document.querySelector("#infoDictionary9").innerHTML = hungarianWordsOfMonkey2.length;
+    document.querySelector("#infoDictionary11").innerHTML = dictionaryOfMonkeyAllWord.length;
+    document.querySelector("#infoDictionary16").innerHTML =  dictionaryOfMonkeyFinal.length;
+    //document.querySelector("#infoDictionary12").innerHTML=`${((hungarianWordsOfMonkey2.length/ dictionaryOfMonkeyAllWord.length)*100).toFixed(2)}`;
+    //document.querySelector("#infoDictionary12").style["background-color"] = "#FADADD"
+    //document.querySelector("#infoDictionary13").innerHTML= hungarianWordsOfMonkey2.length;
+
+
+sumHWoM=0;
+    for (let i=0;i<hungarianWordsOfMonkey.length;i++){
+        sumHWoM=sumHWoM+hungarianWordsOfMonkey[i][1];
+    };
+    document.querySelector("#infoDictionary14").innerHTML=sumHWoM;
+    document.querySelector("#infoDictionary15").innerHTML=((sumHWoM/dictionaryOfMonkeyFinal.length)*100).toFixed(2);
+    document.querySelector("#infoDictionary13").innerHTML=dictionaryOfMonkeyFinal.length;
+
+
+
+
 };
 
 hungarianWordsOfMonkey = Array();
-searchHungarianWords = function () {
+hungarianWordsOfMonkey2 = Array();
+searchHungarianWords = function (dictionaryOfMonkey2) {
     hungarianWordsOfMonkey = Array();
     hungarianWordsOfMonkey[0] = Array();
     hungarianWordsOfMonkey[0][0] = "";
     hungarianWordsOfMonkey[0][0] = 0;
-    hungarianWordsOfMonkey2 = Array();
+
     for (let i = 0; i < dictionaryOfMonkey2.length; i++) {
         for (let k = 0; k < szavak.length; k++) {
             if (dictionaryOfMonkey2[i] == szavak[k]) {
@@ -1385,7 +1484,7 @@ searchHungarianWords = function () {
                     hungarianWordsOfMonkey[hungarianWordsOfMonkey.length] = myArrayHWOM;
                 };
                 hungarianWordsOfMonkey2[hungarianWordsOfMonkey2.length] = dictionaryOfMonkey2[i];
-                console.log("yes");
+               
             };
         };
     };

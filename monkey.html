@@ -128,7 +128,7 @@
                         </form>
                     </div>
 
-                    <table id="result" mt-5; class="table table-sm table-bordered table-striped table-small">
+                    <table id="result" mt-5; class="table table-sm table-bordered table-striped">
                         <tbody>
                             <tr>
                                 <td>
@@ -1802,7 +1802,7 @@
                                         jelentősége!</P>
                                     <br>
 
-                                    <table class="table table-sm table-bordered table-striped table-small">
+                                    <table class="table table-sm table-bordered table-striped">
                                         <tbody>
                                             <tr>
                                                 <td>
@@ -2584,7 +2584,7 @@
                         <div class="col -8">
                             <p>Egy konkrét méréssorozatnál program az első 10 000 futásra ennyi karakterkettőst
                                 detektált:</p>
-                            <table class="table table-small">
+                            <table class="table table-sm">
                                 <tbody>
                                     <tr>
                                         <td>Karakterek száma:</td>
@@ -2613,7 +2613,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <table class="table table-small">
+                            <table class="table table-sm">
                                 <tbody>
                                     <tr>
                                         <td>Az eddidi futások száma</td>
@@ -2866,7 +2866,8 @@
                                                     type="checkbox" class="control-input" checked>
                                             </div>
                                             <div style="display:inline">(Az opció bejelölése esetén a
-                                                program az összes szószedet-készítés összes eredményét feljegyzi. A jegyzéket az
+                                                program az összes szószedet-készítés összes eredményét feljegyzi. A
+                                                jegyzéket az
                                                 'ürít' gombbal tudja üríteni.)
                                             </div>
 
@@ -2911,37 +2912,104 @@
                             <div class="row smallBorder">
                                 <div class="col">
                                     <div class="row">
-                                        <div class="col">
+                                        <div id="monkeyMakes" class="col">
                                             <p>Most pedig a majom készítsen egy <input id="numberOfWordsInDictionary"
-                                                    type="number" min="100" value="1000"> szóból álló szószedetet!</p>
+                                                    style="width:100px" type="number" min="100" value="1000"> szóból
+                                                álló (új) szószedetet!
+                                                <button type="button" style="vertical-align:middle"
+                                                    class="btn btn-secondary btn-sm ml-3"
+                                                    onclick="makeDictionary()">Mehet</button></p>
+                                            <p>Kérem az eddig előállított összes szószedet összes szavát! (<span
+                                                    id="infoDictionary11"> - </span> szó.)
+                                                <button id="plsAllDict" type="button" style="vertical-align:middle"
+                                                    class="btn btn-secondary btn-sm ml-3"
+                                                    onclick="makeDictionaryAll()">Mehet</button></p>
+                                            <p>Kérem az eddig előállított összes szószedet törlését!
+                                                <button type="button" style="vertical-align:middle"
+                                                    class="btn btn-secondary btn-sm ml-3"
+                                                    onclick="deleteDictionaries()">Törlés</button></p>
+                                                    <p>A program most <span id="infoDictionary1"> <i> - </i>
+                                                    </span>. <span id="infoDictionary2"> - </span> db. 'szó' van, mivel a
+                                                    szóismétlések
+                                                    száma: <span id="infoDictionary3"> - </span>.</p>
                                         </div>
                                     </div>
+                                    <hr>
                                     <div class="row mt-3">
                                         <div class="col-4">
-                                            <button type="button" class="btn btn-secondary btn-sm mb-3"
-                                                onclick="makeDictionary()">Mehet</button>
-                                            <p>A program most <span id="infoDictionary1"> - </span> 'szót' állított elő.
+                                            <table class="table table-sm table-sm">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            A létrehozott 'szavak' <span id="infoDictionary8"> - </span>
+                                                            %-a
+                                                            különbözik egymástól.
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            A 'szavak' között <span id="infoDictionary4"> - </span>
+                                                            értelmes magyar szó található. 
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Az eddig létrehozott összes értelmes szó [<span
+                                                            id="infoDictionary9"> - </span>] az eddig létrehozott összes 'szó' [<span
+                                                            id="infoDictionary16"> - </span>] <span
+                                                                id="infoDictionary5"> - </span> %-a (ismétlésekkel
+                                                            együtt).
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            A most létrehozott összes értelmes szó [<span
+                                                            id="infoDictionary14"> - </span>] a most létrehozott összes 'szó' [<span
+                                                            id="infoDictionary13"> - </span>] <span
+                                                                id="infoDictionary15"> - </span> %-a (ismétlésekkel
+                                                            együtt).
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            A most létrehozott egyedi értelmes szavak a most létrehozott egyedi 'szavak'
+                                                            <span id="infoDictionary6"> - </span> %-a
+                                                            (az ismétlések kiszűrése után).
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <!--<p>A program most <span id="infoDictionary1"> <i>ez meg az</i> </span>.
                                                 <br><br>Ezek között
                                                 <span id="infoDictionary2"> - </span> db. 'szó' van, mivel a
                                                 szóismétlések
                                                 száma: <span id="infoDictionary3"> - </span>.
                                                 <br><br>
-                                                Ezek között <span id="infoDictionary4"> - </span>
-                                                értelmes magyar szó található.
+                                                A létrehozott 'szavak' <span id="infoDictionary8"> - </span> %-a
+                                                különbözik egymástól.
                                                 <br><br>
-                                                A létrehozott 'szavak' <span id="infoDictionary5"> - </span> %-a
-                                                értelmes szó.
-                                            </p>
+                                                A 'szavak' között <span id="infoDictionary4"> - </span>
+                                                értelmes magyar szó található. Ismétlésekkel együtt: <span
+                                                    id="infoDictionary9"></span>
+                                                <br><br>
+                                                Az értelmes szavak az összes létrehozott 'szó' <span
+                                                    id="infoDictionary5"> - </span> %-a (ismétlésekkel együtt).
+                                                <br><br>
+                                                Az egyedi értelmes szavak az összes létrehozott egyedi 'szó' <span
+                                                    id="infoDictionary6"> - </span> %-a
+                                                (az ismétlések kiszűrése után).
+                                            </p>-->
                                         </div>
                                         <div class="col-4">
-                                            <p>Az előállított 'szavak' - <span id="infoDictionary6"> - </span> db.</p>
+                                            <p>Az előállított 'szavak': <span id="infoDictionary10"> - </span> db. (az ismétlések kiszűrése után).</p>
                                             <div id="divForDictionaryMonkey">
                                                 <div id="dictionaryMonkey">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-4">
-                                            <p>Az értelmes szavak (zárójelben az ismétlések száma) - <span
+                                            <p>Az értelmes szavak (zárójelben az ismétlések száma): <span
                                                     id="infoDictionary7"> - </span> db.</p>
                                             <div id="divForDictionaryMonkeyRep">
                                                 <div id="dictionaryMonkeyRep">

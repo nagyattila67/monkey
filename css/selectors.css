@@ -1,6 +1,7 @@
 body{background-color:#f6f6f6;}
 p{font-size:19px;}
 label{font-size:19px;}
+td{font-size:19px;}
 
 span{font-size:19px;}
 li small{font-size:15px;}
@@ -214,11 +215,12 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #divForSyllabesGraph{overflow:auto;height:400px;}
 #forSyllabesGraph td{padding:1px;max-height:3px;border:solid 1px #f8f8f8;}
 
-#divForDictionaryMonkey{background-color:#f8f8f8;border:solid 1px #dbdbdb;height:600px;overflow:auto}
-#divForDictionaryMonkeyRep{background-color:#f8f8f8;border:solid 1px #dbdbdb;height:542px;overflow:auto}
+#divForDictionaryMonkey{background-color:#f8f8f8;border:solid 1px #dbdbdb;height:459px;overflow:auto}
+#divForDictionaryMonkeyRep{background-color:#f8f8f8;border:solid 1px #dbdbdb;height:459px;overflow:auto}
 
 #notationInput p{margin-bottom:1px;}
 #noteAll{margin:0px;width: 20px; height: 20px;vertical-align:middle}
+#monkeyMakes p{margin-bottom:5px;margin-bottom:5px}
 
 
 
