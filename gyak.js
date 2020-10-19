@@ -1309,7 +1309,7 @@ makeDictionaryAll = function () {
     dictionaryOfMonkeyOriginal2.sort();
     dictionaryOfMonkeyOriginal2_2 = dictionaryOfMonkeyOriginal2.slice();
     checkDictionaryOfMonkey(dictionaryOfMonkeyOriginal2);
-    searchHungarianWords(dictionaryOfMonkeyOriginal2_2);
+    //searchHungarianWords(dictionaryOfMonkeyOriginal2_2);
     displayDictionaryOfMonkey();
     displayDictionaryInfo();
     displayHungarianDictionaryOfMonkey();
@@ -1317,28 +1317,98 @@ makeDictionaryAll = function () {
 };
 
 makeDictionary = function () {
-    makeDictionaryFunction();
+    numberOfWords = document.querySelector("#numberOfWordsInDictionary").value;
+    numberOfWords = parseInt(numberOfWords);
+    makeDictionaryFunction(numberOfWords);
     checkDictionaryOfMonkey(dictionaryOfMonkey);
     dictionaryOfMonkey2 = dictionaryOfMonkey.slice();
+    lookingForIndividual(dictionaryOfMonkeyAllWord, hungarianWordsOfMonkey2);
     searchHungarianWords(dictionaryOfMonkey2);
     displayDictionaryOfMonkey();
     displayDictionaryInfo();
     displayHungarianDictionaryOfMonkey();
-    document.querySelector("#plsAllDict").disabled=false;
+    document.querySelector("#plsAllDict").disabled = false;
 };
 
-deleteDictionaries = function(){
-    dictionaryOfMonkeyAllWord=Array();
-    dictionaryOfMonkeyOriginal=Array();
-    dictionaryOfMonkeyOriginal2=Array();
-    dictionaryOfMonkeyFinal=Array();
-    hungarianWordsOfMonkey2=Array();  
-    hungarianWordsOfMonkey=Array();
-    dictionaryOfMonkey=Array();
+
+
+
+percentagesOfMMR = Array();
+percentagesAllOfMMR = Array();
+increaseOfMMR = Array();
+lengthOfMMR=Array();
+makeDictionaryAgainAndAgain = function () {
+    timeMDAAAStart=new Date();
+    timeMDAAAStart=timeMDAAAStart.getTime();
+
+    wordNumb = document.querySelector("#mmrWordNumber").value;
+    wordNumb = parseInt(wordNumb);
+    repNumb = document.querySelector("#mmrRepNumber").value;
+    repNumb = parseInt(repNumb);
+
+    dictionaryAgainAndAgainAllVariation = Array();
+    dictionaryAgainAndAgainAllHungarianWords = Array();
+    dictionaryAgainAndAgainShortHungarian=Array();
+
+    for (let k = 0; k < repNumb; k++) {
+        prevoiusLength=dictionaryAgainAndAgainShortHungarian.length;
+        makeDictionaryFunction(wordNumb);
+        checkDictionaryOfMonkey(dictionaryOfMonkey);
+        lookingForIndividualOneArray(dictionaryOfMonkeyFinal);
+        dictionaryAgainAndAgainShort = arrayIndividual.slice(0);
+        searchHungarianWords(dictionaryAgainAndAgainShort);
+        dictionaryAgainAndAgainShortHungarian = hungarianWordsOfMonkey2.slice(0);
+
+        for (let h = 0; h < dictionaryAgainAndAgainShort.length; h++) {
+            dictionaryAgainAndAgainAllVariation[dictionaryAgainAndAgainAllVariation.length] = dictionaryAgainAndAgainShort[h];
+            checkDictionaryOfMonkey(dictionaryAgainAndAgainAllVariation);
+            lookingForIndividualOneArray(dictionaryOfMonkeyFinal);
+            dictionaryAgainAndAgainAllVariation = dictionaryOfMonkeyFinal.slice();
+        };
+        for (let h = 0; h < dictionaryAgainAndAgainShortHungarian.length; h++) {
+            dictionaryAgainAndAgainAllHungarianWords[dictionaryAgainAndAgainAllHungarianWords.length] = dictionaryAgainAndAgainShortHungarian[h];
+        };
+        percentagesAllOfMMR[k]=((dictionaryAgainAndAgainAllHungarianWords/dictionaryAgainAndAgainAllVariation)*100).toFixed(2);
+        percentagesOfMMR[k] = ((dictionaryAgainAndAgainShortHungarian.length / dictionaryAgainAndAgainAllVariation.length)*100).toFixed(2);
+        increaseOfMMR[k] = dictionaryAgainAndAgainShortHungarian.length-prevoiusLength;
+        lengthOfMMR[k]=dictionaryAgainAndAgainShortHungarian.length;
+    };
+    timeMDAAASFinish=new Date();
+    timeMDAAAFinish=timeMDAAASFinish.getTime();
+    timeMDAAAS=(timeMDAAAFinish-timeMDAAAStart)/1000;
+
+    sector=document.querySelector("#mmrTimeReal");
+    displayTime(timeMDAAAS,sector);
+
+
+};
+
+mmrOnInput = function () {
+    wordNumb = document.querySelector("#mmrWordNumber").value;
+    wordNumb = parseInt(wordNumb);
+    repNumb = document.querySelector("#mmrRepNumber").value;
+    repNumb = parseInt(repNumb);
+    document.querySelector("#mmrInfo1").innerHTML = wordNumb * repNumb;
+    secMMR=repNumb*16.97;
+    console.log("sec",secMMR);
+    sector=document.querySelector("#mmrTime")
+    displayTime(secMMR,sector);
+    sector=document.querySelector("#mmrTimeReal").innerHTML=" - ";
+};
+mmrOnInput();
+
+deleteDictionaries = function () {
+    dictionaryOfMonkeyAllWord = Array();
+    dictionaryOfMonkeyOriginal = Array();
+    dictionaryOfMonkeyOriginal2 = Array();
+    dictionaryOfMonkeyFinal = Array();
+    hungarianWordsOfMonkey2 = Array();
+    hungarianWordsOfMonkey = Array();
+    dictionaryOfMonkey = Array();
     makeDictAll = true;
     displayDictionaryInfo();
     makeDictAll = false;
-    document.querySelector("#plsAllDict").disabled=true;
+    document.querySelector("#plsAllDict").disabled = true;
     displayDictionaryOfMonkey();
     displayHungarianDictionaryOfMonkey();
 };
@@ -1347,7 +1417,7 @@ makingDictionary = false;
 dictionaryOfMonkeyOriginal = Array();
 dictionaryOfMonkey = Array();
 
-makeDictionaryFunction = function () {
+makeDictionaryFunction = function (numberOfWords) {
     noMore = false;
 
     if (learning.length == 0) { alert("A tanulómemória üres. Először futtasson egy 'a majom ˝ennyi˝ betűs szavakat keres ˝ennyiszer˝' keresést!"); noMore = true; }
@@ -1355,8 +1425,7 @@ makeDictionaryFunction = function () {
         dictionaryOfMonkey = Array();
         makingDictionary = true;
 
-        numberOfWords = document.querySelector("#numberOfWordsInDictionary").value;
-        numberOfWords = parseInt(numberOfWords);
+
         for (let i = 0; i < numberOfWords; i++) {
             random = true;
             myRndNumber = Math.ceil(Math.random() * 10);
@@ -1368,6 +1437,7 @@ makeDictionaryFunction = function () {
         dictionaryOfMonkey.sort();
 
         makingDictionary = false;
+        return (dictionaryOfMonkey);
 
     };
 };
@@ -1400,33 +1470,94 @@ checkDictionaryOfMonkey = function (dictionaryOfMonkey) {
             dictionaryOfMonkeyFinal[dictionaryOfMonkeyFinal.length] = dictionaryOfMonkey[i];
         };
     };
+    return dictionaryOfMonkeyFinal;
     //searchHungarianWords();
     //displayDictionaryOfMonkey();
     //displayDictionaryInfo();
     //displayHungarianDictionaryOfMonkey();
 };
 
+lookingForIndividualOneArray = function (array) {
+    for (let i = 0; i < array.length; i++) {
+        for (let j = i + 1; j < array.length; j++) {
+            if (array[i] == array[j]) {
+                array[j] = "404";
+            };
+        };
+    };
+
+    arrayIndividual = Array();
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] != "404") {
+            arrayIndividual[arrayIndividual.length] = array[i];
+        };
+    };
+    return arrayIndividual;
+};
+
+lookingForIndividual = function (dictionaryOfMonkeyAllWord, hungarianWordsOfMonkey2) {
+
+    for (let i = 0; i < dictionaryOfMonkeyAllWord.length; i++) {
+        for (let j = i + 1; i < dictionaryOfMonkeyAllWord.length; i++) {
+            if (dictionaryOfMonkeyAllWord[i] == dictionaryOfMonkeyAllWord[j]) {
+                dictionaryOfMonkeyAllWord[j] = "404";
+            };
+        };
+    };
+
+    dictionaryOfMonkeyAllWordIndividual = Array();
+    for (let i = 0; i < dictionaryOfMonkeyAllWord.length; i++) {
+        if (dictionaryOfMonkeyAllWord[i] != "404") {
+            dictionaryOfMonkeyAllWordIndividual[dictionaryOfMonkeyAllWordIndividual.length] = dictionaryOfMonkeyAllWord[i];
+        };
+    };
+    for (let i = 0; i < hungarianWordsOfMonkey2.length; i++) {
+        for (let j = i + 1; i < hungarianWordsOfMonkey2.length; i++) {
+            if (hungarianWordsOfMonkey2[i] == hungarianWordsOfMonkey2[j]) {
+                hungarianWordsOfMonkey2[j] = "404";
+            };
+        };
+    };
+
+    hungarianWordsOfMonkey2Individual = Array();
+    for (let i = 0; i < hungarianWordsOfMonkey2.length; i++) {
+        if (hungarianWordsOfMonkey2[i] != "404") {
+            hungarianWordsOfMonkey2Individual[hungarianWordsOfMonkey2Individual.length] = hungarianWordsOfMonkey2[i];
+        };
+    };
+    return dictionaryOfMonkeyAllWord, hungarianWordsOfMonkey2
+
+
+
+};
+
 displayDictionaryInfo = function () {
+
+
+    document.querySelector("#infoDictionary30").innerHTML = hungarianWordsOfMonkey2Individual.length;
+    document.querySelector("#infoDictionary31").innerHTML = dictionaryOfMonkeyAllWordIndividual.length;
+    if (dictionaryOfMonkeyAllWordIndividual.length != 0) { document.querySelector("#infoDictionary32").innerHTML = ((hungarianWordsOfMonkey2Individual.length / dictionaryOfMonkeyAllWordIndividual.length) * 100).toFixed(2); }
+    else { document.querySelector("#infoDictionary32").innerHTML = " - " }
+    document.querySelector("#infoDictionary32").style["background-color"] = "#FADADD";
+
 
     if (makeDictAll == false) {
         document.querySelector("#infoDictionary1").innerHTML = `${dictionaryOfMonkey.length} 'szót' állított elő.`;
         document.querySelector("#infoDictionary3").innerHTML = dictionaryOfMonkey.length - dictionaryOfMonkeyFinal.length;
         document.querySelector("#infoDictionary8").innerHTML = `${((dictionaryOfMonkeyFinal.length / dictionaryOfMonkey.length) * 100).toFixed(2)}`
-        document.querySelector("#infoDictionary5").innerHTML = ((hungarianWordsOfMonkey2.length / dictionaryOfMonkeyAllWord.length) * 100).toFixed(2);
-        document.querySelector("#infoDictionary6").innerHTML = ((hungarianWordsOfMonkey.length / dictionaryOfMonkeyFinal.length) * 100).toFixed(2);
     };
     if (makeDictAll == true) {
         document.querySelector("#infoDictionary1").innerHTML = `az összes eddigi szószedetet ${dictionaryOfMonkeyOriginal2.length} db. 'szavát' megvizsgálja`;
         //document.querySelector("#infoDictionary2").innerHTML =dictionaryOfMonkeyOriginal2_2.length;
         document.querySelector("#infoDictionary3").innerHTML = dictionaryOfMonkeyOriginal2.length - dictionaryOfMonkeyFinal.length;
-        if(dictionaryOfMonkeyOriginal2.length!=0){document.querySelector("#infoDictionary8").innerHTML = `${((dictionaryOfMonkeyFinal.length / dictionaryOfMonkeyOriginal2.length) * 100).toFixed(2)}`}
-        else{document.querySelector("#infoDictionary8").innerHTML =" - "};
+        if (dictionaryOfMonkeyOriginal2.length != 0) { document.querySelector("#infoDictionary8").innerHTML = `${((dictionaryOfMonkeyFinal.length / dictionaryOfMonkeyOriginal2.length) * 100).toFixed(2)}` }
+        else { document.querySelector("#infoDictionary8").innerHTML = " - " };
         //document.querySelector("#infoDictionary5").innerHTML = ((hungarianWordsOfMonkey2.length / dictionaryOfMonkey.length) * 100).toFixed(2);
-        if(dictionaryOfMonkeyOriginal2.length!=0){document.querySelector("#infoDictionary5").innerHTML = ((hungarianWordsOfMonkey2.length / dictionaryOfMonkeyOriginal2.length) * 100).toFixed(2);}
-        else{document.querySelector("#infoDictionary5").innerHTML=" - "}
-        if(dictionaryOfMonkey.length!=0){document.querySelector("#infoDictionary6").innerHTML = ((hungarianWordsOfMonkey.length / dictionaryOfMonkeyFinal.length) * 100).toFixed(2);}
-        else{document.querySelector("#infoDictionary6").innerHTML=" - "};
+
+
     };
+    if (dictionaryOfMonkeyAllWord.length != 0) { document.querySelector("#infoDictionary5").innerHTML = ((hungarianWordsOfMonkey2.length / dictionaryOfMonkeyAllWord.length) * 100).toFixed(2); }
+    else { document.querySelector("#infoDictionary5").innerHTML = " - " }
     document.querySelector("#infoDictionary2").innerHTML = dictionaryOfMonkeyFinal.length;
     document.querySelector("#infoDictionary10").innerHTML = dictionaryOfMonkeyFinal.length;
     document.querySelector("#infoDictionary4").innerHTML = hungarianWordsOfMonkey.length;
@@ -1434,24 +1565,31 @@ displayDictionaryInfo = function () {
     document.querySelector("#infoDictionary5").style["background-color"] = "#FADADD";
     //document.querySelector("#infoDictionary6").innerHTML = dictionaryOfMonkeyFinal.length;
     document.querySelector("#infoDictionary7").innerHTML = hungarianWordsOfMonkey.length;
-    document.querySelector("#infoDictionary6").style["background-color"] = "#FADADD"
+
     document.querySelector("#infoDictionary7").style["background-color"] = "#FADADD"
     document.querySelector("#infoDictionary10").style["background-color"] = "#FADADD"
-    document.querySelector("#infoDictionary9").innerHTML = hungarianWordsOfMonkey2.length;
+    document.querySelector("#infoDictionary9").innerHTML = hungarianWordsOfMonkey2.length
     document.querySelector("#infoDictionary11").innerHTML = dictionaryOfMonkeyAllWord.length;
-    document.querySelector("#infoDictionary16").innerHTML =  dictionaryOfMonkeyFinal.length;
+    document.querySelector("#infoDictionary16").innerHTML = dictionaryOfMonkeyAllWord.length;
+    document.querySelector("#infoDictionary20").innerHTML = hungarianWordsOfMonkey.length;
+    document.querySelector("#infoDictionary21").innerHTML = dictionaryOfMonkeyFinal.length;
+    if (dictionaryOfMonkey.length != 0) { document.querySelector("#infoDictionary22").innerHTML = ((hungarianWordsOfMonkey.length / dictionaryOfMonkeyFinal.length) * 100).toFixed(2); }
+    else { document.querySelector("#infoDictionary22").innerHTML = " - " };
+    document.querySelector("#infoDictionary22").style["background-color"] = "#FADADD"
     //document.querySelector("#infoDictionary12").innerHTML=`${((hungarianWordsOfMonkey2.length/ dictionaryOfMonkeyAllWord.length)*100).toFixed(2)}`;
     //document.querySelector("#infoDictionary12").style["background-color"] = "#FADADD"
     //document.querySelector("#infoDictionary13").innerHTML= hungarianWordsOfMonkey2.length;
 
 
-sumHWoM=0;
-    for (let i=0;i<hungarianWordsOfMonkey.length;i++){
-        sumHWoM=sumHWoM+hungarianWordsOfMonkey[i][1];
+    sumHWoM = 0;
+    for (let i = 0; i < hungarianWordsOfMonkey.length; i++) {
+        sumHWoM = sumHWoM + hungarianWordsOfMonkey[i][1];
     };
-    document.querySelector("#infoDictionary14").innerHTML=sumHWoM;
-    document.querySelector("#infoDictionary15").innerHTML=((sumHWoM/dictionaryOfMonkeyFinal.length)*100).toFixed(2);
-    document.querySelector("#infoDictionary13").innerHTML=dictionaryOfMonkeyFinal.length;
+    document.querySelector("#infoDictionary14").innerHTML = sumHWoM;
+    if (dictionaryOfMonkey.length != 0) { document.querySelector("#infoDictionary15").innerHTML = ((sumHWoM / dictionaryOfMonkey.length) * 100).toFixed(2); }
+    else { document.querySelector("#infoDictionary15").innerHTML = " - " };
+    document.querySelector("#infoDictionary15").style["background-color"] = "#FADADD"
+    document.querySelector("#infoDictionary13").innerHTML = dictionaryOfMonkey.length;
 
 
 
@@ -1484,11 +1622,12 @@ searchHungarianWords = function (dictionaryOfMonkey2) {
                     hungarianWordsOfMonkey[hungarianWordsOfMonkey.length] = myArrayHWOM;
                 };
                 hungarianWordsOfMonkey2[hungarianWordsOfMonkey2.length] = dictionaryOfMonkey2[i];
-               
+
             };
         };
     };
     hungarianWordsOfMonkey.shift();
+    return hungarianWordsOfMonkey2;
 };
 
 displayDictionary = function (mainArea, sectorId, dictionary) {
