@@ -39,6 +39,29 @@ ketBetusSzavak = Array();
 haromBetusSzavak = Array();
 negyBetusSzavak = Array();
 
+firstSelector = function () {
+    sector = document.querySelector("#runTimeMain");
+    min = 1;
+    max = 7;
+    charNumber = document.querySelector("#letterMain").value;
+    charNumber = parseInt(charNumber);
+    repetitionNumberForMatch = document.querySelector("#runMain").value;
+    repetitionNumberForMatch = parseInt(repetitionNumberForMatch);
+    howManyRepetition = 1;
+    document.querySelector("#futasSzam").value = repetitionNumberForMatch;
+    document.querySelector("#karakterSzam").value = charNumber;
+    countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
+    timeCounting();
+    document.querySelector("#futasSzam2").value = repetitionNumberForMatch;
+    document.querySelector("#karakterSzam2").value = charNumber;
+    timeCounting2();
+    //goToRepeat();
+};
+
+
+
+
+
 time = function (timeStart, timeFinish) {
     timeLength = (timeFinish.getTime() - timeStart.getTime()) / 1000;
     //timeLength = Math.ceil(timeLength);
@@ -980,63 +1003,74 @@ word = function (wordLength) {
     //hány sor után adja fel a majom
     maxTurn = 100000000
 
+    memoryABConlyOne = "";
     while (hit == false && turn < maxTurn) {
         if (turn == 0) { timeStart = new Date(); };
 
-        expressionHTML = "";
-        digitHTML = "";
-        expressionHex = ""
-        digitHex = "";
-        expressionABC = "";
-        digitABC = "";
-        //turn = turn + 1; áttettem a végéra
-        for (let i = 1; i < (wordLength + 1); i++) {
+        if (document.querySelector("#useLearningMemory").checked == false) {
+            expressionHTML = "";
+            digitHTML = "";
+            expressionHex = ""
+            digitHex = "";
+            expressionABC = "";
+            digitABC = "";
+            //turn = turn + 1; áttettem a végéra
+            for (let i = 1; i < (wordLength + 1); i++) {
 
-            // a digit egy decimális szám
-            digit = Math.floor(Math.random() * 35);
-            //betűk 'A'-tól 'Z'-ig
-            if (digit >= 0 && digit <= 25) { digit = digit + 65 }
-            //'Ö" betű 0xD6
-            if (digit == 26) { digit = 214 }
-            //'Ü' betű 0xDC
-            if (digit == 27) { digit = 220 }
-            //'Ő' betű 0x150
-            if (digit == 28) { digit = 336 }
-            //'Ű' betű 0x368
-            if (digit == 29) { digit = 368 }
-            //'É' betű 0xc9
-            if (digit == 30) { digit = 201 }
-            //'Í' betű 0xcd
-            if (digit == 31) { digit = 205 }
-            //'Ó' betű 0xd3
-            if (digit == 32) { digit = 211 }
-            //'Á' betű 0xc1
-            if (digit == 33) { digit = 193 }
-            //'Ú' betű 0xda
-            if (digit == 34) { digit = 218 }
+                // a digit egy decimális szám
+                digit = Math.floor(Math.random() * 35);
+                //betűk 'A'-tól 'Z'-ig
+                if (digit >= 0 && digit <= 25) { digit = digit + 65 }
+                //'Ö" betű 0xD6
+                if (digit == 26) { digit = 214 }
+                //'Ü' betű 0xDC
+                if (digit == 27) { digit = 220 }
+                //'Ő' betű 0x150
+                if (digit == 28) { digit = 336 }
+                //'Ű' betű 0x368
+                if (digit == 29) { digit = 368 }
+                //'É' betű 0xc9
+                if (digit == 30) { digit = 201 }
+                //'Í' betű 0xcd
+                if (digit == 31) { digit = 205 }
+                //'Ó' betű 0xd3
+                if (digit == 32) { digit = 211 }
+                //'Á' betű 0xc1
+                if (digit == 33) { digit = 193 }
+                //'Ú' betű 0xda
+                if (digit == 34) { digit = 218 }
 
-            digitHex = digit.toString(16);
-            digitHex = "\\" + "x" + digitHex
-            expressionHex = expressionHex + digitHex;
+                digitHex = digit.toString(16);
+                digitHex = "\\" + "x" + digitHex
+                expressionHex = expressionHex + digitHex;
 
-            digitHTML = `&#${digit}`
-            expressionHTML = expressionHTML + digitHTML;
+                digitHTML = `&#${digit}`
+                expressionHTML = expressionHTML + digitHTML;
 
-            digitABC = String.fromCharCode(digit);
-            expressionABC = expressionABC + digitABC;
+                digitABC = String.fromCharCode(digit);
+                expressionABC = expressionABC + digitABC;
 
-            //kikapcsolva, mert ötszörösére növeli a program által használt memóriát
-            //memory[turn] = expressionHTML;
-            borderLength = 8;
-            if (wordLength < borderLength) { memoryABC[turn] = expressionABC; }
-            //console.log("digit: ", digit, " digitHEX: ", digitHex, " expressionHEX: ", expressionHex, " turn: ", turn);
+                //kikapcsolva, mert ötszörösére növeli a program által használt memóriát
+                //memory[turn] = expressionHTML;
+                borderLength = 8;
+                if (wordLength < borderLength) { memoryABC[turn] = expressionABC; }
+                //console.log("digit: ", digit, " digitHEX: ", digitHex, " expressionHEX: ", expressionHex, " turn: ", turn);
+            };
         };
+        if (document.querySelector("#useLearningMemory").checked == true) {
+            expressionABC = "";
+            memoryABConlyOne = "";
+            generateWordRnd();
+            //console.log("turn",turn);
+            expressionABC = wordOfMonkey;
+            borderLength = 5;
+            if (wordLength < borderLength) { memoryABC[turn] = expressionABC; }
+            if (wordLength >= borderLength) { memoryABConlyOne = expressionABC };
 
-
-
-        for (let k = 0; k < szavakHex.length; k++) {
-            if (expressionHex == szavakHex[k]) {
-                index = szavakHex.findIndex(x => x == expressionHex);
+        };
+        for (let k = 0; k < szavak.length; k++) {
+            if (expressionABC == szavak[k]) {
+                index = szavak.findIndex(x => x == expressionABC);
                 hit = true;
                 if (cons == true && displayNow == true && noConsole == false && isItGoToRepeat == false) { console.log("TALÁLAT!!!!! ", turn, "ciklus után. A szó: ", szavak[index]); };
                 timeFinish = new Date();
@@ -1072,24 +1106,30 @@ word = function (wordLength) {
     learn(expressionHex);
     if (onlyOneWord == true) { document.querySelector("#matchingInput").setAttribute("maxlength", `${wordLength}`) };
 
-    exampleForMatch = "";
-    for (let k = 0; k < wordLength - 1; k++) {
-        exampleForMatch = exampleForMatch + "&#10038"
-    };
-    document.querySelector("#matchExample").innerHTML = `a(z) ${memoryABC[turn - 1][0]}${exampleForMatch} azokat a karaktersorozatokat listázza ki, ahol az első karakter a ${memoryABC[turn - 1][0]}, a többi pedig tetszőleges`;
-    document.querySelector("#matchingInput").value = memoryABC[turn - 1][0];
-    if (isLookingForMatch == false) {
-        textForSearch = memoryABC[turn - 1][0];
-        lookingForMatch(textForSearch);
-        displayMatching();
-    };
-    if (isLookingForMatch == true) {
+    if (memoryABC.length > 0) {
+        exampleForMatch = "";
+        for (let k = 0; k < wordLength - 1; k++) {
+            exampleForMatch = exampleForMatch + "&#10038"
+        };
+        document.querySelector("#matchExample").innerHTML = `a(z) ${memoryABC[turn - 1][0]}${exampleForMatch} azokat a karaktersorozatokat listázza ki, ahol az első karakter a ${memoryABC[turn - 1][0]}, a többi pedig tetszőleges`;
+        document.querySelector("#matchingInput").value = memoryABC[turn - 1][0];
+        document.querySelector("#matchExample2").innerHTML = "Most nincs listázás!"
+        if (isLookingForMatch == false) {
+            textForSearch = memoryABC[turn - 1][0];
+            lookingForMatch(textForSearch);
+            displayMatching();
+        };
+        if (isLookingForMatch == true) {
 
-    };
+        };
+    }
+    else {
+        document.querySelector("#matchExample").innerHTML = "";
+        document.querySelector("#matchExample2").innerHTML = "Most nincs listázás!";
+    }
+
     return expressionHex, expressionHTML, digit, digitHex, sheetCounter, hit, turn, timeLength, memoryABC;
 };
-
-
 
 sendData = function () {
     luggage = learningForPost;
@@ -1112,32 +1152,30 @@ generateWordRnd = function () {
     random = true;
     myRndNumber = Math.ceil(Math.random() * 10);
     myRndNumber = myRndNumber + 2;
-    generateWord(myRndNumber);
+    if (makingDictionary == false) {
+        if (random == false) { lengthOfMonkeyWord = document.querySelector("#szohosszOfMonkey").value }
+        else { lengthOfMonkeyWord = myRndNumber }
+    };
+    if (makingDictionary == true) {
+        lengthOfMonkeyWord = myRndNumber;
+    };
+    if (document.querySelector("#useLearningMemory").checked == true) { lengthOfMonkeyWord = document.querySelector("#letterMain").value };
+    generateWord(lengthOfMonkeyWord);
 };
 
 //az eddig tanultak alapján generál egy új szót
 noMore = false;
 dictionaryOfMonkeyAllWord = Array();
-generateWord = function (myRndNumber) {
+generateWord = function () {
     noMore = false;
 
     if (learning.length == 0) { alert("A tanulómemória üres. Először futtasson egy 'a majom ˝ennyi˝ betűs szavakat keres ˝ennyiszer˝' keresést!"); noMore = true; }
     if (noMore == false) {
 
-
         let gotIt = false;
         monkeyNumber = Number();
         wordOfMonkey = String();
         nextStep = String();
-
-        if (makingDictionary == false) {
-            if (random == false) { lengthOfMonkeyWord = document.querySelector("#szohosszOfMonkey").value }
-            else { lengthOfMonkeyWord = myRndNumber }
-        };
-        if (makingDictionary == true) {
-            lengthOfMonkeyWord = myRndNumber;
-        };
-
 
         while (gotIt == false) {
             monkeyNumber = Math.floor(Math.random() * learning.length);
@@ -1194,7 +1232,8 @@ generateWord = function (myRndNumber) {
         if (document.querySelector("#noteAll").checked == true) {
             notation(wordOfMonkey);
         };
-        dictionaryOfMonkeyAllWord[dictionaryOfMonkeyAllWord.length] = wordOfMonkey;
+        if (itIsRepeat3 == false) { dictionaryOfMonkeyAllWord[dictionaryOfMonkeyAllWord.length] = wordOfMonkey; };
+        document.querySelector("#infoDictionary11").innerHTML = dictionaryOfMonkeyAllWord.length;
         return wordOfMonkey;
     };
 };
@@ -1356,7 +1395,7 @@ makeDictionaryAgainAndAgain = function () {
         dictionaryOfMonkey = Array();
         dictionaryOfMonkeyFinal = Array();
         hungarianWordsOfMonkey2 = Array();
-        infoArray=Array();
+        infoArray = Array();
 
         for (let k = 0; k < repNumb; k++) {
             prevoiusLength = dictionaryAgainAndAgainShortHungarian.length;
@@ -1391,7 +1430,7 @@ makeDictionaryAgainAndAgain = function () {
             lengthOfMMR[k] = dictionaryAgainAndAgainShortHungarian.length;
 
 
-            infoArray[k]="("+dictionaryAgainAndAgainAllVariation.length+"/"+dictionaryAgainAndAgainAllHungarianWords.length+") "+((dictionaryAgainAndAgainShortHungarian.length/dictionaryAgainAndAgainAllVariation.length) * 100).toFixed(2) +"%"
+            infoArray[k] = "(" + dictionaryAgainAndAgainAllVariation.length + "/" + dictionaryAgainAndAgainAllHungarianWords.length + ") " + ((dictionaryAgainAndAgainShortHungarian.length / dictionaryAgainAndAgainAllVariation.length) * 100).toFixed(2) + "%"
 
 
 
@@ -1406,6 +1445,8 @@ makeDictionaryAgainAndAgain = function () {
         console.log(percentagesAllOfMMR);
         mainArea = document.querySelector("#divForPercentagesTable");
         sectorId = "percentagesTable";
+        sectorId = "percentagesTable";
+
         dictionary = percentagesAllOfMMR;
         displayDictionaryInline(mainArea, sectorId, infoArray);
         dictionary100 = Array();
@@ -1416,10 +1457,10 @@ makeDictionaryAgainAndAgain = function () {
         id = "percentagesGraph"
         array = dictionary100;
         makeMyGraph(area, id, array);
-        document.querySelector("#maxPercentage").innerHTML=maximum/100;
-        document.querySelector("#lastPercentage").innerHTML=array[array.length-1]/100;
-        document.querySelector("#maxPercentage").style["background-color"]="#FADADD";
-        document.querySelector("#lastPercentage").style["background-color"]="#FADADD";
+        document.querySelector("#maxPercentage").innerHTML = maximum / 100;
+        document.querySelector("#lastPercentage").innerHTML = array[array.length - 1] / 100;
+        document.querySelector("#maxPercentage").style["background-color"] = "#FADADD";
+        document.querySelector("#lastPercentage").style["background-color"] = "#FADADD";
     };
 };
 
@@ -1447,6 +1488,7 @@ makeMyGraph = function (area, id, array) {
             };
         };
     };
+    return maximum, array;
 };
 
 mmrOnInput = function () {
@@ -1460,8 +1502,8 @@ mmrOnInput = function () {
     sector = document.querySelector("#mmrTime")
     displayTime(secMMR, sector);
     sector = document.querySelector("#mmrTimeReal").innerHTML = " - ";
-    document.querySelector("#maxPercentage").innerHTML=" - ";
-    document.querySelector("#lastPercentage").innerHTML=" - "
+    document.querySelector("#maxPercentage").innerHTML = " - ";
+    document.querySelector("#lastPercentage").innerHTML = " - "
 };
 mmrOnInput();
 
@@ -1700,7 +1742,8 @@ displayDictionary = function (mainArea, sectorId, dictionary) {
     sector = document.querySelector(`#${sectorId}`);
     area.removeChild(sector);
     newDiv = document.createElement("div");
-    newDiv.id = "dictionaryMonkey";
+    //newDiv.id = "dictionaryMonkey";
+    newDiv.id = "percentagesTable";
     area.appendChild(newDiv);
     sector = newDiv;
     for (let i = 0; i < dictionary.length; i++) {
@@ -1714,9 +1757,10 @@ displayDictionary = function (mainArea, sectorId, dictionary) {
 displayDictionaryInline = function (mainArea, sectorId, dictionary) {
     area = mainArea;
     sector = document.querySelector(`#${sectorId}`);
+    console.log(sectorId);
     area.removeChild(sector);
     newDiv = document.createElement("div");
-    newDiv.id = "dictionaryMonkey";
+    newDiv.id = `${sectorId}`;
     area.appendChild(newDiv);
     sector = newDiv;
     for (let i = 0; i < dictionary.length; i++) {
@@ -1762,12 +1806,6 @@ displayDictionaryOfMonkey = function () {
     dictionary = dictionaryOfMonkeyFinal;
     displayDictionary(mainArea, sectorId, dictionary);
 };
-
-
-
-
-
-
 
 displayResultOfTyping = function (place, expressionHTML, hit, turn, maxTurn) {
 
@@ -1948,7 +1986,7 @@ displayMatching = function () {
 repetitionNumberForMatch = document.querySelector("#match100RepNumber").value
 
 countRunTime = function (charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max) {
-    if (charNumber < 7 || charNumber >= min && isNaN(charNumber) == false || charNumber == parseInt) {
+    if (charNumber < 9 || charNumber >= min && isNaN(charNumber) == false || charNumber == parseInt) {
         if (charNumber == 1) { sec1 = 0.00137 * repetitionNumberForMatch };
         if (charNumber == 2) { sec1 = 0.05946 * repetitionNumberForMatch };
         if (charNumber == 3) { sec1 = 0.0509 * repetitionNumberForMatch };
@@ -1968,7 +2006,8 @@ countRunTime = function (charNumber, repetitionNumberForMatch, howManyRepetition
         if (hour1 > 0) { sector.innerHTML = `${hour1} óra, ${min1} perc` };
 
     }
-    if (charNumber > max || charNumber < min || isNaN(charNumber) == true || charNumber != parseInt(charNumber)) { sector.innerHTML = "no way"; };
+
+    if (charNumber > max || charNumber < min || isNaN(charNumber) == true || charNumber != parseInt(charNumber)) { sector.innerHTML = "no way"; console.log(charNumber); };
 
     return hour1, min1, sec1
 };
@@ -2399,6 +2438,9 @@ learn = function (expressionHex) {
     document.querySelector("#monkeyMemorySize").innerHTML = `${learning.length} karakterkettős.`
     document.querySelector("#monkeyMemorySize").style["background-color"] = "#FADADD";
     document.querySelector("#numberOfRunnings").innerHTML = totalNumberOfCurrents;
+    document.querySelector("#learningMemorySize").innerHTML = learning.length;
+    if (memoryABC.length > 0) { document.querySelector("#uccso").innerHTML = expressionABC; }
+    else { document.querySelector("#uccso").innerHTML = memoryABConlyOne };
     if (thisIsGoToRep2 == false) { ranking() };
 };
 
@@ -2519,7 +2561,7 @@ timeCounting = function () {
     sector = document.querySelector("#timeInfo");
     howManyRepetition = 1;
     min = 1;
-    max = 8;
+    max = 7;
     countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max)
 
     /*timeCountingMethod(runningNumberForInfo, charNumberForInfo);
@@ -2530,8 +2572,15 @@ timeCounting = function () {
  
     document.querySelector("#timeInfo").innerHTML = `${min1} min, ${sec1} sec`;*/
     document.querySelector("#timeInfo").style["background-color"] = "#7ee4e4";
-};
 
+    document.querySelector("#letterMain").value = charNumberForInfo;
+    document.querySelector("#runMain").value = runningNumberForInfo;
+    charNumber = charNumberForInfo;
+    repetitionNumberForMatch = runningNumberForInfo;
+    howManyRepetition = 1;
+    sector = document.querySelector("#runTimeMain");
+    countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
+};
 
 timeCounting2 = function () {
     let runningNumberForInfo = document.querySelector("#futasSzam2").value;
@@ -2543,7 +2592,7 @@ timeCounting2 = function () {
     howManyRepetition = 1;
     min = 1;
     max = 8;
-    countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max)
+    countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max);
 
     /*timeCountingMethod(runningNumberForInfo, charNumberForInfo);
  
@@ -2553,12 +2602,17 @@ timeCounting2 = function () {
  
     document.querySelector("#timeInfo").innerHTML = `${min1} min, ${sec1} sec`;*/
     document.querySelector("#timeInfo2").style["background-color"] = "#7ee4e4";
+
+    document.querySelector("#letterMain").value = charNumberForInfo;
+    document.querySelector("#runMain").value = runningNumberForInfo;
+    charNumber = charNumberForInfo;
+    repetitionNumberForMatch = runningNumberForInfo;
+    howManyRepetition = 1;
+    sector = document.querySelector("#runTimeMain");
+    countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
+
 };
 timeCounting2();
-
-
-
-
 
 timeCountingMethod = function (runningNumberForInfo, charNumberForInfo) {
     /*if (startCounting == true) {
@@ -2569,10 +2623,6 @@ timeCountingMethod = function (runningNumberForInfo, charNumberForInfo) {
         runningNumberForInfo = event.path[1][0].value;
         charNumberForInfo = event.path[1][1].value;
     };*/
-
-
-
-
 
     if (charNumberForInfo == 2) { coefficient = 135 };
     if (charNumberForInfo == 3) { coefficient = 621 };
@@ -2595,7 +2645,6 @@ timeCountingMethod = function (runningNumberForInfo, charNumberForInfo) {
 
     if (charNumberForInfo == 3) { supposedTimeNew = supposedTime * 5 / 3 }
 
-
     if (supposedTimeNew != 0) { supposedTime = supposedTimeNew };
     supposedTime1 = supposedTime;
     // = supposedTime * 3;
@@ -2603,9 +2652,6 @@ timeCountingMethod = function (runningNumberForInfo, charNumberForInfo) {
     sec1 = supposedTime1 % 60;
     sec1 = Math.ceil(sec1);
     min1 = Math.floor(supposedTime1 / 60);
-
-
-
     //sec2 = supposedTime2 % 60;
     //sec2 = Math.ceil(sec2);
     //min2 = Math.floor(supposedTime2 / 60);
@@ -2675,10 +2721,17 @@ repeat2 = function () {
     charNumber2 = document.querySelector("#karakterSzam2").value;
     charNumber2 = parseInt(charNumber2);
 
-    for (let i = 0; i < runningNumber2; i++) {
-        word(charNumber2);
-        repeatCount = repeatCount + 1;
-        averageArray2[i] = turn;
+    /*if (itIsRepeat3 == true) {
+        for (let i = 0; i < runningNumber2; i++) {
+            word(charNumber2);
+            repeatCount = repeatCount + 1;
+            averageArray2[i] = turn;
+        };
+    }
+    else{averageArray2=averageArray.slice(0)}*/
+
+    for (let i = 0; i < averageArray.length; i++) {
+        averageArray2[i] = averageArray[i][0];
     };
 
     maximum2 = 0;
@@ -2723,8 +2776,6 @@ repeat2 = function () {
         distributionCopy2[i] = distribution[i];
     };
 
-
-
     charNumber = charNumber2;
     runningNumber = runningNumber2;
     distanceMatrix = Array();
@@ -2753,7 +2804,18 @@ repeat2 = function () {
     createDistributionDistanceGraph();
 };
 isItRepeating = false;
+
+itIsRepeat3 = false;
+repeat3 = function () {
+    itIsRepeat3 = true;
+    repeat();
+    whereEmptinessInDistribution(distribution);
+    itIsRepeat3 = false;
+};
+
+
 repeat = function () {
+    resultFromLearnMemory = Array();
 
     if (wasRepeating == true) { removeDistanceMatrixSpan(); removeDistributionDistanceSpans(); removeDistanceMatrixSpan() };
     hideClickCounter = 0;
@@ -2800,6 +2862,14 @@ repeat = function () {
         //charNumber = document.querySelector("#karakterSzam").value;
         //charNumber = parseInt(charNumber);
         word(charNumber);
+        console.log("repeat: ", i, expressionABC, "turn: ", turn);
+
+        if (document.querySelector("#useLearningMemory").checked == true) {
+            myArray = Array();
+            myArray[0] = expressionABC;
+            myArray[1] = turn;
+            resultFromLearnMemory[i] = myArray;
+        };
         repeatCount = repeatCount + 1;
         averageArray[i][0] = turn;
         //averageArray[i][1] = timeLength;
@@ -2807,8 +2877,27 @@ repeat = function () {
         if (i == 0) { minimum = turn; };
         if (turn <= minimum) { minimum = turn }
         if (turn > maximum) { maximum = turn }
-
     };
+
+    if (document.querySelector("#useLearningMemory").checked == true) {
+        useLMMax = 0;
+        for (let i = 0; i < resultFromLearnMemory.length; i++) {
+            if (useLMMax < resultFromLearnMemory[i][1]) { useLMMax = resultFromLearnMemory[i][1] };
+        };
+        useLMMin = resultFromLearnMemory[0][1];
+        for (let i = 1; i < resultFromLearnMemory.length; i++) {
+            if (useLMMin > resultFromLearnMemory[i][1]) { useLMMin = resultFromLearnMemory[i][1] };
+        };
+        useLMAverage = 0;
+        for (let i = 1; i < resultFromLearnMemory.length; i++) {
+            useLMAverage = useLMAverage + resultFromLearnMemory[i][1]
+        };
+
+        useLMAverage = (useLMAverage / resultFromLearnMemory.length).toFixed(2);
+    };
+
+
+
     onlyOneWord = true;
 
     for (let i = 0; i < averageArray.length; i++) {
@@ -2864,7 +2953,7 @@ repeat = function () {
     for (let i = 0; i < averageArray.length; i++) {
         timeLength = averageArray[i][1] + timeLength;
     };
- 
+     
     timeLength = timeLength / averageArray.length
     console.log(timeLength, " sec");*/
 
@@ -2913,6 +3002,7 @@ repeat = function () {
         countTheHalfListLength();
         fillProblemTable();
     };
+    repeat2();
 };
 
 fillLoopTable = function (wordLength) {
@@ -2960,8 +3050,25 @@ fillLoopTable = function (wordLength) {
     document.querySelector("#explantation8").innerHTML = "Minél jobban növeljük a futások számát, "
     document.querySelector("#explantation9").style["background-color"] = "#7ee4e4"
     document.querySelector("#explantation9").innerHTML = "a két érték"
-    document.querySelector("#explantation10").innerHTML = " annál jobban meközelítheti egymást."
+    document.querySelector("#explantation10").innerHTML = " annál jobban megközelítheti egymást."
     document.querySelector("#explantation11").innerHTML = `Jelenleg az eltérés: ${(Math.abs(100 - (result / (totalNumberOfWords / runningNumber) * 100))).toFixed(2)} %`;
+
+    if (document.querySelector("#useLearningMemory").checked == true) {
+        document.querySelector("#redText").style.display = "initial";
+        document.querySelector("#learnMemory1").innerHTML = result;
+        document.querySelector("#learnMemory2").innerHTML = useLMAverage;
+        document.querySelector("#learnMemory3").innerHTML = `${((useLMAverage / result) * 100).toFixed(2)} %`
+        document.querySelector("#learnMemory4").innerHTML = `${(100/((useLMAverage / result) * 100)).toFixed(1)} X`
+    }
+    else {
+        document.querySelector("#redText").style.display = "none";
+        document.querySelector("#learnMemory1").innerHTML = " - ";
+        document.querySelector("#learnMemory2").innerHTML = " - ";
+        document.querySelector("#learnMemory3").innerHTML = " - ";
+        document.querySelector("#learnMemory4").innerHTML = " - ";
+    };
+
+
 };
 base = Number();
 valueOne = Number();
@@ -6627,6 +6734,7 @@ makeSzavakByLength = function () {
 makeSzavakByLength();
 becslesRepInLine();
 console.log("betöltöttem");
+firstSelector();
 
 
 

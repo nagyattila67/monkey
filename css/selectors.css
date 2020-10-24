@@ -2,6 +2,17 @@ body{background-color:#f6f6f6;}
 p{font-size:19px;}
 label{font-size:19px;}
 td{font-size:19px;}
+span{font-size:19px;}
+
+#mainSelector{width:150px;height:580px;position:sticky;top:5px}
+#languageSelector{width:150px;height:580px;position:fixed;right:5px;top:5px}
+#mainSelector p{margin-bottom:10px}
+#mainSelector input {margin-bottom:10px}
+#mainSelector div{margin-bottom:10px}
+#mainSelector span{margin-bottom:10px}
+#mainSelector button{margin-bottom:10px}
+
+
 
 span{font-size:19px;}
 li small{font-size:15px;}
