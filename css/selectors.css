@@ -11,6 +11,7 @@ span{font-size:19px;}
 #mainSelector div{margin-bottom:10px}
 #mainSelector span{margin-bottom:10px}
 #mainSelector button{margin-bottom:10px}
+#learningMemoryWarning{width:170px;height:160px;position:fixed;left:5px; bottom:5px}
 
 
 
@@ -236,6 +237,7 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #divForPercentagesGraph{overflow:auto;height:400px;}
 #percentagesGraph{width:max-content}
 #percentagesGraph td{width:10px}
+#divForRepMemEx{height:100px; overflow:auto}
 
 
 
