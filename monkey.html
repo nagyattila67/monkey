@@ -3190,7 +3190,7 @@
                                 <hr>
                                 <div class="row mt-3">
                                     <div class="col-6">
-                                        <table class="table table-sm table-sm">
+                                        <table class="table table-sm">
                                             <tbody>
                                                 <tr>
                                                     <td>
@@ -3418,21 +3418,76 @@
 
                 <div class="row smallBorder bgLight mt-3">
                     <div class="col">
-                        <p>Most futtassunk le <input style="width:100px" id="repetitionMemoryExamineRun" type="number" value="1000">-szer
-                            <input id="repetitionMemoryExamineLetter" style="width:50px" type="number" value="3"> betűs szó keresését a
+                        <p>Most futtassunk le <input oninput="repTime()" style="width:100px"
+                                id="repetitionMemoryExamineRun" type="number" value="100">-szor
+                            <input oninput="repTime()" id="repetitionMemoryExamineLetter" style="width:50px"
+                                type="number" value="3"> betűs
+                            szó keresését a
                             tanulómemória segítségével, s vizsgáljuk meg az eredményül kapott szószedetben az
-                            ismétlődéseket. Ezen ismétlődések létéből és számosságából következtethetünk arra, hogy a
-                            tanulómemória használata mennyire hatékony.</p>
-                            <button type="button" class="ml-3 btn btn-secondary btn-sm"
+                            ismétlődéseket.</p>
+                        <p>Ezen ismétlődések létéből és számosságából következtethetünk arra, hogy a
+                            tanulómemória használata mennyire hatékony - minél kevesebb ismétlést látunk, annál több
+                            egyedi szót tudott képezni a program. (A szavak mellett zárójelben látjuk, hogy hányszor
+                            ismétlődött az adott szó.)</p>
+                        <p>A felsorolásban előforduló 'ErRoR' azt jelenti, hogy ott a program nem tudta még elkezdeni
+                            sem a
+                            szóképzést, s 'RöViD' pedig azt, hogy ott a vártnál rövidebb szót tudott csak képezni a
+                            program a rendelkezésére álló betűkettősökből.</p>
+                        <p>
+                            A program részéről némi kreativitást is felfedezhetünk. A gyakrabban ismételt szavak között
+                            lesznek egymással rímelő szavak, ill. ikerszavakra emlékeztető szópárok, szójátékok - pl.:
+                            <i>velúr -
+                                kifúr; altáj - oltár; kelő -
+                                velő; holt - bolt; elér - relé; bontás - rontás</i>, de találhatunk kimondhatatlan
+                            nyelvtörőket is: <i>ártér - átér</i>.
+                        </p>
+                        <p><small>(Ha növelni akarjuk a tanulómemória méretét, akkor a balra lévő applikációt futtassuk
+                                úgy, hogy előtte kikapcsoltuk a tanulómemóriát, ui. az csak akkor töltődik
+                                automatikusan, ha nincs használatban.)</small></p>
+                        <button type="button" class="ml-3 btn btn-secondary btn-sm"
                             onclick="repetitionMemoryExamine()">Mehet!</button>
-                            <span class="ml-3">Sorrend: </span>
-                            <button disabled type="button" class="ml-3 btn btn-secondary btn-sm"
+                        <span class="ml-3">Sorrend: </span>
+                        <button disabled type="button" class="ml-3 btn btn-secondary btn-sm"
                             id="repetitionMemoryExamineSize" onclick="repSize()">Ismétlés száma szerint</button>
-                            <button disabled type="button" class="ml-3 btn btn-secondary btn-sm"
-                            id="repetitionMemoryExamine" onclick="repABC()">ABC sorrendben</button>
-                            <div id="divForRepMemEx" class="smallBorder bgDarker mt-3">
-                                <div id="repMemEx"></div>
-                            </div>
+                        <button disabled type="button" class="ml-3 btn btn-secondary btn-sm"
+                            id="repetitionMemoryExamineABC" onclick="repABC()">ABC sorrendben</button>
+                        <span class="ml-3">Futásidő: </span><span id="timeRMEAppr"> - </span>
+                        <p><small>(A program gyorsítása miatt az eddigi táblázatokat és grafikonokat nem tölti ki a
+                                program, így azok egy része a korábbi futtatás eredményeit tartalmazza.)</small></p>
+                        <div class="ml-3" style="color:#696969">
+                            <span>Felsorolás: </span>
+                            <span style="display:initial" id="infoRepSize">ismétlés száma szerint</span>
+                            <span style="display:none" id="infoRepABC">ábécé sorrendben</span>
+                            <p>Futásidő: <span id="timeRMEReal"> - </span></p>
+                        </div>
+
+
+<table class="table table-sm">
+    <tbody>
+        <tr>
+            <td>A tanulómemória használata nélkül ennyi lenne a listák átlagos hossza:</td>
+            <td><span style="color:red" id="learnMemory11">-</span></td>
+        </tr>
+        <tr>
+            <td>A tanulómemória használata esetén átlagosan ennyi a listák hossza:</td>
+            <td><span style="color:red" id="learnMemory12">-</span></td>
+        </tr>
+        <tr>
+            <td>Az átlaghossz ennyi százaléka a tanulómemória használata nélkül várt
+                szólista hosszának:</td>
+            <td><span style="color:red" id="learnMemory13">-</span></td>
+        </tr>
+        <tr>
+            <td>Az értelmes szavak előállítása ennyiszer lett gyorsabb:</td>
+            <td><span style="color:red" id="learnMemory14">-</span></td>
+        </tr>
+    </tbody>
+</table>
+
+
+                        <div id="divForRepMemEx" class="smallBorder bgDarker mt-3">
+                            <div id="repMemEx"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="row mt-3">
