@@ -67,12 +67,16 @@ firstSelector = function () {
 };
 
 learningMemoryBEKI = function () {
-    if (document.querySelector("#lmBE").checked == true) { document.querySelector("#useLearningMemory").checked = true;
-document.querySelector("#learningMemoryWarningBE").style.display="initial";
-document.querySelector("#learningMemoryWarningKI").style.display="none"; };
-    if (document.querySelector("#lmBE").checked == false) { document.querySelector("#useLearningMemory").checked = false;
-    document.querySelector("#learningMemoryWarningBE").style.display="none";
-    document.querySelector("#learningMemoryWarningKI").style.display="initial";  };
+    if (document.querySelector("#lmBE").checked == true) {
+        document.querySelector("#useLearningMemory").checked = true;
+        document.querySelector("#learningMemoryWarningBE").style.display = "initial";
+        document.querySelector("#learningMemoryWarningKI").style.display = "none";
+    };
+    if (document.querySelector("#lmBE").checked == false) {
+        document.querySelector("#useLearningMemory").checked = false;
+        document.querySelector("#learningMemoryWarningBE").style.display = "none";
+        document.querySelector("#learningMemoryWarningKI").style.display = "initial";
+    };
 };
 
 learningMemoryBE = function () {
@@ -1262,15 +1266,15 @@ generateWord = function (myRndNumber) {
                     lengthOfTemporaryWord = lengthOfTemporaryWord + 1;
                 };
             };
-            if (probability == 1 && workMemory!=0) {
+            if (probability == 1 && workMemory != 0) {
                 numberOfMonkey = Math.floor(Math.random() * workMemory.length);
                 vowel = workMemory[numberOfMonkey][0][1];
                 wordOfMonkey = wordOfMonkey + vowel;
                 lengthOfTemporaryWord = lengthOfTemporaryWord + 1;
             };
-            if(workMemory.length==0){
-                wordOfMonkey="ErRoR";
-                lengthOfMonkeyWord=lengthOfTemporaryWord;
+            if (workMemory.length == 0) {
+                wordOfMonkey = "ErRoR";
+                lengthOfMonkeyWord = lengthOfTemporaryWord;
             };
 
         };
@@ -1287,7 +1291,7 @@ generateWord = function (myRndNumber) {
             if (itIsRepeat3 == false) { dictionaryOfMonkeyAllWord[dictionaryOfMonkeyAllWord.length] = wordOfMonkey; };
             document.querySelector("#infoDictionary11").innerHTML = dictionaryOfMonkeyAllWord.length;
         };
-if(wordOfMonkey.length<myRndNumber){wordOfMonkey="RöViD"}
+        if (wordOfMonkey.length < myRndNumber) { wordOfMonkey = "RöViD" }
         return wordOfMonkey;
     };
 };
@@ -1530,7 +1534,7 @@ runAndLetterSetting = function (runNumber, letterNumber) {
 dontDoIt = false;
 repetitionMemoryExamine = function () {
     learningMemoryKI();
-    timeRMEStart= new Date();
+    timeRMEStart = new Date();
     dontDoIt = true;
     if (learning.length == 0) { alert("A tanulómemória üres. Először futtasson egy 'a majom ˝ennyi˝ betűs szavakat keres ˝ennyiszer˝' keresést!") }
     else {
@@ -1641,18 +1645,96 @@ repetitionMemoryExamine = function () {
     document.querySelector("#infoRepSize").style.display = "none";
     document.querySelector("#infoRepABC").style.display = "initial";
     dontDoIt = false;
-    timeRMEFinish=new Date();
-    timeRMEFinish=timeRMEFinish.getTime();
-    timeRMEStart=timeRMEStart.getTime();
-    timeRME=(timeRMEFinish-timeRMEStart)/1000;
+    timeRMEFinish = new Date();
+    timeRMEFinish = timeRMEFinish.getTime();
+    timeRMEStart = timeRMEStart.getTime();
+    timeRME = (timeRMEFinish - timeRMEStart) / 1000;
     console.log(timeRME);
-    sector=document.querySelector("#timeRMEReal");
+    sector = document.querySelector("#timeRMEReal");
     displayTime(timeRME, sector);
-    console.log("#learnMemory11").innerHTML=result;
-    console.log("#learnMemory12").innerHTML=useLMAverage;
-    console.log("#learnMemory13").innerHTML= `${((useLMAverage / result) * 100).toFixed(2)} %`
-    console.log("#learnMemory14").innerHTML=`${(100 / ((useLMAverage / result) * 100)).toFixed(1)} X`
+    result = (35 ** letterNumber / szavakByLength[letterNumber].length).toFixed(2);
+
+    document.querySelector("#learnMemory11").innerHTML = result;
+    document.querySelector("#learnMemory12").innerHTML = useLMAverage;
+    document.querySelector("#learnMemory13").innerHTML = `${((useLMAverage / result) * 100).toFixed(2)} %`
+    document.querySelector("#learnMemory14").innerHTML = `${(100 / ((useLMAverage / result) * 100)).toFixed(1)} X`
+
+    allCharacterLine = 0;
+    for (let i = 0; i < resultFromLearningMemory.length; i++) {
+        allCharacterLine = allCharacterLine + resultFromLearningMemory[i][1];
+    };
+    ErRoRAllLine = 0
+    for (let i = 0; i < myArray.length; i++) {
+        if (myArray[i][0] == "ErRoR") { ErRoRAllLine = myArray[i][1] }
+    };
+    RöViDAllLine = 0
+    for (let i = 0; i < myArray.length; i++) {
+        if (myArray[i][0] == "RöViD") { RöViDAllLine = myArray[i][1] }
+    };
+    myErRoR = 0;
+    if (ErRoRAllLine > 0) { myErRoR = 1 }
+    myRövid = 0;
+    if (RöViDAllLine > 0) { myRövid = 1 }
+    meaningfullWords = myArray.length - myErRoR - myRövid;
+    meaningfullWordsWithoutRepetition = myArray.length - myErRoR - myRövid;
+
+    document.querySelector("#learnMemory20").innerHTML = ErRoRAllLine;
+    document.querySelector("#learnMemory21").innerHTML = RöViDAllLine;
+    document.querySelector("#learnMemory22").innerHTML = allCharacterLine;
+    document.querySelector("#learnMemory23").innerHTML = resultFromLearningMemory.length;
+    document.querySelector("#learnMemory24").innerHTML = `${(((resultFromLearningMemory.length - ErRoRAllLine - RöViDAllLine) / allCharacterLine) * 100).toFixed(2)} %`;
+    document.querySelector("#learnMemory25").innerHTML = meaningfullWordsWithoutRepetition;
+    document.querySelector("#learnMemory26").innerHTML = `${((meaningfullWordsWithoutRepetition / allCharacterLine) * 100).toFixed(2)} %`;
+    document.querySelector("#learnMemory27").innerHTML = `${(allCharacterLine / resultFromLearningMemory.length).toFixed(0)}.`;
+
+    console.log("resultFromLearningMemory: ", resultFromLearningMemory);
+
+    makeLearningDistribution();
 };
+
+makeLearningDistribution = function () {
+    
+    thereIsError = false;
+    thereIsRovid = false;
+    for (let i = 0; i < myArraySize.length; i++) {
+        if (myArraySize[i] == "ErRoR") { indexError = i; thereIsError = true };
+        if (myArraySize[i] == "RöViD") { indexError = i; thereIsRovid = true };
+    };
+    if (thereIsError == true) { myArraySize.splice(indexError, 1) };
+    if (thereIsRovid == true) { myArraySize.splice(indexRovid, 1) };
+    max = 0;
+    for (let i = 0; i < myArraySize.length; i++) {
+        if (max < myArraySize[i][1]) { max = myArraySize[i][1] };
+    };
+    learningDistribution = Array();
+    for (let i = 0; i < max+1; i++) { learningDistribution[i] = 0 };
+    for (let i = 0; i < max + 1; i++) {
+        for (let j = 0; j < myArraySize.length; j++) {
+            if (myArraySize[j][1] == i) { learningDistribution[i] = learningDistribution[i] + 1 };
+        };
+    };
+    console.log(learningDistribution);
+    index=0;
+    for (let i = 0; i < learningDistribution.length; i++) {
+        if (learningDistribution[learningDistribution.length - i - 1] == 0) { index = index + 1 };
+        if (learningDistribution[learningDistribution.length - i - 1] != 0) { break };
+    };
+    learningDistribution.splice(learningDistribution.length - index, index);
+    console.log(learningDistribution);
+    mainArea=document.querySelector("#divForLearningDist");
+    sectorId="learningDist"
+    dictionary=learningDistribution;
+    displayDictionaryInline(mainArea, sectorId, dictionary);
+    area=document.querySelector("#tableForLearningDistGraph");
+    id="learningDistGraph";
+    array=learningDistribution;
+    makeMyGraph(area, id, array) 
+};
+
+
+
+
+
 
 repSize = function () {
     document.querySelector("#repetitionMemoryExamineSize").disabled = "disabled";
@@ -1675,17 +1757,19 @@ repABC = function () {
     document.querySelector("#infoRepABC").style.display = "initial";
 };
 
-repTime=function(){
-    run=document.querySelector("#repetitionMemoryExamineRun").value;
-    run=parseInt(run);
-    abc=document.querySelector("#repetitionMemoryExamineLetter").value;
-    abc=parseInt(abc);
-    if(abc==2){time=0.005722*run};
-    if(abc==3){time=0.006939*run};
-    if(abc==4){time=0.016*run};
-    if(abc==5){time=0.1314*run};
-    if(abc==6){time=0.1039*run};
-    sector= sector=document.querySelector("#timeRMEAppr");
+repTime = function () {
+    run = document.querySelector("#repetitionMemoryExamineRun").value;
+    run = parseInt(run);
+    abc = document.querySelector("#repetitionMemoryExamineLetter").value;
+    abc = parseInt(abc);
+    document.querySelector("#infoRepMemExInfo1").innerHTML = run;
+    document.querySelector("#infoRepMemExInfo2").innerHTML = abc;
+    if (abc == 2) { time = 0.005722 * run };
+    if (abc == 3) { time = 0.006939 * run };
+    if (abc == 4) { time = 0.016 * run };
+    if (abc == 5) { time = 0.18206 * run };
+    if (abc == 6) { time = 1.69593 * run };
+    sector = sector = document.querySelector("#timeRMEAppr");
     displayTime(time, sector)
 
 };
@@ -1695,7 +1779,7 @@ makeMyGraph = function (area, id, array) {
     sector = document.querySelector(`#${id}`);
     area.removeChild(sector);
     newTbody = document.createElement("tbody");
-    newTbody.id = "percentagesGraph";
+    newTbody.id = `${id}`;
     area.appendChild(newTbody);
     maximum = 0;
     for (let i = 0; i < array.length; i++) {
@@ -1703,7 +1787,7 @@ makeMyGraph = function (area, id, array) {
             maximum = array[i];
         };
     };
-    for (let i = 0; i < maximum; i++) {
+    for (let i = 0; i < maximum+1; i++) {
         myArea = document.querySelector(`#${id}`)
         newTr = document.createElement("tr");
         myArea.appendChild(newTr);
@@ -2688,7 +2772,7 @@ learn = function (expressionHex) {
     document.querySelector("#monkeyMemorySize").style["background-color"] = "#FADADD";
     document.querySelector("#numberOfRunnings").innerHTML = totalNumberOfCurrents;
     document.querySelector("#learningMemorySize").innerHTML = learning.length;
-    if (memoryABC.length > 0) { document.querySelector("#uccso").innerHTML = expressionABC; }
+    if (memoryABC.length > 0 && expressionABC!="ErRoR" && expressionABC!="RöViD") { document.querySelector("#uccso").innerHTML = expressionABC; }
     else { document.querySelector("#uccso").innerHTML = memoryABConlyOne };
     if (thisIsGoToRep2 == false) { ranking() };
 };

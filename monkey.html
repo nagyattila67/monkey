@@ -129,11 +129,8 @@
                                 eltelt
                                 felfoghatatlan hosszúságú idő ellenére is csak egy darab 15 betű hosszúságú
                                 értelmes
-                                szót talált volna, s jelenleg a második ilyen szót keresné azóta, hogy
-                                az
-                                első
-                                prokarióta egysejtűek megjelentek a földön. S a második 15 betűs értelmes szót
-                                nagyjából
+                                szót talált volna kb. akkor, amikor az első prokarióta egysejtűek megjelentek a földön.
+                                A jelenleg - azóta is - a második ilyen szót keresné. S ezt a szót nagyjából
                                 akkor fogja megtalálni, mikorra a nap már vörös óriássá változott, s felforralt
                                 mindent
                                 a Föld felszínén..</small>
@@ -3418,13 +3415,12 @@
 
                 <div class="row smallBorder bgLight mt-3">
                     <div class="col">
-                        <p>Most futtassunk le <input oninput="repTime()" style="width:100px"
-                                id="repetitionMemoryExamineRun" type="number" value="100">-szor
-                            <input oninput="repTime()" id="repetitionMemoryExamineLetter" style="width:50px"
-                                type="number" value="3"> betűs
-                            szó keresését a
-                            tanulómemória segítségével, s vizsgáljuk meg az eredményül kapott szószedetben az
-                            ismétlődéseket.</p>
+                        <p>Most futtassunk le <i>'a majom <span id="infoRepMemExInfo2"> - </span> betűs
+                                szavakat keres <span id="infoRepMemExInfo1"> - </span> -szor'</i> beállítással a
+                            programot
+                            úgy, hogy a majom használja a szóképzésnél a tanulómemóriában tárol betűkettősöket, s
+                            vizsgáljuk meg, hogy mennyivel gyorsabban képzi a majom az értelmes szavakat, ill. milyen
+                            szóismétlések lesznek az eredményül kapott szószedetben.</p>
                         <p>Ezen ismétlődések létéből és számosságából következtethetünk arra, hogy a
                             tanulómemória használata mennyire hatékony - minél kevesebb ismétlést látunk, annál több
                             egyedi szót tudott képezni a program. (A szavak mellett zárójelben látjuk, hogy hányszor
@@ -3438,12 +3434,62 @@
                             lesznek egymással rímelő szavak, ill. ikerszavakra emlékeztető szópárok, szójátékok - pl.:
                             <i>velúr -
                                 kifúr; altáj - oltár; kelő -
-                                velő; holt - bolt; elér - relé; bontás - rontás</i>, de találhatunk kimondhatatlan
+                                velő; holt - bolt; elér - relé; bontás - rontás; kongó - dongó -tangó</i>, de
+                            találhatunk kimondhatatlan
                             nyelvtörőket is: <i>ártér - átér</i>.
                         </p>
                         <p><small>(Ha növelni akarjuk a tanulómemória méretét, akkor a balra lévő applikációt futtassuk
                                 úgy, hogy előtte kikapcsoltuk a tanulómemóriát, ui. az csak akkor töltődik
-                                automatikusan, ha nincs használatban.)</small></p>
+                                automatikusan, ha nincs használatban. Továbbá a program gyorsítása miatt az eddigi
+                                táblázatokat és grafikonokat nem tölti ki a
+                                program, így azok egy része a korábbi futtatás eredményeit tartalmazza.)</small></p>
+                        <table class="table table-bordered table-sm">
+                            <tbody>
+                                <tr>
+                                    <td>A tanulómemória használata nélkül ennyi lenne a listák átlagos hossza:</td>
+                                    <td><span style="color:red" id="learnMemory11">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td>A tanulómemória használata esetén átlagosan ennyi a listák hossza:</td>
+                                    <td><span style="color:red" id="learnMemory12">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Az átlaghossz ennyi százaléka a tanulómemória használata nélkül várt
+                                        szólista hosszának:</td>
+                                    <td><span style="color:red" id="learnMemory13">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Az értelmes szavak előállítása ennyiszer lett gyorsabb:</td>
+                                    <td><span style="color:red" id="learnMemory14">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Az összes előállított karaktersorozat száma - beleértve az 'ErRoR'-t (<span
+                                            style="color:red" id="learnMemory20"> - </span> db.) és a 'RöVid'-et (<span
+                                            style="color:red" id="learnMemory21"> - </span> db.) eredményező futásokat
+                                        is:</td>
+                                    <td><span style="color:red" id="learnMemory22">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Az ezek között található értelmes szavak (<span style="color:red"
+                                            id="learnMemory23"> - </span> db.) százaléka ennyi:</td>
+                                    <td><span style="color:red" id="learnMemory24">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Az ezek között található - ismétlés nélküli - értelmes szavak (<span
+                                            style="color:red" id="learnMemory25"> - </span> db.) százaléka ennyi:</td>
+                                    <td><span style="color:red" id="learnMemory26">-</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Mindez tehát azt jelenti, hogy a létrehozott szavak közül minden
+                                        <span style="color:red" id="learnMemory27"> - </span> értelmes szó.</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Futásszám: <input oninput="repTime()" style="width:100px" id="repetitionMemoryExamineRun"
+                                type="number" value="100"> Betűszám:
+                            <input oninput="repTime()" id="repetitionMemoryExamineLetter" style="width:50px"
+                                type="number" value="3"></p>
                         <button type="button" class="ml-3 btn btn-secondary btn-sm"
                             onclick="repetitionMemoryExamine()">Mehet!</button>
                         <span class="ml-3">Sorrend: </span>
@@ -3452,41 +3498,47 @@
                         <button disabled type="button" class="ml-3 btn btn-secondary btn-sm"
                             id="repetitionMemoryExamineABC" onclick="repABC()">ABC sorrendben</button>
                         <span class="ml-3">Futásidő: </span><span id="timeRMEAppr"> - </span>
-                        <p><small>(A program gyorsítása miatt az eddigi táblázatokat és grafikonokat nem tölti ki a
-                                program, így azok egy része a korábbi futtatás eredményeit tartalmazza.)</small></p>
+
                         <div class="ml-3" style="color:#696969">
                             <span>Felsorolás: </span>
                             <span style="display:initial" id="infoRepSize">ismétlés száma szerint</span>
                             <span style="display:none" id="infoRepABC">ábécé sorrendben</span>
                             <p>Futásidő: <span id="timeRMEReal"> - </span></p>
                         </div>
-
-
-<table class="table table-sm">
-    <tbody>
-        <tr>
-            <td>A tanulómemória használata nélkül ennyi lenne a listák átlagos hossza:</td>
-            <td><span style="color:red" id="learnMemory11">-</span></td>
-        </tr>
-        <tr>
-            <td>A tanulómemória használata esetén átlagosan ennyi a listák hossza:</td>
-            <td><span style="color:red" id="learnMemory12">-</span></td>
-        </tr>
-        <tr>
-            <td>Az átlaghossz ennyi százaléka a tanulómemória használata nélkül várt
-                szólista hosszának:</td>
-            <td><span style="color:red" id="learnMemory13">-</span></td>
-        </tr>
-        <tr>
-            <td>Az értelmes szavak előállítása ennyiszer lett gyorsabb:</td>
-            <td><span style="color:red" id="learnMemory14">-</span></td>
-        </tr>
-    </tbody>
-</table>
-
-
                         <div id="divForRepMemEx" class="smallBorder bgDarker mt-3">
                             <div id="repMemEx"></div>
+                        </div>
+                        <p class="mt-3">A következő táblázat azt mutatja meg, hogy a szóképzésnél hány egyszer
+                            előforduló értelmes
+                            szó volt, hány kétszer előforduló értelmes szó volt, hány háromszor ... és így tovább.
+                            Alatta pedig ugyanezt ábrázolja az oszlopgrafikon.</p>
+                        <div id="divForLearningDist" class="smallBorder bgDarker mt-3">
+                            <div id="learningDist"></div>
+                        </div>
+                        <div id="divForLearningDistGraph" class="smallBorder bgDarker mt-3">
+                            <table id="tableForLearningDistGraph">
+                                <tbody id="learningDistGraph"></tbody>
+                            </table>
+                        </div>
+                        <hr>
+                        <div class="mt-3">
+                            <p>Futtassuk végig ugyanezt az eljárást többször egymás után, s a program ki fogja listázni
+                                az első <input id="repNumberForRME" type="number" style="width:50px" value="10">
+                                leggyakrabban ismételt szót ismétlésenkénti felsorolásban '||' jellel elválasztva
+                                egymástól.</p>
+                            <p>Ismétlésszám: <input oninput="repTime2()" style="width:100px"
+                                    id="repetitionMemoryExamineRep2" type="number" value="100">
+                                Futásszám: <input oninput="repTime2()" style="width:100px"
+                                    id="repetitionMemoryExamineRun2" type="number" value="1000"> Betűszám:
+                                <input oninput="repTime2()" id="repetitionMemoryExamineLetter2" style="width:50px"
+                                    type="number" value="5"></p>
+                            <button type="button" class="ml-3 btn btn-secondary btn-sm"
+                                onclick="repetitionMemoryExamine2()">Mehet!</button>
+                            <p class="mt-1 mb-0">Becsült futásidő: <span id="repTimeRMEAppr"> - </span></p>
+                            <p class="mt-0" style="color:#696969">Futásidő: <span id="repTimeRMEAppr"> - </span></p>
+                        </div>
+                        <div class="smallBorder bgDarker mt-3" id="divForRME2">
+                            <div id="RME2"></div>
                         </div>
                     </div>
                 </div>

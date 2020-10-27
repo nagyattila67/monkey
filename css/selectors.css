@@ -238,7 +238,11 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #percentagesGraph{width:max-content}
 #percentagesGraph td{width:10px}
 #divForRepMemEx{height:100px; overflow:auto}
-
+#divForLearningDist{height:50px;overflow:auto;}
+#divForLearningDistGraph{height:300px;overflow:auto;}
+#tableForLearningDistGraph{border-collapse:unset;height:400px;min-width:900px}
+#learningDistGraph td{border:solid 1px #f1f1f1}
+#divForRME2{height:190px;overflow:auto}
 
 
 
