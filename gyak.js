@@ -1,4 +1,5 @@
 console.log("Üdvözlet!");
+borderLength = 6;
 main = 0;
 maxPage = 0;
 wasClick = false;
@@ -38,6 +39,9 @@ numberOfWordsInDictionary = Array();
 ketBetusSzavak = Array();
 haromBetusSzavak = Array();
 negyBetusSzavak = Array();
+wordLength = 0;
+textForSearchOriginal2 = "";
+isLookingForMatch100 = false;
 
 firstSelector = function () {
     if (document.querySelector("#useLearningMemory").checked == true) {
@@ -56,8 +60,8 @@ firstSelector = function () {
     repetitionNumberForMatch = document.querySelector("#runMain").value;
     repetitionNumberForMatch = parseInt(repetitionNumberForMatch);
     howManyRepetition = 1;
-    document.querySelector("#futasSzam").value = repetitionNumberForMatch;
-    document.querySelector("#karakterSzam").value = charNumber;
+    //document.querySelector("#futasSzam").value = repetitionNumberForMatch;
+    //document.querySelector("#karakterSzam").value = charNumber;
     countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
     timeCounting();
     document.querySelector("#futasSzam2").value = repetitionNumberForMatch;
@@ -1082,7 +1086,6 @@ word = function (wordLength) {
 
                 //kikapcsolva, mert ötszörösére növeli a program által használt memóriát
                 //memory[turn] = expressionHTML;
-                borderLength = 8;
                 if (wordLength < borderLength) { memoryABC[turn] = expressionABC; }
                 //console.log("digit: ", digit, " digitHEX: ", digitHex, " expressionHEX: ", expressionHex, " turn: ", turn);
             };
@@ -1093,7 +1096,6 @@ word = function (wordLength) {
             generateWordRnd();
             //console.log("turn",turn);
             expressionABC = wordOfMonkey;
-            borderLength = 5;
             if (wordLength < borderLength) { memoryABC[turn] = expressionABC; }
             if (wordLength >= borderLength) { memoryABConlyOne = expressionABC };
 
@@ -1136,6 +1138,7 @@ word = function (wordLength) {
     learn(expressionHex);
     if (onlyOneWord == true) { document.querySelector("#matchingInput").setAttribute("maxlength", `${wordLength}`) };
 
+
     if (memoryABC.length > 0) {
         exampleForMatch = "";
         for (let k = 0; k < wordLength - 1; k++) {
@@ -1143,21 +1146,22 @@ word = function (wordLength) {
         };
         document.querySelector("#matchExample").innerHTML = `a(z) ${memoryABC[turn - 1][0]}${exampleForMatch} azokat a karaktersorozatokat listázza ki, ahol az első karakter a ${memoryABC[turn - 1][0]}, a többi pedig tetszőleges`;
         document.querySelector("#matchingInput").value = memoryABC[turn - 1][0];
-        document.querySelector("#matchExample2").innerHTML = "Most nincs listázás!"
-        if (isLookingForMatch == false) {
-            textForSearch = memoryABC[turn - 1][0];
-            lookingForMatch(textForSearch);
-            displayMatching();
-        };
-        if (isLookingForMatch == true) {
-
-        };
+        matchingList = Array()
+        textForSearch = memoryABC[turn - 1][0];
+        lookingForMatch(textForSearch);
+        displayMatch();
+        if (memoryABC.length != 0) { displayMatching() };
+        document.querySelector("#lookingForMatchButton").disabled = false;
     }
     else {
         document.querySelector("#matchExample").innerHTML = "";
         document.querySelector("#matchExample2").innerHTML = "Most nincs listázás!";
-    }
-
+        matchingList = Array(); displayMatch();
+        document.querySelector("#matchingInput").value = "";
+        document.querySelector("#lookingForMatchButton").disabled = true;
+    };
+    displaySearchingButtons();
+    displayFirstButtons();
     return expressionHex, expressionHTML, digit, digitHex, sheetCounter, hit, turn, timeLength, memoryABC;
 };
 
@@ -1527,8 +1531,8 @@ makeDictionaryAgainAndAgain = function () {
 runAndLetterSetting = function (runNumber, letterNumber) {
     document.querySelector("#runMain").value = runNumber;
     document.querySelector("#letterMain").value = letterNumber;
-    document.querySelector("#futasSzam").value = runNumber;
-    document.querySelector("#karakterSzam").value = letterNumber;
+    //document.querySelector("#futasSzam").value = runNumber;
+    //document.querySelector("#karakterSzam").value = letterNumber;
 };
 
 dontDoIt = false;
@@ -1693,7 +1697,7 @@ repetitionMemoryExamine = function () {
 };
 
 makeLearningDistribution = function () {
-    
+
     thereIsError = false;
     thereIsRovid = false;
     for (let i = 0; i < myArraySize.length; i++) {
@@ -1707,28 +1711,28 @@ makeLearningDistribution = function () {
         if (max < myArraySize[i][1]) { max = myArraySize[i][1] };
     };
     learningDistribution = Array();
-    for (let i = 0; i < max+1; i++) { learningDistribution[i] = 0 };
+    for (let i = 0; i < max + 1; i++) { learningDistribution[i] = 0 };
     for (let i = 0; i < max + 1; i++) {
         for (let j = 0; j < myArraySize.length; j++) {
             if (myArraySize[j][1] == i) { learningDistribution[i] = learningDistribution[i] + 1 };
         };
     };
     console.log(learningDistribution);
-    index=0;
+    index = 0;
     for (let i = 0; i < learningDistribution.length; i++) {
         if (learningDistribution[learningDistribution.length - i - 1] == 0) { index = index + 1 };
         if (learningDistribution[learningDistribution.length - i - 1] != 0) { break };
     };
     learningDistribution.splice(learningDistribution.length - index, index);
     console.log(learningDistribution);
-    mainArea=document.querySelector("#divForLearningDist");
-    sectorId="learningDist"
-    dictionary=learningDistribution;
+    mainArea = document.querySelector("#divForLearningDist");
+    sectorId = "learningDist"
+    dictionary = learningDistribution;
     displayDictionaryInline(mainArea, sectorId, dictionary);
-    area=document.querySelector("#tableForLearningDistGraph");
-    id="learningDistGraph";
-    array=learningDistribution;
-    makeMyGraph(area, id, array) 
+    area = document.querySelector("#tableForLearningDistGraph");
+    id = "learningDistGraph";
+    array = learningDistribution;
+    makeMyGraph(area, id, array)
 };
 
 
@@ -1787,7 +1791,7 @@ makeMyGraph = function (area, id, array) {
             maximum = array[i];
         };
     };
-    for (let i = 0; i < maximum+1; i++) {
+    for (let i = 0; i < maximum + 1; i++) {
         myArea = document.querySelector(`#${id}`)
         newTr = document.createElement("tr");
         myArea.appendChild(newTr);
@@ -2231,7 +2235,7 @@ matchingArray = Array();
 previousMatchLength = 0;
 jujj = 0;
 isLookingForMatch = false;
-lookingForMatch = function (textForSearch) {
+lookingForMatch = function () {
     matchingList = Array();
     matchingListNumero = 0;
     textForSearchOriginal = "";
@@ -2240,7 +2244,7 @@ lookingForMatch = function (textForSearch) {
         textForSearch = document.querySelector("#matchingInput").value;
         if (memoryABC.length == 0 && jujj == 0) { alert("Önnek még nincs szólistája!") }
         if (memoryABC.length != 0 && textForSearch.length == 0 && jujj == 1) { alert("Baszki!"); jujj = jujj + 1; }
-        if (memoryABC.length != 0 && textForSearch.length == 0 && jujj == 0) { alert("Azé' egy betűt írjon má' be!"); jujj = jujj + 1 };
+        if (memoryABC.length != 0 && textForSearch.length == 0 && jujj == 0) { alert("Azért egy betűt írjon már be!"); jujj = jujj + 1 };
     };
     if (memoryABC.length != 0 && textForSearch.length != 0) {
         //document.querySelector("#matchingInput").setAttribute("maxlength", `${wordLength}`);
@@ -2270,21 +2274,31 @@ lookingForMatch = function (textForSearch) {
                 matchingListNumero = matchingListNumero + 1;
             };
         };
-        if (displayNow == true) {
-            area = document.querySelector("#displayMatchingList")
-            for (let i = 0; i < previousMatchLength; i++) {
-                sector = document.querySelector("#displayMatchingList span");
-                area.removeChild(sector);
-            };
-            for (let i = 0; i < matchingList.length; i++) {
-                sector = document.createElement("span");
-                area.appendChild(sector);
-                if (i < matchingList.length - 1) { sector.innerHTML = `${matchingList[i]}, ` }
-                else { sector.innerHTML = `${matchingList[i]}` };
-            }
-            previousMatchLength = matchingList.length;
-            document.querySelector("#foundMatches").innerHTML = matchingList.length
+    };
+    if (isLookingForMatch100 == false) {
+        displayMatch();
+        displayMatching();
+    };
+};
+
+displayMatch = function () {
+    if (displayNow == true) {
+        area = document.querySelector("#displayMatchingList")
+        for (let i = 0; i < previousMatchLength; i++) {
+            sector = document.querySelector("#displayMatchingList span");
+            area.removeChild(sector);
         };
+
+        for (let i = 0; i < matchingList.length; i++) {
+            sector = document.createElement("span");
+            area.appendChild(sector);
+            if (i < matchingList.length - 1) { sector.innerHTML = `${matchingList[i]}, ` }
+            else { sector.innerHTML = `${matchingList[i]}` };
+        };
+
+
+        previousMatchLength = matchingList.length;
+        document.querySelector("#foundMatches").innerHTML = matchingList.length;
     };
     textForSearchOriginal2 = "";
     for (let i = 0; i < textForSearchOriginal.length; i++) {
@@ -2294,7 +2308,7 @@ lookingForMatch = function (textForSearch) {
     };
 
 
-    if (isLookingForMatch == false && displayNow == true) displayMatching();
+    if (isLookingForMatch == false && displayNow == true && memoryABC.length != 0) { displayMatching() };
     //document.querySelector("#match5").innerHTML = `${(turn / (35 ** textForSearchOriginal2)).toFixed(1)}`;
     //document.querySelector("#match5").innerHTML = "";
     //document.querySelector("#match6").innerHTML = 35 ** charNumber;
@@ -2302,7 +2316,7 @@ lookingForMatch = function (textForSearch) {
 };
 
 displayMatching = function () {
-    if (isLookingForMatch == true) { textForSearch = memoryABC[turn - 1][0]; lookingForMatch(textForSearch); };
+    if (isLookingForMatch == true && isLookingForMatch100 == false) { textForSearch = memoryABC[turn - 1][0]; lookingForMatch(textForSearch); };
     document.querySelector("#match1").innerHTML = turn;
     document.querySelector("#match2").innerHTML = charNumber;
     document.querySelector("#match3").innerHTML = textForSearchOriginal2.length;
@@ -2314,6 +2328,9 @@ displayMatching = function () {
     document.querySelector("#match9").innerHTML = (turn / 35 ** textForSearchOriginal2.length).toFixed(1);
     document.querySelector("#match9").style["background-color"] = "#FADADD";
     document.querySelector("#foundMatches").style["background-color"] = "#FADADD";
+
+
+
 };
 
 repetitionNumberForMatch = document.querySelector("#match100RepNumber").value
@@ -2394,6 +2411,7 @@ lookingForMatch100 = function () {
         };
         averageMemoryABCLength = 0;
         for (let k = 0; k < repetitionNumberForMatch; k++) {
+            console.log(k);
             word(charNumber);
             textForSearch = memoryABC[turn - 1]
             //averageMemoryABCLength = averageMemoryABCLength + memoryABC.length;
@@ -2481,7 +2499,7 @@ lookingForMatch100 = function () {
         if (charNumber > 3) { document.querySelector("#match14").innerHTML = `, ${(averageMemoryABCLength / 35 ** 3).toFixed(1)}`; document.querySelector("#match14").style["background-color"] = "#FADADD"; };
         if (charNumber > 4) { document.querySelector("#match15").innerHTML = `, ${(averageMemoryABCLength / 35 ** 4).toFixed(1)}`; document.querySelector("#match15").style["background-color"] = "#FADADD"; };
 
-        displayMatching();
+        if (memoryABC.length != 0) { displayMatching() };
         isLookingForMatch = false;
         isLookingForMatch100 = false;
 
@@ -2772,7 +2790,7 @@ learn = function (expressionHex) {
     document.querySelector("#monkeyMemorySize").style["background-color"] = "#FADADD";
     document.querySelector("#numberOfRunnings").innerHTML = totalNumberOfCurrents;
     document.querySelector("#learningMemorySize").innerHTML = learning.length;
-    if (memoryABC.length > 0 && expressionABC!="ErRoR" && expressionABC!="RöViD") { document.querySelector("#uccso").innerHTML = expressionABC; }
+    if (memoryABC.length > 0 && expressionABC != "ErRoR" && expressionABC != "RöViD") { document.querySelector("#uccso").innerHTML = expressionABC; }
     else { document.querySelector("#uccso").innerHTML = memoryABConlyOne };
     if (thisIsGoToRep2 == false) { ranking() };
 };
@@ -2915,6 +2933,12 @@ timeCounting = function () {
     countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
 };
 
+setFutasSzam2 = function () {
+    document.querySelector("#futasSzam2").value;
+    document.querySelector("#karakterSzam2").value;
+};
+
+
 timeCounting2 = function () {
     let runningNumberForInfo = document.querySelector("#futasSzam2").value;
     let charNumberForInfo = document.querySelector("#karakterSzam2").value
@@ -2936,8 +2960,8 @@ timeCounting2 = function () {
     document.querySelector("#timeInfo").innerHTML = `${min1} min, ${sec1} sec`;*/
     document.querySelector("#timeInfo2").style["background-color"] = "#7ee4e4";
 
-    document.querySelector("#letterMain").value = charNumberForInfo;
-    document.querySelector("#runMain").value = runningNumberForInfo;
+    //document.querySelector("#letterMain").value = charNumberForInfo;
+    //document.querySelector("#runMain").value = runningNumberForInfo;
     charNumber = charNumberForInfo;
     repetitionNumberForMatch = runningNumberForInfo;
     howManyRepetition = 1;
@@ -3023,7 +3047,7 @@ charNumber2 = document.querySelector("#karakterSzam2").value;
 charNumber2 = parseInt(charNumber2);
 noConsole = false;
 itWasMoreDistance = false;
-repeat2 = function () {
+repeat2 = function (runningNumber, charNumber) {
     /*if (hideDistanceGraphOrNot == "no") {
         hideClickCounter = 0;
         hideTheDistanceGraph();
@@ -3137,17 +3161,40 @@ repeat2 = function () {
     createDistributionDistanceGraph();
 };
 isItRepeating = false;
+//runningNumber = document.querySelector("#futasSzam").value;
+//charNumber = document.querySelector("#karakterSzam").value
+//runningNumber = parseInt(runningNumber);
+//charNumber = parseInt(charNumber);
+
+
+repeatFirst = function () {
+    runningNumber = document.querySelector("#futasSzam").value;
+    charNumber = document.querySelector("#karakterSzam").value;
+    runningNumber = parseInt(runningNumber);
+    charNumber = parseInt(charNumber);
+    repeat3(runningNumber, charNumber);
+};
+
+repeatSecond = function () {
+    runningNumber = document.querySelector("#futasSzam2").value;
+    charNumber = document.querySelector("#karakterSzam2").value;
+    runningNumber = parseInt(runningNumber);
+    charNumber = parseInt(charNumber);
+    repeat3(runningNumber, charNumber);
+};
 
 itIsRepeat3 = false;
-repeat3 = function () {
+repeat3 = function (runningNumber, charNumber) {
+    //runningNumber = parseInt(runningNumber);
+    //charNumber = parseInt(charNumber);
     itIsRepeat3 = true;
-    repeat();
+    repeat(runningNumber, charNumber);
     whereEmptinessInDistribution(distribution);
     itIsRepeat3 = false;
 };
 
 
-repeat = function () {
+repeat = function (runningNumber, charNumber) {
     resultFromLearningMemory = Array();
 
     if (wasRepeating == true) { removeDistanceMatrixSpan(); removeDistributionDistanceSpans(); removeDistanceMatrixSpan() };
@@ -3164,7 +3211,7 @@ repeat = function () {
     averageArray = Array();
     rep = true;
 
-    if (isItRepeating == false) {
+    /*if (isItRepeating == false) {
         //runningNumber = event.path[4].children[0].children[0].children[1].value;
         //charNumber = event.path[4].children[0].children[0].children[3].value;
         runningNumber = document.querySelector("#futasSzam").value;
@@ -3172,14 +3219,14 @@ repeat = function () {
         runningNumber = parseInt(runningNumber);
         charNumber = parseInt(charNumber);
 
-    };
+    };*/
     if (isItRepeating == true) {
         runningNumber = previousRunningNumber;
         charNumber = previousCharNumber;
     };
     if (wasHide != "") { removeDistributionP(); };
-    runningNumber = parseInt(runningNumber);
-    charNumber = parseInt(charNumber);
+    //runningNumber = parseInt(runningNumber);
+    //charNumber = parseInt(charNumber);
     previousCharNumber = charNumber;
     previousRunningNumber = runningNumber;
     maximum = 0;
@@ -4047,8 +4094,8 @@ running100 = function (futasSzamOfTest, charValue) {
     };
     testRunning = true;
     //document.querySelector("#karakterSzam").value
-    document.querySelector("#futasSzam").value = futasSzam;
-    document.querySelector("#karakterSzam").value = betuSzamOfTest;
+    //document.querySelector("#futasSzam").value = futasSzam;
+    //document.querySelector("#karakterSzam").value = betuSzamOfTest;
     //document.querySelector("#karakterSzam").innerHTML = betuSzamOfTest;
     //countTheLetters(betuSzamOfTest);
     numberOfWordsInDictionary[betuSzamOfTest];
@@ -4468,28 +4515,28 @@ wantLog = function () {
 
 wrappingZindex = function () {
     console.log("wrap");
-    document.querySelector("#learningMemoryWarning").style["z-index"] = "0"
-    document.querySelector("#languageSelector").style["z-index"] = "0"
+    //document.querySelector("#learningMemoryWarning").style["z-index"] = "0"
+    document.querySelector("#languageSelector").style["z-index"] = "1"
     document.querySelector("#mainSelector").style["z-index"] = "0"
-    document.querySelector("#wrapping0Form").style["z-index"] = "1"
-    document.querySelector("#wrapping1Form").style["z-index"] = "1"
-    document.querySelector("#wrapping2Form").style["z-index"] = "1"
+    document.querySelector("#wrapping0Form").style["z-index"] = "2"
+    document.querySelector("#wrapping1Form").style["z-index"] = "2"
+    document.querySelector("#wrapping2Form").style["z-index"] = "2"
 };
 
 selectorZindex = function () {
     console.log("sel");
-    document.querySelector("#wrapping0Form").style["z-index"] = "0"
-    document.querySelector("#wrapping1Form").style["z-index"] = "0"
-    document.querySelector("#wrapping2Form").style["z-index"] = "0"
-    document.querySelector("#learningMemoryWarning").style["z-index"] = "1"
-    document.querySelector("#languageSelector").style["z-index"] = "1"
+    document.querySelector("#wrapping0Form").style["z-index"] = "1"
+    document.querySelector("#wrapping1Form").style["z-index"] = "1"
+    document.querySelector("#wrapping2Form").style["z-index"] = "1"
+    //document.querySelector("#learningMemoryWarning").style["z-index"] = "1"
+    document.querySelector("#languageSelector").style["z-index"] = "2"
     document.querySelector("#mainSelector").style["z-index"] = "1"
 };
 
 jumpingUp = 0;
 jumpUp = function () {
-    if (jumpingUp % 2 == 0) { document.querySelector("#learningMemoryWarning").style["z-index"] = "0" };
-    if (jumpingUp % 2 == 1) { document.querySelector("#learningMemoryWarning").style["z-index"] = "1" };
+    //if (jumpingUp % 2 == 0) { document.querySelector("#learningMemoryWarning").style["z-index"] = "0" };
+    //if (jumpingUp % 2 == 1) { document.querySelector("#learningMemoryWarning").style["z-index"] = "1" };
     jumpUp0();
     jumpUp1();
     jumpUp2();
@@ -5296,9 +5343,17 @@ document.querySelector("#functionApprLog").disabled = "";
 
 preparation = function () {
     isItRepeating = true;
+    charNumber=2;
+    runningNumber=300;
+    document.querySelector("#futasSzam").value=runningNumber;
+    document.querySelector("#karakterSzam").value=charNumber;
+    runningNumber = parseInt(runningNumber);
+    charNumber = parseInt(charNumber);
     previousRunningNumber = 300;
     previousCharNumber = 2;
-    repeat();
+    document.querySelector("#letterMain").value=charNumber;
+    document.querySelector("#runMain").value=runningNumber;
+    repeat(runningNumber, charNumber);
     document.querySelector("#estimateFunc").disabled = "";
     document.querySelector("#functionAppr1").disabled = "";
     document.querySelector("#functionAppr2").disabled = "";
@@ -6823,15 +6878,16 @@ word_ = function () {
 };
 
 dictionary = function () {
+    myWord = document.querySelector("#word").innerHTML;
     if (wasClick == true) {
-        open(`https://mek.oszk.hu/adatbazis/magyar-nyelv-ertelmezo-szotara/kereses.php?kereses=${szavak[index]}&csakcimben=on`)
+        open(`https://mek.oszk.hu/adatbazis/magyar-nyelv-ertelmezo-szotara/kereses.php?kereses=${myWord}&csakcimben=on`)
     }
     else { alert("Önnek még nincs szava!") };
 };
 
 forward = function () {
     if (wasClick == false) { alert("Ön még nem kapott könyvet!") };
-    if (wasClick == true) {
+    if (wasClick == true && wordLength < borderLength) {
         rowList[lastWordNumber].style["font-weight"] = "";
         document.querySelector("#pageInput").value = ""
         //if (page == maxPage) { page = 1 }
@@ -6856,7 +6912,7 @@ forward = function () {
 
 backward = function () {
     if (wasClick == false) { alert("Ön még nem kapott könyvet!") };
-    if (wasClick == true) {
+    if (wasClick == true && wordLength < borderLength) {
         rowList[lastWordNumber].style["font-weight"] = "";
         wordForSearch = ""
         document.querySelector("#pageInput").value = ""
@@ -6879,9 +6935,22 @@ backward = function () {
     };
 };
 
+displayFirstButtons = function () {
+    if (wordLength < borderLength) {
+        for (let i = 0; i < document.querySelectorAll(".firstClass").length; i++) {
+            document.querySelectorAll(".firstClass")[i].disabled = false
+        };
+    }
+    else {
+        for (let i = 0; i < document.querySelectorAll(".firstClass").length; i++) {
+            document.querySelectorAll(".firstClass")[i].disabled = true
+        }
+    };
+};
+
 first = function () {
     if (wasClick == false) { alert("Ön még nem kapott könyvet!") };
-    if (wasClick == true) {
+    if (wasClick == true && wordLength < borderLength) {
         rowList[lastWordNumber].style["font-weight"] = "";
         document.querySelector("#pageInput").value = ""
         page = 1;
@@ -6905,7 +6974,7 @@ first = function () {
 
 last = function () {
     if (wasClick == false) { alert("Ön még nem kapott könyvet!") };
-    if (wasClick == true) {
+    if (wasClick == true && wordLength < borderLength) {
         rowList[lastWordNumber].style["font-weight"] = "";
         wordForSearch = ""
         document.querySelector("#pageInput").value = ""
@@ -6928,18 +6997,18 @@ last = function () {
 };
 
 skipToPage = function (event) {
-    if (wasClick == false) { alert("Ön még nem kapott könyvet!") };
+    if (wasClick == false && wordLength < borderLength) { alert("Ön még nem kapott könyvet!") };
     goToPage = event.path[2].children[1].children[0].value;
     goToPage = parseInt(goToPage);
-    if (wasClick == true && isNaN(goToPage) == false && goToPage > 0 && goToPage < maxPage + 1) {
+    if (wasClick == true && isNaN(goToPage) == false && goToPage > 0 && goToPage < maxPage + 1 && wordLength < borderLength) {
         page = goToPage
     }
-    if (wasClick == true && !(goToPage > 0 && goToPage < maxPage + 1)) {
+    if (wasClick == true && !(goToPage > 0 && goToPage < maxPage + 1) && wordLength < borderLength) {
         alert(`Az input mezőben egy 1 és ${maxPage} között lévő egész számnak kell szerepelnie!`);
         document.querySelector("#pageInput").value = ""
     };
 
-    if (wasClick == true) {
+    if (wasClick == true && wordLength < borderLength) {
         rowList[lastWordNumber].style["font-weight"] = "";
         wordForSearch = ""
         //rowList = document.querySelectorAll("#wordTable tr");
@@ -6962,18 +7031,32 @@ skipToPage = function (event) {
 addSearchingEvent = function () {
     area = document.querySelectorAll("#wordTable tr");
     for (let i = 1; i < area.length; i++) {
-        area[i].setAttribute("onclick", "search(event)");
+        area[i].setAttribute("onclick", "search(this)");
     };
 };
 
-search = function () {
-    wordForSearch = event.path[0].textContent;
-    wordForSearch = "\"" + wordForSearch + "\""
-    wordNumber = event.path[0].rowIndex;
-    wordNumber = parseInt(wordNumber);
-    rowList[wordNumber].style["font-weight"] = "500";
-    rowList[lastWordNumber].style["font-weight"] = "";
-    lastWordNumber = wordNumber;
+search = function (thisNow) {
+    if (wordLength < borderLength) {
+        wordNumber = thisNow.getAttribute("name");
+        wordNumber = parseInt(wordNumber);
+        rowList[lastWordNumber].style["font-weight"] = "";
+        rowList[wordNumber].style["font-weight"] = "500";
+        lastWordNumber = wordNumber;
+        wordForSearch = document.querySelector(`#wordTable [name='${wordNumber}']`).innerHTML
+    };
+};
+
+displaySearchingButtons = function () {
+    if (wordLength < borderLength) {
+        for (let i = 0; i < document.querySelectorAll(".searchingClass").length; i++) {
+            document.querySelectorAll(".searchingClass")[i].disabled = false
+        };
+    }
+    else {
+        for (let i = 0; i < document.querySelectorAll(".searchingClass").length; i++) {
+            document.querySelectorAll(".searchingClass")[i].disabled = true
+        }
+    };
 };
 
 searching = function () {
@@ -6981,33 +7064,50 @@ searching = function () {
     if (wasClick == false) { alert("Önnek még nincs könyve!") }
     if (wasClick == true && wordForSearch == "") { alert("Még nem választott szót!") }
     if (wasClick == true && wordForSearch != "") {
-        if (goal == "Google") {
-            openG();
+
+        if (document.querySelector("#searchText").checked == true) {
+            if (goal == "Google") {
+                open(`https://www.google.com/search?&q=${wordForSearch}&tbas=0&source=lnt&tbs=li:1&sa=X`, target = "_blank");
+            };
+            if (goal == "Yahoo") {
+                open(`https://search.yahoo.com/search?p=${wordForSearch}`, target = "_blank");
+            };
+            if (goal == "Bing") {
+                open(`https://www.bing.com/search?q=${wordForSearch}`, target = "_blank");
+            };
+            if (goal == "DuckDuckGo") {
+                open(`https://duckduckgo.com/?q=${wordForSearch}`, target = "_blank")
+            };
+            if (goal == "Baidu") {
+                open(`http://www.baidu.com/s?wd=${wordForSearch}`, target = "_blank");
+            };
+            if (goal == "Yandex") {
+                open(`https://yandex.com/search/?text=${wordForSearch}`, target = "_blank");
+            };
         };
-        if (goal == "Yahoo") {
-            openYh();
-        };
-        if (goal == "Bing") {
-            openBi();
-        };
-        if (goal == "DuckDuckGo") {
-            openD();
-        };
-        if (goal == "Baidu") {
-            openBa();
-        };
-        if (goal == "Yandex") {
-            openYd();
+        if (document.querySelector("#searchImage").checked == true) {
+            if (goal == "Google") {
+                open(`https://www.google.com/search?q=${wordForSearch}&tbas=0&source=lnms&tbm=isch&sa=X`, target = "_blank");
+            };
+            if (goal == "Yahoo") {
+                open(`https://images.search.yahoo.com/search/images;?p=${wordForSearch}&fr2=piv-web`, target = "_blank");
+            };
+            if (goal == "Bing") {
+                open(`https://www.bing.com/images/search?q=${wordForSearch}&form=HDRSC2&first=1&scenario=ImageHoverTitle`, target = "_blank");
+            };
+            if (goal == "DuckDuckGo") {
+                open(`https://duckduckgo.com/?q=${wordForSearch}&iax=images&ia=images`, target = "_blank")
+            };
+            if (goal == "Baidu") {
+                open(`https://image.baidu.com/search/index?tn=baiduimage&ps=1&ct=201326592&lm=-1&cl=2&nc=1&ie=utf-8&word=${wordForSearch}`, target = "_blank");
+            };
+            if (goal == "Yandex") {
+                open(`https://yandex.com/images/search?text=${wordForSearch}`, target = "_blank");
+            };
         };
     };
 };
 
-openG = function () { open(`https://www.google.com/search?&q=${wordForSearch}&tbas=0&source=lnt&tbs=li:1&sa=X`, target = "_blank"); };
-openYh = function () { open(`https://search.yahoo.com/search?p=${wordForSearch}`, target = "_blank"); };
-openBi = function () { open(`https://www.bing.com/search?q=${wordForSearch}`, target = "_blank"); };
-openD = function () { open(`https://duckduckgo.com/?q=${wordForSearch}`, target = "_blank"); };
-openBa = function () { open(`http://www.baidu.com/s?wd=${wordForSearch}`, target = "_blank"); };
-openYd = function () { open(`https://yandex.com/search/?text=${wordForSearch}`, target = "_blank") };
 
 transform = function () {
     for (let k = 0; k < szavak.length; k++) {
@@ -7098,6 +7198,7 @@ makeSzavakByLength = function () {
 makeSzavakByLength();
 becslesRepInLine();
 console.log("betöltöttem");
+console.log("memóriák: memoryABC,")
 firstSelector();
 
 

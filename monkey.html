@@ -20,7 +20,7 @@
             <div class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding">
             </div>
             <div class="col-8 col-sm-8 col-md-8 col-lg-8 noPadding">
-                <div onclick="selectorZindex()" style="z-index:1" id="learningMemoryWarning"
+                <!--<div onclick="selectorZindex()" style="z-index:1" id="learningMemoryWarning"
                     class="smallBorder bgLight">
                     <p>A tanulómemória: </p>
                     <div><span>BE: </span><input oninput="learningMemoryBEKI()" type="radio" name="lnBEKI"
@@ -32,25 +32,26 @@
                     <div id="learningMemoryWarningKI" style="display:initial">
                         <p>nincs bekapcsolva</p>
                     </div>
-                </div>
+                </div>-->
                 <div onclick="selectorZindex()" style="z-index:1" id="languageSelector" class="smallBorder bgLight">
                     <label>Nyelvválasztás:</label>
                     <div style="display:block">
                         <label>magyar</label>
-                        <input type="radio" oninput="firstSelector()" name="language" checked id="magyar">
+                        <input disabled type="radio" oninput="firstSelector()" name="language" checked id="magyar">
                     </div>
                     <div style="display:block">
                         <label>angol</label>
-                        <input type="radio" oninput="firstSelector()" name="language" id="angol">
+                        <input disabled type="radio" oninput="firstSelector()" name="language" id="angol">
                     </div>
                     <div style="display:block">
                         <label>latin</label>
-                        <input type="radio" oninput="firstSelector()" name="language" id="latin">
+                        <input disabled type="radio" oninput="firstSelector()" name="language" id="latin">
                     </div>
                     <div style="display:block">
                         <label>olasz</label>
-                        <input type="radio" oninput="firstSelector()" name="language" id="olasz">
+                        <input disabled type="radio" oninput="firstSelector()" name="language" id="olasz">
                     </div>
+                    <div><p>ez a funkció még nem müxik</p></div>
                 </div>
                 <div class="row mt-3 mb-3">
                     <h2>Majom az írógépnél</h2>
@@ -231,24 +232,26 @@
                             </div>
                             <div class="row">
                                 <div class="col-auto">
-                                    <button type="button" class="btn btn-secondary btn-sm btnMargin" onclick="first()">
+                                    <button disabled type="button" class="firstClass btn btn-secondary btn-sm btnMargin"
+                                        onclick="first()">
                                         első
                                     </button>
                                 </div>
                                 <div class="col-auto">
-                                    <button type="button" class="btn btn-secondary btn-sm btnMargin"
+                                    <button disabled type="button" class="firstClass btn btn-secondary btn-sm btnMargin"
                                         onclick="backward()">
                                         &lt&lt&lt
                                     </button>
                                 </div>
                                 <div class="col-auto">
-                                    <button type="button" class="btn btn-secondary btn-sm btnMargin"
+                                    <button disabled type="button" class="firstClass btn btn-secondary btn-sm btnMargin"
                                         onclick="forward()">
                                         &gt&gt&gt
                                     </button>
                                 </div>
                                 <div class="col-auto">
-                                    <button type="button" class="btn btn-secondary btn-sm btnMargin" onclick="last()">
+                                    <button disabled type="button" class="firstClass btn btn-secondary btn-sm btnMargin"
+                                        onclick="last()">
                                         utolsó
                                     </button>
                                 </div>
@@ -259,7 +262,8 @@
                             <form>
                                 <div class="row align-items-center">
                                     <div class="col-auto">
-                                        <button id="skip" type="button" class="btn btn-secondary btn-sm"
+                                        <button disabled id="skip" type="button"
+                                            class="firstClass btn btn-secondary btn-sm"
                                             onclick="skipToPage(event)">Ugrás a</button>
                                     </div>
                                     <div class="col-auto">
@@ -288,25 +292,35 @@
                             </p>
 
                             <div>
-                                <button type="button" class="btn btn-secondary btn-sm searching" onclick="searching()">
+                                <button disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
+                                    onclick="searching()">
 
                                     Google
                                 </button>
-                                <button type="button" class="btn btn-secondary btn-sm searching" onclick="searching()">
+                                <button disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
+                                    onclick="searching()">
                                     Yahoo
                                 </button>
-                                <button type="button" class="btn btn-secondary btn-sm searching" onclick="searching()">
+                                <button disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
+                                    onclick="searching()">
                                     Bing
                                 </button>
-                                <button type="button" class="btn btn-secondary btn-sm searching" onclick="searching()">
+                                <button disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
+                                    onclick="searching()">
                                     DuckDuckGo
                                 </button>
-                                <button type="button" class="btn btn-secondary btn-sm searching" onclick="searching()">
+                                <button disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
+                                    onclick="searching()">
                                     Baidu
                                 </button>
-                                <button type="button" class="btn btn-secondary btn-sm searching" onclick="searching()">
+                                <button disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
+                                    onclick="searching()">
                                     Yandex
                                 </button>
+                                <label class="ml-5">szöveg </label><input class="ml-2" id="searchText" type="radio"
+                                    name="searcEngines" checked>
+                                <label class="ml-2">kép </label><input class="ml-2" id="searchImage" type="radio"
+                                    name="searcEngines">
                             </div>
                             <div class="row mt-3">
                                 <div class="col">
@@ -327,7 +341,8 @@
                                         <span id="matchExample2" style="color:red"></span>
                                     </p>
                                     <input class="needMarginRight" id="matchingInput" type="text" size="9" maxlength=7>
-                                    <button type="button" class="needMarginRight btn btn-secondary btn-sm searching"
+                                    <button id="lookingForMatchButton" type="button"
+                                        class="needMarginRight btn btn-secondary btn-sm searching"
                                         onclick="lookingForMatch()">
                                         Mehet!
                                     </button>
@@ -350,10 +365,12 @@
                                 megtalálta az első <span id="match2">-</span> betűből álló értelmes szót. Az ábécé
                                 35
                                 betűs, ezért ugyanaz a(z) <span id="match3"></span> betűből álló karaktercsoport
-                                átlagosan 35<sup><span id="match4">kitevő</span></sup> = <span id="match5"></span>
+                                átlagosan 35<sup><span id="match4"><small>kitevő</small></span></sup> = <span
+                                    id="match5"></span>
                                 szavanként fordul
                                 elő, azaz a(z) <span id="match6">-</span> szó között nagy átlagban
-                                <span id="match7"> - </span> / 35<sup><span id="match8">kitevő</span></sup> = <span
+                                <span id="match7"> - </span> / 35<sup><span
+                                        id="match8"><small>kitevő</small></span></sup> = <span
                                     id="match9">eredmény</span> db. található belőlük.
                             </p>
 
@@ -388,17 +405,17 @@
                                     </div>
                                 </div>
 
-                                <div id="displaySeries" class="row" style="display:none">
+                                <div id="displaySeries" class="row" style="display:initial">
                                     <div class="col smallBorder bgDarker">
                                         <p class="littlePaddingBottom">A számsorozat: <span id="seriesOne"></span>
                                         </p>
-                                        <p class="littlePaddingBottom"> Ugyanakkor teljesen mindegy, hogy az
+                                        <p class="littlePaddingBottom"> Valójában teljesen mindegy, hogy az
                                             utoljára
                                             kapott
                                             - első értelmes - szó
                                             kezdő betűcsoportjaira keresünk rá vagy helyette ugyanúgy végezzük a
                                             kereséseket, de
-                                            az "ABCDEFGHI" kulcsszóval, ui. 'nagy átlagban' ugyanazt a számsort
+                                            a - megfelelő karakterszámú - "ABCDEFGHI" kulcsszóval, ui. 'nagy átlagban' ugyanazt a számsort
                                             kapjuk. Hogy
                                             ezt megmutassunk, ugyanígy végigfuttattuk a keresést ez utóbbi a
                                             karaktersorozatra
@@ -623,6 +640,21 @@
                     <p>Használja a tanulómemóriát:</p>
                     <input type="checkbox" oninput="firstSelector()" id="useLearningMemory">
                     <p>Az utolsó szó: <span id="uccso"> - </p>
+
+
+
+                    <p class="mt-0 mb-0">A tanulómemória: </p>
+                    <div class="mt-0 mb-0"><span>BE: </span><input oninput="learningMemoryBEKI()" type="radio"
+                            name="lnBEKI" id="lmBE"><span class="ml-4">KI: </span><input oninput="learningMemoryBEKI()"
+                            type="radio" name="lnBEKI" id="lmKI"></div>
+                    <div class="mt-0 mb-0" id="learningMemoryWarningBE" style="color:red;display:none">
+                        <p class="mt-0 mb-0">be van kapcsolva</p>
+                    </div>
+                    <div class="mt-0 mb-0" id="learningMemoryWarningKI" style="display:initial">
+                        <p class="mt-0 mb-0">nincs bekapcsolva</p>
+                    </div>
+
+
                 </div>
             </div>
             <div class="col-8 col-sm-8 col-md-8 col-lg-8 noPadding">
@@ -665,7 +697,7 @@
                                     </div>
                                     <div class="col-6">
                                         <button type="button" class="btn btn-secondary btn-sm"
-                                            onclick="repeat3( )">Mehet</button>
+                                            onclick="repeatFirst( )">Mehet</button>
                                     </div>
                                 </div>
                             </div>
@@ -1047,7 +1079,7 @@
                     </div>
                     <div class="row">
                         <div id="wrapping0Col" class="col-4">
-                            <form onclick="wrappingZindex()" id="wrapping0Form" class="wrapping ml-3">
+                            <form onclick="wrappingZindex()" style="z-index:1" id="wrapping0Form" class="wrapping ml-3">
 
                                 <div class="row">
                                     <button name="chooseGraph" type="button" onclick="wantHyp()"
@@ -1830,11 +1862,13 @@
                                     <div class="col-6">
                                         <form oninput="timeCounting2()">
                                             <label>Futások száma:</label>
-                                            <input id="futasSzam2" type="number" class="form-control form-control-sm"
-                                                style="width:100px" min="1" max="1000000" value="100">
+                                            <input oninput="setFutasSzam2()" id="futasSzam2" type="number"
+                                                class="form-control form-control-sm" style="width:100px" min="1"
+                                                max="1000000" value="100">
                                             <label>Karakterek száma:</label>
-                                            <input id="karakterSzam2" type="number" class="form-control form-control-sm"
-                                                style="width:100px" min="1" max="7" value="3">
+                                            <input oninput="setFutasSzam2()" id="karakterSzam2" type="number"
+                                                class="form-control form-control-sm" style="width:100px" min="1" max="7"
+                                                value="3">
 
                                         </form>
                                     </div>
@@ -1849,7 +1883,7 @@
                                             </div>
                                             <div class="col-6">
                                                 <button type="button" class="btn btn-secondary btn-sm"
-                                                    onclick="repeat3()">Mehet</button>
+                                                    onclick="repeatSecond()">Mehet</button>
                                             </div>
                                         </div>
                                     </div>
@@ -3434,7 +3468,8 @@
                             lesznek egymással rímelő szavak, ill. ikerszavakra emlékeztető szópárok, szójátékok - pl.:
                             <i>velúr -
                                 kifúr; altáj - oltár; kelő -
-                                velő; holt - bolt; elér - relé; bontás - rontás; kongó - dongó -tangó</i>, de
+                                velő; holt - bolt; elér - relé; bontás - rontás; kongó - dongó - tangó; maláj -
+                                moraj</i>, de
                             találhatunk kimondhatatlan
                             nyelvtörőket is: <i>ártér - átér</i>.
                         </p>
@@ -3550,7 +3585,7 @@
 
             </div>
 
-            <div class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding"></div>
+            <div style="z-index:0" class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding"></div>
         </div>
     </div>
     <script src="/gyak.js">

@@ -4,15 +4,16 @@ label{font-size:19px;}
 td{font-size:19px;}
 span{font-size:19px;}
 
-#mainSelector{width:150px;height:580px;position:sticky;top:5px}
+p{margin-bottom:10px}
+#mainSelector inpp{text-align:justify}
+#mainSelector{width:150px;height:670px;position:sticky;top:5px;}
+#mainSelector p{text-align:left;;}
 #languageSelector{width:150px;height:580px;position:fixed;right:5px;top:5px}
-#mainSelector p{margin-bottom:10px}
-#mainSelector input {margin-bottom:10px}
+#mainSelectorut {margin-bottom:10px}
 #mainSelector div{margin-bottom:10px}
 #mainSelector span{margin-bottom:10px}
 #mainSelector button{margin-bottom:10px}
 #learningMemoryWarning{width:170px;height:160px;position:fixed;left:5px; bottom:5px}
-
 
 
 span{font-size:19px;}
