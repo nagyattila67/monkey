@@ -43,16 +43,20 @@ wordLength = 0;
 textForSearchOriginal2 = "";
 isLookingForMatch100 = false;
 
+firstSelectorIsTheFirst = false;
 firstSelector = function () {
+    firstSelectorIsTheFirst = true;
     if (document.querySelector("#useLearningMemory").checked == true) {
         document.querySelector("#learningMemoryWarningKI").style.display = "none"; document.querySelector("#learningMemoryWarningBE").style.display = "initial";
         document.querySelector("#lmBE").checked = true;
-    }
+    };
     if (document.querySelector("#useLearningMemory").checked == false) {
         document.querySelector("#learningMemoryWarningKI").style.display = "initial"; document.querySelector("#learningMemoryWarningBE").style.display = "none";
         document.querySelector("#lmKI").checked = true;
-    }
-    sector = document.querySelector("#runTimeMain");
+    };
+
+
+    
     min = 1;
     max = 7;
     charNumber = document.querySelector("#letterMain").value;
@@ -60,14 +64,28 @@ firstSelector = function () {
     repetitionNumberForMatch = document.querySelector("#runMain").value;
     repetitionNumberForMatch = parseInt(repetitionNumberForMatch);
     howManyRepetition = 1;
+    document.querySelector("#futasSzam").value=repetitionNumberForMatch;
+    document.querySelector("#karakterSzam").value=charNumber;
+    //howManyRepetition = document.querySelector("#futasSzam").value;
+    charNumberForInfo = document.querySelector("#karakterSzam").value;
+    runningNumberForInfo = document.querySelector("#futasSzam").value;
     //document.querySelector("#futasSzam").value = repetitionNumberForMatch;
     //document.querySelector("#karakterSzam").value = charNumber;
+    //sector=document.querySelector("#runTimeMain");
+    sector = document.querySelector("#runTimeMain1");
     countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
-    timeCounting();
+    sector = document.querySelector("#runTimeMain2");
+    countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
+    sector = document.querySelector("#timeInfo1");
+    countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
+    sector = document.querySelector("#timeInfo2");
+    countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
+    //timeCounting();
     document.querySelector("#futasSzam2").value = repetitionNumberForMatch;
     document.querySelector("#karakterSzam2").value = charNumber;
-    timeCounting2();
+    //timeCounting2();
     //goToRepeat();
+    learningMemoryBEKI();
 };
 
 learningMemoryBEKI = function () {
@@ -75,11 +93,24 @@ learningMemoryBEKI = function () {
         document.querySelector("#useLearningMemory").checked = true;
         document.querySelector("#learningMemoryWarningBE").style.display = "initial";
         document.querySelector("#learningMemoryWarningKI").style.display = "none";
+        document.querySelector("#displayDel").style.display = "initial";
+        document.querySelector("#dontDisplayDel").style.display = "none";
+        document.querySelector("#displayTimeInfoDel").style.display = "initial";
+        document.querySelector("#dontDisplayTimeInfoDel").style.display = "none";
+        //firstSelector();
+        //secondSelector();
+
     };
     if (document.querySelector("#lmBE").checked == false) {
         document.querySelector("#useLearningMemory").checked = false;
         document.querySelector("#learningMemoryWarningBE").style.display = "none";
         document.querySelector("#learningMemoryWarningKI").style.display = "initial";
+        document.querySelector("#displayDel").style.display = "none";
+        document.querySelector("#dontDisplayDel").style.display = "initial";
+        document.querySelector("#displayTimeInfoDel").style.display = "none";
+        document.querySelector("#dontDisplayTimeInfoDel").style.display = "initial";
+        //firstSelector();
+        //secondSelector();
     };
 };
 
@@ -94,6 +125,9 @@ learningMemoryKI = function () {
     document.querySelector("#learningMemoryWarningKI").style.display = "initial";
     document.querySelector("#learningMemoryWarningBE").style.display = "none";
     document.querySelector("#useLearningMemory").checked = "false";
+    
+    
+    
 };
 
 myTime = function (timeStart, timeFinish) {
@@ -115,6 +149,7 @@ for (let i = 0; i < 41; i++) {
 
 writeInLine = function () {
     writeInLineTimeStart = new Date();
+
     charNumbInLine = document.querySelector("#szoHosszInLine").value;
     charNumbInLine = parseInt(charNumbInLine);
     thisWord = "";
@@ -906,7 +941,13 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
     */
 
 };
+searchThisWordTime = function(){
+
+};
+
 searchInLine = function () {
+    writeInLineTimeStart = new Date();
+    timeSILStart= new Date();
     stopSearch = false;
     if (document.querySelector("#searchThisWord").value == "") { alert("Ön nem írt be egy betűt sem a keresőmezőbe!") }
     else {
@@ -924,6 +965,13 @@ searchInLine = function () {
         if (stopSearch == false) { document.querySelector("#searchThisWord").value = ""; };
         if (stopSearch == true) { runWriteInLine(charNumbInLine, thisWord) };
     };
+    timeSILFinish= new Date();
+    timeSILStart=timeSILStart.getTime();
+    timeSILFinish=timeSILFinish.getTime();
+    timeSIL=(timeSILFinish-timeSILStart)/1000;
+    sector=document.querySelector("#szoHosszTime");
+    //displayTime(timeSIL,sector);
+    console.log(timeSIL);
 };
 
 makeLetter = function () {
@@ -1095,7 +1143,7 @@ word = function (wordLength) {
             memoryABConlyOne = "";
             generateWordRnd();
             //console.log("turn",turn);
-            expressionABC = wordOfMonkey;
+            if(learning.length!=0){expressionABC = wordOfMonkey};
             if (wordLength < borderLength) { memoryABC[turn] = expressionABC; }
             if (wordLength >= borderLength) { memoryABConlyOne = expressionABC };
 
@@ -1200,18 +1248,21 @@ generateWordRnd = function () {
 //az eddig tanultak alapján generál egy új szót
 noMore = false;
 dictionaryOfMonkeyAllWord = Array();
+
 generateWord = function (myRndNumber) {
     noMore = false;
-
     //????????????????
     lengthOfMonkeyWord = myRndNumber;
 
     if (learning.length == 0) {
-        alert("A tanulómemória üres. Először futtasson egy 'a majom ˝ennyi˝ betűs szavakat keres ˝ennyiszer˝' keresést!"); noMore = true;
+        charNumber=document.querySelector("#karakterSzam").value;
+        runningNumber=document.querySelector("#futasSzam").value;
+        alert(`A tanulómemória üres. Először egy 'a majom ${charNumber} betűs szavakat keres ${runningNumber}-szor' keresés fog lefutni, hogy a program létrehozza a tanulómemóriát!`); noMore = true;
         document.querySelector("#lmKI").checked = true;
         document.querySelector("#useLearningMemory").checked = false;
         document.querySelector("#learningMemoryWarningKI").style.display = "initial";
         document.querySelector("#learningMemoryWarningBE").style.display = "none";
+        
     };
     if (noMore == false) {
 
@@ -2903,17 +2954,46 @@ szavakHexTemp = Array();
     };
     return (szavakTemp, szavakHexTemp);
 };*/
-timeCounting = function () {
+
+secondSelector = function () {
     runningNumberForInfo = document.querySelector("#futasSzam").value;
     charNumberForInfo = document.querySelector("#karakterSzam").value
 
     runningNumberForInfo = parseInt(runningNumberForInfo);
     charNumberForInfo = parseInt(charNumberForInfo);
-    sector = document.querySelector("#timeInfo");
+    document.querySelector("#letterMain").value = charNumberForInfo;
+    document.querySelector("#runMain").value = runningNumberForInfo;
+
+    
     howManyRepetition = 1;
     min = 1;
     max = 7;
-    countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max)
+    sector = document.querySelector("#timeInfo1");
+    countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max);
+    sector = document.querySelector("#timeInfo2");
+    countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max);
+    sector = document.querySelector("#runTimeMain1");
+    countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max);
+    sector = document.querySelector("#runTimeMain2");
+    countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max);
+    learningMemoryBEKI();
+
+};
+
+timeCounting = function () {
+    firstSelectorIsTheFirst = false;
+    runningNumberForInfo = document.querySelector("#futasSzam").value;
+    charNumberForInfo = document.querySelector("#karakterSzam").value
+
+    runningNumberForInfo = parseInt(runningNumberForInfo);
+    charNumberForInfo = parseInt(charNumberForInfo);
+    sector = document.querySelector("#runTimeMain");
+    howManyRepetition = 1;
+    min = 1;
+    max = 7;
+    countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max);
+    sector = document.querySelector("#timeInfo");
+    countRunTime(charNumberForInfo, runningNumberForInfo, howManyRepetition, sector, min, max);
 
     /*timeCountingMethod(runningNumberForInfo, charNumberForInfo);
  
@@ -2924,19 +3004,28 @@ timeCounting = function () {
     document.querySelector("#timeInfo").innerHTML = `${min1} min, ${sec1} sec`;*/
     document.querySelector("#timeInfo").style["background-color"] = "#7ee4e4";
 
-    document.querySelector("#letterMain").value = charNumberForInfo;
-    document.querySelector("#runMain").value = runningNumberForInfo;
-    charNumber = charNumberForInfo;
-    repetitionNumberForMatch = runningNumberForInfo;
-    howManyRepetition = 1;
-    sector = document.querySelector("#runTimeMain");
-    countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
+
+
+    //charNumber = charNumberForInfo;
+    //repetitionNumberForMatch = runningNumberForInfo;
+    //howManyRepetition = 1;
+    //sector = document.querySelector("#runTimeMain");
+    //countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
 };
 
 setFutasSzam2 = function () {
-    document.querySelector("#futasSzam2").value;
-    document.querySelector("#karakterSzam2").value;
+    runningNumber=document.querySelector("#futasSzam2").value;
+    charNumber=document.querySelector("#karakterSzam2").value;
+    document.querySelector("#letterMain").value=charNumber;
+    document.querySelector("#runMain").value=runningNumber;
+    sector=document.querySelector("#timeInfo3");
+    howManyRepetition = 1;
+    min = 1;
+    max = 8;
+    countRunTime(charNumber, runningNumber, howManyRepetition, sector, min, max);
+
 };
+setFutasSzam2();
 
 
 timeCounting2 = function () {
@@ -2962,11 +3051,11 @@ timeCounting2 = function () {
 
     //document.querySelector("#letterMain").value = charNumberForInfo;
     //document.querySelector("#runMain").value = runningNumberForInfo;
-    charNumber = charNumberForInfo;
-    repetitionNumberForMatch = runningNumberForInfo;
-    howManyRepetition = 1;
-    sector = document.querySelector("#runTimeMain");
-    countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
+    //charNumber = charNumberForInfo;
+    //repetitionNumberForMatch = runningNumberForInfo;
+    //howManyRepetition = 1;
+    //sector = document.querySelector("#runTimeMain");
+    //countRunTime(charNumber, repetitionNumberForMatch, howManyRepetition, sector, min, max);
 
 };
 timeCounting2();
@@ -3172,6 +3261,10 @@ repeatFirst = function () {
     charNumber = document.querySelector("#karakterSzam").value;
     runningNumber = parseInt(runningNumber);
     charNumber = parseInt(charNumber);
+    if (firstSelectorIsTheFirst == false) {
+        document.querySelector("#letterMain").value = charNumberForInfo;
+        document.querySelector("#runMain").value = runningNumberForInfo;
+    };
     repeat3(runningNumber, charNumber);
 };
 
@@ -5343,16 +5436,16 @@ document.querySelector("#functionApprLog").disabled = "";
 
 preparation = function () {
     isItRepeating = true;
-    charNumber=2;
-    runningNumber=300;
-    document.querySelector("#futasSzam").value=runningNumber;
-    document.querySelector("#karakterSzam").value=charNumber;
+    charNumber = 2;
+    runningNumber = 300;
+    document.querySelector("#futasSzam").value = runningNumber;
+    document.querySelector("#karakterSzam").value = charNumber;
     runningNumber = parseInt(runningNumber);
     charNumber = parseInt(charNumber);
     previousRunningNumber = 300;
     previousCharNumber = 2;
-    document.querySelector("#letterMain").value=charNumber;
-    document.querySelector("#runMain").value=runningNumber;
+    document.querySelector("#letterMain").value = charNumber;
+    document.querySelector("#runMain").value = runningNumber;
     repeat(runningNumber, charNumber);
     document.querySelector("#estimateFunc").disabled = "";
     document.querySelector("#functionAppr1").disabled = "";
@@ -7136,7 +7229,7 @@ transform();
 wordLength = 4;
 previousWordLength = wordLength;
 //beFaster();
-startCounting = true; timeCounting();
+//startCounting = true; timeCounting();
 
 /*numberOfSzavak = 0;
 countTheLetters = function (numberOfLetters) {

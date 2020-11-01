@@ -6,7 +6,7 @@ span{font-size:19px;}
 
 p{margin-bottom:10px}
 #mainSelector inpp{text-align:justify}
-#mainSelector{width:150px;height:670px;position:sticky;top:5px;}
+#mainSelector{width:150px;height:700px;position:sticky;top:5px;}
 #mainSelector p{text-align:left;;}
 #languageSelector{width:150px;height:580px;position:fixed;right:5px;top:5px}
 #mainSelectorut {margin-bottom:10px}
@@ -195,7 +195,7 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #run100Button{display:block;margin:25px 0px 15px 0px;}
 #vartMaximum{margin-top:15px}
 
-#divForFinalString{overflow:auto; width:501px;height:290px;background-color:#dbdbdb;}
+#divForFinalString{overflow:auto;height:290px;background-color:#dbdbdb;}
 #placeForFinalString{width:500px;height:290px}
 #divForFinalWords{overflow:auto; max-width:800px;height:310px;background-color:#dbdbdb;}
 #placeForFinalWords{width:500px;height:290px}
@@ -235,7 +235,7 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #noteAll{margin:0px;width: 20px; height: 20px;vertical-align:middle}
 #monkeyMakes p{margin-bottom:5px;margin-bottom:5px}
 #divForPercentagesTable{overflow:auto;height:105px;}
-#divForPercentagesGraph{overflow:auto;height:400px;}
+#divForPercentagesGraph{overflow:auto;height:200px;}
 #percentagesGraph{width:max-content}
 #percentagesGraph td{width:10px}
 #divForRepMemEx{height:100px; overflow:auto}

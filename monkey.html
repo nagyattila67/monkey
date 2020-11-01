@@ -51,7 +51,9 @@
                         <label>olasz</label>
                         <input disabled type="radio" oninput="firstSelector()" name="language" id="olasz">
                     </div>
-                    <div><p>ez a funkció még nem müxik</p></div>
+                    <div>
+                        <p>ez a funkció még nem müxik</p>
+                    </div>
                 </div>
                 <div class="row mt-3 mb-3">
                     <h2>Majom az írógépnél</h2>
@@ -415,7 +417,8 @@
                                             - első értelmes - szó
                                             kezdő betűcsoportjaira keresünk rá vagy helyette ugyanúgy végezzük a
                                             kereséseket, de
-                                            a - megfelelő karakterszámú - "ABCDEFGHI" kulcsszóval, ui. 'nagy átlagban' ugyanazt a számsort
+                                            a - megfelelő karakterszámú - "ABCDEFGHI" kulcsszóval, ui. 'nagy átlagban'
+                                            ugyanazt a számsort
                                             kapjuk. Hogy
                                             ezt megmutassunk, ugyanígy végigfuttattuk a keresést ez utóbbi a
                                             karaktersorozatra
@@ -625,14 +628,23 @@
         <div class="row">
             <div class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding">
                 <div onclick="selectorZindex()" style="z-index:1" id="mainSelector" class="smallBorder bgLight">
-                    <p>Betűszám:</p>
+                    <p class="mb-1">Futásszám:</p>
+                    <input id="runMain" oninput="firstSelector()" type="number" value="100" style="width:80px">
+                    <p class="mt-3 mb-1">Betűszám:</p>
                     <input id="letterMain" oninput="firstSelector()" type="number" min="1" max="7" value="3"
                         style="width:50px">
-                    <p>Futásszám:</p>
-                    <input id="runMain" oninput="firstSelector()" type="number" value="100" style="width:80px">
-                    <p>Futásidő:</p>
-                    <p id="runTimeMain"> - </p>
-                    <button onclick="repeat3()" type="button" class="ml-3 btn btn-secondary btn-sm">Mehet!</button>
+                    <div style="display:initial" id="dontDisplayDel">
+                        <p class="mt-3 mb-1">Futásidő:</p>
+                        <p id="runTimeMain1"> - </p>
+                    </div>
+                    <div style="display:none" id="displayDel">
+                        <p class="mb-1 mt-3">Futásidő:</p>
+                        <del>
+                            <p id="runTimeMain2"> - </p>
+                        </del>
+                    </div>
+
+                    <button onclick="repeatFirst()" type="button" class="ml-3 btn btn-secondary btn-sm">Mehet!</button>
                     <p>Tanulómemória:</p>
                     <div style="display:block">
                         <span id="learningMemorySize"> - </span>
@@ -644,9 +656,11 @@
 
 
                     <p class="mt-0 mb-0">A tanulómemória: </p>
+
                     <div class="mt-0 mb-0"><span>BE: </span><input oninput="learningMemoryBEKI()" type="radio"
                             name="lnBEKI" id="lmBE"><span class="ml-4">KI: </span><input oninput="learningMemoryBEKI()"
                             type="radio" name="lnBEKI" id="lmKI"></div>
+
                     <div class="mt-0 mb-0" id="learningMemoryWarningBE" style="color:red;display:none">
                         <p class="mt-0 mb-0">be van kapcsolva</p>
                     </div>
@@ -676,11 +690,11 @@
                             <div class="col-6">
                                 <form>
                                     <label>Futások száma:</label>
-                                    <input oninput="timeCounting()" id="futasSzam" type="number"
+                                    <input oninput="secondSelector()" id="futasSzam" type="number"
                                         class="form-control form-control-sm" style="width:100px" min="1" max="1000000"
                                         value="100">
                                     <label>Karakterek száma:</label>
-                                    <input oninput="timeCounting()" id="karakterSzam" type="number"
+                                    <input oninput="secondSelector()" id="karakterSzam" type="number"
                                         class="form-control form-control-sm" style="width:100px" min="1" max="7"
                                         value="3">
 
@@ -693,7 +707,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <p><span id="timeInfo">-</span></p>
+                                        <p id="dontDisplayTimeInfoDel" style="display:initial"><span
+                                                id="timeInfo1">-</span></p>
+                                        <p id="displayTimeInfoDel" style="display:none"><del><span
+                                                    id="timeInfo2">-</span></del></p>
                                     </div>
                                     <div class="col-6">
                                         <button type="button" class="btn btn-secondary btn-sm"
@@ -1879,7 +1896,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <p><span id="timeInfo2">-</span></p>
+                                                <p><span id="timeInfo3">-</span></p>
                                             </div>
                                             <div class="col-6">
                                                 <button type="button" class="btn btn-secondary btn-sm"
@@ -2540,7 +2557,6 @@
                                                 <label>
                                                     <p>betű</p>
                                                 </label>
-
                                             </td>
                                             <td style="background-color:#b5f7c4">
                                                 <p>Ha akarja, akkor a majom addig gépel, amíg rá nem bukkan egy
@@ -2550,19 +2566,29 @@
                                                 <label>
                                                     <p>Ezt a szót kérem:</p>
                                                 </label>
-                                                <input id="searchThisWord" type="text" maxlength=6>
+                                                <input oninput="searchThisWordTime()" id="searchThisWord" type="text"
+                                                    maxlength=6>
 
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="background-color:#FBEC5D">
-                                                <button id="please" type="button" class="ml-3 btn btn-secondary btn-sm"
+                                                <button id="please" type="button" class="ml-1 mt-1 btn btn-secondary btn-sm"
                                                     onclick="writeInLine()">Mehet!</button>
                                             </td>
                                             <td style="background-color:#b5f7c4">
                                                 <button id="pleaseThis" type="button"
-                                                    class="ml-3 btn btn-secondary btn-sm"
+                                                    class="ml-1 mt-1 btn btn-secondary btn-sm"
                                                     onclick="searchInLine()">Mehet!</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color:#FBEC5D">
+                                                <span>(4 betű - 1 mp, 5 betű -1 perc, 6 betű - fél óra
+                                                    ...)</span>
+                                            </td>
+                                            <td style="background-color:#b5f7c4">
+                                                <span>(2 betű - 6 mp, 3 betű - 7 perc ...)</span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -3020,7 +3046,7 @@
                                 ezek
                                 is összetett szavak (<i>betűmetszés, fűmag, hegedűművész, műmelléklet)</i>,
                                 s a
-                                betűkettős a két szóelem találkozásánal alakul ki. Így az 'ŰM'
+                                betűkettős a két szóelem találkozásánál alakul ki. Így az 'ŰM'
                                 betűkettős tkp. egyetlen magyar szóban sem fordul elő.</p>
                             <p>Ezzel szemben pl. a <span class="bgLightSilver">'TA'</span> betűkapcsolat 3
                                 404-szer fordul elő, ami a szavak 5.8 %-a.</p>
