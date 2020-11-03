@@ -42,6 +42,11 @@ negyBetusSzavak = Array();
 wordLength = 0;
 textForSearchOriginal2 = "";
 isLookingForMatch100 = false;
+hungarianWordsOfMonkey2Individual = Array;
+myArraySize2 = Array();
+resultFromLearningMemory = Array();
+wasMadeEmpty = false;
+
 
 firstSelectorIsTheFirst = false;
 firstSelector = function () {
@@ -54,9 +59,10 @@ firstSelector = function () {
         document.querySelector("#learningMemoryWarningKI").style.display = "initial"; document.querySelector("#learningMemoryWarningBE").style.display = "none";
         document.querySelector("#lmKI").checked = true;
     };
+    document.querySelector("#mehetBE").checked = true;
 
 
-    
+
     min = 1;
     max = 7;
     charNumber = document.querySelector("#letterMain").value;
@@ -64,8 +70,8 @@ firstSelector = function () {
     repetitionNumberForMatch = document.querySelector("#runMain").value;
     repetitionNumberForMatch = parseInt(repetitionNumberForMatch);
     howManyRepetition = 1;
-    document.querySelector("#futasSzam").value=repetitionNumberForMatch;
-    document.querySelector("#karakterSzam").value=charNumber;
+    document.querySelector("#futasSzam").value = repetitionNumberForMatch;
+    document.querySelector("#karakterSzam").value = charNumber;
     //howManyRepetition = document.querySelector("#futasSzam").value;
     charNumberForInfo = document.querySelector("#karakterSzam").value;
     runningNumberForInfo = document.querySelector("#futasSzam").value;
@@ -86,6 +92,24 @@ firstSelector = function () {
     //timeCounting2();
     //goToRepeat();
     learningMemoryBEKI();
+};
+
+mehetBEKI = function () {
+    if (document.querySelector("#mehetBE").checked == true) {
+        document.querySelector("#labelKI").style.color = "#212529";
+    };
+    if (document.querySelector("#mehetKI").checked == true) {
+        document.querySelector("#labelKI").style.color = "red";
+    };
+    if (document.querySelector("#mehetKI").checked == true) {
+        makeEmptyTableAndGraphic();
+    };
+    if (document.querySelector("#mehetKI").checked == true) {
+        wasMadeEmpty = true;
+    };
+    if (document.querySelector("#mehetBE").checked == true) {
+        wasMadeEmpty = false;
+    };
 };
 
 learningMemoryBEKI = function () {
@@ -125,9 +149,9 @@ learningMemoryKI = function () {
     document.querySelector("#learningMemoryWarningKI").style.display = "initial";
     document.querySelector("#learningMemoryWarningBE").style.display = "none";
     document.querySelector("#useLearningMemory").checked = "false";
-    
-    
-    
+
+
+
 };
 
 myTime = function (timeStart, timeFinish) {
@@ -941,13 +965,13 @@ colorEnnyiBetusSzavak = function (charNumbInLine) {
     */
 
 };
-searchThisWordTime = function(){
+searchThisWordTime = function () {
 
 };
 
 searchInLine = function () {
     writeInLineTimeStart = new Date();
-    timeSILStart= new Date();
+    timeSILStart = new Date();
     stopSearch = false;
     if (document.querySelector("#searchThisWord").value == "") { alert("Ön nem írt be egy betűt sem a keresőmezőbe!") }
     else {
@@ -965,11 +989,11 @@ searchInLine = function () {
         if (stopSearch == false) { document.querySelector("#searchThisWord").value = ""; };
         if (stopSearch == true) { runWriteInLine(charNumbInLine, thisWord) };
     };
-    timeSILFinish= new Date();
-    timeSILStart=timeSILStart.getTime();
-    timeSILFinish=timeSILFinish.getTime();
-    timeSIL=(timeSILFinish-timeSILStart)/1000;
-    sector=document.querySelector("#szoHosszTime");
+    timeSILFinish = new Date();
+    timeSILStart = timeSILStart.getTime();
+    timeSILFinish = timeSILFinish.getTime();
+    timeSIL = (timeSILFinish - timeSILStart) / 1000;
+    sector = document.querySelector("#szoHosszTime");
     //displayTime(timeSIL,sector);
     console.log(timeSIL);
 };
@@ -1143,7 +1167,7 @@ word = function (wordLength) {
             memoryABConlyOne = "";
             generateWordRnd();
             //console.log("turn",turn);
-            if(learning.length!=0){expressionABC = wordOfMonkey};
+            if (learning.length != 0) { expressionABC = wordOfMonkey };
             if (wordLength < borderLength) { memoryABC[turn] = expressionABC; }
             if (wordLength >= borderLength) { memoryABConlyOne = expressionABC };
 
@@ -1255,14 +1279,14 @@ generateWord = function (myRndNumber) {
     lengthOfMonkeyWord = myRndNumber;
 
     if (learning.length == 0) {
-        charNumber=document.querySelector("#karakterSzam").value;
-        runningNumber=document.querySelector("#futasSzam").value;
-        alert(`A tanulómemória üres. Először egy 'a majom ${charNumber} betűs szavakat keres ${runningNumber}-szor' keresés fog lefutni, hogy a program létrehozza a tanulómemóriát!`); noMore = true;
+        charNumber = document.querySelector("#karakterSzam").value;
+        runningNumber = document.querySelector("#futasSzam").value;
+        if (noAlert == false) { alert(`A tanulómemória üres. Először egy 'a majom ${charNumber} betűs szavakat keres ${runningNumber}-szor' keresés fog lefutni, hogy a program létrehozza a tanulómemóriát!`) }; noMore = true;
         document.querySelector("#lmKI").checked = true;
         document.querySelector("#useLearningMemory").checked = false;
         document.querySelector("#learningMemoryWarningKI").style.display = "initial";
         document.querySelector("#learningMemoryWarningBE").style.display = "none";
-        
+
     };
     if (noMore == false) {
 
@@ -1557,7 +1581,6 @@ makeDictionaryAgainAndAgain = function () {
         sector = document.querySelector("#mmrTimeReal");
         displayTime(timeMDAAAS, sector);
 
-        console.log(percentagesAllOfMMR);
         mainArea = document.querySelector("#divForPercentagesTable");
         sectorId = "percentagesTable";
         sectorId = "percentagesTable";
@@ -1588,19 +1611,27 @@ runAndLetterSetting = function (runNumber, letterNumber) {
 
 dontDoIt = false;
 repetitionMemoryExamine = function () {
+    runNumber = document.querySelector("#repetitionMemoryExamineRun").value;
+    runNumber = parseInt(runNumber);
+    letterNumber = document.querySelector("#repetitionMemoryExamineLetter").value;
+    letterNumber = parseInt(letterNumber);
+    repetitionMemoryExamineBasic(runNumber, letterNumber);
+    makeLearningDistribution();
+};
+
+repetitionMemoryExamineBasic = function () {
+
     learningMemoryKI();
     timeRMEStart = new Date();
     dontDoIt = true;
-    if (learning.length == 0) { alert("A tanulómemória üres. Először futtasson egy 'a majom ˝ennyi˝ betűs szavakat keres ˝ennyiszer˝' keresést!") }
+    if (learning.length == 0) { alert("A tanulómemória üres. Először futtasson egy 'a majom ˝ennyi˝ betűs szavakat keres ˝ennyiszer˝' keresést!"); learningMemoryKI(); learningMemoryBEKI() }
     else {
+        document.querySelector("#mehetKI").checked = true;
+        mehetBEKI();
         learningMemoryBE();
-        runNumber = document.querySelector("#repetitionMemoryExamineRun").value;
-        runNumber = parseInt(runNumber);
-        letterNumber = document.querySelector("#repetitionMemoryExamineLetter").value;
-        letterNumber = parseInt(letterNumber);
-        runAndLetterSetting(runNumber, letterNumber)
-        repeat3();
 
+        runAndLetterSetting(runNumber, letterNumber)
+        repeat3(runNumber, letterNumber);
 
         myArray = Array();
         for (let i = 0; i < resultFromLearningMemory.length; i++) {
@@ -1655,11 +1686,7 @@ repetitionMemoryExamine = function () {
                 };
             };
             myArraySize[myArraySize.length] = myArrayABC[placeOfMin];
-            console.log("min", min, "placeOfMin", placeOfMin);
-            //console.log(myArrayABC[placeOfMin][0],myArrayABC[placeOfMin][1]);
             myArrayABC.splice(placeOfMin, 1);
-            console.log("myArrayABC", myArrayABC.length, myArrayABC);
-            console.log("myArraySize", myArraySize.length, myArraySize);
         };
         if (myArrayABC.length == 1) { myArraySize[myArraySize.length] = myArrayABC[0] };
         myArraySize2 = Array();
@@ -1671,19 +1698,16 @@ repetitionMemoryExamine = function () {
         for (let i = 0; i < myArrayABC.length; i++) {
             checkSumMyArrayABC = checkSumMyArrayABC + myArrayABC[i][1];
         };
-        console.log("checkSumMyArrayABC", checkSumMyArrayABC);
 
         checkSumMyArray = 0;
         for (let i = 0; i < myArray.length; i++) {
             checkSumMyArray = checkSumMyArray + myArray[i][1];
         };
-        console.log("checkSumMyArray", checkSumMyArray);
 
         checkSumMyArrayABC2 = 0;
         for (let i = 0; i < myArrayABC2.length; i++) {
             checkSumMyArrayABC2 = checkSumMyArrayABC2 + myArrayABC2[i][1];
         };
-        console.log("checkSumMyArrayABC2", checkSumMyArrayABC2);
         /*checkSumMyArraySize=0;
         for(let i=0;i<myArraySize.length;i++){
             checkSumMyArraySize=checkSumMyArraySize+myArraySize[i][1];
@@ -1691,61 +1715,194 @@ repetitionMemoryExamine = function () {
         console.log("checkSumMyArraySize",checkSumMyArraySize);*/
 
 
+
+        mainArea = document.querySelector("#divForRepMemEx");
+        sectorId = "repMemEx";
+        dictionary = myArraySize2;
+        displayDictionaryWithRepetitionInline(mainArea, sectorId, dictionary);
+        document.querySelector("#repetitionMemoryExamineABC").disabled = "";
+        document.querySelector("#infoRepSize").style.display = "none";
+        document.querySelector("#infoRepABC").style.display = "initial";
+        dontDoIt = false;
+        timeRMEFinish = new Date();
+        timeRMEFinish = timeRMEFinish.getTime();
+        timeRMEStart = timeRMEStart.getTime();
+        timeRME = (timeRMEFinish - timeRMEStart) / 1000;
+        sector = document.querySelector("#timeRMEReal");
+        displayTime(timeRME, sector);
+        result = (35 ** letterNumber / szavakByLength[letterNumber].length).toFixed(2);
+
+        document.querySelector("#learnMemory11").innerHTML = result;
+        document.querySelector("#learnMemory12").innerHTML = useLMAverage;
+        document.querySelector("#learnMemory13").innerHTML = `${((useLMAverage / result) * 100).toFixed(2)} %`
+        document.querySelector("#learnMemory14").innerHTML = `${(100 / ((useLMAverage / result) * 100)).toFixed(1)} X`
+
+        allCharacterLine = 0;
+        for (let i = 0; i < resultFromLearningMemory.length; i++) {
+            allCharacterLine = allCharacterLine + resultFromLearningMemory[i][1];
+        };
+        ErRoRAllLine = 0
+        for (let i = 0; i < myArray.length; i++) {
+            if (myArray[i][0] == "ErRoR") { ErRoRAllLine = myArray[i][1] }
+        };
+        RöViDAllLine = 0
+        for (let i = 0; i < myArray.length; i++) {
+            if (myArray[i][0] == "RöViD") { RöViDAllLine = myArray[i][1] }
+        };
+        myErRoR = 0;
+        if (ErRoRAllLine > 0) { myErRoR = 1 }
+        myRövid = 0;
+        if (RöViDAllLine > 0) { myRövid = 1 }
+        meaningfullWords = myArray.length - myErRoR - myRövid;
+        meaningfullWordsWithoutRepetition = myArray.length - myErRoR - myRövid;
+
+        document.querySelector("#learnMemory20").innerHTML = ErRoRAllLine;
+        document.querySelector("#learnMemory21").innerHTML = RöViDAllLine;
+        document.querySelector("#learnMemory22").innerHTML = allCharacterLine;
+        document.querySelector("#learnMemory23").innerHTML = resultFromLearningMemory.length;
+        document.querySelector("#learnMemory24").innerHTML = `${(((resultFromLearningMemory.length - ErRoRAllLine - RöViDAllLine) / allCharacterLine) * 100).toFixed(2)} %`;
+        document.querySelector("#learnMemory25").innerHTML = meaningfullWordsWithoutRepetition;
+        document.querySelector("#learnMemory26").innerHTML = `${((meaningfullWordsWithoutRepetition / allCharacterLine) * 100).toFixed(2)} %`;
+        document.querySelector("#learnMemory27").innerHTML = `${(allCharacterLine / resultFromLearningMemory.length).toFixed(0)}.`;
+        return resultFromLearningMemory;
     };
-    mainArea = document.querySelector("#divForRepMemEx");
-    sectorId = "repMemEx";
-    dictionary = myArraySize2;
-    displayDictionaryWithRepetitionInline(mainArea, sectorId, dictionary);
-    document.querySelector("#repetitionMemoryExamineABC").disabled = "";
-    document.querySelector("#infoRepSize").style.display = "none";
-    document.querySelector("#infoRepABC").style.display = "initial";
-    dontDoIt = false;
-    timeRMEFinish = new Date();
-    timeRMEFinish = timeRMEFinish.getTime();
-    timeRMEStart = timeRMEStart.getTime();
-    timeRME = (timeRMEFinish - timeRMEStart) / 1000;
-    console.log(timeRME);
-    sector = document.querySelector("#timeRMEReal");
-    displayTime(timeRME, sector);
-    result = (35 ** letterNumber / szavakByLength[letterNumber].length).toFixed(2);
-
-    document.querySelector("#learnMemory11").innerHTML = result;
-    document.querySelector("#learnMemory12").innerHTML = useLMAverage;
-    document.querySelector("#learnMemory13").innerHTML = `${((useLMAverage / result) * 100).toFixed(2)} %`
-    document.querySelector("#learnMemory14").innerHTML = `${(100 / ((useLMAverage / result) * 100)).toFixed(1)} X`
-
-    allCharacterLine = 0;
-    for (let i = 0; i < resultFromLearningMemory.length; i++) {
-        allCharacterLine = allCharacterLine + resultFromLearningMemory[i][1];
-    };
-    ErRoRAllLine = 0
-    for (let i = 0; i < myArray.length; i++) {
-        if (myArray[i][0] == "ErRoR") { ErRoRAllLine = myArray[i][1] }
-    };
-    RöViDAllLine = 0
-    for (let i = 0; i < myArray.length; i++) {
-        if (myArray[i][0] == "RöViD") { RöViDAllLine = myArray[i][1] }
-    };
-    myErRoR = 0;
-    if (ErRoRAllLine > 0) { myErRoR = 1 }
-    myRövid = 0;
-    if (RöViDAllLine > 0) { myRövid = 1 }
-    meaningfullWords = myArray.length - myErRoR - myRövid;
-    meaningfullWordsWithoutRepetition = myArray.length - myErRoR - myRövid;
-
-    document.querySelector("#learnMemory20").innerHTML = ErRoRAllLine;
-    document.querySelector("#learnMemory21").innerHTML = RöViDAllLine;
-    document.querySelector("#learnMemory22").innerHTML = allCharacterLine;
-    document.querySelector("#learnMemory23").innerHTML = resultFromLearningMemory.length;
-    document.querySelector("#learnMemory24").innerHTML = `${(((resultFromLearningMemory.length - ErRoRAllLine - RöViDAllLine) / allCharacterLine) * 100).toFixed(2)} %`;
-    document.querySelector("#learnMemory25").innerHTML = meaningfullWordsWithoutRepetition;
-    document.querySelector("#learnMemory26").innerHTML = `${((meaningfullWordsWithoutRepetition / allCharacterLine) * 100).toFixed(2)} %`;
-    document.querySelector("#learnMemory27").innerHTML = `${(allCharacterLine / resultFromLearningMemory.length).toFixed(0)}.`;
-
-    console.log("resultFromLearningMemory: ", resultFromLearningMemory);
-
-    makeLearningDistribution();
 };
+
+/*cleaningRRME=function(){
+    myArray=Array();
+    mainArea = document.querySelector("#divForRRME")
+    sectorId = "RRME";
+    displayDictionaryWithRepetitionInline(mainArea, sectorId, myArray);
+};*/
+
+noAlert = false;
+repRepMexEx = function () {
+    //cleaningRRME();
+    noAlert = true;
+    if (dontNullMemory == false) { learning = Array() };
+
+    learningMemoryKI();
+    timeRRMEStart = new Date();
+    timeRRMEStart = timeRRMEStart.getTime();
+
+    thisWasTheSetting = document.querySelector("#mehetKI").checked;
+    document.querySelector("#mehetKI").checked = true;
+
+
+
+
+    myUltimateResult = Array();
+    URlength = 0;
+
+    repNumber = document.querySelector("#repetitionMemoryExamineRep2").value;
+    repNumber = parseInt(repNumber);
+    runNumber = document.querySelector("#repetitionMemoryExamineRun2").value;
+    runNumber = parseInt(runNumber);
+    letterNumber = document.querySelector("#repetitionMemoryExamineLetter2").value;
+    letterNumber = parseInt(letterNumber);
+
+    for (let i = 0; i < repNumber; i++) {
+        console.log("repetition: ", i);
+        if (document.querySelector("#dontWantToSetMemory").checked == false) {
+            runningNumberSpec = document.querySelector("#repNumberFor3").value;
+            runningNumberSpec = parseInt(runningNumberSpec);
+            charNumberSpec = 3;
+            repeat3(runningNumberSpec, charNumberSpec);
+            runningNumberSpec = document.querySelector("#repNumberFor4").value;
+            runningNumberSpec = parseInt(runningNumberSpec);
+            charNumberSpec = 4;
+            repeat3(runningNumberSpec, charNumberSpec);
+        };
+
+        repetitionMemoryExamineBasic(runNumber, letterNumber);
+        max = 0;
+        for (let j = 0; j < resultFromLearningMemory.length; j++) {
+            if (resultFromLearningMemory[j][1] > max && resultFromLearningMemory[j][0] != undefined
+                && resultFromLearningMemory[j][0] != "ErRoR" && resultFromLearningMemory[j][0] != "RöViD") {
+                max = resultFromLearningMemory[j][1];
+                word4max = resultFromLearningMemory[j][0];
+            };
+        };
+        myArray = Array();
+        myArray[0] = word4max;
+        myArray[1] = max;
+        myUltimateResult[URlength] = myArray;
+        console.log("length", URlength);
+        URlength = URlength + 1;
+    };
+
+
+
+
+    myResult = myUltimateResult.slice(0);
+    dictionary = Array()
+    for (let i = 0; i < myResult.length; i++) { dictionary[i] = myResult[i][0] };
+    dictionary.sort();
+
+    console.log("MOST");
+    myArray = Array();
+    finalDictionaryABC = Array();
+    for (let i = 0; i < dictionary.length; i++) {
+        for (let j = 0; j < myResult.length; j++) {
+            if (dictionary[i] == myResult[j][0]) {
+                finalDictionaryABC[finalDictionaryABC.length] = myResult[j];
+            };
+        };
+    };
+
+    finalDictionaryValue = Array();
+
+    while (myUltimateResult.length > 0) {
+        max = 0;
+        for (let i = 0; i < myUltimateResult.length; i++) {
+            if (max < myUltimateResult[i][1]) { max=myUltimateResult[i][1];
+                element = myUltimateResult[i]; index = i };
+        };
+        finalDictionaryValue[finalDictionaryValue.length] = element;
+        myUltimateResult.splice(index, 1);
+    };
+    displayItem();
+
+    document.querySelector("#mehetKI").checked = thisWasTheSetting;
+    timeRRMEFinish = new Date();
+    timeRRMEFinish = timeRRMEFinish.getTime();
+    timeRRME = (timeRRMEFinish - timeRRMEStart) / 1000;
+    sector = document.querySelector("#realTimeRRME")
+    displayTime(timeRRME, sector);
+    noAlert = false;
+};
+
+displayItem = function () {
+    if (document.querySelector("#RRMEabcRadio").checked == true) {
+        mainArea = document.querySelector("#divForRRME")
+        sectorId = "RRME";
+        displayDictionaryWithRepetitionInline(mainArea, sectorId, finalDictionaryABC);
+    };
+    if (document.querySelector("#RRMEvalueRadio").checked == true) {
+        mainArea = document.querySelector("#divForRRME")
+        sectorId = "RRME";
+        displayDictionaryWithRepetitionInline(mainArea, sectorId, finalDictionaryValue);
+    };
+};
+
+RRMEabc = function () {
+    displayItem();
+};
+
+IdontWantToSetMemory = function () {
+    if (document.querySelector("#dontWantToSetMemory").checked == false) {
+        document.querySelector("#repNumberFor3").disabled = false;
+        document.querySelector("#repNumberFor4").disabled = false;
+        dontNullMemory = false;
+    }
+    else {
+        document.querySelector("#repNumberFor3").disabled = true;
+        document.querySelector("#repNumberFor4").disabled = true;
+        dontNullMemory = true;
+    };
+
+};
+IdontWantToSetMemory();
 
 makeLearningDistribution = function () {
 
@@ -1768,14 +1925,12 @@ makeLearningDistribution = function () {
             if (myArraySize[j][1] == i) { learningDistribution[i] = learningDistribution[i] + 1 };
         };
     };
-    console.log(learningDistribution);
     index = 0;
     for (let i = 0; i < learningDistribution.length; i++) {
         if (learningDistribution[learningDistribution.length - i - 1] == 0) { index = index + 1 };
         if (learningDistribution[learningDistribution.length - i - 1] != 0) { break };
     };
     learningDistribution.splice(learningDistribution.length - index, index);
-    console.log(learningDistribution);
     mainArea = document.querySelector("#divForLearningDist");
     sectorId = "learningDist"
     dictionary = learningDistribution;
@@ -1864,7 +2019,6 @@ mmrOnInput = function () {
     repNumb = parseInt(repNumb);
     document.querySelector("#mmrInfo1").innerHTML = wordNumb * repNumb;
     secMMR = repNumb * wordNumb * 0.2;
-    console.log("sec", secMMR);
     sector = document.querySelector("#mmrTime")
     displayTime(secMMR, sector);
     sector = document.querySelector("#mmrTimeReal").innerHTML = " - ";
@@ -2124,7 +2278,6 @@ displayDictionary = function (mainArea, sectorId, dictionary) {
 displayDictionaryInline = function (mainArea, sectorId, dictionary) {
     area = mainArea;
     sector = document.querySelector(`#${sectorId}`);
-    console.log(sectorId);
     area.removeChild(sector);
     newDiv = document.createElement("div");
     newDiv.id = `${sectorId}`;
@@ -2956,6 +3109,7 @@ szavakHexTemp = Array();
 };*/
 
 secondSelector = function () {
+    document.querySelector("#mehetBE") = checked;
     runningNumberForInfo = document.querySelector("#futasSzam").value;
     charNumberForInfo = document.querySelector("#karakterSzam").value
 
@@ -2964,7 +3118,7 @@ secondSelector = function () {
     document.querySelector("#letterMain").value = charNumberForInfo;
     document.querySelector("#runMain").value = runningNumberForInfo;
 
-    
+
     howManyRepetition = 1;
     min = 1;
     max = 7;
@@ -3014,11 +3168,11 @@ timeCounting = function () {
 };
 
 setFutasSzam2 = function () {
-    runningNumber=document.querySelector("#futasSzam2").value;
-    charNumber=document.querySelector("#karakterSzam2").value;
-    document.querySelector("#letterMain").value=charNumber;
-    document.querySelector("#runMain").value=runningNumber;
-    sector=document.querySelector("#timeInfo3");
+    runningNumber = document.querySelector("#futasSzam2").value;
+    charNumber = document.querySelector("#karakterSzam2").value;
+    document.querySelector("#letterMain").value = charNumber;
+    document.querySelector("#runMain").value = runningNumber;
+    sector = document.querySelector("#timeInfo3");
     howManyRepetition = 1;
     min = 1;
     max = 8;
@@ -3141,7 +3295,7 @@ repeat2 = function (runningNumber, charNumber) {
         hideClickCounter = 0;
         hideTheDistanceGraph();
     };*/
-    if (document.querySelectorAll("#distributionDistanceGraph tr").length > 0) {
+    if (document.querySelectorAll("#distributionDistanceGraph tr").length > 0 && document.querySelector("#tableForDistributionDistance").children.length > 0) {
         area = document.querySelector("#tableForDistributionDistance");
         sector = document.querySelector("#distributionDistanceGraph");
         area.removeChild(sector);
@@ -3157,6 +3311,7 @@ repeat2 = function (runningNumber, charNumber) {
         hideTheDistanceGraph();
     };
 
+    //if (wasMadeEmpty == false) {
     console.log("ürességvizsgálat elindult");
     noConsole = true;
     timeRepeat2Start = new Date;
@@ -3248,6 +3403,8 @@ repeat2 = function (runningNumber, charNumber) {
         hideMoreDistance();
     };
     createDistributionDistanceGraph();
+    //};
+
 };
 isItRepeating = false;
 //runningNumber = document.querySelector("#futasSzam").value;
@@ -3282,7 +3439,7 @@ repeat3 = function (runningNumber, charNumber) {
     //charNumber = parseInt(charNumber);
     itIsRepeat3 = true;
     repeat(runningNumber, charNumber);
-    whereEmptinessInDistribution(distribution);
+    if (document.querySelector("#mehetBE").checked == true) { whereEmptinessInDistribution(distribution) };
     itIsRepeat3 = false;
 };
 
@@ -3335,7 +3492,7 @@ repeat = function (runningNumber, charNumber) {
         //charNumber = document.querySelector("#karakterSzam").value;
         //charNumber = parseInt(charNumber);
         word(charNumber);
-        console.log("repeat: ", i, expressionABC, "turn: ", turn);
+        //console.log("repeat: ", i, expressionABC, "turn: ", turn);
 
         if (document.querySelector("#useLearningMemory").checked == true) {
             myArray = Array();
@@ -3357,7 +3514,8 @@ repeat = function (runningNumber, charNumber) {
         for (let i = 0; i < resultFromLearningMemory.length; i++) {
             if (useLMMax < resultFromLearningMemory[i][1]) { useLMMax = resultFromLearningMemory[i][1] };
         };
-        useLMMin = resultFromLearningMemory[0][1];
+        //useLMMin = resultFromLearningMemory[0][1];
+        useLMMin = 0;
         for (let i = 1; i < resultFromLearningMemory.length; i++) {
             if (useLMMin > resultFromLearningMemory[i][1]) { useLMMin = resultFromLearningMemory[i][1] };
         };
@@ -3437,50 +3595,140 @@ repeat = function (runningNumber, charNumber) {
         //wordLength = parseInt(wordLength);
         isItRepeating = false;
 
-        if (testRunning == false) {
-            distMaxOriginal = distMax;
-            if (displayNow == true) {
-                makeTableAndColoring();
-                console.log("első grafikon elkészült");
-                console.log("indul a második táblázat elkészítése");
-                makeTheSecondTable();
-                fillLoopTable(wordLength);
-                console.log("második grafikon elkészült");
-            };
-            document.querySelector("#valueCouple").innerHTML = distribution.length - 1;
-            wasRepeating = true;
-            wasHiddenFullGraph = false;
-            if (wasHide == "no") { hideDistribution() };
-            if (wasWantFullGraph == true) {
-                hideFullGraph();
-                removeFullGraph();
-                wasHiddenFullGraph = false;
-            };
-            document.querySelector("#buttonForDistanceGraph").setAttribute("onclick", "showTheDistanceGraph()");
-            document.querySelector("#buttonForDistanceGraph").innerHTML = "Mutat";
-            distanceMatrix = Array();
-            distanceMatrixAllElementCount = 0;
-            makeDistanceMatrix(distribution);
-            maxDistance = 0;
-            for (let i = 0; i < distanceMatrix.length; i++) {
-                if (distanceMatrix[i] > maxDistance) { maxDistance = distanceMatrix[i] };
-            };
-            distanceStart();
-            makeDistributionDistance();
-            distributionDistanceStart();
-            if (wasShowingDistanceGraph == true) { removeRowsFromDistanceGraph() };
-            timeDistance = 0;
 
-            document.querySelector("#divForAllDistribution");
-            hideDistribution();
-            wasHide = "";
-            countTheHalfListLength();
-            fillProblemTable();
+        //if (document.querySelector("#mehetKI").checked == true) {
+        //makeEmptyTableAndGraphic();
+        //};
+
+        if (document.querySelector("#mehetBE").checked == true) {
+            if (testRunning == false) {
+                distMaxOriginal = distMax;
+                if (displayNow == true) {
+                    makeTableAndColoring();
+                    console.log("első grafikon elkészült");
+                    console.log("indul a második táblázat elkészítése");
+                    makeTheSecondTable();
+                    fillLoopTable(wordLength);
+                    console.log("második grafikon elkészült");
+                };
+                document.querySelector("#valueCouple").innerHTML = distribution.length - 1;
+                wasRepeating = true;
+                wasHiddenFullGraph = false;
+                if (wasHide == "no") { hideDistribution() };
+                if (wasWantFullGraph == true) {
+                    hideFullGraph();
+                    removeFullGraph();
+                    wasHiddenFullGraph = false;
+                };
+                document.querySelector("#buttonForDistanceGraph").setAttribute("onclick", "showTheDistanceGraph()");
+                document.querySelector("#buttonForDistanceGraph").innerHTML = "Mutat";
+                distanceMatrix = Array();
+                distanceMatrixAllElementCount = 0;
+                makeDistanceMatrix(distribution);
+                maxDistance = 0;
+                for (let i = 0; i < distanceMatrix.length; i++) {
+                    if (distanceMatrix[i] > maxDistance) { maxDistance = distanceMatrix[i] };
+                };
+                distanceStart();
+                makeDistributionDistance();
+                distributionDistanceStart();
+                if (wasShowingDistanceGraph == true) { removeRowsFromDistanceGraph() };
+                timeDistance = 0;
+
+                document.querySelector("#divForAllDistribution");
+                hideDistribution();
+                wasHide = "";
+                countTheHalfListLength();
+                fillProblemTable();
+            };
         };
         repeat2();
 
     };
 
+
+};
+
+makeEmptyTableAndGraphic = function () {
+    wasMadeEmpty = true;
+    if (document.querySelectorAll("#graphicSecond tr").length > 0) {
+        borderNumber = document.querySelectorAll("#graphicSecond tr").length;
+        for (let i = 0; i < borderNumber; i++) {
+            area = document.querySelector("#graphicSecond");
+            element = document.querySelectorAll("#graphicSecond tr")[borderNumber - 1 - i];
+            area.removeChild(element);
+        };
+    };
+
+    if (document.querySelectorAll("#graphic tr").length > 0) {
+        borderNumber = document.querySelectorAll("#graphic tr").length;
+        for (let i = 0; i < borderNumber; i++) {
+            area = document.querySelector("#graphic");
+            element = document.querySelectorAll("#graphic tr")[borderNumber - 1 - i];
+            area.removeChild(element);
+        };
+    };
+
+
+    borderNumber = document.querySelectorAll("#fullGraphic tr").length;
+    for (let i = 0; i < borderNumber; i++) {
+        area = document.querySelector("#fullGraphic");
+        element = document.querySelectorAll("#fullGraphic tr")[borderNumber - 1 - i];
+        area.removeChild(element);
+    };
+
+    /*if (document.querySelector("#distanceTable") != null) {
+        area = document.querySelector("#colForDistanceTable");
+        sector = document.querySelector("#distanceTable");
+        area.removeChild(sector);
+
+        let newP = document.createElement("p");
+        newP.setAttribute("id", "distanceTable");
+        area.appendChild(newP);
+
+    };
+    for (let i = 0; i < distributionDistance.length; i++) {
+        newSpan = document.createElement("span");
+        newSpan.setAttribute("name", i);
+        document.querySelector("#distributionDistanceTable").appendChild(newSpan);
+    };*/
+
+
+
+    document.querySelector("#numberOfAllRunning").innerHTML = " - ";
+    document.querySelector("#numberOfWords").innerHTML = " - ";
+    document.querySelector("#averageNumberOfWords").innerHTML = " - ";
+    document.querySelector("#shortestListLength").innerHTML = " - ";;
+    document.querySelector("#shortestListValue").innerHTML = " - ";
+    document.querySelector("#longestListLength").innerHTML = " - ";
+    document.querySelector("#longestListValue").innerHTML = " - ";
+    document.querySelector("#mostFrequentedListLength").innerHTML = " - ";
+    document.querySelector("#mostFrequentedListValue").innerHTML = " - ";
+    //document.querySelector("#runTime").innerHTML = " - ";
+
+    document.querySelector("#explantation1").innerHTML = `A majom most - betű hosszúságú szavakat keresett.`
+    document.querySelector("#explantation2").innerHTML = "A 35 betűből álló ábécéből 35";
+    document.querySelector("#explantation3").innerHTML = " - ";
+    document.querySelector("#explantation4").innerHTML = ` = - darab - betű hosszúságú szó rakható ki.A szótárban pedig összesen - db. - betű hosszúságú szó szerepel.`
+
+    document.querySelector("#explantation5").innerHTML = `Ha a két értéket elosztjuk egymással, akkor a - /  - =`
+    document.querySelector("#explantation6").innerHTML = " - ";
+    document.querySelector("#explantation7").innerHTML = ` értéket kapjuk, ami azt mutatja meg, hogy a majomnak hány értelmetlen betűcsoportot kell átlagosan leírnia, hogy végül egy értelmes szóhóz jusson. Ez lesz a - hosszúságú szavakat tartalmazó szólisták átlagos terjedelme.`
+
+    document.querySelector("#explantation8").innerHTML = "Minél jobban növeljük a futások számát, "
+    document.querySelector("#explantation9").innerHTML = "a két érték"
+    document.querySelector("#explantation10").innerHTML = " annál jobban megközelítheti egymást."
+    document.querySelector("#explantation11").innerHTML = `Jelenleg az eltérés: - `;
+
+
+    document.querySelector("#redText").style.display = "none";
+    document.querySelector("#learnMemory1").innerHTML = " - ";
+    document.querySelector("#learnMemory2").innerHTML = " - ";
+    document.querySelector("#learnMemory3").innerHTML = " - ";
+    document.querySelector("#learnMemory4").innerHTML = " - ";
+
+
+    //wasMadeEmpty = false;
 
 };
 
@@ -4617,7 +4865,6 @@ wrappingZindex = function () {
 };
 
 selectorZindex = function () {
-    console.log("sel");
     document.querySelector("#wrapping0Form").style["z-index"] = "1"
     document.querySelector("#wrapping1Form").style["z-index"] = "1"
     document.querySelector("#wrapping2Form").style["z-index"] = "1"
@@ -5415,8 +5662,9 @@ showDistribution = function () {
 
 removeDistributionP = function () {
     place = document.querySelector("#divForAllDistribution");
-    place.removeChild(place.children[0])
-
+    if (document.querySelector("#divForAllDistribution").children.length > 0) {
+        place.removeChild(place.children[0])
+    };
 };
 
 createDistributionP = function () {
@@ -5573,46 +5821,53 @@ createDistanceMatrixSpans = function () {
 };
 
 removeDistanceMatrixSpan = function () {
-
     let area = document.querySelector("#colForDistanceTable");
     let sector = document.querySelector("#colForDistanceTable").lastElementChild;
     area.removeChild(sector);
+
     let newP = document.createElement("p");
     newP.setAttribute("id", "distanceTable");
     area.appendChild(newP);
     createDistanceMatrixSpans();
-
 };
 
 whereEmptinessInDistribution = function (distribution2) {
 
+
     let area = document.querySelector("#hiddenEmptiness");
     let sector = document.querySelector("#forHiddenEmptinessSpan");
-    area.removeChild(sector);
-    newDiv = document.createElement("div");
-    newDiv.id = "forHiddenEmptinessSpan";
-    area.appendChild(newDiv);
-
-    for (let i = 0; i < distribution2.length; i++) {
-        let area = document.querySelector("#forHiddenEmptinessSpan");
-        let newSpan1 = document.createElement("span");
-        let newSpan2 = document.createElement("span");
-        newSpan1.innerHTML = distribution2[i]
-        if (i != distribution2.length - 1) { newSpan2.innerHTML = ", " };
-        if (distribution2[i] == 0) {
-            newSpan1.style["background-color"] = "#cbe7cb";
-            newSpan2.style["background-color"] = "#cbe7cb"
-        };
-        area.appendChild(newSpan1);
-        area.appendChild(newSpan2);
+    if (document.querySelector("#forHiddenEmptinessSpan") != null) {
+        area.removeChild(sector);
     };
 
+    if (wasMadeEmpty == false) {
+        newDiv = document.createElement("div");
+        newDiv.id = "forHiddenEmptinessSpan";
+        area.appendChild(newDiv);
 
-    document.querySelector("#hiddenEmptiness")
+        for (let i = 0; i < distribution2.length; i++) {
+            let area = document.querySelector("#forHiddenEmptinessSpan");
+            let newSpan1 = document.createElement("span");
+            let newSpan2 = document.createElement("span");
+            newSpan1.innerHTML = distribution2[i]
+            if (i != distribution2.length - 1) { newSpan2.innerHTML = ", " };
+            if (distribution2[i] == 0) {
+                newSpan1.style["background-color"] = "#cbe7cb";
+                newSpan2.style["background-color"] = "#cbe7cb"
+            };
+            area.appendChild(newSpan1);
+            area.appendChild(newSpan2);
+        };
+
+
+        document.querySelector("#hiddenEmptiness")
+    };
+
 };
 
 
 showDistanceMatrix = function (firstElement, lastElement, pageOfDistanceTable) {
+
     if (wasDistanceMatrixClick == false) { createDistanceMatrixSpans(); };
     wasDistanceMatrixClick = true;
 
@@ -5623,7 +5878,10 @@ showDistanceMatrix = function (firstElement, lastElement, pageOfDistanceTable) {
         }
         else { area.innerHTML = " " };
     };
-    document.querySelector("#distanceTablePage").innerHTML = `- ${pageOfDistanceTable} -`;
+    if (document.querySelector("#distanceTablePage") != null) {
+        document.querySelector("#distanceTablePage").innerHTML = `- ${pageOfDistanceTable} -`;
+    };
+
     //document.querySelector("#distanceAllPage").innerHTML = `${maxDistancePage}`;
     document.querySelector("#emptiness1").innerHTML = runningNumber;
     document.querySelector("#emptiness1_").innerHTML = charNumber;
@@ -5658,26 +5916,31 @@ showDistanceMatrix = function (firstElement, lastElement, pageOfDistanceTable) {
     //let time = distribution.length * distMax2 * 0.001;
     //sector = document.querySelector("#distGraphEstimateTime2");
     //displayTime(time, sector);
-
-
 };
 wasDistanceMatrixClick = false;
 distanceStart = function () {
-    if (distanceMatrix.length < 100) { lastElement = distanceMatrix.length }
-    else { lastElement = 100 };
-    firstElement = 0;
-    pageOfDistanceTable = 1;
-    showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable);
+    if (wasMadeEmpty == false) {
+        if (distanceMatrix.length < 100) { lastElement = distanceMatrix.length }
+        else { lastElement = 100 };
+        firstElement = 0;
+        pageOfDistanceTable = 1;
+        showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable);
+    };
+
 };
 
-distanceBack = function () {
-    if (firstElement - 99 > 0) {
-        firstElement = firstElement - 100;
-        if (pageOfDistanceTable > 1) { pageOfDistanceTable -= 1 }
-    }
-    else { lastElement = 1 }
 
-    showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable);
+
+distanceBack = function () {
+    if (wasMadeEmpty == false) {
+        if (firstElement - 99 > 0) {
+            firstElement = firstElement - 100;
+            if (pageOfDistanceTable > 1) { pageOfDistanceTable -= 1 }
+        }
+        else { lastElement = 1 }
+
+        showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable);
+    };
 };
 distanceFow = function () {
     if (firstElement + 100 < distanceMatrix.length) {
@@ -5692,15 +5955,17 @@ distanceFow = function () {
 };
 borderElement = 0;
 distanceLast = function () {
-    oldBorderElement = borderElement;
-    borderElement = (Math.floor(distanceMatrix.length / 100)) * 100;
-    firstElement = borderElement;
-    lastElement = firstElement + 100;
-    if (lastElement > distanceMatrix.length) {
-        lastElement = distanceMatrix.length;
-        pageOfDistanceTable = maxDistancePageDM;
+    if (wasMadeEmpty == false) {
+        oldBorderElement = borderElement;
+        borderElement = (Math.floor(distanceMatrix.length / 100)) * 100;
+        firstElement = borderElement;
+        lastElement = firstElement + 100;
+        if (lastElement > distanceMatrix.length) {
+            lastElement = distanceMatrix.length;
+            pageOfDistanceTable = maxDistancePageDM;
+        };
+        if (borderElement > oldBorderElement) { showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable) };
     };
-    if (borderElement > oldBorderElement) { showDistanceMatrix(firstElement, lastElement, pageOfDistanceTable) };
 };
 
 hideTheDistanceGraph = function () {
@@ -5934,10 +6199,10 @@ createDistributionDistanceSpans = function () {
 };
 
 removeDistributionDistanceSpans = function () {
-    let area = document.querySelector("#colForDistributionDistanceTable");
-    let sector = document.querySelector("#colForDistributionDistanceTable").lastElementChild;
+    area = document.querySelector("#colForDistributionDistanceTable");
+    sector = document.querySelector("#colForDistributionDistanceTable").lastElementChild;
     area.removeChild(sector);
-    let newP = document.createElement("p");
+    newP = document.createElement("p");
     newP.setAttribute("id", "distributionDistanceTable");
     area.appendChild(newP);
     createDistributionDistanceSpans();
@@ -5946,18 +6211,24 @@ removeDistributionDistanceSpans = function () {
 showDistributionDistance = function (firstElement, lastElement, pageOfDistanceTable) {
     createDistributionDistanceSpans();
 
-    for (let i = 0; i < 100; i++) {
-        area = document.querySelector(`#distributionDistanceTable span[name='${i}']`)
-        if (firstElement + i < distributionDistance.length) {
-            area.innerHTML = `${firstElement + i + 1} - ${distributionDistance[firstElement + i]}; `
-        };
-        if (firstElement + i > distributionDistance.length - 1) { area.innerHTML = "" };
-        if (distributionDistance[firstElement + i] !== 0) { area.style["background-color"] = "#fadadd" };
-        if (distributionDistance[firstElement + i] == 0) {
-            area.style["background-color"] = "#cbe7cb"
+
+    if (wasMadeEmpty == false) {
+        for (let i = 0; i < 100; i++) {
+            area = document.querySelector(`#distributionDistanceTable span[name='${i}']`)
+            if (firstElement + i < distributionDistance.length) {
+                area.innerHTML = `${firstElement + i + 1} - ${distributionDistance[firstElement + i]}; `
+            };
+            if (firstElement + i > distributionDistance.length - 1) { area.innerHTML = "" };
+            if (distributionDistance[firstElement + i] !== 0) { area.style["background-color"] = "#fadadd" };
+            if (distributionDistance[firstElement + i] == 0) {
+                area.style["background-color"] = "#cbe7cb"
+            };
         };
     };
-    document.querySelector("#distributionDistanceTablePage").innerHTML = `- ${pageOfDistanceTable} -`;
+
+    if (document.querySelector("#distributionDistanceTablePage") != null) {
+        document.querySelector("#distributionDistanceTablePage").innerHTML = `- ${pageOfDistanceTable} -`;
+    };
 
     document.querySelector("#emptiness6").innerHTML = distanceMatrix.length;
     document.querySelector("#emptiness7").innerHTML = distanceMax;
@@ -5983,6 +6254,9 @@ showDistributionDistance = function (firstElement, lastElement, pageOfDistanceTa
     //if (charNumber == 5) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
     //if (charNumber == 6) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
     //if (charNumber == 7) { document.querySelector("#distGraphEstimateTime2").innerHTML = "? sec." };
+
+
+
 
 };
 
@@ -6056,15 +6330,18 @@ createDistributionDistanceGraph = function () {
         };
     };
 
-    maxLengthHere = distributionDistance.length;
-    for (let i = 0; i < distributionDistance.length; i++) {
-        for (let j = 0; j < distributionDistanceMax; j++) {
-            if (distributionDistance2[i] > 0) {
-                document.querySelectorAll("#distributionDistanceGraph tr")[distributionDistanceMax - j - 1].children[i].style["background-color"] = "rgb(240,12,147)";
-                distributionDistance2[i] = distributionDistance2[i] - 1;
+    if (wasMadeEmpty == false) {
+        maxLengthHere = distributionDistance.length;
+        for (let i = 0; i < distributionDistance.length; i++) {
+            for (let j = 0; j < distributionDistanceMax; j++) {
+                if (distributionDistance2[i] > 0) {
+                    document.querySelectorAll("#distributionDistanceGraph tr")[distributionDistanceMax - j - 1].children[i].style["background-color"] = "rgb(240,12,147)";
+                    distributionDistance2[i] = distributionDistance2[i] - 1;
+                };
             };
         };
     };
+
 };
 
 makeDistributionDistance22 = function () {
@@ -6323,81 +6600,84 @@ makeDistanceMatrixNew = function () {
 
 displayDistanceMatrix = function () {
     //ez most itt kicsit nagyon el lett áttervezés miatt
-    sums = Array();
-    if (displayCounter == 0) {
-        area = document.querySelector("#moreDistanceMatrix");
-        newP = document.createElement("p");
-        area.appendChild(newP);
-        sumOfEmptiness = 0;
-        for (let i = 0; i < distanceMatrix.length; i++) {
-            sumOfEmptiness = sumOfEmptiness + distanceMatrix[i];
-        };
-        sums[0] = sumOfEmptiness;
-        newSpan = document.createElement("span");
-        sector = document.querySelector("#colForMoreDistanceMatrix").lastElementChild;
-        sector.appendChild(newSpan);
-        newSpan.innerHTML = `táblázat fent, utolsó eleme: ${distanceMatrix[distanceMatrix.length - 1]}  - ürességek száma: ${distanceMatrix.length}`
-        area = document.querySelector("#moreDistanceMatrix");
-        newP = document.createElement("p");
-        area.appendChild(newP);
-        sumOfEmptiness = 0;
-        for (let i = 0; i < distanceMatrix2.length; i++) {
-            sumOfEmptiness = sumOfEmptiness + distanceMatrix2[i];
-        };
-        sums[1] = sumOfEmptiness;
-        newSpan = document.createElement("span");
-        sector = document.querySelector("#colForMoreDistanceMatrix").lastElementChild;
-        sector.appendChild(newSpan);
-
-        for (let i = 0; i < distanceMatrix2.length; i++) {
-            newSpan2 = document.createElement("span");
-            sector = newSpan;
-            sector.appendChild(newSpan2);
-            newSpan2.innerHTML = `${distanceMatrix2[i]}, `
-            newSpan2.style["background-color"] = "rgb(250,218,221)"
-        };
-
-        newSpan = document.createElement("span");
-        sector = document.querySelector("#colForMoreDistanceMatrix").lastElementChild;
-        sector.appendChild(newSpan);
-
-
-        newSpan.innerHTML = `ürességek száma: ${distanceMatrix2.length} `
-    };
-
-    displayCounter = displayCounter + 1;
-    sumOfEmptiness = 0;
-
-    for (let i = 0; i < distanceMatrixNew.length; i++) {
-        sumOfEmptiness = sumOfEmptiness + distanceMatrixNew[i];
-    };
-
-    area = document.querySelector("#moreDistanceMatrix");
-    newP = document.createElement("p");
-    area.appendChild(newP);
-    wasCreatedNewAgainP = true;
-
-
-    for (let i = 0; i < distanceMatrixNew.length + 2; i++) {
-        if (i == distanceMatrixNew.length + 1) {
-            newSpan.innerHTML = `ürességek száma: ${distanceMatrixNew.length}`
-            newSpan.style["background-color"] = "#cbe7cb"
-            //összeg: ${sumOfEmptiness}, `
-        }
-        else {
+    if (wasMadeEmpty == false) {
+        sums = Array();
+        if (displayCounter == 0) {
+            area = document.querySelector("#moreDistanceMatrix");
+            newP = document.createElement("p");
+            area.appendChild(newP);
+            sumOfEmptiness = 0;
+            for (let i = 0; i < distanceMatrix.length; i++) {
+                sumOfEmptiness = sumOfEmptiness + distanceMatrix[i];
+            };
+            sums[0] = sumOfEmptiness;
             newSpan = document.createElement("span");
             sector = document.querySelector("#colForMoreDistanceMatrix").lastElementChild;
             sector.appendChild(newSpan);
-            newSpan.innerHTML = `${distanceMatrixNew[i]}, `
-            newSpan.style["background-color"] = "rgb(250,218,221)";
+            newSpan.innerHTML = `táblázat fent, utolsó eleme: ${distanceMatrix[distanceMatrix.length - 1]}  - ürességek száma: ${distanceMatrix.length}`
+            area = document.querySelector("#moreDistanceMatrix");
+            newP = document.createElement("p");
+            area.appendChild(newP);
+            sumOfEmptiness = 0;
+            for (let i = 0; i < distanceMatrix2.length; i++) {
+                sumOfEmptiness = sumOfEmptiness + distanceMatrix2[i];
+            };
+            sums[1] = sumOfEmptiness;
+            newSpan = document.createElement("span");
+            sector = document.querySelector("#colForMoreDistanceMatrix").lastElementChild;
+            sector.appendChild(newSpan);
+
+            for (let i = 0; i < distanceMatrix2.length; i++) {
+                newSpan2 = document.createElement("span");
+                sector = newSpan;
+                sector.appendChild(newSpan2);
+                newSpan2.innerHTML = `${distanceMatrix2[i]}, `
+                newSpan2.style["background-color"] = "rgb(250,218,221)"
+            };
+
+            newSpan = document.createElement("span");
+            sector = document.querySelector("#colForMoreDistanceMatrix").lastElementChild;
+            sector.appendChild(newSpan);
+
+
+            newSpan.innerHTML = `ürességek száma: ${distanceMatrix2.length} `
         };
+
+        displayCounter = displayCounter + 1;
+        sumOfEmptiness = 0;
+
+        for (let i = 0; i < distanceMatrixNew.length; i++) {
+            sumOfEmptiness = sumOfEmptiness + distanceMatrixNew[i];
+        };
+
+        area = document.querySelector("#moreDistanceMatrix");
+        newP = document.createElement("p");
+        area.appendChild(newP);
+        wasCreatedNewAgainP = true;
+
+
+        for (let i = 0; i < distanceMatrixNew.length + 2; i++) {
+            if (i == distanceMatrixNew.length + 1) {
+                newSpan.innerHTML = `ürességek száma: ${distanceMatrixNew.length}`
+                newSpan.style["background-color"] = "#cbe7cb"
+                //összeg: ${sumOfEmptiness}, `
+            }
+            else {
+                newSpan = document.createElement("span");
+                sector = document.querySelector("#colForMoreDistanceMatrix").lastElementChild;
+                sector.appendChild(newSpan);
+                newSpan.innerHTML = `${distanceMatrixNew[i]}, `
+                newSpan.style["background-color"] = "rgb(250,218,221)";
+            };
+        };
+
+        allDistanceMatrixInOne[dmSerialNumber] = distanceMatrixNew;
+        dmSerialNumber += 1;
+        distanceIndex = distanceMatrixNew.length;
+        clickCounterForAgain += 1;
+        if (distanceIndex > 1) { againAndAgain() };
     };
 
-    allDistanceMatrixInOne[dmSerialNumber] = distanceMatrixNew;
-    dmSerialNumber += 1;
-    distanceIndex = distanceMatrixNew.length;
-    clickCounterForAgain += 1;
-    if (distanceIndex > 1) { againAndAgain() };
 };
 
 //a szimulált könyv két üres oldalhasábja sorainak a létrehozása
@@ -7291,7 +7571,7 @@ makeSzavakByLength = function () {
 makeSzavakByLength();
 becslesRepInLine();
 console.log("betöltöttem");
-console.log("memóriák: memoryABC,")
+console.log("memóriák: memoryABC, dictionaryOfMonkeyAllWord")
 firstSelector();
 
 

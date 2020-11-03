@@ -6,7 +6,7 @@ span{font-size:19px;}
 
 p{margin-bottom:10px}
 #mainSelector inpp{text-align:justify}
-#mainSelector{width:150px;height:700px;position:sticky;top:5px;}
+#mainSelector{width:150px;height:780px;position:sticky;top:5px;}
 #mainSelector p{text-align:left;;}
 #languageSelector{width:150px;height:580px;position:fixed;right:5px;top:5px}
 #mainSelectorut {margin-bottom:10px}
@@ -243,7 +243,7 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #divForLearningDistGraph{height:300px;overflow:auto;}
 #tableForLearningDistGraph{border-collapse:unset;height:400px;min-width:900px}
 #learningDistGraph td{border:solid 1px #f1f1f1}
-#divForRME2{height:190px;overflow:auto}
+#divForRRME{height:190px;overflow:auto}
 
 
 

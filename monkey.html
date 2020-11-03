@@ -630,32 +630,32 @@
                 <div onclick="selectorZindex()" style="z-index:1" id="mainSelector" class="smallBorder bgLight">
                     <p class="mb-1">Futásszám:</p>
                     <input id="runMain" oninput="firstSelector()" type="number" value="100" style="width:80px">
-                    <p class="mt-3 mb-1">Betűszám:</p>
+                    <p class="mt-1 mb-1">Betűszám:</p>
                     <input id="letterMain" oninput="firstSelector()" type="number" min="1" max="7" value="3"
                         style="width:50px">
                     <div style="display:initial" id="dontDisplayDel">
-                        <p class="mt-3 mb-1">Futásidő:</p>
+                        <p class="mt-1 mb-1">Futásidő:</p>
                         <p id="runTimeMain1"> - </p>
                     </div>
                     <div style="display:none" id="displayDel">
-                        <p class="mb-1 mt-3">Futásidő:</p>
+                        <p class="mb-1 mt-1">Futásidő:</p>
                         <del>
                             <p id="runTimeMain2"> - </p>
                         </del>
                     </div>
 
                     <button onclick="repeatFirst()" type="button" class="ml-3 btn btn-secondary btn-sm">Mehet!</button>
-                    <p>Tanulómemória:</p>
+                    <p class="mb-0">Tanulómemória:</p>
                     <div style="display:block">
                         <span id="learningMemorySize"> - </span>
                     </div>
-                    <p>Használja a tanulómemóriát:</p>
-                    <input type="checkbox" oninput="firstSelector()" id="useLearningMemory">
-                    <p>Az utolsó szó: <span id="uccso"> - </p>
+                    <p class="mb-1">Használja a tanulómemóriát:</p>
+                    <input class="mt-0" type="checkbox" oninput="firstSelector()" id="useLearningMemory">
+                    <p class="mb-1">Az utolsó szó: <span style="color:green"><span id="uccso"> - </p></span>
 
 
 
-                    <p class="mt-0 mb-0">A tanulómemória: </p>
+                    <p class="mt-0 mb-0">Tanulómemória: </p>
 
                     <div class="mt-0 mb-0"><span>BE: </span><input oninput="learningMemoryBEKI()" type="radio"
                             name="lnBEKI" id="lmBE"><span class="ml-4">KI: </span><input oninput="learningMemoryBEKI()"
@@ -667,8 +667,13 @@
                     <div class="mt-0 mb-0" id="learningMemoryWarningKI" style="display:initial">
                         <p class="mt-0 mb-0">nincs bekapcsolva</p>
                     </div>
-
-
+                    <p class="mt-1 mb-0">A <i>'mehet-1'</i> és <i>'mehet-2'</i> grafikonjai / táblázatai most</p>
+                    <div id="divForMehet1" style="display:initial">
+                        <p class="mt-0 mb-0"><label style="color:#212529">BE: </label><input oninput="mehetBEKI()"
+                                class="ml-2" id="mehetBE" type="radio" name="mehet1" checked>
+                            <label style="color:#212529" id="labelKI" class="ml-3">KI: </label><input
+                                oninput="mehetBEKI()" class="ml-2" id="mehetKI" type="radio" name="mehet1"></p>
+                    </div>
                 </div>
             </div>
             <div class="col-8 col-sm-8 col-md-8 col-lg-8 noPadding">
@@ -713,8 +718,8 @@
                                                     id="timeInfo2">-</span></del></p>
                                     </div>
                                     <div class="col-6">
-                                        <button type="button" class="btn btn-secondary btn-sm"
-                                            onclick="repeatFirst( )">Mehet</button>
+                                        <button type="button" class="btn btn-primary btn-sm"
+                                            onclick="repeatFirst( )">Mehet - 1</button>
                                     </div>
                                 </div>
                             </div>
@@ -1899,8 +1904,8 @@
                                                 <p><span id="timeInfo3">-</span></p>
                                             </div>
                                             <div class="col-6">
-                                                <button type="button" class="btn btn-secondary btn-sm"
-                                                    onclick="repeatSecond()">Mehet</button>
+                                                <button type="button" class="btn btn-primary btn-sm"
+                                                    onclick="repeatSecond()">Mehet - 2</button>
                                             </div>
                                         </div>
                                     </div>
@@ -2573,7 +2578,8 @@
                                         </tr>
                                         <tr>
                                             <td style="background-color:#FBEC5D">
-                                                <button id="please" type="button" class="ml-1 mt-1 btn btn-secondary btn-sm"
+                                                <button id="please" type="button"
+                                                    class="ml-1 mt-1 btn btn-secondary btn-sm"
                                                     onclick="writeInLine()">Mehet!</button>
                                             </td>
                                             <td style="background-color:#b5f7c4">
@@ -3053,7 +3059,8 @@
 
                         </div>
                         <div class="mt-3 smallBorder" style="font-size:18px">
-                            Fonetikai gyorstalpaló:
+                            Fonetikai gyorstalpaló - azaz a probléma <i>egy laikus megközelítése</i> az internetről
+                            összegereblyézett fonetikai összefüggések alapján:
                             <ul style="margin-top:10px">
                                 <li>
                                     az 'Ű' <i>labiális</i> (ajakkerekítéses), <i>felső
@@ -3109,6 +3116,45 @@
                                     de ezt a
                                     tömörség miatt nem hangsúlyoztuk.</li>
 
+                            </ul>
+                            Ezzel szemben a probléma <i>tudományos megközelítése</i> az MTA egy nyelvész doktora szavaival:
+                            <ul style="margin-top:10px">
+                                <li>
+                                    A probléma tehát az, hogy ha tilos az 'Ű+N' hangkapcsolat, akkor miért létezik a
+                                    három - <i>bűn, tűnik, szűnik</i> - szó, ill. ha mégis létezhetnek, akkor miért csak ez
+                                    a három
+                                    létezik?
+                                </li>
+                                <li>
+                                    Egy nyelvész professzor - az MTA tagja - azt válaszolta ezzel a problémával
+                                    kapcsolatban, miszerint: "Érdekes a kérdés, amit felvet, de nem hiszem, hogy a
+                                    probléma megoldása valóban az "egymást
+                                    taszító" hangpárok körében keresendő. Sokkal inkább az lehet mögötte, hogy minél
+                                    ritkább egy
+                                    bigram egyik vagy másik tagja, annál ritkább lesz maga a bigram is. Márpedig az ű
+                                    nagyon ritka. Ha
+                                    valóban taszításról lenne szó, akkor ellenkező sorrendben is taszítaniuk kellene
+                                    egymást, ezt
+                                    legalábbis meg kellene vizsgálni.
+                                </li>
+                                <li>
+                                    Másrészt: az idézett adatokból kiderül, hogy elég sok olyan
+                                    bigram van, amelynek 1 előfordulása van a megvizsgált korpuszban: nagyon kevéssé
+                                    valószínű, hogy
+                                    ezek mindegyikére található lenne ilyen "taszításos" magyarázat, mégpedig pontosan
+                                    egyforma
+                                    mértékben. És az ilyen alacsony előfordulási számok esetében nagyon nem mindegy,
+                                    hogy a kiinduló
+                                    korpusz mekkora, és pontosan milyen alakokból áll. Ebben nagyon nagy szerepe van a
+                                    véletlennek.
+                                </li>
+                                <li>
+                                    Vagyis összességében azt hiszem, hogy nemigen található értelmes válasz a ritka
+                                    kombinációk
+                                    ritkaságára (a tagjaik ritkaságán túlmenően); és a gyakori kombinációk gyakoriságát
+                                    is sokkal
+                                    inkább magyarázzák fonológián kívüli okok."
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -3559,7 +3605,8 @@
                         <button disabled type="button" class="ml-3 btn btn-secondary btn-sm"
                             id="repetitionMemoryExamineABC" onclick="repABC()">ABC sorrendben</button>
                         <span class="ml-3">Futásidő: </span><span id="timeRMEAppr"> - </span>
-
+                        <p>A <i>'mehet-1'</i> és <i>'mehet-2'</i>-höz tartozó táblázatok, grafikonok most ki lesznek
+                            kapcsolva.</p>
                         <div class="ml-3" style="color:#696969">
                             <span>Felsorolás: </span>
                             <span style="display:initial" id="infoRepSize">ismétlés száma szerint</span>
@@ -3583,23 +3630,30 @@
                         </div>
                         <hr>
                         <div class="mt-3">
-                            <p>Futtassuk végig ugyanezt az eljárást többször egymás után, s a program ki fogja listázni
-                                az első <input id="repNumberForRME" type="number" style="width:50px" value="10">
-                                leggyakrabban ismételt szót ismétlésenkénti felsorolásban '||' jellel elválasztva
-                                egymástól.</p>
+                            <p>Futtassuk végig ugyanezt az eljárást többször egymás után úgy, hogy minden egyes futás
+                                előtt a tanulómemória lenullázódik, majd 3 betűs szavakkal <input id="repNumberFor3"
+                                    type="number" style="width:70px" value="100">-szor, 4 betűs szavakkal pedig <input
+                                    id="repNumberFor4" type="number" style="width:70px" value="10">-szer történő
+                                ismétléssel feltöltődik, majd ezután a program lefut az alábbi beállításokkal, s a végén
+                                kiírja, hogy mi volt a leggyakoribb szó az egyes futások során.
+                            </p>
                             <p>Ismétlésszám: <input oninput="repTime2()" style="width:100px"
-                                    id="repetitionMemoryExamineRep2" type="number" value="100">
+                                    id="repetitionMemoryExamineRep2" type="number" value="10">
                                 Futásszám: <input oninput="repTime2()" style="width:100px"
-                                    id="repetitionMemoryExamineRun2" type="number" value="1000"> Betűszám:
+                                    id="repetitionMemoryExamineRun2" type="number" value="10"> Betűszám:
                                 <input oninput="repTime2()" id="repetitionMemoryExamineLetter2" style="width:50px"
-                                    type="number" value="5"></p>
-                            <button type="button" class="ml-3 btn btn-secondary btn-sm"
-                                onclick="repetitionMemoryExamine2()">Mehet!</button>
+                                    type="number" value="3"></p>
+                                    <p><span class="mr-3">Nem kérem a tanulómemória futtatását, én szeretném beállítani.</span>
+                                    <input oninput="IdontWantToSetMemory()" id="dontWantToSetMemory" type="checkbox"></p>
+                            <div ><button type="button" class="ml-3 mb-1 btn btn-secondary btn-sm"
+                                onclick="repRepMexEx()">Mehet!</button>
+                                <span class="ml-3">ábécé sorrendben</span><input checked type="radio" name="abcORvalue" onclick="RRMEabc()" class="ml-3" id="RRMEabcRadio">
+                                <span class="ml-3">előfordulások száma szerint</span><input type="radio" name="abcORvalue" onclick="RRMEabc()" class="ml-3" id="RRMEvalueRadio"></div>
                             <p class="mt-1 mb-0">Becsült futásidő: <span id="repTimeRMEAppr"> - </span></p>
-                            <p class="mt-0" style="color:#696969">Futásidő: <span id="repTimeRMEAppr"> - </span></p>
+                            <p class="mt-0" style="color:#696969">Futásidő: <span id="realTimeRRME"> - </span></p>
                         </div>
-                        <div class="smallBorder bgDarker mt-3" id="divForRME2">
-                            <div id="RME2"></div>
+                        <div class="smallBorder bgDarker mt-3" id="divForRRME">
+                            <div id="RRME"></div>
                         </div>
                     </div>
                 </div>
