@@ -3117,11 +3117,13 @@
                                     tömörség miatt nem hangsúlyoztuk.</li>
 
                             </ul>
-                            Ezzel szemben a probléma <i>tudományos megközelítése</i> az MTA egy nyelvész doktora szavaival:
+                            Ezzel szemben a probléma <i>tudományos megközelítése</i> az MTA egy nyelvész doktora
+                            szavaival:
                             <ul style="margin-top:10px">
                                 <li>
                                     A probléma tehát az, hogy ha tilos az 'Ű+N' hangkapcsolat, akkor miért létezik a
-                                    három - <i>bűn, tűnik, szűnik</i> - szó, ill. ha mégis létezhetnek, akkor miért csak ez
+                                    három - <i>bűn, tűnik, szűnik</i> - szó, ill. ha mégis létezhetnek, akkor miért csak
+                                    ez
                                     a három
                                     létezik?
                                 </li>
@@ -3643,30 +3645,59 @@
                                     id="repetitionMemoryExamineRun2" type="number" value="10"> Betűszám:
                                 <input oninput="repTime2()" id="repetitionMemoryExamineLetter2" style="width:50px"
                                     type="number" value="3"></p>
-                                    <p><span class="mr-3">Nem kérem a tanulómemória futtatását, én szeretném beállítani.</span>
-                                    <input oninput="IdontWantToSetMemory()" id="dontWantToSetMemory" type="checkbox"></p>
-                            <div ><button type="button" class="ml-3 mb-1 btn btn-secondary btn-sm"
-                                onclick="repRepMexEx()">Mehet!</button>
-                                <span class="ml-3">ábécé sorrendben</span><input checked type="radio" name="abcORvalue" onclick="RRMEabc()" class="ml-3" id="RRMEabcRadio">
-                                <span class="ml-3">előfordulások száma szerint</span><input type="radio" name="abcORvalue" onclick="RRMEabc()" class="ml-3" id="RRMEvalueRadio"></div>
-                            <p class="mt-1 mb-0">Becsült futásidő: <span id="repTimeRMEAppr"> - </span></p>
+                            <p><span class="mr-3">Nem kérem a tanulómemória futtatását, én szeretném beállítani.</span>
+                                <input oninput="IdontWantToSetMemory()" id="dontWantToSetMemory" type="checkbox"></p>
+                            <div><button type="button" class="ml-3 mb-1 btn btn-secondary btn-sm"
+                                    onclick="repRepMexEx()">Mehet!</button>
+                                <span class="ml-3">ábécé sorrendben</span><input checked type="radio" name="abcORvalue"
+                                    onclick="RRMEabc()" class="ml-3" id="RRMEabcRadio">
+                                <span class="ml-3">előfordulások száma szerint</span><input type="radio"
+                                    name="abcORvalue" onclick="RRMEabc()" class="ml-3" id="RRMEvalueRadio"></div>
+                            <p class="mt-1 mb-0">Becsült futásidő: <span id="repTimeRMEAppr"> <i>Például:
+                                        100/10/100/10/3 beállítással 16 - 54 perc</i> </span></p>
                             <p class="mt-0" style="color:#696969">Futásidő: <span id="realTimeRRME"> - </span></p>
                         </div>
                         <div class="smallBorder bgDarker mt-3" id="divForRRME">
                             <div id="RRME"></div>
                         </div>
+                        <p class="mt-3">Egy példa erre az alkalmazásra: 100/10-es memóriafeltöltéssel 100/100/4
+                            beállítással több mint 5 órán át futott
+                            a program. Minden ismétlés előtt új tanulómemória jött létre. Így a következő szavakat
+                            sorolta fel a program:
+                        </p>
+                        <p>
+                            <span class="ml-3">ábécé sorrendben</span><input checked type="radio" name="abcORvalue2"
+                                onclick="RRMEabc2()" class="ml-3" id="RRMEabcRadio2"><span class="ml-3">előfordulások
+                                száma szerint</span><input type="radio" name="abcORvalue2" onclick="RRMEabc2()"
+                                class="ml-3" id="RRMEvalueRadio2">
+
+                        </p>
+                        <p class="ml-3">Ennyi különböző szó szerepel a felsorolásban: <span id="RRMEdifferent"> - </span> db.</p>
+                        <small>
+                            <div id="divForRRMEteszt">
+                                <p id="pForRRMEteszt">
+
+                                </p>
+                            </div>
+                        </small>
+
+
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col">
-
+                        <p>A majom tehát - a négy betűs szavak közül - ezeket a szavakat képezte legtöbbször az általa
+                            felállított betűstatisztikai szabályok alapján.</p>
+                            <p style="color:red">a program eddig van meg ... folytatjuk ... mihelyst ráérünk ... &#128584  &#128585  &#128586</p>
+                            <p></p>
                     </div>
                 </div>
 
             </div>
-
-            <div style="z-index:0" class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding"></div>
         </div>
+
+        <div style="z-index:0" class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding"></div>
+    </div>
     </div>
     <script src="/gyak.js">
     </script>
