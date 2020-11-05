@@ -294,29 +294,29 @@
                             </p>
 
                             <div>
-                                <button disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
-                                    onclick="searching()">
+                                <button disabled name="Google" type="button" class="searchingClass btn btn-secondary btn-sm searching"
+                                    onclick="searching(this)">
 
                                     Google
                                 </button>
-                                <button disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
-                                    onclick="searching()">
+                                <button name="Yahoo" disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
+                                    onclick="searching(this)">
                                     Yahoo
                                 </button>
-                                <button disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
-                                    onclick="searching()">
+                                <button name="Bing" disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
+                                    onclick="searching(this)">
                                     Bing
                                 </button>
-                                <button disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
-                                    onclick="searching()">
+                                <button name="DuckDuckGo" disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
+                                    onclick="searching(this)">
                                     DuckDuckGo
                                 </button>
-                                <button disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
-                                    onclick="searching()">
+                                <button name="Baidu" disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
+                                    onclick="searching(this)">
                                     Baidu
                                 </button>
-                                <button disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
-                                    onclick="searching()">
+                                <button name="Yandex"  disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
+                                    onclick="searching(this)">
                                     Yandex
                                 </button>
                                 <label class="ml-5">szöveg </label><input class="ml-2" id="searchText" type="radio"
@@ -3660,10 +3660,12 @@
                         <div class="smallBorder bgDarker mt-3" id="divForRRME">
                             <div id="RRME"></div>
                         </div>
-                        <p class="mt-3">Egy példa erre az alkalmazásra: 100/10-es memóriafeltöltéssel 100/100/4
-                            beállítással több mint 5 órán át futott
-                            a program. Minden ismétlés előtt új tanulómemória jött létre. Így a következő szavakat
-                            sorolta fel a program:
+                        <p class="mt-3">Néhány példa erre az alkalmazásra: 100/10-es memóriafeltöltéssel 100/100/4
+                            beállítással 30-40 percen át futott a program háromszor, s ewnnek az eredményeit látjuk az
+                            alábbi felsorolásban.
+                            a program. (Minden 100-as ismétlés előtt új tanulómemória jött létre.) Így a következő
+                            szavakat
+                            sorolta fel a program:<input type="radio" id="RRMEteszt1" name="RRMEtesztname">
                         </p>
                         <p>
                             <span class="ml-3">ábécé sorrendben</span><input checked type="radio" name="abcORvalue2"
@@ -3672,14 +3674,26 @@
                                 class="ml-3" id="RRMEvalueRadio2">
 
                         </p>
-                        <p class="ml-3">Ennyi különböző szó szerepel a felsorolásban: <span id="RRMEdifferent"> - </span> db.</p>
-                        <small>
-                            <div id="divForRRMEteszt">
-                                <p id="pForRRMEteszt">
+                        <p class="ml-3">az elsőt <input oninput="RRMEabc2()" checked class="ml-1 mr-3" type="radio"
+                                id="RRMEtesztek1" name="RRMEtesztek"> a másodikat <input oninput="RRMEabc2()"
+                                class="ml-1 mr-3" type="radio" id="RRMEtesztek2" name="RRMEtesztek"> a harmadikat <input
+                                oninput="RRMEabc2()" class="ml-1 mr-3" type="radio" id="RRMEtesztek3"
+                                name="RRMEtesztek"> kérem.</p>
+                        <p class="ml-3">Ennyi különböző szó szerepel a felsorolásban: <span id="RRMEdifferent"> -
+                            </span> db.</p>
+                        <div class="bgWhite smallBorder" id="divForRRMEteszt">
+                            <p id="pForRRMEteszt">
 
-                                </p>
+                            </p>
+                        </div>
+                        <p class="mt-3">Ezek a szavak fordulnak elő mind a három futtatás során: (<span
+                                id="myLittleWordsNumber"> -
+                            </span> db.)</p>
+                        <div class="mt-3 bgWhite smallBorder" id="divForMyLittleWords">
+                            <div id="myLittleWords">
+
                             </div>
-                        </small>
+                        </div>
 
 
                     </div>
@@ -3688,8 +3702,10 @@
                     <div class="col">
                         <p>A majom tehát - a négy betűs szavak közül - ezeket a szavakat képezte legtöbbször az általa
                             felállított betűstatisztikai szabályok alapján.</p>
-                            <p style="color:red">a program eddig van meg ... folytatjuk ... mihelyst ráérünk ... &#128584  &#128585  &#128586</p>
-                            <p></p>
+                        <p style="color:red"><span style="color:red">a program eddig van meg ... folytatjuk ... mihelyst
+                                ráérünk ... </span>&#128584
+                            &#128585 &#128586</p>
+                        <p></p>
                     </div>
                 </div>
 
