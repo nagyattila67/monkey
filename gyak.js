@@ -1828,7 +1828,7 @@ repRepMexEx = function () {
         myArray[1] = max;
         myUltimateResult[URlength] = myArray;
         URlength = URlength + 1;
-        console.log("repetition: ", i, "tanulómemória: ", learning.length);
+        console.error("repetition: ", i, "tanulómemória: ", learning.length);
     };
 
 
@@ -7516,6 +7516,15 @@ szavak = ["ErRoR", "RöViD", "A", "ABAJGAT", "ABÁL", "ABAPOSZTÓ", "ABÁROL", "
 myRRMEteszt1 = ["AGÁR(134)", "AJAJ(49)", "AKÁR(92)", "ALÁZ(258)", "AMÍG(135)", "APÁT(186)", "ARAT(125)", "BAKÓ(102)", "BELŐ(182)", "BÁBA(122)", "BÁLA(138)", "BÉTA(149)", "BÓRA(258)", "CICI(200)", "DARA(93)", "DEKA(102)", "EDZŐ(217)", "EGÉR(90)", "ELAD(192)", "ELÉR(92)", "FAGY(60)", "FEST(91)", "FIÓK(90)", "FOJT(152)", "FÉLT(148)", "FŐZŐ(157)", "GESZ(125)", "GÉPI(172)", "HAGY(129)", "HAGY(192)", "HAGY(129)", "HAGY(192)", "HALL(130)", "HARA(153)", "HJAJ(145)", "HOLT(75)", "HOPP(70)", "HÚZÓ(188)", "HÚZÓ(148)", "HÚZÓ(188)", "HÚZÓ(148)", "IGAZ(112)", "IKON(47)", "IKON(212)", "IKON(47)", "IKON(212)", "INAL(97)", "IVAR(133)", "KAPU(53)", "KARC(179)", "KEGY(186)", "KIKI(56)", "KORC(203)", "KOSZ(27)", "KÁVA(289)", "KÖTŐ(55)", "LAMÉ(163)", "LELŐ(198)", "LENG(61)", "LENN(146)", "LÁNC(116)", "LÍRA(175)", "MAMA(141)", "MART(90)", "MENT(126)", "MENY(124)", "MERŐ(113)", "MESE(116)", "MORC(148)", "MÁLÉ(65)", "MÁMA(213)", "NYÍR(186)", "OROZ(152)", "PAPA(37)", "PARI(110)", "PASA(285)", "PIKK(187)", "PISA(180)", "PONT(234)", "PRÍM(203)", "PÁRA(110)", "ROGY(286)", "RUTA(135)", "RÁNT(158)", "SEJK(103)", "SIMA(201)", "SZÁR(142)", "SZÓR(77)", "SZÚR(136)", "SZŰZ(47)", "TORZ(291)", "TUDÓ(260)", "UTÁL(222)", "ZAGY(64)", "ZÚGÓ(209)", "ÁLOK(133)", "ÁLÚT(365)", "ÁRVA(161)", "ÉLET(156)", "ÉRÉS(125)", "ÉTEL(76)", "ÉVAD(120)", "ÍJAS(133)", "ÍRÁS(65)", "ÓRAI(58)", "ÚSZÓ(125)"];
 myRRMEteszt2 = ["ABÁL(339)", "ABÁL(63)", "ABÁL(339)", "ABÁL(63)", "ADAG(106)", "AJAJ(198)", "AJTÓ(146)", "ALVÓ(157)", "ARAB(79)", "BENT(89)", "BENŐ(258)", "BOKA(74)", "BÉRC(150)", "BÓRA(142)", "CICI(199)", "CINK(283)", "DESZ(112)", "DUGÓ(158)", "DÁMA(232)", "EMEL(176)", "EREZ(121)", "ERŐS(21)", "ESTE(191)", "FESS(225)", "FIAS(108)", "FING(58)", "FOGÓ(146)", "FÚGA(113)", "FŰFA(129)", "GYŰR(223)", "GYŰR(92)", "GYŰR(223)", "GYŰR(92)", "HUHU(150)", "HUJJ(76)", "HUTA(30)", "HÉJA(44)", "HÍVÓ(197)", "HÍZÓ(147)", "HÚGY(241)", "JUTA(428)", "JÁRÓ(72)", "KALL(144)", "KEPE(108)", "KINT(62)", "KÉRŐ(180)", "KÓLÓ(123)", "KÖTŐ(110)", "KÜNT(162)", "LÁGY(147)", "MAJD(97)", "MAKI(124)", "MAMA(168)", "MEGÉ(119)", "MENT(77)", "MINT(170)", "MORC(40)", "MÉHE(160)", "NYŰG(178)", "NÁSZ(225)", "OKOZ(129)", "OLLÓ(244)", "PAPA(35)", "PÁPÁ(169)", "PÓRÉ(107)", "REDŐ(118)", "RÁCS(363)", "RÁCS(192)", "RÁCS(88)", "RÁCS(363)", "RÁCS(192)", "RÁCS(88)", "RÁCS(363)", "RÁCS(192)", "RÁCS(88)", "RÓLA(32)", "SEJT(161)", "SUKK(80)", "SZAR(53)", "SZÉN(130)", "SZÍV(163)", "SZŐR(43)", "SZŰR(201)", "SZŰR(30)", "SZŰR(201)", "SZŰR(30)", "SZŰZ(104)", "SŐRE(119)", "TAPP(257)", "TELE(67)", "TINÓ(77)", "TÖRT(85)", "VELE(207)", "VESE(238)", "VICI(96)", "VÁJT(42)", "VÉKA(146)", "VÉKA(104)", "VÉKA(146)", "VÉKA(104)", "VÉNY(61)", "VÉTŐ(170)", "ÁJER(134)", "ÉKES(238)", "ÉRTE(172)", "ÍGÉR(197)", "ÍRAT(117)", "ÍVÁS(135)", "ÓRÁS(113)", "ÖKÖR(57)", "ÖZÉS(88)", "ÖZÉS(168)", "ÖZÉS(88)", "ÖZÉS(168)", "ÜRÜL(49)", "ŐSZI(260)"];
 myRRMEteszt3 = ["AKÓZ(112)", "ASZÚ(154)", "AVAS(131)", "BELŐ(89)", "BENN(115)", "BORÚ(139)", "BUJT(110)", "BÓRA(227)", "CICA(116)", "CSEL(37)", "DACI(137)", "DÓKA(147)", "DŐLŐ(131)", "ERŐS(298)", "ESTE(61)", "FELE(94)", "FENN(48)", "FEST(199)", "FING(217)", "FÉLŐ(59)", "FÖNT(132)", "FŰZŐ(36)", "GYŐZ(93)", "GYŰR(169)", "GÚNY(204)", "HANG(161)", "HOLT(129)", "HUHÚ(196)", "HUNY(126)", "HUNY(115)", "HUNY(126)", "HUNY(115)", "IDŐS(58)", "IVAR(208)", "JUSS(96)", "KAJA(74)", "KALL(141)", "KELŐ(115)", "KENŐ(217)", "KINŐ(335)", "KOVA(163)", "KUKK(143)", "KÉNY(120)", "KÖRÉ(61)", "LESZ(202)", "LÉGY(50)", "LÉGY(189)", "LÉGY(50)", "LÉGY(189)", "LÉGÓ(233)", "LÜKE(66)", "LŐRE(121)", "LŐRE(173)", "LŐRE(121)", "LŐRE(173)", "MART(209)", "MEGY(165)", "MELY(278)", "MOLY(137)", "MORE(208)", "MÉRV(132)", "MÉRŐ(231)", "NYES(114)", "NYÉK(143)", "NYÍR(135)", "ONDÓ(204)", "PALL(66)", "POPÓ(87)", "PÖCS(114)", "PÖCS(171)", "PÖCS(114)", "PÖCS(171)", "REJT(112)", "SILD(110)", "SING(78)", "STÉG(70)", "SZAG(228)", "SZAR(158)", "SZIK(47)", "SZÁD(94)", "SZÁR(72)", "SZŐR(68)", "SZŰR(66)", "SÍVÓ(223)", "SÜLT(138)", "TEVŐ(125)", "TOSZ(210)", "TÖLT(174)", "TÖLT(268)", "TÖLT(174)", "TÖLT(268)", "TÜLE(143)", "UGAT(24)", "UTÁN(252)", "VEJE(137)", "VÁGY(332)", "VÁLT(92)", "VÉSZ(75)", "ÁBRA(33)", "ÁLLJ(269)", "ÁRAD(87)", "ÁRVA(240)", "ÁSÍT(278)", "ÁTÉR(172)", "ÁZIK(186)", "ÉHES(128)", "ÉLED(148)", "ÍRÁS(269)", "ÍZÉS(147)", "ÜTEG(125)"];
+myRRMEteszt4 = ["ACÉL(189)", "AGÁT(186)", "AHÁN(335)", "AJAJ(329)", "AKÁR(234)", "AZÚR(197)", "BAGÓ(275)", "BAKA(308)", "BELE(359)", "BOHÓ(456)", "BUKÓ(142)", "BÁNT(227)", "BÓDÉ(218)", "BÚGÓ(379)", "BŐGŐ(258)", "CEJG(191)", "COMB(234)", "CSAL(292)", "DÖNT(338)", "DŐRE(253)", "EREZ(282)", "ESET(248)", "FEJŐ(227)", "FENN(363)", "FEST(266)", "FÉNY(310)", "FÉNY(480)", "FÉNY(310)", "FÉNY(480)", "FÜST(229)", "GALL(327)", "GYŰR(319)", "GYŰR(139)", "GYŰR(319)", "GYŰR(139)", "HAGY(315)", "HÍZÓ(370)", "INOG(220)", "IRTÓ(371)", "JÁNY(230)", "KOHÓ(249)", "KOPÓ(282)", "KRÓM(245)", "KÜNN(313)", "KÜNT(230)", "LAKK(174)", "LANT(249)", "LÁNG(265)", "LÜKE(545)", "LÜKE(472)", "LÜKE(545)", "LÜKE(472)", "LŐRE(166)", "LŐTT(201)", "MARI(255)", "MENŐ(356)", "MENŐ(155)", "MENŐ(356)", "MENŐ(155)", "MUKK(471)", "MÉHE(303)", "NYAL(257)", "NYÍR(197)", "NYÍR(274)", "NYÍR(382)", "NYÍR(197)", "NYÍR(274)", "NYÍR(382)", "NYÍR(197)", "NYÍR(274)", "NYÍR(382)", "OLLÓ(308)", "PANG(204)", "PIGE(342)", "PULI(349)", "PUMI(279)", "PÁKA(175)", "RANG(395)", "REÁL(193)", "RIZS(199)", "ROGY(225)", "ROMA(173)", "RÁGÓ(237)", "RÁTA(378)", "RÉGI(412)", "SAJT(173)", "SARK(223)", "SEJT(227)", "SODÓ(273)", "SOHA(368)", "SZEL(216)", "SZÍJ(242)", "TESZ(307)", "TÁNC(248)", "TÁTI(245)", "TÉNY(305)", "TÉRD(421)", "TÖRT(346)", "TÚRA(175)", "TŰZŐ(231)", "VALÓ(433)", "VESZ(155)", "VONT(390)", "ÁDÁZ(305)", "ÁGÁL(249)", "ÁJUL(229)", "ÉKEZ(192)", "ÉTEL(196)", "ÉTER(168)", "ÖRÜL(316)", "ÚJUL(216)", "ÚTŐR(173)", "ÜRÖM(268)", "ŰZÉS(224)"]
+
+myRRMEteszt5 = ["AGÁR(238)", "ALIG(372)", "AZÚR(175)", "BUBA(186)", "BÓKA(390)", "BŐSZ(308)", "BŐSZ(314)", "BŐSZ(308)", "BŐSZ(314)", "CETT(153)", "CIHA(173)", "CSEN(193)", "DESZ(182)", "DICS(166)", "DIKÓ(272)", "DONG(174)", "DÖNT(271)", "ELUN(464)", "ELÖL(220)", "EMEZ(292)", "EPÉS(264)", "ESŐS(274)", "ESŐS(272)", "ESŐS(274)", "ESŐS(272)", "FAJI(281)", "FESS(307)", "FUJT(335)", "FŰTŐ(315)", "GYŰR(222)", "HATÓ(290)", "HEGY(268)", "HEGY(235)", "HEGY(268)", "HEGY(235)", "HERE(314)", "HUJA(326)", "HUJJ(413)", "HUJJ(263)", "HUJJ(413)", "HUJJ(263)", "HÚGY(303)", "HÚGY(234)", "HÚGY(303)", "HÚGY(234)", "HŰLT(221)", "JAJA(212)", "KEGY(365)", "KENŐ(309)", "KIÚT(248)", "KONG(222)", "KÁPA(183)", "KÉZI(170)", "KÉZI(296)", "KÉZI(170)", "KÉZI(296)", "LAJT(359)", "LANT(288)", "LIGA(294)", "LILE(314)", "LÉGÓ(290)", "MEGY(276)", "MEGÉ(264)", "MEGÉ(161)", "MEGÉ(264)", "MEGÉ(161)", "MUKK(209)", "MÁLÉ(211)", "MÁRC(368)", "MÉRV(197)", "NAGY(196)", "NYEL(179)", "NÉMA(206)", "OPÁL(317)", "OSON(437)", "PETE(256)", "PIAC(321)", "PIÁS(228)", "PÁVA(242)", "PÖCS(379)", "RING(334)", "RONT(249)", "RÁLŐ(155)", "RÉGI(276)", "RÓNA(310)", "RÜGY(153)", "SAJT(341)", "SATU(223)", "SUTA(246)", "SZÉL(193)", "SZÓR(200)", "SZÚR(353)", "SZŐR(223)", "SÜLT(258)", "TEVŐ(189)", "TUJA(268)", "TÁTI(308)", "TÚSZ(232)", "VALA(253)", "VÉTŐ(359)", "VÍVÓ(257)", "VÍZI(212)", "ÁNGY(184)", "ÁNGY(258)", "ÁNGY(149)", "ÁNGY(184)", "ÁNGY(258)", "ÁNGY(149)", "ÁNGY(184)", "ÁNGY(258)", "ÁNGY(149)", "ÉHEN(292)", "ÉKES(312)", "ÉLED(182)", "ÉLET(665)", "ÉREZ(152)", "ÍZEL(272)", "ÍZÍK(424)", "ÓZON(308)", "ÖKÖR(250)"]
+
+myRRMEteszt6 = ["AGÁR(228)", "AKÓS(188)", "ALÉL(361)", "BANK(267)", "BELE(263)", "BEÍR(261)", "BOLY(165)", "BONG(191)", "BÁNT(203)", "BÁRÓ(382)", "BÓKA(276)", "BÖGY(220)", "CAKÓ(202)", "CIPÓ(524)", "CSEL(247)", "CSÚZ(235)", "DŐLT(241)", "ELÉL(257)", "ELÜT(183)", "ENNY(577)", "EPER(170)", "ERES(309)", "ERŐS(373)", "ESTE(421)", "FAGY(234)", "FELÉ(240)", "FONT(177)", "FUTÓ(227)", "FÁJÓ(323)", "FÁTA(261)", "FÓKA(537)", "FÖLD(223)", "FÖLD(273)", "FÖLD(223)", "FÖLD(273)", "FŰZŐ(237)", "GISZ(239)", "GUBÓ(340)", "GYŐZ(207)", "GYŰR(297)", "GŐTE(240)", "HALÓ(369)", "HANT(203)", "HATÓ(177)", "HJAJ(235)", "HUHÚ(210)", "HUJA(199)", "HUNY(487)", "HÁLA(192)", "HÍVÓ(217)", "HŐSI(324)", "IKON(185)", "JAVA(120)", "JÁRÓ(344)", "KELL(373)", "KELŐ(298)", "KOFA(264)", "KÓTA(267)", "KÖLL(123)", "KÜSZ(242)", "LELŐ(185)", "LÉGY(297)", "LÓRÉ(265)", "MERŐ(330)", "MÁMI(262)", "MÉCS(461)", "NERC(286)", "NÉHA(224)", "NÉMA(259)", "NÓTA(221)", "OROZ(284)", "PETE(278)", "PONT(269)", "PRÉS(250)", "PULI(239)", "PÓKA(177)", "REGE(396)", "RÓTT(292)", "RÚZS(267)", "RÜGY(249)", "SETE(154)", "SETE(327)", "SETE(154)", "SETE(327)", "SZIK(221)", "SZÖK(201)", "SZŰZ(123)", "SÚJT(278)", "TAVI(376)", "VAGY(238)", "VERS(157)", "VÁGY(333)", "VÉRT(213)", "ZACI(422)", "ÁMUL(355)", "ÁTÜT(407)", "ÉNEK(256)", "ÍRAT(301)", "ÍTÉL(349)", "ÍZEL(282)", "ÓSÁG(256)", "ÚSZÓ(348)", "ÜTEG(216)", "ŰZÉS(257)"]
+
+myRRMEteszt7 = ["AJAJ(423)", "AKAD(282)", "AKUT(213)", "AKÁR(293)", "ALÓL(282)", "ALÓL(306)", "ALÓL(282)", "ALÓL(306)", "ATOM(295)", "AZÚR(151)", "BEGY(158)", "BEÉR(194)", "BEÜT(219)", "BOLT(223)", "BONT(365)", "BUTI(249)", "BÓRA(364)", "BÚJÓ(273)", "BŐSZ(279)", "CSÉK(204)", "CSÉR(260)", "DALL(284)", "DEPÓ(396)", "DIÓS(373)", "DŐLŐ(259)", "ELUN(332)", "FAGY(227)", "FALÓ(253)", "FOGY(186)", "FOLD(224)", "FUJT(213)", "FÁJÓ(206)", "FÜGE(284)", "FŰZŐ(180)", "GEBE(395)", "GISZ(263)", "GYÚL(364)", "GYŐZ(336)", "GÖNC(200)", "HADI(445)", "HOCI(258)", "HÁNT(263)", "HÍZÓ(243)", "IDÉZ(251)", "IGÉZ(207)", "IKES(197)", "IMÁD(386)", "INAL(233)", "KINT(287)", "KLÓR(184)", "KÖLL(310)", "KÜNN(323)", "KŐSÓ(338)", "LOMB(137)", "LÉGY(355)", "LÉHA(215)", "MELL(298)", "MINT(234)", "NAGY(303)", "NÉHA(143)", "OLTA(158)", "OMOL(228)", "OROM(131)", "PEST(208)", "PICE(315)", "PONK(269)", "POPÓ(358)", "PULT(229)", "RELÉ(281)", "ROJT(238)", "RÁNG(195)", "RÚZS(280)", "SIMA(243)", "SZED(198)", "SZÉL(246)", "SZÉP(267)", "SZÓL(367)", "SZŐR(386)", "SÜLY(235)", "SÜSÜ(208)", "TELT(207)", "TIPP(263)", "TÖRŐ(275)", "TÚRÓ(276)", "TŰZŐ(280)", "UGAT(373)", "VELE(338)", "VICE(332)", "ÁDÁZ(156)", "ÁDÁZ(225)", "ÁDÁZ(156)", "ÁDÁZ(225)", "ÁTAD(275)", "ÉGER(229)", "ÉNEK(225)", "ÉREZ(324)", "ÉTEK(379)", "ÉTEL(467)", "ÉVAD(201)", "ÓRÁS(145)", "ÖKÖR(392)", "ÚJJÁ(264)", "ÜREG(201)", "ŰZÉS(164)"]
+
+myRRMEteszt8 = ["AKÁR(287)", "AZÚR(295)", "BÁNT(153)", "BŐGŐ(198)", "BŐSZ(316)", "CSEH(206)", "DICS(279)", "DŐLŐ(80)", "DŐLŐ(178)", "DŐLŐ(80)", "DŐLŐ(178)", "EHUN(205)", "ELÜT(437)", "ESÉS(274)", "FALÓ(441)", "FONT(291)", "FÚGA(197)", "GYŰR(281)", "GÉPI(258)", "GÖBE(279)", "HINT(203)", "HÁGÓ(330)", "HÁGÓ(198)", "HÁGÓ(330)", "HÁGÓ(198)", "IDEG(216)", "JÁNY(202)", "JÁRÓ(355)", "KAPU(266)", "KARI(297)", "KEGY(195)", "KEPE(306)", "KINT(197)", "KORC(288)", "KUSS(286)", "KÓRÓ(295)", "KÖZÉ(302)", "LENN(231)", "LEVŐ(207)", "LÁDD(281)", "LÁMA(383)", "LÁVA(307)", "LÉGY(259)", "MELY(424)", "MENŐ(349)", "MINT(225)", "MUST(204)", "MÉLY(260)", "MÓKA(320)", "NAGY(284)", "NANÁ(297)", "NYÍR(453)", "NYÍR(495)", "NYÍR(453)", "NYÍR(495)", "NYÖG(140)", "NÉZŐ(296)", "ONDÓ(324)", "PALL(272)", "PIKA(223)", "PIKÉ(375)", "PULI(152)", "REST(240)", "ROJT(269)", "RUGÓ(229)", "RÁGÓ(329)", "RÁNT(398)", "RÉJA(232)", "RÉNY(221)", "RÓNA(365)", "SAFE(509)", "SUKK(205)", "SUNY(211)", "SZEM(357)", "SZÁK(336)", "SZÉR(142)", "SZÍJ(164)", "SZÍV(270)", "SZŰZ(279)", "SÉMI(262)", "SÉTA(264)", "SÓLÉ(187)", "TUJA(236)", "TUJA(266)", "TUJA(236)", "TUJA(266)", "TÁJI(252)", "TÁRT(271)", "TÉNY(216)", "TŐGY(266)", "VEJE(176)", "VICE(430)", "VICI(226)", "VONT(246)", "VÁGY(275)", "VÍVÓ(356)", "ZSÍR(231)", "ÁCSI(217)", "ÁCSI(283)", "ÁCSI(217)", "ÁCSI(283)", "ÁJER(332)", "ÁROS(160)", "ÍVEL(214)", "ÓMEN(234)", "ÖKÖL(361)", "ÖLEL(199)", "ÚSZÓ(221)", "ÚTŐR(326)", "ÜTÉS(223)"]
 convertRRMEteszt = function () {
     RRMEtesztABC = Array();
     RRMEtesztValue = Array();
@@ -7523,6 +7532,11 @@ convertRRMEteszt = function () {
     if (document.querySelector("#RRMEtesztek1").checked == true) { RRMEteszt = myRRMEteszt1.slice(0); };
     if (document.querySelector("#RRMEtesztek2").checked == true) { RRMEteszt = myRRMEteszt2.slice(0); };
     if (document.querySelector("#RRMEtesztek3").checked == true) { RRMEteszt = myRRMEteszt3.slice(0); };
+    if (document.querySelector("#RRMEtesztek4").checked == true) { RRMEteszt = myRRMEteszt4.slice(0); };
+    if (document.querySelector("#RRMEtesztek5").checked == true) { RRMEteszt = myRRMEteszt5.slice(0); };
+    if (document.querySelector("#RRMEtesztek6").checked == true) { RRMEteszt = myRRMEteszt6.slice(0); };
+    if (document.querySelector("#RRMEtesztek7").checked == true) { RRMEteszt = myRRMEteszt7.slice(0); };
+    if (document.querySelector("#RRMEtesztek8").checked == true) { RRMEteszt = myRRMEteszt8.slice(0); };
 
     for (let i = 0; i < RRMEteszt.length; i++) {
         myArray = Array();
@@ -7577,20 +7591,118 @@ RRMEabc2 = function () {
 RRMEabc2();
 
 niniMiVanItt = function () {
-    myWords = Array();
-    for (let i = 0; i < myRRMEteszt1; i++) {
-        for (let j = 0; j < myRRMEteszt2; i++) {
-            for (let k = 0; k < myRRMEteszt2; k++) {
-                if (myRRMEteszt1[i] == myRRMEteszt2[j] && myRRMEteszt2[j] == myRRMEteszt3[k]) {
-                    myRRMEteszt1[i] = myWords[myWords.length];
+    tesztek = Array();
+    tesztek[0] = myRRMEteszt1;
+    tesztek[1] = myRRMEteszt2;
+    tesztek[2] = myRRMEteszt3;
+    tesztek[3] = myRRMEteszt4;
+    tesztek[4] = myRRMEteszt5;
+    tesztek[5] = myRRMEteszt6;
+    tesztek[6] = myRRMEteszt7;
+    tesztek[7] = myRRMEteszt8;
+    kozosSzavak2 = Array();
+    kozosSzavak = Array();
+
+    numbers = Array();
+    for (let i = 0; i < 8; i++) {
+        numbers[i] = -1;
+        if (document.querySelectorAll(".tesztSzoSzedet")[i].checked == true) {
+            number = document.querySelectorAll(".tesztSzoSzedet")[i].name;
+            number = parseInt(number);
+            numbers[number] = number;
+        };
+    };
+    number2 = -1;
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] >= 0) {
+            number2 = numbers[i];
+            numbers[i] = -10;
+            console.log(i);
+            break
+        };
+    };
+    mySzoSzedet = Array();
+    if (number2 >= 0) {
+        for (let i = 0; i < tesztek[number2].length; i++) {
+            mySzoSzedet[i] = tesztek[number2][i][0] + tesztek[number2][i][1] + tesztek[number2][i][2] + tesztek[number2][i][3]
+        };
+    };
+
+    kozosSzavak = mySzoSzedet.slice(0);
+    kozosSzavak2 = Array();
+    kozosSzavak3 = Array();
+    for (let i = 0; i < tesztek.length; i++) {
+        console.log(kozosSzavak);
+        if (numbers[i] > 0) {
+            for (let j = 0; j < kozosSzavak.length; j++) {
+
+                for (k = 0; k < tesztek[i].length; k++) {
+                    if (kozosSzavak[j] == tesztek[i][k][0] + tesztek[i][k][1] + tesztek[i][k][2] + tesztek[i][k][3]) {
+                        noMore = false;
+                        for (h = 0; h < kozosSzavak2.length; h++) {
+                            if (kozosSzavak[j] = kozosSzavak2[h]) {
+                                noMore = true;
+                            };
+                        };
+                        if (noMore == false) { kozosSzavak2[kozosSzavak2.length] = kozosSzavak[j] }
+                    };
+                };
+                /*for (h = 0; h < kozosSzavak2.length; h++) {
+                    marad = false
+                    for (k = 0; k < tesztek[i].length; k++) {
+                        if (tesztek[i][k][0] + tesztek[i][k][1] + tesztek[i][k][2] + tesztek[i][k][3] == kozosSzavak2[h]) {
+                            marad = true;
+                        };
+                        if (marad == false) {
+                            kozosSzavak3 = kozosSzavak2.slice(0);
+                            kozosSzavak3.splice(h, 1);
+                        }
+                        else { kozosSzavak3 = kozosSzavak2.slice(0) }
+                    };
+                };*/
+            };
+            //kozosSzavak2 = kozosSzavak3.slice(0);
+        };
+
+    };
+    for (let i = 0; i < tesztek.length; i++) {
+        console.log(kozosSzavak);
+        if (numbers[i] > 0) {
+            for (let j = 0; j < kozosSzavak.length; j++) {
+
+                for (k = 0; k < tesztek[i].length; k++) {
+                    if (kozosSzavak[j] == tesztek[i][k][0] + tesztek[i][k][1] + tesztek[i][k][2] + tesztek[i][k][3]) {
+                        marad = false;
+                        for (h = 0; h < kozosSzavak2.length; h++) {
+                            if (kozosSzavak[j] = kozosSzavak2[h]) {
+                                noMore = true;
+                            };
+                        };
+                        if (noMore == false) { kozosSzavak2[kozosSzavak2.length] = kozosSzavak[j] }
+                    };
+                };
+                for (h = 0; h < kozosSzavak2.length; h++) {
+                    marad = false
+                    for (k = 0; k < tesztek[i].length; k++) {
+                        if (tesztek[i][k][0] + tesztek[i][k][1] + tesztek[i][k][2] + tesztek[i][k][3] == kozosSzavak2[h]) {
+                            marad = true;
+                        };
+                        if (marad == false) {
+                            kozosSzavak3 = kozosSzavak2.slice(0);
+                            kozosSzavak3.splice(h, 1);
+                        }
+                        else { kozosSzavak3 = kozosSzavak2.slice(0) }
+                    };
                 };
             };
+            kozosSzavak2 = kozosSzavak3.slice(0);
         };
+
     };
     mainArea = document.querySelector("#divForMyLittleWords");
     sectorId = "myLittleWords";
-    displayDictionaryInline(mainArea, sectorId, myWords);
-    document.querySelector("#myLittleWordsNumber").innerHTML = myWords.length;
+    displayDictionaryInline(mainArea, sectorId, kozosSzavak2);
+    document.querySelector("#myLittleWordsNumber").innerHTML = kozosSzavak2.length;
 };
 niniMiVanItt();
 //itt alakítja át a szótár szavait jacaScriptben használható hexadecimális kódsorokká

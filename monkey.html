@@ -294,29 +294,29 @@
                             </p>
 
                             <div>
-                                <button disabled name="Google" type="button" class="searchingClass btn btn-secondary btn-sm searching"
-                                    onclick="searching(this)">
+                                <button disabled name="Google" type="button"
+                                    class="searchingClass btn btn-secondary btn-sm searching" onclick="searching(this)">
 
                                     Google
                                 </button>
-                                <button name="Yahoo" disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
-                                    onclick="searching(this)">
+                                <button name="Yahoo" disabled type="button"
+                                    class="searchingClass btn btn-secondary btn-sm searching" onclick="searching(this)">
                                     Yahoo
                                 </button>
-                                <button name="Bing" disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
-                                    onclick="searching(this)">
+                                <button name="Bing" disabled type="button"
+                                    class="searchingClass btn btn-secondary btn-sm searching" onclick="searching(this)">
                                     Bing
                                 </button>
-                                <button name="DuckDuckGo" disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
-                                    onclick="searching(this)">
+                                <button name="DuckDuckGo" disabled type="button"
+                                    class="searchingClass btn btn-secondary btn-sm searching" onclick="searching(this)">
                                     DuckDuckGo
                                 </button>
-                                <button name="Baidu" disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
-                                    onclick="searching(this)">
+                                <button name="Baidu" disabled type="button"
+                                    class="searchingClass btn btn-secondary btn-sm searching" onclick="searching(this)">
                                     Baidu
                                 </button>
-                                <button name="Yandex"  disabled type="button" class="searchingClass btn btn-secondary btn-sm searching"
-                                    onclick="searching(this)">
+                                <button name="Yandex" disabled type="button"
+                                    class="searchingClass btn btn-secondary btn-sm searching" onclick="searching(this)">
                                     Yandex
                                 </button>
                                 <label class="ml-5">szöveg </label><input class="ml-2" id="searchText" type="radio"
@@ -627,55 +627,65 @@
 
         <div class="row">
             <div class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding">
-                <div onclick="selectorZindex()" style="z-index:1" id="mainSelector" class="smallBorder bgLight">
-                    <p class="mb-1">Futásszám:</p>
-                    <input id="runMain" oninput="firstSelector()" type="number" value="100" style="width:80px">
-                    <p class="mt-1 mb-1">Betűszám:</p>
-                    <input id="letterMain" oninput="firstSelector()" type="number" min="1" max="7" value="3"
-                        style="width:50px">
-                    <div style="display:initial" id="dontDisplayDel">
-                        <p class="mt-1 mb-1">Futásidő:</p>
-                        <p id="runTimeMain1"> - </p>
-                    </div>
-                    <div style="display:none" id="displayDel">
-                        <p class="mb-1 mt-1">Futásidő:</p>
-                        <del>
-                            <p id="runTimeMain2"> - </p>
-                        </del>
-                    </div>
+                <div id="mainSelector" class="row">
+                    <div class="col-11">
+                        <div onclick="selectorZindex()" style="z-index:1" class="smallBorder bgLight">
+                            <p class="mb-1">Futásszám:</p>
+                            <input id="runMain" oninput="firstSelector()" type="number" value="100" style="width:80px">
+                            <p class="mt-1 mb-1">Betűszám:</p>
+                            <input id="letterMain" oninput="firstSelector()" type="number" min="1" max="7" value="3"
+                                style="width:50px">
+                            <div style="display:initial" id="dontDisplayDel">
+                                <p class="mt-1 mb-1">Futásidő:</p>
+                                <p id="runTimeMain1"> - </p>
+                            </div>
+                            <div style="display:none" id="displayDel">
+                                <p class="mb-1 mt-1">Futásidő:</p>
+                                <del>
+                                    <p id="runTimeMain2"> - </p>
+                                </del>
+                            </div>
 
-                    <button onclick="repeatFirst()" type="button" class="ml-3 btn btn-secondary btn-sm">Mehet!</button>
-                    <p class="mb-0">Tanulómemória:</p>
-                    <div style="display:block">
-                        <span id="learningMemorySize"> - </span>
+                            <button onclick="repeatFirst()" type="button"
+                                class="ml-3 btn btn-secondary btn-sm">Mehet!</button>
+                            <p class="mb-0">Memória:</p>
+                            <div style="display:block">
+                                <span id="learningMemorySize"> - </span>
+                            </div>
+                            <p class="mb-1">Használja a memóriát:</p>
+                            <input class="mt-0" type="checkbox" oninput="firstSelector()" id="useLearningMemory">
+                            <p class="mb-1">Az utolsó szó: <span style="color:green"><span id="uccso"> - </p></span>
+
+
+
+                            <p class="mt-0 mb-0">Memória: </p>
+
+                            <div class="mt-0 mb-0"><span>BE: </span><input oninput="learningMemoryBEKI()" type="radio"
+                                    name="lnBEKI" id="lmBE"><span class="ml-4">KI: </span><input
+                                    oninput="learningMemoryBEKI()" type="radio" name="lnBEKI" id="lmKI"></div>
+
+                            <div class="mt-0 mb-0" id="learningMemoryWarningBE" style="color:red;display:none">
+                                <p class="mt-0 mb-0">be van kapcsolva</p>
+                            </div>
+                            <div class="mt-0 mb-0" id="learningMemoryWarningKI" style="display:initial">
+                                <p class="mt-0 mb-0">nincs bekapcsolva</p>
+                            </div>
+                            <p class="mt-1 mb-0">A <i>'mehet-1'</i> és <i>'mehet-2'</i> grafikonjai / táblázatai most
+                            </p>
+                            <div id="divForMehet1" style="display:initial">
+                                <p class="mt-0 mb-0"><label style="color:#212529">BE: </label><input
+                                        oninput="mehetBEKI()" class="ml-2" id="mehetBE" type="radio" name="mehet1"
+                                        checked>
+                                    <label style="color:#212529" id="labelKI" class="ml-3">KI: </label><input
+                                        oninput="mehetBEKI()" class="ml-2" id="mehetKI" type="radio" name="mehet1"></p>
+                            </div>
+                        </div>
+
                     </div>
-                    <p class="mb-1">Használja a tanulómemóriát:</p>
-                    <input class="mt-0" type="checkbox" oninput="firstSelector()" id="useLearningMemory">
-                    <p class="mb-1">Az utolsó szó: <span style="color:green"><span id="uccso"> - </p></span>
-
-
-
-                    <p class="mt-0 mb-0">Tanulómemória: </p>
-
-                    <div class="mt-0 mb-0"><span>BE: </span><input oninput="learningMemoryBEKI()" type="radio"
-                            name="lnBEKI" id="lmBE"><span class="ml-4">KI: </span><input oninput="learningMemoryBEKI()"
-                            type="radio" name="lnBEKI" id="lmKI"></div>
-
-                    <div class="mt-0 mb-0" id="learningMemoryWarningBE" style="color:red;display:none">
-                        <p class="mt-0 mb-0">be van kapcsolva</p>
-                    </div>
-                    <div class="mt-0 mb-0" id="learningMemoryWarningKI" style="display:initial">
-                        <p class="mt-0 mb-0">nincs bekapcsolva</p>
-                    </div>
-                    <p class="mt-1 mb-0">A <i>'mehet-1'</i> és <i>'mehet-2'</i> grafikonjai / táblázatai most</p>
-                    <div id="divForMehet1" style="display:initial">
-                        <p class="mt-0 mb-0"><label style="color:#212529">BE: </label><input oninput="mehetBEKI()"
-                                class="ml-2" id="mehetBE" type="radio" name="mehet1" checked>
-                            <label style="color:#212529" id="labelKI" class="ml-3">KI: </label><input
-                                oninput="mehetBEKI()" class="ml-2" id="mehetKI" type="radio" name="mehet1"></p>
-                    </div>
+                    <div class="col-11"></div>
                 </div>
             </div>
+
             <div class="col-8 col-sm-8 col-md-8 col-lg-8 noPadding">
                 <div class="row bgLight smallBorder mt-3 mb-3">
                     <div class="col">
@@ -2494,7 +2504,9 @@
                                 href="https://maskofreason.files.wordpress.com/2011/02/the-library-of-babel-by-jorge-luis-borges.pdf"
                                 target="blank">The
                                 Library of Babel, by Jorge Luis Borges (1941)</a></p>
-                        <p>"A fentebbiekből nem nehéz arra gyanakodni, hogy tulajdonképpen gigantikus méretű matematikai
+                        <p><img id="monkey" class="float-right mt-2" src="img/Borges.jfif" width="350" ;
+                                alt="Jorge Luis Borges">"A fentebbiekből nem nehéz arra gyanakodni, hogy tulajdonképpen
+                            gigantikus méretű matematikai
                             hasonlatról van szó: elvégre egyfelől a „Könyvtárban nincs két azonos könyv”, másfelől a
                             „Könyvtár teljes, és polcain a húsz-egynéhány ortográfiai jel valamennyi – bár nagyszámú, de
                             mégsem végtelen – lehetséges kombinációja előfordul, vagyis mindaz, ami kifejezhető (és
@@ -2518,7 +2530,8 @@
                             <i>egy
                                 tudománytörténész írása a Bábeli könyvtárról</i> - <a
                                 href="https://mek.oszk.hu/04100/04141/04141.htm#42" target="blank">Galántai Zoltán:
-                                Hányan vagyok?</a></p>
+                                Hányan vagyok?</a> (Kép: Jorge Luis Borges - <a
+                                href="https://www.famousauthors.org/jorge-luis-borges" target="blank">forrás</a>)</p>
 
                         <p>Barangolás a Bábeli könyvtárban: <a href="https://libraryofbabel.info/"
                                 target="blank">LibraryOfBabel.info</a></p>
@@ -3520,7 +3533,6 @@
                 </div>
                 <div id="skipToGraphic2" class="col-1 noPadding"></div>
                 <div class="row m-3"></div>
-
                 <div class="row smallBorder bgLight mt-3">
                     <div class="col">
                         <p>Most futtassunk le <i>'a majom <span id="infoRepMemExInfo2"> - </span> betűs
@@ -3660,12 +3672,14 @@
                         <div class="smallBorder bgDarker mt-3" id="divForRRME">
                             <div id="RRME"></div>
                         </div>
-                        <p class="mt-3">Néhány példa erre az alkalmazásra: 100/10-es memóriafeltöltéssel 100/100/4
-                            beállítással 30-40 percen át futott a program háromszor, s ewnnek az eredményeit látjuk az
-                            alábbi felsorolásban.
-                            a program. (Minden 100-as ismétlés előtt új tanulómemória jött létre.) Így a következő
-                            szavakat
-                            sorolta fel a program:<input type="radio" id="RRMEteszt1" name="RRMEtesztname">
+                        <p class="mt-3">Néhány példa erre az alkalmazásra: </p>
+
+                        <p>Az 1., 2., 3. sorszámú szószedetek: 100/10-es memóriafeltöltéssel 100/100/4
+                            beállítással 30-40 percen át futott a program , s ennek az eredményeit látjuk az
+                            alábbi felsorolásban. (Minden 100-as ismétlés előtt új tanulómemória jött létre.)
+                        </p>
+                        <p>A 4., 5., 6., 7. sorszámú szószedetek: 500/50-es memóriafeltöltéssel 100/100/4
+                            beállítással másfél - két órán át futott a program.
                         </p>
                         <p>
                             <span class="ml-3">ábécé sorrendben</span><input checked type="radio" name="abcORvalue2"
@@ -3674,11 +3688,22 @@
                                 class="ml-3" id="RRMEvalueRadio2">
 
                         </p>
-                        <p class="ml-3">az elsőt <input oninput="RRMEabc2()" checked class="ml-1 mr-3" type="radio"
-                                id="RRMEtesztek1" name="RRMEtesztek"> a másodikat <input oninput="RRMEabc2()"
-                                class="ml-1 mr-3" type="radio" id="RRMEtesztek2" name="RRMEtesztek"> a harmadikat <input
-                                oninput="RRMEabc2()" class="ml-1 mr-3" type="radio" id="RRMEtesztek3"
-                                name="RRMEtesztek"> kérem.</p>
+                        <p class="ml-3">A következő sorszámú szószedetet kérem: 1. <input oninput="RRMEabc2()" checked
+                                class="ml-1 mr-3" type="radio" id="RRMEtesztek1" name="RRMEtesztek"> 2 <input
+                                oninput="RRMEabc2()" class="ml-1 mr-3" type="radio" id="RRMEtesztek2"
+                                name="RRMEtesztek"> 3. <input oninput="RRMEabc2()" class="ml-1 mr-3" type="radio"
+                                id="RRMEtesztek3" name="RRMEtesztek"> 4 <input oninput="RRMEabc2()" class="ml-1 mr-3"
+                                type="radio" id="RRMEtesztek4" name="RRMEtesztek"> 5 <input oninput="RRMEabc2()"
+                                class="ml-1 mr-3" type="radio" id="RRMEtesztek5" name="RRMEtesztek"> 6 <input
+                                oninput="RRMEabc2()" class="ml-1 mr-3" type="radio" id="RRMEtesztek6"
+                                name="RRMEtesztek"> 7 <input oninput="RRMEabc2()" class="ml-1 mr-3" type="radio"
+                                id="RRMEtesztek7" name="RRMEtesztek"> 8 <input oninput="RRMEabc2()" class="ml-1 mr-3"
+                                type="radio" id="RRMEtesztek8" name="RRMEtesztek">
+
+
+
+
+                        </p>
                         <p class="ml-3">Ennyi különböző szó szerepel a felsorolásban: <span id="RRMEdifferent"> -
                             </span> db.</p>
                         <div class="bgWhite smallBorder" id="divForRRMEteszt">
@@ -3686,9 +3711,24 @@
 
                             </p>
                         </div>
-                        <p class="mt-3">Ezek a szavak fordulnak elő mind a három futtatás során: (<span
-                                id="myLittleWordsNumber"> -
-                            </span> db.)</p>
+                        <p class="mt-3">A következő sorszámú szószedetek közös szavait kérem:
+                            1. <input checked oninput="niniMiVanItt()" type="checkbox" id="elso" name="0"
+                                class="tesztSzoSzedet">
+                            2. <input oninput="niniMiVanItt()" type="checkbox" id="ketto" name="1"
+                                class="tesztSzoSzedet">
+                            3. <input oninput="niniMiVanItt()" type="checkbox" id="harom" name="2"
+                                class="tesztSzoSzedet">
+                            4. <input oninput="niniMiVanItt()" type="checkbox" id="negy" name="3"
+                                class="tesztSzoSzedet">
+                            5. <input checked oninput="niniMiVanItt()" type="checkbox" id="ot" name="4"
+                                class="tesztSzoSzedet">
+                            6. <input oninput="niniMiVanItt()" type="checkbox" id="hat" name="5" class="tesztSzoSzedet">
+                            7. <input oninput="niniMiVanItt()" type="checkbox" id="het" name="6" class="tesztSzoSzedet">
+                            8. <input oninput="niniMiVanItt()" type="checkbox" id="nyolc" name="7"
+                                class="tesztSzoSzedet">
+                        </p>
+                        <p>Közös elemek száma: <span id="myLittleWordsNumber"> -
+                            </span> db.</p>
                         <div class="mt-3 bgWhite smallBorder" id="divForMyLittleWords">
                             <div id="myLittleWords">
 
@@ -3698,21 +3738,164 @@
 
                     </div>
                 </div>
+
+
+                <div class="row mt-3 smallBorder">
+
+                    <div class="col ml-3">
+
+
+                        <p>Az első 100/10/100/100/4 (30 perces) futtatással kapott szószedet így kezdődik:
+                            AGÁR (134), AJAJ (49), AKÁR (92), ALÁZ (258), AMÍG (135), APÁT (186), ARAT (125), BAKÓ
+                            (102),
+                            BELŐ (182), BÁBA (122), BÁLA (138), BÉTA (149), BÓRA (258), CICI (200), DARA (93), DEKA
+                            (102),
+                            EDZŐ (217)
+                        </p>
+                        <p>
+                            Ennek a felsorolásnak az első szavaiból akár egy abszurd verset is kihallhatunk. (Tőlem csak
+                            a központozás és az
+                            utolsó két szó származik.)</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <p p class="mb-0 ml-5" style="color:#6A6A6A"><i>Agár – ajaj! – akár</i> </p>
+                                <p p class="mb-0 ml-5" style="color:#6A6A6A"><i>aláz, amíg apát</i> </p>
+                                <p p class="mb-0 ml-5" style="color:#6A6A6A"><i>arat, bakó belő, </i> </p>
+                                <p p class="mb-0 ml-5" style="color:#6A6A6A"><i>bába </i> bája benő. </p>
+                            </div>
+                            <div class="col-6">
+                                <img id="Lackfy" src="img/logic gates.jfif" width="180" ; alt="logikai kapuk">
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col ml-3">
+                                    <p>És akkor most egy kis szájbarágó a hangsúlyos verselésről:</p>
+                                    <p>
+                                    <ul>
+                                        <li>
+                                            <p>Az ütemhangsúlyos verselésben a hangsúlyos és a hangsúlytalan szótagok
+                                                váltakozása
+                                                alkotja a ritmust. A magyar nyelvben rendszerint az első szótag a
+                                                hangsúlyos, s ezt
+                                                követi néhány - vagy csak egy - hangsúlytalan szó. Ez a verselési mód a
+                                                magyaros
+                                                vagy
+                                                nemzeti verselés.</p>
+                                        </li>
+                                        <li>
+                                            <p>A hangsúlyos verselést a szótagok száma szerint nevezzük el. A
+                                                legelterjedtebb az
+                                                <i>ősi magyar hatos</i> verselés. Pl.: <i>’Megrakják a tüzet, mégis
+                                                    elaluszik. /
+                                                    Nincs az a
+                                                    szerelem, ami el nem múlik.’</i> (<a
+                                                    href="https://www.youtube.com/watch?v=kWrRqWdblno"
+                                                    target="_blank">videó</a>)
+                                                Vagy: <i>"Ne vigyorogj, Iljics, nem tart ez örökké. / 150 év alatt sem
+                                                    lettünk
+                                                    törökké!"</i> Esetleg még: <i>Ria! Ria! Hun-gá-ri-a!</i>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>A fenti ’vers’ is ősi magyar hatos ütemben íródott. Ez abból is
+                                                következik, hogy
+                                                négy betűs szavakat kerestünk, s egy-egy ilyen szó általában két szótag,
+                                                s három szó
+                                                így pont hat szótagot ad ki, ami a hatos ütemmérték alapja.</p>
+                                        </li>
+                                        <li>
+                                            <p>A ’vers’ alliterációkat tartalmaz, de ennek az az oka, hogy a szószedet
+                                                ábécé
+                                                sorrendben adja meg a szavakat.</p>
+                                        </li>
+                                        <li>
+                                            <p>A szavak egy része jambikus (&#9169 -) verslábat tartalmaz.</p>
+                                        </li>
+
+                                        <li>
+                                            <p>Lackfi János – a majom ’versével’ kapcsolatos emailemre egy hasonló
+                                                verssel
+                                                válaszolt: „<i>Amúgy lehet hasonlót gyártani, pofás forma: </i></p>
+
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <p class=mb-0 style="color:#6A6A6A"><i>Apám afgán agár,</i></p>
+                                                    <p class=mb-0 style="color:#6A6A6A"><i>anyám sudár, habár...</i></p>
+                                                    <p class=mb-0 style="color:#6A6A6A">
+                                                        <i>húgom kicsit ribis,</i> </p>
+                                                    <p class=mb-0 style="color:#6A6A6A"> <i>bátyám totál dilis.</i>”</p>
+
+                                                </div>
+                                                <div class="col-6">
+                                                    <img id="Lackfy" src="img/LackfyJanos.png" width="120" ;
+                                                        alt="Lackfy János">
+                                                    <p style="color:#6A6A6A">(<a style="color:#6A6A6A"
+                                                            href="https://www.facebook.com/media/set/?vanity=lackfi&set=a.377462389048590"
+                                                            target="blank">forrás</a>)</p>
+                                                </div>
+                                        </li>
+                                        <li>
+                                            <p>A 'verset' előállító aplikáció működése tehát így néz ki: a program
+                                                megállapítja, hogy a nyelvünkben – egy 60 ezres szószedet
+                                                alapján
+                                                – melyek a leggyakoribb betűkettősök. Ezeket a hangzókettősöket –
+                                                előfordulási valószínűségük mértéke szerint – elkezdi egymás mellé
+                                                leírni és
+                                                így hangalaksorokat képez, majd a szószedet segítségével megállapítja,
+                                                ha az
+                                                adott hangsor értelmes magyar szó-e, s amennyiben igen, akkor azt
+                                                kigyűjti
+                                                egy halmazba. Ha ez a halmaz eléri az előre beállított
+                                                elemszámot, akkor megáll és kiválogatja a halmazból azokat a szavakat,
+                                                amelyek a legtöbbször ismétlődtek, s kiírja végül az első 100 db.
+                                                legtöbbször ismételt szót.</p>
+                                        </li>
+                                        <li>
+                                            <p>A kérdés pedig az, hogy vajon az abszurd verset író költő agya – mint
+                                                szoftver
+                                                – ugyanígy működik, mint a fenti applikáció? Csak nyilván több
+                                                tudatossággal
+                                                (ismerve a szavak jelentését, értelmet hordozó vonzatokat), s
+                                                így állítja elő a verset? Vagy azért a költői agy-szoftver egy
+                                                kicsit/nagyon/megfoghatóan/megfoghatatlanul több?</p>
+
+                                        </li>
+                                        <li>
+                                            <p>Lackfy János válasza: <i>"Igen, a költő-agy hasonlóan pörgeti a
+                                                    lehetséges
+                                                    formákat és megoldásokat, mint egy szoftver. Persze bele van
+                                                    programozva
+                                                    a különböző trükkök és jelentés-összjátékok ismerete. "</p></i>
+                                        </li>
+
+                                </div>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="row mt-3">
                     <div class="col">
-                        <p>A majom tehát - a négy betűs szavak közül - ezeket a szavakat képezte legtöbbször az általa
-                            felállított betűstatisztikai szabályok alapján.</p>
+                        <p></p>
                         <p style="color:red"><span style="color:red">a program eddig van meg ... folytatjuk ... mihelyst
                                 ráérünk ... </span>&#128584
                             &#128585 &#128586</p>
                         <p></p>
                     </div>
                 </div>
-
             </div>
-        </div>
 
-        <div style="z-index:0" class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding"></div>
+
+
+
+
+
+
+        </div>
+    </div>
+
+    <div style="z-index:0" class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding"></div>
     </div>
     </div>
     <script src="/gyak.js">
