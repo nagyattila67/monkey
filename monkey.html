@@ -3712,20 +3712,21 @@
                             </p>
                         </div>
                         <p class="mt-3">A következő sorszámú szószedetek közös szavait kérem:
-                            1. <input checked oninput="niniMiVanItt()" type="checkbox" id="elso" name="0"
+                            1. <input oninput="niniMiVanItt()" type="checkbox" id="elso" name="1"
+                                class="tesztSzoSzedet"> &nbsp &nbsp
+                            2. <input checked oninput="niniMiVanItt()" type="checkbox" id="ketto" name="2"
+                                class="tesztSzoSzedet">&nbsp &nbsp
+                            3. <input checked oninput="niniMiVanItt()" type="checkbox" id="harom" name="3"
+                                class="tesztSzoSzedet">&nbsp &nbsp
+                            4. <input oninput="niniMiVanItt()" type="checkbox" id="negy" name="4"
+                                class="tesztSzoSzedet">&nbsp &nbsp
+                            5. <input oninput="niniMiVanItt()" type="checkbox" id="ot" name="5"
+                                class="tesztSzoSzedet">&nbsp &nbsp
+                            6. <input oninput="niniMiVanItt()" type="checkbox" id="hat" name="6" class="tesztSzoSzedet">&nbsp &nbsp
+                            7. <input oninput="niniMiVanItt()" type="checkbox" id="het" name="7" class="tesztSzoSzedet">&nbsp &nbsp
+                            8. <input oninput="niniMiVanItt()" type="checkbox" id="nyolc" name="8"
                                 class="tesztSzoSzedet">
-                            2. <input oninput="niniMiVanItt()" type="checkbox" id="ketto" name="1"
-                                class="tesztSzoSzedet">
-                            3. <input oninput="niniMiVanItt()" type="checkbox" id="harom" name="2"
-                                class="tesztSzoSzedet">
-                            4. <input oninput="niniMiVanItt()" type="checkbox" id="negy" name="3"
-                                class="tesztSzoSzedet">
-                            5. <input checked oninput="niniMiVanItt()" type="checkbox" id="ot" name="4"
-                                class="tesztSzoSzedet">
-                            6. <input oninput="niniMiVanItt()" type="checkbox" id="hat" name="5" class="tesztSzoSzedet">
-                            7. <input oninput="niniMiVanItt()" type="checkbox" id="het" name="6" class="tesztSzoSzedet">
-                            8. <input oninput="niniMiVanItt()" type="checkbox" id="nyolc" name="7"
-                                class="tesztSzoSzedet">
+                                <span id="minimumKettot" style="display:initial">Legalább két jelölőnégyzetet, plíz!</span>
                         </p>
                         <p>Közös elemek száma: <span id="myLittleWordsNumber"> -
                             </span> db.</p>
@@ -3734,6 +3735,7 @@
 
                             </div>
                         </div>
+                        <button style="display:none" onclick="magyarazatCsunyaSzavakhoz" id="csunyaSzavakButton" type="button" class=" mt-3 btn btn-info btn-small btn-block">Magyarázat a 'csúnya' szavakhoz</button>
 
 
                     </div>
@@ -3745,10 +3747,10 @@
                     <div class="col ml-3">
 
 
-                        <p>Az első 100/10/100/100/4 (30 perces) futtatással kapott szószedet így kezdődik:
-                            AGÁR (134), AJAJ (49), AKÁR (92), ALÁZ (258), AMÍG (135), APÁT (186), ARAT (125), BAKÓ
+                        <p style="font-size:15px">Az első 100/10/100/100/4 (30 perces) futtatással kapott szószedet így kezdődik:
+                            <u>AGÁR</u> (134), <u>AJAJ</u> (49), <u>AKÁR</u> (92), <u>ALÁZ</u> (258), <u>AMÍG</u> (135), <u>APÁT</u> (186), <u>ARAT</u> (125), <u>BAKÓ</u>
                             (102),
-                            BELŐ (182), BÁBA (122), BÁLA (138), BÉTA (149), BÓRA (258), CICI (200), DARA (93), DEKA
+                            <u>BELŐ</u> (182), <u>BÁBA</u> (122), BÁLA (138), BÉTA (149), BÓRA (258), CICI (200), DARA (93), DEKA
                             (102),
                             EDZŐ (217)
                         </p>
@@ -3784,13 +3786,13 @@
                                         <li>
                                             <p>A hangsúlyos verselést a szótagok száma szerint nevezzük el. A
                                                 legelterjedtebb az
-                                                <i>ősi magyar hatos</i> verselés. Pl.: <i>’Megrakják a tüzet, mégis
+                                                <i>ősi magyar hatos</i> verselés. Pl.: <i>’Megrakják a tüzet, / mégis
                                                     elaluszik. /
                                                     Nincs az a
-                                                    szerelem, ami el nem múlik.’</i> (<a
+                                                    szerelem, / ami el nem múlik.’</i> (<a
                                                     href="https://www.youtube.com/watch?v=kWrRqWdblno"
                                                     target="_blank">videó</a>)
-                                                Vagy: <i>"Ne vigyorogj, Iljics, nem tart ez örökké. / 150 év alatt sem
+                                                Vagy: <i>"Ne vigyorogj, Iljics, / nem tart ez örökké. / 150 év alatt / sem
                                                     lettünk
                                                     törökké!"</i> Esetleg még: <i>Ria! Ria! Hun-gá-ri-a!</i>
                                             </p>

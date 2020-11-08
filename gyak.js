@@ -7589,121 +7589,99 @@ RRMEabc2 = function () {
     };
 };
 RRMEabc2();
-
+//két napot szenvedtem ezzel a kib*szott halmazok metszete résszel a qrva életbe! Ha tesztelésnél kiderül, hogy nem müxik jól, leszopom magam ...
 niniMiVanItt = function () {
     tesztek = Array();
-    tesztek[0] = myRRMEteszt1;
-    tesztek[1] = myRRMEteszt2;
-    tesztek[2] = myRRMEteszt3;
-    tesztek[3] = myRRMEteszt4;
-    tesztek[4] = myRRMEteszt5;
-    tesztek[5] = myRRMEteszt6;
-    tesztek[6] = myRRMEteszt7;
-    tesztek[7] = myRRMEteszt8;
+    tesztek[1] = myRRMEteszt1;
+    tesztek[2] = myRRMEteszt2;
+    tesztek[3] = myRRMEteszt3;
+    tesztek[4] = myRRMEteszt4;
+    tesztek[5] = myRRMEteszt5;
+    tesztek[6] = myRRMEteszt6;
+    tesztek[7] = myRRMEteszt7;
+    tesztek[8] = myRRMEteszt8;
     kozosSzavak2 = Array();
     kozosSzavak = Array();
+    newArray = Array();
 
     numbers = Array();
     for (let i = 0; i < 8; i++) {
-        numbers[i] = -1;
         if (document.querySelectorAll(".tesztSzoSzedet")[i].checked == true) {
             number = document.querySelectorAll(".tesztSzoSzedet")[i].name;
             number = parseInt(number);
             numbers[number] = number;
         };
     };
-    number2 = -1;
-    for (let i = 0; i < numbers.length; i++) {
-        if (numbers[i] >= 0) {
-            number2 = numbers[i];
-            numbers[i] = -10;
-            console.log(i);
-            break
-        };
-    };
-    mySzoSzedet = Array();
-    if (number2 >= 0) {
-        for (let i = 0; i < tesztek[number2].length; i++) {
-            mySzoSzedet[i] = tesztek[number2][i][0] + tesztek[number2][i][1] + tesztek[number2][i][2] + tesztek[number2][i][3]
-        };
-    };
 
-    kozosSzavak = mySzoSzedet.slice(0);
+    myNumbersArray = Array();
+    for (let i = 0; i < numbers.length; i++) {
+        if (numbers[i] > 0) {
+            myNumbersArray[myNumbersArray.length] = numbers[i];
+        };
+    };
+    if (myNumbersArray.length < 2) { document.querySelector("#minimumKettot").setAttribute("style", "display:initial;color:red") }
+    else { document.querySelector("#minimumKettot").setAttribute("style", "display:none") }
+
+    myNumbersArray1 = myNumbersArray.slice(0);
+    myNumbersArray1.pop();
+    myNumbersArray2 = myNumbersArray.slice(0);
+    myNumbersArray2.shift();
+
     kozosSzavak2 = Array();
     kozosSzavak3 = Array();
-    for (let i = 0; i < tesztek.length; i++) {
-        console.log(kozosSzavak);
-        if (numbers[i] > 0) {
-            for (let j = 0; j < kozosSzavak.length; j++) {
+    kozosSzavak = tesztek[myNumbersArray[0]].slice(0);
+    newArray = tesztek[myNumbersArray[1]].slice(0);
+    for (let i = 0; i < myNumbersArray1.length; i++) {
+        kozosSzavak2 = Array();
+        kozosSzavak4 = Array();
 
-                for (k = 0; k < tesztek[i].length; k++) {
-                    if (kozosSzavak[j] == tesztek[i][k][0] + tesztek[i][k][1] + tesztek[i][k][2] + tesztek[i][k][3]) {
-                        noMore = false;
-                        for (h = 0; h < kozosSzavak2.length; h++) {
-                            if (kozosSzavak[j] = kozosSzavak2[h]) {
-                                noMore = true;
-                            };
-                        };
-                        if (noMore == false) { kozosSzavak2[kozosSzavak2.length] = kozosSzavak[j] }
-                    };
-                };
-                /*for (h = 0; h < kozosSzavak2.length; h++) {
-                    marad = false
-                    for (k = 0; k < tesztek[i].length; k++) {
-                        if (tesztek[i][k][0] + tesztek[i][k][1] + tesztek[i][k][2] + tesztek[i][k][3] == kozosSzavak2[h]) {
-                            marad = true;
-                        };
-                        if (marad == false) {
-                            kozosSzavak3 = kozosSzavak2.slice(0);
-                            kozosSzavak3.splice(h, 1);
-                        }
-                        else { kozosSzavak3 = kozosSzavak2.slice(0) }
-                    };
-                };*/
-            };
-            //kozosSzavak2 = kozosSzavak3.slice(0);
-        };
-
-    };
-    for (let i = 0; i < tesztek.length; i++) {
-        console.log(kozosSzavak);
-        if (numbers[i] > 0) {
-            for (let j = 0; j < kozosSzavak.length; j++) {
-
-                for (k = 0; k < tesztek[i].length; k++) {
-                    if (kozosSzavak[j] == tesztek[i][k][0] + tesztek[i][k][1] + tesztek[i][k][2] + tesztek[i][k][3]) {
-                        marad = false;
-                        for (h = 0; h < kozosSzavak2.length; h++) {
-                            if (kozosSzavak[j] = kozosSzavak2[h]) {
-                                noMore = true;
-                            };
-                        };
-                        if (noMore == false) { kozosSzavak2[kozosSzavak2.length] = kozosSzavak[j] }
-                    };
-                };
-                for (h = 0; h < kozosSzavak2.length; h++) {
-                    marad = false
-                    for (k = 0; k < tesztek[i].length; k++) {
-                        if (tesztek[i][k][0] + tesztek[i][k][1] + tesztek[i][k][2] + tesztek[i][k][3] == kozosSzavak2[h]) {
-                            marad = true;
-                        };
-                        if (marad == false) {
-                            kozosSzavak3 = kozosSzavak2.slice(0);
-                            kozosSzavak3.splice(h, 1);
-                        }
-                        else { kozosSzavak3 = kozosSzavak2.slice(0) }
-                    };
+        for (let k = 0; k < kozosSzavak.length; k++) {
+            for (let j = 0; j < newArray.length; j++) {
+                if (kozosSzavak[k][0] + kozosSzavak[k][1] + kozosSzavak[k][2] + kozosSzavak[k][3] ==
+                    newArray[j][0] + newArray[j][1] + newArray[j][2] + newArray[j][3]) {
+                    if (noMore == false) {
+                        kozosSzavak2[kozosSzavak2.length] = kozosSzavak[k][0] + kozosSzavak[k][1] + kozosSzavak[k][2] + kozosSzavak[k][3];
+                    }
                 };
             };
-            kozosSzavak2 = kozosSzavak3.slice(0);
         };
 
+        for (let i = 0; i < kozosSzavak2.length; i++) {
+            for (let j = i + 1; j < kozosSzavak2.length; j++) {
+                if (kozosSzavak2[i] == kozosSzavak2[j]) {
+                    kozosSzavak2[j] = "ŰŰŰŰ";
+                };
+            };
+        };
+        kozosSzavak2.sort();
+        kozosSzavak4 = kozosSzavak2.slice(0);
+        for (let i = 0; i < kozosSzavak2.length; i++) {
+            if (kozosSzavak2[kozosSzavak2.length - i] == "ŰŰŰŰ") { kozosSzavak4.pop() }
+        };
+        kozosSzavak = kozosSzavak4.slice(0);
+        if (tesztek.length > myNumbersArray[i + 2]) { newArray = tesztek[myNumbersArray[i + 2]].slice(0) };
     };
     mainArea = document.querySelector("#divForMyLittleWords");
     sectorId = "myLittleWords";
-    displayDictionaryInline(mainArea, sectorId, kozosSzavak2);
-    document.querySelector("#myLittleWordsNumber").innerHTML = kozosSzavak2.length;
+    displayDictionaryInline(mainArea, sectorId, kozosSzavak4);
+    document.querySelector("#myLittleWordsNumber").innerHTML = kozosSzavak4.length;
+    if (document.querySelectorAll(".tesztSzoSzedet")[1].checked == true && document.querySelectorAll(".tesztSzoSzedet")[2].checked == true) {
+        document.querySelectorAll("#divForMyLittleWords span")[6].style["background-color"] = "#17a2b8";
+        document.querySelectorAll("#divForMyLittleWords span")[12].style["background-color"] = "#17a2b8";
+        document.querySelector("#csunyaSzavakButton").setAttribute("style","display:initial");
+    }
+    else {
+        document.querySelectorAll("#divForMyLittleWords span")[6].style["background-color"] = "#ffffff";
+        document.querySelectorAll("#divForMyLittleWords span")[12].style["background-color"] = "#ffffff";
+        document.querySelector("#csunyaSzavakButton").setAttribute("style","display:none");
+    };
 };
+
+magyarazatCsunyaSzavakhoz = function (){
+    
+};
+
+
 niniMiVanItt();
 //itt alakítja át a szótár szavait jacaScriptben használható hexadecimális kódsorokká
 transform();
