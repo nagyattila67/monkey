@@ -3535,237 +3535,318 @@
                 <div class="row m-3"></div>
                 <div class="row smallBorder bgLight mt-3">
                     <div class="col">
-                        <p>Most futtassunk le <i>'a majom <span id="infoRepMemExInfo2"> - </span> betűs
-                                szavakat keres <span id="infoRepMemExInfo1"> - </span> -szor'</i> beállítással a
-                            programot
-                            úgy, hogy a majom használja a szóképzésnél a tanulómemóriában tárol betűkettősöket, s
-                            vizsgáljuk meg, hogy mennyivel gyorsabban képzi a majom az értelmes szavakat, ill. milyen
-                            szóismétlések lesznek az eredményül kapott szószedetben.</p>
-                        <p>Ezen ismétlődések létéből és számosságából következtethetünk arra, hogy a
-                            tanulómemória használata mennyire hatékony - minél kevesebb ismétlést látunk, annál több
-                            egyedi szót tudott képezni a program. (A szavak mellett zárójelben látjuk, hogy hányszor
-                            ismétlődött az adott szó.)</p>
-                        <p>A felsorolásban előforduló 'ErRoR' azt jelenti, hogy ott a program nem tudta még elkezdeni
-                            sem a
-                            szóképzést, s 'RöViD' pedig azt, hogy ott a vártnál rövidebb szót tudott csak képezni a
-                            program a rendelkezésére álló betűkettősökből.</p>
-                        <p>
-                            A program részéről némi kreativitást is felfedezhetünk. A gyakrabban ismételt szavak között
-                            lesznek egymással rímelő szavak, ill. ikerszavakra emlékeztető szópárok, szójátékok - pl.:
-                            <i>velúr -
-                                kifúr; altáj - oltár; kelő -
-                                velő; holt - bolt; elér - relé; bontás - rontás; kongó - dongó - tangó; maláj -
-                                moraj</i>, de
-                            találhatunk kimondhatatlan
-                            nyelvtörőket is: <i>ártér - átér</i>.
-                        </p>
-                        <p><small>(Ha növelni akarjuk a tanulómemória méretét, akkor a balra lévő applikációt futtassuk
-                                úgy, hogy előtte kikapcsoltuk a tanulómemóriát, ui. az csak akkor töltődik
-                                automatikusan, ha nincs használatban. Továbbá a program gyorsítása miatt az eddigi
-                                táblázatokat és grafikonokat nem tölti ki a
-                                program, így azok egy része a korábbi futtatás eredményeit tartalmazza.)</small></p>
-                        <table class="table table-bordered table-sm">
-                            <tbody>
-                                <tr>
-                                    <td>A tanulómemória használata nélkül ennyi lenne a listák átlagos hossza:</td>
-                                    <td><span style="color:red" id="learnMemory11">-</span></td>
-                                </tr>
-                                <tr>
-                                    <td>A tanulómemória használata esetén átlagosan ennyi a listák hossza:</td>
-                                    <td><span style="color:red" id="learnMemory12">-</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Az átlaghossz ennyi százaléka a tanulómemória használata nélkül várt
-                                        szólista hosszának:</td>
-                                    <td><span style="color:red" id="learnMemory13">-</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Az értelmes szavak előállítása ennyiszer lett gyorsabb:</td>
-                                    <td><span style="color:red" id="learnMemory14">-</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Az összes előállított karaktersorozat száma - beleértve az 'ErRoR'-t (<span
-                                            style="color:red" id="learnMemory20"> - </span> db.) és a 'RöVid'-et (<span
-                                            style="color:red" id="learnMemory21"> - </span> db.) eredményező futásokat
-                                        is:</td>
-                                    <td><span style="color:red" id="learnMemory22">-</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Az ezek között található értelmes szavak (<span style="color:red"
-                                            id="learnMemory23"> - </span> db.) százaléka ennyi:</td>
-                                    <td><span style="color:red" id="learnMemory24">-</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Az ezek között található - ismétlés nélküli - értelmes szavak (<span
-                                            style="color:red" id="learnMemory25"> - </span> db.) százaléka ennyi:</td>
-                                    <td><span style="color:red" id="learnMemory26">-</span></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">Mindez tehát azt jelenti, hogy a létrehozott szavak közül minden
-                                        <span style="color:red" id="learnMemory27"> - </span> értelmes szó.</td>
+                        <div class="row">
+                            <div class="col">
+                                <p>Most futtassunk le <i>'a majom <span id="infoRepMemExInfo2"> - </span> betűs
+                                        szavakat keres <span id="infoRepMemExInfo1"> - </span> -szor'</i> beállítással a
+                                    programot
+                                    úgy, hogy a majom használja a szóképzésnél a tanulómemóriában tárol betűkettősöket,
+                                    s
+                                    vizsgáljuk meg, hogy mennyivel gyorsabban képzi a majom az értelmes szavakat, ill.
+                                    milyen
+                                    szóismétlések lesznek az eredményül kapott szószedetben.</p>
+                                <p>Ezen ismétlődések létéből és számosságából következtethetünk arra, hogy a
+                                    tanulómemória használata mennyire hatékony - minél kevesebb ismétlést látunk, annál
+                                    több
+                                    egyedi szót tudott képezni a program. (A szavak mellett zárójelben látjuk, hogy
+                                    hányszor
+                                    ismétlődött az adott szó.)</p>
+                                <p>A felsorolásban előforduló 'ErRoR' azt jelenti, hogy ott a program nem tudta még
+                                    elkezdeni
+                                    sem a
+                                    szóképzést, s 'RöViD' pedig azt, hogy ott a vártnál rövidebb szót tudott csak
+                                    képezni a
+                                    program a rendelkezésére álló betűkettősökből.</p>
+                                <p>
+                                    A program részéről némi kreativitást is felfedezhetünk. A gyakrabban ismételt szavak
+                                    között
+                                    lesznek egymással rímelő szavak, ill. ikerszavakra emlékeztető szópárok, szójátékok
+                                    - pl.:
+                                    <i>velúr -
+                                        kifúr; altáj - oltár; kelő -
+                                        velő; holt - bolt; elér - relé; bontás - rontás; kongó - dongó - tangó; maláj -
+                                        moraj</i>, de
+                                    találhatunk kimondhatatlan
+                                    nyelvtörőket is: <i>ártér - átér</i>.
+                                </p>
+                                <p><small>(Ha növelni akarjuk a tanulómemória méretét, akkor a balra lévő applikációt
+                                        futtassuk
+                                        úgy, hogy előtte kikapcsoltuk a tanulómemóriát, ui. az csak akkor töltődik
+                                        automatikusan, ha nincs használatban. Továbbá a program gyorsítása miatt az
+                                        eddigi
+                                        táblázatokat és grafikonokat nem tölti ki a
+                                        program, így azok egy része a korábbi futtatás eredményeit tartalmazza.)</small>
+                                </p>
+                                <table class="table table-bordered table-sm">
+                                    <tbody>
+                                        <tr>
+                                            <td>A tanulómemória használata nélkül ennyi lenne a listák átlagos hossza:
+                                            </td>
+                                            <td><span style="color:red" id="learnMemory11">-</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>A tanulómemória használata esetén átlagosan ennyi a listák hossza:</td>
+                                            <td><span style="color:red" id="learnMemory12">-</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Az átlaghossz ennyi százaléka a tanulómemória használata nélkül várt
+                                                szólista hosszának:</td>
+                                            <td><span style="color:red" id="learnMemory13">-</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Az értelmes szavak előállítása ennyiszer lett gyorsabb:</td>
+                                            <td><span style="color:red" id="learnMemory14">-</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Az összes előállított karaktersorozat száma - beleértve az 'ErRoR'-t
+                                                (<span style="color:red" id="learnMemory20"> - </span> db.) és a
+                                                'RöVid'-et (<span style="color:red" id="learnMemory21"> - </span> db.)
+                                                eredményező futásokat
+                                                is:</td>
+                                            <td><span style="color:red" id="learnMemory22">-</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Az ezek között található értelmes szavak (<span style="color:red"
+                                                    id="learnMemory23"> - </span> db.) százaléka ennyi:</td>
+                                            <td><span style="color:red" id="learnMemory24">-</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Az ezek között található - ismétlés nélküli - értelmes szavak (<span
+                                                    style="color:red" id="learnMemory25"> - </span> db.) százaléka
+                                                ennyi:</td>
+                                            <td><span style="color:red" id="learnMemory26">-</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Mindez tehát azt jelenti, hogy a létrehozott szavak közül
+                                                minden
+                                                <span style="color:red" id="learnMemory27"> - </span> értelmes szó.</td>
 
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p>Futásszám: <input oninput="repTime()" style="width:100px" id="repetitionMemoryExamineRun"
-                                type="number" value="100"> Betűszám:
-                            <input oninput="repTime()" id="repetitionMemoryExamineLetter" style="width:50px"
-                                type="number" value="3"></p>
-                        <button type="button" class="ml-3 btn btn-secondary btn-sm"
-                            onclick="repetitionMemoryExamine()">Mehet!</button>
-                        <span class="ml-3">Sorrend: </span>
-                        <button disabled type="button" class="ml-3 btn btn-secondary btn-sm"
-                            id="repetitionMemoryExamineSize" onclick="repSize()">Ismétlés száma szerint</button>
-                        <button disabled type="button" class="ml-3 btn btn-secondary btn-sm"
-                            id="repetitionMemoryExamineABC" onclick="repABC()">ABC sorrendben</button>
-                        <span class="ml-3">Futásidő: </span><span id="timeRMEAppr"> - </span>
-                        <p>A <i>'mehet-1'</i> és <i>'mehet-2'</i>-höz tartozó táblázatok, grafikonok most ki lesznek
-                            kapcsolva.</p>
-                        <div class="ml-3" style="color:#696969">
-                            <span>Felsorolás: </span>
-                            <span style="display:initial" id="infoRepSize">ismétlés száma szerint</span>
-                            <span style="display:none" id="infoRepABC">ábécé sorrendben</span>
-                            <p>Futásidő: <span id="timeRMEReal"> - </span></p>
-                        </div>
-                        <div id="divForRepMemEx" class="smallBorder bgDarker mt-3">
-                            <div id="repMemEx"></div>
-                        </div>
-                        <p class="mt-3">A következő táblázat azt mutatja meg, hogy a szóképzésnél hány egyszer
-                            előforduló értelmes
-                            szó volt, hány kétszer előforduló értelmes szó volt, hány háromszor ... és így tovább.
-                            Alatta pedig ugyanezt ábrázolja az oszlopgrafikon.</p>
-                        <div id="divForLearningDist" class="smallBorder bgDarker mt-3">
-                            <div id="learningDist"></div>
-                        </div>
-                        <div id="divForLearningDistGraph" class="smallBorder bgDarker mt-3">
-                            <table id="tableForLearningDistGraph">
-                                <tbody id="learningDistGraph"></tbody>
-                            </table>
-                        </div>
-                        <hr>
-                        <div class="mt-3">
-                            <p>Futtassuk végig ugyanezt az eljárást többször egymás után úgy, hogy minden egyes futás
-                                előtt a tanulómemória lenullázódik, majd 3 betűs szavakkal <input id="repNumberFor3"
-                                    type="number" style="width:70px" value="100">-szor, 4 betűs szavakkal pedig <input
-                                    id="repNumberFor4" type="number" style="width:70px" value="10">-szer történő
-                                ismétléssel feltöltődik, majd ezután a program lefut az alábbi beállításokkal, s a végén
-                                kiírja, hogy mi volt a leggyakoribb szó az egyes futások során.
-                            </p>
-                            <p>Ismétlésszám: <input oninput="repTime2()" style="width:100px"
-                                    id="repetitionMemoryExamineRep2" type="number" value="10">
-                                Futásszám: <input oninput="repTime2()" style="width:100px"
-                                    id="repetitionMemoryExamineRun2" type="number" value="10"> Betűszám:
-                                <input oninput="repTime2()" id="repetitionMemoryExamineLetter2" style="width:50px"
-                                    type="number" value="3"></p>
-                            <p><span class="mr-3">Nem kérem a tanulómemória futtatását, én szeretném beállítani.</span>
-                                <input oninput="IdontWantToSetMemory()" id="dontWantToSetMemory" type="checkbox"></p>
-                            <div><button type="button" class="ml-3 mb-1 btn btn-secondary btn-sm"
-                                    onclick="repRepMexEx()">Mehet!</button>
-                                <span class="ml-3">ábécé sorrendben</span><input checked type="radio" name="abcORvalue"
-                                    onclick="RRMEabc()" class="ml-3" id="RRMEabcRadio">
-                                <span class="ml-3">előfordulások száma szerint</span><input type="radio"
-                                    name="abcORvalue" onclick="RRMEabc()" class="ml-3" id="RRMEvalueRadio"></div>
-                            <p class="mt-1 mb-0">Becsült futásidő: <span id="repTimeRMEAppr"> <i>Például:
-                                        100/10/100/10/3 beállítással 16 - 54 perc</i> </span></p>
-                            <p class="mt-0" style="color:#696969">Futásidő: <span id="realTimeRRME"> - </span></p>
-                        </div>
-                        <div class="smallBorder bgDarker mt-3" id="divForRRME">
-                            <div id="RRME"></div>
-                        </div>
-                        <p class="mt-3">Néhány példa erre az alkalmazásra: </p>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p>Futásszám: <input oninput="repTime()" style="width:100px"
+                                        id="repetitionMemoryExamineRun" type="number" value="100"> Betűszám:
+                                    <input oninput="repTime()" id="repetitionMemoryExamineLetter" style="width:50px"
+                                        type="number" value="3"></p>
+                                <button type="button" class="ml-3 btn btn-secondary btn-sm"
+                                    onclick="repetitionMemoryExamine()">Mehet!</button>
+                                <span class="ml-3">Sorrend: </span>
+                                <button disabled type="button" class="ml-3 btn btn-secondary btn-sm"
+                                    id="repetitionMemoryExamineSize" onclick="repSize()">Ismétlés száma szerint</button>
+                                <button disabled type="button" class="ml-3 btn btn-secondary btn-sm"
+                                    id="repetitionMemoryExamineABC" onclick="repABC()">ABC sorrendben</button>
+                                <span class="ml-3">Futásidő: </span><span id="timeRMEAppr"> - </span>
+                                <p>A <i>'mehet-1'</i> és <i>'mehet-2'</i>-höz tartozó táblázatok, grafikonok most ki
+                                    lesznek
+                                    kapcsolva.</p>
+                                <div class="ml-3" style="color:#696969">
+                                    <span>Felsorolás: </span>
+                                    <span style="display:initial" id="infoRepSize">ismétlés száma szerint</span>
+                                    <span style="display:none" id="infoRepABC">ábécé sorrendben</span>
+                                    <p>Futásidő: <span id="timeRMEReal"> - </span></p>
+                                </div>
+                                <div id="divForRepMemEx" class="smallBorder bgDarker mt-3">
+                                    <div id="repMemEx"></div>
+                                </div>
+                                <p class="mt-3">A következő táblázat azt mutatja meg, hogy a szóképzésnél hány egyszer
+                                    előforduló értelmes
+                                    szó volt, hány kétszer előforduló értelmes szó volt, hány háromszor ... és így
+                                    tovább.
+                                    Alatta pedig ugyanezt ábrázolja az oszlopgrafikon.</p>
+                                <div id="divForLearningDist" class="smallBorder bgDarker mt-3">
+                                    <div id="learningDist"></div>
+                                </div>
+                                <div id="divForLearningDistGraph" class="smallBorder bgDarker mt-3">
+                                    <table id="tableForLearningDistGraph">
+                                        <tbody id="learningDistGraph"></tbody>
+                                    </table>
+                                </div>
+                                <hr>
+                                <div class="mt-3">
+                                    <p>Futtassuk végig ugyanezt az eljárást többször egymás után úgy, hogy minden egyes
+                                        futás
+                                        előtt a tanulómemória lenullázódik, majd 3 betűs szavakkal <input
+                                            id="repNumberFor3" type="number" style="width:70px" value="100">-szor, 4
+                                        betűs szavakkal pedig <input id="repNumberFor4" type="number" style="width:70px"
+                                            value="10">-szer történő
+                                        ismétléssel feltöltődik, majd ezután a program lefut az alábbi beállításokkal, s
+                                        a végén
+                                        kiírja, hogy mi volt a leggyakoribb szó az egyes futások során.
+                                    </p>
+                                    <p>Ismétlésszám: <input oninput="repTime2()" style="width:100px"
+                                            id="repetitionMemoryExamineRep2" type="number" value="10">
+                                        Futásszám: <input oninput="repTime2()" style="width:100px"
+                                            id="repetitionMemoryExamineRun2" type="number" value="10"> Betűszám:
+                                        <input oninput="repTime2()" id="repetitionMemoryExamineLetter2"
+                                            style="width:50px" type="number" value="3"></p>
+                                    <p><span class="mr-3">Nem kérem a tanulómemória futtatását, én szeretném
+                                            beállítani.</span>
+                                        <input oninput="IdontWantToSetMemory()" id="dontWantToSetMemory"
+                                            type="checkbox"></p>
+                                    <div><button type="button" class="ml-3 mb-1 btn btn-secondary btn-sm"
+                                            onclick="repRepMexEx()">Mehet!</button>
+                                        <span class="ml-3">ábécé sorrendben</span><input checked type="radio"
+                                            name="abcORvalue" onclick="RRMEabc()" class="ml-3" id="RRMEabcRadio">
+                                        <span class="ml-3">előfordulások száma szerint</span><input type="radio"
+                                            name="abcORvalue" onclick="RRMEabc()" class="ml-3" id="RRMEvalueRadio">
+                                    </div>
+                                    <p class="mt-1 mb-0">Becsült futásidő: <span id="repTimeRMEAppr"> <i>Például:
+                                                100/10/100/10/3 beállítással 16 - 54 perc</i> </span></p>
+                                    <p class="mt-0" style="color:#696969">Futásidő: <span id="realTimeRRME"> - </span>
+                                    </p>
+                                </div>
+                                <div class="smallBorder bgDarker mt-3" id="divForRRME">
+                                    <div id="RRME"></div>
+                                </div>
+                                <p class="mt-3">Néhány példa erre az alkalmazásra: </p>
 
-                        <p>Az 1., 2., 3. sorszámú szószedetek: 100/10-es memóriafeltöltéssel 100/100/4
-                            beállítással 30-40 percen át futott a program , s ennek az eredményeit látjuk az
-                            alábbi felsorolásban. (Minden 100-as ismétlés előtt új tanulómemória jött létre.)
-                        </p>
-                        <p>A 4., 5., 6., 7. sorszámú szószedetek: 500/50-es memóriafeltöltéssel 100/100/4
-                            beállítással másfél - két órán át futott a program.
-                        </p>
-                        <p>
-                            <span class="ml-3">ábécé sorrendben</span><input checked type="radio" name="abcORvalue2"
-                                onclick="RRMEabc2()" class="ml-3" id="RRMEabcRadio2"><span class="ml-3">előfordulások
-                                száma szerint</span><input type="radio" name="abcORvalue2" onclick="RRMEabc2()"
-                                class="ml-3" id="RRMEvalueRadio2">
+                                <p>Az 1., 2., 3. sorszámú szószedetek: 100/10-es memóriafeltöltéssel 100/100/4
+                                    beállítással 30-40 percen át futott a program , s ennek az eredményeit látjuk az
+                                    alábbi felsorolásban. (Minden 100-as ismétlés előtt új tanulómemória jött létre.)
+                                </p>
+                                <p>A 4., 5., 6., 7. sorszámú szószedetek: 500/50-es memóriafeltöltéssel 100/100/4
+                                    beállítással másfél - két órán át futott a program.
+                                </p>
+                                <p>
+                                    <span class="ml-3">ábécé sorrendben</span><input checked type="radio"
+                                        name="abcORvalue2" onclick="RRMEabc2()" class="ml-3" id="RRMEabcRadio2"><span
+                                        class="ml-3">előfordulások
+                                        száma szerint</span><input type="radio" name="abcORvalue2" onclick="RRMEabc2()"
+                                        class="ml-3" id="RRMEvalueRadio2">
 
-                        </p>
-                        <p class="ml-3">A következő sorszámú szószedetet kérem: 1. <input oninput="RRMEabc2()" checked
-                                class="ml-1 mr-3" type="radio" id="RRMEtesztek1" name="RRMEtesztek"> 2 <input
-                                oninput="RRMEabc2()" class="ml-1 mr-3" type="radio" id="RRMEtesztek2"
-                                name="RRMEtesztek"> 3. <input oninput="RRMEabc2()" class="ml-1 mr-3" type="radio"
-                                id="RRMEtesztek3" name="RRMEtesztek"> 4 <input oninput="RRMEabc2()" class="ml-1 mr-3"
-                                type="radio" id="RRMEtesztek4" name="RRMEtesztek"> 5 <input oninput="RRMEabc2()"
-                                class="ml-1 mr-3" type="radio" id="RRMEtesztek5" name="RRMEtesztek"> 6 <input
-                                oninput="RRMEabc2()" class="ml-1 mr-3" type="radio" id="RRMEtesztek6"
-                                name="RRMEtesztek"> 7 <input oninput="RRMEabc2()" class="ml-1 mr-3" type="radio"
-                                id="RRMEtesztek7" name="RRMEtesztek"> 8 <input oninput="RRMEabc2()" class="ml-1 mr-3"
-                                type="radio" id="RRMEtesztek8" name="RRMEtesztek">
+                                </p>
+                                <p class="ml-3">A következő sorszámú szószedetet kérem: 1. <input oninput="RRMEabc2()"
+                                        checked class="ml-1 mr-3" type="radio" id="RRMEtesztek1" name="RRMEtesztek"> 2
+                                    <input oninput="RRMEabc2()" class="ml-1 mr-3" type="radio" id="RRMEtesztek2"
+                                        name="RRMEtesztek"> 3. <input oninput="RRMEabc2()" class="ml-1 mr-3"
+                                        type="radio" id="RRMEtesztek3" name="RRMEtesztek"> 4 <input oninput="RRMEabc2()"
+                                        class="ml-1 mr-3" type="radio" id="RRMEtesztek4" name="RRMEtesztek"> 5 <input
+                                        oninput="RRMEabc2()" class="ml-1 mr-3" type="radio" id="RRMEtesztek5"
+                                        name="RRMEtesztek"> 6 <input oninput="RRMEabc2()" class="ml-1 mr-3" type="radio"
+                                        id="RRMEtesztek6" name="RRMEtesztek"> 7 <input oninput="RRMEabc2()"
+                                        class="ml-1 mr-3" type="radio" id="RRMEtesztek7" name="RRMEtesztek"> 8 <input
+                                        oninput="RRMEabc2()" class="ml-1 mr-3" type="radio" id="RRMEtesztek8"
+                                        name="RRMEtesztek">
 
 
 
 
-                        </p>
-                        <p class="ml-3">Ennyi különböző szó szerepel a felsorolásban: <span id="RRMEdifferent"> -
-                            </span> db.</p>
-                        <div class="bgWhite smallBorder" id="divForRRMEteszt">
-                            <p id="pForRRMEteszt">
+                                </p>
+                                <p class="ml-3">Ennyi különböző szó szerepel a felsorolásban: <span id="RRMEdifferent">
+                                        -
+                                    </span> db.</p>
+                                <div class="bgWhite smallBorder" id="divForRRMEteszt">
+                                    <p id="pForRRMEteszt">
 
-                            </p>
-                        </div>
-                        <p class="mt-3">A következő sorszámú szószedetek közös szavait kérem:
-                            1. <input oninput="niniMiVanItt()" type="checkbox" id="elso" name="1"
-                                class="tesztSzoSzedet"> &nbsp &nbsp
-                            2. <input checked oninput="niniMiVanItt()" type="checkbox" id="ketto" name="2"
-                                class="tesztSzoSzedet">&nbsp &nbsp
-                            3. <input checked oninput="niniMiVanItt()" type="checkbox" id="harom" name="3"
-                                class="tesztSzoSzedet">&nbsp &nbsp
-                            4. <input oninput="niniMiVanItt()" type="checkbox" id="negy" name="4"
-                                class="tesztSzoSzedet">&nbsp &nbsp
-                            5. <input oninput="niniMiVanItt()" type="checkbox" id="ot" name="5"
-                                class="tesztSzoSzedet">&nbsp &nbsp
-                            6. <input oninput="niniMiVanItt()" type="checkbox" id="hat" name="6"
-                                class="tesztSzoSzedet">&nbsp &nbsp
-                            7. <input oninput="niniMiVanItt()" type="checkbox" id="het" name="7"
-                                class="tesztSzoSzedet">&nbsp &nbsp
-                            8. <input oninput="niniMiVanItt()" type="checkbox" id="nyolc" name="8"
-                                class="tesztSzoSzedet">
-                            <span id="minimumKettot" style="display:initial">Legalább két jelölőnégyzetet, plíz!</span>
-                        </p>
-                        <p>Közös elemek száma: <span id="myLittleWordsNumber"> -
-                            </span> db.</p>
-                        <div class="mt-3 bgWhite smallBorder" id="divForMyLittleWords">
-                            <div id="myLittleWords">
+                                    </p>
+                                </div>
+                                <p class="mt-3">A következő sorszámú szószedetek közös szavait kérem:
+                                    1. <input oninput="niniMiVanItt()" type="checkbox" id="elso" name="1"
+                                        class="tesztSzoSzedet"> &nbsp &nbsp
+                                    2. <input checked oninput="niniMiVanItt()" type="checkbox" id="ketto" name="2"
+                                        class="tesztSzoSzedet">&nbsp &nbsp
+                                    3. <input checked oninput="niniMiVanItt()" type="checkbox" id="harom" name="3"
+                                        class="tesztSzoSzedet">&nbsp &nbsp
+                                    4. <input oninput="niniMiVanItt()" type="checkbox" id="negy" name="4"
+                                        class="tesztSzoSzedet">&nbsp &nbsp
+                                    5. <input oninput="niniMiVanItt()" type="checkbox" id="ot" name="5"
+                                        class="tesztSzoSzedet">&nbsp &nbsp
+                                    6. <input oninput="niniMiVanItt()" type="checkbox" id="hat" name="6"
+                                        class="tesztSzoSzedet">&nbsp &nbsp
+                                    7. <input oninput="niniMiVanItt()" type="checkbox" id="het" name="7"
+                                        class="tesztSzoSzedet">&nbsp &nbsp
+                                    8. <input oninput="niniMiVanItt()" type="checkbox" id="nyolc" name="8"
+                                        class="tesztSzoSzedet">
+                                    <span id="minimumKettot" style="display:initial">Legalább két jelölőnégyzetet,
+                                        plíz!</span>
+                                </p>
+                                <p>Közös elemek száma: <span id="myLittleWordsNumber"> -
+                                    </span> db.</p>
+                                <div class="mt-3 bgWhite smallBorder" id="divForMyLittleWords">
+                                    <div id="myLittleWords">
 
+                                    </div>
+                                </div>
+                                <p class="mt-2">Ha akarja, rákereshet, hogy egyes szavak hányszor fordulnak elő a
+                                    felsorolásokban.</p>
+                                <button style="display:initial" onclick="magyarazatCsunyaSzavakhoz()"
+                                    id="csunyaSzavakButton" type="button"
+                                    class=" mt-0 mb-1 btn btn-info btn-small btn-block">Előkészítő eljárás
+                                    futtatása a
+                                    szókereséshez és a táblázatokhoz</button>
+                                <p>A maximális előforulású szó a szószedetben: <span id="negyBetusMaxWord"> - </span>
+                                    <span>Előfordulás száma:</span><span id="negyBetusMax"> - </span></p>
+                                <input disabled id="negyBetusSzoIttBe" type="text">
+                                <button disabled id="negyBetusSzoIttBeButton" onclick="negyBetusSzoKeres()"
+                                    type="button" class="mb-1 btn btn-info btn-small">Mehet</button>
+                                <span class="mt-0">A keresett szó előfordulása: <span class="ml-3"
+                                        id="negyBetusSzoSzama"> -
+                                    </span></span>
+                                <p>A következő táblázat, ill. grafikon azt mutatja meg, hogy az egyes szavak milyen
+                                    előfordulással szerepelnek. A szó mellett zárójelben az összes előfordulásának a
+                                    száma összegezve. <small>(Ha nem jelenne meg, klikkeljen az
+                                        'Előkészítő
+                                        eljárás futtatása' gombra!)</small></p>
+                                <div class="mt-3 smallBorder bgDarker" id="divForSzavakElofordulasaTable">
+                                    <div id="szavakElofordulasaTable"></div>
+                                </div>
                             </div>
                         </div>
-                        <p class="mt-2">Ha akarja, rákereshet, hogy egyes szavak hányszor fordulnak elő a
-                            felsorolásokban.</p>
-                        <button style="display:initial" onclick="magyarazatCsunyaSzavakhoz()" id="csunyaSzavakButton"
-                            type="button" class=" mt-0 mb-1 btn btn-info btn-small btn-block">Előkészítő eljárás
-                            futtatása a
-                            szókereséshez és a táblázatokhoz</button>
-                        <p>A maximális előforulású szó a szószedetben: <span id="negyBetusMaxWord"> - </span>
-                            <span>Előfordulás száma:</span><span id="negyBetusMax"> - </span></p>
-                        <input disabled id="negyBetusSzoIttBe" type="text">
-                        <button disabled id="negyBetusSzoIttBeButton" onclick="negyBetusSzoKeres()" type="button"
-                            class="mb-1 btn btn-info btn-small">Mehet</button>
-                        <span class="mt-0">A keresett szó előfordulása: <span class="ml-3" id="negyBetusSzoSzama"> -
-                            </span></span>
-                        <p>A következő táblázat, ill. grafikon azt mutatja meg, hogy az egyes szavak milyen
-                            előfordulással szerepelnek
-                            csökkenő előfordulási sorrendben. <small>(Ha nem jelenne meg, klikkeljen az 'Előkészítő
-                                eljárás futtatása' gombra!)</small></p>
-                        <div class="mt-3 smallBorder bgDarker" id="divForSzavakElofordulasaTable">
-                            <div id="szavakElofordulasaTable"></div>
+
+
+                        <div class="row">
+
+                            <div id="divForSzavakElofordulasa1" class="col-6 mt-3 smallBorder bgDarker">
+                                <table id="tableForSzavakElofordulasa1"
+                                    class="table table-sm table-bordered table-striped">
+                                    <tbody id="szavakElofordulasa1"></tbody>
+                                </table>
+                            </div>
+
+
+                            <div id="divForSzavakElofordulasa2" class="col-6 mt-3 smallBorder bgDarker">
+                                <table id="tableForSzavakElofordulasa2"
+                                    class="table table-sm table-bordered table-striped">
+                                    <tbody id="szavakElofordulasa2"></tbody>
+                                </table>
+                            </div>
+
                         </div>
 
-                        <div id="divForSzavakElofordulasa" class="mt-3 smallBorder bgDarker" >
-                            <table id="tableForSzavakElofordulasa" class="table table-sm table-bordered table-striped">
-                              <tbody id="szavakElofordulasa"></tbody>  
+                        <p class="mt-2"><small>A grafikonokon az oszlopok magassága felel meg az oszlop által
+                                reprezentált szó előfordulása számának. A bal oldali táblázat az első 100 elemet
+                                mutatja, itt ugyanis az oszlopok brutális
+                                magassággak kezdenek, majd meredek exponencialitással kezdenek süllyedni. Pl. az
+                                első három szó és a hozzá tartozó magasság: GYŰR (17865), ÁNGY (5364). Látható, hogy
+                                a második szóhoz tartozó magasság az előtte lévő oszlop magasságának szinte kevesebb
+                                mint a harmada. Hogy az
+                                oszlopgrafikonok kiférjenek, ezért minden magasság el van osztva 100-zal, azaz egy elemi
+                                magasság 100 előfordulást reprezentál. A második
+                                grafikon a 101-es elemmel kezdődően ábrázolja az oszlopokat. Láthatóan itt
+                                szelídebben
+                                süllyednek a magasságok. Itt is minden magasság el van osztva 10-zel, azaz az oszlopok
+                                téglái egyenként 10-10 előfordulást érnek.</small></p>
+                        <div id="divForSzavakElofordulasa3" class="mt-3 smallBorder bgDarker">
+                            <table id="tableForSzavakElofordulasa3" class="table table-sm table-bordered table-striped">
+                                <tbody id="szavakElofordulasa3"></tbody>
                             </table>
-                            
                         </div>
+                        <p>Ezen a grafikonon egy elemi magasság 100 előfordulást jelez. Ha fentebb rákeres egy szóra,
+                            akkor itt a szóhoz tartozó oszlop eltérő színű lesz, így megállapíthatja, hohy hol található
+                            az oszlopgrafikonon. Kattintson a <i>'felugrik'</i> gombra, s akkor a grafikon közvetlenül a
+                            keresőmező alá ugrik, s így könnyebben kezelheti a kereséseket.</p>
+                        <button id="elofordulasUgrikButton" onclick="elofordulasUgrikFunction()" type="button"
+                            class="ml-3 btn btn-danger btn-sm">Felugrik</button>
+
+
+
 
                     </div>
+
+
+
+
+
                 </div>
 
 
@@ -3774,18 +3855,22 @@
                     <div class="col ml-3">
 
 
-                        <p style="font-size:15px">Az első 100/10/100/100/4 (30 perces) futtatással kapott szószedet így
+                        <p style="font-size:15px">Az első 100/10/100/100/4 (30 perces) futtatással kapott szószedet
+                            így
                             kezdődik:
-                            <u>AGÁR</u> (134), <u>AJAJ</u> (49), <u>AKÁR</u> (92), <u>ALÁZ</u> (258), <u>AMÍG</u> (135),
+                            <u>AGÁR</u> (134), <u>AJAJ</u> (49), <u>AKÁR</u> (92), <u>ALÁZ</u> (258), <u>AMÍG</u>
+                            (135),
                             <u>APÁT</u> (186), <u>ARAT</u> (125), <u>BAKÓ</u>
                             (102),
-                            <u>BELŐ</u> (182), <u>BÁBA</u> (122), BÁLA (138), BÉTA (149), BÓRA (258), CICI (200), DARA
+                            <u>BELŐ</u> (182), <u>BÁBA</u> (122), BÁLA (138), BÉTA (149), BÓRA (258), CICI (200),
+                            DARA
                             (93), DEKA
                             (102),
                             EDZŐ (217)
                         </p>
                         <p>
-                            Ennek a felsorolásnak az első szavaiból akár egy abszurd verset is kihallhatunk. (Tőlem csak
+                            Ennek a felsorolásnak az első szavaiból akár egy abszurd verset is kihallhatunk. (Tőlem
+                            csak
                             a központozás és az
                             utolsó két szó származik.)</p>
                         <div class="row">
@@ -3804,11 +3889,13 @@
                                     <p>
                                     <ul>
                                         <li>
-                                            <p>Az ütemhangsúlyos verselésben a hangsúlyos és a hangsúlytalan szótagok
+                                            <p>Az ütemhangsúlyos verselésben a hangsúlyos és a hangsúlytalan
+                                                szótagok
                                                 váltakozása
                                                 alkotja a ritmust. A magyar nyelvben rendszerint az első szótag a
                                                 hangsúlyos, s ezt
-                                                követi néhány - vagy csak egy - hangsúlytalan szó. Ez a verselési mód a
+                                                követi néhány - vagy csak egy - hangsúlytalan szó. Ez a verselési
+                                                mód a
                                                 magyaros
                                                 vagy
                                                 nemzeti verselés.</p>
@@ -3816,13 +3903,15 @@
                                         <li>
                                             <p>A hangsúlyos verselést a szótagok száma szerint nevezzük el. A
                                                 legelterjedtebb az
-                                                <i>ősi magyar hatos</i> verselés. Pl.: <i>’Megrakják a tüzet, / mégis
+                                                <i>ősi magyar hatos</i> verselés. Pl.: <i>’Megrakják a tüzet, /
+                                                    mégis
                                                     elaluszik. /
                                                     Nincs az a
                                                     szerelem, / ami el nem múlik.’</i> (<a
                                                     href="https://www.youtube.com/watch?v=kWrRqWdblno"
                                                     target="_blank">videó</a>)
-                                                Vagy: <i>"Ne vigyorogj, Iljics, / nem tart ez örökké. / 150 év alatt /
+                                                Vagy: <i>"Ne vigyorogj, Iljics, / nem tart ez örökké. / 150 év alatt
+                                                    /
                                                     sem
                                                     lettünk
                                                     törökké!"</i> Esetleg még: <i>Ria! Ria! Hun-gá-ri-a!</i>
@@ -3831,12 +3920,14 @@
                                         <li>
                                             <p>A fenti ’vers’ is ősi magyar hatos ütemben íródott. Ez abból is
                                                 következik, hogy
-                                                négy betűs szavakat kerestünk, s egy-egy ilyen szó általában két szótag,
+                                                négy betűs szavakat kerestünk, s egy-egy ilyen szó általában két
+                                                szótag,
                                                 s három szó
                                                 így pont hat szótagot ad ki, ami a hatos ütemmérték alapja.</p>
                                         </li>
                                         <li>
-                                            <p>A ’vers’ alliterációkat tartalmaz, de ennek az az oka, hogy a szószedet
+                                            <p>A ’vers’ alliterációkat tartalmaz, de ennek az az oka, hogy a
+                                                szószedet
                                                 ábécé
                                                 sorrendben adja meg a szavakat.</p>
                                         </li>
@@ -3852,10 +3943,12 @@
                                             <div class="row">
                                                 <div class="col-6">
                                                     <p class=mb-0 style="color:#6A6A6A"><i>Apám afgán agár,</i></p>
-                                                    <p class=mb-0 style="color:#6A6A6A"><i>anyám sudár, habár...</i></p>
+                                                    <p class=mb-0 style="color:#6A6A6A"><i>anyám sudár, habár...</i>
+                                                    </p>
                                                     <p class=mb-0 style="color:#6A6A6A">
                                                         <i>húgom kicsit ribis,</i> </p>
-                                                    <p class=mb-0 style="color:#6A6A6A"> <i>bátyám totál dilis.</i>”</p>
+                                                    <p class=mb-0 style="color:#6A6A6A"> <i>bátyám totál dilis.</i>”
+                                                    </p>
 
                                                 </div>
                                                 <div class="col-6">
@@ -3873,12 +3966,14 @@
                                                 – melyek a leggyakoribb betűkettősök. Ezeket a hangzókettősöket –
                                                 előfordulási valószínűségük mértéke szerint – elkezdi egymás mellé
                                                 leírni és
-                                                így hangalaksorokat képez, majd a szószedet segítségével megállapítja,
+                                                így hangalaksorokat képez, majd a szószedet segítségével
+                                                megállapítja,
                                                 ha az
                                                 adott hangsor értelmes magyar szó-e, s amennyiben igen, akkor azt
                                                 kigyűjti
                                                 egy halmazba. Ha ez a halmaz eléri az előre beállított
-                                                elemszámot, akkor megáll és kiválogatja a halmazból azokat a szavakat,
+                                                elemszámot, akkor megáll és kiválogatja a halmazból azokat a
+                                                szavakat,
                                                 amelyek a legtöbbször ismétlődtek, s kiírja végül az első 100 db.
                                                 legtöbbször ismételt szót.</p>
                                         </li>
@@ -3911,7 +4006,8 @@
                 <div class="row mt-3">
                     <div class="col">
                         <p></p>
-                        <p style="color:red"><span style="color:red">a program eddig van meg ... folytatjuk ... mihelyst
+                        <p style="color:red"><span style="color:red">a program eddig van meg ... folytatjuk ...
+                                mihelyst
                                 ráérünk ... </span>&#128584
                             &#128585 &#128586</p>
                         <p></p>

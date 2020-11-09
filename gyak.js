@@ -1991,7 +1991,7 @@ repTime = function () {
 repTime();
 
 makeMyGraph = function (area, id, array) {
-    timeSzEStart=new Date();
+    timeSzEStart = new Date();
     sector = document.querySelector(`#${id}`);
     area.removeChild(sector);
     newTbody = document.createElement("tbody");
@@ -2015,12 +2015,12 @@ makeMyGraph = function (area, id, array) {
             };
         };
     };
-    timeSzEFinish=new Date();
-    timeSzEStart=timeSzEStart.getTime();
-    timeSzEFinish=timeSzEFinish.getTime();
-    time=(timeSzEFinish-timeSzEStart)/1000
-    console.log("sec: ",time);
-    return maximum, array;
+    timeSzEFinish = new Date();
+    timeSzEStart = timeSzEStart.getTime();
+    timeSzEFinish = timeSzEFinish.getTime();
+    time = (timeSzEFinish - timeSzEStart) / 1000
+    console.log("sec: ", time);
+    return maximum, array, sec;
 };
 
 mmrOnInput = function () {
@@ -7813,7 +7813,7 @@ magyarazatCsunyaSzavakhoz = function () {
     document.querySelector("#negyBetusMaxWord").innerHTML = maxWord;
 
     szavakElofordulasaArray = Array();
-    szavakElofordulasaArray[0]=0;
+    szavakElofordulasaArray[0] = 0;
     for (let i = 1; i < allWordFromTesztekWithContractedOccurrenceByValue.length; i++) {
         szavakElofordulasaArray[i] = allWordFromTesztekWithContractedOccurrenceByValue[i][1];
     };
@@ -7823,10 +7823,51 @@ magyarazatCsunyaSzavakhoz = function () {
     dictionary = allWordFromTesztekWithContractedOccurrenceByValue;
     displayDictionaryWithRepetitionInline(mainArea, sectorId, dictionary)
 
-    area = document.querySelector("#tableForSzavakElofordulasa");
-    id = "szavakElofordulasa";
+    area =
+        id = "szavakElofordulasa";
     array = szavakElofordulasaArray;
-    //makeMyGraph(area, id, array);
+    szavakElofordulasaArray1 = Array();
+    szavakElofordulasaArray2 = Array();
+    szavakElofordulasaArray3 = Array();
+
+
+    for (let i = 0; i < 101; i++) {
+        szavakElofordulasaArray1[i] = Math.ceil(szavakElofordulasaArray[i] / 100)
+    };
+    for (let i = 101; i < szavakElofordulasaArray.length; i++) {
+        szavakElofordulasaArray2[i - 101] = Math.ceil(szavakElofordulasaArray[i] / 10)
+    };
+    for (let i = 0; i < szavakElofordulasaArray.length; i++) {
+        szavakElofordulasaArray3[i] = Math.ceil(szavakElofordulasaArray[i] / 100)
+    };
+
+
+    timeSzEStart = new Date();
+    timeSzEStart = timeSzEStart.getTime();
+    area = document.querySelector("#tableForSzavakElofordulasa1");
+    id = "szavakElofordulasa1";
+    array = szavakElofordulasaArray1
+    makeMyGraph(area, id, array)
+
+    area = document.querySelector("#tableForSzavakElofordulasa2");
+    id = "szavakElofordulasa2";
+    array = szavakElofordulasaArray2
+    makeMyGraph(area, id, array)
+
+    area = document.querySelector("#tableForSzavakElofordulasa3");
+    id = "szavakElofordulasa3";
+    array = szavakElofordulasaArray3
+    makeMyGraph(area, id, array)
+
+    timeSzEFinish = new Date();
+
+    timeSzEFinish = timeSzEFinish.getTime();
+    time = (timeSzEFinish - timeSzEStart) / 1000
+    console.log("sec: ", time);
+
+};
+
+elofordulasUgrikFunction = function(){
     
 };
 
@@ -7853,7 +7894,7 @@ negyBetusSzoKeres = function () {
     //displayDictionaryWithRepetitionInline(mainArea, sectorId, dictionary)
 
     area = document.querySelector("#tableForSzavakElofordulasa");
-    id ="#szavakElofordulasa";
+    id = "#szavakElofordulasa";
     array = szavakElofordulasaArray;
     //makeMyGraph(area, id, array)
 
