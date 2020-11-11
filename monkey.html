@@ -2869,7 +2869,8 @@
                     <div class="col">
                         <div class="row">
                             <div class="col -8">
-                                <p>Egy konkrét méréssorozatnál program az első 10 000 futásra ennyi karakterkettőst
+                                <p>Példáuk egy konkrét méréssorozatnál program az első 10 000 futásra ennyi
+                                    karakterkettőst
                                     detektált:</p>
                                 <table class="table table-sm">
                                     <tbody>
@@ -2914,7 +2915,9 @@
                                 </table>
                                 <p>A betűkettősök mellett zárójelben lévő szám azt mutatja meg, hogy a majom a
                                     tanulás során
-                                    hányszor találkozott az adott betűkettőssel.</p>
+                                    hányszor találkozott az adott betűkettőssel. <small>(Ha a táblázat üres, akkor
+                                        futtasson a bal oldali applikáción egy keresést a <i>'mehet'</i>
+                                        gombbal!</small></p>
                                 <p>A betűkettősök felsorolása legyen: </p>
                                 <p class="ml-5"><input oninput="rankingFromOninput()" id="abc" type="radio"
                                         name="sorrend" checked>
@@ -3199,7 +3202,7 @@
                                         style="width:100px" min="2" max="10" value="5">
                                     <label> betű!</label>
                                     <button type="button" class="btn btn-secondary btn-sm"
-                                        onclick="generateWord()">Kérek
+                                        onclick="beforeGenerateWord()">Kérek
                                         egy
                                         szót!</button>
                                     <button type="button" class="btn btn-secondary btn-sm"
@@ -3577,6 +3580,17 @@
                                         táblázatokat és grafikonokat nem tölti ki a
                                         program, így azok egy része a korábbi futtatás eredményeit tartalmazza.)</small>
                                 </p>
+                                <p>Futásszám: <input oninput="repTime()" style="width:100px"
+                                        id="repetitionMemoryExamineRun" type="number" value="100"> Betűszám:
+                                    <input oninput="repTime()" id="repetitionMemoryExamineLetter" style="width:50px"
+                                        type="number" value="3"></p>
+                                <button type="button" class="ml-3 btn btn-secondary btn-sm"
+                                    onclick="repetitionMemoryExamine()">Mehet!</button>
+
+                                <span class="ml-3">Futásidő: </span><span id="timeRMEAppr"> - </span>
+                                <p>A <i>'mehet-1'</i> és <i>'mehet-2'</i>-höz tartozó táblázatok, grafikonok most ki
+                                    lesznek
+                                    kapcsolva.</p>
                                 <table class="table table-bordered table-sm">
                                     <tbody>
                                         <tr>
@@ -3624,21 +3638,11 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <p>Futásszám: <input oninput="repTime()" style="width:100px"
-                                        id="repetitionMemoryExamineRun" type="number" value="100"> Betűszám:
-                                    <input oninput="repTime()" id="repetitionMemoryExamineLetter" style="width:50px"
-                                        type="number" value="3"></p>
-                                <button type="button" class="ml-3 btn btn-secondary btn-sm"
-                                    onclick="repetitionMemoryExamine()">Mehet!</button>
                                 <span class="ml-3">Sorrend: </span>
                                 <button disabled type="button" class="ml-3 btn btn-secondary btn-sm"
                                     id="repetitionMemoryExamineSize" onclick="repSize()">Ismétlés száma szerint</button>
                                 <button disabled type="button" class="ml-3 btn btn-secondary btn-sm"
                                     id="repetitionMemoryExamineABC" onclick="repABC()">ABC sorrendben</button>
-                                <span class="ml-3">Futásidő: </span><span id="timeRMEAppr"> - </span>
-                                <p>A <i>'mehet-1'</i> és <i>'mehet-2'</i>-höz tartozó táblázatok, grafikonok most ki
-                                    lesznek
-                                    kapcsolva.</p>
                                 <div class="ml-3" style="color:#696969">
                                     <span>Felsorolás: </span>
                                     <span style="display:initial" id="infoRepSize">ismétlés száma szerint</span>
@@ -3671,7 +3675,17 @@
                                             value="10">-szer történő
                                         ismétléssel feltöltődik, majd ezután a program lefut az alábbi beállításokkal, s
                                         a végén
-                                        kiírja, hogy mi volt a leggyakoribb szó az egyes futások során.
+                                        kiírja, hogy mi volt a legnehezebben előállított szó az egyes futások során.
+                                        <small>
+                                            (Ez
+                                            azt jelenti, hogy melyik volt az adott futás során az a szó, aminek
+                                            legtovább
+                                            tartott az előállítása. A szó mellett lévő zárójelben lévő szám mutatja,
+                                            hogy az
+                                            adott szó hányadik próbálkozásra jött létre - mint értelmes az első értelmes
+                                            szó
+                                            s próbálkozások sorozatában.)
+                                        </small>
                                     </p>
                                     <p>Ismétlésszám: <input oninput="repTime2()" style="width:100px"
                                             id="repetitionMemoryExamineRep2" type="number" value="10">
@@ -3767,23 +3781,74 @@
 
                                     </div>
                                 </div>
-                                <p class="mt-2">Ha akarja, rákereshet, hogy egyes szavak hányszor fordulnak elő a
+                                <hr>
+                                <p class="mt-2">Kiválaszthatja a szószedeteket, s a program megmutatja, hogy a
+                                    kiválasztott szószedetek összes szava hányszor fordul elő a kiválasztott szószedetek
+                                    felsorolásaiban:
+                                    <span class="ml-3">
+                                        1. <input checked oninput="minimumEgyetPlease()" type="checkbox"
+                                            id="elsoValaszt" name="1" class="tesztSzoSzedet2"> &nbsp &nbsp
+                                        2. <input checked oninput="minimumEgyetPlease()" type="checkbox"
+                                            id="kettoValaszt" name="2" class="tesztSzoSzedet2">&nbsp &nbsp
+                                        3. <input checked oninput="minimumEgyetPlease()" type="checkbox"
+                                            id="haromValaszt" name="3" class="tesztSzoSzedet2">&nbsp &nbsp
+                                        4. <input checked oninput="minimumEgyetPlease()" type="checkbox"
+                                            id="negyValaszt" name="4" class="tesztSzoSzedet2">&nbsp &nbsp
+                                        5. <input checked oninput="minimumEgyetPlease()" type="checkbox" id="otValaszt"
+                                            name="5" class="tesztSzoSzedet2">&nbsp &nbsp
+                                        6. <input checked oninput="minimumEgyetPlease()" type="checkbox" id="hatValaszt"
+                                            name="6" class="tesztSzoSzedet2">&nbsp &nbsp
+                                        7. <input checked oninput="minimumEgyetPlease()" type="checkbox" id="hetValaszt"
+                                            name="7" class="tesztSzoSzedet2">&nbsp &nbsp
+                                        8. <input checked oninput="minimumEgyetPlease()" type="checkbox"
+                                            id="nyolcValaszt" name="8" class="tesztSzoSzedet2"> &nbsp &nbsp
+                                        <span class="mr-3" id="legalabbEgyet2" style="color:red;display:none">Legalább
+                                            egyet be kell jelölnie!</span>
+                                    </span>
+                                    Majd, ha akarja, rákereshet, hogy egyes szavak hányszor fordulnak elő a
                                     felsorolásokban.</p>
                                 <button style="display:initial" onclick="magyarazatCsunyaSzavakhoz()"
                                     id="csunyaSzavakButton" type="button"
-                                    class=" mt-0 mb-1 btn btn-info btn-small btn-block">Előkészítő eljárás
+                                    class=" mt-0 mb-1 btn btn-info btn-small btn-block">Eljárás
                                     futtatása a
-                                    szókereséshez és a táblázatokhoz</button>
-                                <p>A maximális előforulású szó a szószedetben: <span id="negyBetusMaxWord"> - </span>
-                                    <span>Előfordulás száma:</span><span id="negyBetusMax"> - </span></p>
-                                <input disabled id="negyBetusSzoIttBe" type="text">
-                                <button disabled id="negyBetusSzoIttBeButton" onclick="negyBetusSzoKeres()"
-                                    type="button" class="mb-1 btn btn-info btn-small">Mehet</button>
-                                <span class="mt-0">A keresett szó előfordulása: <span class="ml-3"
-                                        id="negyBetusSzoSzama"> -
-                                    </span></span>
-                                <p>A következő táblázat, ill. grafikon azt mutatja meg, hogy az egyes szavak milyen
-                                    előfordulással szerepelnek. A szó mellett zárójelben az összes előfordulásának a
+                                    táblázatokhoz és a szókereséshez</button>
+
+                                <p>Az adatok értelmezéséhez. Pl. az egyik szószedet így kezdődik: 'ABÁL (339), ABÁL
+                                    (63), ABÁL (339), ABÁL (63), ADAG (106), AJAJ (198), AJTÓ (146)' Ennek a szólistának
+                                    az elkészítése során a program 1000-szer keresett 4-4 betűs értelmes szót, s ezt a
+                                    1000-1000 keresést megismételte 100-szor. Így az 'ABÁL' szó a száz ismétlésből
+                                    4-szer lett legépelve (ezek közül egyszer a 339. próbálkozásra, egyszer a 63.,
+                                    egyszer ismét a 339.)
+
+                                <table class="mt-3 table table-sm table-bordered table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td>A szótárban a négybetűs szavak száma:</td>
+                                            <td><span id=SzE1> - </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>A kiválasztott szószedetekben ennyi különböző szó van:</td>
+                                            <td><span id=SzE2> - </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ez az összes négybetűs szó ennyi százaléka</td>
+                                            <td><span id=SzE3> - </span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>A maximális előfordulású szó a szószedetben:</td>
+                                            <td><i><span id=SzE4> - </span></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ennyiszer fordul elő:</td>
+                                            <td><span id=SzE5></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <p>A következő táblázat, ill. grafikon tehát azt mutatja meg, hogy az egyes szavak
+                                    milyen
+                                    előfordulással szerepelnek a kiválasztott szószedetek összességében. A szó mellett
+                                    zárójelben az összes előfordulásának a
                                     száma összegezve. <small>(Ha nem jelenne meg, klikkeljen az
                                         'Előkészítő
                                         eljárás futtatása' gombra!)</small></p>
@@ -3792,27 +3857,20 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="row">
-
                             <div id="divForSzavakElofordulasa1" class="col-6 mt-3 smallBorder bgDarker">
                                 <table id="tableForSzavakElofordulasa1"
                                     class="table table-sm table-bordered table-striped">
                                     <tbody id="szavakElofordulasa1"></tbody>
                                 </table>
                             </div>
-
-
                             <div id="divForSzavakElofordulasa2" class="col-6 mt-3 smallBorder bgDarker">
                                 <table id="tableForSzavakElofordulasa2"
                                     class="table table-sm table-bordered table-striped">
                                     <tbody id="szavakElofordulasa2"></tbody>
                                 </table>
                             </div>
-
                         </div>
-
                         <p class="mt-2"><small>A grafikonokon az oszlopok magassága felel meg az oszlop által
                                 reprezentált szó előfordulása számának. A bal oldali táblázat az első 100 elemet
                                 mutatja, itt ugyanis az oszlopok brutális
@@ -3826,35 +3884,36 @@
                                 szelídebben
                                 süllyednek a magasságok. Itt is minden magasság el van osztva 10-zel, azaz az oszlopok
                                 téglái egyenként 10-10 előfordulást érnek.</small></p>
+                        <p>A maximális előforulású szó a szószedetben: <span id="negyBetusMaxWord"> - </span>
+                            <span>Előfordulás száma:</span><span id="negyBetusMax"> - </span>
+                            <span class="ml-3">Az összes szó száma: <span id="osszesSzoSzama"> - </span></p>
+                        <input disabled id="negyBetusSzoIttBe" type="text">
+                        <button disabled id="negyBetusSzoIttBeButton" onclick="negyBetusSzoKeres()" type="button"
+                            class="mb-1 btn btn-info btn-small">Mehet</button>
+                        <tr>
+                            <td></td>
+                            <td><span id=SzE1></span></td>
+                        </tr>
+                        <span class="mt-0 ml-3">A keresett szó előfordulása: <span class="ml-3" id="negyBetusSzoSzama">
+                                -
+                            </span></span>
+
+
+                        <p class="mt-0">A szavak előfordulás szerinti sorrendjében ez a szó ennyiedik: <span
+                                style="background-color:#FADADD" class="ml-3" id="negyBetusSzoEnnyiedik"> -
+                            </span></p>
                         <div id="divForSzavakElofordulasa3" class="mt-3 smallBorder bgDarker">
                             <table id="tableForSzavakElofordulasa3" class="table table-sm table-bordered table-striped">
                                 <tbody id="szavakElofordulasa3"></tbody>
                             </table>
                         </div>
-                        <p>Ezen a grafikonon egy elemi magasság 100 előfordulást jelez. Ha fentebb rákeres egy szóra,
-                            akkor itt a szóhoz tartozó oszlop eltérő színű lesz, így megállapíthatja, hohy hol található
-                            az oszlopgrafikonon. Kattintson a <i>'felugrik'</i> gombra, s akkor a grafikon közvetlenül a
-                            keresőmező alá ugrik, s így könnyebben kezelheti a kereséseket.</p>
-                        <button id="elofordulasUgrikButton" onclick="elofordulasUgrikFunction()" type="button"
-                            class="ml-3 btn btn-danger btn-sm">Felugrik</button>
-
 
 
 
                     </div>
-
-
-
-
-
                 </div>
-
-
                 <div class="row mt-3 smallBorder">
-
                     <div class="col ml-3">
-
-
                         <p style="font-size:15px">Az első 100/10/100/100/4 (30 perces) futtatással kapott szószedet
                             így
                             kezdődik:
@@ -3971,11 +4030,7 @@
                                                 ha az
                                                 adott hangsor értelmes magyar szó-e, s amennyiben igen, akkor azt
                                                 kigyűjti
-                                                egy halmazba. Ha ez a halmaz eléri az előre beállított
-                                                elemszámot, akkor megáll és kiválogatja a halmazból azokat a
-                                                szavakat,
-                                                amelyek a legtöbbször ismétlődtek, s kiírja végül az első 100 db.
-                                                legtöbbször ismételt szót.</p>
+                                                egy halmazba.</p>
                                         </li>
                                         <li>
                                             <p>A kérdés pedig az, hogy vajon az abszurd verset író költő agya – mint
@@ -3994,14 +4049,11 @@
                                                     programozva
                                                     a különböző trükkök és jelentés-összjátékok ismerete. "</p></i>
                                         </li>
-
                                 </div>
-
                                 </ul>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="row mt-3">
                     <div class="col">
@@ -4019,13 +4071,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
         </div>
     </div>
 

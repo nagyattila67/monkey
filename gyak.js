@@ -1272,6 +1272,11 @@ generateWordRnd = function () {
 //az eddig tanultak alapján generál egy új szót
 noMore = false;
 dictionaryOfMonkeyAllWord = Array();
+beforeGenerateWord = function () {
+    myRndNumber = document.querySelector("#szohosszOfMonkey").value;
+    myRndNumber = parseInt(myRndNumber);
+    generateWord(myRndNumber)
+};
 
 generateWord = function (myRndNumber) {
     noMore = false;
@@ -1281,7 +1286,7 @@ generateWord = function (myRndNumber) {
     if (learning.length == 0) {
         charNumber = document.querySelector("#karakterSzam").value;
         runningNumber = document.querySelector("#futasSzam").value;
-        if (noAlert == false) { alert(`A tanulómemória üres. Először egy 'a majom ${charNumber} betűs szavakat keres ${runningNumber}-szor' keresés fog lefutni, hogy a program létrehozza a tanulómemóriát!`) }; noMore = true;
+        if (noAlert == false) { alert(`A tanulómemória üres. Először egy 'a majom ${charNumber} betűs szavakat keres ${runningNumber}-szor' keresés fog lefutni, hogy a program létrehozza a tanulómemóriát, majd utána képez egy 'szót'!`); repeatFirst(); generateWord(); }; noMore = true;
         document.querySelector("#lmKI").checked = true;
         document.querySelector("#useLearningMemory").checked = false;
         document.querySelector("#learningMemoryWarningKI").style.display = "initial";
@@ -1409,7 +1414,8 @@ remove = function (nowHere) {
 };
 
 notation = function (wordOfMonkey) {
-    place = document.querySelector("#notations");
+    if (wordOfMonkey != "ErRoR" && wordOfMonkey != "RöViD")
+        place = document.querySelector("#notations");
 
     newSpan = document.createElement("span");
     place.appendChild(newSpan);
@@ -1619,9 +1625,9 @@ repetitionMemoryExamine = function () {
     makeLearningDistribution();
 };
 
-repetitionMemoryExamineBasic = function () {
-
+repetitionMemoryExamineBasic = function (runNumber, letterNumber) {
     learningMemoryKI();
+    myMemory = Array
     timeRMEStart = new Date();
     dontDoIt = true;
     if (learning.length == 0) { alert("A tanulómemória üres. Először futtasson egy 'a majom ˝ennyi˝ betűs szavakat keres ˝ennyiszer˝' keresést!"); learningMemoryKI(); learningMemoryBEKI() }
@@ -1657,6 +1663,23 @@ repetitionMemoryExamineBasic = function () {
                 myArray[myArray.length] = littleArray;
             };
         };
+        if (repRep == true) {
+            myArrayMM = Array();
+            registrateIt = true;
+            for (let i = 0; i < myMemory.length; i++) {
+                if (expressionABC == myMemory[i][0]) {
+                    myMemory[i] = myMemory[i] + 1;
+                    registrateIt = false;
+                };
+            };
+            if (registrateIt == true) {
+                myArrayMM[0] = expressionABC;
+                myArrayMM[1] = 1;
+                myMemory[myMemory.length] = myArrayMM;
+            };
+            myArray = myArrayMM.slice(0);
+        };
+
         myArray0 = Array();
         for (let i = 0; i < myArray.length; i++) {
             myArray0[i] = myArray[i][0];
@@ -1776,7 +1799,11 @@ repetitionMemoryExamineBasic = function () {
 };*/
 
 noAlert = false;
+repRep = false;
 repRepMexEx = function () {
+    repRep = true;
+    //resultFromLearningMemory = Array();
+    //myMemory = Array();
     //cleaningRRME();
     noAlert = true;
     if (dontNullMemory == false) { learning = Array() };
@@ -1814,7 +1841,10 @@ repRepMexEx = function () {
             repeat3(runningNumberSpec, charNumberSpec);
         };
 
-        repetitionMemoryExamineBasic(runNumber, letterNumber);
+
+
+
+        /*repetitionMemoryExamineBasic(runNumber, letterNumber);
         max = 0;
         for (let j = 0; j < resultFromLearningMemory.length; j++) {
             if (resultFromLearningMemory[j][1] > max && resultFromLearningMemory[j][0] != undefined
@@ -1823,12 +1853,35 @@ repRepMexEx = function () {
                 word4max = resultFromLearningMemory[j][0];
             };
         };
-        myArray = Array();
-        myArray[0] = word4max;
-        myArray[1] = max;
-        myUltimateResult[URlength] = myArray;
+        myArrayRMEB = Array();
+        myArrayRMEB[0] = word4max;
+        myArrayRMEB[1] = max;
+        myUltimateResult[URlength] = myArrayRMEB;
         URlength = URlength + 1;
         console.error("repetition: ", i, "tanulómemória: ", learning.length);
+        console.log("resultFromLearningMemory", resultFromLearningMemory)
+        console.log("myUltimateResult", myUltimateResult)
+        console.log("myArray", myArray)*/
+
+        repetitionMemoryExamineBasic(runNumber, letterNumber);
+        max = 0;
+        for (let j = 0; j < myMemory.length; j++) {
+            if (myMemory[j][1] > max && myMemory[j][0] != undefined
+                && myMemory[j][0] != "ErRoR" && myMemory[j][0] != "RöViD") {
+                max = myMemory[j][1];
+                word4max = myMemory[j][0];
+            };
+        };
+        myArrayRMEB = Array();
+        myArrayRMEB[0] = word4max;
+        myArrayRMEB[1] = max;
+        myUltimateResult[URlength] = myArrayRMEB;
+        URlength = URlength + 1;
+        console.error("repetition: ", i, "tanulómemória: ", learning.length);
+        console.log("resultFromLearningMemory", resultFromLearningMemory)
+        console.log("myUltimateResult", myUltimateResult)
+        console.log("myArray", myArray);
+        console.log("myMemory", myMemory);
     };
 
 
@@ -1851,6 +1904,7 @@ repRepMexEx = function () {
 
     finalDictionaryValue = Array();
 
+    myUltimateResultOriginal = myUltimateResult.slice(0);
     while (myUltimateResult.length > 0) {
         max = 0;
         for (let i = 0; i < myUltimateResult.length; i++) {
@@ -1871,6 +1925,7 @@ repRepMexEx = function () {
     sector = document.querySelector("#realTimeRRME")
     displayTime(timeRRME, sector);
     noAlert = false;
+    repRep = false;
 };
 
 displayItem = function () {
@@ -2254,7 +2309,7 @@ searchHungarianWords = function (dictionaryOfMonkey2) {
                         //break;
                     };
                 };
-                if (doIt == true) {
+                if (doIt == true && dictionaryOfMonkey2[i] != "ErRoR" && dictionaryOfMonkey2[i] != "RöViD") {
                     myArrayHWOM = Array();
                     myArrayHWOM[0] = dictionaryOfMonkey2[i];
                     myArrayHWOM[1] = 1;
@@ -7596,16 +7651,18 @@ RRMEabc2 = function () {
 };
 RRMEabc2();
 //két napot szenvedtem ezzel a kib*szott halmazok metszete résszel a qrva életbe! Ha tesztelésnél kiderül, hogy nem müxik jól, leszopom magam ...
+
+tesztek = Array();
+tesztek[1] = myRRMEteszt1;
+tesztek[2] = myRRMEteszt2;
+tesztek[3] = myRRMEteszt3;
+tesztek[4] = myRRMEteszt4;
+tesztek[5] = myRRMEteszt5;
+tesztek[6] = myRRMEteszt6;
+tesztek[7] = myRRMEteszt7;
+tesztek[8] = myRRMEteszt8;
 niniMiVanItt = function () {
-    tesztek = Array();
-    tesztek[1] = myRRMEteszt1;
-    tesztek[2] = myRRMEteszt2;
-    tesztek[3] = myRRMEteszt3;
-    tesztek[4] = myRRMEteszt4;
-    tesztek[5] = myRRMEteszt5;
-    tesztek[6] = myRRMEteszt6;
-    tesztek[7] = myRRMEteszt7;
-    tesztek[8] = myRRMEteszt8;
+
     kozosSzavak2 = Array();
     kozosSzavak = Array();
     newArray = Array();
@@ -7682,15 +7739,42 @@ niniMiVanItt = function () {
         //document.querySelector("#csunyaSzavakButton").setAttribute("style", "display:none");
     };
 };
+numbers2 = Array();
+minimumEgyetPlease = function () {
+    howMany = 0;
+    number2 = -10;
+    numbers2 = Array();
+    for (let i = 0; i < 8; i++) {
+        if (document.querySelectorAll(".tesztSzoSzedet2")[i].checked == true) {
+            howMany = howMany + 1;
+            number2 = document.querySelectorAll(".tesztSzoSzedet2")[i].name;
+            number2 = parseInt(number2);
+            numbers2[number2] = number2;
+        }
+        else { numbers2[number2] = -10 };
+        if (howMany == 0) { document.querySelector("#legalabbEgyet2").style.display = "initial" }
+        else { document.querySelector("#legalabbEgyet2").style.display = "none" }
+    };
+    console.log(numbers2);
 
-magyarazatCsunyaSzavakhoz = function () {
+
     allWordFromTesztek = Array();
-    for (i = 1; i < 9; i++) {
-        for (j = 0; j < tesztek[i].length; j++) {
-            allWordFromTesztek[allWordFromTesztek.length] = tesztek[i][j];
+    for (i of numbers2) {
+        if (isNaN(numbers2[i]) == false && numbers2[i] != -10) {
+            for (j = 0; j < tesztek[i].length; j++) {
+                allWordFromTesztek[allWordFromTesztek.length] = tesztek[i][j];
+            };
         };
+
     };
     console.log("allWordFromTesztek", allWordFromTesztek);
+};
+minimumEgyetPlease();
+
+
+
+magyarazatCsunyaSzavakhoz = function () {
+
 
     allWordFromTesztek2 = allWordFromTesztek.slice();
     for (let i = 0; i < allWordFromTesztek2.length; i++) {
@@ -7721,7 +7805,7 @@ magyarazatCsunyaSzavakhoz = function () {
     allWordFromTesztekWithContractedOccurrence = Array();
     myArray1 = Array();
     allWordFromTesztekWithContractedOccurrence[0] = myArray1;
-
+    sorszam = 0;
 
     for (let i = 0; i < allWordFromTesztek2.length; i++) {
         for (let j = 0; j < allWordFromTesztek.length; j++) {
@@ -7737,6 +7821,8 @@ magyarazatCsunyaSzavakhoz = function () {
                         myNewNumber = allWordFromTesztekWithContractedOccurrence[k][1] + myNumber;
                         allWordFromTesztekWithContractedOccurrence[k][1] = myNewNumber;
                         index = j; vegyukFelASzot = false;
+                        sorszam = sorszam + 1;
+                        allWordFromTesztekWithContractedOccurrence[k][2] = sorszam;
                     };
                 };
                 if (vegyukFelASzot == true) {
@@ -7764,6 +7850,7 @@ magyarazatCsunyaSzavakhoz = function () {
     allWordFTWCOonlyNumbersNew = Array();
     allWordFromTesztekWithContractedOccurrenceByValue = Array()
     myArray = Array();
+    sorszam = 0;
     allWordFTWCOonlyWordsNew[0] = myArray;
     allWordFromTesztekWithContractedOccurrenceByABC = Array()
 
@@ -7793,6 +7880,8 @@ magyarazatCsunyaSzavakhoz = function () {
         myArray = Array();
         myArray[0] = allWordFTWCOonlyWordsNew[i];
         myArray[1] = allWordFTWCOonlyNumbersNew[i];
+        myArray[2] = sorszam;
+        sorszam = sorszam + 1;
         allWordFromTesztekWithContractedOccurrenceByValue[i] = myArray;
     };
 
@@ -7809,8 +7898,9 @@ magyarazatCsunyaSzavakhoz = function () {
     console.log(maxWord);
     document.querySelector("#negyBetusSzoIttBeButton").disabled = "";
     document.querySelector("#negyBetusSzoIttBe").disabled = "";
-    document.querySelector("#negyBetusMax").innerHTML = maximum;
-    document.querySelector("#negyBetusMaxWord").innerHTML = maxWord;
+    //document.querySelector("#negyBetusMax").innerHTML = maximum;
+    //document.querySelector("#negyBetusMaxWord").innerHTML = maxWord;
+    //document.querySelector("#osszesSzoSzama").innerHTML = allWordFromTesztekWithContractedOccurrence.length;
 
     szavakElofordulasaArray = Array();
     szavakElofordulasaArray[0] = 0;
@@ -7865,13 +7955,31 @@ magyarazatCsunyaSzavakhoz = function () {
     time = (timeSzEFinish - timeSzEStart) / 1000
     console.log("sec: ", time);
 
+    document.querySelector("#SzE1").innerHTML = szavakByLength[4].length;
+    document.querySelector("#SzE2").innerHTML = allWordFromTesztekWithContractedOccurrence.length;
+    document.querySelector("#SzE3").innerHTML = `${(allWordFromTesztekWithContractedOccurrence.length / szavakByLength[4].length * 100).toFixed(1)} %`;
+    document.querySelector("#SzE4").innerHTML = maxWord;
+    document.querySelector("#SzE5").innerHTML = maximum;
+
 };
 
-elofordulasUgrikFunction = function(){
-    
+elofordulasUgrikFunction = function () {
+    document.querySelector("#elofordulasUgrikButton").innerHTML = "Ugrás vissza!"
+    document.querySelector("#elofordulasUgrikButton").setAttribute("onclick", "elofordulasVisszaUgrikFunction()");
+    document.querySelector("#elofordulasShowTheText").style.display = "none";
+    document.querySelector("#elofordulasUgrikInnen").style.position = "absolute";
+
 };
+elofordulasVisszaUgrikFunction = function () {
+    document.querySelector("#elofordulasUgrikButton").innerHTML = "Felugrik!"
+    document.querySelector("#elofordulasUgrikButton").setAttribute("onclick", "elofordulasUgrikFunction()");
+    document.querySelector("#elofordulasShowTheText").style.display = "initial";
+    document.querySelector("#elofordulasUgrikInnen").style.position = "static";
+};
+
 
 searchedNumber = String();
+previousIndex = -10;
 negyBetusSzoKeres = function () {
     index = "nincs";
     searchThis = document.querySelector("#negyBetusSzoIttBe").value;
@@ -7888,6 +7996,7 @@ negyBetusSzoKeres = function () {
     };
     document.querySelector("#negyBetusSzoSzama").innerHTML = searchedNumber;
 
+
     mainArea = document.querySelector("#divForSzavakElofordulasaTable");
     sectorId = "szavakElofordulasaTable";
     dictionary = allWordFromTesztekWithContractedOccurrenceByValue;
@@ -7898,7 +8007,31 @@ negyBetusSzoKeres = function () {
     array = szavakElofordulasaArray;
     //makeMyGraph(area, id, array)
 
+    for (let i = 0; i < allWordFromTesztekWithContractedOccurrenceByValue.length; i++) {
+        if (searchThis == allWordFromTesztekWithContractedOccurrenceByValue[i][0]) {
+            ;
+            indexForGraph = allWordFromTesztekWithContractedOccurrenceByValue[i][2];
+
+        };
+    };
+    document.querySelector("#negyBetusSzoEnnyiedik").innerHTML = indexForGraph;
+
+    area = document.querySelector("#tableForSzavakElofordulasa3");
+    id = "szavakElofordulasa3";
+    array = szavakElofordulasaArray3
+    makeMyGraph(area, id, array)
+    for (let i = 0; i < document.querySelectorAll("#szavakElofordulasa3 td").length / szavakElofordulasaArray.length; i++) {
+        document.querySelectorAll("#szavakElofordulasa3 td")[i * szavakElofordulasaArray.length + indexForGraph].style["background-color"] = "#000000";
+    };
+
+
+
+
+
+
+
 };
+
 niniMiVanItt();
 //itt alakítja át a szótár szavait jacaScriptben használható hexadecimális kódsorokká
 transform();
