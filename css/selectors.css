@@ -246,7 +246,7 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #divForRRME{height:190px;overflow:auto}
 #divForRRMEteszt{height:150px;overflow:auto}
 #divForMyLittleWords{height:100px;overflow:auto}
-#divForSzavakElofordulasa2{height300px;overflow:auto}
+#divForSzavakElofordulasa2{height:300px;overflow:auto}
 #divForSzavakElofordulasaTable{height:100px;overflow:auto}
 
 
@@ -262,9 +262,10 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #divForSzavakElofordulasa1 td{border-collapse: collapse;padding:0px;height:3px;}
 
 #divForSzavakElofordulasa3{height:300px;overflow:auto}
-//#tableForSzavakElofordulasa3{height:200px;width:400px}
 #divForSzavakElofordulasa3 tr{width:3px;}
 #divForSzavakElofordulasa3 td{height:3px;}
+#divForProbalkozasokHossza{overflow:auto;height:100px}
+#divForSzavakMelleslegIde{overflow:auto;height:90px}
 
 
 

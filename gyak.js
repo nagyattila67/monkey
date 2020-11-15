@@ -10,6 +10,7 @@ wordForSearch = String();
 //rep = false;
 cons = true;
 displayNow = true;
+displayNowWas = "";
 totalNumberOfWords = 0
 hungWord = "";
 learning = Array();
@@ -142,13 +143,13 @@ learningMemoryBE = function () {
     document.querySelector("#lmBE").checked = true;
     document.querySelector("#learningMemoryWarningKI").style.display = "none";
     document.querySelector("#learningMemoryWarningBE").style.display = "initial";
-    document.querySelector("#useLearningMemory").checked = "true";
+    document.querySelector("#useLearningMemory").checked = true;
 };
 learningMemoryKI = function () {
     document.querySelector("#lmKI").checked = true;
     document.querySelector("#learningMemoryWarningKI").style.display = "initial";
     document.querySelector("#learningMemoryWarningBE").style.display = "none";
-    document.querySelector("#useLearningMemory").checked = "false";
+    document.querySelector("#useLearningMemory").checked = false;
 
 
 
@@ -1286,7 +1287,12 @@ generateWord = function (myRndNumber) {
     if (learning.length == 0) {
         charNumber = document.querySelector("#karakterSzam").value;
         runningNumber = document.querySelector("#futasSzam").value;
-        if (noAlert == false) { alert(`A tanulómemória üres. Először egy 'a majom ${charNumber} betűs szavakat keres ${runningNumber}-szor' keresés fog lefutni, hogy a program létrehozza a tanulómemóriát, majd utána képez egy 'szót'!`); repeatFirst(); generateWord(); }; noMore = true;
+        if (noAlert == false) {
+            alert(`A tanulómemória üres. Először egy 'a majom ${charNumber} betűs szavakat keres ${runningNumber}-szor' keresés fog lefutni, hogy a program létrehozza a tanulómemóriát, majd utána képez egy 'szót'!. A memória azalatt ki lesz kapcsolva. Egyébként ha használni akarja a tanulómemóriát, először győződjön meg, hogy fel van töltve!`);
+            learningMemoryKI()
+            repeatFirst();
+            generateWord();
+        }; noMore = true;
         document.querySelector("#lmKI").checked = true;
         document.querySelector("#useLearningMemory").checked = false;
         document.querySelector("#learningMemoryWarningKI").style.display = "initial";
@@ -2656,6 +2662,7 @@ match100Numbers = function () {
 averageMemoryABCLength = 0;
 mehet = true;
 lookingForMatch100 = function () {
+    displayNowWas = displayNow;
     displayNow = false;
     if (charNumber > 6 || charNumber < 1 || isNaN(charNumber) == true || charNumber != parseInt(charNumber)) {
         alert("Karakterszám min: 2, max: 6, egész szám, plíz!");
@@ -2786,7 +2793,7 @@ lookingForMatch100 = function () {
         if (hourLFM100 == 0) { document.querySelector("#matchRunningTimeInReal").innerHTML = `${minLFM100} perc, ${secLFM100} mp` };
         if (hourLFM100 > 0) { document.querySelector("#matchRunningTimeInReal").innerHTML = `${hourLFM100} óra, ${minLFM100} perc` };
     };
-    displayNow = true;
+    displayNow = displayNowWas;
 };
 
 checkRunTimeCount = function () {
@@ -3377,99 +3384,103 @@ repeat2 = function (runningNumber, charNumber) {
         hideTheDistanceGraph();
     };
 
-    //if (wasMadeEmpty == false) {
-    console.log("ürességvizsgálat elindult");
-    noConsole = true;
-    timeRepeat2Start = new Date;
-    averageArray2 = Array();
-    distribution2 = Array();
-    runningNumber2 = document.querySelector("#futasSzam2").value;
-    runningNumber2 = parseInt(runningNumber2);
-    charNumber2 = document.querySelector("#karakterSzam2").value;
-    charNumber2 = parseInt(charNumber2);
+    if (displayNow == true) {
+        //if (wasMadeEmpty == false) {
+        console.log("ürességvizsgálat elindult");
+        noConsole = true;
+        timeRepeat2Start = new Date;
+        averageArray2 = Array();
+        distribution2 = Array();
+        runningNumber2 = document.querySelector("#futasSzam2").value;
+        runningNumber2 = parseInt(runningNumber2);
+        charNumber2 = document.querySelector("#karakterSzam2").value;
+        charNumber2 = parseInt(charNumber2);
 
-    /*if (itIsRepeat3 == true) {
-        for (let i = 0; i < runningNumber2; i++) {
-            word(charNumber2);
-            repeatCount = repeatCount + 1;
-            averageArray2[i] = turn;
+        /*if (itIsRepeat3 == true) {
+            for (let i = 0; i < runningNumber2; i++) {
+                word(charNumber2);
+                repeatCount = repeatCount + 1;
+                averageArray2[i] = turn;
+            };
+        }
+        else{averageArray2=averageArray.slice(0)}*/
+
+        for (let i = 0; i < averageArray.length; i++) {
+            averageArray2[i] = averageArray[i][0];
         };
-    }
-    else{averageArray2=averageArray.slice(0)}*/
 
-    for (let i = 0; i < averageArray.length; i++) {
-        averageArray2[i] = averageArray[i][0];
-    };
-
-    maximum2 = 0;
-    for (let i = 0; i < averageArray2.length; i++) {
-        if (maximum2 < averageArray2[i]) {
-            maximum2 = averageArray2[i];
-        };
-    };
-
-    distribution2 = Array();
-    /*for (let i = 0; i <= maximum2; i++) {
-        distribution2[i] = 0;
-        for (let j = 0; j < averageArray2.length; j++) {
-            if (averageArray2[j] == i) {
-                distribution2[i] = distribution2[i] + 1;
+        maximum2 = 0;
+        for (let i = 0; i < averageArray2.length; i++) {
+            if (maximum2 < averageArray2[i]) {
+                maximum2 = averageArray2[i];
             };
         };
-    };*/
 
-    distMax2 = 0;
-    for (let i = 0; i <= maximum2; i++) {
-        distribution2[i] = 0;
-        for (let j = 0; j < averageArray2.length; j++) {
-            if (averageArray2[j] == i) {
-                distribution2[i] = distribution2[i] + 1;
+        distribution2 = Array();
+        /*for (let i = 0; i <= maximum2; i++) {
+            distribution2[i] = 0;
+            for (let j = 0; j < averageArray2.length; j++) {
+                if (averageArray2[j] == i) {
+                    distribution2[i] = distribution2[i] + 1;
+                };
             };
-            if (distribution2[i] > distMax2) { distMax2 = distribution2[i]; };
+        };*/
+
+        distMax2 = 0;
+        for (let i = 0; i <= maximum2; i++) {
+            distribution2[i] = 0;
+            for (let j = 0; j < averageArray2.length; j++) {
+                if (averageArray2[j] == i) {
+                    distribution2[i] = distribution2[i] + 1;
+                };
+                if (distribution2[i] > distMax2) { distMax2 = distribution2[i]; };
+            };
         };
+
+        //a 0-dik sorszámú elem azt mutatja, hogy hány 0 hosszúságú lista van, de mivel ilyen nincs, kirakjuk a tömbből
+        distribution2.shift();
+        distribution = distribution2.slice(0);
+
+        distributionCopy = Array();
+        for (let i = 0; i < distribution.length; i++) {
+            distributionCopy[i] = distribution[i];
+
+        }
+        distributionCopy2 = Array();
+        for (let i = 0; i < distribution.length; i++) {
+            distributionCopy2[i] = distribution[i];
+        };
+
+        charNumber = charNumber2;
+        runningNumber = runningNumber2;
+        distanceMatrix = Array();
+        distanceMatrixAllElementCount = 0;
+        makeDistanceMatrix(distribution);
+
+        maxDistance = 0;
+        for (let i = 0; i < distanceMatrix.length; i++) {
+            if (distanceMatrix[i] > maxDistance) { maxDistance = distanceMatrix[i] };
+        };
+
+        distanceStart();
+        makeDistributionDistance();
+        distributionDistanceStart();
+
+        //makeDistanceMatrix(distribution);
+        whereEmptinessInDistribution(distribution);
+        timeRepeat2Finish = new Date;
+        timeRepeat2 = (timeRepeat2Finish - timeRepeat2Start) / 1000;
+        displayDistributionDistance();
+        noConsole = false;
+        if (itWasMoreDistance == true) {
+            newMoreDistance();
+            hideMoreDistance();
+        };
+        createDistributionDistanceGraph();
+        //};
     };
 
-    //a 0-dik sorszámú elem azt mutatja, hogy hány 0 hosszúságú lista van, de mivel ilyen nincs, kirakjuk a tömbből
-    distribution2.shift();
-    distribution = distribution2.slice(0);
 
-    distributionCopy = Array();
-    for (let i = 0; i < distribution.length; i++) {
-        distributionCopy[i] = distribution[i];
-
-    }
-    distributionCopy2 = Array();
-    for (let i = 0; i < distribution.length; i++) {
-        distributionCopy2[i] = distribution[i];
-    };
-
-    charNumber = charNumber2;
-    runningNumber = runningNumber2;
-    distanceMatrix = Array();
-    distanceMatrixAllElementCount = 0;
-    makeDistanceMatrix(distribution);
-
-    maxDistance = 0;
-    for (let i = 0; i < distanceMatrix.length; i++) {
-        if (distanceMatrix[i] > maxDistance) { maxDistance = distanceMatrix[i] };
-    };
-
-    distanceStart();
-    makeDistributionDistance();
-    distributionDistanceStart();
-
-    //makeDistanceMatrix(distribution);
-    whereEmptinessInDistribution(distribution);
-    timeRepeat2Finish = new Date;
-    timeRepeat2 = (timeRepeat2Finish - timeRepeat2Start) / 1000;
-    displayDistributionDistance();
-    noConsole = false;
-    if (itWasMoreDistance == true) {
-        newMoreDistance();
-        hideMoreDistance();
-    };
-    createDistributionDistanceGraph();
-    //};
 
 };
 isItRepeating = false;
@@ -3521,7 +3532,7 @@ repeat = function (runningNumber, charNumber) {
     wasMaximumChanged = false;
     wasDistMaxChanged = false;
     repeatCount = 0;
-    displayNow = false;
+    displayNow = true;
     if (noConsole == false) { console.log("Az ismétlések elindultak. Csak az utolsó ismétlés találatát fogja látni.") };
     timeStartReally = new Date();
     averageArray = Array();
@@ -3553,7 +3564,7 @@ repeat = function (runningNumber, charNumber) {
 
     onlyOneWord = false;
     for (let i = 0; i < runningNumber; i++) {
-        if (repeatCount == runningNumber - 1) { displayNow = true };
+        //if (repeatCount == runningNumber - 1) { displayNow = true };
 
         //charNumber = document.querySelector("#karakterSzam").value;
         //charNumber = parseInt(charNumber);
@@ -3665,49 +3676,51 @@ repeat = function (runningNumber, charNumber) {
         //if (document.querySelector("#mehetKI").checked == true) {
         //makeEmptyTableAndGraphic();
         //};
-
-        if (document.querySelector("#mehetBE").checked == true) {
-            if (testRunning == false) {
-                distMaxOriginal = distMax;
-                if (displayNow == true) {
-                    makeTableAndColoring();
-                    console.log("első grafikon elkészült");
-                    console.log("indul a második táblázat elkészítése");
-                    makeTheSecondTable();
-                    fillLoopTable(wordLength);
-                    console.log("második grafikon elkészült");
-                };
-                document.querySelector("#valueCouple").innerHTML = distribution.length - 1;
-                wasRepeating = true;
-                wasHiddenFullGraph = false;
-                if (wasHide == "no") { hideDistribution() };
-                if (wasWantFullGraph == true) {
-                    hideFullGraph();
-                    removeFullGraph();
+        if (displayNow == true) {
+            if (document.querySelector("#mehetBE").checked == true) {
+                if (testRunning == false) {
+                    distMaxOriginal = distMax;
+                    if (displayNow == true) {
+                        makeTableAndColoring();
+                        console.log("első grafikon elkészült");
+                        console.log("indul a második táblázat elkészítése");
+                        makeTheSecondTable();
+                        fillLoopTable(wordLength);
+                        console.log("második grafikon elkészült");
+                    };
+                    document.querySelector("#valueCouple").innerHTML = distribution.length - 1;
+                    wasRepeating = true;
                     wasHiddenFullGraph = false;
-                };
-                document.querySelector("#buttonForDistanceGraph").setAttribute("onclick", "showTheDistanceGraph()");
-                document.querySelector("#buttonForDistanceGraph").innerHTML = "Mutat";
-                distanceMatrix = Array();
-                distanceMatrixAllElementCount = 0;
-                makeDistanceMatrix(distribution);
-                maxDistance = 0;
-                for (let i = 0; i < distanceMatrix.length; i++) {
-                    if (distanceMatrix[i] > maxDistance) { maxDistance = distanceMatrix[i] };
-                };
-                distanceStart();
-                makeDistributionDistance();
-                distributionDistanceStart();
-                if (wasShowingDistanceGraph == true) { removeRowsFromDistanceGraph() };
-                timeDistance = 0;
+                    if (wasHide == "no") { hideDistribution() };
+                    if (wasWantFullGraph == true) {
+                        hideFullGraph();
+                        removeFullGraph();
+                        wasHiddenFullGraph = false;
+                    };
+                    document.querySelector("#buttonForDistanceGraph").setAttribute("onclick", "showTheDistanceGraph()");
+                    document.querySelector("#buttonForDistanceGraph").innerHTML = "Mutat";
+                    distanceMatrix = Array();
+                    distanceMatrixAllElementCount = 0;
+                    makeDistanceMatrix(distribution);
+                    maxDistance = 0;
+                    for (let i = 0; i < distanceMatrix.length; i++) {
+                        if (distanceMatrix[i] > maxDistance) { maxDistance = distanceMatrix[i] };
+                    };
+                    distanceStart();
+                    makeDistributionDistance();
+                    distributionDistanceStart();
+                    if (wasShowingDistanceGraph == true) { removeRowsFromDistanceGraph() };
+                    timeDistance = 0;
 
-                document.querySelector("#divForAllDistribution");
-                hideDistribution();
-                wasHide = "";
-                countTheHalfListLength();
-                fillProblemTable();
+                    document.querySelector("#divForAllDistribution");
+                    hideDistribution();
+                    wasHide = "";
+                    countTheHalfListLength();
+                    fillProblemTable();
+                };
             };
         };
+
         repeat2();
 
     };
@@ -5402,96 +5415,100 @@ formulaOfTheFunction = function () {
 
 //elkészíti az üres táblázatot
 makeTableAndColoring = function () {
+    if (displayNow == true) {
 
-    //tisztítás: újraklikkelésnél eltávollítja az odarakott cellákat, hogy üres legyen a table
-    borderNumber = document.querySelectorAll("#graphic tr").length;
-    for (let i = 0; i < borderNumber; i++) {
-        area = document.querySelector("#graphic");
-        element = document.querySelectorAll("#graphic tr")[borderNumber - 1 - i];
-        area.removeChild(element);
-    };
-
-    myArray = Array();
-    for (let i = 0; i < averageArray.length; i++) { myArray[i] = averageArray[i][0] };
-
-    for (let i = 0; i < distribution.length; i++) {
-        distributionCopy[i] = distribution[i];
-    };
-
-    while (distributionCopy.length > 100) {
-
-        //bizonyos méret felett összevonja oszlopokat (felezi azok számát), ezzel gyorsítja a futásidőt a grafikon ábrázolásánál; beállítás: 100, azaz max 100 lesz az oszlopok száma
-        console.log("tömörítés -- oszlopokok összevonása a táblázatban!");
-        wasMerge = true;
-        distributionCopy2 = Array();
-
-        for (let i = 0; i < Math.ceil(distributionCopy.length / 2) - 1; i++) {
-            distributionCopy2[i] = Math.max(distributionCopy[2 * i], distributionCopy[2 * i + 1])
+        //tisztítás: újraklikkelésnél eltávollítja az odarakott cellákat, hogy üres legyen a table
+        borderNumber = document.querySelectorAll("#graphic tr").length;
+        for (let i = 0; i < borderNumber; i++) {
+            area = document.querySelector("#graphic");
+            element = document.querySelectorAll("#graphic tr")[borderNumber - 1 - i];
+            area.removeChild(element);
         };
-        distributionCopy = Array();
-        for (let i = 0; i < distributionCopy2.length; i++) {
-            distributionCopy[i] = distributionCopy2[i];
+
+        myArray = Array();
+        for (let i = 0; i < averageArray.length; i++) { myArray[i] = averageArray[i][0] };
+
+        for (let i = 0; i < distribution.length; i++) {
+            distributionCopy[i] = distribution[i];
         };
-        wasMerge = true;
-        wasMaximumChanged = true;
-    };
 
-    distMaxForTable = distMax;
+        while (distributionCopy.length > 100) {
 
-    while (distMaxForTable > 100) {
-        //Tömöríti a táblázat sorait; minden ciklusnál megfelezi őket; beállítás: 100; max. 100 lesz a sorok száma
-        console.log("tömörítés -- sorok összevonása a táblázatban!");
-        for (let i = 0; i < distributionCopy[i]; i++) { distributionCopy[i] = Math.ceil(distributionCopy[i] / 2) };
-        distMaxForTable = Math.ceil(distMaxForTable / 2);
-        wasMerge = true;
-        wasDistMaxChanged = true;
-    };
+            //bizonyos méret felett összevonja oszlopokat (felezi azok számát), ezzel gyorsítja a futásidőt a grafikon ábrázolásánál; beállítás: 100, azaz max 100 lesz az oszlopok száma
+            console.log("tömörítés -- oszlopokok összevonása a táblázatban!");
+            wasMerge = true;
+            distributionCopy2 = Array();
 
-    //pixWidth = Math.ceil(600 / maximum);
-    //pixHeight = Math.ceil(400 / distMax);
-    pixHeight = "1px";
-    pixWidth = "1px";
-
-    maximum = distributionCopy.length - 1;
-    //táblázat elkészítése
-    for (let i = 0; i <= distMaxForTable; i++) {
-        place = document.querySelector("#graphic");
-        dataRow = document.createElement("tr");
-        place.appendChild(dataRow)
-        sector = document.querySelectorAll("#graphic tr")[i];
-        for (let j = 0; j < maximum + 1; j++) {
-            dataCell = document.createElement("td");
-            sector.appendChild(dataCell);
-            dataCell.style.width = `${pixWidth}px`;
-            dataCell.style.height = `${pixHeight}px`;
-            dataCell.style.margin = "0px";
-            dataCell.style.padding = "0px";
-            dataCell.style["background-color"] = "#dbdbdb";
+            for (let i = 0; i < Math.ceil(distributionCopy.length / 2) - 1; i++) {
+                distributionCopy2[i] = Math.max(distributionCopy[2 * i], distributionCopy[2 * i + 1])
+            };
+            distributionCopy = Array();
+            for (let i = 0; i < distributionCopy2.length; i++) {
+                distributionCopy[i] = distributionCopy2[i];
+            };
+            wasMerge = true;
+            wasMaximumChanged = true;
         };
-    };
 
-    //kiszínezi a cellákat alulról haladva       
-    let k = distMaxForTable;
-    while (k > 0) {
-        for (let j = 0; j < maximum + 1; j++) {
-            dataCell = document.querySelectorAll("#graphic tr")[k].children[j];
-            if (distributionCopy[j] != 0) { dataCell.style["background"] = "#f00c93"; distributionCopy[j] = distributionCopy[j] - 1 };
+        distMaxForTable = distMax;
+
+        while (distMaxForTable > 100) {
+            //Tömöríti a táblázat sorait; minden ciklusnál megfelezi őket; beállítás: 100; max. 100 lesz a sorok száma
+            console.log("tömörítés -- sorok összevonása a táblázatban!");
+            for (let i = 0; i < distributionCopy[i]; i++) { distributionCopy[i] = Math.ceil(distributionCopy[i] / 2) };
+            distMaxForTable = Math.ceil(distMaxForTable / 2);
+            wasMerge = true;
+            wasDistMaxChanged = true;
         };
-        k = k - 1;
-        //clearing = true;
+
+        //pixWidth = Math.ceil(600 / maximum);
+        //pixHeight = Math.ceil(400 / distMax);
+        pixHeight = "1px";
+        pixWidth = "1px";
+
+        maximum = distributionCopy.length - 1;
+        //táblázat elkészítése
+        for (let i = 0; i <= distMaxForTable; i++) {
+            place = document.querySelector("#graphic");
+            dataRow = document.createElement("tr");
+            place.appendChild(dataRow)
+            sector = document.querySelectorAll("#graphic tr")[i];
+            for (let j = 0; j < maximum + 1; j++) {
+                dataCell = document.createElement("td");
+                sector.appendChild(dataCell);
+                dataCell.style.width = `${pixWidth}px`;
+                dataCell.style.height = `${pixHeight}px`;
+                dataCell.style.margin = "0px";
+                dataCell.style.padding = "0px";
+                dataCell.style["background-color"] = "#dbdbdb";
+            };
+        };
+
+        //kiszínezi a cellákat alulról haladva       
+        let k = distMaxForTable;
+        while (k > 0) {
+            for (let j = 0; j < maximum + 1; j++) {
+                dataCell = document.querySelectorAll("#graphic tr")[k].children[j];
+                if (distributionCopy[j] != 0) { dataCell.style["background"] = "#f00c93"; distributionCopy[j] = distributionCopy[j] - 1 };
+            };
+            k = k - 1;
+            //clearing = true;
+        };
+
+        if (wasMerge == true) {
+            document.querySelector("#merge").style.display = "initial"
+            document.querySelector("#merge").style["font-size"] = "12px"
+            document.querySelector("#merge1").innerHTML = "Figyelem!"
+            document.querySelector("#merge1").style["background-color"] = "#FADADD";
+            document.querySelector("#merge2").innerHTML = ` A program gyorsítása és a táblázat megfelelő méretben történő megrajzolása miatt a táblázat sorai és oszlopai arányosan össze lettek vonva. Jelennleg ${distMax} sor helyett ${distMaxForTable} sor, a ${distribution.length} oszlop helyett pedig ${distributionCopy.length} oszlop van. Egy sorban ${(distMax / distMaxForTable).toFixed(2)} eredeti sor, egy oszlopban pedig ${(distribution.length / distributionCopy.length).toFixed(2)}  eredeti oszlop van összevonva.`
+        };
+        if (wasMerge == false) {
+            document.querySelector("#merge").style.display = "none";
+        };
+        littleInfoForFullGraph();
     };
 
-    if (wasMerge == true) {
-        document.querySelector("#merge").style.display = "initial"
-        document.querySelector("#merge").style["font-size"] = "12px"
-        document.querySelector("#merge1").innerHTML = "Figyelem!"
-        document.querySelector("#merge1").style["background-color"] = "#FADADD";
-        document.querySelector("#merge2").innerHTML = ` A program gyorsítása és a táblázat megfelelő méretben történő megrajzolása miatt a táblázat sorai és oszlopai arányosan össze lettek vonva. Jelennleg ${distMax} sor helyett ${distMaxForTable} sor, a ${distribution.length} oszlop helyett pedig ${distributionCopy.length} oszlop van. Egy sorban ${(distMax / distMaxForTable).toFixed(2)} eredeti sor, egy oszlopban pedig ${(distribution.length / distributionCopy.length).toFixed(2)}  eredeti oszlop van összevonva.`
-    };
-    if (wasMerge == false) {
-        document.querySelector("#merge").style.display = "none";
-    };
-    littleInfoForFullGraph();
+
 };
 
 wasWantFullGraph = false;
@@ -5769,79 +5786,81 @@ preparation = function () {
 };
 
 makeTheSecondTable = function () {
+    if (displayNow == true) {
+        valueHyp1 = 5;
+        valueHyp2 = 2;
+        valueHyp3 = -4;
+        valueBase = 0.5;
+        valueLog1 = 5;
+        valueLog2 = -28;
+        valueLog3 = 0;
+        document.querySelector("#H1").value = valueHyp1;
+        document.querySelector("#H2").value = valueHyp2;
+        document.querySelector("#H3").value = valueHyp3;
+        document.querySelector("#maximum2").innerHTML = maximum;
+        //document.querySelector("#LBase").value=valueBase;
+        document.querySelector("#L1").value = valueLog1;
+        document.querySelector("#L2").value = valueLog2;
+        document.querySelector("#L3").value = valueLog3;
 
-    valueHyp1 = 5;
-    valueHyp2 = 2;
-    valueHyp3 = -4;
-    valueBase = 0.5;
-    valueLog1 = 5;
-    valueLog2 = -28;
-    valueLog3 = 0;
-    document.querySelector("#H1").value = valueHyp1;
-    document.querySelector("#H2").value = valueHyp2;
-    document.querySelector("#H3").value = valueHyp3;
-    document.querySelector("#maximum2").innerHTML = maximum;
-    //document.querySelector("#LBase").value=valueBase;
-    document.querySelector("#L1").value = valueLog1;
-    document.querySelector("#L2").value = valueLog2;
-    document.querySelector("#L3").value = valueLog3;
+        myArray2 = Array();
+        for (let i = 0; i < averageArray.length; i++) { myArray2[i] = averageArray[i][0] };
+        //elkészíti az üres táblázatot
 
-    myArray2 = Array();
-    for (let i = 0; i < averageArray.length; i++) { myArray2[i] = averageArray[i][0] };
-    //elkészíti az üres táblázatot
-
-    //tisztítás: újraklikkelésnél eltávollítja az odarakott cellákat, hogy üres legyen a table
-    borderNumber = document.querySelectorAll("#graphicSecond tr").length;
-    for (let i = 0; i < borderNumber; i++) {
-        area = document.querySelector("#graphicSecond");
-        element = document.querySelectorAll("#graphicSecond tr")[borderNumber - 1 - i];
-        area.removeChild(element);
-    };
-
-    //pixWidth = Math.ceil(600 / maximum);
-    pixWidth = "1px"
-    //pixHeight = Math.ceil(150 / myArray2.length);
-
-    //táblázat elkészítése
-
-    //csak az első 600 oszlopát készíti el és írja ki, ui. a kiszínezésnél órákig futna egyébként!
-    //for (let j = 0; j < myArray.length; j++) {
-    myBorder = 1000;
-    if (myArray.length < myBorder) { myBorder = myArray.length }
-
-    for (let i = 0; i <= maximum - 1; i++) {
-        place = document.querySelector("#graphicSecond");
-        dataRow = document.createElement("tr");
-        place.appendChild(dataRow)
-        sector = document.querySelectorAll("#graphicSecond tr")[i];
-        for (let j = 0; j < myBorder; j++) {
-            dataCell = document.createElement("td");
-            sector.appendChild(dataCell);
-            dataCell.style.width = `${pixWidth}px`;
-            dataCell.style.height = `${pixHeight}px`;
-            dataCell.style.margin = "0px";
-            dataCell.style.padding = "0px";
+        //tisztítás: újraklikkelésnél eltávollítja az odarakott cellákat, hogy üres legyen a table
+        borderNumber = document.querySelectorAll("#graphicSecond tr").length;
+        for (let i = 0; i < borderNumber; i++) {
+            area = document.querySelector("#graphicSecond");
+            element = document.querySelectorAll("#graphicSecond tr")[borderNumber - 1 - i];
+            area.removeChild(element);
         };
-    };
 
-    console.log("a második táblázat elkészült!!!!");
+        //pixWidth = Math.ceil(600 / maximum);
+        pixWidth = "1px"
+        //pixHeight = Math.ceil(150 / myArray2.length);
 
-    k = maximum - 1;
-    while (k > 0) {
-        for (let j = 0; j < myBorder; j++) {
-            dataCell = document.querySelectorAll("#graphicSecond tr")[k].children[j];
-            if (myArray2[j] != 0) {
-                dataCell.style["background"] = "#f00c93";
-                myArray2[j] = myArray2[j] - 1;
+        //táblázat elkészítése
+
+        //csak az első 600 oszlopát készíti el és írja ki, ui. a kiszínezésnél órákig futna egyébként!
+        //for (let j = 0; j < myArray.length; j++) {
+        myBorder = 1000;
+        if (myArray.length < myBorder) { myBorder = myArray.length }
+
+        for (let i = 0; i <= maximum - 1; i++) {
+            place = document.querySelector("#graphicSecond");
+            dataRow = document.createElement("tr");
+            place.appendChild(dataRow)
+            sector = document.querySelectorAll("#graphicSecond tr")[i];
+            for (let j = 0; j < myBorder; j++) {
+                dataCell = document.createElement("td");
+                sector.appendChild(dataCell);
+                dataCell.style.width = `${pixWidth}px`;
+                dataCell.style.height = `${pixHeight}px`;
+                dataCell.style.margin = "0px";
+                dataCell.style.padding = "0px";
             };
         };
-        k = k - 1;
 
-        //distributionCopy2-re szükség van?
-        //clearing-re szükség van?
+        console.log("a második táblázat elkészült!!!!");
+
+        k = maximum - 1;
+        while (k > 0) {
+            for (let j = 0; j < myBorder; j++) {
+                dataCell = document.querySelectorAll("#graphicSecond tr")[k].children[j];
+                if (myArray2[j] != 0) {
+                    dataCell.style["background"] = "#f00c93";
+                    myArray2[j] = myArray2[j] - 1;
+                };
+            };
+            k = k - 1;
+
+            //distributionCopy2-re szükség van?
+            //clearing-re szükség van?
+        };
+        document.querySelector("#graphicSecond").style.width = `${myArray.length}px`
+        timeFinishingAll = new Date();
     };
-    document.querySelector("#graphicSecond").style.width = `${myArray.length}px`
-    timeFinishingAll = new Date();
+
 };
 
 distanceMatrix = Array();
@@ -7756,8 +7775,6 @@ minimumEgyetPlease = function () {
         if (howMany == 0) { document.querySelector("#legalabbEgyet2").style.display = "initial" }
         else { document.querySelector("#legalabbEgyet2").style.display = "none" }
     };
-    console.log(numbers2);
-
 
     allWordFromTesztek = Array();
     for (i of numbers2) {
@@ -7768,7 +7785,20 @@ minimumEgyetPlease = function () {
         };
 
     };
-    console.log("allWordFromTesztek", allWordFromTesztek);
+
+    if (document.querySelector("#nyolcValaszt").checked == false) {
+        document.querySelector("#negyBetusSzoIttBeButton").disabled = "";
+        document.querySelector("#negyBetusSzoIttBe").disabled = "";
+        document.querySelector("#nyolcBeVanJelolve").style.display = "none"
+    }
+    else {
+        document.querySelector("#negyBetusSzoIttBeButton").disabled = true;
+        document.querySelector("#negyBetusSzoIttBe").disabled = true;
+        document.querySelector("#nyolcBeVanJelolve").style.display = "initial"
+        document.querySelector("#nyolcBeVanJelolve").style.color = "red"
+    };
+
+    //console.log("allWordFromTesztek", allWordFromTesztek);
 };
 minimumEgyetPlease();
 
@@ -8024,13 +8054,103 @@ negyBetusSzoKeres = function () {
     for (let i = 0; i < document.querySelectorAll("#szavakElofordulasa3 td").length / szavakElofordulasaArray.length; i++) {
         document.querySelectorAll("#szavakElofordulasa3 td")[i * szavakElofordulasaArray.length + indexForGraph].style["background-color"] = "#000000";
     };
+};
 
+itWas = "";
+keresiMyKeresettSzavamat = function () {
 
+    timeKMKSZstart = new Date();
+    displayNow = false;
 
+    itWas = document.querySelector("#mehetKI").checked;
+    document.querySelector("#mehetKI").checked = false;
+    runNumber = document.querySelector("#myKeresettSzavamRunNumber").value;
+    runNumber = parseInt(runNumber);
+    myWord = document.querySelector("#myKeresettSzavam").value;
+    myWord = myWord.toUpperCase();
+    document.querySelector("#myKeresettSzavam").value = myWord;
+    wordLength = myWord.length;
+    myRunLengths = Array();
 
+    szavakMellesleg = Array();
 
+    for (let i = 0; i < runNumber; i++) {
+        timeTanMemStart = new Date;
+        timeTanMemStart = timeTanMemStart.getTime();
+        learning = Array();
+        learningMemoryKI();
+        runningNumber = 1000;
+        charNumber = 3;
+        repeat(runningNumber, charNumber);
+        runningNumber = 100;
+        charNumber = 4;
+        repeat(runningNumber, charNumber);
+        learningMemoryBE()
+        timeTanMemFinish = new Date;
+        timeTanMemFinish = timeTanMemFinish.getTime();
+        min = (((timeTanMemFinish - timeTanMemStart) / 1000) / 60).toFixed(1);
+        console.log("tanulómemória feltöltése: ", min, " min");
+        console.log("tanulómemória mérete: ", learning.length);
+        indexKMKSZ = 0;
+        wordOfMonkey = "";
+        szavakMelleslegArray = Array();
+        while (wordOfMonkey != myWord) {
+            szavakMellesleg = Array();
+            //for (let j = 0; j < 1000000; j++) {
+            generateWord(wordLength);
+            indexKMKSZ = indexKMKSZ + 1;
+            timeNow = new Date();
+            if (indexKMKSZ % 1000 == 0) {
+                console.log(indexKMKSZ, " running: ", i, timeNow)
+            };
 
+            /*if (i == runNumber - 1) {
+                for (let k = 0; k < szavakByLength[wordLength].length; k++) {
+                    if (wordOfMonkey == szavakByLength[wordLength][k]) {
+                        //console.log(wordOfMonkey);
+                        szavakMellesleg[szavakMellesleg.length] = wordOfMonkey;
+                    };
+                };
+            };*/
 
+            //console.log(wordOfMonkey);
+            //console.log(myWord);
+            //console.log("tömb hossza: ", myRunLengths.length,)
+            //if (wordOfMonkey == myWord) { break };
+            //szavakMelleslegArray[szavakMelleslegArray.length]=szavakMellesleg;
+        };
+        myRunLengths[myRunLengths.length] = indexKMKSZ;
+    };
+    indexKMKSZaverage = 0;
+    for (let i = 0; i < myRunLengths.length; i++) {
+        indexKMKSZaverage = indexKMKSZaverage + myRunLengths[i]
+    };
+    indexKMKSZaverage = (indexKMKSZaverage / myRunLengths.length).toFixed(2);
+    document.querySelector("#futasokAtlagerteke").innerHTML = indexKMKSZaverage
+    document.querySelector("#tanuloMemoriaMereteKMKSZ").innerHTML = `${learning.length} betűkettős`;
+
+    learningMemoryKI();
+    document.querySelector("#mehetKI").checked = itWas;
+    timeKMKSZfinish = new Date();
+    timeKMKSZstart = timeKMKSZstart.getTime();
+    timeKMKSZfinish = timeKMKSZfinish.getTime();
+    sec1 = (timeKMKSZfinish - timeKMKSZstart) / 1000;
+    sector = document.querySelector("#futasIdoKMKSZ");
+    displayTime(sec1, sector)
+    //displayNow=true;
+    mainArea = document.querySelector("#divForProbalkozasokHossza");
+    sectorId = "probalkozasokHossza";
+    infoArray = myRunLengths.slice(0);
+    displayDictionaryInline(mainArea, sectorId, infoArray);
+    mainArea = document.querySelector("#divForSzavakMelleslegIde");
+    sectorId = "szavakMelleslegIde"
+    infoArray = szavakMellesleg.slice(0)
+    displayDictionaryInline(mainArea, sectorId, infoArray);
+    document.querySelector("#KMKSZinfo1").innerHTML = szavakMellesleg.length;
+    document.querySelector("#KMKSZinfo2").innerHTML = myRunLengths[myRunLengths.length - 1]
+    document.querySelector("#KMKSZinfo3").innerHTML = `${((szavakMellesleg.length / myRunLengths[myRunLengths.length - 1]) * 100).toFixed(2)} %`
+    //ha van elég RAM, baszki
+    //console.log("Az összes futás összes értelmes szavát ebben a tömbben találja: szavakMelleslegArray");
 };
 
 niniMiVanItt();

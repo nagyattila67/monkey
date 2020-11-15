@@ -670,7 +670,11 @@
                             <div class="mt-0 mb-0" id="learningMemoryWarningKI" style="display:initial">
                                 <p class="mt-0 mb-0">nincs bekapcsolva</p>
                             </div>
-                            <p class="mt-1 mb-0">A <i>'mehet-1'</i> és <i>'mehet-2'</i> grafikonjai / táblázatai most
+                            <small>
+                                <p class="mt-1 mb-0">A <i>'mehet-1'</i> és <i>'mehet-2'</i> grafikonjainak és
+                                    táblázatainak
+                                    elkészítése
+                            </small> <small style="color:red">Ne kapcsolja ki!</small>
                             </p>
                             <div id="divForMehet1" style="display:initial">
                                 <p class="mt-0 mb-0"><label style="color:#212529">BE: </label><input
@@ -1111,7 +1115,7 @@
                     </div>
                     <div class="row">
                         <div id="wrapping0Col" class="col-4">
-                            <form onclick="wrappingZindex()" style="z-index:1" id="wrapping0Form" class="wrapping ml-3">
+                            <form onclick="wrappingZindex()" style="z-index:1" id="wrapping0Form" class="wrapping ml-1">
 
                                 <div class="row">
                                     <button name="chooseGraph" type="button" onclick="wantHyp()"
@@ -1197,7 +1201,7 @@
                             </form>
                         </div>
                         <div id="wrapping1Col" class="col-4">
-                            <form onclick="wrappingZindex()" id="wrapping1Form" style="z-index:1" class="wrapping ml-3">
+                            <form onclick="wrappingZindex()" id="wrapping1Form" style="z-index:1" class="wrapping ml-1">
                                 <div class="row">
                                     <p>Hiperbolikus burkológörbe</p>
                                 </div>
@@ -1229,7 +1233,7 @@
                             </form>
                         </div>
                         <div id="wrapping2Col" class="col-4">
-                            <form onclick="wrappingZindex()" style="z-index:1" id="wrapping2Form" class="wrapping ml-3">
+                            <form onclick="wrappingZindex()" style="z-index:1" id="wrapping2Form" class="wrapping ml-1">
                                 <div class="row">
                                     <p>Logaritmikus burkológörbe
                                         <!--(javasolt beállítással</p> - <span
@@ -3721,7 +3725,8 @@
                                 <p>A 4., 5., 6., 7. sorszámú szószedetek: 500/50-es memóriafeltöltéssel 100/100/4
                                     beállítással másfél - két órán át futott a program.
                                 </p>
-                                <p>A 8. sorszámú szószedetek: 1 000/110-as memóriafeltöltéssel (memória átlagos mérete: 430-450 betűkettős) 100/100/4
+                                <p>A 8. sorszámú szószedetek: 1 000/110-as memóriafeltöltéssel (memória átlagos mérete:
+                                    430-450 betűkettős) 100/100/4
                                     beállítással másfél - négy napon és 8 órán át futott a program.
                                 </p>
                                 <p>
@@ -3787,7 +3792,7 @@
                                 <hr>
                                 <p class="mt-2">Kiválaszthatja a szószedeteket, s a program megmutatja, hogy a
                                     kiválasztott szószedetek összes szava hányszor fordul elő a kiválasztott szószedetek
-                                    felsorolásaiban:
+                                    felsorolásaiban :
                                     <span class="ml-3">
                                         1. <input checked oninput="minimumEgyetPlease()" type="checkbox"
                                             id="elsoValaszt" name="1" class="tesztSzoSzedet2"> &nbsp &nbsp
@@ -3803,13 +3808,14 @@
                                             name="6" class="tesztSzoSzedet2">&nbsp &nbsp
                                         7. <input checked oninput="minimumEgyetPlease()" type="checkbox" id="hetValaszt"
                                             name="7" class="tesztSzoSzedet2">&nbsp &nbsp
-                                        8. <input checked oninput="minimumEgyetPlease()" type="checkbox"
-                                            id="nyolcValaszt" name="8" class="tesztSzoSzedet2"> &nbsp &nbsp
+                                        8. <input oninput="minimumEgyetPlease()" type="checkbox" id="nyolcValaszt"
+                                            name="8" class="tesztSzoSzedet2"> &nbsp &nbsp
                                         <span class="mr-3" id="legalabbEgyet2" style="color:red;display:none">Legalább
                                             egyet be kell jelölnie!</span>
                                     </span>
                                     Majd, ha akarja, rákereshet, hogy egyes szavak hányszor fordulnak elő a
-                                    felsorolásokban.</p>
+                                    felsorolásokban.<small> (Ha a 8.-t bejelöli, rendkívül megnő a futásidő!)</small>
+                                </p>
                                 <button style="display:initial" onclick="magyarazatCsunyaSzavakhoz()"
                                     id="csunyaSzavakButton" type="button"
                                     class=" mt-0 mb-1 btn btn-info btn-small btn-block">Eljárás
@@ -3893,6 +3899,9 @@
                         <input disabled id="negyBetusSzoIttBe" type="text">
                         <button disabled id="negyBetusSzoIttBeButton" onclick="negyBetusSzoKeres()" type="button"
                             class="mb-1 btn btn-info btn-small">Mehet</button>
+                        <span id="nyolcBeVanJelolve" class="ml-3" style="display:none;color:red">(Mivel a 8. szószedet
+                            be van jelölve, ez a gomb memória kezelési okokból
+                            inaktív.)</span>
                         <tr>
                             <td></td>
                             <td><span id=SzE1></span></td>
@@ -4058,13 +4067,266 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row mt-3 bgDarker smallBorder">
+                    <div class="col">
+                        <p>Most pedig megvizsgáljuk, valóban lehetséges-e, hogy bizonyos szavakat csak kiemelkedően
+                            hosszú próbálkozások után képes csak előállítani a majom.</p>
+                        <p>Ez azért is valószínű, mert a tanulómemóriában rangsorolva vannak a betűkettősök attól
+                            függően, hogy a tanulás során hányszor talűlkozott velük a majom. Így az előre sorolt
+                            betűkettősök gyakrabban, a hátrébb sorolt betűkettősök pedig ritkábban fognak megjelenni.
+                        </p>
+                        <p>Most pedig nézzük meg, hogy egy adott szót <i>'nagy átlagban'</i> hány próbálkozás után állít
+                            elő a program, ha használja a tanulómemóriát.</p>
+                        <p>A szó legyen: <input class="ml-3 mr-3 mb-2" style="width:200px;height:30px;" type="text"
+                                id="myKeresettSzavam" placeholder="hall">Ennyiszer fusson
+                            neki a majom: <input class="ml-3 mr-3" style="width:80px; height:30px;" type="number"
+                                id="myKeresettSzavamRunNumber" value="1" min="1" max="100"> <button type="button"
+                                class="ml-3 btn btn-secondary btn-sm"
+                                onclick="keresiMyKeresettSzavamat()">Mehet!</button> <small class="ml-3">(A 'szó' itt
+                                értelmetlen karaktersor is lehet!)</small></p>
+                        <p>A próbálkozások átlagértéke:<span id="futasokAtlagerteke"> - </span></p>
+                        <p>A tanulómemória mérete (utolsó):<span id="tanuloMemoriaMereteKMKSZ"> - </span></p>
+                        <p>A futásidő:<span id="futasIdoKMKSZ"> - </span></p>
+                        <p>Az egyes próbálkozások hossza:</p>
+                        <div class="smallBorder, bgWhite" id="divForProbalkozasokHossza">
+                            <div id="probalkozasokHossza">
+                                <p> <span style="color:red">Javasoljuk, ne futtassa ezt az applikációt, mert a futásidő
+                                        akár több óra is lehet.</span>
+                                    <span style="color:green">'HALL' szóra való keresésénél a futásidő (nyiván
+                                        véletlenszerűen) 1 perc 36 mp lett, az
+                                        összes karaktersorozat száma: 19445, az értelmes szavak száma: 236 - ezek:
+                                    </span>PATA, AVAT,
+                                    EPED, IHOL, FÖNT, GYÜN, IGEN, KACS, NÉMA, BŐSZ, TAXA, NESZ, VÉSZ, GÁLA, ZACI, ÁPOL,
+                                    EGÉR, ENNY, ÜLET, DŰLŐ, FUGA, SZÁR, GUGA, BUJA, DARU, RÉSZ, PISI, PÉTI, ÖRÜL, LÉHA,
+                                    FINN, BOJT, KLÓR, GYŰR, RÉSZ, VISZ, DARU, PEDZ, UGAT, KRAL, ELVI, IDŐS, TUJA, SAFE,
+                                    ÜTET, HUJJ, ÉRIK, SZÉT, FIKA, CETT, SOHA, ÓNOS, ÍVEL, TETU, NERC, FÜST, VÁRÓ, PRÉS,
+                                    PÁKA, ÁPOL, EVET, ASZÚ, MÓDI, ÉLÉS, RÁNG, ZÚGÓ, EZER, SODÓ, FACH, FALÓ, NYÍL, PERC,
+                                    PONT, ÉTEL, ETET, KUKK, BARI, STÍL, CIGI, ZÁRT, ÉTER, NYÍR, INGÓ, SOTU, SOLO, ÖLTŐ,
+                                    PAFF, KORC, PERC, PINT, FUTÓ, KÖRÉ, HALÓ, RING, HŰLT, UJJÉ, DONG, ZUHÉ, BUJT, ÜSZŐ,
+                                    ÜTÉS, HAJÓ, BÚGÓ, MÁMA, MÁRC, TIPP, ÖNTŐ, KÓLÓ, REND, AMAZ, ELUN, NYÍL, CIKK, MÓLÓ,
+                                    ŐRÖL, NONÁ, SODÓ, HOGY, TŰZŐ, ÉGÉS, GÓRÉ, UGAT, ÜLET, ÖCSI, MORC, MELY, OMOL, AVAR,
+                                    RÜGY, TETU, EJHA, ÍZÍK, FÜST, GYŰR, TELT, MINŐ, MINK, BÉRC, SZER, SATU, PICE, HAMU,
+                                    BUJT, FÚGA, RÖMI, ÜRÜL, LERÍ, ÜDÜL, EMEZ, GYÍK, SETE, SÍRI, MENT, NONO, HAMU, EMEZ,
+                                    FÜST, HUJJ, RÓKA, VEND, HAHÓ, BENT, NYÍR, SZEN, REDŐ, LÉGY, NOHA, MINŐ, GEBE, CISZ,
+                                    HUJA, TERC, RÖMI, SZÁK, ÖRÜL, FOJT, NÉGY, LELŐ, BUSZ, ÜGET, ÚTŐR, SOLO, ÉGÉS, VEND,
+                                    ŐRÖL, ITAT, GYŐZ, EVEZ, SATU, ÚJJÁ, MOLL, ÉLET, PONK, REVÜ, MEGÉ, ÉVAD, NYÚL, BOJT,
+                                    GYÜN, KORC, ÜLET, SZOP, TERC, UJJÉ, ÍZES, NYÍR, GYÚL, ÍVEL, ÍREZ, SÉTA, ÜLET, EPER,
+                                    TAHÓ, AVAT, PENG, ZAKÓ, KÜSZ, CSÍP, ÜRÜL, RÁCS, TAXA, BUJT, PECH, SARU, FALÓ, ÜGET,
+                                    EVÉS, ELŐL, CSÉK, VETŐ, DUGA, IDÉN, LENT, LAKK, UNKA, HALL.
+                                    <span style="color:green">Ugyanerre a szóra való keresésénél a futásidő 15 perc 29
+                                        mp lett, az
+                                        összes karaktersorozat száma: 128 947, az értelmes szavak száma: 1 679 - ezek:
+                                    </span>FOJT, OKUL, RÁNG, UGAR, SZÖG, LÁTÓ, BONT, BIRS, MINŐ, SZÚR, KIES, ZÚGÓ, BONT,
+                                    FÚRÓ, SÚLY, ÁNGY, KOPÓ, ÍJAS, ÜDÍT, KONG, JÁRT, OLÁH, FIÓK, KORA, ELÜT, ÖLÉS, KÜNN,
+                                    KONG, TEVŐ, ELŰZ, FŰZŐ, NÁCI, HIBA, RAJZ, KÁPA, PERC, REGE, PULT, HARC, BANK, SÜTŐ,
+                                    IKER, KESE, KÓRÓ, FEST, PÁNT, RAGU, KÜLD, FAGY, PONT, GYŐZ, VELE, TŐGY, RÁMA, ESTE,
+                                    BUDI, PÓRÉ, HARS, AZÚR, PEDZ, ÖNTŐ, FÁJÓ, TELT, UKÁZ, TÉMA, ECHÓ, BUTA, TOSZ, RÓKA,
+                                    HAJÓ, IDEI, DŰNE, FENN, MORE, UGAT, ANNO, NYÁK, HEGY, APAI, ÓRAI, CIKK, BENN, LERÍ,
+                                    MORE, ERES, NEJE, REND, FŐZŐ, NYÁL, HAMM, LÁTÓ, SZÁL, CSÉK, FEDD, KIFŐ, MEJJ, RÓTT,
+                                    SÓLÉ, ZSÁK, HÁNY, HOHÓ, LENG, GYÁM, ELUN, PIKK, NAPA, BŐGŐ, POLC, KARI, BÖGY, FRÉZ,
+                                    ELÉL, FŐZŐ, CSÉK, KÉVE, DIDI, NÁSZ, PANG, PÓRI, ÖNTŐ, IGÉZ, MART, GYÁR, FIKA, SZÖK,
+                                    FŰZŐ, ÖBÖL, FIÓK, GANG, IVÁS, PÓRI, HUNY, TOJÓ, DONG, MARI, RÜGY, PARI, KOMI, RÁZÓ,
+                                    EDZŐ, RÓKA, PACI, KÜNN, BITÓ, FOGY, BÁBU, LEJT, BŐGŐ, APUS, ÚTŐR, VESZ, DUGÓ, SRÉT,
+                                    DÁKÓ, GANG, RÁCS, ÁCSI, KÖLL, ECHÓ, AISZ, HUTA, KÜNN, EHUN, ALUL, KÜNT, FENE, LENN,
+                                    POPÓ, KINN, ROST, KOSZ, FACH, MARÓ, FÚGA, ÓZON, JUTA, LÓRÉ, DŐRE, OJJÉ, IMÁD, ÖRÜL,
+                                    VÉTŐ, ROGY, ERES, HATÓ, ÁNGY, ÖRÜL, SÜTŐ, ÚJÉV, AKUT, SŐRE, DÓKA, CSŐR, NONÁ, SVÉD,
+                                    APÓS, KÖZÉ, TŰZŐ, IVAR, ÁTÉG, VESZ, TOJÓ, NAPI, TOTÓ, NÉHA, KULI, LÓGÓ, ELIT, ÉVES,
+                                    TEVŐ, PÓRÉ, KECS, ÖNZŐ, BÜTÜ, KÉRŐ, BUKÓ, PFUJ, ÓDON, BIBE, ÖVÉK, ÚJON, RIGÓ, ELÜT,
+                                    HALÓ, MARÓ, HADI, PÓKA, JÓGA, AJTÓ, INGA, GYŰR, BÍRÓ, EMEL, JÁRÓ, MOND, RÁTA, ÁRAD,
+                                    ELÍR, DŐRE, ÓRAI, LÓFŐ, ÁRVA, SVÉD, BUKÓ, SING, ROGY, MÉCS, DANA, MÉRT, DONG, KÓTA,
+                                    ÓZON, KEDD, AZAZ, PÓKA, BUTI, SZOL, RIZS, KAKA, ÉRTE, AJAK, IRAM, APRÓ, EMEL, RANG,
+                                    ÖRÜL, TŐGY, ELIT, SEJK, TOSZ, LEJT, ÓZON, MAGA, ÁPOL, GŐTE, EGÉR, PÁPA, HELY, ÖZÖN,
+                                    TELI, ÓSDI, PETE, PÖNG, VEVŐ, FENT, MÁMA, CIKK, BELE, MOHA, KÜNT, BOLY, RÓTT, IMÁM,
+                                    CSÉK, BUKÉ, FAIR, NÉZŐ, ÜTET, IPAR, RAGU, AGÁR, PIAC, BÚGÓ, ACÉL, OKÁD, MÁMA, FONT,
+                                    DARU, SZÁZ, ÉGÉS, UTÓD, IKES, ÁPOL, MENT, BOLY, NYÁK, VISZ, ÁLOK, FŐTT, CIGI, SEJK,
+                                    ALIG, LŐRE, SING, LENN, HOKI, HINT, TERÜ, TÚLI, SÚGÓ, REDŐ, TRÓN, VESZ, KORA, AKAR,
+                                    BÁNT, ÓMEN, NYŰG, MÉRT, FOGÓ, MORC, PISI, RIAN, BRIT, LENG, SZÖG, PANG, DUGA, FUTÓ,
+                                    VOLT, HUJA, TEVE, EMEL, SZOL, ÍZÉS, SZŐR, BÜTÜ, KOPÓ, NYÁK, ÜDÜL, ÍVIK, MÓDI, CSŐR,
+                                    FOJT, HÚGY, LŐRE, FOGY, AKUT, SZOL, VARR, NÉZŐ, ÜHÜM, RESÓ, IGEN, ÍTÉL, TŰZŐ, ZSÚR,
+                                    KINŐ, EGÁL, FACH, NYÁR, NYŰG, LÓRÉ, PÖCS, LENG, GYŰR, KIRÓ, FOTÓ, SZŐR, FORR, TŰZŐ,
+                                    KÚRA, ELUN, ÁHÍT, BUTA, RAGU, BOJT, ZAKÓ, SOKK, HŰTŐ, SZŐR, IVÁS, CINK, MÓDI, KINŐ,
+                                    CULA, SZÖG, ÉVES, FEDD, EHUN, KONG, PIKA, ÜLÉS, ÍZÉS, ÉKÍT, FEST, KÓRÓ, HELY, ESTE,
+                                    CÁPA, KÉVE, ESTI, HUKK, ÉKEL, SÉRT, VAGY, BOJT, SEGG, RÚZS, SÚJT, NYŰG, ECHÓ, EMEL,
+                                    SZOL, BONG, IDŐS, GYŐZ, SOLO, FŐTT, UTÓD, TEVE, LENN, LÁTÓ, OMOL, MENY, LAPU, MÉRT,
+                                    IRAT, ÁHÍT, ERŐS, BUJT, SZŰZ, SEGG, DELI, PRÉM, TÜTÜ, FÓKA, PÉNZ, FÚRT, GITT, CÁRI,
+                                    RING, AKOL, KIFŐ, SVÁB, LETT, STÉG, BENN, MEGY, FŐFŐ, BIKK, MENŐ, EBÉD, IGÉZ, ZÚGÓ,
+                                    TŐGY, TŐKE, DALI, PIKK, SZÍV, SZŐR, PÁPÁ, SŐRE, MOND, TŐKE, INGÓ, MÁMA, DONG, NONO,
+                                    SZÁL, LÉHA, ÉLÉS, TŐKE, ÜRÍT, TRIÓ, SZÓR, GYŰR, SRÁC, LAKK, ÓNAS, HUNY, TŰZŐ, SÍRÍ,
+                                    SIKK, TÚRA, BRIT, AZON, TŐGY, TEVŐ, REGE, BANK, GISZ, HANT, GITT, FÚRT, VONT, JUTA,
+                                    PART, KACS, PISI, BOLY, OKOL, PAKK, APRÓ, SZÁM, PÁKA, ÍZÍK, CSÚZ, VÁJÓ, JAVA, SÜTŐ,
+                                    ÖCSI, TÚSZ, RÁNG, RAJZ, CSÍP, PICI, RÓTT, HÁTI, BÚGÓ, FACH, KÁRÓ, TÚRÓ, FEDŐ, PÁRA,
+                                    INTŐ, VERT, TOJÓ, IGÉZ, ÉKEL, ÍREZ, RÉPA, HASI, BŐGŐ, SAJT, ÍREL, PÁPA, HIVŐ, SZÖK,
+                                    HONN, RÉSZ, AJAK, JUTA, SZŰZ, EHUN, RANG, FÁMA, VÉTŐ, KÓRÓ, VARR, EVEZ, UGAR, CSÍZ,
+                                    CSÓK, TÚRÓ, BONG, PAKK, HEHE, IVAR, TŐGY, TÉKA, SZÉK, VÁJÓ, RIMA, ÓZON, ZSÚR, MÁMA,
+                                    HŰHÓ, ÉPÍT, SOKÁ, FASÉ, REDŐ, ACÉL, ÍTÉL, BÁBU, VÉRT, SZÖK, ZSÍR, AJKÚ, ŐRIZ, ZÚGÓ,
+                                    FAKÓ, TÜLL, CSAK, ZAGY, DARA, JUTA, ÖREG, BENT, ZÚGÓ, KOSZ, AKTA, SZŐR, AZON, VERS,
+                                    KAPA, FELE, ÁMEN, SÜLY, SZÉR, IKES, ÍVÁS, PISI, MUST, ÁDÁZ, ZÚGÓ, ÍRAT, ÉVES, APAI,
+                                    HOHÓ, FOGÓ, ÉKKŐ, ADAG, TÜLE, PICI, GYÁM, RÓKA, ERED, TÜLE, ÍVES, BÖGY, ÉVAD, DÖNG,
+                                    DUGÓ, VEJE, TÉKA, TŰZŐ, FONT, BIRS, AVAT, VIZA, BÍRÓ, KACS, GYŐZ, TYHŰ, BELE, SAKK,
+                                    RÚZS, EHUN, BAGÓ, RÜGY, ALUL, KIKI, KINŐ, ÚSZÓ, ÖCSI, EVET, SZÍJ, ÜRES, EVEZ, SZŰZ,
+                                    AGÁT, TYHŰ, SZÍJ, REDŐ, BAGÓ, ÜDÜL, NÁCI, TYHŰ, SZÉR, ELÜL, ÁNGY, MÉRV, FALÓ, PAKK,
+                                    ESTI, SÜLT, ÓZON, IRAT, ZÚZÓ, CSŐR, MÉLY, ÓZON, PONK, PELE, NAGY, CIGI, NYÁJ, RÁTA,
+                                    MINŐ, KOMI, GYŰR, VIVŐ, IVAR, LOPÓ, SŐRE, ÍREL, CSÉK, UTÁN, HŰHÓ, TUJA, TETŐ, BONG,
+                                    SEJT, ENYH, BUMM, PARI, HUJA, ÜTET, SZÖG, MARS, LEVŐ, KONG, RAGU, ESÉS, CINK, LENG,
+                                    OLÁH, ÁDÁZ, LEVŐ, ACÉL, ÁTAL, EBÉD, UGAR, FALU, FUJT, GŐTE, ÁTÜL, ELUN, EBBE, ÖCSI,
+                                    KÜNN, TOTÓ, ÁRUL, SING, MEGY, ESIK, SÜLY, BÁRÓ, ÁROK, RIZS, REST, TAVI, ELEM, PIKA,
+                                    BÚGÓ, ÚJUL, MÓKA, KÜLD, VÉSZ, ÁCSI, FIÚI, ESDŐ, DALL, LÓFŐ, DIÁK, IGEI, ALÁZ, ÜLTE,
+                                    PIRÉ, MIND, KÁDI, SZOL, PUHA, VERS, ROGY, PARI, SAVÓ, LÜKE, RANG, ARAB, OLTA, KIFŐ,
+                                    BOJT, GYÍK, ÉRIK, SÜTŐ, BUGA, CISZ, TŰZŐ, TŐKE, FASÉ, STÉG, VÉSZ, SZÁN, KACS, FÚGA,
+                                    REGE, PARI, KÁDI, ÖCSI, MINT, RÉPA, BÜKK, SING, ÜREG, PART, MOND, BUJT, CSÍP, VÍVÓ,
+                                    KIFŐ, MARI, HOLD, HÚGY, ÉTEL, BRIT, PÓKA, LAZA, LÁDD, ELÜT, ÁTOK, NYÁK, ÖKÖL, NERC,
+                                    RUGÓ, ÁRUL, ROMA, BECS, NESZ, SÜLY, ÁBRA, DÖNT, FOJT, KOPÓ, MEGY, FEJT, FUTÓ, MELÓ,
+                                    BUJT, ELÜL, DŐRE, SŐRE, TELE, JÓGA, CÁPA, KARÓ, KÖTŐ, APRÓ, ÍZÍK, MEGÉ, GŐTE, BUTI,
+                                    HUNY, ÚTŐR, VÁPA, HUHU, IGEN, SAKK, VÍVÓ, FUJT, ALUL, NYŰG, ÖRÜL, ÉVES, HANG, PONT,
+                                    ELIT, AKÁC, HUJA, HINT, VÉKA, BÓRA, RÁGÓ, BONG, PINA, KOPP, ÜHÜM, NEJE, BUTI, CIKK,
+                                    KÖZÉ, SATU, NÉMA, KÜNN, SZOP, KIRÓ, VAGY, RÁGÓ, APAD, ELŰZ, FAKÓ, ÚTŐR, ÚTŐR, HUKK,
+                                    PITE, GYŐZ, ÁLOK, CSÉP, ÚJJÁ, PÁPA, NÉPI, NYÁK, DÖNT, ÁTÍR, BÜKK, ÖLEB, SÍZŐ, BUMM,
+                                    FÚRT, FŐTE, SZÉL, HINT, LENN, PFUJ, HAZA, ÖCSI, OJTÓ, IMÁM, TÉMA, KÜNT, DUGA, MÁMI,
+                                    SZÖG, ÁMUL, SÉRT, HAJT, GYÁR, RÁNT, RIZS, ÁGAS, BARI, GYÁM, ÉTEL, ECHÓ, HERE, RONT,
+                                    LAPU, SVÁB, ÖLEB, FESS, NÉZŐ, FONT, IGEN, ÓSDI, PÁRT, BOLY, TŐGY, AKAD, ÁMUL, HANT,
+                                    VÉRT, GYÍK, GESZ, APUS, BRÓM, CSÓK, ECHÓ, BELE, RUHA, ÖLES, KEND, ÁNGY, HISZ, AVAR,
+                                    TIED, HONN, FŐTT, FIÓK, HŰHÓ, LÜKE, PÓLÓ, INAL, VEVŐ, MELY, BRÓM, ÁJER, KORA, DACI,
+                                    KONG, ELÜT, BÚGÓ, LAKÓ, PÁPÁ, POPÓ, BENT, ÜHÜM, BULI, ÍVES, PONT, CSÉP, ÁLOK, ÜRÜL,
+                                    AGÁT, SVÉD, NONÁ, FIKA, LŐRE, ALIG, MIRE, SRÉT, VEVŐ, NYÁL, BARI, TŐKE, ÁPOL, LÁTÓ,
+                                    EMEL, KONG, ROLÓ, FIÓK, BÉKÓ, NAGY, ÁPOL, SIKK, UTÓD, FINN, ÁNGY, LENG, PULI, IGÁS,
+                                    REDŐ, BÉKÓ, LEVŐ, CSÁS, RÓKA, RÓTT, NYÁR, ÁPOL, PANG, RAGU, MÓDI, FISZ, ONDÓ, KÁDI,
+                                    VÉTÓ, PEST, FOJT, FUJT, DIÁK, SZÖK, GŐTE, BARI, ESTE, SÚGÓ, MOST, ÖCSI, FRÉZ, TELE,
+                                    KÜNN, SZÁM, TÚRA, EVES, BUMM, ESŐS, ELEI, TORS, AJKÚ, HONN, MARI, SAKK, NYÁK, UTÓD,
+                                    IDÉZ, INAL, ÖRÜL, VÁLT, MOLY, KÖTŐ, ÚJÉV, BOLT, BARI, GÓRÉ, IVAR, ÁRVA, SZÁD, LENT,
+                                    TOTÓ, NANÁ, PECS, BÍRÓ, ÍGÉR, FENT, FALÓ, IPAR, BUMM, RIZS, INGA, ELÜT, VÁRT, PIKÉ,
+                                    BANK, GUGA, FEDD, BÉTA, HIVŐ, MENŐ, VÉRT, FŐTT, SEJK, ÉKÍT, PÁRT, ÖLES, PÖCS, DIÁK,
+                                    EDZŐ, SÚGÓ, FAGY, ÖREG, BAGÓ, FINN, TEVŐ, FUTÓ, TÉKA, ÚTŐR, BEÉR, VESZ, BONT, DŐRE,
+                                    ÉNEK, HÁNY, GYŰR, BÉRC, ÓKOR, VÉSZ, BUSA, HANT, HARS, CICI, DÖNT, KAPÓ, EHUN, FACH,
+                                    NYÁR, SOHA, BÖGY, AGÁT, SOKÁ, VÉNY, GYŐZ, HAGY, RÁCS, GUGA, NAGY, EBÉD, SÍZŐ, RÜGY,
+                                    SEJT, SZÍT, FÚRT, KÁKA, GYÁR, ÉGET, KÉVE, GYŐZ, REJT, ÁCSI, HANG, NYÁL, ÜRÜL, ÜRÜL,
+                                    OKOL, VEVŐ, ÜTÉR, RÁNŐ, DIKÓ, ÜDÍT, HANT, TÁTI, RIMA, KÜNT, VEVŐ, AGÁT, VÁZA, MOHA,
+                                    BULI, ÍVIK, ALUL, OJTÓ, ÁGAS, BÓDÉ, BORÚ, SZAG, SRÉG, SZŰR, RAGU, KÁPA, KEDD, BONG,
+                                    BAGÓ, CSÓK, ZÖNG, IMÁM, ÚSZÓ, KAMÓ, ECHÓ, ORSÓ, RAGU, CÁRI, ÚTŐR, MISE, KENŐ, TŰZŐ,
+                                    ECHÓ, VIVŐ, OKÍT, ÍTÉL, VONT, RÁMA, BÜKK, ALÁZ, FRÍG, ÜHÜM, MÉHE, PETE, HESS, CSÉP,
+                                    EGÉR, FAGY, BOKA, GANG, OJTÓ, PÁKA, GYÁR, ELŰZ, CSÉP, SÉMI, GÓRÉ, SZÖG, PITE, TÜLE,
+                                    VEVŐ, LAJT, IGEI, BÚGÓ, FAGY, FÓKA, BUMM, BAGÓ, ÚTŐR, FELE, IGÉZ, ZÉRÓ, EHOL, LÓFŐ,
+                                    ARGÓ, FÁMA, CUMI, IGAZ, NANÁ, ÜGET, ZÚGÓ, ÓKOR, BAKÓ, ALÍT, DONG, LINK, CSÍZ, AHOL,
+                                    SÉRT, KÁTÉ, MÉRŐ, ESTI, HUTA, MART, ELÖL, NYŰG, ZUHÉ, FUJT, UGAT, ZULU, KÁPA, CUKI,
+                                    ELÜT, BENN, FENN, ÍZÍK, BÖGY, TRIÓ, AKÁC, FŰZŐ, PÓRI, NEJE, HOGY, KÖTŐ, DOBÓ, BARI,
+                                    SÜLY, MORE, DŰNE, HALÓ, ÉKES, TÁRÓ, EMEL, ZAGY, ÉGET, BEGY, NYÁR, PONT, BÓRA, PATA,
+                                    NYÁR, PACI, LESZ, BÚGÓ, SZŐR, SZOL, KONG, TEVŐ, PIAC, FŐTE, HŰTŐ, JÁRT, TÚRA, PIPA,
+                                    SVÉD, ÚJUL, HATÓ, HANG, ELÜL, BOHÓ, ALÍT, IKER, FEDŐ, LEÁS, OJTÓ, HÉJA, MERŐ, VEND,
+                                    TEVŐ, BORS, IVÁS, DIÁK, NYÁR, NYŰG, AHOL, TŰZŐ, ZÓNA, IKES, BÁBU, MINT, TÜLL, MÉLA,
+                                    ÜRÍT, PACI, PÓRI, TŐGY, IMÁM, ELIT, ÓZON, ÚJUL, NAGY, SOLO, JEGY, POLC, KONG, ALOM,
+                                    NÉPI, ÜTÉR, KOHÓ, RUTA, SÚLY, ÜRÜL, PITE, FUJT, DACI, PEST, HÚGY, BOJT, BŐGŐ, LÍRA,
+                                    GYÍK, KEDD, DUGÓ, SÍZŐ, SEJT, FINN, DUGÓ, RENG, NÉZŐ, UGAR, DONG, ÉRIK, BŐSZ, BÖTŰ,
+                                    HAVI, MÉRT, MÉTA, HAZA, DUGA, MIRE, AJKÚ, BÖGY, BIKA, VOLT, VÉTÓ, GUGA, HŐSI, HASI,
+                                    SÍZŐ, CSÓR, TENG, ELÜL, ARAB, KÖTŐ, TART, NEJE, SZÁN, ÁTOK, SÚGÓ, ÓZON, VESZ, DÓKA,
+                                    ÖRÜL, ÜRES, SÚGÓ, ALÍT, ALÍT, TANK, KERT, PACI, PIKK, PÉTI, EHUN, LÉGI, TŐGY, DONG,
+                                    BONG, HONN, ÍRAT, SÉRT, LENN, ZAKÓ, FOJT, HÁNY, PIKK, SZOK, PSSZ, GYÍK, SZOL, PINT,
+                                    DÁDÁ, UTÓD, VÁGÓ, JÁRÓ, ÍTÉL, TRÓN, SZÚR, CICI, MOLY, EJHA, VÉKA, FOGY, SZÁZ, RÉSZ,
+                                    IKES, CISZ, EVET, BÓDÉ, LÜKE, CSŐR, DONG, JÁRÓ, BEÁS, ÉRTE, PFUJ, SÍZŐ, SEJK, PICE,
+                                    MORE, UTÓD, BUMM, EDZŐ, UTAL, AGÁR, HIVŐ, HUKK, ÚJUL, DESZ, ŐRIZ, AMAZ, SZAR, BONT,
+                                    VEND, FALÓ, HIVŐ, ÖNTŐ, VÉNY, AJAJ, VESE, VONT, RÉNY, MOLY, MÓKA, SÉMI, BEÁS, FÚGA,
+                                    ÖZÉS, SÚGÓ, LEVŐ, ÁTÉG, HŰHÓ, HŰTŐ, PÖCS, SÜLY, FÖNT, BÉKÓ, MAKK, NEJE, FAGY, KORA,
+                                    JOBB, HŰLT, TŐGY, MIRE, BEÁS, HÁGÓ, PÁRT, KINT, BUGA, KINŐ, LAJT, TANK, ZAKÓ, ÁTAL,
+                                    BÉRC, KÓRÓ, HOGY, TÖRT, NEMI, ÉKEL, ERED, ÓLÁB, LOPÓ, IGEN, FŐZŐ, SZŐR, FAIR, BÓDÉ,
+                                    FŰZŐ, OMOL, FÁJÓ, ÉGET, REMI, RÓTT, KORA, EBÉD, IGEN, ÁPOL, MARI, DŐRE, ERŐS, ÍREL,
+                                    ECHÓ, ENYH, NAPI, EZÉS, IRTÓ, ENNY, KULI, DÁDÉ, DUMA, ÁNGY, APUS, PECS, SZÉR, ÉKKŐ,
+                                    ELÖL, UGAR, RIZS, TOTÓ, FÚGA, AKÓZ, DONG, RÚGÓ, ALÁN, SÜTŐ, FACH, ÓMEN, FÚRT, TŰZŐ,
+                                    NÉHA, HÚSZ, FEDŐ, TÉNY, GYÁR, ÁTÉR, KACS, ÍRÁS, PITI, FENN, NEJE, LOPÓ, MÓDI, ÉKKŐ,
+                                    VARR, AGÁR, TŐGY, PRÍM, CSÓK, KIFŐ, ZÉRÓ, FASZ, ÖNTŐ, FRÍZ, PULI, KALL, VÉTŐ, FIÓK,
+                                    HÚGY, FÚGA, RIAN, ÉTER, LÓGÓ, SITI, KÉSZ, RONT, EVES, MONY, SETE, SZÁM, ÁGAZ, REND,
+                                    PONK, TÉKA, TOJÓ, DIRI, FÖNT, PRÉM, PAKK, LÁNG, VONT, BORÚ, FAIR, ELÍR, KÜNN, MELÓ,
+                                    GYÁR, CSÓK, HUKK, GYŐZ, TŰZŐ, FŐTE, SÍZŐ, HŰHÓ, RING, CISZ, NYÁR, ÁNGY, RAJZ, SZÓR,
+                                    RAGU, PÁPA, ÓMEN, LÓGÓ, ÁRUL, TEVE, EVES, FENT, PULT, TOJÓ, GIGA, PAPA, HIBA, EBBE,
+                                    IDEI, UTAL, SZÖK, PINT, SVÉD, SZÍT, MENŐ, PANG, ÖRÜL, ÍZÍK, RENG, VEJE, ÁGAZ, HALL
+
+                                    <span style="color:green">Ugyanerre a szóra egy harmadik keresésénél a futásidő 5
+                                        perc
+                                        18 mp lett, az
+                                        összes karaktersorozat száma: 64 618, az értelmes szavak száma: 821 - ezek:
+                                    </span>
+                                    SZÓR, SŰRŰ, SZŰR, ÉNEK, GAMÓ, ÁGAS, SÍVÓ, NÉGY, FIÚS, ÍJAS, BRÓM, KEND, KINN, ÚJÉV,
+                                    ÁJER, PUMI, SÍVÓ, PETE, CSÓR, ALAK, IZÉL, PÁPÁ, FÓKA, ANNO, ZÁRT, EVEZ, HÍVÓ, BETŰ,
+                                    FASÉ, FŰTŐ, BÉKA, IGÉZ, HOHÓ, LÜKE, LÁNY, KANI, TÁRT, FENN, IVÁS, KELL, DÁMA, TERÜ,
+                                    GNÓM, GESZ, NEDV, TÉMA, ÜTEG, SZÉL, MÁRC, ÁMUL, DÁMA, SEGG, ÜHÜM, BEGY, ÁGÁL, EVET,
+                                    RÜGY, BÚZA, SZŰR, NEDV, DUGÓ, TELŐ, NEKI, NÉNI, ZAGY, DARA, ÉHEN, SICC, RÁZÓ, CSÖG,
+                                    HÍVÓ, SÍVÓ, HÍJA, FISZ, ÁRUS, VICI, ÖLTŐ, PFUJ, VICI, ROGY, ÍREL, ÖRÜL, APUS, ROLÓ,
+                                    CSÍN, TETT, EJHA, ÖLTŐ, NÉHA, ÓVÁR, KÖTŐ, DÁDÁ, RÚZS, MERŐ, TENG, ÉRTE, ÁTAL, ÉNEK,
+                                    ALUL, PÓLÓ, BAGÓ, ÍZÉS, ÁTÉR, HANG, VIZA, MÁRT, GYŰR, BUSZ, SVÉD, CSŐR, FIÚS, BUSA,
+                                    FUJT, HÍVÓ, FÖLD, IGÉZ, TÚSZ, LÁNG, PÖCS, TOPA, VÍVÓ, RÁNŐ, FUTÓ, KIFŐ, ÖNTŐ, VELE,
+                                    FÖNN, KÉVE, ALVÓ, ZUHÉ, ÓBOR, RÁCS, TERÜ, AMÍG, TERÜ, LÉHA, TUJA, ZAGY, PÖCS, KORC,
+                                    HUJA, FENT, LŐRE, ALOM, DICS, ELŐZ, SZŰR, ÜTET, IDŐS, LAPU, KAPA, ELŐL, KŐSÓ, BŐSZ,
+                                    REJT, TÁRÓ, MOLL, TERÜ, ÁLOM, BEGY, PASA, TELI, BURA, TOKA, SÜTŐ, TÚSZ, SZÁK, PULI,
+                                    APAI, ZSÚP, RÁCS, ALAP, PONC, KOMA, URAZ, FŰTŐ, RÁGÓ, RÉSZ, HÓLÉ, LŐRE, ÖLTŐ, GYÍK,
+                                    PAPA, ZACI, JUSS, HUNY, DONG, FASZ, VETŐ, SÍRÍ, BÉTA, ÉLÉS, LÍRA, MOHA, ALLÉ, ELVI,
+                                    SÍVÓ, FUJT, BEGY, VÍVÓ, PÁST, VÁLL, BÓRA, ÁTAL, HISZ, VESZ, GYŰR, ÜHÜM, EMEL, TEKE,
+                                    SÚJT, RANG, SZÉP, UTÁN, UTÁN, ÚTŐR, PACI, LŐTT, BABA, ÓRAI, IDŐS, CSÉR, JOBB, TERV,
+                                    KULI, ÉHES, HAGY, BÍRÓ, ÚJON, SZÉT, KERT, EMEL, DOBÓ, AJTÓ, FŐTE, HOHÓ, NAPI, DALL,
+                                    IDUS, LAMÉ, NÉZŐ, SZÁZ, KÖZÉ, SOSE, ÜRÜL, BÖGY, TEKE, BÚGÓ, PACI, MÉRT, CSÚF, SŰRŰ,
+                                    ÖVÉK, ÉTEK, BŐGŐ, EVÉS, ÉNEK, SAVÓ, DICS, PÓRI, ÁTAD, SÜLT, CETT, GYŰR, NAGY, MEGY,
+                                    HASÉ, MÉRT, PINA, TŐGY, AKÁC, TILÓ, FÁTA, POPÓ, MINT, HAJÓ, SÍVÓ, HUTA, HÍVÓ, ESŐS,
+                                    BOHÓ, SŰRŰ, ÜLET, BULI, TUDÓ, SZÉT, KULI, TOKA, HAMM, FŰZŐ, IGEI, FIÓK, OSON, ÁCSI,
+                                    UGOR, ELÖL, MAGA, ESŐS, VÍVÓ, IDEG, FENE, NYIT, GUMI, ÍGÉR, AKÁR, ÓBOR, ELUN, BELE,
+                                    ASZÚ, ASZÚ, GŐTE, ÓVÁR, REND, ELŐL, ÁMUL, ÜLÉS, ELUN, UTAS, ÖVÉK, FIÚI, REDŐ, HOZÓ,
+                                    JAJA, ELŐZ, ÍVÁS, GYŰR, AKÁR, PFUJ, KÚSZ, LÉGI, LELŐ, GNÓM, CSEL, ZÚZA, SÉMA, SZÁR,
+                                    IDŐS, VIVŐ, MAKI, PÁST, ZSÚP, ÁMÍT, FOTÓ, ŐRÖL, ZACI, GYŐZ, ÜRÜL, TETŰ, SZAB, CSEN,
+                                    APAI, NEDV, PINT, KÚSZ, VAJH, KAMÓ, VÁGÓ, IKER, TAVI, KOHÓ, SŰRŰ, ÓNAS, ÚTŐR, SURC,
+                                    DEÁK, SOKÁ, NYÍR, RAGU, EGÉR, LŐTT, MEZŐ, ÁTÍR, VOLT, ILLÓ, KÜNT, FÁMA, FÜGE, BELŐ,
+                                    FENN, ÍGÉR, ALLÉ, AJAK, HIÚZ, KÁBA, VÉKA, VÉTŐ, FŰTŐ, KÜLD, NONO, LŐTT, TÁRT, ÚZUS,
+                                    HASÉ, HŰHÓ, SÍRÓ, ÁCSI, HŰTŐ, VÁPA, COPF, KAMÓ, GYŰR, SEJT, RÉNY, POPÓ, MENT, ÖVÉK,
+                                    DOBÓ, PELE, OJJÉ, SZÉR, ELŐZ, PART, FŰTŐ, ASZÚ, ESŐS, MOHA, BŐSZ, TAHÓ, ÉKEL, VÉRT,
+                                    SÍVÓ, TÚRA, ÉLED, MELL, PÓRI, GYŰR, IKER, BENŐ, ÉTER, DUGA, PIPA, KÉNY, RÖMI, APAD,
+                                    BOKA, ÁMEN, SÍVÓ, ALVÓ, HOHÓ, SZŰR, PÖCS, LÜKE, TILT, ÚJUL, ÍREZ, TETŰ, KINŐ, SÍRÍ,
+                                    ÍJAS, ÁCSI, PINA, ALVÓ, DAKU, JEGY, GYŰR, HONN, NIPP, ÓBOR, ÁRAM, DÁMA, FUGA, BÓRA,
+                                    LÁGY, BRIT, KUSS, ABBA, AKOL, DUGA, ABBA, DŐLT, FÉNY, PICI, HETI, RÁGÓ, EMEL, ÁJUL,
+                                    EPED, NÉMA, RÜGY, UGOR, SZÉL, ZSÁK, HUSS, ZÚZA, PFUJ, PIHA, TÓRA, CSAL, AKUT, RÉSZ,
+                                    TÚLI, SÁNC, PIKÉ, SZŰR, RÁGÓ, ÉTER, DÓKA, SÜTŐ, GUMÓ, LŐRE, DELI, SÍVÓ, LAMÉ, SZŰR,
+                                    CSEN, ALLÉ, DALL, ICCE, GYŰR, GNÓM, SŰRŰ, LAMÉ, ÉLET, KIÚT, CSÉR, ÖNTŐ, SZÓR, HÚGY,
+                                    OLLÓ, HERE, UTÁN, MENT, LÁMA, MENY, ODOR, FŰZŐ, TŐLE, LILE, VÁRT, ZSÚR, HEHE, HÚGY,
+                                    PÁVA, NÉMI, ÁLDÓ, NAPI, TABU, ESET, KÁPA, MÉTA, CSÉR, MOLL, VÉLT, VAJH, PALI, ÚTŐR,
+                                    PORC, VAGY, SZŰR, ÜLTE, CICA, HÚGY, GYŰR, SUNY, MOHA, BÚZA, ÜREG, ASZÚ, VÁLU, CIPÓ,
+                                    KORA, GYÍK, CSÚZ, ÁBRA, TŐLE, PÖCS, FŰTŐ, OSON, TÁRT, ÖRÜL, VICC, CÁRI, DŐLŐ, RÁCS,
+                                    SZÁZ, ASZÚ, VÁRÓ, BIGE, ÁGAZ, DERŰ, ÉGER, KAPU, BÚGÓ, ALAK, SÜLT, BÉKE, ZACI, HULL,
+                                    EMEZ, ALIG, SZÉP, FÓKA, LETT, NYIT, DICS, GYŰR, DACI, ERED, ÜGET, CSÉP, PÓNI, AISZ,
+                                    LEPE, SŰRŰ, IDOM, ÓNIX, IMÁD, BEÍR, MOHÓ, ÜRÖM, FOLT, KÖZÉ, PART, NYAK, SOTU, ELEI,
+                                    KIÚT, TŐLE, FEDŐ, ÚJUL, ÉKEL, PÖCS, TELT, PACI, ELŐL, GYŰR, ÓNOZ, CSŰR, UTÁL, REGE,
+                                    CSÚZ, ZACI, BÉKE, ÁRUL, SZAG, PITE, PÓLÓ, SZÉT, AKÁR, UKÁZ, ASZÚ, DÓKA, ÜREG, ALÉL,
+                                    RÜGY, UGOR, SÉMA, AJKÚ, SZÉL, FŐZŐ, RÜGY, PITI, ELŐL, SÉRV, VESE, KŐSÓ, MIND, TINÓ,
+                                    SZÉK, ÁCSI, PUHA, APUS, ÖLFA, LÉGY, ÉLEZ, FISZ, ÉVES, BUDI, ÚZUS, LILE, SÉRV, EMEL,
+                                    DERŰ, BUJA, NYAK, SAVÓ, PULI, DICS, TŐKE, KAMÓ, NYÍR, ELÁS, KOMA, BÉKE, SÚJT, KŐSÓ,
+                                    SÍVÓ, BEÁS, LETT, NYÍR, PÖCS, ILLŐ, RÁRÓ, SŐRE, SZÉL, LŐRE, TAPP, GÖCS, RÓTT, RÓTT,
+                                    LÁMA, PÖNG, KÁPA, APÓS, HAGY, ÜREG, GYÍK, RÉNY, SZÚR, SEJK, PIKÉ, SÍVÓ, BÉNA, MÉRT,
+                                    EMEL, EPÉS, ÓLOM, FÜGE, BŐSZ, DEKA, LEÍR, OROZ, SÍVÓ, GÖCS, PITI, ÜRÖM, HAGY, MÉCS,
+                                    RELÉ, RÁZÓ, TŰZŐ, FŰTŐ, VIVŐ, SZÉN, KÖTŐ, ÖVEZ, AKTA, ÁGÁL, ÚTŐR, TÖRŐ, VÁZA, GŐTE,
+                                    ILLÓ, ZAGY, ZAGY, TATA, HŰTŐ, SZŰR, MUST, OLTÓ, FÉLŐ, KOMA, HÚGY, NÉNE, ÜTEG, AKTA,
+                                    GRÍZ, BEÍR, ÜVEG, ALVÓ, DICS, TÖLT, SZÓL, NÉZŐ, ÉREZ, KÁBA, RÉPA, CETT, EPED, URAS,
+                                    NEDV, TÁCA, VISZ, EPER, ICCE, NOHA, SOTU, GYŰR, BURA, ASZÚ, NYÍR, ÁTOK, GYÍK, SÜLY,
+                                    HÍJA, OBOA, SICC, BUKÉ, ÚTŐR, NYÍR, SÜTŐ, ZULU, CICI, DOBÓ, MENY, PIKÉ, GYÍK, ÉDEN,
+                                    SÍVÓ, IDÉZ, VAJH, HOHÓ, NYÍR, LEPE, ÉHEN, ÚJUL, ALÓL, DACI, ALVÓ, HÚSZ, APUS, KINŐ,
+                                    BÓLÉ, MOHÓ, SZÚR, ALVÓ, HÁGÓ, GYŰR, FEKÜ, KÖZÉ, HALL
+                                </p>
+
+
+                            </div>
+                        </div>
+                        <p class="mt-3">Az egyes próbálokzások során képzett értelmes szavak:</p>
+                        <div class="smallBorder, bgWhite" id="divForSzavakMelleslegIde">
+                            <div id="szavakMelleslegIde"></div>
+                        </div>
+                        <p class="mt-3">Ezek száma (csak utolsó futás): <span id="KMKSZinfo1"> - </span></p>
+                        <p>Összes karaktersor száma (csak utolsó futás): <span id="KMKSZinfo2"> - </span></p>
+                        <p>Az értelmes szavak az összes karaktersor ennyi százaléka: <span id="KMKSZinfo3"> - </span>
+                        </p>
+                    </div>
+                </div>
+
+
+
                 <div class="row mt-3">
                     <div class="col">
                         <p></p>
-                        <p style="color:red"><span style="color:red">a program eddig van meg ... folytatjuk ...
-                                mihelyst
-                                ráérünk ... </span>&#128584
-                            &#128585 &#128586</p>
+                        <p style="color:red">
+                            <span style="color:red">a program eddig van meg ... folytatjuk ... javaslatok, kritikák,
+                                hibák:</span> <span style="color:blue">szivkuldi@latinora.hu</span>
+                            <span class="ml-3">&#128584 &#128585 &#128586</span></p>
                         <p></p>
                     </div>
                 </div>
