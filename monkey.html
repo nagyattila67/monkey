@@ -1364,7 +1364,7 @@
                                 <tr>
                                     <td><button id="run100FirstButton" type="button" class="btn btn-secondary btn-sm"
                                             onclick="running100First()">Mehet!</button></td>
-                                    <td><span id="infoForRun100FirtsButton">Futásidő: 1 perc. </span></td>
+                                    <td><span id="infoForRun100FirtsButton">Futásidő: 3-6 perc. </span></td>
                                     <td> <span> Az átlag leghosszabb betűsorozata: <span id="run100TestLength"> -
                                             </span>.</span></td>
                                 </tr>
@@ -1403,7 +1403,7 @@
                             lévő oszloppárok magassága nagyjából megegyezik. S ha úgy képzeljük el, hogy az
                             egyes
                             oszlopok
-                            téglákból épülnek fel, akkor az is igaz, hogy a maximum két oldalán két lévő
+                            téglákból épülnek fel, akkor az is igaz, hogy a maximum két oldalán lévő két
                             oszlophalmaz
                             közelítőleg azonos számú téglából épül fel.</p>
                         <p>Azaz a maximumtól jobbra is, balra is ugyanannyi <i>'tégla'</i> kell a két oszlopsor
@@ -1556,6 +1556,13 @@
                                     <td>A várt maximumnál rövidebb és hosszabb szólisták számának az aránya:
                                     </td>
                                     <td><span style="background-color:rgb(126, 228, 228)" id="averageProp"> -
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>eltérés 1.7 -től
+                                    </td>
+                                    <td><span id="averagePropElteres"> -
                                         </span>
                                     </td>
                                 </tr>
@@ -1742,7 +1749,24 @@
                                     eloszlásból. Ekkor már csak
                                     a mi valóságunkban is létező listák alkotják a látható Gauss eloszlás oszlopait.
                                 </p>
+                                <p>Viszont ekkor a majomnak maradt <span id="restFromList"> -
+                                    </span>
+                                    db.
+                                    virtuális listája, amivel kezdenie kell valamit! A majom tehát fogja ezt a
+                                    kupacot,
+                                    és
+                                    elhelyezi
+                                    azokat a valóságban is létező listák között úgy, hogy a maximumnál rövidebb
+                                    szószámú
+                                    listák
+                                    oszlopait tölti fel velük véletlenszerűen - figyelve arra, hogy minél kisebb
+                                    az
+                                    oszlophoz
+                                    tartozó szószám, annál több listát helyezzen oda a megmaradt listái közül.
 
+                                </p>
+                                <p>Most pedig hasonlítsuk össze a program által létrehozott és a majom által kreált
+                                    eloszlást!</p>
                             </div>
                         </div>
 
@@ -1753,14 +1777,16 @@
 
                                 <div id="forTable5">
                                     <div style="float:right">
-                                        <p style="text-align:center">A kreált eloszlás:</p>
+                                        <p style="text-align:center"><i>A fenti eloszlás kiindulási adataiból a majom
+                                                által kreált eloszlás:</i></p>
                                         <div class="divForGraphic">
 
                                             <table class="tableGraphic" id="graphic5">
                                             </table>
 
                                         </div>
-                                        <p style="text-align:center">Az eredeti eloszlás:</p>
+                                        <p style="text-align:center"><i>A program által fentebb lefuttatott eredeti
+                                                eloszlás:</i></p>
                                         <div class="divForGraphic">
 
                                             <table class="tableGraphic" id="graphic6">
@@ -1770,26 +1796,11 @@
                                     </div>
 
 
-                                    <p>Viszont ekkor a majomnak maradt <span id="restFromList"> -
-                                        </span>
-                                        db.
-                                        virtuális listája, amivel kezdenie kell valamit! A majom tehát fogja ezt a
-                                        kupacot,
-                                        és
-                                        elhelyezi
-                                        azokat a valóságban is létező listák között úgy, hogy a maximumnál rövidebb
-                                        szószámú
-                                        listák
-                                        oszlopait tölti fel velük véletlenszerűen - figyelve arra, hogy minél kisebb
-                                        az
-                                        oszlophoz
-                                        tartozó szószám, annál több listát helyezzen oda a megmaradt listái közül.
 
-                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col">
                                 <img class="littleImgRight" style="float:right" src="/img/example_oszlopok_epitese.png"
                                     alt="eloszlásvizsgálat" width="250">
@@ -1800,7 +1811,9 @@
                                     eloszlás
                                     jobb
                                     oldalából
-                                    - a fenti szabály szerint - konstruált eloszlás van. Néha viszont olyan
+                                    - a fenti szabály szerint - konstruált eloszlás van.
+                                </p>
+                                <p>Néha a két eloszlás passzol, néha viszont olyan
                                     eloszláspárt
                                     kapunk, amelyek jócskán eltérnek egymástól, s ez kételyt ébreszthet,
                                     hogy a
@@ -2541,6 +2554,45 @@
                                 target="blank">LibraryOfBabel.info</a></p>
                         <p>A Bábeli könyvtár online szimulációja: <a href="https://dicelog.com/babel"
                                 target="blank">dicelog.com/babel</a></p>
+                    </div>
+                </div>
+
+                <div class="row smallBorder bgDarker mt-3 mb-3">
+                    <div class="col">
+                        <h5>A mendeli könyvtár</h5>
+                        <p><img id="monkey" class="float-right mt-2" src="img/genom reszlet.jpg" width="350" ;
+                                alt="humán genom"> Az emberi test összes információja a DNS-ben van kódolva. A DNS-ben a
+                            hélix - a kettrős spirál - létrafokain négy nukleotid ismétlődhet. Ezek: az
+                            <strong>a</strong>denin, a <strong>t</strong>imin, a <strong>g</strong>uanin és a
+                            <strong>c</strong>itozin.</p>
+                        <p>Ez a négy betű - a, t, g, c - tehát az, amivel bármely (földi) élőlény teste felépítésének és
+                            működésének a kódja le van írva. A négy nukleotid bizonyos szabályok szerint követi
+                            egymást, de ettől most tekintsünk el. Továbbá tudjuk, hogy a legrövidebb DNS a
+                            baktériumokban van és úgy 10<sup>5</sup> bázispárt tartalmaz, míg az ember DNS-e
+                            10<sup>9</sup> bázispárt tartalmaz. Megjegyezzük, hogy az emberi DNS hossza tömörítetlenül
+                            kb. 2 méter. </p>
+                        </p>
+                        <p><img id="monkey" class="float-right mt-2" src="img/mendeli konyvtar.jfif" width="350" ;
+                                alt="humán genom"> A legdurvább felülbecsléssel a mendeli génkönyvtár tehát összesen
+                            4<sup> 1 000 000 000</sup>
+                            kötetet tartalmaz, aminek egy felső becslése a 100<sup> 3 000 000 000</sup>. Ez a szám pedig
+                            felfoghatatlanul nagyobb, mint a bábeli könyvtár hipercsillagászati kötetszáma.</p>
+                        <p>Persze ebben a mendeli könyvtárban, azaz <i>"az összes elképzelhető DNS által leírt térben
+                                található legtöbb kombináció egyszerűen
+                                szemét, és semmiféle élőlényt nem határoz (és nem is határozhat) meg. Valahogy úgy, mint
+                                ahogy jóval több értelmetlen jelsorozatokkal teli könyv képzelhető el, és jóval nagyobb
+                                valószínűsége van annak, hogy ha egy csomó csimpánzt odaültetünk az írógép elé, akkor
+                                nem
+                                egy Shakespeare-i remekmű fog születni."</i> [Galántai - uo.]</p>
+                        <p>S itt felvetődik a kérdés. Láttuk, hogy egy 15 betűs értelmes szó leírása (35 betűs ábécével)
+                            nagyjából igénybe veszi a létező univerzumunk idejét, akkor az első baktérium DNS-ének a
+                            kódsora hogy
+                            jöhetett létre véletlenszerűen? Hiszen egyszerűen nem volt rá elég idő. (Kép: az emberi DNS
+                            kódja kinyomtatva és könyvbe kötve - <a
+                                href="https://hu.m.wikipedia.org/wiki/F%C3%A1jl:The_Genome_sequence_when_printed_fills_a_huge_book_of_close_print.JPG"
+                                target="blank">forrás</a></p>.)
+
+
                     </div>
                 </div>
 
@@ -4092,7 +4144,7 @@
                         <div class="smallBorder, bgWhite" id="divForProbalkozasokHossza">
                             <div id="probalkozasokHossza">
                                 <p> <span style="color:red">Javasoljuk, ne futtassa ezt az applikációt, mert a futásidő
-                                        akár több óra is lehet.</span>
+                                        akár több óra is lehet. Helyette megmutatunk néhány előre lefuttatott példát itt: </span>
                                     <span style="color:green">'HALL' szóra való keresésénél a futásidő (nyiván
                                         véletlenszerűen) 1 perc 36 mp lett, az
                                         összes karaktersorozat száma: 19445, az értelmes szavak száma: 236 - ezek:

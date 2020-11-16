@@ -1101,6 +1101,11 @@ word = function (wordLength) {
     area.style.display = "initial";
     goToPage = String();
 
+
+
+
+
+
     //if (wordLength != previousWordLength) { beFaster() };
     previousWordLength = wordLength;
 
@@ -1673,7 +1678,7 @@ repetitionMemoryExamineBasic = function (runNumber, letterNumber) {
             myArrayMM = Array();
             registrateIt = true;
             for (let i = 0; i < myMemory.length; i++) {
-                if (expressionABC == myMemory[i][0]) {
+                if (myMemory.length > 1 && expressionABC == myMemory[i][0]) {
                     myMemory[i] = myMemory[i] + 1;
                     registrateIt = false;
                 };
@@ -1847,29 +1852,6 @@ repRepMexEx = function () {
             repeat3(runningNumberSpec, charNumberSpec);
         };
 
-
-
-
-        /*repetitionMemoryExamineBasic(runNumber, letterNumber);
-        max = 0;
-        for (let j = 0; j < resultFromLearningMemory.length; j++) {
-            if (resultFromLearningMemory[j][1] > max && resultFromLearningMemory[j][0] != undefined
-                && resultFromLearningMemory[j][0] != "ErRoR" && resultFromLearningMemory[j][0] != "RöViD") {
-                max = resultFromLearningMemory[j][1];
-                word4max = resultFromLearningMemory[j][0];
-            };
-        };
-        myArrayRMEB = Array();
-        myArrayRMEB[0] = word4max;
-        myArrayRMEB[1] = max;
-        myUltimateResult[URlength] = myArrayRMEB;
-        URlength = URlength + 1;
-        console.error("repetition: ", i, "tanulómemória: ", learning.length);
-        console.log("resultFromLearningMemory", resultFromLearningMemory)
-        console.log("myUltimateResult", myUltimateResult)
-        console.log("myArray", myArray)*/
-
-        repetitionMemoryExamineBasic(runNumber, letterNumber);
         max = 0;
         for (let j = 0; j < myMemory.length; j++) {
             if (myMemory[j][1] > max && myMemory[j][0] != undefined
@@ -1951,10 +1933,6 @@ RRMEabc = function () {
     displayItem();
 };
 
-
-
-
-
 IdontWantToSetMemory = function () {
     if (document.querySelector("#dontWantToSetMemory").checked == false) {
         document.querySelector("#repNumberFor3").disabled = false;
@@ -2006,11 +1984,6 @@ makeLearningDistribution = function () {
     array = learningDistribution;
     makeMyGraph(area, id, array)
 };
-
-
-
-
-
 
 repSize = function () {
     document.querySelector("#repetitionMemoryExamineSize").disabled = "disabled";
@@ -2225,20 +2198,14 @@ lookingForIndividual = function (dictionaryOfMonkeyAllWord, hungarianWordsOfMonk
         };
     };
     return dictionaryOfMonkeyAllWord, hungarianWordsOfMonkey2
-
-
-
 };
 
 displayDictionaryInfo = function () {
-
-
     document.querySelector("#infoDictionary30").innerHTML = hungarianWordsOfMonkey2Individual.length;
     document.querySelector("#infoDictionary31").innerHTML = dictionaryOfMonkeyAllWordIndividual.length;
     if (dictionaryOfMonkeyAllWordIndividual.length != 0) { document.querySelector("#infoDictionary32").innerHTML = ((hungarianWordsOfMonkey2Individual.length / dictionaryOfMonkeyAllWordIndividual.length) * 100).toFixed(2); }
     else { document.querySelector("#infoDictionary32").innerHTML = " - " }
     document.querySelector("#infoDictionary32").style["background-color"] = "#FADADD";
-
 
     if (makeDictAll == false) {
         document.querySelector("#infoDictionary1").innerHTML = `${dictionaryOfMonkey.length} 'szót' állított elő.`;
@@ -2253,7 +2220,6 @@ displayDictionaryInfo = function () {
         if (dictionaryOfMonkeyOriginal2.length != 0) { document.querySelector("#infoDictionary8").innerHTML = `${((dictionaryOfMonkeyFinal.length / dictionaryOfMonkeyOriginal2.length) * 100).toFixed(2)}` }
         else { document.querySelector("#infoDictionary8").innerHTML = " - " };
         //document.querySelector("#infoDictionary5").innerHTML = ((hungarianWordsOfMonkey2.length / dictionaryOfMonkey.length) * 100).toFixed(2);
-
 
     };
     if (dictionaryOfMonkeyAllWord.length != 0) { document.querySelector("#infoDictionary5").innerHTML = ((hungarianWordsOfMonkey2.length / dictionaryOfMonkeyAllWord.length) * 100).toFixed(2); }
@@ -2280,7 +2246,6 @@ displayDictionaryInfo = function () {
     //document.querySelector("#infoDictionary12").style["background-color"] = "#FADADD"
     //document.querySelector("#infoDictionary13").innerHTML= hungarianWordsOfMonkey2.length;
 
-
     sumHWoM = 0;
     for (let i = 0; i < hungarianWordsOfMonkey.length; i++) {
         sumHWoM = sumHWoM + hungarianWordsOfMonkey[i][1];
@@ -2290,10 +2255,6 @@ displayDictionaryInfo = function () {
     else { document.querySelector("#infoDictionary15").innerHTML = " - " };
     document.querySelector("#infoDictionary15").style["background-color"] = "#FADADD"
     document.querySelector("#infoDictionary13").innerHTML = dictionaryOfMonkey.length;
-
-
-
-
 };
 
 hungarianWordsOfMonkey = Array();
@@ -2859,9 +2820,6 @@ checkRuns = function () {
     };
 };
 
-
-
-
 infoForGoToRep = function () {
     charNumRep = document.querySelector("#charNumGoToRep").value;
     charNumRep = parseInt(charNumRep);
@@ -2869,7 +2827,6 @@ infoForGoToRep = function () {
     runNumRep = parseInt(runNumRep);
     document.querySelector("#infoGoToRepRun").innerHTML = runNumRep;
     document.querySelector("#infoGoToRepChar").innerHTML = charNumRep;
-
 
     sec = 0;
     if (charNumRep == 2) { sec = runNumRep * 0.02329 };
@@ -2912,7 +2869,6 @@ goToRepeat1 = function (charNumRep, runNumRep) {
     timeGTR = (timeGTRFinish - timeGTRStart) / 1000;
     sector = document.querySelector("#appTimeGTRReal");
     displayTime(timeGTR, sector);
-
 
 };
 
@@ -3117,17 +3073,8 @@ ranking = function () {
             };
         };
         showTheMemory(frequenceArrayLong);
-        /*for (let i = 0; i < learning.length; i++) {
-            if (learning[i][5] == "new") {
-                document.querySelectorAll("#showMemory span")[3 * i].style["background-color"] = "#ffff00";
-                document.querySelectorAll("#showMemory span")[3 * i + 1].style["background-color"] = "#ffff00";
-                if (3 * i + 2 < learning.length - 1) { document.querySelectorAll("#showMemory span")[3 * i + 2].style["background-color"] = "#ffff00" };
-                newSpan2.style["background-color"] = "#ffff00"
-            };
-        };*/
     };
 };
-
 
 memoryIsShown = false;
 showTheMemory = function (learning) {
@@ -3231,8 +3178,6 @@ timeCounting = function () {
     document.querySelector("#timeInfo").innerHTML = `${min1} min, ${sec1} sec`;*/
     document.querySelector("#timeInfo").style["background-color"] = "#7ee4e4";
 
-
-
     //charNumber = charNumberForInfo;
     //repetitionNumberForMatch = runningNumberForInfo;
     //howManyRepetition = 1;
@@ -3253,7 +3198,6 @@ setFutasSzam2 = function () {
 
 };
 setFutasSzam2();
-
 
 timeCounting2 = function () {
     let runningNumberForInfo = document.querySelector("#futasSzam2").value;
@@ -3405,6 +3349,15 @@ repeat2 = function (runningNumber, charNumber) {
         }
         else{averageArray2=averageArray.slice(0)}*/
 
+
+        if (isRunning100First == true) {
+            charNumber2 = 2;
+            runningNumber2 = 100;
+        };
+
+
+
+
         for (let i = 0; i < averageArray.length; i++) {
             averageArray2[i] = averageArray[i][0];
         };
@@ -3522,6 +3475,7 @@ repeat3 = function (runningNumber, charNumber) {
 
 
 repeat = function (runningNumber, charNumber) {
+
     resultFromLearningMemory = Array();
 
     if (wasRepeating == true) { removeDistanceMatrixSpan(); removeDistributionDistanceSpans(); removeDistanceMatrixSpan() };
@@ -3560,6 +3514,10 @@ repeat = function (runningNumber, charNumber) {
     totalNumberOfWords = 0;
     //averageArray: adott sorszámú futásnál hány ciklus történt
 
+
+
+
+
     for (let i = 0; i < runningNumber; i++) { averageArray[i] = [0, 0]; averageArray[i][0] = 0; averageArray[i][1] = 0 };
 
     onlyOneWord = false;
@@ -3568,6 +3526,7 @@ repeat = function (runningNumber, charNumber) {
 
         //charNumber = document.querySelector("#karakterSzam").value;
         //charNumber = parseInt(charNumber);
+
         word(charNumber);
         //console.log("repeat: ", i, expressionABC, "turn: ", turn);
 
@@ -3969,7 +3928,7 @@ fillProblemTable = function () {
     };
     document.querySelector("#shorterListNumber").innerHTML = howManyShorter;
     document.querySelector("#longerListNumber").innerHTML = howManyLonger;
-    document.querySelector("#proportion").innerHTML = (howManyShorter / howManyLonger).toFixed(2);
+    if (howManyLonger != 0) { document.querySelector("#proportion").innerHTML = (howManyShorter / howManyLonger).toFixed(2) };
     document.querySelector("#halfingListLength").innerHTML = halfingList;
     document.querySelector("#halfingListNumber").innerHTML = numberOfHalfingList;
     document.querySelector("#shorterThanHalfListNumber").innerHTML = numberOfShorterListThanHalf;
@@ -4024,9 +3983,11 @@ setListLength = function () {
 
 isRunning100First = false;
 running100First = function () {
+    document.querySelector("#mehetBE").checked == true;
+    displayNow = true;
     isRunning100First = true;
-    //betuSzamOfTest = 2;
-    //futasSzamOfTest=100;
+    betuSzamOfTest = 2;
+    futasSzamOfTest = 100;
     running100(futasSzamOfTest, betuSzamOfTest);
     testRunning = true;
     makeTableAndColoringTest();
@@ -4048,22 +4009,37 @@ forProblemsInput();
 testRunning = false
 forProblems = false
 runningForProblems = function () {
+
     forProblems = true;
     betuSzamOfTest = document.querySelector("charNumberForTest");
+    if (isRunning100 == true) {
+        futasSzamOfTest = document.querySelector("#runRepNumb").value;
+        futasSzam = document.querySelector("#runNumb").value;
+        betuSzamOfTest = document.querySelector("#runCharNumb").value;
+    };
     running100(futasSzamOfTest, betuSzamOfTest);
     forProblems = false;
 };
 
 isRunning100 = false;
 running100_500_2 = function () {
+    ezVolt = document.querySelector("#mehetKI").checked;
+    document.querySelector("#mehetKI").checked = true;
     isRunning100 = true;
     betuSzamOfTest = 2
-    running100(futasSzamOfTest, betuSzamOfTest);
+    //running100(futasSzamOfTest, betuSzamOfTest);
+
+    for (let i = 0; i < futasSzamOfTest; i++) {
+        runningForProblems();
+    };
+
     document.querySelector("#averageProp").innerHTML = averageProportionFinal.toFixed(2);
+    document.querySelector("#averagePropElteres").innerHTML = `${(Math.abs((1.7 / averageProportionFinal) * 100 - 100)).toFixed(2)} %`;
     myLength_ = Math.floor(35 ** betuSzamOfTest / numberOfWordsInDictionary[betuSzamOfTest]);
     document.querySelector("#forApproximatedFinalHalfing").innerHTML = myLength_;
     document.querySelector("#forFinalHalfing").innerHTML = finalHalfing.toFixed(2);
     isRunning100 = false;
+    document.querySelector("#mehetKI").checked = ezVolt;
 };
 
 chooseCharNumb = function () {
@@ -4523,7 +4499,7 @@ running100 = function (futasSzamOfTest, charValue) {
     proportionArray = Array();
     howManyArray = Array();
     for (let i = 0; i < futasSzamOfTest; i++) {
-        repeat();
+        repeat(futasSzam, betuSzamOfTest);
         howManyShorter = 0;
         howManyLonger = 0;
         for (let j = 1; j < distribution.length + 1; j++) {
@@ -5677,7 +5653,7 @@ distFow = function () {
 };
 borderElement = 0;
 distLast = function () {
-    borderElement = (Math.floor(distribution.length / 100)) * 100;
+    borderElement = (Math.floor(distribution.length / 100)) * 100 + 1;
     firstElement = borderElement;
     lastElement = firstElement + 100;
     fillTheDistributionTable(firstElement);
