@@ -1638,12 +1638,13 @@ repetitionMemoryExamine = function () {
 
 repetitionMemoryExamineBasic = function (runNumber, letterNumber) {
     learningMemoryKI();
-    myMemory = Array
+    myMemory = Array();
     timeRMEStart = new Date();
     dontDoIt = true;
-    if (learning.length == 0) { alert("A tanulómemória üres. Először futtasson egy 'a majom ˝ennyi˝ betűs szavakat keres ˝ennyiszer˝' keresést!"); learningMemoryKI(); learningMemoryBEKI() }
+    if (learning.length == 0 && noAlert == false) { alert("A tanulómemória üres. Először futtasson egy 'a majom ˝ennyi˝ betűs szavakat keres ˝ennyiszer˝' keresést!"); learningMemoryKI(); learningMemoryBEKI() }
     else {
         document.querySelector("#mehetKI").checked = true;
+        //document.querySelector("#lmBE").checked == false; 
         mehetBEKI();
         learningMemoryBE();
 
@@ -1674,11 +1675,11 @@ repetitionMemoryExamineBasic = function (runNumber, letterNumber) {
                 myArray[myArray.length] = littleArray;
             };
         };
-        if (repRep == true) {
+        /*if (repRep == true) {
             myArrayMM = Array();
             registrateIt = true;
             for (let i = 0; i < myMemory.length; i++) {
-                if (myMemory.length > 1 && expressionABC == myMemory[i][0]) {
+                if (expressionABC == myMemory[i][0]) {
                     myMemory[i] = myMemory[i] + 1;
                     registrateIt = false;
                 };
@@ -1689,7 +1690,7 @@ repetitionMemoryExamineBasic = function (runNumber, letterNumber) {
                 myMemory[myMemory.length] = myArrayMM;
             };
             myArray = myArrayMM.slice(0);
-        };
+         };*/
 
         myArray0 = Array();
         for (let i = 0; i < myArray.length; i++) {
@@ -1808,14 +1809,14 @@ repetitionMemoryExamineBasic = function (runNumber, letterNumber) {
     sectorId = "RRME";
     displayDictionaryWithRepetitionInline(mainArea, sectorId, myArray);
 };*/
-
 noAlert = false;
+
 repRep = false;
 repRepMexEx = function () {
     repRep = true;
-    //resultFromLearningMemory = Array();
-    //myMemory = Array();
-    //cleaningRRME();
+    //if (learning.length > 0) { noAlert = true };
+    //if (learning.length > 0) { learningMemoryBE() };
+    resultFromLearningMemory = Array();
     noAlert = true;
     if (dontNullMemory == false) { learning = Array() };
 
@@ -1825,7 +1826,7 @@ repRepMexEx = function () {
 
     thisWasTheSetting = document.querySelector("#mehetKI").checked;
     document.querySelector("#mehetKI").checked = true;
-
+    mehetBEKI();
 
 
 
@@ -1839,6 +1840,9 @@ repRepMexEx = function () {
     letterNumber = document.querySelector("#repetitionMemoryExamineLetter2").value;
     letterNumber = parseInt(letterNumber);
 
+    
+
+
     for (let i = 0; i < repNumber; i++) {
         if (document.querySelector("#dontWantToSetMemory").checked == false) {
             learning = Array();
@@ -1850,6 +1854,17 @@ repRepMexEx = function () {
             runningNumberSpec = parseInt(runningNumberSpec);
             charNumberSpec = 4;
             repeat3(runningNumberSpec, charNumberSpec);
+        };
+        console.log("learning.length: ", learning.length);
+
+
+        for (let i = 0; i < repNumber; i++) {
+            repetitionMemoryExamine(runNumber, letterNumber);
+            console.log(i);
+    
+            for (let j = 0; j < myArraySize.length; j++) {
+                myMemory[myMemory.length] = myArraySize[j]
+            };
         };
 
         max = 0;
@@ -1872,7 +1887,7 @@ repRepMexEx = function () {
         console.log("myMemory", myMemory);
     };
 
-
+   
 
 
     myResult = myUltimateResult.slice(0);
