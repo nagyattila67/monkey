@@ -47,7 +47,7 @@ hungarianWordsOfMonkey2Individual = Array;
 myArraySize2 = Array();
 resultFromLearningMemory = Array();
 wasMadeEmpty = false;
-
+letterNumberRep=Number();
 
 firstSelectorIsTheFirst = false;
 firstSelector = function () {
@@ -1056,10 +1056,6 @@ runWord = function () {
 };
 
 word = function (wordLength) {
-
-    //miért nem működik??????????
-    //document.querySelector("#status").innerHTML == "A majom éppen gépel"
-
     wasClick = true;
     timeStart = "";
     timeFinish = "";
@@ -1100,25 +1096,13 @@ word = function (wordLength) {
     };
     area.style.display = "initial";
     goToPage = String();
-
-
-
-
-
-
-    //if (wordLength != previousWordLength) { beFaster() };
     previousWordLength = wordLength;
-
-
-    //if(hit==false && turn==0){document.querySelector("#status").setAttribute("innerHTML","A majom //////éppen gépel");}
-
     //hány sor után adja fel a majom
     maxTurn = 100000000
-
     memoryABConlyOne = "";
+
     while (hit == false && turn < maxTurn) {
         if (turn == 0) { timeStart = new Date(); };
-
         if (document.querySelector("#useLearningMemory").checked == false) {
             expressionHTML = "";
             digitHTML = "";
@@ -1632,7 +1616,7 @@ repetitionMemoryExamine = function () {
     runNumber = parseInt(runNumber);
     letterNumber = document.querySelector("#repetitionMemoryExamineLetter").value;
     letterNumber = parseInt(letterNumber);
-    repetitionMemoryExamineBasic(runNumber, letterNumber);
+    repetitionMemoryExamineBasic(runNumber, letterNumberRep);
     makeLearningDistribution();
 };
 
@@ -1811,6 +1795,16 @@ repetitionMemoryExamineBasic = function (runNumber, letterNumber) {
 };*/
 noAlert = false;
 
+repTime2 = function(){
+    repNumber = document.querySelector("#repetitionMemoryExamineRep2").value;
+    repNumber = parseInt(repNumber);
+    runNumber = document.querySelector("#repetitionMemoryExamineRun2").value;
+    runNumber = parseInt(runNumber);
+    letterNumberRep = document.querySelector("#repetitionMemoryExamineLetter2").value;
+    letterNumberRep = parseInt(letterNumberRep);
+};
+repTime2();
+
 repRep = false;
 repRepMexEx = function () {
     repRep = true;
@@ -1833,14 +1827,14 @@ repRepMexEx = function () {
     myUltimateResult = Array();
     URlength = 0;
 
-    repNumber = document.querySelector("#repetitionMemoryExamineRep2").value;
+    /*repNumber = document.querySelector("#repetitionMemoryExamineRep2").value;
     repNumber = parseInt(repNumber);
     runNumber = document.querySelector("#repetitionMemoryExamineRun2").value;
     runNumber = parseInt(runNumber);
     letterNumber = document.querySelector("#repetitionMemoryExamineLetter2").value;
-    letterNumber = parseInt(letterNumber);
+    letterNumber = parseInt(letterNumber);*/
 
-    
+
 
 
     for (let i = 0; i < repNumber; i++) {
@@ -1859,9 +1853,9 @@ repRepMexEx = function () {
 
 
         for (let i = 0; i < repNumber; i++) {
-            repetitionMemoryExamine(runNumber, letterNumber);
+            repetitionMemoryExamine(runNumber, letterNumberRep);
             console.log(i);
-    
+
             for (let j = 0; j < myArraySize.length; j++) {
                 myMemory[myMemory.length] = myArraySize[j]
             };
@@ -1887,7 +1881,7 @@ repRepMexEx = function () {
         console.log("myMemory", myMemory);
     };
 
-   
+
 
 
     myResult = myUltimateResult.slice(0);
@@ -3542,7 +3536,9 @@ repeat = function (runningNumber, charNumber) {
         //charNumber = document.querySelector("#karakterSzam").value;
         //charNumber = parseInt(charNumber);
 
-        word(charNumber);
+
+
+       word(charNumber)
         //console.log("repeat: ", i, expressionABC, "turn: ", turn);
 
         if (document.querySelector("#useLearningMemory").checked == true) {
