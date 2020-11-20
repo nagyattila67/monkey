@@ -632,15 +632,15 @@
                         <div onclick="selectorZindex()" style="z-index:1" class="smallBorder bgLight">
                             <p class="mb-1">Futásszám:</p>
                             <input id="runMain" oninput="firstSelector()" type="number" value="100" style="width:80px">
-                            <p class="mt-1 mb-1">Betűszám:</p>
+                            <p class="mt-0 mb-0">Betűszám:</p>
                             <input id="letterMain" oninput="firstSelector()" type="number" min="1" max="7" value="3"
                                 style="width:50px">
                             <div style="display:initial" id="dontDisplayDel">
-                                <p class="mt-1 mb-1">Futásidő:</p>
+                                <p class="mt-0 mb-0">Futásidő:</p>
                                 <p id="runTimeMain1"> - </p>
                             </div>
                             <div style="display:none" id="displayDel">
-                                <p class="mb-1 mt-1">Futásidő:</p>
+                                <p class="mb-0 mt-0">Futásidő:</p>
                                 <del>
                                     <p id="runTimeMain2"> - </p>
                                 </del>
@@ -652,9 +652,9 @@
                             <div style="display:block">
                                 <span id="learningMemorySize"> - </span>
                             </div>
-                            <p class="mb-1">Használja a memóriát:</p>
+                            <p class="mb-0">Használja a memóriát:</p>
                             <input class="mt-0" type="checkbox" oninput="firstSelector()" id="useLearningMemory">
-                            <p class="mb-1">Az utolsó szó: <span style="color:green"><span id="uccso"> - </p></span>
+                            <p class="mb-0">Az utolsó szó: <span style="color:green"><span id="uccso"> - </p></span>
 
 
 
@@ -841,6 +841,9 @@
                                         <td><span style="color:red" id="learnMemory4">-</span></td>
                                     </tr>
                                 </table>
+                                <p id="merge" style="display:initial"><i><span id="merge1"></span> <span
+                                            id="merge2"></span></i>
+                                </p>
                             </div>
                             <div id="explantation" class="col-5">
                                 <p>Magyarázat: </p>
@@ -867,8 +870,7 @@
                                 </i>
                             </div>
                         </div>
-                        <p id="merge" style="display:initial"><i><span id="merge1"></span> <span id="merge2"></span></i>
-                        </p>
+
                         <hr id="skipToHere">
                         <div id="forTable">
                             <table class="table" id="graphic">
@@ -2549,11 +2551,17 @@
                                 href="https://mek.oszk.hu/04100/04141/04141.htm#42" target="blank">Galántai Zoltán:
                                 Hányan vagyok?</a> (Kép: Jorge Luis Borges - <a
                                 href="https://www.famousauthors.org/jorge-luis-borges" target="blank">forrás</a>)</p>
-
-                        <p>Barangolás a Bábeli könyvtárban: <a href="https://libraryofbabel.info/"
-                                target="blank">LibraryOfBabel.info</a></p>
-                        <p>A Bábeli könyvtár online szimulációja: <a href="https://dicelog.com/babel"
-                                target="blank">dicelog.com/babel</a></p>
+                        <br>
+                        <ul>
+                            <li>
+                                <p>Barangolás a Bábeli könyvtárban: <a href="https://libraryofbabel.info/"
+                                        target="blank">LibraryOfBabel.info</a></p>
+                            </li>
+                            <li>
+                                <p>A Bábeli könyvtár online szimulációja: <a href="https://dicelog.com/babel"
+                                        target="blank">dicelog.com/babel</a></p>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -2562,21 +2570,22 @@
                         <h5>A mendeli könyvtár</h5>
                         <p><img id="monkey" class="float-right mt-2" src="img/genom reszlet.jpg" width="350" ;
                                 alt="humán genom"> Az emberi test összes információja a DNS-ben van kódolva. A DNS-ben a
-                            hélix - a kettrős spirál - létrafokain négy nukleotid ismétlődhet. Ezek: az
+                            hélix - a kettrős spirál - létrafokain négy nukleotid ismétlődhet párban. Ezek: az
                             <strong>a</strong>denin, a <strong>t</strong>imin, a <strong>g</strong>uanin és a
                             <strong>c</strong>itozin.</p>
                         <p>Ez a négy betű - a, t, g, c - tehát az, amivel bármely (földi) élőlény teste felépítésének és
                             működésének a kódja le van írva. A négy nukleotid bizonyos szabályok szerint követi
                             egymást, de ettől most tekintsünk el. Továbbá tudjuk, hogy a legrövidebb DNS a
                             baktériumokban van és úgy 10<sup>5</sup> bázispárt tartalmaz, míg az ember DNS-e
-                            10<sup>9</sup> bázispárt tartalmaz. Megjegyezzük, hogy az emberi DNS hossza tömörítetlenül
+                            3*10<sup>9</sup> bázispárból áll. Megjegyezzük, hogy az emberi DNS hossza tömörítetlenül
                             kb. 2 méter. </p>
                         </p>
                         <p><img id="monkey" class="float-right mt-2" src="img/mendeli konyvtar.jfif" width="350" ;
-                                alt="humán genom"> A legdurvább felülbecsléssel a mendeli génkönyvtár tehát összesen
+                                alt="humán genom"> Egy durva alulbecsléssel a mendeli génkönyvtár tehát 'nagyjából'
                             4<sup> 1 000 000 000</sup>
-                            kötetet tartalmaz, aminek egy felső becslése a 100<sup> 3 000 000 000</sup>. Ez a szám pedig
-                            felfoghatatlanul nagyobb, mint a bábeli könyvtár hipercsillagászati kötetszáma.</p>
+                            kötetet tartalmaz, ami úgy 100<sup> 3 000 000 000</sup>-nal egyenlő. Ez a szám pedig
+                            felfoghatatlanul nagyobb, mint a bábeli könyvtár hipercsillagászati kötetszáma (100<sup> 1
+                                000 000</sup>).</p>
                         <p>Persze ebben a mendeli könyvtárban, azaz <i>"az összes elképzelhető DNS által leírt térben
                                 található legtöbb kombináció egyszerűen
                                 szemét, és semmiféle élőlényt nem határoz (és nem is határozhat) meg. Valahogy úgy, mint
@@ -2584,15 +2593,63 @@
                                 valószínűsége van annak, hogy ha egy csomó csimpánzt odaültetünk az írógép elé, akkor
                                 nem
                                 egy Shakespeare-i remekmű fog születni."</i> [Galántai - uo.]</p>
-                        <p>S itt felvetődik a kérdés. Láttuk, hogy egy 15 betűs értelmes szó leírása (35 betűs ábécével)
+                        <p>S itt felvetődik egy kérdés. Láttuk, hogy egy 15 betűs értelmes szó leírása (35 betűs
+                            ábécével)
                             nagyjából igénybe veszi a létező univerzumunk idejét, akkor az első baktérium DNS-ének a
-                            kódsora hogy
-                            jöhetett létre véletlenszerűen? Hiszen egyszerűen nem volt rá elég idő. (Kép: az emberi DNS
+                            kódsora - egy 10 000 betűből álló kötetecske a mendeli könyvtárban - hogy
+                            jöhetett létre véletlenszerűen? Hiszen egyszerűen még nem lehetett rá elég idő. (Kép: az
+                            emberi DNS
                             kódja kinyomtatva és könyvbe kötve - <a
                                 href="https://hu.m.wikipedia.org/wiki/F%C3%A1jl:The_Genome_sequence_when_printed_fills_a_huge_book_of_close_print.JPG"
-                                target="blank">forrás</a></p>.)
+                                target="blank">forrás</a>.)</p>
+                        <p><a href="humangenom.html" target="blank"><img id="monkey" class="float-right mt-2"
+                                    src="img/human genom2.jpg" width="350" ; alt="humán genom"></a>Az emberi géntérképet
+                            tartalmazó könyvtár 23 kötetből áll - ahány kromoszómánk van - s minden kötet további
+                            könyvekre van bontva. Összesen 3 milliárd betűt tartalmaznak egy 4 betűs ábécéből. Ennek a
+                            betűi: a, t, g, c. (<a href="https://wellcomecollection.org/articles/WcvK4CsAANQR59Up"
+                                target="blank">kép
+                                forrása</a>)</p>
 
-
+                        <p>Részlet az amerikai bölény (bison bison) géntérlépéről (<a
+                                href="https://www.ncbi.nlm.nih.gov/nuccore/NC_012346.1" target="blank">több</a>):</p>
+                        <i>
+                            <p style="line-height:2px">&nbsp&nbsp&nbsp 1 actaatgact aatcagccca tgctcacaca taactgtgct
+                                gtcatacatt
+                                tggtattttt
+                            </p>
+                            <p style="line-height:2px">&nbsp 61 ttattttggg ggatgcttgg actcagctat ggccgtcaaa ggccctgacc
+                                cggagcatct
+                            </p>
+                            <p style="line-height:2px">121 attgtagctg gacttaactg caccttgagc accagcataa tggtaagcat
+                                gcacatatag
+                            </p>
+                            <p style="line-height:2px">181 tcaatggtta caggacataa ctgtattata tatccccccc tccataaaaa
+                                ttccccctta
+                            </p>
+                        </i>
+                        <br>
+                        <ul>
+                            <li>
+                                <p>Barangolás a mendeli könyvtárban (csak download) - <a
+                                        href="http://www.genomenewsnetwork.org/resources/sequenced_genomes/genome_guide_p1.shtml"
+                                        target="blank">genomenewsnetwork.org</a></p>
+                            </li>
+                            <li>
+                                <p>Barangolás a mendeli könyvtárban (böngészhető) - <a
+                                        href="https://genome-euro.ucsc.edu/cgi-bin/hgGateway?redirect=manual&source=genome.ucsc.edu"
+                                        target="blank">University of California, Santa Cruz</a></p>
+                            </li>
+                            <li>
+                                <p>Szathmáry Eörs: Miért négybetűs a genetikai ábécé? - <a
+                                        href="https://www.kfki.hu/~cheminfo/osztaly/kemia/szathmary.html"
+                                        target="blank">kfki.hu</a></p>
+                            </li>
+                            <li>
+                                <p>A kötetek letöltése .gz formátumban - <a
+                                        href="http://hgdownload.soe.ucsc.edu/downloads.html" target="blank">University
+                                        of California, Santa Cruz</a></p>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -3200,7 +3257,7 @@
                                     létezik?
                                 </li>
                                 <li>
-                                    Egy nyelvész professzor - az MTA tagja - azt válaszolta ezzel a problémával
+                                    A nyelvész professzor pedig azt válaszolta ezzel a problémával
                                     kapcsolatban, miszerint: "Érdekes a kérdés, amit felvet, de nem hiszem, hogy a
                                     probléma megoldása valóban az "egymást
                                     taszító" hangpárok körében keresendő. Sokkal inkább az lehet mögötte, hogy minél
@@ -4130,8 +4187,8 @@
                         </p>
                         <p>Most pedig nézzük meg, hogy egy adott szót <i>'nagy átlagban'</i> hány próbálkozás után állít
                             elő a program, ha használja a tanulómemóriát.</p>
-                        <p>A szó legyen: <input class="ml-3 mr-3 mb-2" style="width:200px;height:30px;" type="text"
-                                id="myKeresettSzavam" placeholder="hall">Ennyiszer fusson
+                        <p>A szó legyen: <input oninput="MKSZtoUpperCase()" class="ml-3 mr-3 mb-2"
+                                style="width:200px;height:30px;" type="text" id="myKeresettSzavam">Ennyiszer fusson
                             neki a majom: <input class="ml-3 mr-3" style="width:80px; height:30px;" type="number"
                                 id="myKeresettSzavamRunNumber" value="1" min="1" max="100"> <button type="button"
                                 class="ml-3 btn btn-secondary btn-sm"
@@ -4144,7 +4201,8 @@
                         <div class="smallBorder, bgWhite" id="divForProbalkozasokHossza">
                             <div id="probalkozasokHossza">
                                 <p> <span style="color:red">Javasoljuk, ne futtassa ezt az applikációt, mert a futásidő
-                                        akár több óra is lehet. Helyette megmutatunk néhány előre lefuttatott példát itt: </span>
+                                        akár több óra is lehet. Helyette megmutatunk néhány előre lefuttatott példát
+                                        itt: </span>
                                     <span style="color:green">'HALL' szóra való keresésénél a futásidő (nyiván
                                         véletlenszerűen) 1 perc 36 mp lett, az
                                         összes karaktersorozat száma: 19445, az értelmes szavak száma: 236 - ezek:
@@ -4370,7 +4428,72 @@
                     </div>
                 </div>
 
+                <div class="row mt-3 smallBorder bgLight">
+                    <div class="col">
 
+                        <span>Ha ide kattint, akkor a program megmutatja, hogy az egyes betűk hányszor fordulnak
+                            elő a
+                            szótár szavaiban. (A grafikonon az értékek ezredrészét mutatják az oszlopok
+                            magasságai.)</span>
+                        <button id="buttonForAllletters" type="button" class="ml-3 btn btn-secondary btn-sm"
+                            onclick="allLetters()">Mehet!</button>
+
+
+
+
+                        <div id="divForAbcArray" class="row smallBorder bgDarker mt-3">
+                            <div id="forAbcArray"></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col smallBorder bgLight" id="divForabcOccurranceGraph">
+                                <table id="tableForAbcOccurranceGraph">
+                                    <tbody id="abcOccurranceGraph"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row mt-3 smallBorder bgDarker">
+                    <div class="col">
+
+                        <p>A továbbiakban egy táblázat vizualizálja, hogy a tanulómemória betűpárosaiból páronként
+                            mennyi van, amit a cellákban levő számok jelölnek, s a cella színárnyalata arányban áll
+                            ezzel a számmal. Ahol üres a cella, ott a betűpáros előfordulása nulla.</p>
+
+                        <p> Közvetlenül a
+                            gomb alatt a táblázat tömörített változatát látja. Ott az üres helyek ki lettek hagyva. (Ami
+                            abban a táblázatban üres helynek tűnik, annak annyira fehéres a színárnyalata, hogy a
+                            szemünk fehérnek érzékeli, de valójában színes.) A
+                            második táblázat tartalmazza az üres helyeket is.</p>
+                        <p><img class="float-right ml-3 mt-3" src="img/vizualizacio 433 92.jpg" width="400" ;
+                                alt="vizualizáció">A
+                            képen a tanulómemória egy 433 / 92 állapotának a tömörített vizualizációja látható. A
+                            tanulómemóriának ekkor 433 eleme volt, egy elemmel pedig addig átlagosan 92-szer találkozott
+                            a memória a tanulás során.</p>
+                        <p>Színárnyalatok távolsága: <input style="width:100px" type="number" value=10000000
+                                id="colorDistance"></p>
+                        <p>Ha egy-egy nullával növeli a számjegyet, azzal állíthat a vizualizáció szinbeállításán.</p>
+                        <button id="buttonForAllBigrams" type="button" class="ml-3 btn btn-secondary btn-sm"
+                            onclick="allBigrams()">Mehet!</button>
+                        <div class="row mt-3 smallBorder bgDarker" id="rowForAllBigramsMinor">
+                            <table class="col smallBorder bgDarker" id="divForAllBigramsMinor">
+                                <tbody id="div2ForAllBigramsMinor">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col smallBorder bgDarker" id="divForAllBigrams">
+                                <table id="tableForAllBigrams">
+                                    <tbody id="forAllBigrams"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
 
                 <div class="row mt-3">
                     <div class="col">
@@ -4387,6 +4510,7 @@
                         <p></p>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
