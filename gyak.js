@@ -1052,9 +1052,11 @@ makeWord = function (wordLength) {
 };
 
 runWord = function () {
+    document.querySelector("#spinner_please").style.visibility = "visible";
     wordLength = document.querySelector("#keremASzot").value;
     wordLength = parseInt(wordLength);
     word(wordLength);
+    document.querySelector("#spinner_please").style.visibility = "hidden";
 };
 
 word = function (wordLength) {
@@ -8292,16 +8294,11 @@ allLetters = function () {
 
 bigramsForGraph = Array();
 allBigrams = function () {
-    if(learning.length==0){alert("A tanulómemória jelenleg üres. Először futassa le a bal oldali applikáció segítségével!")}
+    //bigramsForGraphMinor = Array();
+    if (learning.length == 0) { alert("A tanulómemória jelenleg üres. Először futassa le a bal oldali applikáció segítségével!") }
     bigramsForGraph = Array()
     document.querySelector("#buttonForAllBigrams").innerHTML = "újra!";
 
-    area = document.querySelector("#tableForAllBigrams")
-    sector = document.querySelector("#forAllBigrams");
-    area.removeChild(sector);
-    newTbody = document.createElement("tbody");
-    area.appendChild(newTbody);
-    newTbody.id = "forAllBigrams";
     for (let i = 0; i < abcArray2.length; i++) {
         for (let j = 0; j < abcArray2.length; j++) {
             arrayFBig = Array();
@@ -8312,11 +8309,6 @@ allBigrams = function () {
         };
     };
 
-    colorDistanceNumber = document.querySelector("#colorDistance").value;
-    colorDistanceNumber = parseInt(colorDistanceNumber);
-    for (let i = 0; i < learning.length; i++) {
-
-    };
     bigramsForGraph2 = bigramsForGraph.slice(0);
     for (let i = 0; i < bigramsForGraph.length; i++) {
         myBigram = bigramsForGraph[i][0] + bigramsForGraph[i][1];
@@ -8324,6 +8316,25 @@ allBigrams = function () {
             if (myBigram == learning[j][0]) { bigramsForGraph2[i][2] = learning[j][1] }
         };
     }
+
+    colorDistanceNumber = document.querySelector("#colorDistance").value;
+    colorDistanceNumber = parseInt(colorDistanceNumber);
+
+    makeAllBigramsGraphNull(bigramsForGraph);
+    forGraphMinorNull(bigramsForGraphMinor);
+};
+
+
+
+makeAllBigramsGraphNull = function (arrayABG) {
+    bigramsForGraph2 = arrayABG.slice(0);
+    bigramsForGraph = Array()
+    area = document.querySelector("#tableForAllBigrams")
+    sector = document.querySelector("#forAllBigrams");
+    area.removeChild(sector);
+    newTbody = document.createElement("tbody");
+    area.appendChild(newTbody);
+    newTbody.id = "forAllBigrams";
 
     for (let i = 0; i < abcArray2.length; i++) {
         area = document.querySelector("#forAllBigrams");
@@ -8339,36 +8350,94 @@ allBigrams = function () {
             if (j == 0) { newTd.innerHTML = `${abcArray2[i]}` }
         };
     };
-    for (let i = 0; i < bigramsForGraph.length; i++)
-        if (bigramsForGraph[i][2] == 0) { color = "ffffff" }
+    for (let i = 0; i < arrayABG.length; i++)
+        if (arrayABG[i][2] == 0) { color = "ffffff" }
         else {
-            color = bigramsForGraph[i][2] * colorDistanceNumber + 1000000;
+            color = arrayABG[i][2] * colorDistanceNumber + 1000000;
+            color = arrayABG[i][2] * colorDistanceNumber
             color = color.toString(16);
             color = parseInt(color);
             if (color > 16777215) { color = color % 16777215 }
 
-            if (document.querySelectorAll("#forAllBigrams td")[i].innerHTML == "" ) { document.querySelectorAll("#forAllBigrams td")[i].innerHTML = bigramsForGraph[i][2] }
-            
+
+            myNumber = (arrayABG[i][2] - arrayABG[i][2] % 12) / 12;
+
+            document.querySelectorAll("#forAllBigrams td")[i].style["background-color"] = `#${color}`
+            document.querySelectorAll("#forAllBigrams td")[i].style["background-color"] = `${color}`
 
 
-
-            document.querySelectorAll("#forAllBigrams td")[i].style["background-color"] = `#${color}`;
-           
+            if (document.querySelectorAll("#forAllBigrams td")[i].innerHTML == "") {
+                document.querySelectorAll("#forAllBigrams td")[i].innerHTML = arrayABG[i][2];
+                document.querySelectorAll("#forAllBigrams td")[i].style["background-color"] = `#${color} `;
+                bigramsForGraphMinor[bigramsForGraphMinor.length] = color;
+            };
         };
-    forGraphMinor();
+    makeAllBigramsGraphMinNull(bigramsForGraph2);
+    return bigramsForGraphMinor;
 };
 
+makeAllBigramsGraphMinNull = function (arrayABG) {
+    //bigramsForGraph=Array()
+    area = document.querySelector("#tableForAllBigramsMin")
+    sector = document.querySelector("#forAllBigramsMin");
+    area.removeChild(sector);
+    newTbody = document.createElement("tbody");
+    area.appendChild(newTbody);
+    newTbody.id = "forAllBigramsMin";
+
+    for (let i = 0; i < abcArray2.length; i++) {
+        area = document.querySelector("#forAllBigramsMin");
+        newTr = document.createElement("tr");
+        area.appendChild(newTr);
+
+        for (let j = 0; j < abcArray2.length; j++) {
+            area = document.querySelectorAll("#forAllBigramsMin tr")[i]
+            newTd = document.createElement("td");
+            area.appendChild(newTd);
+
+            //if (i == 0) { newTd.innerHTML = `${abcArray2[j]}` }
+            //if (j == 0) { newTd.innerHTML = `${abcArray2[i]}` }
+        };
+    };
+    for (let i = 0; i < arrayABG.length; i++)
+        if (arrayABG[i][2] == 0) { color = "ffffff" }
+        else {
+            color = arrayABG[i][2] * colorDistanceNumber + 1000000;
+            color = arrayABG[i][2] * colorDistanceNumber
+            color = color.toString(16);
+            color = parseInt(color);
+            if (color > 16777215) { color = color % 16777215 }
+
+            myNumber = (arrayABG[i][2] - arrayABG[i][2] % 12) / 12;
+
+            console.log(color);
+            //document.querySelectorAll("#forAllBigrams td")[i].style["background-color"] = `#${color}
+            document.querySelectorAll("#forAllBigramsMin td")[i].style["background-color"] = `${color}`
+
+
+            if (document.querySelectorAll("#forAllBigramsMin td")[i].innerHTML == "") {
+                //document.querySelectorAll("#forAllBigramsMin td")[i].innerHTML = arrayABG[i][2];
+                document.querySelectorAll("#forAllBigramsMin td")[i].style["background-color"] = `#${color} `;
+                bigramsForGraphMinor[bigramsForGraphMinor.length] = color;
+            };
+        };
+};
+
+
+
+
 bigramsForGraphMinor = Array();
-forGraphMinor = function () {
+forGraphMinorNull = function (arrayGMinor) {
+    bigramsForGraph = Array()
     bigramsForGraphMinor = Array();
-    for (let i = 0; i < bigramsForGraph.length; i++) {
+    /*for (let i = 0; i < bigramsForGraph.length; i++) {
         if (bigramsForGraph[i][2] > 0) {
             bigramsForGraphMinor[bigramsForGraphMinor.length] = bigramsForGraph[i][2]
 
         };
-    };
+    };*/
 
-    borderOfTable = Math.floor(Math.sqrt(bigramsForGraphMinor.length))
+    borderOfTable = Math.floor(Math.sqrt(arrayGMinor.length))
     index = 0;
 
     area = document.querySelector("#divForAllBigramsMinor");
@@ -8377,7 +8446,6 @@ forGraphMinor = function () {
     newTbody = document.createElement("tbody");
     newTbody.id = "div2ForAllBigramsMinor"
     area.appendChild(newTbody);
-
 
     for (let i = 0; i < borderOfTable; i++) {
         newTr = document.createElement("tr");
@@ -8388,19 +8456,10 @@ forGraphMinor = function () {
             area = document.querySelectorAll("#div2ForAllBigramsMinor tr")[i];
             area.appendChild(newTd);
             index = index + 1;
-            color = bigramsForGraphMinor[index] * colorDistanceNumber;
-            color = color.toString(16);
-            color = parseInt(color);
-            if (color > 16777215) { color = color % 16777215 }
-
-            newTd.style["background-color"] = `#${color}`
-            //newTd.innerHTML = color
+            color = arrayGMinor[index];
+            newTd.style["background-color"] = `#${color} `
         };
-
-
     };
-
-
 };
 
 
@@ -8410,6 +8469,348 @@ forGraphMinor = function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+makeAllBigramsGraph = function (arrayABG) {
+    index1000ig = 0;
+    index2000ig = 0;
+    index3000ig = 0;
+    index4000ig = 0;
+    index4000tol = 0;
+    bigramsForGraph2 = arrayABG.slice(0);
+    //bigramsForGraph=Array()
+    area = document.querySelector("#tableForAllBigrams")
+    sector = document.querySelector("#forAllBigrams");
+    area.removeChild(sector);
+    newTbody = document.createElement("tbody");
+    area.appendChild(newTbody);
+    newTbody.id = "forAllBigrams";
+
+    for (let i = 0; i < abcArray2.length; i++) {
+        area = document.querySelector("#forAllBigrams");
+        newTr = document.createElement("tr");
+        area.appendChild(newTr);
+
+        for (let j = 0; j < abcArray2.length; j++) {
+            area = document.querySelectorAll("#forAllBigrams tr")[i]
+            newTd = document.createElement("td");
+            area.appendChild(newTd);
+
+            if (i == 0) { newTd.innerHTML = `${abcArray2[j]}` }
+            if (j == 0) { newTd.innerHTML = `${abcArray2[i]}` }
+        };
+    };
+    for (let i = 0; i < arrayABG.length; i++)
+        if (arrayABG[i][2] == 0) { color = "ffffff" }
+        else {
+            //color = arrayABG[i][2] * colorDistanceNumber + 1000000;
+            /*color = arrayABG[i][2] * colorDistanceNumber
+            color = color.toString(16);
+            color = parseInt(color);
+            if (color > 16777215) { color = color % 16777215 }*/
+
+
+            myNumber = (arrayABG[i][2] - arrayABG[i][2] % 12) / 12;
+            color = `rgb(255, ${myNumber}, ${myNumber})`;
+            //document.querySelectorAll("#forAllBigrams td")[i].style["background-color"] = `#${color}
+            document.querySelectorAll("#forAllBigrams td")[i].style["background-color"] = `${color}`
+
+
+            if (document.querySelectorAll("#forAllBigrams td")[i].innerHTML == "") {
+                document.querySelectorAll("#forAllBigrams td")[i].innerHTML = arrayABG[i][2];
+                document.querySelectorAll("#forAllBigrams td")[i].style["background-color"] = `#${color} `;
+                bigramsForGraphMinor[bigramsForGraphMinor.length] = color;
+            
+
+            myNewToy = arrayABG[i][2];
+            myNewToy = parseInt(myNewToy);
+            console.log(myNewToy);
+            if (myNewToy < 1001) { index1000ig = index1000ig + 1; };
+            if (1000<myNewToy && myNewToy < 2001) { index2000ig = index2000ig + 1; };
+            if (2000 < myNewToy && myNewToy < 3001) { index3000ig = index3000ig + 1; };
+            if (3000 < myNewToy && myNewToy < 4001) { index4000ig = index4000ig + 1; };
+            if (4000 < myNewToy) { index4000tol = index4000tol + 1; };
+
+};
+
+
+
+        };
+    document.querySelector("#ezerig").innerHTML = index1000ig;
+    document.querySelector("#ketezerig").innerHTML = index2000ig;
+    document.querySelector("#haromezerig").innerHTML = index3000ig;
+    document.querySelector("#negyezerig").innerHTML = index4000ig;
+    document.querySelector("#negyezertol").innerHTML = index4000tol;
+    makeAllBigramsGraphMin(bigramsForGraph2);
+    return bigramsForGraphMinor;
+};
+
+makeAllBigramsGraphMin = function (arrayABG) {
+    //bigramsForGraph=Array()
+    area = document.querySelector("#tableForAllBigramsMin")
+    sector = document.querySelector("#forAllBigramsMin");
+    area.removeChild(sector);
+    newTbody = document.createElement("tbody");
+    area.appendChild(newTbody);
+    newTbody.id = "forAllBigramsMin";
+
+    for (let i = 0; i < abcArray2.length; i++) {
+        area = document.querySelector("#forAllBigramsMin");
+        newTr = document.createElement("tr");
+        area.appendChild(newTr);
+
+        for (let j = 0; j < abcArray2.length; j++) {
+            area = document.querySelectorAll("#forAllBigramsMin tr")[i]
+            newTd = document.createElement("td");
+            area.appendChild(newTd);
+
+            //if (i == 0) { newTd.innerHTML = `${abcArray2[j]}` }
+            //if (j == 0) { newTd.innerHTML = `${abcArray2[i]}` }
+        };
+    };
+    for (let i = 0; i < arrayABG.length; i++)
+        if (arrayABG[i][2] == 0) { color = "ffffff" }
+        else {
+            //color = arrayABG[i][2] * colorDistanceNumber + 1000000;
+            /*color = arrayABG[i][2] * colorDistanceNumber
+            color = color.toString(16);
+            color = parseInt(color);
+            if (color > 16777215) { color = color % 16777215 }*/
+
+            myNumber = (arrayABG[i][2] - arrayABG[i][2] % 12) / 12;
+            if (document.querySelector("#sarga").checked == true) { cellColor1 = 255; cellColor2 = 255; cellColor3 = myNumber }
+            if (document.querySelector("#lila").checked == true) { cellColor1 = 255; cellColor2 = myNumber; cellColor3 = 255 }
+            if (document.querySelector("#hupikek").checked == true) { cellColor1 = myNumber; cellColor2 = 255; cellColor3 = 255 }
+            if (document.querySelector("#piros").checked == true) { cellColor1 = 255; cellColor2 = myNumber; cellColor3 = myNumber }
+            if (document.querySelector("#zold").checked == true) { cellColor1 = myNumber; cellColor2 = 255; cellColor3 = myNumber }
+            if (document.querySelector("#kek").checked == true) { cellColor1 = myNumber; cellColor2 = myNumber; cellColor3 = 255; }
+            if (document.querySelector("#szurke").checked == true) { cellColor1 = myNumber; cellColor2 = myNumber; cellColor3 = myNumber; }
+
+            color = `rgb(${cellColor1}, ${cellColor2}, ${cellColor3})`;
+            console.log(color);
+            //document.querySelectorAll("#forAllBigrams td")[i].style["background-color"] = `#${color}
+            document.querySelectorAll("#forAllBigramsMin td")[i].style["background-color"] = `${color}`
+
+
+            if (document.querySelectorAll("#forAllBigramsMin td")[i].innerHTML == "") {
+                //document.querySelectorAll("#forAllBigramsMin td")[i].innerHTML = arrayABG[i][2];
+                document.querySelectorAll("#forAllBigramsMin td")[i].style["background-color"] = `#${color} `;
+                bigramsForGraphMinor[bigramsForGraphMinor.length] = color;
+            };
+        };
+};
+
+bigramsForGraphMinor = Array();
+forGraphMinor = function (arrayGMinor) {
+
+    bigramsForGraph = Array();
+    bigramsForGraphMinor = Array();
+    /*for (let i = 0; i < bigramsForGraph.length; i++) {
+         if (bigramsForGraph[i][2] > 0) {
+             bigramsForGraphMinor[bigramsForGraphMinor.length] = bigramsForGraph[i][2]
+ 
+         };
+     };*/
+
+    borderOfTable = Math.floor(Math.sqrt(arrayGMinor.length))
+    index = 0;
+
+    area = document.querySelector("#divForAllBigramsMinor");
+    sector = document.querySelector("#div2ForAllBigramsMinor");
+    area.removeChild(sector);
+    newTbody = document.createElement("tbody");
+    newTbody.id = "div2ForAllBigramsMinor"
+    area.appendChild(newTbody);
+
+    for (let i = 0; i < borderOfTable / 2; i++) {
+        newTr = document.createElement("tr");
+        area = document.querySelector("#div2ForAllBigramsMinor");
+        area.appendChild(newTr);
+        for (let j = 0; j < borderOfTable; j++) {
+            newTd = document.createElement("td");
+            area = document.querySelectorAll("#div2ForAllBigramsMinor tr")[i];
+            area.appendChild(newTd);
+            index = index + 1;
+
+            color = arrayGMinor[index];
+            //newTd.style["background-color"] = `#${ color } `
+            newTd.style["background-color"] = color;
+
+
+        };
+    };
+
+
+};
+
+ABCfortextInput = []
+myBigramsFFTI = Array();
+functionForTextInput = function () {
+    myText = document.querySelector("#textExamples").value
+    myText = myText.toUpperCase();
+    console.log(myText.length);
+    for (let i = 0; i < myText.length - 1; i++) {
+        myLittleArray = Array();
+        myLittleArray[0] = myText[i] + myText[i + 1];
+        myLittleArray[1] = 1;
+        myBigramsFFTI[i] = myLittleArray;
+    };
+
+
+    console.log(myText.length);
+
+    textFilter();
+    makeListShorter();
+};
+
+//myAbcArray = Array();
+myAbcArray = ["A", "Á", "B", "C", "D", "E", "É", "F", "G", "H", "I", "Í", "J", "K", "L", "M", "N", "O", "Ó", "Ö", "Ő", "P", "Q", "R", "S", "T", "U", "Ú", "Ü", "Ű", "V", "X", "Y", "W", "Z"];
+myBigramsFFTI2 = Array()
+signals = Array();
+textFilter = function () {
+    myBigramsFFTI2 = Array()
+
+    for (let i = 0; i < myBigramsFFTI.length; i++) {
+        for (let j = 0; j < myAbcArray.length; j++) {
+            if (myBigramsFFTI[i][0][0] == myAbcArray[j]) {
+                for (let k = 0; k < myAbcArray.length; k++) {
+                    if (myBigramsFFTI[i][0][1] == myAbcArray[k]) {
+                        myBigramsFFTI2[myBigramsFFTI2.length] = myBigramsFFTI[i]
+                    };
+                };
+            };
+        };
+    };
+};
+
+makeListShorter = function () {
+    indexesFFTI2 = Array()
+    for (let i = 0; i < myBigramsFFTI2.length; i++) {
+        myTwoLetter = myBigramsFFTI2[i][0]
+        for (let j = i + 1; j < myBigramsFFTI2.length; j++) {
+            if (myBigramsFFTI2[j][0] == myTwoLetter) {
+                indexFFTI2 = j;
+                myArray = Array();
+                myArray[0] = myTwoLetter;
+                myArray[1] = indexFFTI2;
+                indexesFFTI2[indexesFFTI2.length] = myArray;
+                myBigramsFFTI2[j][1] = myBigramsFFTI2[j][1] + 1;
+            };
+        };
+    };
+
+    for (let i = 0; i < indexesFFTI2.length; i++) {
+        myNumber = indexesFFTI2[i][1];
+        for (let j = i + 1; j < indexesFFTI2.length; j++) {
+
+            if (indexesFFTI2[j][1] == myNumber) {
+                indexesFFTI2[j][1] = -100;
+            };
+        };
+    };
+    myBigramsFFTI3 = Array();
+    for (let i = 0; i < indexesFFTI2.length; i++) {
+        if (indexesFFTI2[i][1] != -100) {
+            myArray = Array();
+            myArray[0] = indexesFFTI2[i][0];
+            myArray[1] = indexesFFTI2[i][1];
+            myBigramsFFTI3[myBigramsFFTI3.length] = myArray;
+        };
+    };
+    for (let i = 0; i < myBigramsFFTI3.length; i++) {
+        myBigramsFFTI3[i][2] = myBigramsFFTI3[i][1];
+        myBigramsFFTI3[i][1] = myBigramsFFTI3[i][0][1];
+        myBigramsFFTI3[i][0] = myBigramsFFTI3[i][0][0];
+    };
+
+    myBigramsFFTI4 = Array();
+    for (let i = 0; i < abcArray2.length; i++) {
+        for (let j = 0; j < abcArray2.length; j++) {
+            myArray = Array();
+            myArray[0] = abcArray2[i];
+            myArray[1] = abcArray2[j];
+            myArray[2] = 0;
+            myBigramsFFTI4[myBigramsFFTI4.length] = myArray;
+        };
+    };
+
+    for (let i = 0; i < myBigramsFFTI3.length; i++) {
+        for (let j = 0; j < myBigramsFFTI4.length; j++) {
+            if (myBigramsFFTI3[i][0] == myBigramsFFTI4[j][0] && myBigramsFFTI3[i][1] == myBigramsFFTI4[j][1]) {
+                myBigramsFFTI4[j][2] = myBigramsFFTI3[i][2]
+
+            };
+        };
+
+    };
+
+    //colorDistanceNumber = document.querySelector("#colorDistance2").value;
+    //colorDistanceNumber = parseInt(colorDistanceNumber);
+
+
+    makeAllBigramsGraph(myBigramsFFTI4);
+    bigramsForGraphMinor2 = bigramsForGraphMinor.slice(0);
+    forGraphMinor(bigramsForGraphMinor);
+};
+
+textAreaOnInput = function () {
+    document.querySelector("#exampleCharacters").innerHTML = document.querySelector("#textExamples").value.length;
+};
+
+setExampleText = function () {
+    if (document.querySelector("#orban").checked == true) { document.querySelector("#textExamples").value = "Polgártársak! Az orosz megszállás és a kommunista diktatúra negyven évvel ezelőtt történt bevezetése óta a magyar nemzetnek egyszer nyílt alkalma, csak egyszer volt elegendő bátorsága és ereje ahhoz, hogy megkísérelje elérni a már 1848-ban kitűzött céljait, a nemzeti függetlenséget és a politikai szabadságot. Céljaink máig nem változtak, ma sem engedünk a '48-ból, így nem engedünk '56-ból sem. Azok a fiatalok, akik ma az európai polgári demokrácia megvalósításáért küzdenek, két okból hajtanak fejet a kommunista Nagy Imre és társai előtt. Mi azokat az államférfiakat tiszteljük bennük, akik azonosultak a magyar társadalom akaratával, akik, hogy ezt megtehessék, képesek voltak leszámolni a szent kommunista tabukkal, azaz az orosz birodalom feltétlen szolgálatával és a párt diktatúrájával. Ők azok az államférfiak számunkra, akik az akasztófa árnyékában sem vállalták, hogy a társadalmat megtizedelő gyilkosokkal egy sorba álljanak, akik életük árán sem tagadták meg azt a nemzetet, amely elfogadta őket és bizalmát beléjük helyezte. Mi az ő sorsukból tanultuk meg, hogy a demokrácia és a kommunizmus összeegyeztethetetlenek. Jól tudjuk, a forradalom és a megtorlások áldozatainak többsége korunkbeli, magunkfajta fiatal volt. De nem pusztán ezért érezzük magunkénak a hatodik koporsót. Mind a mai napig 1956 volt az utolsó esély arra, hogy nemzetünk a nyugati fejlődés útjára lépve gazdasági jólétet teremtsen. A ma vállunkra nehezedő csődtömeg egyenes következménye annak, hogy vérbe fojtották forradalmunkat, és visszakényszerítenek bennünket abba az ázsiai zsákutcába, amelyből most újra megpróbálunk kiutat találni. Valójában akkor, 1956-ban vette el tőlünk – mai fiataloktól – a jövőnket a Magyar Szocialista Munkáspárt. Ezért a hatodik koporsóban nem csupán egy legyilkolt fiatal, hanem a mi elkövetkező húsz vagy ki tudja, hány évünk is ott fekszik. Barátaim! Mi, fiatalok sok mindent nem értünk, ami talán természetes az idősebb generációk számára. Mi értetlenül állunk azelőtt, hogy a forradalmat és annak miniszterelnökét nemrég még kórusban gyalázók ma váratlanul ráébrednek, hogy ők Nagy Imre reformpolitikájának folytatói. Azt sem értjük, hogy azok a párt- és állami vezetők, akik elrendelték, hogy bennünket a forradalmat meghamisító tankönyvekből oktassanak, ma szinte tülekednek, hogy – mintegy szerencsehozó talizmánként – megérinthessék ezeket a koporsókat. Mi úgy véljük, nem tartozunk hálával azért, hogy harmincegy év után eltemethetjük halottainkat, nem jár nekik köszönet azért, mert ma már működhetnek politikai szervezeteink. A magyar politikai vezetésnek nem érdeme, hogy a demokráciát és szabad választásokat követelőkkel szemben – bár fegyvereik súlyánál fogva megtehetné – nem lép fel a Pol Potéhoz, Jaruzelskiéhez, Li Pengéhez vagy Rákosiékhoz hasonló módszerekkel.Polgártársak! Ma, harminchárom évvel a magyar forradalom és harmincegy évvel az utolsó felelős magyar miniszterelnök kivégzése után esélyünk van arra, hogy békés úton érjük el mindazt, amit az '56-os forradalmárok véres harcokban, ha csak néhány napra is, de megszereztek a nemzet számára. Ha hiszünk a magunk erejében, képesek vagyunk véget vetni a kommunista diktatúrának, ha elég eltökéltek vagyunk, rászoríthatjuk az uralkodó pártot, hogy alávesse magát a szabad választásoknak. Ha nem tévesztjük szem elől '56 eszméit, olyan kormányt választhatunk magunknak, amely azonnali tárgyalásokat kezd az orosz csapatok kivonásának haladéktalan megkezdéséről. Ha van bennünk elég mersz, hogy mindezt akarjuk, akkor, de csak akkor beteljesíthetjük forradalmunk akaratát. Senki sem hiheti, hogy a pártállam magától fog megváltozni. Emlékezzetek, 1956. október 6-án, Rajk László temetésének napján a párt napilapja, a Szabad Nép öles betűkkel hirdette címlapján: Soha többé! Csak három hét telt el, és a kommunista párt ÁVH-s keretlegényeivel békés, fegyvertelen tüntetők közé lövetett. Két év sem telt el, és az MSZMP Rajkéhoz hasonló koncepciós perekben ítéltette halálra ártatlanok százait, köztük saját elvtársait. Mi nem érjük be a kommunista politikusok semmire sem kötelező ígéretével, nekünk azt kell elérnünk, hogy az uralkodó párt, ha akar, se tudjon erőszakot alkalmazni ellenünk. Csak ezen a módon kerülhetjük el az újabb koporsókat, a maihoz hasonló megkésett temetéseket. Nagy Imre, Gimes Miklós, Losonczy Géza, Maléter Pál, Szilágyi József a magyar függetlenségért és szabadságért adták életüket. Azok a magyar fiatalok, akik előtt ezek az eszmék még ma is sérthetetlenek, meghajtják fejüket emléketek előtt. Nyugodjatok békében!" };
+
+    if (document.querySelector("#kadar").checked == true) { document.querySelector("#textExamples").value = "Elnézést kérek, hogy elsőként kértem szót, mert ebből az enyém egy kicsit hosszabb lesz, mint a szokásos. Talán régen hallottak engem, kibírják. A szabad beszédnek van előnye, és van hátránya, és az írott beszédnek is van hátránya.  Engedjék meg, a következők megjegyezzem. Nekem van betegségem, nagyon hasonlít ahhoz, ami a feleségemé; fogy. Ő is, én is. Az orvosi vélemény a következő: az én feleségem öt éve jár bottal, neki azért kell bottal járnia, és azért fogy, mert radikális gyomorműtéten ment keresztül, miközben én börtönben voltam. És felszólították, hogy tagadjon meg engem, és nem tagadott meg, erre megtiltották a férje nevének a használatát. Pincehelyiségben, egy mackótömő vacak helyiségben volt már megfelelően koros nő, ez még most is számít, és egyszer azok engem megismertek.  És bámultak, hogy hogyan vállalta ő azt, hogy tudják, hogy én mikor voltam a mi rendszerünkben börtönben. Van egy kérésem még. Nekem az a bajom, én azért vagyok feledékeny, sokszor nem tudom, hogy mit akarok, én is fogyok. Én az én stabil súlyomból – nem tudom, hogy maguk engem püffedt embernek vagy pocakosnak ismertek-e, nekem éveken át stabil súlyom volt. Ez nem orvosi titok, mert nem ott méretzkedtem. Nekem az a bajom, hogy az agyam örökké forog, és az is energiát kíván. Én nem a pocakomból fogytam. Az orvosnak mindig bevallom, hogy amióta abban a helyzetben vagyok, hogy nem tudok beszélni, mert hiszen ahhoz képest, hogy milyen rossz állapotban vagyok, lábon járok, de ez számomra nem teljesen veszélytelen, mert nekem olyasmit is kell mondanom, amiért felelek.  Majd furcsát fognak maguk hallani tőlem. Mi az én felelősségem? Erre az a kifejezés a jó válasz,(Az) amit nem én használtam, hanem más, nyugati, olyan ember, aki ezt nem a szovjet tankok jelenlétében mondja. Azt mondja, hogy a Dunánál túl gyors a folyás. És nekem arra is gondolni kell, hogyha én egészséges leszek, és nem beteg, de a szónak abban az értelmében, amit egy belgyógyász generálprofesszor felügyelő megmond, hogy mikor gyógyulok meg, azt sajnos még ő sem tudja, és senki sem tudja, hogy meddig fog tartani. Mert tovább tart, mint amit én kértem. Egy olyan időszakban amikor már megbénult a kezem mozgatóidege. Nem az érző, a mozgató, én nem tudtam, hogy ez két különböző dolog, mert ha a tűz megéget azt érzem, de mozgatni nem tudom a mutatóujjamat és a hüvelykujjamat.  És én világéletemben, ha csak lehetett, szabadon beszéltem. És ha valami fontos levelet írtam – erre vannak tanúk –, még akkor is megírtam. Mert én ugyan primitív ember vagyok, én csak négy akkori elemit jártam és négy akkori polgárit – ez egy kicsit jobb volt akkor, komolyabban vették. A gyerek legalább megtanult írni, olvasni, és nem örök újítás, hogy minden évben más a rendje stb. És én megmondom Önöknek azt is, most már meg merem mondani, hogy én olyan társaságban ültem le egyszer, ahol biztos volt, hogy az én mániám nem érvényesül. Nem tudom, hány ember volt, és kijelentem, és kijelentem, a főtitkár jelenlétében is, hogy ő nem felel azért, amit én itt most mondok. Mert én félreértésben voltam. Félreértésben voltam. Mert olyan könnyelműséget vállalt el, hogy – és én kértem, hogy mivel én nem csak a magam nevében beszélek, engem kötelez egy rend és egy fegyelem. Mert ha három embert mutat egy karikatúra, amelyik azt jelenti, hogy a Párt most nincs orientálva, akkor van egy figura. Háromfelé néz a tagság. Van egy középső figura is. Hát akkor ő azt hiszi, hogy mind a három hivatalosan beszél. Ez az én felelősségem.  Én nem bánom, Önök akármit mondanak ezután, és akármit mondanak, mert engem nyugodtan agyonlőhet bárki, mert én most már ennek a felelősségnek a tudatában voltam, hogy én megnevezni senkit sem fogok. Senkit nem fogok, kivéve azt, akit Önök titkos szavazással megválasztanak. (És sok vizet kérek, mert ideges vagyok.)  Az én bajom nemcsak az, hogy nagyon sok fiatal és laikus azt mondja, hogy miféle beteg ez, aki lábon jár? Önök azt hiszik, mindnyájan tudják, bocsánat, nem mindnyájan tudják, akik KB-tagok maradtak azóta, amióta én a műtét előtt beszélni szoktam, és utána. Az orvos azt mondja, az a bajom, hogy én örökké az én felelősségemre gondolok, hisz ebben van egy ilyen – most már az Ön megválasztása titkos szavazással, tehát Ön nem köteles megnevezni senkit, aki részt vett egy olyan beszélgetésben, amin az összes, nem tudom pontosan, hány ember volt, akik folyton azt mondták, hogy tényleg, maga az elnöke a pártnak, akkor folyton azon harsognak, hogy nem tud megszólalni. Miért nem tud megszólalni, maga az elnöke!  Én tudom, én azt kértem – mert ehhez mindenkinek joga van, minden interjúkészítőnek –, hogyha nem teszik meg előre írásban a kérdést, és az nem ért egyet azzal, akkor visszautasíthatja, hogy nem adok interjút. A másik pedig az, hogy dokumentálni kell az új magyar felfogás szerint. Én most más vagyok, mint régen voltam. Már a betegségem miatt is, mert én azon forgatom éjjel–nappal a fejemet, hogy olyan választ adjak, ami félreérthetetlenül ott kellett hogy legyen mondjuk a Péter elvtárs, a Grósz elvtárs szignója, illetve aki célozva érzi magát, mert nagyon nehéz ezt megkerülni. Nem tudok, bizonyos embert, akinek én felelős vagyok, felmenteni a felelősség alól, azt meg kell mondani." };
+
+
+    if (document.querySelector("#tar").checked == true) { document.querySelector("#textExamples").value = "A sofőr értette a dolgát, úgy állt meg, mintha nekiment volna valaminek, kicsit megfarolt közben, Mikos pedig kiesett az ajtón. Éppen a lépcsőn állt, dohányzott, le is szállhatott volna, de nem így. Kihűlt szemek meredtek rá a mocskos üvegen keresztül, a romos jármű pedig tovább iparkodott azzal a néhány emberrel, neki pedig fel kellett állnia a földről. Ha nagyon akarja, utolérte volna őket, jó futó volt, de minek? Később látta, hogy nem messze újra megáll a busz, fekete alakok, volt útitársai másznak ki belőle, mint a bogarak, majd el is tűnnek hamar, de hogy hová, az rejtély maradt, hiába erőltette a szemét, semmit nem látott, csak a nap vakította. Néhány roggyant házféle rémlett szétszórtan, szinte a földbe süppedve, lehetett öt is vagy hat, pár girhes fa, bokor, kútágas. Távolabb semmi. Megfordult, arra sem. Semerre. Mint egy asztal. Úgy látszott, azok ott integetnek egymásnak, integetett ő is, de oda se figyeltek. Hálátlan népség, gondolta, pedig már majdnem megtanultak kártyázni. Megtörölte a homlokát a pólója aljával, égetett a nap, és árnyék sehol. Férgek, dünnyögte magában, bár volt némi lelkiismeret-furdalása, pénzt nyert tőlük, de hát ilyen a játék. Viszont ők kezdték, nem voltak ki, mert a kacskakezű nem játszott, akkor szóltak neki, hogyha van kedve, ő meg beszállt, azzal is telik az idő. Póló volt rajta, cipő, nadrág, aki ért hozzá, az tudja, hogy ilyen rongyban nehéz megjátszani egy sima, mezítlábas ultit, ha például hetest nem osztanak, de azért meg lehet oldani. Az elején szoktatta őket a nyeréshez, később látta, hogy figyelni sem kell nagyon, faltól falig ér az agyuk, ittak is közben, lármáztak, majd ahogy ő nyerni kezdett, egyre nagyobb lett a csend. Elöl játszottak, a sofőr fél szemmel figyelte a játékot, és egyszer azt találta mondani, hogy valaki csal, a makk tízes már kiment. Mikos akkor lassan felállt, éppen ő dobta a makk tízest, és azt mondta, motozzák meg, dobja be mindenki, ami a kezében van, és ha két lap lesz benne, akkor motozzanak meg mindenkit. Utána döntsék el, ki vezeti tovább a buszt, mert a sofőrnek erre bedagadt szemmel nem lesz érkezése, neki meg nincs jogosítványa. A többiek csak sunyítottak, de a kacskakezű is bizonygatni kezdte, hogy a makk tízes már szerinte is kiment, a sofőr pedig azt mondta, ő nem azért, neki mindegy, nem akar ő beleszólni, csak szórakozásból figyeli az egészet, az is lehet, hogy rosszul látta. Jó, dobjuk be, mondta váratlanul egy kis idétlen, feketébe öltözött alak, akit Murcinak szólítottak a többiek, nem kell itt cirkuszt csinálni, de mégiscsak borzasztó, hogy itt senki nem nyer, csak Mikos. A fiatalember azt felelte, hogy ennek az lehet az oka, hogy nem tudnak játszani. Gondolkozni kell, mondta, kombinálni, majd mindjárt elmagyarázza a lényeget, de ezt most tisztázzák, mert ő meg lett gyanúsítva. Kietlen pusztaságon araszolt a busz, piszkos porfelhőt göngyölve maga után, nyitva voltak az ajtók, úgysem esik ki senki, és legalább mozog a levegő. Két tízes volt. Makkból. Aztán egy zöld ászt találtak egy görbe, borotválatlan ember combja alatt az ülésen. Nem igaz, hebegte, nyálas csikk lógott a szája szélén, Kolompár, úgy hívták, valaki oda tette. Na jó, mondta Mikos, nekem ebből elegem van, én nem ismerem magukat, hagyjuk a fenébe az egészet. Méregették egymást, és Mikos tudta, mire gondolnak. Ide figyeljenek, mondta, ha az ember idegenekkel ül le játszani, arra mindig számítani kell, hogy valaki csal. Nyerni akkor is lehet, csak be kell kalkulálni. Az lehet, mondta a kacskakezű, csakhogy itt nincsenek idegenek magát kivéve, a sógoromat meg ismerem, meg ismeri itt mindegyik, mi munkásemberek vagyunk. Maga itt nyert vagy hatszáz forintot. Mikos egyenként végigmérte őket, nem néztek a szemébe, aztán a zsebébe nyúlt, kivett egy marék pénzt, levett belőle egy százast, a többit rátette a kopott bőröndre. Seggfejek, mondta, visszaadtam volna úgyis, én csak játszani ültem le. Osszák el, tette hozzá később, mert nem válaszolt senki, és játsszanak tovább. Egymással. Maguk ismerik egymást, legalábbis azt hiszik. Hátrament, és a nyitott ajtó lépcsőjére állt, hogy rágyújtson. Csend lett. Később valaki elkezdte osztani a pénzt, de sehogy sem volt jó, vita támadt, hol hangos, hol halkabb, és az istennek sem akart vége lenni. Csend, kiáltotta a sofőr, majd hátrafordult, szálljon le, mondta Mikosnak, épp elég bajt csinált. Aztán fékezett. Mikos a húszas éveiben járt, szőke volt, magabiztos és felelőtlen, kicsit kölyökképű, mégis férfias, mint az Oroszlán jegyűek általában. Barna szemével gyanakodva nézett a világra és a világ is őrá, az arcán pedig néhány markánsan gyógyult nyom árulkodott nyugtalan természetéről. Tudomása szerint senkije, semmije nem volt, még a neve is a másé, benti szokás szerint cserélt egy jó baráttal, mielőtt kilépett a szabadságba, csak azt felejtette el tisztázni, hogy Mikos vagy Mikus, így aztán a Mikos mellett döntött, de ez nem is volt érdekes, az igazi neve az igazolványában úgyis benne van, ha valakit érdekel." };
+
+    if (document.querySelector("#toldi").checked == true) { document.querySelector("#textExamples").value = "Ég a napmelegtől a kopár szík sarja, Tikkadt szöcskenyájak legelésznek rajta; Nincs egy árva fűszál a tors közt kelőben, Nincs tenyérnyi zöld hely nagy határ mezőben.    Boglyák hűvösében tíz-tizenkét szolga Hortyog, mintha legjobb rendin menne dolga; Hej, pedig üresen, vagy félig rakottan, Nagy szénás szekerek álldogálnak ottan.  2  Ösztövér kútágas, hórihorgas gémmel Mélyen néz a kútba s benne vizet kémel: Óriás szunyognak képzelné valaki, Mely az öreg földnek vérit most szíja ki.    Válunál az ökrök szomjasan delelnek, Bőgölyök hadával háborúra kelnek: De felült Lackó a béresek nyakára,[2] Nincs, ki vizet merjen hosszu csatornára.  3  Egy, csak egy legény van talpon a vidéken, Meddig a szem ellát puszta földön, égen; Szörnyű vendégoldal reng araszos vállán, Pedig még legénytoll sem pehelyzik állán.    Széles országútra messze, messze bámul, Mintha más mezőkre vágyna e határrul; Azt hinné az ember: élő tilalomfa, Ütve ,általútnál' egy csekély halomba.  4  Szép öcsém, miért állsz ott a nap tüzében? Ládd, a többi horkol boglya hűvösében; Nyelvel a kuvasz is földre hengeredve, A világért sincs most egerészni kedve:    Vagy sohasem láttál olyan forgó szelet, Mint az, aki mindjárt megbirkózik veled, És az útat nyalja sebesen haladva, Mintha füstokádó nagy kémény szaladna?  5  Nem is, nem is azt a forgószelet nézi, Mely a hamvas útat véges-végig méri: Túl a tornyon, melyet porbul rakott a szél, Büszke fegyver csillog, büszke hadsereg kél.    És amint sereg kél szürke por ködéből, Úgy kel a sohajtás a fiú szivéből; Aztán csak néz, csak néz előre hajolva, Mintha szive-lelke a szemében volna.  6  Szép magyar leventék, aranyos vitézek! Jaj be keservesen, jaj be búsan nézlek. Merre, meddig mentek? Harcra? Háborúba? Hírvirágot szedni gyöngyös koszorúba?    Mentek-é tatárra? mentek-é törökre, Nekik jóéjszakát mondani örökre? Hej! ha én is, én is köztetek mehetnék, Szép magyar vitézek, aranyos leventék!  7  Ilyenforma Toldi Miklós gondolatja, Mely sovárgó lelkét mélyen szántogatja; S amint fő magában, amint gondolkodik, Szíve búbánatban összefacsarodik.    Mert vitéz volt apja: György is, álnok bátyja, A királyfi mellett nőtt fel, mint barátja; S míg ő béresekkel gyüjt, kaszál egy sorban, Gőgösen henyél az a királyudvarban.  8  Itt van immár a had, Laczfi nádor hada, Itt kevély hadával Laczfi Endre maga; Délcegen megűli sárga paripáját, Sok nehéz aranyhím terheli ruháját;    És utána nyalka, kolcsagos legények, Tombolván alattok cifra nyergü mének: Nézi Miklós, nézi, s dehogy veszi észbe, Hogy a szeme is fáj az erős nézésbe.  9  Hé, paraszt! melyik út megyen itt Budára? Kérdi Laczfi hetykén, csak amúgy félvállra; De Toldinak a szó szívébe nyilallik, És olyat döbben rá, hogy kivűl is hallik.    Hm, paraszt én! emígy füstölög magában, Hát ki volna úr más széles e határban? Toldi György talán, a rókalelkü bátya, Ki Lajos királynál fenn a tányért váltja?  10  Én paraszt? én? - Amit még e szóhoz gondolt, Toldi Györgyre szörnyü nagy káromkodás volt. Azzal a nehéz fát könnyedén forgatja, Mint csekély botocskát, véginél ragadja; Hosszan, egyenesen tartja félkezével, Mutatván az utat, hol Budára tér el, S mintha vassá volna karja, maga válva, Még csak meg se rezzen a kinyujtott szálfa.  11  Nádorispán látja Toldit a nagy fával, És elámul rajta mind egész hadával. Ember ez magáért Laczfi mond akárki; Nos fiúk, birokra, hadd lássuk, ki áll ki?    Vagy ki tartja úgy fel azt a hitvány rúdat, Amellyel mutatja e suhanc az útat? Szégyen és gyalázat: zúg, morog mindenki, Egy paraszt fiúval még sem áll ki senki!  12  De ki vína bajt az égiháborúval, Szélveszes, zimankós, viharos borúval? És ki vína Isten tüzes haragjával, Hosszu, kacskaringós, sistergő nyilával?    Mert csak az kössön ki Toldival, ha drága S nem megunt előtte Isten szép világa; Jaj-keserves annak, aki jut kezébe, Meghalt anyjának is visszarí ölébe.  13  Elvonúl a hadnép hosszu tömött sorban, Toldiról beszélnek az egész táborban; Mindenik mond néki nyájasat vagy szépet, Mindenik derít rá egy mosolygó képet;    Egyik így szól: Bajtárs! mért ne jősz csatára? Ily legénynek, mint te, ott van ám nagy ára. Másik szánva mondja: Szép öcsém, be nagy kár, Hogy apád paraszt volt s te is az maradtál.  14  Elvonúl a tábor, csillapul morajja: Ezt a szél elhordta, azt a por takarja; Toldi meg nagybúsan hazafelé ballag, Vaskos lábnyomától messze reng a parlag;    Mint komor bikáé, olyan a járása, Mint a barna éjfél, szeme pillantása, Mint a sértett vadkan, fú veszett dühében, Csaknem összeroppan a rúd vas kezében. Így vesződék Miklós, nyers, haragos búban, De van drága dolog otthon Nagyfaluban: Tán kigyúlt a ház is, úgy füstöl a kémény, Nagy kolonc köszönget a kút méla gémén.    A malac-nép sí-rí; borju, bárány béget; Aprómarha-nyáj közt van szörnyű itélet; A fehércseléd közt a beteg se lomha: Holmi kis vásárnál népesebb a konyha." };
+
+
+    if (document.querySelector("#pajzán").checked == true) { document.querySelector("#textExamples").value = "Egy krónikás írja, mit szemével látott: Jókedvében egyszer hét megyét meghágott… Malomkövet zúz szét iszonyú dorongja, Melynek dajna álom szederjes korongja.   I.  Ég a napmelegtől a kopár sík szarja, Redves faszát Toldi biz’ igen vakarja. Mérges bögöly legyek csípik ahol érik, Rücskös segge partján vecsernyéznek délig.  Vályúnál az ökrök szomjasan delelnek, Bokrok tövén böszme béresek tekernek. Zsombékoknak alján, hol füves az árok, Vígan henteregnek cihekedő párok.  Ösztövér kútágas alatt áll egy némber, Vízmerítés helyett jobbágyfaszra kémlel. Nincs egy árva szőrszál a pinája ráncán, Az utolsót tegnap vesztette el kártyán.  Egy, csak egy legény van, aki nem hág: Toldi, Bár hatalmas tökét talicskán kell tolni. Most csak únva nézi hatalmas nagy lőcsét, Egyensúlyoz rajta három köteg rőzsét.  Vele ő az ipart en gros-ban űzi, Reája a nőket tucatjával fűzi. Amint vakaródzik, s a semmibe réved, Lát felé ügetni nyalka hadfi népet.  „Hé paraszt! – melyik út vezet itt Budára?” Kérdi vezetőjük, csak amúgy, félvállra. Válaszul Miklós a gatyájában kutat, S kétöles faszával mutatja az utat.  Megjött Toldi György, a rókalelkű bátya, Visszeres seggén csüng szattyánbőr gatyája. Kókadt kanóc pöcse gubbaszkodva hallgat, Nem kíván az pinát, csupán nyugodalmat.  Hajdanában ő volt a bordélyházak bakja, Most unottan lóg le bús, penészes makkja. Hogyha egyszer mégis ünnep kerekedne, Duhaj jókedvében, hogy egyet tekerne.  Hiába nógatja azt a hitvány tököt, Sunyin és unottan mond az csütörtököt. Rút irígység marja György barátunk szívét, Látja testvéröccse duzzadó kellékét.  Búsan üldögél hát, kocsányon lóg pöcse, Mikor arra sétál taligával öccse. Gondolata támad, mely aljas és kajla: „Majd elintéz téged a királyi szajha!”   II.  Föl van lobogózva ős Budavár tornya, Harmadnapja áll ott bősz lovagi torna: Merthogy Lajos király nemi kedve fogyó, S így elégedetlen a királyi lotyó.  Kihirdette tehát hetedhét országban, Jelentkezzék lovag, ki nejét meghágja. Nehéz a feladat, nem mindenki bírja, És aki nem bírja, annak ásva sírja.  Húsz numerát kíván a királyi némber, Fejét veszti, ki csak tizennyolcig ér el. Akinek húsz után is úgy áll, mint a szálfa, Annak Aranybullát vernek a faszára.  Jött is Csáktornyáról jó bükköny levente, Hajderménkű faszát ürühájjal kente. „Tízig meg sem állok!” – mondja bemenőben, De már három után hozzák lepedőben.  Fogcsikorgatva jött Kont, a kemény örmény, Megcsóválja farkát, s támad nagy légörvény. „Mit nekem – rikolta –, leverem egy szuszra”, Ám az ötödiknél kifogyott a szufla.  Riszálja valagát Johanna, az álnok, Mert ingerlé peckét egy herélt pohárnok. S míg perverz apródja szívja keble halmát, Berúgrat pej lován Vazul, a bősz dalmát.  Dölyfösen kiáltja: „Harmincszor verem be!” Ám csakhamar dobták őt is hűs verembe. Sok vidor lovag jött, felcsigázva kedvök, Ám hiába folyt el drága életnedvök.  Öreg Lajos király, nem tudja, mit tegyen, Búsan kóvályog odafönn a Várhegyen. Mert hét után nem állt egynek sem, hiába, Vonhatták a kastélyt gyászdrapériába.   III.  Mint gímszarvas, kit seggbelőtt az ármány, Fut sötét erdőben szegény Miklós árván. Együgyű lelkében csak egy terv világol: E nemes versenyből győztesen kilábol.  Ösztökéli bátyja, kinek szava lépes: „Most mutasd meg öcsém, dárdád mire képes!” Ravaszul tette ezt, hogy véka alá rejtse Csúf tervét, miszerint öccsét elveszejtse.  Meszes seggét a hold feltolta az égre, Mire Miklós felért Buda alá végre. Öklözi a kaput, rúgja, löki, rázza, Míg csak rá nem förmed a királyi strázsa:  „Hé, paraszt! – süvölti – ez királyi porta! Nem zsellér fattyaknak áll itt hősi torna! Hogyan is nézne ki a királyi udvar, Ha már jobbágy kéne, rücskös fadoronggal!”  „Én, paraszt, én?” – és fogat csikorgat, Hatalmas hímtagja vészjóslóan horgad. Mintha vasból volna ágyékának kincse, Tajtékzó dúvadként csap le a kilincsre.  Lesúlyt hős Botondként, képes volna ölni, Röpköd az ércforgács, támad rés, két ölnyi. Iszonyút rikkantva beugrik a résen, S inal, hogy a nemes harcból le ne késsen.  Mikor a várkertet fürkészőn átszelte, Látta Lajos királyt, épp tökét jegelte. Az aggastyán király reszketegen szóla: „Még senki se került le élve őróla!  Voltam én is egykor délceg, ifjú, nyalka, Most búsan ténfergek, rossz picsákat nyalva!” Vánnyadt tökét rázva keservesen nyögött: „Ha életed kedves, meg ne baszd a dögöt!”  Megköszönte Miklós a király tanácsát, S szétverte faszával a bejárat rácsát. Ezt látja Johanna, s felsóhajt epedőn: „Remélem nem visznek téged is lepedőn!”  Miklósnak dermeszti szívét, mit látott: Előtte a delnő szörnyű luka tátog. Bozontos szőrök közt, mint a mérges kígyó, Vonaglik, tekereg a vérvörös csikló.  Vágyakozva tátog Johanna puncija, Melynek űrmértéke harminchat uncia. A nagy pina elbírt ötvencentis dákót, Elébb Kont hagyott benn egy tollforgós csákót.  Mint jókora dinnye, olyan a két melle, Mint húszakós hordó, akkora a segge. Észrevette, hogy Miklós egy percre megingott, Ezért biztatásul egy öblöset fingott.  Kedves volt Miklós fülének a zene, Elérte az orrát Johannának a szele, Amúgy paraszt módra, megköpte a markát, S benyálazta vele égnek álló farkát.  Nem szívbajos Toldi, legény ő a talpán, Be is veri tüstént nagy husángját nyalkán." }
+
+    if (document.querySelector("#trump").checked == true) { document.querySelector("#textExamples").value = "Friends, delegates, and distinguished guests: I stand before you tonight honored by your support; proud of the extraordinary progress we have made together over the last four years; and brimming with confidence in the bright future we will build for America over the NEXT four years!  As we begin this evening, our thoughts are with the wonderful people who have just come through the wrath of Hurricane Laura. We are working closely with state and local officials in Texas, Louisiana, Arkansas, and Mississippi, sparing no effort to save lives. While the hurricane was fierce, one of the strongest to make landfall in 150 years, the casualties and damage were far less than thought possible only 24 hours ago. This is due to the great work of FEMA, law enforcement, and the individual states. I will be going this weekend. We are one national family, and we will always protect, love and care for each other.  Here tonight are the people who have made my journey possible, and filled my life with so much joy.  For her incredible service to our nation and its children, I want to thank our magnificent First Lady. I also want to thank my amazing daughter Ivanka for that introduction, and to all of my children and grandchildren – I love you more than words can express. I know my brother Robert is looking down on us right now from Heaven. He was a great brother and was very proud of the job we are doing. Let us also take a moment to show our profound appreciation for a man who has always fought by our side, and stood up for our values – a man of deep faith and steadfast conviction: Vice President Mike Pence. Mike is joined by his beloved wife, a teacher and military mom, Karen Pence.  My fellow Americans, tonight, with a heart full of gratitude and boundless optimism, I profoundly accept this nomination for President of the United States.  The Republican Party, the party of Abraham Lincoln, goes forward united, determined, and ready to welcome millions of Democrats, Independents, and anyone who believes in the GREATNESS of America and the righteous heart of the American People.  In a new term as President, we will again build the greatest economy in history – quickly returning to full employment, soaring incomes, and RECORD prosperity! We will DEFEND AMERICA against all threats, and protect America against all dangers. We will LEAD AMERICA into new frontiers of ambition and discovery, and we will reach for new heights of national achievement. We will rekindle new faith in our values, new pride in our history, and a new spirit of unity that can ONLY be realized through love for our country. Because we understand that America is NOT a land cloaked in darkness, America is the torch that enlightens the entire world.  Gathered here at our beautiful and majestic White House – known all over the world as the People's House – we cannot help but marvel at the miracle that is our Great American Story. This has been the home of larger-than-life figures like Teddy Roosevelt and Andrew Jackson who rallied Americans to bold visions of a bigger and brighter future. Within these walls lived tenacious generals like Presidents Grant and Eisenhower who led our soldiers in the cause of freedom. From these grounds, Thomas Jefferson sent Lewis and Clark on a daring expedition to cross a wild and uncharted continent. In the depths of a bloody Civil War, President Abraham Lincoln looked out these very windows upon a half-completed Washington Monument – and asked God, in His Providence, to save our union. Two weeks after Pearl Harbor, Franklin Delano Roosevelt welcomed Winston Churchill, and just inside, they set our people on a course to victory in the Second World War.  In recent months, our nation, and the entire planet, has been struck by a new and powerful invisible enemy. Like those brave Americans before us, we are meeting this challenge. We are delivering lifesaving therapies, and will produce a vaccine BEFORE the end of the year, or maybe even sooner! We will defeat THE VIRUS, end the pandemic, and emerge stronger than ever before.  What united generations past was an unshakable confidence in America's destiny, and an unbreakable faith in the American People. They knew that our country is blessed by God, and has a special purpose in this world. It is that conviction that inspired the formation of our union, our westward expansion, the abolition of slavery, the passage of civil rights, the space program, and the overthrow of fascism, tyranny and communism.  This towering American spirit has prevailed over every challenge, and lifted us to the summit of human endeavor.  And yet, despite all of our greatness as a nation, everything we have achieved is now endangered. This is the most important election in the history of our country. At no time before have voters faced a clearer choice between two parties, two visions, two philosophies, or two agendas.  This election will decide whether we SAVE the American Dream, or whether we allow a socialist agenda to DEMOLISH our cherished destiny." };
+
+    if (document.querySelector("#twain").checked == true) { document.querySelector("#textExamples").value = "Tom! No answer.  Tom!  No answer.  What's gone with that boy, I wonder? You Tom!  No answer.  The old lady pulled her spectacles down and looked over them about the room; then she put them up and looked out under them. She seldom or never looked through them for so small a thing as a boy; they were her state pair, the pride of her heart, and were built for style, not service -- she could have seen through a pair of stove-lids just as well. She looked perplexed for a moment, and then said, not fiercely, but still loud enough for the furniture to hear:  Well, I lay if I get hold of you I'll --  She did not finish, for by this time she was bending down and punching under the bed with the broom, and so she needed breath to punctuate the punches with. She resurrected nothing but the cat.  I never did see the beat of that boy!  She went to the open door and stood in it and looked out among the tomato vines and jimpson weeds that constituted the garden. No Tom. So she lifted up her voice at an angle calculated for distance and shouted:  Y-o-u-u Tom!  There was a slight noise behind her and she turned just in time to seize a small boy by the slack of his roundabout and arrest his flight.  There! I might 'a' thought of that closet. What you been doing in there?  Nothing.  Nothing! Look at your hands. And look at your mouth. What is that truck?  I don't know, aunt.  Well, I know. It's jam -- that's what it is. Forty times I've said if you didn't let that jam alone I'd skin you. Hand me that switch.  The switch hovered in the air -- the peril was desperate --  My! Look behind you, aunt!  The old lady whirled round, and snatched her skirts out of danger. The lad fled on the instant, scrambled up the high board-fence, and disappeared over it.  His aunt Polly stood surprised a moment, and then broke into a gentle laugh.  Hang the boy, can't I never learn anything? Ain't he played me tricks enough like that for me to be looking out for him by this time? But old fools is the biggest fools there is. Can't learn an old dog new tricks, as the saying is. But my goodness, he never plays them alike, two days, and how is a body to know what's coming? He 'pears to know just how long he can torment me before I get my dander up, and he knows if he can make out to put me off for a minute or make me laugh, it's all down again and I can't hit him a lick. I ain't doing my duty by that boy, and that's the Lord's truth, goodness knows. Spare the rod and spile the child, as the Good Book says. I'm a laying up sin and suffering for us both, I know. He's full of the Old Scratch, but laws-a-me! he's my own dead sister's boy, poor thing, and I ain't got the heart to lash him, somehow. Every time I let him off, my conscience does hurt me so, and every time I hit him my old heart most breaks. Well-a-well, man that is born of woman is of few days and full of trouble, as the Scripture says, and I reckon it's so. He'll play hookey this evening [*], and I'll just be obleeged to make him work, to-morrow, to punish him. It's mighty hard to make him work Saturdays, when all the boys is having holiday, but he hates work more than he hates anything else, and I've got to do some of my duty by him, or I'll be the ruination of the child. Tom did play hookey, and he had a very good time. He got back home barely in season to help Jim, the small colored boy, saw next-day's wood and split the kindlings before supper -- at least he was there in time to tell his adventures to Jim while Jim did three-fourths of the work. Tom's younger brother (or rather half-brother) Sid was already through with his part of the work (picking up chips), for he was a quiet boy, and had no adventurous, troublesome ways.  While Tom was eating his supper, and stealing sugar as opportunity offered, Aunt Polly asked him questions that were full of guile, and very deep -- for she wanted to trap him into damaging revealments. Like many other simple-hearted souls, it was her pet vanity to believe she was endowed with a talent for dark and mysterious diplomacy, and she loved to contemplate her most transparent devices as marvels of low cunning. Said she:  Tom, it was middling warm in school, warn't it?  Yes'm.  Powerful warm, warn't it?  Yes'm.  Didn't you want to go in a-swimming, Tom A bit of a scare shot through Tom -- a touch of uncomfortable suspicion. He searched Aunt Polly's face, but it told him nothing. So he said:  No'm -- well, not very much.  The old lady reached out her hand and felt Tom's shirt, and said: But you ain't too warm now, though. And it flattered her to reflect that she had discovered that the shirt was dry without anybody knowing that that was what she had in her mind. But in spite of her, Tom knew where the wind lay, now. So he forestalled what might be the next move:  Some of us pumped on our heads -- mine's damp yet. See?  Aunt Polly was vexed to think she had overlooked that bit of circumstantial evidence, and missed a trick. Then she had a new inspiration:" };
+
+    if (document.querySelector("#Stadium").checked == true) { document.querySelector("#textExamples").value = "Magyarország lakosa sok nyelv, sok vallású. Türödelem türödelmet szül. És ha azért az Austriai közbirodalom Fejedelme mély bölcseségében nem tehet jobbat, mint egy vallást sem pártolni más vallás el- nyomására, helyesszinünek (plausible) látszik azon türödelem is, melynél fogva az Austriai birodalom különféle népeinek nyelvei és sajátsági szabad gyakorolhatásában háboritlanul meghagyassanak. Elérthet azért, ha nem-magyar különösen nem kedveli is a magyar szót, s annak a többi felett elsséget engedni nem akar. De hogy Magyar szegzi magát magyar szó ellen, olyasrul ugy hiszem emberek közt példa még nem volt. Csalárd, hazaáruló minden idben, minden nemzetek közt létezett; de olyast, ki minden nemzeti sajátságibul (inként, s maga vetkeztette volna ki magát, ki odahagyván az anyanyelvet, felejtvén mindent, mi becsületes embert hónához köt, maga magát törülte ki hazafiai sorábul, s saját kezeivel nyomta legyen korcsság czimerét homlokára, — olyast, járd be laktekénk mind négy vidékit bár, csak Hunnia földje tudott teremteni. Nézd a Görögöt. Századokig görbedett a Török irgalmatlan járma alatt. Veszni látá szép hazáját, pusztulni minden vagyonát. A mi kínt tudatlanság s vak fanatismus békói halandóval csak éreztetni képesek : azt mind szenvedte ö; és súlyos századok alig haladó ideje alatt mind mélyebl^ s mélyebbre sü- lyesztetvén már-már oda jutott, hol mindentül, még becsülettül: is megfosztva a mindemiapinak szemében megvetési, a lelkesb ember Ítéletében pedig csak mély szánakozási tárgygyá lön. De nemzetiségét, anyaföldje , anyanyelve bálványzását semmi nem tudta meggyzni, megsemmisítni; és ím minden hi- báival, minden elfogultságival feltámada megint és él. Adja a Mindenható, hogy a még most virágokkal körülfont s ekép láthatlan uj lánczai ne váljanak va- laha szorosb és feloldhatlanabb kötelékekké, *) mint milyen a vad Ozmán járma vala egykor ! Nézzed az Olaszt, nézzed a Lengyelt, öröki vi- szálkodások miatt egymás közt megszakadván elveszték önállóságukat. Es mégis mindkettt egy nemzeti szellem, egy nyelv egyesíti, és nem égett még hamuvá bennök azon szent tüz, mely ha gondosan ápoltatik, századok viszontagságait túlélni képes. Tekintsed az emberiség minden felekezetit régi idben és most : tapasztalni fogod, hogy legszámosb nemzetiségek id és véletlen, s idegenekkeli súrlódások által végre hatalmasb nemzetek fénykörében (nimbus) *) A lelkes szerz nem alaptalanul a felett látszik aggódni , hogy az oly kedvez színben mutatkozó orosz pártfogás és befolyás, mely csupán a vallásrokonság szine alatt gyakoroltatik , — idvel még szo- rosb és közvetlenebb leend, s a görög nemzetiségnek oly alkotmányos kifejldését , mely az Orosztól való függést idvel megsemmisítené, — s az oroszországi többi szláv népekkel az alkotmányos eszméket megkedveltetné , — lehetlng gátolni fogja. T. J. elolvadtak, s hogy csak kevés nemzet emelkedett fel azon magas lépcsre, mely az emberiség kifejlettségének fokát képezi. A nemzetek egybekeveredése példáival viszont, s azon elfajzások s elkorcsulásokkal, melyek nyomorúság! közt oly sok nép hervadoz, emberi évrajzink minden lapjain, minden soraiban ta- lálkozunk. De hogy meggondolva, tanácskozva maga döfte legyen valaha agy nemzet is a megsennnítö vasat saját szivén keresztül, ily hír, ily herostrati tett csak Árpád maradékira jusson? Ha magyarság maga magátul olvadoz, és a külföld nagyobb értelmi súlya, természetébül, sajátságibul a helyett, hogy ezeket nemesítné, tökéletesítné, mindinkább csak emészt és ró, mily nagy szerencsétlenség már ez is; s nem a boszús ég átka-e, hogy utolsó kincsünk vesztét, szülgyilkosokként még mi magunk sürgessük, mi segítsük elé leginkább? Mily elfogultság, mily mánia hajthat minket ily természetelleni tettre? Hiszszük tán, jobban megbecsül az idegen, ha honunk iránt részvétlenséget, hidegséget mutatunk, és nemzetünkön tapodunk? hiszszük, a hazához hivtelent, a honárulót ö magasbra emelendi? O nem! Legyünk meggyzdve, csalni akarnak íizok, s ennenes czéluk elérésére használni, kik olfajulásunks korcsosodásunkat dicsérik. Valamint mi nem tudunk romlatlan fiatalsági létünkben becsülni olyast, ki hazájának nem hü fia, ugy a romlatlan itélö minket se tud valóban becsülni, ha honunkat nem tiszteljük; fiatal romlatlan létünkben, mondom; most hány sava- nyui és avasul el mind azon törvényi sophismák és szokási enségek rutságitul, melyeket éltünk haladtával mindennap látunk és tapasztalunk köröttünk, s melyeknek mérges leheletétül a legnagyobb óvás is alig menthet meg. A hazai rendek barátságos összetartás helyett, melynél fogva egyik trné a másik hibáit s közös ervel vívnának elre, visszavonulva s egymásnak hátat fordítva, ellenséges indulattal viseltetnek egymás iránt. A külfóldiesen kimivéltebb neveti az itthon fel- nttnek általános ügyetlen vagy bárdolatlan magaviseletét. S van is, nem tagadhatni, honosink kiváltságolt rendéi közt oly nagyszámú faragatlan, vagy in- kább roszul faragott társ, vagy jobban mondva lény — mert soha társnak ilyest jó nevelés nem kivánna" };
+
+    if (document.querySelector("#Döbling").checked == true) { document.querySelector("#textExamples").value = "Ennek oka azonban sokkal mélyebben fekszik. És ugyanis az okosabbak átlátták, hogy oly alacsony oly mirigyes tájakon, mint az alföld, annyi zsiros hal és zsiros lé-élvezet közt, mint a mennyi ott kínálkozik, az embernek mindenek eltt hatalmas gyomorra és heroicus hasra volna szüksége, — ezeket pedig csak ugy lehetne ersítni, ha ugy szólván bölcstl kezdetnék az eféle idomítás; — honnét aztán igaz, oly kurta üngíí legények is találkoznak a magyar síkokon, kik D'hauret, porosz és török-féle tekin- télyeket könnyen csizmájához kenné, — kik hosszú s tán három üng, jó kibéllelt waffenrock és bséges schawlok nélkül töltenének csak egy éjt a csilagos boltozat alatt Berettyó partján, és laknának csak egyszer ugyan csak jól zsiros tokkal, túros lepénynyel etc. és alkalmasint gyalog alig mennének ki többé a határból. S különös, o, — 248 - liidi'g láz rsak ritkán hántju a Icfrí'nj'cket, niidó'n a leánvzók, kik c'l(j<i,' vásznat fonlítnak liosszú üngjeikre, nao-y líiértékln'n ki vannak téve c nvav;ilyának. Szint igy van a paprikával. Hány noy nevezett >fein Sclimeker,« ki most már nem ebédel, de »diniroz,« mosolyra vonja arczát azon ostoba magyarokon, kik ugy megpaprikáznak mindent, mikép okos (?!) ember ilyféle éo-fti',' >mise,li-mascht« nem is vehet magához. A bnnda hasonlólag és gnba, melyet a német >zottel- pelz«-nek nevez, nem ritkán gúny tárgya, ha t. i. az nyár közepette is mindenütt elkíséri gazdáját. Ki nem emlékezik már több idö óta kimnlt igen becsületes és jó szivíí St. grófra? Ez sajnálva megjegyzé, mennyire elpnhítná magát a magyar, mert bizonyos alka- lomkor a két jeles eszíí testvér a báró M. öt nyár közepette meglátogatá és a bundákat is elhozta magával ; — St. már régóta odál)b állt, a két báró pedig még most is áll, — és pedig mert Magyarországban sok helyütt a leg- forróbb nyái'i napot hideg éj váltja fel, és ekép a bnn- <l;itlan könnyen megfázik és pórul jár. Hány pásztor ember takarja magát be nyáron luindával. mert igv okos- kodik: ha kitiltja a bunda a hideget, miért ne zárná ki a meleget is ? — És ez nem oly buta nézet, -- meh-rül azonban a puhafajtájú egyén nem ítélhet, kín könnyen kiüt a veríték, de csak oly legényre nézve alkalmas pazaran, ki a kemény speciesbl való esnem izzad meg mindjárt, mint a nyárson forgatott pecsenye. Zsidóvárra cseh gyarmat települt, ^íost martán beszokott. De kezdetkor valami elsárgult tagja kivel vélet- lenül találkoztam, ersen panaszkodott az ottani el ima ellen. >]\rind megbetegedtünk, és én többé semmi árért oda vissza nem megyek de sietek Csaszlauba.« Késbb bizonyos odavah'ival jöttem össze. >Hát mit nu'ívelnek estdi uraimék?* — Nagy része bet^g. kisebb - 249 — része kihalt ; pedig eleget intettük, de hiába, ó'k mint annyival okosabbak, minket csak lekaczagtak, ha paprikával sa- turáltuk a halászlét, vagy a zsiros gulyás húst, mit ok >gol- lasch«-nak neveznek; éskivált az szolgált nékiek nagy mulatságra, hogy mig mi naplemente után bundát öltöttünk, k forró nap után egy üngben élvezték az esti hst. Most rajtunk volna a sor »ó'ket lekaczagni«, de ezt nem tesz- szük, mert valóban tiszteletre méltó, vajmi munkás faj és nem engedi magát könnyen beolvasztatni.* Locális szokásokon nem kell könnyelmen kaczagni, mi kivált a németnek egyik fö tulajdona, és azért egy nép sem szenvedheti. — mert akkor könnyen megeshetik, hogy az, ki kaczag, elvégre maga kaczagtatik le az egész világ által, és azon cathegoriába esik, mint amaz ezredes, ki haragjában bizonyos »antrag«-gal, mely soha nem acceptál tátik, illette 3000 egyénbl álló ezredét, — midn ez Jgegen autraggal« válaszolt, honnét aztán applicatióban a méltóságos Óbester lír számára terjedelmesb és elágzóbb nyelvmunkai tér nyilt volna meg. Némi locális divatok azonban oly annyira viselik az anomália bélyegét, miszerint az ember igen hajlajidó volna azokban némi > animál í féle symptomákat találni, noha mint érintem, nem kell ilyesekröl szelesen itélni, és tüs- tént egy bécsi Hansjörgelvagy Saphir-féle witz-et kitojni, ha az ember azok okát rögtön megmagyarázni nem képes. így például soha nem tudtam azon rejtélynek kulcsát feltalálni, hogy vajon miért épülnek a házak Cataniában, s pedig legsolidabb matériáiéból oly kitnen magasra. Cataniábau, az Etna tövében, a földindulások ezen privilegiált fészkében ! Bizonyosan van jó oka, — csakhogy én nem birtam azt soha is kikutatni, mert az én felfogásom szerint legalább, földindulásnak nagyon kitett helyen, a magas képletnél tán czélirányosb volna valami vásári fabódé féle készítmény, vagy kaliczka modorú vasház, mely be nem dííl, és ha valami különüs nagy ingás- nál cl is dülnc, ijedséggel és egy bukfenczczel fizetné meg az ember ilyféle alkalmatlan phoenomenek egész diját, — vagy ennél tán még czél irányosb volna egy Diogenes mintájú hordó, melyben ha »fractus illabatur orbis«, legfeljebb nagy kényelemmel odább gurulna a benn lakó zsellér.Es épen ilyféle csuda lenne az is, ha a Tisza és Körösök völgyében mindig csak szélesednének az építmények és" };
+
+
+
+
+    if (document.querySelector("#varázsló").checked == true) { document.querySelector("#textExamples").value = "A varázsló, egy harmincon aluli férfi, akinek arca már egészen szomorú, ráncos és kisgyerekes volt a sok ópiumtól, cigarettától és csóktól - hamvazószerdán kora hajnalban haldoklott. Bálteremben vagy lakomán, nem tudom. Egy kis fülkében ült szegény egyedül. Kétség nem fért hozzá, hogy mire a nap felkel, már ki lesz nyújtózkodva, s maga is jól látta ezt. Nem volt szomorú miatta.  Megpróbált persze mindenféle varázslatokat utoljára - még saját magán is, ami már a legnagyobb kockázat, de nem sikerült semmi, és hamvazószerda hajnalra, csúnya nagy kudarccal, be kellett fejeznie az életét. Hanyatt dőlt két székre az asztal mellett, és behunyta a szemeit.  Az apja, egy kedves, erős, széles vállú ember jött legelőször. Alig ősz még és kemény járású.  - Megmondtam, hogy az ópiummal baj lesz. Hogy tönkre fog tenni. Nézz meg engem, ötvenéves vagyok. Másképp éltem én. Egészen másképp.  Az anyja, egy sápadt, régen halott asszony, zsebkendővel takarta el az arcát, és zokogva magához ölelte a varázsló fejét.  - Miért nem akartál, fiam, rendesen élni! Megházasodni. Most úgy pusztulsz el, mint valami kóbor kutya. A feleséged befogná a szemeidet! Én, látod, nem tehetem, mert halott vagyok. Hol van most az a sok nő, akik szerettek téged?  - Én nem szerettem egyiküket sem - mondta a varázsló.  - Különben is csak az kellene még, hogy nők előtt haldokoljak.  A varázsló nagyanyja, egy főkötős, pápaszemes öregasszony, lassan topogott arra. Kerekes gombolyítógépét hozta a kezében, és a másikban a kis kanári madarát kalitkában. A zsebében kötés volt, egy harisnya, amely a varázsló számára készült.  - Én foglak megfürdetni, és még ma kész lesz az új harisnya, amelyben el fognak temetni.  A nagymama nagyon szerette a varázslót. Talán legjobban minden unokái közt. Kétségbeesetten sírt, úgyhogy le kellett venni a pápaszemét is. De nem maradhatott ottan, mert a sok nő tolongott a varázsló körül, akik legújabban érkeztek.  - A síron túl még látjuk egymást - mondta a nagymama, hóna alá vette a gombolyítógépét, a kanárikalitkát, és imádkozva elment.  A nők lábujjhegyen járták körül a haldokló varázslót, jól megnézték, és akinek eszébe jutott, mondott is valamit rá. Például:  - Szegénynek nemsokára üvegesek lesznek a kék szemei.  - És a finom, nőies, vékony kezeiről le fognak esni a szép körmei.  - Bocsánat - mondta a harmadik -, neki egész életében barna szemei voltak.  - És széles, férfias, nagy izmos keze!  - Mily tüzes erővel tudott ölelni.  - Tévedés, mindig gyöngéden, finoman ölelt, mint egy asszony.  - Olyan biztos és kényelmes volt az ölében, hogy akár napokig elüldögéltem volna benne.  - Sohase ültetett engem az ölébe. Ő ült mindig az én ölembe.  - Egyenes, kevés szavú ember volt, úgy tudott haragudni, hogy jaj annak, aki a kezébe kerül.  - Nagysád téved, kedves és szíves beszédű férfi volt ő, és soha hangosan beszélni nem hallottam.  Így beszélgettek a nők a haldokló varázslóról, aszerint, amint ki-ki előtt másnak mutatkozott, és ki-kivel másképpen és másképpen bánt.  - Menjenek innen - mondta a varázsló. - Legyenek szívesek elmenni, az öreg arcotok kellemetlenül hat rám, és különben a koporsómat hozzák.  Valóban hozták. Szép érckoporsó volt. A varázsló apja rendelte kétszázhuszonöt forintért; a gavalléria a családban volt.  - Sok pénzemben van a fiam - mondta a temetkezési vállalkozónak. - Mégis megreszkíroztam, hadd legyen szép temetése.  A varázsló most hamarosan megfésülködött kis kézi tükrében, elrendezte az ajkait - gúnyosan mosolygóra, amely pózban különösen tetszelgett magának, azután elküldött egy kisfiút tiszta gallérért és kézelőért. Addig is átvizsgálta a szemfedőt, s lefejtette róla zsebkésével az ezüst csipkedíszt, miután bántóan ízléstelennek találta. Ezalatt megérkezett a tiszta gallér és kézelő. Kicserélte őket a régivel, sietősen beült a koporsóba, és fütyörészve le akart dőlni a fekete selyemvánkosra. E pillanatban kis kendőben, futva, kipirulva és könnyezve egy leány érkezett.  A varázsló megtámaszkodott a könyökére, mert eszébe jutott, hogy ez volt az egyetlen leány, akit életében szeretett. Csodálkozott kissé, mert a dolog régen volt, öt-hat éve - és a leány semmit se változott.  Rövid szoknyát viselt, fiatal, édes arca meg nem öregedett, mint a többi nőé.  - Végre egy fiatal nő - köszöntötte a leányt a varázsló. - Kellemesen lep meg, hogy halálom előtt még egy szép fiatal lányt láthatok.  A leány nem utálta meg őt e kellemetlen és alakoskodó megjegyzésért, lehajolt, megölelte, és kérlelni kezdte, hogy keljen föl.  - Das ewig weibliche zieht uns!... - mondta a varázsló fanyar mosollyal, bár nem tudott jól németül, és a Faust-ot eredetiben sohase olvasta. De mégis ellágyult, és megcsókolta a leányt a száján.  - No most, fiam, menj - mondta azután -, elég ennyi nekem. Menj, fiatal vagy és szép, és akadnak igen derék férfiak ott künn. - Azzal hanyatt feküdt, és mosolyogva, gyönyörködve nézte a leányka könnyes arcát és édes aranyszemeit. Kis idő múlva újra szólott.  - Belátom, hogy az ópium és a sok rossz csók hel" };
+
+
+    if (document.querySelector("#Dénes").checked == true) { document.querySelector("#textExamples").value = "Egy Tolna megyei faluban, Madocsán született Dénes Imre. Apja és anyja, akiknek egyetlen gyermeke volt, s akik egyébként második unokatestvérek voltak, valami szokatlan és a falubeliek szemében majdnem nevetséges gyengédséggel becézték a fiút. Arra tanították, hogy legyen büszke, mert ő különb, mint a többi gyerek. Úgy járatták, mint valami kis grófot. Két pár lakkos csizmája is volt a kölyöknek. Emiatt és hasonló dolgok miatt a faluban sokan haragudtak az apjára, aki egyébként nagyon szerény, derék ember volt, s akin soha, senki se vette volna észre, hogy gőgös és büszke. Bizony eltitkolta őkegyelme, de a fiát már úgy nevelte, hogy az mutassa ki szíve szerint, helyesebben az apja szíve szerint.  Nagy volt hát az öröm mindenfelé, amikor Dénes András bajba jutott. Jótállt a sógoráért, a sógor pedig egy éjjel megfázott, és hat hét alatt meghalt hektikában. Andrásnak fizetni kellett. Sokat, háromezer koronát.  Nagyon el volt keseredve emiatt. Búsan üldögélt a tornácon, és törte a fejét naphosszat, hogy hogyan mentse meg kis földjét a betáblázástól. Néha már úgy érezte, hogy mindjárt veszi a baltát, leüti az asszonyt, gyereket, és felköti saját magát. Mérhetetlen düh emésztette, látta az embereken, hogy örülnek a kárán, és egyébként is elviselhetetlen szégyennek tartotta, hogy teher legyen az ő földjén, aki addig mindig a falu jó gazdái közé számított.  Semmi reménye se volt rá, hogy hamarosan kifizethesse azt az ezerötszáz forintot.  Végre is elhatározta, hogy Amerikába megy az Imre fiával. Ott maradnak, míg együtt össze nem keresik a pénzt, hogy újra nyugodtan, büszkén a szemébe nézhessenek mindenkinek.  Egy hideg márciusi estén csendesen elintézte a család a dolgot. Az asszony otthon marad, napszámosokkal végezteti a szőlőmunkát, a földeket pedig árendába adják. És Dénes András a fiával egy szép áprilisi reggelen elindult a nagy útra, Fiume felé. Angolul egy szót sem tudtak ugyan, de volt már helyük. A faluból többen dolgoztak kinn. Mind Carnegie-nél, az acélkirálynál. Oda igyekeztek ők is.  Jókedvűen tűrték az utazás fáradalmait. András komorsága pár nap alatt egészen megszűnt. Nem látta a falubelieket, megszűnt a legnagyobb baja: a keserves, tehetetlen düh. Még tréfázott is a fiával:  - Ne búsulj, Imre. Hazagyüvünk, kifizetünk mindent, mégis csak te leszel az első legény a faluban. A leggazdagabb lányt fogod feleségül kapni! - Tréfás hangon mondta, de komolyan gondolta nagyon is.  Imre, mint mindig, ha a házasságról beszéltek, mélyen elpirult, és szabadkozott: - Ugyan! Ne beszéljen, apám!  Vallásos és szemérmes fiú volt. Nem tudott káromkodni, és nem ízlett neki a bor. Vasárnap délutánonként a kocsmában csak nézte a táncot, de soha nem állt be a táncolók közé. Pedig nagyon hítták a lányok és nem egyszer. Tetszett nekik az Imre. A fiú azonban konokul egy helyben maradt.  - Nem táncolok én!  És magában megvetette és lenézte ezeket a lányokat, akik nem röstellik még hívni is, amikor láthatják, hogy úgyse akar. Úgy érezte, hogy nem méltó hozzá az efféle fehérnép. Ha néha, téli éjszakákon, amikor valami különös érzés felébresztette álmából, és a melegre fűtött szoba tikkasztó, párás levegőjében kellemes és gyötrő fulladást érzett, egészen másféle nőkre gondolt. Finom, aranyszőke, fehér bőrű teremtésekre, olyanfélékre, mint a szomszéd falubeli báró felesége és annak a húga, akik minden héten áthajtattak a falun, mikor bevásárolni mentek a városba.  Egyébként az egész utazás alatt nem sokat beszélgettek. Reggel megmosdottak, megreggeliztek. Egy helyben ültek naphosszat, feltett kalappal, a fedélzet valamelyik padján, és nézték a tengert. Az apa olykor beszélgetésbe elegyedett a honfitársakkal, akik szép számmal voltak a harmadik osztályon, de Imre alig szólt egy hangot is. A fásultságnak és megelégedettségnek valami különös érzése töltötte el, úgyhogy nem kívánt se beszélni, se semmit csinálni.  2  Végre megérkeztek. Az óriási kikötő, az ezernyi hajó, a felhőkarcolók, mint egy szédítő forgatag táncoltak el a szemeik előtt, anélkül hogy valami mélyebb benyomást tettek volna rájuk. Valóban, ha meggondoljuk: az újonnan látott dolgok csak arra az emberre élnek és hatnak igazán, akinek ideje és kedve van rá, hogy a régi benyomásaival összehasonlítsa, összeméricskélje az újakat. A szegény magyar parasztoknak nem volt érkezésük erre, az ezernyi gond és aggódás megfosztotta őket ettől az élvezettől. Megjegyzéseket és örömkiáltásokat nem lehetett hallani. Csupa komor, szorongó ember kászolódott, gomolygott a hidakon, a lépcsőkön, a csarnokokban, az irodákban és a bizottságok előtt, a különböző ügynökök vezetése alatt.  Három nap múlva már volt munkájuk. Pittsburgba helyezték el őket. Az apa nappal dolgozott egy építkezésnél, a fiú éjszaka az acélgyárban. Így kevesebbe került a burdosházban a lakás, ugyanabban az ágyban alhattak mind a ketten. Türelemmel, panasz nélkül húzták az igát. Hamarosan kiderült azonban, hogy a fizetés nem olyan nagy, amilyent az amerikaiak a hazaírt dicsekedő leveleikben emlegettek. Tehát megállap" };
+
+
+    if (document.querySelector("#Mariska").checked == true) { document.querySelector("#textExamples").value = "A Mariska, akiről itt szó van, az én nagyanyám.  Harminc álló esztendeje már, hogy nem látta az anyját Mariska. Pedig vasúton nincs messze a szülővárosa, ahol Májkó - így híjjuk a mi dédanyánkat - lakik. Csakhogy kétféle vonaton kell menni, és egyszer háromnegyed óráig kocsin, hogy odaérjen az ember, s ez okból Mariska - sokszor emlegette mentegetőzve - nem ment el annyi idő óta. Holott igazában jó leány. Névnapokon el nem feledte:  - Ejnye, holnap van édesanyám névnapja; majd gratulálok neki. Szegény, mit csinálhat?!...  De az esztendő egyéb részeiben ritkán esett szó Májkóról. Néha hírek jöttek, hogy kívánja a bort és mindennemű szeszt, sőt a rumot is kiszörpöli, ha a kezébe kerül! Ilyenkor Mariska hevesen tiltakozott:  - Az nem lehet, az én édesanyám sohase szerette a bort, soha, mióta az eszemet tudom. Mikor megesküdtem boldogult férjemmel, Pintérrel, akkor is csak nehezen ivott ki egy fél pohár bort, amikor koccintani kellett. Nekem beszélhetnek, nem igaz. Különben is, majd én elmegyek, és utánanézek.  Hiába magyaráztam, hogy aki kilencvenöt éves, hát kívánhatja a bort, és joggal, mert a szíve immár fáradt, lassúdik - Mariska idegesen közbevágott:  - Öreg, de egészséges; nézz meg engem, hetvenéves vagyok. Van valami bajom? Köll nekem bor? Megiszom az én kis kávém reggel, délután, és mást ugyan nem is iszok én egész nap.  Ami az elutazást illeti, semmi se lett belőle. Az unokáknak gyermekeik születtek, és Mariska nagyanyám egy nyáron dédanyává lépett elő. Mint dédanya ápolta sorra a gyermekágyas asszonyokat.  Ezen a nyáron már magam is kíváncsi lettem Májkóra, és fáradozásomnak vége az lett, hogy elment ez a levél:  Kedves mama, én, ha időm engedi, jövő héten elmegyek. Itthon mindenki egészséges. Margitéknál fiú lett. Tisztelteti és csókolja szerető leánya, özv. Pintér Gyuláné Donner Mariska. Ha a jövő héten nem is megyek, de azután bizonyosan.  És megérkeztünk egy sárga színű, kissé már fázós augusztusi napon. Mikor beléptünk a Májkó szobájába, mindjárt megcsapott az a finom, sajátos szag, amelyet csak igen öreg asszonyok szobáiban tapasztalhatunk, s amelyben a ménta illatától kezdve régi levelek porzójának, jól kivasalt és bizonyára megsárgult öreg fehérneműnek, apró kincses ládikáknak, tömjénnek és muskátlinak édesen elvegyülő illatát érezni. A mama egy óriási bőr karosszékben ült az ablak mellett, és a vakok méla arcával bámult maga elé. Finom, halványsárga arcán fehér, ragyogó fénysávot vont az ablakon özönlő fény. Fekete ruha volt rajta, és fekete felöltő takarta ezüstszínű haját. Megriadt, amikor Mariska nagy zajjal berontott, és megcsókolta mind a két kezét s mind a két arcát:  - Ejnye, Mariska, Mariska, hát nem tudod, hogy szegény öreg anyád beteges. Így megijeszteni az embert. (Mosolygott a mama.) Nem járja ez, Mariska. De nehogy nekem széthajigáld a holmidat. Majd Katalin megmutatja, hová tégy mindent.  Ez a Katalin egy húszéves leány volt. A mama sohase tartott öreg nőt. Ki nem állhatta őket.  - Fösvények, és nem tisztelik a kort!  Fiatal lányokat fogadott, akiket meghallgatott előbb - jól tudnak-e olvasni? Gyakran kapott leveleket unokáitól (a gyerekeitől alig), és így alaposan tájékozódva volt a családi dolgokról. Az utóbbi időben hamar felejtett. Ilyenkor efféle beszélgetések estek:  - Te, Katalin, most nem tudom, hány gyerek is van Lujzáéknál?  - Öt van, ténsasszony.  - Ne mondd, alig mintha egy hónapja lenne, hogy három volt.  - Én már egy éve vagyok itt, de akkor négy volt, amikor gyöttem.  - Igazad van, Katalin, gyere ide, megcsókollak.  És megcsókolta a piros képű, jókedvű parasztlányt. Nála nem bírta ki, aki nem szerette őt. Sokszor éjjel ébredt föl, és sétálni akart menni az utcára. Ilyenkor Katalin szó nélkül felöltöztette, és lassan topogva sétáltak egy órát a csillagos, nyári éjszakában.  Katalin elhelyezte holminkat. Azután két zsámolyra odaültünk a Májkó lábaihoz. A kezeinket a kezébe vette. Énvelem hamar végzett:  - Doktornak készülsz és írsz az újságba? Hát csak legyél jó doktor. Az a legszebb.  Azután elkezdték a család és a város dolgait. Amit mások harmincéves levelezésekkel intéznek el apránkint, ők keresztülfutották aznap - estig.  ... Hogy a Mariska volt barátnője, az Irma, háromszor ment férjhez, és azután rákban halt meg tavaly... hogy a Mariska legkisebb leánya, a Margit, akkor halt meg - épp öt esztendeje volt egy hete -, amikor Pistikét megszülte... és hogy az orvosok voltak a hibásak...  A mama ezt nem hitte el, mert betegnek tudta magát - komolyan hitte, hogy szervi baja van -, és nem akart rosszat mondani az orvosokra.  - Nem, fiam, annak oka volt az ura, meg - ne haragudj, Mariskám - te! Érted?  Mariska egy szót se szólt, mert tényleg része volt benne, hogy az orvost csak későn hítták. De mit tehet ő róla. Életében nála orvos nem volt.  - Bizony énhozzám orvos még nem nyúlt életemben, és itt vagyok ni, semmi bajom.  A mama nem hagyta annyiban:  - De hiszen lettél volna csak beteg!  Nemsokára Katalin jelentette, hogy asztalon van a leves. Berántott csirkeleves" };
+
+    if (document.querySelector("#Lackfi").checked == true) { document.querySelector("#textExamples").value = "SZAKADATLAN Ahogy zuhanni kezdek a kútba, lentről egy hozzám hasonlóan kapálózó figura zuhan felfelé, felém. Eltorzult arca mind közelebb ér, látom megnyíló szájüregét, bőrén a gyűrődéseket, mint ahogy a víz bőre gyüremlik odalenn. Találkozásunk elkerülhetetlen, nagy reccsenéssel szakad át húsa a húsomon, csontja a csontomon. Nem tudok visszanézni, nem tudom hát, vele mi lett, én zuhanok tovább. A leginkább az nyugtalanít, hogy közvetlen közelről úgy láttam, mintha kút-mély szemeiben is egy-egy mihozzánk hasonló alak zuhanna szakadatlan. KERTHELYISÉG  Régi barátoknak Izzik bennem még pár zsarátnok, de nem vagyok jó már barátnak. Magamhoz sincsen már türelmem, nemhogy a más baját füleljem. Ringtunk rég nagy szómámorokban, most a poharak alja koppan. Csak elütöm, mint pingponglabdát, a szavakat, ha adogatják. Ez botot dob, az szalad érte, szétrágja, mire visszaérne. Szók közt a szóköz egyre több lett, néha ráncos csend-kása töpped. Csak a nevetés változatlan, vagy majdnem az, kivár, s kicsattan. Felröhögjük, mint régi slájmot, mindazt, mi bánt, mindazt, mi bántott. De már a szemek alja mélyül, foltnyi sötétnek menedékül. De már ráncok huzagolódnak, kellenek összefogni, drótnak.  48 Már elégettük a világot benső kohónkban elviláglott. Most hamujában kotorászva mindegyre több az érc, az ábra. És csak a vésők cincogása, pöndörödik forgács forgácsra… És csak a huzalok az égen, bennük az élet észrevétlen. IDŐELTOLÓDÁS Kanadai szállodaszobámban éjjel három-négy óra körül rendszeresen felébreszt mobiltelefonom csörgése. Az otthoniak nyilván úgy vélik, reggel tíz-tizenegy tájban már a művészlelkek is biztonsággal hívhatóak, nyilván ücsörgök számítógépem előtt, és dolgozom, ahogy kell. Ehhez képest én szorgos önmagamtól mintegy négyezer kilométernyire aludni próbálok ég és föld között, a tizenötödik emeleten, közben a függöny résén áthunyorognak a szemközti toronyházak – az irodákban szégyenérzetemet fokozandó, ilyenkor, éjszaka is derengő, mini képernyőket böngésznek, faxpapírokkal hadonásznak a hangyasziluettek. Ágyam odvában vackolódó tücsökként próbálok visszazuhanni az álom legalább tizenöt emeletnyi mélységébe. Estig aztán hangya módjára nyüstölöm a munkát, és szédülő tekintetem lehajigált gyümölcsei időnként nagyokat toccsannak az odalenn tátongó aszfalton, ám hiába készülök el egy-egy jobb szöveggel, fordítással, otthoni énem kábultan húzza a lóbőrt, meghallgatni sem hajlandó, amit írtam, visszatúrja magát földszintes álmaiba. Miközben fürdök, ő bambán kortyolgatja ebéd utáni kávéját, miközben Robinsonként a szupermarketben partra sodródott, olcsó élelmiszereket falatozom, bébirépát sonkával és fűszeres zöldséglével, ő felolvas egy író-olvasó találkozón, miközben franciául nyilatkozom egy angol nyelvű rádióadónak, ő különórára fuvarozza gyermekeit. Hiába ismétlem meg mozdulatait, hiába utánzom mimikáját, hiába próbálom aprólékosan visszaadni a stílusát, hiába, hogy én tudok róla, ő pedig mit sem sejt rólam, képtelenség, hogy utolérjem, Akhilleusz sosem előzi meg a teknőcöt, mert amíg bizonyos távolságot megtesz, a páncélos atyafi szintén araszol valamennyit, igaz, sokkal kevesebbet, de az a kis eltolódás mindig megmarad. Majd repülőre ülök, hidat verek a térben, és sokszor tizenöt emeletnyi magasból temetem be az idő közöttünk tátongó szakadékát. Elcsíphetetlen mégis a pillanat, amikor két énem összeolvad. KISHIBÁK Apró csomó a bőr hártyája alatt tapintható nem látható  49 nem növekszik fel se szívódik sírba viszem vagy sírba visz Titkos helyen egy anyajegy ugyanaz a toll ugyanott lányomon is jelet hagyott Oltásvirágok vállamon testem viaszába mélyedt pecsétgyűrű-nyomok Köldököm labirintusa csak az enyém mint ujjlenyomat göcsört göb és gumó senki másé nem lehet épp ilyen A köldök gödrében pedig ingem vagy pólóm szöszei gyűlnek össze apró gomoly csak szerelmem szedheti ki LYUK A FOGAMON  Kosztolányi Dezsőnek Lyuk a fogamon. Kitöltetlen hiány. Fogorvosom nem foltozta be, Mert eleven még gyökere, S ha ideiglenes tömést kapott, Sajogni kezdett mindannyiszor, Tűvel és késsel magam estem neki A sajgó léket kiszabadítani. Lyuk a fogamon. Nem fáj sosem Mégis érzem, kín lapul odabenn, Lesve az alkalmas pillanatot. Néha úgy képzelem, nem vagyok, Pontosabban nem úgy vagyok, Ahogy az ember lenni szokott, Vagyis nem test és kiterjedés, hanem Hiány terjeng hűlt helyemen, Ez a lyuk az egyetlen való, Bár hézag, pontosan látható, Aprócska rés a valóság falán, S én nem itt, hanem a túloldalán, Létezem, negatívba fordulva ki, S csak nyelvem képes kitapintani A lyukat, amelynek túlfelén Az a világ van, honnan hiányzom én.  50 FELSZÍNEN Használom számítógépemet, de fogalmam sincs, a képernyő kocsonyás szilíciumzizegése mögött miféle rézcikornyákon, bélalagutakon illan az ujjbeggyel beletöltött okosság- és butaságrakomány, és hogy miképpen rejti számok-betűk egymásutánja a kutyusnak odavetett néma utasításokat Vezetek autót, de mindig csak okosan bólogatok, míg autószerelőim besült dugattyúról, kiégett tömítésről, felfúrt hengerről" };
+
+
+    if (document.querySelector("#Tar6714").checked == true) { document.querySelector("#textExamples").value = "KÖZLEKEDIK: PÉNTEKEN, IV. 1- JÉN,  DE NEM KÖZLEKEDIK III. 31-ÉN     Budapest, Nyugati pályaudvar, 11 óra.  Apró szemetet sodor a huzat a férfi W. C. irányába, a nagyvárosi csend decibeljei morajlanak, időnként felsikolt a szignál: vigyázni, vigyázni, a vonat lassan, szinte méltóságteljesen közeledik. A bemondó még megismétli néhányszor a figyelmeztetést, páran a csellengők közül felugrálnak a még mozgó szerelvényre. Csikorgás, lármavisszhang.  Budapest, Nyugati pályaudvar, 12 óra.  A vonat egyre jobban megtelik. A sürgés-forgás megsokszorozódva hömpölyög végig a szerelvény hosszán. A leendő utasok zöme már megérkezett, leteszik a jegyüket az általuk elfoglalt helyekre, és leszállnak. Minket rendesen elenged a főnök tizenegy-tizenkét óra fele, mert tudja, hogy utazunk haza. Ha meg nem, akkor egyet-kettőt enged csak el, hogy a helyet lefoglalja. Ha azt se engedi el, akkor otthagyja mindenki a munkát, és hétfőn az egész csapat kiveszi a munkakönyvét. Az ember gyorsan felugrik, kinéz valami jó helyet a bandának, szétrakom a jegyeket, és várok. Ez már úgy kialakult. Bort szoktunk venni, uram, mi nehéz munkán vagyunk, építkezésen, kiszárad ám az ember, egy-két liter ezekből a dugaszoltakból úgy leszalad, mint a pinty. Hát hogy sört nem lehet kapni, evvel is a vendéglátó járt jól, mert a drágább bort meg a töményt veszi az ember, apám is azt mondta mindig, hogy fiam, a kocsmáros mindig jól jár, akkor is, ha jó a termés, akkor is, ha rossz. Úgy, úgy, ahogy az elvtárs mondja, olyan brigádok vannak, akik együtt utaznak, egyfelé laknak, egy községben, és úgy aktuális, hogy együtt, ahogy össze van szokva az ember. Kijövünk előbb a vonathoz, hogy vegyünk ezt-azt, eszünk valamit, kinek hogy futja, van olyan cég is, amely a vasúttal foglaltatja le a helyet a munkásoknak, az ugye neki jó, de nekünk meg rossz, merthogy a fogtomig (???) kell dolgozni, és nincs idő itt az állomáson semmire. Én, uram, megiszok itt álltó helyemben öt liter bort, nem hiszi? Kérdezze meg ezeket az embereket itt, hogy leokádtam a múltkor is egy Szegedre való embert, az sem hitte, nem hiszi? A legközelebbi vonat 13 órakor megy, de nem ajánlom uram, nem fér fel, várja meg inkább a gyorsot. nézze, maga tudja, mit csinál. Ez egy munkásvonat, az utasok nyolcvan százaléka részeg, és olyan zsúfolt, hogy maga még olyat nem látott. Hogy a munkásvonatnak kellene a legtisztábbnak és a legkényelmesebbnek lenni, azt én is aláírom, meg hogy szocializmus van, de ne kapjon a fejéhez majd, ha mást tapasztal, mint amit a kisdobos-eligazításon hallott, viszontlátásra, és ne röhögtessen, mert cserepes a szám... Mégis, kisapu, teszerinted mit kellene venni, Népszabadság-ot? Vagy meséskönyvet az útra? Kisapu, közben mit gondolsz, hova szarok én, hogy el ne lopják?.  Budapest, Nyugati pályaudvar, 13 óra.  Az indulás közeledtével a vonat valószínűtlenül megtelik, az ülések mellett zsúfoltan állnak, állnak a folyosókon, peronokon, a lépcsőkön, a vagonok közötti átjárókban. Sokan esznek, főtt kolbászt, fasírozottat, szalámit, húst, szalonnát, a kocsikat ellepi a zsír és a szesz szaga. Úgy tűnik, mindenki ismer mindenkit, nagy hangon beszélgetnek, néhányan már részegek, egyesek bambán zuhannak magukba, mások énekelnek. Egy fiú rikító pulóverben gitározik, alig hallani, csak az éneke nyüszít fel olykor: rossz helyen állnak a fák. Az indulás közeledtével gyorsuló ütemben újabb emberhullámok rohanják meg a vonatot, megélénkül a kiáltozás, két üres üveg repül ki az ablakon, két rendőr ráérősen előremegy a mozdony felé. Mintegy vezényszóra több vagonból is felüvölt ugyanaz az ének: Mához egy hétre már nem leszek itt., a két rendőr a mozdony mellé ér, visszanéznek, majd felszállnak, sípszó, aztán lassan meglódul a szerelvény, a vonat elindult. Az épület bugyraiból alakok szakadnak ki és a vonat után vetik magukat, felugrálnak a tömött lépcsőkre, kiáltozás, füttyszó, valaki tapsol, egy erősen ittas férfi kezében kolbásszal imbolyogva fut a vonat mellett, megbotlik, egy vasutas elkapja, egyben fogva tartja, amíg a szerelvény elhúz. Mindig van néhány, aki lemarad, pedig idejönnek már délben, de berúgnak, aztán nem tudnak magukról. Ilyenkor aztán, amíg a pénzből tart, csak azért is. Igazolványaik, jegyük többnyire a vonaton marad, az haza is ér, a többiek hazaviszik. A baj akkor van, ha tél van, és a koma elkábul, leül valami félreeső helyen és megfagy. Mert a szállóra visszamehetne, de nem megy. Iszik, amíg a pénzből tart. R. B. egy egész hétvégét töltött a W. C.-ben, időnként feljött, vett egy üveg valamit és visszament, mert fent elkapták volna, lent meg meleg volt, és megegyezett a nénivel... Lemaradtam, kérem, lemaradtam, a kutyafáját, ugyehát lemaradtam, merthogy elment a vonat éshát lemaradtam ugye. Hát ez már így van, hogy ittmaradtam én. Most aztán hát mondja az én feleségem, hogy hol vagyok, gondolja, hogy biztos ért engemet valami, meg hát a gyerekek is. Hogy a szállásra. tetszik mondani? Oda lehet, persze. és mért akar odamenni.? Hogy én? A szállásra? A szállásra menjek? De hiszen én most megyek az én családomhoz, én ha evvel nem, akkor a másikkal ugye. Zuglóban, Kőbánya-alsón a vonat néhány új felszállót vesz fel, még mindig folyik a jövés-menés, helykeresés, mindenkinek erősen az arcába néznek, néhányan felmásznak a csomagtartóra, lábuk lelóg; felkönyökölve nézik az alattuk folyó kártyapartit, vagy kezüket átfonva a csomagtartó vasán alusznak a füstben. A W. C.-ben három fiatalember kártyázik, a helyiség egyébként is megközelíthetetlen. Aztán egy csoport mindenkit besodor a kocsi közepe felé, néhányan az ülések közé esnek, meg az ülőkre, de senki sem háborog különösebben, egy fiatalember beszáll a W. C.-ben negyediknek, de már csak az ajtóban tud megállni, ott néhány határozott mozdulattal helyet csinál magának, leül kis kofferjére, megnyálazza ujját. A bejárati ajtó melletti ülésen egy fiú ül, a mellette ülő pakompartos férfi ölébe hajtva a fejét alszik. A férfi a vele szemben ülő nőnek magyaráz valamit, aki mellett két gyerek ül szorongva. A férfi arca gunyoros, a nőé szomorú. Valamennyi ablak nyitva van, igen nagy a meleg, moccanni is nehéz a zsúfoltságban. Egy csoport a vagon közepe táján nagy hangon beszélget, a szót egy alacsony, középkorú férfi viszi akadozó nyelvvel, a többiek evés-ivás közben intenzíven figyelik, olykor közbekiáltanak. .mi, János? Mint az öreg takarító, János, mi? Hát észrevettük egyszer, hogy a W. C.-ben, amit mellétettek a deszkára, az öreg nagy nyugodtan sepri be a helyire; mi, János? De kézzel ám, tenyérrel, akkor mondom neki, hogy ember, mit csinál, hát kézzel kell ezt csinálni, azt mondja, miért, tiszta ez, nem nyúlt ehhez senki... Amikor nem látták, az öreg be is vágott belőle egy-egy marékkal, biztos... Nincs is abban semmi, komám, én csak azt nem szeretem, ha hajszál van benne. Te szájba lökött állat, hát nem láttad, hogy kimentem a tízessel, hát nem láttad? A peronon a legtöbben leülnek a padlóra, kabátot, újságpapírt terítenek egyesek maguk alá, az ajtó nyitva mindkét irányban, jobb oldalon két középkorú férfi ül egymás mellett a lépcsőn, ordítva egymás fülébe énekelnek. .nekem, komám, elhihetitek, hogy a sánta nő a legjobb. Állva. Hogy a rövidebb lába alá teszel egy téglát, és amikor bent van, akkor kirúgod alóla, és ahogy keresi a lábával... Ha meg nem rövidebb, le lehet azt vágni! Percekig tart a röhögés, mindenki elképzeli magának a dolgot, és a végén újra meg újra nevetésben törnek ki. Egy fiatal pár ül közöttük mosolytalanul és mozdulatlanul, látszólag nem látnak, nem hallanak, egy kövér nő énekelni kezd, és egy ötszáz forintossal illegeti a kezét a levegőben, hóna alatt nagy félholdban üt ki az izzadtság, néhány ablak elé lehúzzák a függönyt, ezáltal a kocsi félhomályba borul, meghittebbé válik. ...ahogy ott vagyok, hát mondom neki, hogy, hát anyám, kellene valamit csinálni, de csak mondja a magáét, terjeget a kezével, én meg se szó, se beszéd tolom le a nadrágot, meg a gatyát, hát elájult.. A szagodtól! Meglátta az angol verest. A kenőmájast. Nézzed már, ez meg fel akar ide szállni! Pont ide! Nem látja, hogy tele vagyunk? Ne hagyd. A lépcsőkön ülők nem állnak fel, veszekedés, valakit lerántanak a lépcsőről, nyomban felugrik és támadójára vetné magát, de sípszó hallatszik, és megrándul a vonat, bent az ülések alatt összecsörrennek az üvegek. Engem mindig vár az asszony az állomáson, de mindig elkerüljük egymást. Vagy én nem ismerem meg őtet, vagy ő engem. Tán rossz a szeme? Nem rossz az annak, hajjaj, még ugyan jó, csak hát bánatában ő is felhajint egy-két kupicával, aztán ő is úgy lesz, ahogyan más. Már annyiszor mondtam neki, te, ne igyál annyit... Hát az biztos, hogy emberbe is csúnya, aki iszik, de asszonyba. Olyanokat csinál, hogy egy pár tyúkot ad egy deci pálinkáért. Az esze nem a legjobb neki. Akkor meg a gyerekek is ott vannak, hát a kislányt azt nem állhatja, csak üti-veri, már a tanácsnál is fel lettünk jelentve... Meg kell igazítani a derekát a nyújtófával, komám! Na hisz, meg is kapja, abban hiba nincs. Csak hát hiába rakok én ilyenkor rendbe mindent, amikor eljövök otthonról, megint az övé minden. Állomáshoz közeledve fékez a vonat, néhányan leszállnak, üres üvegekkel rohannak a vízcsaphoz, mások az állomás épületébe igyekeznek, és bámulatos gyorsasággal térnek vissza újabb boros- és pálinkásüvegekkel megrakodva. A rendőrök két fiatalembert lökdösnek sietve maguk előtt, az egyik fiú arca véres, inge csapzott. Az újabb felszállók sokáig keresgélnek a szerelvény hosszában, de a leszállók ellenére a zsúfoltság nem enyhült. A két rendőr visszatér, és a lépcsőkön ülőket sorban felállítják, egy kislány tűnik fel a tömegben, piszkosfehér tüllruhában, kézen fogva egy vak öregembert vezet, aki szemüregeiben egy-egy pingponglabdával halk hangon mormol: Engedjenek fel, engedjenek, már engedelmet. Egy csoport katona bukkan fel hangoskodva, túlfűtött hangulatban, némi vita után félszállnak, nyomukban a kislány és az öreg vak. A katonák a peronon nyomban énekelni kezdenek, egy fél liter gyümölcspálinkát adva körbe. A lábuknál, a padlón ülő idős férfi részeg gyönyörrel veri a ritmust a térdén: Mához egy hétre már nem leszek itt. Itt valaki pálinkát iszik!, kiált fel a vak, és obszcén mozdulatot tesz, nevetés, az öreg megdermed, felvonja szemöldökét, a két pingponglabda egyszerre kiesik alátartott tenyerébe. Aztán iszik a kezébe nyomott üvegből. A hangosbemondó a vonat indulását jelzi, ismét kiabálás, rohangálás, majd sípszó, a vonat meglódul. A tüllruhás kislány áttolakszik a katonákon, maga után vonszolva az öreget, aki pingponglabdáit ügyes mozdulattal ismét a szemüregeibe teszi. Ó, hogy a baj jöjjön magára! A szívbajt hozza az emberre. A kövér asszony sikolt, az ajtó mellett ülő pakompartos férfi világoszöld ballont terít az ölében alvó fiú fejére; mire az mocorogni kezd, aztán a férfi keze is eltűnik a kabát alatt, miközben egykedvűen néz ki az ablakon. Az asszony oldalt fordulva, a gyerekeknek háttal, ugyancsak kifelé néz. Később visszafordul és a férfi arcába köp; aki meglepetés nélkül, gúnyos mosollyal törli le. Kétszeres vak vagyok, már engedelmet, egy kis helyet, ha szabadna, már engedelmet. A szótlan fiatal pár összesúg, arcukon patakzik a verejték, majd a fiú feláll, levesz a csomagtartóból egy üveg bort, isznak, a fiatalasszony fintorog. A kövér asszony rájuk néz, és énekelni kezd: Énmellettem elaludni nem lehet., a fiú elmosolyodik, a fiatalasszony hűvös arccal elpirul. Otthon majd kivágok egy pár kant, és megsüti az asszony. A tökit? Hát persze! A malactöke-pörkölt tudja, milyen jó? A fiatalember nem ül le, visszateszi a bort, helyére betolakszik a tüllruhás kislány a vakkal. Állomás. Valaki ismét kizuhan a lépcsőről, és fekve marad hatalmas nevetéstől kísérve, majd ketten érte mennek, visszahúzzák, arca piszkos és véres, pálinkát locsolnak rá. Sípszó, indulás. A kövér nő kezéből eltűnt az ötszázforintos, piszkos verejtékcsík vezet a nyomára kibuggyanó két melle között, jókedvűen kacarászik, ölében zsíros papírban fasírozott, amit a szemben ülő gitáros fiú komoly arccal, kenyér nélkül majszol. Gyönyörű hangja van a kislányomnak, gyönyörű hangja! Maguk azt el sem gondolják; már engedelmet. A vak élénk gesztikulálással magyaráz vélt hallgatóinak, kezeivel minduntalan beleütközve szomszédaiba, a kislány mozdulatlan arccal néz a lehúzott függönyre. A kártyázók vitatkoznak valamin, a levegő nehéz, a fojtó, a betűző nap miatt most már valamennyi ablakon lehúzták a függönyt. Kint valaki jajgat, és felerősödik körülötte a lárma, aztán elnyomja az egészet a katonák éneke. Egy fiatalember hirtelen mozdulatokkal lemászik a csomagtartóból, és nagy erőfeszítéssel eltűnik a tömegben. Néhány perc múlva egy másik mászik fel a rácsra, feje alá gyűr egy táskát. Ismét állomás, de nem látni ki a kocsiból. Ne engedd fel, vagyunk itt elegen! Rúgd szájba, ha nagyon akarja! Sípszó, a vonat megrándul. A másik ember meg kijárt a dolgát végezni hátra, az udvarra, a gazba, és meglestük, éppen egy árokban dolgoztunk, hát jön a pofa, nekikészül, Gyula meg odamegyen egy lapáttal hogy az ürge észre ne vegye, és alá tartotta, a pofa aztán teleeresztette, ez meg eljött vele, de már röhögtünk! A pofa aztán felállt, maga alá nézett, ahogyan szokott az ember, hát nem talál semmit! Úgy képzeljétek el, hogy az levetkezett teljesen, kirázta a gatyáját, mindenit, a bakancsot, mink meg majd megdöglöttünk, de nem szóltunk. Nevetés, nevetés, kiabálás, a fiatal pár ismét iszik. Az semmi, uraim, már engedelmet, és ha más is akarja hallani, akkor egy fasírtot kérek, mert itt valaki fasírtot eszik, már engedelmet Anyuuu!, tör fel a farkasüvöltésszerű hang az egyik katona ajkáról, a többiek nevetik, utánozni próbálják. Fogom, tapogatom óvatosan, az isten, micsoda ez a szőrös, hát a tehén. Nevetés, anyuuu, aztán előkerül egy üveg, a lent fekvő öregember arcát elborítja a cigarettahamu. .nekem hiába is beszéltek! Az a baj, hogy nem tudunk mi élni! Élni! Meg hát ha tudnánk is, hát hogyan? Hát hogyan, kérdem én! Ne ordíts, te hülye, így sose fogod megtudni! Mit érdekel engem! Nekem négy lovam volt! Négy! Most meg mi vagyok? Mi vagyok? A föld alatt, Pesten! Vakondok! Jól van már, ülj le, játszol, vagy nem? Mint a vakondok. Félig feláll, kiabál, a mellette ülő nevetve húzza vissza újra és újra, majd megunva átöleli hátulról, és lerántja az ülésre a kiabálót, aki széttárt kézzel zuhan hátra, feje a támlának ütődik, körülnéz, mint aki most ébred, bort töltenek a szájába. Kaszáltam, már engedelmet, és lecsaptam egy dongófészek tetejét, tetszenek tudni, és futás. A dongó meg bele a bakancsomba, gyorsan leülök, oldoznám, nem megy, elő a kést, így alulról, nyessz, akkor ment ki a jobb szemem, már engedelmet, egy év múlva a másik bakancs, a bal, meg a bal szemem, nyessz. Rossz helyen állnak a fák., énekli a fiú érdes kamaszhangján, a kövér nő a mellette ülő férfival csókolózik csorgó nyállal, mosolyogva, egy férfi imbolyogva feláll és kivizel az ablakon, visszarántják, pantallója szárán végigfut a nedvesség. Állomás. Lesegítenek valakit. Van vagy negyven disznóm, az asszony intéz mindent, én ilyenkor kihányom a ganét alóla, begórom a szalmát, éppen elég. Az asszony meg fogad maga mellé valami legényt, míg te Pesten vagy! Na hiszen, azt tudjam én meg! Nem tudod ám meg! Mert aki itthon van, az mind ellened van, te meg csak hordod haza a pénzt! Én elintéztem a dolgot, komám! Terhes az asszony. Ez a legbiztosabb, hogy terhes. Amíg én Pesten leszek, ő terhes lesz! Van valami öv, azt mondják, az asszony derekára teszik és kulcsra jár! Máma már mindenhez lehet kulcsot kapni, komám, míg te vacakolsz a kulccsal, egy iparos már rég megpiszkálta az asszonyt! Állomás. Anyuuu! Anyuuu! Anyuuu! A katonák valakinek szánják ezt az anyuuuzást, aki nem látszik, csak a peronról, aztán egymásra esnek, az öregre, üvegcsörömpölés, a kártyázók váratlanul felordítanak, velük együtt a kibicek napraforgót rágó gyűrűje. Ezt nem hittem volna! Ezt nem hittem volna!, egy kopasz férfi fogatlan mosollyal fordul mindenkihez csodálkozásában, a csomagtartóban felül a fiatalember, megigazítja a nadrágját, és alszik tovább. Gyönyörű hangja van a kislányomnak, nem hiszik el, már engedelmet, ugye kislányom, gyönyörű hangod van, nem énekelnél valamit a kartársaknak, kislányom? Képzeljék, olyan a hangja. Az ajtó mellett ülő pakompartos férfi lejjebb csúszik ültében, arca merev, az ölében fekvő fiú lassan mocorogva befelé fordul, a szomorú arcú nő feláll, és nagy erőfeszítéssel kifelé igyekszik, a két gyerek rémült arccal figyeli a szomszédos üléspárt, ahol dinnyét esznek hersegve, szanaszét köpködve a magját. Én a disznót úgy szúrom meg, hogy ne visítson sokáig, mert van, aki direkt visíttatja, hogy hadd hallják a szomszédok, hogy ő disznót öl. Én a gégéjét szoktam elvágni, rövid késsel... Persze, ha a seggibe szúrsz, az is fáj neki. Egy izgatott csoport vág át nagy zajjal a tömegen, Górgyán! Górgyán Jani!, valakit keresnek, egyikük kezén friss, vágott seb vérzik, ő a legbüszkébb, és e pillanatban az ablak előtt W. C.-papírcsík szalad végig a vonaton, valaki fogja elöl a végét a furcsa lobogónak, majd papírtörölközők erdeje repül a szélben. Sámsoni srácok vagyunk; melózni nem akarunk., hangzik valahonnan, a W. C.-ből kizuhan egy fiatalember, szájából vér serken, fekve maradna, de az alatta ülő ledobja magáról, egy darabig így dobálják, míg a mosdófülke előtt köt ki, hát mit akarok én, mit akarok, a jóistent akarok én., dadogja, aztán hányni kezd, mire gyorsan felugrik a mellette ülő alak, beszakítja a mosdó ajtaját, mely mögött egy lány áll feltűrt szoknyában, karját és felemelt bal lábát egy fiú köré fonva. Állomás. A vonatról az ellenkező oldalon leugrik egy ember, nyomában a rendőrökkel. A menekülő a közeli kukoricásba veszi be magát, a rendőrök visszafordulnak." };
+
+
+
+    if (document.querySelector("#nothing").checked == true) { document.querySelector("#textExamples").value = "" };
+
+    textAreaOnInput();
+};
+
+setExampleText();
 
 
 

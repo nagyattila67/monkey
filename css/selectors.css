@@ -270,10 +270,12 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #divForAbcArray{height:100px; overflow:auto;}
 #divForabcOccurranceGraph{overflow:auto;height:300px;}
 #abcOccurranceGraph td{height:5px;width:20px}
-#divForAllBigrams{height:400px;overflow:auto;}
+#divForAllBigrams{height:250px;overflow:auto;}
 
-#rowForAllBigramsMinor{overflow:auto;height:100px}
+#rowForAllBigramsMinor{overflow:auto;height:120px}
 #divForAllBigramsMinor td{width:1px;height:6px;font-size:1px;}
+#divForAllBigramsMin td{height:10px;width:30px;}
+
 
 
 

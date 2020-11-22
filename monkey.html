@@ -7,8 +7,6 @@
     <title>Majom az írógépnél</title>
     <link rel="stylesheet" href="css/selectors.css">
     <link rel="stylesheet" href="lib/bootstrap/bootstrap-4.5.2-dist/bootstrap-4.5.2-dist/css/bootstrap.min.css">
-
-
 </head>
 
 <body>
@@ -147,9 +145,11 @@
                                 value="4">
                             <label class="ml-3">betű!</label>
                             <button id="please" type="button" class="ml-3 btn btn-secondary btn-sm"
-                                onclick="runWord()">Kérem a
+                                onclick="runWord()"><span class="spinner-border spinner-border-sm"></span>Kérem a
                                 szót!</button>
                             <p class="ml-3">Futásidő: <span id="wordTime"> - sec.</span></p>
+                            <div style="visibility:hidden" id="spinner_please" class="ml-3 spinner-border" role="">
+                            </div>
                         </form>
                     </div>
 
@@ -4472,7 +4472,7 @@
                             képen a tanulómemória egy 433 / 92 állapotának a tömörített vizualizációja látható. A
                             tanulómemóriának ekkor 433 eleme volt, egy elemmel pedig addig átlagosan 92-szer találkozott
                             a memória a tanulás során.</p>
-                        <p>Színárnyalatok távolsága: <input style="width:100px" type="number" value=10000000
+                        <p>Színárnyalatok távolsága: <input style="width:100px" type="number" value=100000
                                 id="colorDistance"></p>
                         <p>Ha egy-egy nullával növeli a számjegyet, azzal állíthat a vizualizáció szinbeállításán.</p>
                         <button id="buttonForAllBigrams" type="button" class="ml-3 btn btn-secondary btn-sm"
@@ -4484,6 +4484,14 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <div class="row mt-3">
+                            <div class="col smallBorder bgDarker" id="divForAllBigramsMin">
+                                <table id="tableForAllBigramsMin">
+                                    <tbody id="forAllBigramsMin"></tbody>
+                                </table>
+                            </div>
+                        </div>
                         <div class="row mt-3">
                             <div class="col smallBorder bgDarker" id="divForAllBigrams">
                                 <table id="tableForAllBigrams">
@@ -4491,32 +4499,222 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
+                        <div class="row mt-3 smallBorder bgDarker">
+                            <div id="colForAllBigrams">
+                                <div class="row">
+                                    <div class="col">
+                                        <textarea oninput="textAreaOnInput()" id="textExamples" maxlength="5000"
+                                            class="mb-0" rows="4" cols="50" placeholder="Kedves Naplóm!"></textarea>
 
-                </div>
+                                        <span class="mr-1" style="color:rgb(255,255,0)">sárga</span><input id="sarga"
+                                            class="mr-2" type="radio" name="myCellColor">
+                                        <span class="mr-1" style="color:rgb(255,0,255)">lila</span><input id="lila"
+                                            class="mr-2" type="radio" name="myCellColor">
+                                        <span class="mr-1" style="color:rgb(0,255,255)">hupikék</span><input
+                                            id="hupikek" class="mr-2" type="radio" name="myCellColor">
+                                        <span class="mr-1" style="color:rgb(255,0,0)">piros</span><input id="piros"
+                                            class="mr-2" type="radio" name="myCellColor" checked>
+                                        <span class="mr-1" style="color:rgb(0,255,0)">zöld</span><input id="zold"
+                                            class="mr-2" type="radio" name="myCellColor">
+                                        <span class="mr-1" style="color:rgb(0,0,255)">kék</span><input id="kek"
+                                            class="mr-2" type="radio" name="myCellColor">
+                                        <span class="mr-1" style="color:rgb(0,0,0)">szürke</span><input id="szurke"
+                                            class="mr-2" type="radio" name="myCellColor">
 
-                <div class="row mt-3">
-                    <div class="col">
-                        <p></p>
-                        <p style="color:red">
-                            <span style="color:red">a program eddig van meg ... folytatjuk ... javaslatok, kritikák,
-                                hibák:</span> <span style="color:blue">szivkuldi@latinora.hu</span>
-                            <span class="ml-3">&#128584 &#128585 &#128586</span></p>
-                        <p></p>
+
+
+                                        <p>Előre megadott példaszövegek (lásd lent):
+                                            <span>Orbán: </span><input name="textExample" oninput="setExampleText()"
+                                                type="radio" id="orban">
+                                            <span>Kádár: </span><input name="textExample" oninput="setExampleText()"
+                                                type="radio" id="kadar">
+                                            <span>Tar - Ház a ...: </span><input name="textExample" oninput="setExampleText()"
+                                                type="radio" id="tar">
+                                            <span>Tar - 6714-es ...: </span><input name="textExample" oninput="setExampleText()"
+                                                type="radio" id="Tar6714">
+                                            <span>Lackfi: </span><input name="textExample" oninput="setExampleText()"
+                                                type="radio" id="Lackfi">
+                                            <span>Toldi: </span><input name="textExample" oninput="setExampleText()"
+                                                type="radio" id="toldi">
+                                            <span>Pajzán Toldi: </span><input name="textExample"
+                                                oninput="setExampleText()" type="radio" id="pajzán">
+                                            <span>Twain: </span><input name="textExample" oninput="setExampleText()"
+                                                type="radio" id="twain">
+                                            <span>Trump: </span><input name="textExample" oninput="setExampleText()"
+                                                type="radio" id="trump">
+                                            <span>Széchenyi - Stadium: </span><input name="textExample"
+                                                oninput="setExampleText()" type="radio" id="Stadium">
+                                            <span>Széchenyi - Döbling: </span><input name="textExample"
+                                                oninput="setExampleText()" type="radio" id="Döbling">
+                                            <span>Csáth - A varázsló kertje: </span><input name="textExample"
+                                                oninput="setExampleText()" type="radio" id="varázsló">
+                                            <span>Csáth - Mariska </span><input name="textExample"
+                                                oninput="setExampleText()" type="radio" id="Mariska">
+                                            <span>Csáth - utolsó novella </span><input name="textExample"
+                                                oninput="setExampleText()" type="radio" id="Dénes">
+                                            <span style="color:blue">egyik sem: </span><input name="textExample"
+                                                oninput="setExampleText()" type="radio" id="nothing" checked>
+                                        </p>
+                                        <p>A jobb oldali táblázat a színes vizualizációt segít értelmezni. A
+                                            vizualizációban ui. minél világosabb egy cella színe, annál nagyobb a hozzá
+                                            tartozó betűkettős előfordulása. A táblázat pedig azt mutatja meg, hogy hány
+                                            olyan betűkettős van, aminek 1 és 1 000 közé esik az előfordulása, hány
+                                            olyan karakter van, aminek 1 001 és 2 000 közé esik az előfordulása, s így
+                                            tovább.</p>
+                                    </div>
+                                    <div class="col">
+                                        <p>A szövegdobozba bemásolhat tetszőleges szöveget, s a program elékszíti a
+                                            szöveg fenti
+                                            vizualizációját. Azaz megmutatja, hogy az egyes bigrammokból hány darab van.
+                                            (Max. 5
+                                            000 karakter.) De választhat szöveget a felsorolt példák közül is. Ekkor
+                                            jelölje be a választását az adott jelölőnégyzettel.</p>
+                                        <button id="buttonForTextInput" type="button"
+                                            class="ml-3 mb-3 btn btn-secondary btn-sm"
+                                            onclick="functionForTextInput()">Mehet!</buttonid></button>
+                                        <span class="ml-3">Karakterszám:
+                                            <span id="exampleCharacters"> - </span></span>
+                                        <p>A betűkettősök előfordulásának az eloszlása:</p>
+                                        <table class="table table-sm table-bordered table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td>1 - 1 000</td>
+                                                    <td><span id="ezerig"> - </span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1 001 - 2 000</td>
+                                                    <td><span id="ketezerig"> - </span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2 001 - 3 000</td>
+                                                    <td><span id="haromezerig"> - </span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3 001 - 4 000</td>
+                                                    <td><span id="negyezerig"> - </span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4 001 - </td>
+                                                    <td><span id="negyezertol"> - </span></td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <hr>
+                                        <p>A példaszövekek:
+                                        <ol>
+                                            <li>Orbán Viktor beszéde Nagy Imre temetésén, 1989</li>
+                                            <li> Kádár János utolsó beszéde, 1989</li>
+                                            <li> Tar Sándor: Ház a térkép szélén</li>
+                                            <li> Tar Sándor: A 6714-es személy</li>
+                                            <li> Lackfi János: Élő hal (versek)</li>
+                                            <li> Arany János: Toldi</li>
+                                            <li>Ismeretlen szerző: Pajzán Toldi</li>
+                                            <li>Mark Twain: Tom Sawyer (angolul)</li>
+                                            <li>Donald Trump's 2020 Republican National Convention speech</li>
+                                            <li>Széchenyi István: Stadium (1833)</li>
+                                            <li> Széchenyi István feljegyzéseiből a döblingi elmegyógyintézetben halála
+                                                előtt
+                                                (1860)</li>
+                                            <li>Csáth Géza: A varázsló halála (1908)</li>
+                                            <li>Csáth Géza: Mariska az anyjánál (1908)</li>
+                                            <li> Csáth Géza: Dénes Imre - A súlyosan morfiumfüggő Csáth utolsó novellája
+                                                (1918)</li>
+                                        </ol>
+                                        </p>
+
+                                        <p>Ezeknél a vizualizációkkal - szemben a tanulómemóriás vizualizációnál - itt
+                                            minden cella ugyanazt a betűkettőst jelenti, s <i>minél világosabb</i> a
+                                            cella színe,
+                                            <i>annál gyakoribb</i> a betűkettős előfordulása. - Az első vizualizáció
+                                            tömörített,
+                                            nem tartalmazza az üres helyeket. - A harmadik vizualizáció kiírja az
+                                            előfordulások számát is, ha az nem nulla.</p>
+                                        </p>
+                                        <p>Érdemes összehasonlítani pár vizualizációt. Orbán Viktor beszédét Nagy Imre
+                                            temetésén, Kádár János utolsó beszédét és Tar Sándor: Ház a térkép szélén
+                                            c., ill. a 6714-es személy c.
+                                            novelláit tettük egymás mellé. A két beszéd vizualizációjához képes a két
+                                            szépirodalmi szöveg vizualizációja viszonylag szellős.
+
+
+
+
+                                        </p>
+                                        <p><img class="float-right ml-2" width="400" src="img/Orbán3.jpg" ;
+                                                alt="bigram vizualizáció">
+                                            Orbán Viktor beszéde Nagy Imre temetésén, 1989
+
+                                        </p>
+                                        <br> <br> <br> <br>
+                                        <hr>
+                                        <p><img class="float-right ml-2" width="400" src="img/Kadar3.jpg" ;
+                                                alt="bigram vizualizáció">
+                                            Kádár János utolsó beszéde, 1989
+
+                                        </p>
+                                        <br> <br> <br> <br><br><br>
+                                        <hr>
+                                        <p><img class="float-right ml-2" width="400" src="img/Tar3.jpg" ;
+                                                alt="bigram vizualizáció">
+                                            Tar Sándor: Ház a térkép szélén
+                                        </p>
+                                        <br><br> <br> <br> <br><br>
+                                        <hr>
+                                        <p><img class="float-right ml-2" width="400" src="img/6714.jpg" ;
+                                                alt="bigram vizualizáció">
+                                            Tar Sándor: 6714-es személy
+                                        </p>
+                                        <br><br> <br> <br> <br><br><br><br>
+                                        <hr>
+                                        <p>A két következő példa pedig Csáth Géza két novellája. Egyiket a pályája
+                                            csúcsán írta, ez A varázsló halála 1908-ból, a másik pedig a már súlyosan
+                                            morfiumfüggő Csáth utolsó novellája a tragikus halála előtt egy évvel: Dénes
+                                            Imre (1918)
+                                        </p>
+                                        <p><img class="float-right ml-2" width="400" src="img/varázsló3.jpg" ;
+                                                alt="bigram vizualizáció">
+                                            Csáth Géza: A varázsló halála (1908)
+                                        </p>
+                                        <br><br> <br> <br> <br>
+                                        <hr>
+                                        <p><img class="float-right ml-2" width="400" src="img/Dénes3.jpg" ;
+                                                alt="bigram vizualizáció">
+                                            Csáth Géza: Dénes Imre - A súlyosan morfiumfüggő Csáth utolsó novellája
+                                            (1918)
+                                        </p>
+                                        <br> <br> <br> <br>
+                                        <hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <p></p>
+                                <p style="color:red">
+                                    <span style="color:red">a program eddig van meg ... folytatjuk ... javaslatok,
+                                        kritikák,
+                                        hibák:</span> <span style="color:blue">szivkuldi [kukac] latinora [pont]
+                                        hu</span>
+                                    <span class="ml-3">&#128584 &#128585 &#128586</span></p>
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <p></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="row mt-3">
-                    <div class="col">
-                        <p></p>
-                    </div>
-                </div>
-
             </div>
+            <div style="z-index:0" class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding"></div>
         </div>
-    </div>
-
-    <div style="z-index:0" class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding"></div>
-    </div>
     </div>
     <script src="/gyak.js">
     </script>
