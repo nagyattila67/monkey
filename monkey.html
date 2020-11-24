@@ -4535,10 +4535,16 @@
                                                     oninput="setExampleText()" type="radio" id="Tar6714">
                                                 <span>Lackfi: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="Lackfi">
-                                                <span>Toldi: </span><input name="textExample" oninput="setExampleText()"
-                                                    type="radio" id="toldi">
-                                                <span>Pajzán Toldi: </span><input name="textExample"
+                                                <span>Toldi 1.: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="toldi">
+                                                <span>Toldi 4.: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="Toldi4">
+                                                <span>Pajzán Toldi 1.: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="pajzán">
+                                                <span>Pajzán Toldi 2.: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="pajzán2">
+                                                <span>Pajzán Toldi 3.: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="pajzán3">
                                                 <span>Twain: </span><input name="textExample" oninput="setExampleText()"
                                                     type="radio" id="twain">
                                                 <span>Trump: </span><input name="textExample" oninput="setExampleText()"
@@ -4553,7 +4559,9 @@
                                                     oninput="setExampleText()" type="radio" id="Mariska">
                                                 <span>Csáth - utolsó novella: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="Dénes">
-                                                <span>Csontváry: </span><input name="textExample"
+                                                <span>Csontváry - A lángész: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="CsontváryALangesz">
+                                                <span>Csontváry - Önéletrajz: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="Csontváry">
                                                 <span>Dian: </span><input name="textExample" oninput="setExampleText()"
                                                     type="radio" id="Dian">
@@ -4563,36 +4571,38 @@
                                                     oninput="setExampleText()" type="radio" id="portal168ora">
                                                 <span>888.hu: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="portal888">
-                                                <span>Móricz: </span><input name="textExample"
+                                                <span>Móricz - Rokonok </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="Móricz">
+                                                <span>Móricz - Egyszer </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="egyszer">
+                                                <span>Móricz - Úri muri: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="MoriczUriMuri">
+                                                <span>Móricz - Légy jó: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="MoriczLegyJo">
                                                 <span>Ady: </span><input name="textExample" oninput="setExampleText()"
                                                     type="radio" id="Ady">
                                                 <span>József A: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="JózsefA">
                                                 <span>Latinovits: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="Latinovits">
-                                                <span style="color:blue">egyik sem: </span><input name="textExample"
+                                                <span>Mikszáth - Jó palócok: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="MikszathJoPalocok">
+                                                <span>Mikszáth - Tót: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="MikszathTotAtyafiak">
+                                                <span>Mikszáth - A fekete v.: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="MikszathAFekete">
+                                                <span>Juhász Gy.: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="Juhász">
+                                                <span style="color:blue">egyik sem, saját szöveget másolok be a
+                                                    szövegdobozba: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="nothing">
+
                                             </p>
                                             <button id="buttonForTextInput" type="button"
-                                                    class="ml-3 mb-3 btn btn-secondary btn-sm"
-                                                    onclick="functionForTextInput()">Mehet!</buttonid></button>
-                                                <span class="ml-3">Karakterszám:
-                                                    <span id="exampleCharacters"> - </span></span>
-                                            <p>A jobb oldali táblázat a színes vizualizációt segít értelmezni. A
-                                                vizualizációban ui. minél világosabb egy cella színe, annál nagyobb a
-                                                hozzá
-                                                tartozó betűkettős előfordulása. A táblázat pedig azt mutatja meg, hogy
-                                                hány
-                                                olyan betűkettős van, aminek 1 és 1 000 közé esik az előfordulása, hány
-                                                olyan karakter van, aminek 1 001 és 2 000 közé esik az előfordulása, s
-                                                így
-                                                tovább.</p>
-                                        </div>
-                                        <div class="col">
-
-
-                                           
+                                                class="ml-3 mb-3 btn btn-secondary btn-sm"
+                                                onclick="functionForTextInput()">Mehet!</buttonid></button>
+                                            <span class="ml-3">Karakterszám:
+                                                <span id="exampleCharacters"> - </span></span>
                                             <p>A betűkettősök előfordulásának az eloszlása:</p>
                                             <table class="table - table-small table-bordered table-stripped">
                                                 <tbody>
@@ -4618,11 +4628,25 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                        </div>
+                                        <div class="col">
+
+                                            <p>A jobb oldali táblázat a színes vizualizációt segít értelmezni. A
+                                                vizualizációban ui. minél világosabb egy cella színe, annál nagyobb a
+                                                hozzá
+                                                tartozó betűkettős előfordulása. <!-- A táblázat pedig azt mutatja meg, hogy
+                                                hány
+                                                olyan betűkettős van, aminek 1 és 1 000 közé esik az előfordulása, hány
+                                                olyan karakter van, aminek 1 001 és 2 000 közé esik az előfordulása, s
+                                                így
+                                                tovább.--></p>
+
+                                            <p>Az eloszlás ábrázolása grafikonon:</p>
                                             <p class="mt-3">A 3 000-es és a 4 000-es előfordulás különbsége ennyi
                                                 százaléka az összegüknek: <strong><span style="color:green"
                                                         id="lovelyPercent"> - </span></strong>
                                             <p>
-                                            <p>Az eloszlás ábrázolása grafikonon:</p>
+
                                             <div id="colForExaplsTextOccurrence" class="col-6 bgDarker smallBorder">
                                                 <table id="tableForExaplsTextOccurrence">
                                                     <tbody id="tbodyForExaplsTextOccurrence"></tbody>
@@ -4633,18 +4657,31 @@
                                     </div>
                                     <hr>
                                     <div class="row mt-3">
+                                        <div class="col bgDarker smallBorder" id="colForMBIO2">
+                                            <table id="tableForMBIO2">
+                                                <tbody id="tbodyForMBIO2"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row mt-3">
                                         <div class="col-6">
                                             <div class="row">
                                                 <div class="col">
                                                     <p>A példaszövekek:
-                                                    <ol>
+                                                    <ul>
                                                         <li>Orbán Viktor beszéde Nagy Imre temetésén, 1989</li>
                                                         <li> Kádár János utolsó beszéde, 1989</li>
                                                         <li> Tar Sándor: Ház a térkép szélén</li>
                                                         <li> Tar Sándor: 6714-es személy</li>
                                                         <li> Lackfi János: Élő hal (versek)</li>
-                                                        <li> Arany János: Toldi</li>
-                                                        <li>Ismeretlen szerző: Pajzán Toldi</li>
+                                                        <li> Arany János: Toldi 1. ének</li>
+                                                        <li> Arany János: Toldi 4. ének</li>
+                                                        <li>Ismeretlen szerző: Pajzán Toldi (1. ötezer karakter)</li>
+                                                        <li>Ismeretlen szerző: Pajzán Toldi (2. ötezer karakter)</li>
+                                                        <li>Ismeretlen szerző: Pajzán Toldi (3. ötezer karakter)</li>
                                                         <li>Mark Twain: Tom Sawyer (angolul)</li>
                                                         <li>Donald Trump's 2020 Republican National Convention speech
                                                         </li>
@@ -4660,19 +4697,17 @@
                                                             utolsó
                                                             novellája
                                                             (1918)</li>
-                                                        <li> Csontváry Kosztka Tivadar: Önéletrajz (1915)
-                                                            (1918)</li>
+                                                        <li> Csontváry Kosztka Tivadar: A lángész. Ki lehet zseni és ki
+                                                            nem lehet zseni (1913)</li>
+                                                        <li> Csontváry Kosztka Tivadar: Önéletrajz (1915)</li>
                                                         <li> Dian László: Még van időd</li>
                                                         <li> Karinthy Gábor: Versek</li>
                                                         <li> Egy cikk a 168ora.hu portálról</li>
                                                         <li> Egy cikk a 888.hu portálról</li>
-                                                        <li> Móricz Zsigmond: Rokonok (!)</li>
-                                                        <li> Ady Endre utolsó írásai (1918) </li>
-                                                        <li> József Attila utolsó prózai írásai</li>
-                                                        <li> Latinovits Zoltán: A Bagó story (1976)</li>
-                                                    </ol>
+
+                                                    </ul>
                                                     </p>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -4693,6 +4728,20 @@
                                                 szövegdobozba. Ez az eljárás kiszedi a szövegből az egy szóköznél
                                                 hosszabb töréseket, azokkal együtt ugyanis a program nem ad értékelhető
                                                 eredményt.</p>
+                                            <ul>
+                                                <li> Móricz Zsigmond: Rokonok (1932)</li>
+                                                <li> Móricz Zsigmond: Egyszer jóllakni (1933)</li>
+                                                <li> Móricz Zsigmond: Úri Muri (1928)</li>
+                                                <li> Móricz Zsigmond: Légy jó mindhalálig! (1920)</li>
+                                                <li> Ady Endre utolsó írásai (1918) </li>
+                                                <li> József Attila utolsó prózai írásai</li>
+                                                <li> Latinovits Zoltán: A Bagó story (1976)</li>
+                                                <li> Mikszáth Kálmán: A jó palócok (1882)</li>
+                                                <li> Mikszáth Kálmán: Tót atyafiak (1881)</li>
+                                                <li> Mikszáth Kálmán: A fekete város (1911)</li>
+                                                <li> Juhász Gyula: Népek az ország használatában</li>
+                                            </ul>
+
                                         </div>
 
                                         <div class="row">
@@ -4700,7 +4749,7 @@
 
 
 
-                                                <p>Ezeknél a vizualizációkkal - szemben a tanulómemóriás
+                                               <!-- <p>Ezeknél a vizualizációkkal - szemben a tanulómemóriás
                                                     vizualizációnál
                                                     -
                                                     itt
@@ -4713,8 +4762,60 @@
                                                     nem tartalmazza az üres helyeket. - A harmadik vizualizáció
                                                     kiírja
                                                     az
-                                                    előfordulások számát is, ha az nem nulla.</p>
-                                                </p>
+                                                    előfordulások számát is, ha az nem nulla.</p>-->
+                                                <hr>
+                                            </div>
+                                        </div>
+
+                                        <div id="innenolvassa" class="row">
+                                            <div class="col">
+                                                <div class="row">
+                                                    <div class="col">
+                                                       <!-- <p>A grafikon oszlopainak a magasságai azt mutatják meg sorban
+                                                            egymás után, hogy <i>hány</i> olyan betűkettősünk van,
+                                                            amelyik <i>csak
+                                                                egyszer</i> fordul elő; (majd a következő oszlop azt,
+                                                            hogy) <i>hány</i>
+                                                            olyan betűkettősünk van, amelyik <i>kétszer</i> fordul elő,
+                                                            s így
+                                                            tovább egészen a maxilmális előfordulásig, ami a nyelvünkben
+                                                            5 000 karakter esetén úgy 3 000 körül van.</p>-->
+                                                        <p><img class="float-right m-3" src="img/Csontváry példák.jpg"
+                                                                width="400" ; alt="Csontváry">Ha összeshasonlítjuk
+                                                            ugyanazon író szövegeihez tartozó grafikonokat,
+                                                            érdekes jelenségeket fedezhetünk fel! Lehetséges lenne, hogy
+                                                            az
+                                                            egyes íróknak néha egyedi <i>'bigrammikus ujjlenyomatuk'</i>
+                                                            lenne,
+                                                            amit
+                                                            rajta hagynak a szövegen?</p>
+                                                        <p>Az első két példa Csontváry Kosztka Tivadar egy-egy írása. Az
+                                                            első az 1913-ban írt <i>'Lángész. Ki lehet zseni és ki nem
+                                                                lehet zseni'</i> c. írása, a másik pedig a tízes évek
+                                                            közepén
+                                                            írt <i>Önéletrajz</i>-a. Mindkét írása első ötezer
+                                                            karakterét
+                                                            tartalmazó szövegrészletének a grafikonjának szinte
+                                                            ugyanaz
+                                                            a lejtése, s ugyanott találunk rajta egy sajátos
+                                                            töréspontot.</p>
+                                                        <p><img class="float-right m-3" src="img/Móricz példák.jpg"
+                                                                width="400" ; alt="Csontváry">A következő példák négy
+                                                            Móricz mű elejéről származnak. Itt a grafikon vége felé
+                                                            egy-egy sajátos kiszögellésszerű képződményt láthatunk.
+                                                            Ezeket a
+                                                            műveket 1920 és 1933 között írta Móricz, így nem meglepő, ha
+                                                            az orom mintázat némi változáson megy át a példák során.</p>
+                                                        <p><img class="float-right m-3" src="img/suicidium példák.jpg"
+                                                                width="400" ; alt="Csontváry">A következő három írás
+                                                            pedig egy-egy olyan szerzőtől - haláluk évéből vagy azt
+                                                            megelőzően - származó írás, akik öngyilkosságot követtek el:
+                                                            Csáth Géza, József Attila és Juhász Gyula. Mindhárom
+                                                            grafikon ugyanolyan toronyminzázatban végződik.</p>
+                                                            <p style="color:red">Megjegyzés: ezek az egyezések nagyobb valószínűséggel véletlen egyezések, mintsem valódiak.</p>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
