@@ -4523,7 +4523,6 @@
                                                 class="mr-2" type="radio" name="myCellColor">
 
 
-
                                             <p>Előre megadott példaszövegek (lásd lent):
                                                 <span>Orbán: </span><input name="textExample" oninput="setExampleText()"
                                                     type="radio" id="orban" checked>
@@ -4563,6 +4562,8 @@
                                                     oninput="setExampleText()" type="radio" id="CsontváryALangesz">
                                                 <span>Csontváry - Önéletrajz: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="Csontváry">
+                                                <span>Csontváry - A tekintély </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="CsontvaryTekintély">
                                                 <span>Dian: </span><input name="textExample" oninput="setExampleText()"
                                                     type="radio" id="Dian">
                                                 <span>Karinthy G: </span><input name="textExample"
@@ -4579,10 +4580,16 @@
                                                     oninput="setExampleText()" type="radio" id="MoriczUriMuri">
                                                 <span>Móricz - Légy jó: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="MoriczLegyJo">
+                                                <span>Móricz - Árvácska: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="Árvácska">
                                                 <span>Ady: </span><input name="textExample" oninput="setExampleText()"
                                                     type="radio" id="Ady">
-                                                <span>József A: </span><input name="textExample"
+                                                <span>József A - Van-e ... </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="JózsefA">
+                                                <span>József A - Ázsia lelke: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="Ázsialelke">
+                                                <span>József A - Curriculum vitae: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="JozsefACurriculum">
                                                 <span>Latinovits: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="Latinovits">
                                                 <span>Mikszáth - Jó palócok: </span><input name="textExample"
@@ -4593,6 +4600,10 @@
                                                     oninput="setExampleText()" type="radio" id="MikszathAFekete">
                                                 <span>Juhász Gy.: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="Juhász">
+                                                <span>Wass A.: </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="WassHagyaték">
+                                                <span>egy pedofil személy (angolul): </span><input name="textExample"
+                                                    oninput="setExampleText()" type="radio" id="pedophile">
                                                 <span style="color:blue">egyik sem, saját szöveget másolok be a
                                                     szövegdobozba: </span><input name="textExample"
                                                     oninput="setExampleText()" type="radio" id="nothing">
@@ -4604,7 +4615,7 @@
                                             <span class="ml-3">Karakterszám:
                                                 <span id="exampleCharacters"> - </span></span>
                                             <p>A betűkettősök előfordulásának az eloszlása:</p>
-                                            <table class="table - table-small table-bordered table-stripped">
+                                            <table class="table table-sm table-bordered table-stripped">
                                                 <tbody>
                                                     <tr>
                                                         <td>1 - 1 000</td>
@@ -4634,12 +4645,14 @@
                                             <p>A jobb oldali táblázat a színes vizualizációt segít értelmezni. A
                                                 vizualizációban ui. minél világosabb egy cella színe, annál nagyobb a
                                                 hozzá
-                                                tartozó betűkettős előfordulása. <!-- A táblázat pedig azt mutatja meg, hogy
+                                                tartozó betűkettős előfordulása.
+                                                <!-- A táblázat pedig azt mutatja meg, hogy
                                                 hány
                                                 olyan betűkettős van, aminek 1 és 1 000 közé esik az előfordulása, hány
                                                 olyan karakter van, aminek 1 001 és 2 000 közé esik az előfordulása, s
                                                 így
-                                                tovább.--></p>
+                                                tovább.-->
+                                            </p>
 
                                             <p>Az eloszlás ábrázolása grafikonon:</p>
                                             <p class="mt-3">A 3 000-es és a 4 000-es előfordulás különbsége ennyi
@@ -4664,7 +4677,12 @@
                                         </div>
                                     </div>
 
-
+                                    <div class="row mt-3" id="rowForTopBigrams">
+                                        <div class="col smallBorder bgLight" id="colForTopBigrams">
+                                            <p id="pForTopBigrams">
+                                            </p>
+                                        </div>
+                                    </div>
 
                                     <div class="row mt-3">
                                         <div class="col-6">
@@ -4700,10 +4718,14 @@
                                                         <li> Csontváry Kosztka Tivadar: A lángész. Ki lehet zseni és ki
                                                             nem lehet zseni (1913)</li>
                                                         <li> Csontváry Kosztka Tivadar: Önéletrajz (1915)</li>
+                                                        <li> Csontváry Kosztka Tivadar: A tekintély</li>
                                                         <li> Dian László: Még van időd</li>
                                                         <li> Karinthy Gábor: Versek</li>
                                                         <li> Egy cikk a 168ora.hu portálról</li>
                                                         <li> Egy cikk a 888.hu portálról</li>
+                                                        <li> Móricz Zsigmond: Rokonok (1932)</li>
+                                                        <li> Móricz Zsigmond: Egyszer jóllakni (1933)</li>
+                                                        <li> Móricz Zsigmond: Úri Muri (1928)</li>
 
                                                     </ul>
                                                     </p>
@@ -4729,17 +4751,24 @@
                                                 hosszabb töréseket, azokkal együtt ugyanis a program nem ad értékelhető
                                                 eredményt.</p>
                                             <ul>
-                                                <li> Móricz Zsigmond: Rokonok (1932)</li>
-                                                <li> Móricz Zsigmond: Egyszer jóllakni (1933)</li>
-                                                <li> Móricz Zsigmond: Úri Muri (1928)</li>
+
                                                 <li> Móricz Zsigmond: Légy jó mindhalálig! (1920)</li>
+                                                <li> Móricz Zsigmond: Árvácska (1941)</li>
                                                 <li> Ady Endre utolsó írásai (1918) </li>
-                                                <li> József Attila utolsó prózai írásai</li>
+                                                <li> József Attila - Van-e szociológiai indokoltsága az uj népies
+                                                    iránynak?</li>
+                                                <li> József Attia - Ázsia lelke (1937)</li>
+                                                <li> József Attia - Cirriculum vitae (1937)</li>
                                                 <li> Latinovits Zoltán: A Bagó story (1976)</li>
                                                 <li> Mikszáth Kálmán: A jó palócok (1882)</li>
                                                 <li> Mikszáth Kálmán: Tót atyafiak (1881)</li>
                                                 <li> Mikszáth Kálmán: A fekete város (1911)</li>
                                                 <li> Juhász Gyula: Népek az ország használatában</li>
+                                                <li> Wass Albert: Hagyaték (1985)</li>
+                                                <li> 'I’m a pedophile, but not a monster' - Egy vállaltan pedofil
+                                                    személy blogjából (<a
+                                                        href="https://web.archive.org/web/20150923001237/https://www.salon.com/2015/09/21/im_a_pedophile_but_not_a_monster/"
+                                                        target="blank">link</a>)</li>
                                             </ul>
 
                                         </div>
@@ -4749,7 +4778,7 @@
 
 
 
-                                               <!-- <p>Ezeknél a vizualizációkkal - szemben a tanulómemóriás
+                                                <!-- <p>Ezeknél a vizualizációkkal - szemben a tanulómemóriás
                                                     vizualizációnál
                                                     -
                                                     itt
@@ -4769,9 +4798,8 @@
 
                                         <div id="innenolvassa" class="row">
                                             <div class="col">
-                                                <div class="row">
-                                                    <div class="col">
-                                                       <!-- <p>A grafikon oszlopainak a magasságai azt mutatják meg sorban
+
+                                                <!-- <p>A grafikon oszlopainak a magasságai azt mutatják meg sorban
                                                             egymás után, hogy <i>hány</i> olyan betűkettősünk van,
                                                             amelyik <i>csak
                                                                 egyszer</i> fordul elő; (majd a következő oszlop azt,
@@ -4780,88 +4808,278 @@
                                                             s így
                                                             tovább egészen a maxilmális előfordulásig, ami a nyelvünkben
                                                             5 000 karakter esetén úgy 3 000 körül van.</p>-->
-                                                        <p><img class="float-right m-3" src="img/Csontváry példák.jpg"
-                                                                width="400" ; alt="Csontváry">Ha összeshasonlítjuk
-                                                            ugyanazon író szövegeihez tartozó grafikonokat,
-                                                            érdekes jelenségeket fedezhetünk fel! Lehetséges lenne, hogy
-                                                            az
-                                                            egyes íróknak néha egyedi <i>'bigrammikus ujjlenyomatuk'</i>
-                                                            lenne,
-                                                            amit
-                                                            rajta hagynak a szövegen?</p>
-                                                        <p>Az első két példa Csontváry Kosztka Tivadar egy-egy írása. Az
-                                                            első az 1913-ban írt <i>'Lángész. Ki lehet zseni és ki nem
-                                                                lehet zseni'</i> c. írása, a másik pedig a tízes évek
-                                                            közepén
-                                                            írt <i>Önéletrajz</i>-a. Mindkét írása első ötezer
-                                                            karakterét
-                                                            tartalmazó szövegrészletének a grafikonjának szinte
-                                                            ugyanaz
-                                                            a lejtése, s ugyanott találunk rajta egy sajátos
-                                                            töréspontot.</p>
-                                                        <p><img class="float-right m-3" src="img/Móricz példák.jpg"
-                                                                width="400" ; alt="Csontváry">A következő példák négy
-                                                            Móricz mű elejéről származnak. Itt a grafikon vége felé
-                                                            egy-egy sajátos kiszögellésszerű képződményt láthatunk.
-                                                            Ezeket a
-                                                            műveket 1920 és 1933 között írta Móricz, így nem meglepő, ha
-                                                            az orom mintázat némi változáson megy át a példák során.</p>
-                                                        <p><img class="float-right m-3" src="img/suicidium példák.jpg"
-                                                                width="400" ; alt="Csontváry">A következő három írás
-                                                            pedig egy-egy olyan szerzőtől - haláluk évéből vagy azt
-                                                            megelőzően - származó írás, akik öngyilkosságot követtek el:
-                                                            Csáth Géza, József Attila és Juhász Gyula. Mindhárom
-                                                            grafikon ugyanolyan toronyminzázatban végződik.</p>
-                                                            <p style="color:red">Megjegyzés: ezek az egyezések nagyobb valószínűséggel véletlen egyezések, mintsem valódiak.</p>
-                                                    </div>
-                                                </div>
+                                                <p><img class="float-right m-3" src="img/Csontváry grafikon.png"
+                                                        width="350" ; alt="Csontváry">Ha összeshasonlítjuk
+                                                    ugyanazon író szövegeihez tartozó grafikonokat,
+                                                    érdekes jelenségeket fedezhetünk fel! Lehetséges lenne, hogy
+                                                    az
+                                                    egyes íróknak néha egyedi <i>'bigrammikus ujjlenyomatuk'</i>
+                                                    lenne,
+                                                    amit
+                                                    rajta hagynak a szövegen?</p>
+                                                <p>Az első három példa Csontváry Kosztka Tivadar egy-egy írása.
+                                                    Az
+                                                    első az 1910-es évek közepén írt <i>Önéletrajz</i>-a c.
+                                                    írása, a másik pedig a tízes évek
+                                                    írt <i>Önéletrajz</i>-a. ÍA másik írása A tekintély című
+                                                    dolgozata, végül a harmadik szöveg az 1913-ban írt
+                                                    <i>'Lángész. Ki lehet zseni és ki nem'</i>
+                                                    lehet zseni' Mindhárom írása első ötezer
+                                                    karakterét
+                                                    tartalmazó szövegrészlete a grafikonjának szinte
+                                                    ugyanaz
+                                                    a lejtése, s ugyanott találunk rajta egy sajátos
+                                                    töréspontot.</p>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <p><img class="float-right m-3" src="img/Móricz grafikon.jpg"
+                                                        width="350" ; alt="Móricz">A következő példák két
+                                                    Móricz mű elejéről származnak. Itt a grafikon elején
+                                                    egy-egy sajátos kiszögellésszerű képződményt láthatunk.
+                                                    Ezeket a
+                                                    műveket 1920 és 1932 között írta Móricz, így nem meglepő, ha
+                                                    az orom mintázat némi változáson megy át a két példán.</p>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <p><img class="float-right m-3" src="img/suicidium 1 grafikon.jpg"
+                                                        width="350" ; alt="suicidium">A következő két írás Csáth Gézától
+                                                    (1918) és József Attilától (1937) származik azt megelőzően, hogy
+                                                    öngyilkosságot követtek el.
+
+                                                    Mindkét grafikonon a bigrammák oszlopai egy hirtelen ugrással
+                                                    kezdődnek, nem pedig fokozatosan épülnek fel az oszlopok a tengely
+                                                    egyenesétől.
+                                                </p>
+                                                <p style="color:red">Megjegyzés: ezek az egyezések nagyobb
+                                                    valószínűséggel véletlen egyezések, mintsem valódiak, ill. további
+                                                    kutatást igényelnek.</p>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+
+                                                <p><img class="float-right m-3" src="img/suicidium 2 grafikon.jpg"
+                                                        width="350" ; alt="suicidium">A következő két írás szintén két
+                                                    öngyilkosságot elkövető írótól származik, Juhász Gyultól és Wass
+                                                    Alberttől. Hasonlóan megfigyelhetjük a hirtelen ugrásokkal emelkedő
+                                                    kezdő bigrammák oszlopait.</p>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <p><img class="float-right m-3" src="img/pedophile grafikon.png"
+                                                        width="350" ; alt="pedofil személy">Az utolsó grafikon egy
+                                                    bevallottan pedofil személy angol
+                                                    nyelvű blogjának szövegéből származik. (<a
+                                                        href="https://web.archive.org/web/20150923001237/https://www.salon.com/2015/09/21/im_a_pedophile_but_not_a_monster/"
+                                                        target="blank">link</a>) Egy vele kjészített interjúból
+                                                    kiderül, hogy többször volt öngyilkossági szándéka:</p>
+                                                <quote>"Todd az egyetemi évei után mély depressziója esett, mert
+                                                    úgy érezte mindenki azt várja el tőle, hogy legyen egy
+                                                    barátnője és házasodjon meg, miközben ő egy sötét titkot
+                                                    őrzött magában. Több alkalommal is megpróbálta megölni magát
+                                                    és drogfüggő lett."(<a
+                                                        href="https://web.archive.org/web/20190118215410/https://www.blikk.hu/aktualis/krimi/nyilvanos-blogot-vezet-a-pedofil-ferfi/fg9kz5k"
+                                                        target="blank">link</a>)</quote>
+                                                <hr>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+
+
+                                                <p>Most pedig egy konkrét példán megmutatjuk, hogy a legritkábban
+                                                    előforduló bigrammák
+                                                    segítségével
+                                                    hogyan olvashatunk ki szövegekből mögöttes - tudattalan - tartalmat.
+                                                </p>
+                                                <p>József Attila <i>Van-e szociológiai indokoltsága az uj népies
+                                                        iránynak</i> c. írását
+                                                    vizsgáljuk
+                                                    meg, ami röviddel a költő öngyilkossága előtt született. A következő
+                                                    táblázat az első 5000
+                                                    kararakter
+                                                    legritkább bigrammáit mutatja, s azok előfordulását.</p>
+
+                                                <table class="mt-3 table table-sm table-bordered table-striped">
+
+                                                    <thead>
+
+                                                        <tr>
+                                                            <th>bigramma</th>
+                                                            <th>a tartalmazó szó</th>
+                                                            <th>a tartalmazó mondattöredék</th>
+                                                            <th>indexe</th>
+                                                            <th>előfordulása a szavas 1 109 szövegben</th>
+                                                            <th>ez ennyi %</th>
+                                                            <th>előfordulása az 58 362 szavas szótárban</th>
+                                                            <th>ez ennyi %</th>
+                                                        </tr>
+
+
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>ÖC</td>
+                                                            <td>Öcsödre</td>
+                                                            <td>Országos Gyermekvédő Liga <u>Öc</u>södre adott nevelőszülőkhöz</td>
+                                                            <td>595</td>
+                                                            <td>2</td>
+                                                            <td>0.18 %</td>
+                                                            <td>63</td>
+                                                            <td>0.108</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>ÖC</td>
+                                                            <td>Öcsödön</td>
+                                                            <td><u>Öc</u>södön nevelőszüleim Pistának hivtak</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>SÖ</td>
+                                                            <td>Öcsödre</td>
+                                                            <td>Országos Gyermekvédő Liga Öc<u>sö</u>dre adott nevelőszülőkhöz</td>
+                                                            <td>597</td>
+                                                            <td>2</td>
+                                                            <td style="background-color:#FADADD">0.18 %</td>
+                                                            <td>318</td>
+                                                            <td style="background-color:#FADADD">0.54 %</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>SÖ</td>
+                                                            <td>nevelőszüleim</td>
+                                                            <td>Öc<u>sö</u>dön nevelőszüleim Pistának hivtak</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>LÜ</td>
+                                                            <td>szülői</td>
+                                                            <td>én szülői fe<u>lü</u>gyelet nélkül</td>
+                                                            <td>927</td>
+                                                            <td>2</td>
+                                                            <td>0.18 %</td>
+                                                            <td>106</td>
+                                                            <td>0.18 %</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>LÜ</td>
+                                                            <td>fö<u>lü</u>lvizsgálja</td>
+                                                            <td>de magában fölülvizsgálja</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td</td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
+
+
+
+
+
+
+
+
+
+
 
                                             </div>
                                         </div>
                                     </div>
+
+
                                 </div>
                             </div>
 
+
+
+                            <div class="row">
+                                <div class="col-6">
+                                </div>
+                                <div class="col-6">
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <p></p>
+                                    <p style="color:red">
+                                        <span style="color:red">a program eddig van meg ... folytatjuk ...
+                                            javaslatok,
+                                            kritikák,
+                                            hibák:</span> <span style="color:blue">szivkuldi [kukac] latinora [pont]
+                                            hu</span>
+                                        <span class="ml-3">&#128584 &#128585 &#128586</span></p>
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <p></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-
-
-                <div class="row">
-                    <div class="col-6">
-                    </div>
-                    <div class="col-6">
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col">
-                        <p></p>
-                        <p style="color:red">
-                            <span style="color:red">a program eddig van meg ... folytatjuk ...
-                                javaslatok,
-                                kritikák,
-                                hibák:</span> <span style="color:blue">szivkuldi [kukac] latinora [pont]
-                                hu</span>
-                            <span class="ml-3">&#128584 &#128585 &#128586</span></p>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col">
-                        <p></p>
-                    </div>
-                </div>
+                <div style="z-index:0" class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding"></div>
             </div>
         </div>
-    </div>
-
-    <div style="z-index:0" class="col-2 col-sm-2 col-md-2 col-lg-2 noPadding"></div>
-    </div>
-    </div>
-    <script src="/gyak.js">
-    </script>
+        <script src="/gyak.js">
+        </script>
 </body>
 
 </html>
