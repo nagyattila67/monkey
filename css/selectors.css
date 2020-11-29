@@ -285,7 +285,9 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 //#tbodyForMBIO2 tr{border: solid 1px #ffffff; height:30px;width:30px}
 
 #colForTopBigrams{overflow:auto;height:300px;width:600px}
-
+#megjegyzesek{margin-left:100px}
+#mjz{margin-left:25px}
+#mjz{margin-left:25px;font-size:14px;}
 
 
 

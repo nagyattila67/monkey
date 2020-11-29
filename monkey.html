@@ -4499,12 +4499,12 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="row mt-3">
+                        <div id="bigramelemzesinnen" class="row mt-3">
                             <div class="col">
                                 <div id="colForAllBigrams">
                                     <div class="row">
                                         <div class="col">
-                                            <textarea oninput="textAreaOnInput()" id="textExamples" maxlength="5000"
+                                            <textarea oninput="textAreaOnInput()" id="textExamples" maxlength="500000"
                                                 class="mb-0" rows="4" cols="50" placeholder="Kedves Naplóm!"></textarea>
 
                                             <span class="mr-1" style="color:rgb(255,255,0)">sárga</span><input
@@ -4821,7 +4821,7 @@
                                                     Az
                                                     első az 1910-es évek közepén írt <i>Önéletrajz</i>-a c.
                                                     írása, a másik pedig a tízes évek
-                                                    írt <i>Önéletrajz</i>-a. ÍA másik írása A tekintély című
+                                                    írt <i>Önéletrajz</i>-a. A másik írása A tekintély című
                                                     dolgozata, végül a harmadik szöveg az 1913-ban írt
                                                     <i>'Lángész. Ki lehet zseni és ki nem'</i>
                                                     lehet zseni' Mindhárom írása első ötezer
@@ -4897,10 +4897,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row" style="overflow:auto">
                                             <div class="col">
-
-
                                                 <p>Most pedig egy konkrét példán megmutatjuk, hogy a legritkábban
                                                     előforduló bigrammák
                                                     segítségével
@@ -4916,10 +4914,7 @@
                                                     táblázat az első 5000
                                                     kararakterek
                                                     legritkább bigrammáit mutatja, s azok előfordulását.</p>
-                                                <p>Legritkább bigrammák a <i>Van-e szociológiai indokoltsága az uj
-                                                        népies
-                                                        iránynak</i> c. írásban</p>
-
+                                                <p>Legritkább bigrammák a <i>Curriculum vitae</i> önéletrajzában.</p>
                                                 <table class="mt-3 table table-sm table-bordered table-striped">
 
                                                     <thead>
@@ -4932,6 +4927,9 @@
                                                             <th>előfordulása a szavas 1 109 szövegben</th>
                                                             <th>ez ennyi %</th>
                                                             <th>előfordulása az 58 362 szavas szótárban</th>
+                                                            <th>ez ennyi %</th>
+                                                            <th>előfordulás a64 149 szavas 1937 évi József Attila próza
+                                                                korpuszban</th>
                                                             <th>ez ennyi %</th>
                                                         </tr>
 
@@ -4948,11 +4946,15 @@
                                                             <td>0.18 %</td>
                                                             <td>63</td>
                                                             <td>0.108</td>
+                                                            <td>4</td>
+                                                            <td style="background-color:#CDE7F0">0.0062 %</td>
                                                         </tr>
                                                         <tr>
                                                             <td>ÖC</td>
                                                             <td>Öcsödön</td>
                                                             <td><u>Öc</u>södön nevelőszüleim Pistának hivtak</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
@@ -4969,11 +4971,15 @@
                                                             <td style="background-color:#FADADD">0.18 %</td>
                                                             <td>318</td>
                                                             <td style="background-color:#FADADD">0.54 %</td>
+                                                            <td>208</td>
+                                                            <td style="background-color:#CDE7F0">0.32 %</td>
                                                         </tr>
                                                         <tr>
                                                             <td>SÖ</td>
                                                             <td>nevelőszüleim</td>
                                                             <td>Öc<u>sö</u>dön nevelőszüleim Pistának hivtak</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
@@ -4989,11 +4995,15 @@
                                                             <td>0.18 %</td>
                                                             <td>106</td>
                                                             <td>0.18 %</td>
+                                                            <td>73</td>
+                                                            <td>0.11 %</td>
                                                         </tr>
                                                         <tr>
                                                             <td>LÜ</td>
                                                             <td>fö<u>lü</u>lvizsgálja</td>
                                                             <td>de magában fölülvizsgálja</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
@@ -5009,11 +5019,16 @@
                                                             <td style="background-color:#FADADD">0.18 %</td>
                                                             <td>281</td>
                                                             <td style="background-color:#FADADD">0.48 %</td>
+                                                            <td>951</td>
+                                                            <td>1.48 % [a 'ja' rag is, így nem szerepel ugyanolyan
+                                                                mértékben a szószedetben]</td>
                                                         </tr>
                                                         <tr>
                                                             <td>JA</td>
                                                             <td>fölülvizsgálja</td>
                                                             <td>de magában fölülvizsgálja</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
@@ -5029,11 +5044,15 @@
                                                             <td>0.36 %</td>
                                                             <td>76</td>
                                                             <td>0.13 %</td>
+                                                            <td>65</td>
+                                                            <td>0.1 %</td>
                                                         </tr>
                                                         <tr>
                                                             <td>YR</td>
                                                             <td>királyról</td>
                                                             <td>történeteket találtam Attila királyról</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
@@ -5050,10 +5069,14 @@
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                         </tr>
 
                                                     </tbody>
                                                 </table>
+
+
 
                                                 <p>Legritkább bigrammák a <i>Van-e szociológiai indokoltsága az uj
                                                         népies
@@ -5071,6 +5094,9 @@
                                                             <th>előfordulása a szavas 1 109 szövegben</th>
                                                             <th>ez ennyi %</th>
                                                             <th>előfordulása az 58 362 szavas szótárban</th>
+                                                            <th>ez ennyi %</th>
+                                                            <th>előfordulás a64 149 szavas 1937 évi József Attila próza
+                                                                korpuszban</th>
                                                             <th>ez ennyi %</th>
                                                         </tr>
 
@@ -5088,11 +5114,15 @@
                                                             <td style="background-color:#FADADD">0.18 %</td>
                                                             <td>294</td>
                                                             <td style="background-color:#FADADD">0.5 %</td>
+                                                            <td>343</td>
+                                                            <td>0.53 %</td>
                                                         </tr>
                                                         <tr>
                                                             <td>ZÜ</td>
                                                             <td>tess<u>zü</u>k</td>
                                                             <td>a népet uralkodóvá tesszük az irodalomban</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
@@ -5107,13 +5137,17 @@
                                                             <td>2</td>
                                                             <td style="background-color:#FADADD">0.18 %</td>
                                                             <td>470</td>
-                                                            <td style="background-color:#FADADD">0.8</td>
+                                                            <td style="background-color:#FADADD">0.8 %</td>
+                                                            <td>316</td>
+                                                            <td style="background-color:#CDE7F0">0.49 %</td>
                                                         </tr>
                                                         <tr>
                                                             <td>LS</td>
                                                             <td>e<u>ls</u>ősorban</td>
                                                             <td>Petőfi-féle értelmezésére támaszkodik s elsősorban ezért
                                                             </td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
@@ -5129,12 +5163,16 @@
                                                             <td style="background-color:#FADADD">0.18 %</td>
                                                             <td>539</td>
                                                             <td style="background-color:#FADADD">0.92 %</td>
+                                                            <td>219</td>
+                                                            <td style="background-color:#CDE7F0">0.32 %</td>
                                                         </tr>
                                                         <tr>
                                                             <td>ŐS</td>
                                                             <td>el<u>ső</u>sorban</td>
                                                             <td>Petőfi-féle értelmezésére támaszkodik s elsősorban ezért
                                                             </td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
@@ -5147,14 +5185,18 @@
                                                             <td>Horváth János irja, hogy az elsősorban</td>
                                                             <td>385</td>
                                                             <td>2</td>
-                                                            <td style="background-color:#FADADD">0.18</td>
+                                                            <td style="background-color:#FADADD">0.18 %</td>
                                                             <td>216</td>
                                                             <td style="background-color:#FADADD">0.37</td>
+                                                            <td>193</td>
+                                                            <td style="background-color:#CDE7F0">0.3 %</td>
                                                         </tr>
                                                         <tr>
                                                             <td>RJ</td>
                                                             <td>í<u>rj</u>on</td>
                                                             <td>hogy a népért irjon az iró</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
@@ -5169,13 +5211,17 @@
                                                             <td>2</td>
                                                             <td>0.18 %</td>
                                                             <td>5</td>
-                                                            <td>0.0085</td>
+                                                            <td>0.0085 %</td>
+                                                            <td>30</td>
+                                                            <td>0.046 %</td>
                                                         </tr>
                                                         <tr>
                                                             <td>ÁU</td>
                                                             <td>programj<u>áu</u>l</td>
                                                             <td>a Petőfi korabeli népies politikai szemléletet vallja
                                                                 alapjául</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
@@ -5192,6 +5238,8 @@
                                                             <td>0.45 %</td>
                                                             <td>95</td>
                                                             <td>0.16 %</td>
+                                                            <td>33</td>
+                                                            <td>0.05 %</td>
                                                         </tr>
                                                         <tr>
                                                             <td>ŐF</td>
@@ -5201,12 +5249,16 @@
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
-                                                            <td>ua. %</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                         </tr>
                                                         <tr>
                                                             <td>ŐF</td>
                                                             <td>Petőfi</td>
                                                             <td>a népiesség Petőfi-féle értelmezésére támaszkodik</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
@@ -5222,11 +5274,15 @@
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                         </tr>
                                                         <tr>
                                                             <td>ŐF</td>
                                                             <td>Petőfi</td>
                                                             <td>Petőfiék népies irodalmi és politikai mozgalma</td>
+                                                            <td>ua.</td>
+                                                            <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
                                                             <td>ua.</td>
@@ -5240,16 +5296,29 @@
                                                 <p>Ezeknek az adatoknak az alapján az első írásból alábbi
                                                     következtetéseket
                                                     tudjuk levonni:
+                                                <p>
                                                 <ul>
+                                                    <li>Az 'Öcsöd' szó 'ÖC' bigrammája a
+                                                        73 841 szót tartalmazó József Attila költöi korpusznak összesen
+                                                        csak 11 szavában
+                                                        fordul elő (0.014 %). A bigrammát hordozó szó szövegkörnyezete
+                                                        ezek közül 10 esetben a fröccsenő vérhez, a halálhoz, a
+                                                        temetéshez és az éhséghez kapcsolódik (pontos kimutatását lásd
+                                                        lentebb.)
+                                                    </li>
+
                                                     <li>LÜ bigramma kétszer fordul elő: "szülői felügyelet nélkül";
                                                         "felülvizsgálja" - József Attila számára az Öcsödi
-                                                        tartózkodás, s az, hogy az anyja de facto magára hagyta őt,
-                                                        elsősorban <i>a szülői felügyelet, a kontroll hiányának a
-                                                            megélését</i> jelenti.</li>
+                                                        tartózkodás, s az, hogy az anyja de facto magára hagyta őt
+                                                        először Öcsödön, majd amikor ismét magához vette a gyermekeit,
+                                                        de a munkája miatt nem ért rá foglalkozni velük,
+                                                        szerintünk elsősorban <i>a szülői felügyelet, a kontroll
+                                                            hiányának a
+                                                            megélését</i> jelentette a költő számára.</li>
                                                     <li>Amikor József Attila rátalált a hun király, Attila
                                                         történeteire, az megerősítette őt abban, hogy neki joga van
                                                         <i>Attilaként</i> - saját magaként -, nem pedig <i>Pistaként</i>
-                                                            létezni.</li>
+                                                        létezni.</li>
                                                     <li>Mindezt úgy éli meg, miszerint <i>'végső soron talán ez az
                                                             élményem vezetett el az irodalomhoz, ez az élmény tett
                                                             gondolkodóvá, olyan emberré, aki meghallgatja mások
@@ -5284,11 +5353,21 @@
                                                         meg.</li>
                                                 </ul>
                                                 <br>
-                                                Mindezt kiegészíti mindaz, amit a második - József Attila <i>utolsó</i>
-                                                - írásából. Ez az utolsó írás tkp. egy búcsúlevélnek is tekinthető,
-                                                amelyből kiderül, hogy a halálát okozó balsest egy tudattalan döntés
-                                                következménye volt, azaz a halála tudattalan tévcselekvéssel elkövetett
-                                                öngyilkosság volt.
+                                                <p>
+                                                    Mindezt kiegészíti mindaz, amire József Attila <i>Van-e szociológiai
+                                                        indokoltsága az uj népies iránynak</i> c. írásából
+                                                    következtethetünk. Ez
+                                                    az egyik utolsó írása tkp. egy búcsúlevélnek is tekinthető,
+                                                    amelyben a későbbi balatonszárszói történést indokolja meg, ahogyan
+                                                    az írás címe is <i>'Van-e indokoltsága'</i> kifejezéssel kezdődik.
+                                                </p>
+                                                <p>
+                                                    S az indoklásból kiderül, hogy a halálát okozó balesett voltaképpen
+                                                    egy
+                                                    tudattalanul meghozott döntés
+                                                    következménye volt, azaz a halála tudattalan tévcselekvéssel
+                                                    elkövetett
+                                                    öngyilkosság volt.
                                                 </p>
                                                 <ul>
                                                     <li>
@@ -5303,6 +5382,8 @@
                                                     <li>Mi is volt Petőfi programja? Ahogyan ő írta le: <i>"Ott essem el
                                                             én, /
                                                             A harc mezején,</i></li>
+                                                    <li>József Attila szerintünk valóban <i>'elsesett'</i>, amikor
+                                                        átmászott a vagonok között, s így került a kerekek alá.</li>
                                                     <li>Kicsit részletezve pedig így néz ki ez a program: "S ha ajkam
                                                         örömteli végszava zendül, /
                                                         Hadd nyelje el azt az acéli (!) zörej, /
@@ -5314,11 +5395,219 @@
                                                         Ott szedjék össze elszórt csontomat ...</li>
                                                     <li>És így is lett.</li>
                                                 </ul>
+                                                <div id="megjegyzesek">
+                                                    <p>Megjegyzések:</p>
+                                                    <p>Az 'ÖCSÖD' szóban szereplő 'ÖC' bigramma még 11 szóban szerepel
+                                                        József Attila összes versei között. Ezek a következőek:
 
+                                                    <table class="table table-sm table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>év</th>
+                                                                <th>cím</th>
+                                                                <th>kifejezés</th>
+                                                                <th>versrészlet</th>
+                                                                <th>kulcsszó</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1922</td>
+                                                                <td>Munkáshalál</td>
+                                                                <td>fröccsent</td>
+                                                                <td>"A gép elkapta. Messze fröccsent vére, /
+                                                                    Fehéren hullott földre a feje.
+                                                                </td>
+                                                                <td>balsest, vér, halál</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1923</td>
+                                                                <td>Tanítások</td>
+                                                                <td>öccsei</td>
+                                                                <td>"Most a jövendő férfiakról szólok. / .../Az Isten
+                                                                    szerető öccsei ők.</td>
+                                                                <td>a jövő</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1926</td>
+                                                                <td>Beteg vagyok</td>
+                                                                <td>köcsögöt</td>
+                                                                <td>"Beteg vagyok, 3 napja nem láttam senkit, / a
+                                                                    szomszédasszony tejes
+                                                                    köcsögöt állított asztalomra, /
+                                                                    Nem halhatok meg, nem szabad, míg meg nem találtam a
+                                                                    tisztaságot"
+                                                                </td>
+                                                                <td>betegség, meghalás</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1926</td>
+                                                                <td>Engem temetnek</td>
+                                                                <td>szöcske</td>
+                                                                <td>"Lombok zizegnek, szöcske ugrik"</td>
+                                                                <td>halál, temetés</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1927</td>
+                                                                <td>Bevezető</td>
+                                                                <td>öccse</td>
+                                                                <td>"Lidi nénémnek öccse itt, / ... /kinek verséért a
+                                                                    halál
+                                                                    /
+                                                                    öles kondérban főz babot –
+                                                                </td>
+                                                                <td>megszemélyesített halál</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1931</td>
+                                                                <td>Beszél a tej</td>
+                                                                <td>köcsögök</td>
+                                                                <td>Ájtatosak a teli köcsögök.</td>
+                                                                <td>Jóllakottság egy elképzelt jövőben</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1931</td>
+                                                                <td>Szocialisták</td>
+                                                                <td>köcsögébe</td>
+                                                                <td>"a tejjel, amely megsavanyodott, amíg a munkás /
+                                                                    köcsögébe belecsobbant
+                                                                </td>
+                                                                <td>munkások nyomora, éhség, evés</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td> 1931</td>
+                                                                <td>Munkások</td>
+                                                                <td>fröccsel</td>
+                                                                <td>"s két deci fröccsel becsüljük magunk’"</td>
+                                                                <td>ivás</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td> 1936</td>
+                                                                <td>Ha a hold süt</td>
+                                                                <td>köcsögök</td>
+                                                                <td>Zsirok és köcsögök teje közt kotorász,</td>
+                                                                <td>éhség, evés</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td> 1937</td>
+                                                                <td>Hazám</td>
+                                                                <td>fröccsre</td>
+                                                                <td>"levesre telik és kenyérre, /
+                                                                    s fröccsre, hogy csináljon ricsajt.
+                                                                </td>
+                                                                <td>evés, ivás</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1937</td>
+                                                                <td>A pap mosolyog</td>
+                                                                <td>szöcske</td>
+                                                                <td>"lombok zizegnek, szöcske ugrik"</td>
+                                                                <td>a saját temetése
+                                                                <td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td> 1937</td>
+                                                                <td>Glas</td>
+                                                                <td>möchte (szeretnék)</td>
+                                                                <td>"Ich möchte dir, ich möchte nur so leuchten,"</td>
+                                                                <td>magány, egyedüllét</td>
+                                                            </tr>
 
+                                                            <tr>
+                                                                <td> 1937</td>
+                                                                <td>Reggeli ájtatosság</td>
+                                                                <td>öcsém</td>
+                                                                <td>"Címed öcsém hogy engem meglepett / ... ó de Vác /
+                                                                    Dutyijja őrzze testedet
+                                                                    ... "</td>
+                                                                <td>börtön, bezártság</td>
 
+                                                            </tr>
 
+                                                        </tbody>
+                                                    </table>
+                                                    <br>
+                                                    <p>Az ' ÖC' bigramma tehát látszólag rendkívül alacsony számban
+                                                        fordul elő a költő összes költeményeiben. Összesen 11
+                                                        szóban szerepel, míg az összes költemények szavainak a
+                                                        száma 73 841, így az 'ÖC' elkőfordulása: 0.014 %. Ha
+                                                        összehasonlítjuk ezt az előfordulást a kortárs Dzsida Jenő
+                                                        összes
+                                                        költeményeivel, láthatjuk, hogy ott a 125 139 szavas korpuszban
+                                                        az 'ÖC' bigramma 18-szor fordul elő, ami ugyanúgy 0.014 %-os
+                                                        előfordulás, mint József Attilánál.</p>
+                                                    <p>Azaz nem beszélhetünk arról, hogy József Attila
+                                                        direkt kerüli az 'ÖC' betűkettőst, hanem egyszerűen
+                                                        ennek a betűkettősnek ennyi az átlagos előfordulása
+                                                        a magyar nyelvben. Azonban még mindig mondhatjuk
+                                                        azt, hogy a költő a ritkán előfordulő bigramm mögé
+                                                        rejti el (?) a fájó tartalmat, hogy így - a nyelv
+                                                        statisztikai szabályai szerint - minél kevesebbet
+                                                        kelljen találkozni velük. Az ugyanis mindenesetre
+                                                        meggyőző, hogy hogyan oszlanak el ezen bigrammához
+                                                        rendelt tartalmak: </p>
+                                                    <ul>
+                                                        <li>halálos baleset: 1X</li>
+                                                        <li>betegség, meghalás: 1X</li>
+                                                        <li>saját temetése: 2X</li>
+                                                        <li>halál: 1X</li>
+                                                        <li>evés, ivás - éhség, rossz körülmények: 4X</li>
+                                                        <li>evés, ivás, elképzelt bőség: 1X</li>
+                                                        <li>magány, börtön: 2X</li>
+                                                        <li>egyéb: 1X</li>
+                                                    </ul>
+                                                    <p>Az ellentmondást tehát - miszerint a ritka bigrammokat József
+                                                        Attila valójában nem kerüli, hanem egyszerűen azok a nyelvünk
+                                                        fonetikájának statisztikai szabályai miatt fordulnak elő olyan
+                                                        ritkán -, azzal tudjuk feloldani, hogy valójában a költő a fájó
+                                                        tartalomhoz egy alacsony előfordulású bigrammát rendel hozzá,
+                                                        hogy így a lehető legkevesebbszer találkozzon a mögötte rejtőző
+                                                        kínzó - vagy kínos - tartalommal.</p>
+                                                    <p style="color:red">Ez viszont felvet egy elméleti kérdést a
+                                                        pszichoanalitikus szemlélet számára. Az elmélet szerint a
+                                                        tudattalan komplexusok bizonyos hívószavak mögött rejtőznek.
+                                                        (Ezen alapul pl. C. G. Jung szótesztje.) A kérdés pedig a
+                                                        következő: a komplexus maga választja ki a hívószavát vagy pedig
+                                                        a hívószó kijelölésében van szerepe a komplexust hordozó
+                                                        személynek is?</p>
+                                                    <p>Amikor létrejön a komplexum és a hozzá tartozó fedőszó között a
+                                                        kötés, akkor a személy esetleg választhat adott kifejezések
+                                                        között. Pl. lehetséges lett volna, hogy az <i>'Öcsödre'</i> szó
+                                                        semleges marad, s helyette a <i>'falun'</i> kifejezéshez kötődik
+                                                        a
+                                                        komplexus a költőnél. </p>
+                                                    <p>Még egy érdekes kérdés: Nyelvünkben a szavak hanglakja és
+                                                        jelentése között - eltekintve a hangulatfestő szavaktól -
+                                                        nincsen kapcsolat. Lehetsges lenne, hogy egyes személyek
+                                                        nyelhasználatában - a bigrammák által fedett komplexusok miatt -
+                                                        az egyes szótagokhoz esetleg konkrét tartalom van rendelve, s
+                                                        így felállíthatunk egy szótag szótárat, ami az egyén
+                                                        nyelvhasználatára jellemző? Pl József Attila esetében ennek
+                                                        a szótag szótárnak egy szócikke így nézne ki: </p>
+                                                    <ul>
+                                                        <li>
+                                                            <i>CÖ [ritka] 1.
+                                                                baleset, 2. halál, 3. temetés, 4. éhség, 5.
+                                                                jóllakottság, 6. magány, 7.az ideális jövő</i>
+                                                        </li>
+                                                    </ul>
+                                                    <p id="mjz">Megjegyzés: a tranzakcióanalitikus iskola ezt a szócikket
+                                                            úgy
+                                                            értelmezné, mint egy kész életforgatókönyv, amelyet a
+                                                            tulajdonosa dolgozott ki, majd
+                                                            az életében végre fog hajtani, s a szószedetben felsorolt
+                                                            jelentések mentén éli le az életét, ahol természetesen <i>az
+                                                                ideális jövő</i> így néz ki : <i>magány, éhezés, evés,
+                                                                baleset, halál, temetés</i></p>
 
+                                                    <p>További kérdés: Ha létezik közösségi (pl. nemzeti) kollektív
+                                                        tudattalan, akkor abban vajom megtalálhatóak-e a közösséget ért
+                                                        egykori, ősi - mára már feledésbe merült - traumák? Vajon
+                                                        ezekhez a kollektív tudattalanban lévő komplexusokhoz hasonlóan
+                                                        tapadnak bigrammák, ami pedig azt jelentené, hogy <i>azon
+                                                            bigrammák 'jelentése' a közösségen belül minden ember
+                                                            számára ugyanaz?</i></p>
+                                                </div>
 
 
                                             </div>
@@ -5331,7 +5620,7 @@
 
 
 
-                            <div class="row">
+                            <div class=" row">
                                 <div class="col-6">
                                 </div>
                                 <div class="col-6">
@@ -5342,10 +5631,12 @@
                                 <div class="col">
                                     <p></p>
                                     <p style="color:red">
-                                        <span style="color:red">a program eddig van meg ... folytatjuk ...
+                                        <span style="color:red">a program eddig van meg ...
+                                            folytatjuk ...
                                             javaslatok,
                                             kritikák,
-                                            hibák:</span> <span style="color:blue">szivkuldi [kukac] latinora [pont]
+                                            hibák:</span> <span style="color:blue">szivkuldi [kukac]
+                                            latinora [pont]
                                             hu</span>
                                         <span class="ml-3">&#128584 &#128585 &#128586</span></p>
                                     <p></p>
