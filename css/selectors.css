@@ -289,7 +289,11 @@ button[name='arrow2']{width:80px;height:35px;font-size:15px;padding:0px;margin:1
 #mjz{margin-left:25px}
 #mjz{margin-left:25px;font-size:14px;}
 
+#kozosBigrammak{overflow:auto;height:50px;}
 
+#divForJAelemzes1{overflow:auto}
+#divForJAelemzes2{overflow:auto}
+#divForJAelemzes3{overflow:auto}
 
 
 

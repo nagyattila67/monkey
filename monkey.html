@@ -4896,14 +4896,24 @@
                                                 <hr>
                                             </div>
                                         </div>
-
-                                        <div class="row" style="overflow:auto">
+                                        <div class="row">
                                             <div class="col">
                                                 <p>Most pedig egy konkrét példán megmutatjuk, hogy a legritkábban
                                                     előforduló bigrammák
                                                     segítségével
                                                     hogyan olvashatunk ki szövegekből mögöttes - tudattalan - tartalmat.
                                                 </p>
+                                                <button type="button" id="buttonForJAelemzes"
+                                                    onclick="JAelemzesFunction()"
+                                                    class="ml-3 mb-3 btn btn-secondary btn-sm">Mutat</button>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row" id="JAelemzes" style="overflow:auto; display:none">
+                                            <div class="col">
+
                                                 <p>József Attila két prózai szövegét, a<i>Van-e szociológiai
                                                         indokoltsága az uj népies
                                                         iránynak</i> c. írását és a <i>Curriculum vitae</i> c.
@@ -4915,384 +4925,388 @@
                                                     kararakterek
                                                     legritkább bigrammáit mutatja, s azok előfordulását.</p>
                                                 <p>Legritkább bigrammák a <i>Curriculum vitae</i> önéletrajzában.</p>
-                                                <table class="mt-3 table table-sm table-bordered table-striped">
+                                                <div id="divForJAelemzes1">
+                                                    <table id="JAelemzesTable"
+                                                        class="table table-sm table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>bigramma</th>
+                                                                <th>a tartalmazó szó</th>
+                                                                <th>a tartalmazó mondattöredék</th>
+                                                                <th>indexe</th>
+                                                                <th>előfordulása a szavas 1 109 szövegben</th>
+                                                                <th>ez ennyi %</th>
+                                                                <th>előfordulása az 58 362 szavas szótárban</th>
+                                                                <th>ez ennyi %</th>
+                                                                <th>a 64 149 szavas 1937 évi J. A.
+                                                                    próza
+                                                                    korpuszban</th>
+                                                                <th>ez ennyi %</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>ÖC</td>
+                                                                <td>Öcsödre</td>
+                                                                <td>Országos Gyermekvédő Liga <u>Öc</u>södre adott
+                                                                    nevelőszülőkhöz</td>
+                                                                <td>595</td>
+                                                                <td>2</td>
+                                                                <td>0.18 %</td>
+                                                                <td>63</td>
+                                                                <td>0.108</td>
+                                                                <td>4</td>
+                                                                <td style="background-color:#CDE7F0">0.0062 %</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ÖC</td>
+                                                                <td>Öcsödön</td>
+                                                                <td><u>Öc</u>södön nevelőszüleim Pistának hivtak</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>SÖ</td>
+                                                                <td>Öcsödre</td>
+                                                                <td>Országos Gyermekvédő Liga Öc<u>sö</u>dre adott
+                                                                    nevelőszülőkhöz</td>
+                                                                <td>597</td>
+                                                                <td>2</td>
+                                                                <td style="background-color:#FADADD">0.18 %</td>
+                                                                <td>318</td>
+                                                                <td style="background-color:#FADADD">0.54 %</td>
+                                                                <td>208</td>
+                                                                <td style="background-color:#CDE7F0">0.32 %</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>SÖ</td>
+                                                                <td>nevelőszüleim</td>
+                                                                <td>Öc<u>sö</u>dön nevelőszüleim Pistának hivtak</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>LÜ</td>
+                                                                <td>szülői</td>
+                                                                <td>én szülői fe<u>lü</u>gyelet nélkül</td>
+                                                                <td>927</td>
+                                                                <td>2</td>
+                                                                <td>0.18 %</td>
+                                                                <td>106</td>
+                                                                <td>0.18 %</td>
+                                                                <td>73</td>
+                                                                <td>0.11 %</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>LÜ</td>
+                                                                <td>fö<u>lü</u>lvizsgálja</td>
+                                                                <td>de magában fölülvizsgálja</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>JA</td>
+                                                                <td>meghallgatja</td>
+                                                                <td>aki meghallgatja mások véleményét</td>
+                                                                <td>937</td>
+                                                                <td>2</td>
+                                                                <td style="background-color:#FADADD">0.18 %</td>
+                                                                <td>281</td>
+                                                                <td style="background-color:#FADADD">0.48 %</td>
+                                                                <td>951</td>
+                                                                <td>1.48 % [a 'ja' rag is, így nem szerepel ugyanolyan
+                                                                    mértékben a szószedetben]</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>JA</td>
+                                                                <td>fölülvizsgálja</td>
+                                                                <td>de magában fölülvizsgálja</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>YR</td>
+                                                                <td>királyról</td>
+                                                                <td>a hun királyról szóló mesék </td>
+                                                                <td>1031</td>
+                                                                <td>4</td>
+                                                                <td>0.36 %</td>
+                                                                <td>76</td>
+                                                                <td>0.13 %</td>
+                                                                <td>65</td>
+                                                                <td>0.1 %</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>YR</td>
+                                                                <td>királyról</td>
+                                                                <td>történeteket találtam Attila királyról</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>YR</td>
+                                                                <td>egyre</td>
+                                                                <td>kitört a világháború, egyre rosszabbul ment a sorunk
+                                                                </td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
 
-                                                    <thead>
+                                                        </tbody>
+                                                    </table>
 
-                                                        <tr>
-                                                            <th>bigramma</th>
-                                                            <th>a tartalmazó szó</th>
-                                                            <th>a tartalmazó mondattöredék</th>
-                                                            <th>indexe</th>
-                                                            <th>előfordulása a szavas 1 109 szövegben</th>
-                                                            <th>ez ennyi %</th>
-                                                            <th>előfordulása az 58 362 szavas szótárban</th>
-                                                            <th>ez ennyi %</th>
-                                                            <th>előfordulás a64 149 szavas 1937 évi József Attila próza
-                                                                korpuszban</th>
-                                                            <th>ez ennyi %</th>
-                                                        </tr>
-
-
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>ÖC</td>
-                                                            <td>Öcsödre</td>
-                                                            <td>Országos Gyermekvédő Liga <u>Öc</u>södre adott
-                                                                nevelőszülőkhöz</td>
-                                                            <td>595</td>
-                                                            <td>2</td>
-                                                            <td>0.18 %</td>
-                                                            <td>63</td>
-                                                            <td>0.108</td>
-                                                            <td>4</td>
-                                                            <td style="background-color:#CDE7F0">0.0062 %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ÖC</td>
-                                                            <td>Öcsödön</td>
-                                                            <td><u>Öc</u>södön nevelőszüleim Pistának hivtak</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>SÖ</td>
-                                                            <td>Öcsödre</td>
-                                                            <td>Országos Gyermekvédő Liga Öc<u>sö</u>dre adott
-                                                                nevelőszülőkhöz</td>
-                                                            <td>597</td>
-                                                            <td>2</td>
-                                                            <td style="background-color:#FADADD">0.18 %</td>
-                                                            <td>318</td>
-                                                            <td style="background-color:#FADADD">0.54 %</td>
-                                                            <td>208</td>
-                                                            <td style="background-color:#CDE7F0">0.32 %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>SÖ</td>
-                                                            <td>nevelőszüleim</td>
-                                                            <td>Öc<u>sö</u>dön nevelőszüleim Pistának hivtak</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>LÜ</td>
-                                                            <td>szülői</td>
-                                                            <td>én szülői fe<u>lü</u>gyelet nélkül</td>
-                                                            <td>927</td>
-                                                            <td>2</td>
-                                                            <td>0.18 %</td>
-                                                            <td>106</td>
-                                                            <td>0.18 %</td>
-                                                            <td>73</td>
-                                                            <td>0.11 %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>LÜ</td>
-                                                            <td>fö<u>lü</u>lvizsgálja</td>
-                                                            <td>de magában fölülvizsgálja</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>JA</td>
-                                                            <td>meghallgatja</td>
-                                                            <td>aki meghallgatja mások véleményét</td>
-                                                            <td>937</td>
-                                                            <td>2</td>
-                                                            <td style="background-color:#FADADD">0.18 %</td>
-                                                            <td>281</td>
-                                                            <td style="background-color:#FADADD">0.48 %</td>
-                                                            <td>951</td>
-                                                            <td>1.48 % [a 'ja' rag is, így nem szerepel ugyanolyan
-                                                                mértékben a szószedetben]</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>JA</td>
-                                                            <td>fölülvizsgálja</td>
-                                                            <td>de magában fölülvizsgálja</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>YR</td>
-                                                            <td>királyról</td>
-                                                            <td>a hun királyról szóló mesék </td>
-                                                            <td>1031</td>
-                                                            <td>4</td>
-                                                            <td>0.36 %</td>
-                                                            <td>76</td>
-                                                            <td>0.13 %</td>
-                                                            <td>65</td>
-                                                            <td>0.1 %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>YR</td>
-                                                            <td>királyról</td>
-                                                            <td>történeteket találtam Attila királyról</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>YR</td>
-                                                            <td>egyre</td>
-                                                            <td>kitört a világháború, egyre rosszabbul ment a sorunk
-                                                            </td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
+                                                </div>
 
 
 
                                                 <p>Legritkább bigrammák a <i>Van-e szociológiai indokoltsága az uj
                                                         népies
                                                         iránynak</i> c. írásban</p>
+                                                <div id="divForJAelemzes2">
+                                                    <table class="table table-sm table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>bigramma</th>
+                                                                <th>a tartalmazó szó</th>
+                                                                <th>a tartalmazó mondattöredék</th>
+                                                                <th>indexe</th>
+                                                                <th>előfordulása a szavas 1 109 szövegben</th>
+                                                                <th>ez ennyi %</th>
+                                                                <th>előfordulása az 58 362 szavas szótárban</th>
+                                                                <th>ez ennyi %</th>
+                                                                <th>a 64 149 szavas 1937 évi J. A.
+                                                                    próza
+                                                                    korpuszban</th>
+                                                                <th>ez ennyi %</th>
+                                                            </tr>
 
-                                                <table class="mt-3 table table-sm table-bordered table-striped">
 
-                                                    <thead>
+                                                        </thead>
+                                                        <tbody>
 
-                                                        <tr>
-                                                            <th>bigramma</th>
-                                                            <th>a tartalmazó szó</th>
-                                                            <th>a tartalmazó mondattöredék</th>
-                                                            <th>indexe</th>
-                                                            <th>előfordulása a szavas 1 109 szövegben</th>
-                                                            <th>ez ennyi %</th>
-                                                            <th>előfordulása az 58 362 szavas szótárban</th>
-                                                            <th>ez ennyi %</th>
-                                                            <th>előfordulás a64 149 szavas 1937 évi József Attila próza
-                                                                korpuszban</th>
-                                                            <th>ez ennyi %</th>
-                                                        </tr>
-
-
-                                                    </thead>
-                                                    <tbody>
-
-                                                        <tr>
-                                                            <td>ZÜ</td>
-                                                            <td>megs<u>zü</u>ntetését</td>
-                                                            <td>az irodalmi nyelv és a köznyelv közötti különbség
-                                                                megszüntetését</td>
-                                                            <td>219</td>
-                                                            <td>2</td>
-                                                            <td style="background-color:#FADADD">0.18 %</td>
-                                                            <td>294</td>
-                                                            <td style="background-color:#FADADD">0.5 %</td>
-                                                            <td>343</td>
-                                                            <td>0.53 %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ZÜ</td>
-                                                            <td>tess<u>zü</u>k</td>
-                                                            <td>a népet uralkodóvá tesszük az irodalomban</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>LS</td>
-                                                            <td>e<u>ls</u>ősorban</td>
-                                                            <td>Horváth János irja, hogy az elsősorban</td>
-                                                            <td>327</td>
-                                                            <td>2</td>
-                                                            <td style="background-color:#FADADD">0.18 %</td>
-                                                            <td>470</td>
-                                                            <td style="background-color:#FADADD">0.8 %</td>
-                                                            <td>316</td>
-                                                            <td style="background-color:#CDE7F0">0.49 %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>LS</td>
-                                                            <td>e<u>ls</u>ősorban</td>
-                                                            <td>Petőfi-féle értelmezésére támaszkodik s elsősorban ezért
-                                                            </td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ŐS</td>
-                                                            <td>el<u>ső</u>sorban</td>
-                                                            <td>Horváth János irja, hogy az elsősorban</td>
-                                                            <td>329</td>
-                                                            <td>2</td>
-                                                            <td style="background-color:#FADADD">0.18 %</td>
-                                                            <td>539</td>
-                                                            <td style="background-color:#FADADD">0.92 %</td>
-                                                            <td>219</td>
-                                                            <td style="background-color:#CDE7F0">0.32 %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ŐS</td>
-                                                            <td>el<u>ső</u>sorban</td>
-                                                            <td>Petőfi-féle értelmezésére támaszkodik s elsősorban ezért
-                                                            </td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>RJ</td>
-                                                            <td>í<u>rj</u>a</td>
-                                                            <td>Horváth János irja, hogy az elsősorban</td>
-                                                            <td>385</td>
-                                                            <td>2</td>
-                                                            <td style="background-color:#FADADD">0.18 %</td>
-                                                            <td>216</td>
-                                                            <td style="background-color:#FADADD">0.37</td>
-                                                            <td>193</td>
-                                                            <td style="background-color:#CDE7F0">0.3 %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>RJ</td>
-                                                            <td>í<u>rj</u>on</td>
-                                                            <td>hogy a népért irjon az iró</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ÁU</td>
-                                                            <td>programj<u>áu</u>l</td>
-                                                            <td>mert programjául azt vallja</td>
-                                                            <td>481</td>
-                                                            <td>2</td>
-                                                            <td>0.18 %</td>
-                                                            <td>5</td>
-                                                            <td>0.0085 %</td>
-                                                            <td>30</td>
-                                                            <td>0.046 %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ÁU</td>
-                                                            <td>programj<u>áu</u>l</td>
-                                                            <td>a Petőfi korabeli népies politikai szemléletet vallja
-                                                                alapjául</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ŐF</td>
-                                                            <td>Petőfi</td>
-                                                            <td>A Petőfi–Arany-féle népiesség fogalmáról Horváth János
-                                                                irja</td>
-                                                            <td>486</td>
-                                                            <td>5</td>
-                                                            <td>0.45 %</td>
-                                                            <td>95</td>
-                                                            <td>0.16 %</td>
-                                                            <td>33</td>
-                                                            <td>0.05 %</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ŐF</td>
-                                                            <td>Petőfi</td>
-                                                            <td>Petőfi maga azért</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ŐF</td>
-                                                            <td>Petőfi</td>
-                                                            <td>a népiesség Petőfi-féle értelmezésére támaszkodik</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ŐF</td>
-                                                            <td>Petőfi</td>
-                                                            <td>nem, mert a Petőfi korabeli</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ŐF</td>
-                                                            <td>Petőfi</td>
-                                                            <td>Petőfiék népies irodalmi és politikai mozgalma</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                            <td>ua.</td>
-                                                        </tr>
-
-                                                    </tbody>
-
-                                                </table>
+                                                            <tr>
+                                                                <td>ZÜ</td>
+                                                                <td>megs<u>zü</u>ntetését</td>
+                                                                <td>az irodalmi nyelv és a köznyelv közötti különbség
+                                                                    megszüntetését</td>
+                                                                <td>219</td>
+                                                                <td>2</td>
+                                                                <td style="background-color:#FADADD">0.18 %</td>
+                                                                <td>294</td>
+                                                                <td style="background-color:#FADADD">0.5 %</td>
+                                                                <td>343</td>
+                                                                <td>0.53 %</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ZÜ</td>
+                                                                <td>tess<u>zü</u>k</td>
+                                                                <td>a népet uralkodóvá tesszük az irodalomban</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>LS</td>
+                                                                <td>e<u>ls</u>ősorban</td>
+                                                                <td>Horváth János irja, hogy az elsősorban</td>
+                                                                <td>327</td>
+                                                                <td>2</td>
+                                                                <td style="background-color:#FADADD">0.18 %</td>
+                                                                <td>470</td>
+                                                                <td style="background-color:#FADADD">0.8 %</td>
+                                                                <td>316</td>
+                                                                <td style="background-color:#CDE7F0">0.49 %</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>LS</td>
+                                                                <td>e<u>ls</u>ősorban</td>
+                                                                <td>Petőfi-féle értelmezésére támaszkodik s elsősorban
+                                                                    ezért
+                                                                </td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ŐS</td>
+                                                                <td>el<u>ső</u>sorban</td>
+                                                                <td>Horváth János irja, hogy az elsősorban</td>
+                                                                <td>329</td>
+                                                                <td>2</td>
+                                                                <td style="background-color:#FADADD">0.18 %</td>
+                                                                <td>539</td>
+                                                                <td style="background-color:#FADADD">0.92 %</td>
+                                                                <td>219</td>
+                                                                <td style="background-color:#CDE7F0">0.32 %</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ŐS</td>
+                                                                <td>el<u>ső</u>sorban</td>
+                                                                <td>Petőfi-féle értelmezésére támaszkodik s elsősorban
+                                                                    ezért
+                                                                </td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>RJ</td>
+                                                                <td>í<u>rj</u>a</td>
+                                                                <td>Horváth János irja, hogy az elsősorban</td>
+                                                                <td>385</td>
+                                                                <td>2</td>
+                                                                <td style="background-color:#FADADD">0.18 %</td>
+                                                                <td>216</td>
+                                                                <td style="background-color:#FADADD">0.37</td>
+                                                                <td>193</td>
+                                                                <td style="background-color:#CDE7F0">0.3 %</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>RJ</td>
+                                                                <td>í<u>rj</u>on</td>
+                                                                <td>hogy a népért irjon az iró</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ÁU</td>
+                                                                <td>programj<u>áu</u>l</td>
+                                                                <td>mert programjául azt vallja</td>
+                                                                <td>481</td>
+                                                                <td>2</td>
+                                                                <td>0.18 %</td>
+                                                                <td>5</td>
+                                                                <td>0.0085 %</td>
+                                                                <td>30</td>
+                                                                <td>0.046 %</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ÁU</td>
+                                                                <td>programj<u>áu</u>l</td>
+                                                                <td>a Petőfi korabeli népies politikai szemléletet
+                                                                    vallja
+                                                                    alapjául</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ŐF</td>
+                                                                <td>Petőfi</td>
+                                                                <td>A Petőfi–Arany-féle népiesség fogalmáról Horváth
+                                                                    János
+                                                                    irja</td>
+                                                                <td>486</td>
+                                                                <td>5</td>
+                                                                <td>0.45 %</td>
+                                                                <td>95</td>
+                                                                <td>0.16 %</td>
+                                                                <td>33</td>
+                                                                <td>0.05 %</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ŐF</td>
+                                                                <td>Petőfi</td>
+                                                                <td>Petőfi maga azért</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ŐF</td>
+                                                                <td>Petőfi</td>
+                                                                <td>a népiesség Petőfi-féle értelmezésére támaszkodik
+                                                                </td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ŐF</td>
+                                                                <td>Petőfi</td>
+                                                                <td>nem, mert a Petőfi korabeli</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ŐF</td>
+                                                                <td>Petőfi</td>
+                                                                <td>Petőfiék népies irodalmi és politikai mozgalma</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                                <td>ua.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                                 <p>Ezeknek az adatoknak az alapján az első írásból alábbi
                                                     következtetéseket
                                                     tudjuk levonni:
@@ -5399,133 +5413,140 @@
                                                     <p>Megjegyzések:</p>
                                                     <p>Az 'ÖCSÖD' szóban szereplő 'ÖC' bigramma még 11 szóban szerepel
                                                         József Attila összes versei között. Ezek a következőek:
+                                                    <div id="divForJAelemzes3">
+                                                        <table class="table table-sm table-bordered table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>év</th>
+                                                                    <th>cím</th>
+                                                                    <th>kifejezés</th>
+                                                                    <th>versrészlet</th>
+                                                                    <th>kulcsszó</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1922</td>
+                                                                    <td>Munkáshalál</td>
+                                                                    <td>fröccsent</td>
+                                                                    <td>"A gép elkapta. Messze fröccsent vére, /
+                                                                        Fehéren hullott földre a feje.
+                                                                    </td>
+                                                                    <td>balsest, vér, halál</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1923</td>
+                                                                    <td>Tanítások</td>
+                                                                    <td>öccsei</td>
+                                                                    <td>"Most a jövendő férfiakról szólok. / .../Az
+                                                                        Isten
+                                                                        szerető öccsei ők.</td>
+                                                                    <td>a jövő</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1926</td>
+                                                                    <td>Beteg vagyok</td>
+                                                                    <td>köcsögöt</td>
+                                                                    <td>"Beteg vagyok, 3 napja nem láttam senkit, / a
+                                                                        szomszédasszony tejes
+                                                                        köcsögöt állított asztalomra, /
+                                                                        Nem halhatok meg, nem szabad, míg meg nem
+                                                                        találtam a
+                                                                        tisztaságot"
+                                                                    </td>
+                                                                    <td>betegség, meghalás</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1926</td>
+                                                                    <td>Engem temetnek</td>
+                                                                    <td>szöcske</td>
+                                                                    <td>"Lombok zizegnek, szöcske ugrik"</td>
+                                                                    <td>halál, temetés</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1927</td>
+                                                                    <td>Bevezető</td>
+                                                                    <td>öccse</td>
+                                                                    <td>"Lidi nénémnek öccse itt, / ... /kinek verséért
+                                                                        a
+                                                                        halál
+                                                                        /
+                                                                        öles kondérban főz babot –
+                                                                    </td>
+                                                                    <td>megszemélyesített halál</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1931</td>
+                                                                    <td>Beszél a tej</td>
+                                                                    <td>köcsögök</td>
+                                                                    <td>Ájtatosak a teli köcsögök.</td>
+                                                                    <td>Jóllakottság egy elképzelt jövőben</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1931</td>
+                                                                    <td>Szocialisták</td>
+                                                                    <td>köcsögébe</td>
+                                                                    <td>"a tejjel, amely megsavanyodott, amíg a munkás /
+                                                                        köcsögébe belecsobbant
+                                                                    </td>
+                                                                    <td>munkások nyomora, éhség, evés</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> 1931</td>
+                                                                    <td>Munkások</td>
+                                                                    <td>fröccsel</td>
+                                                                    <td>"s két deci fröccsel becsüljük magunk’"</td>
+                                                                    <td>ivás</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> 1936</td>
+                                                                    <td>Ha a hold süt</td>
+                                                                    <td>köcsögök</td>
+                                                                    <td>Zsirok és köcsögök teje közt kotorász,</td>
+                                                                    <td>éhség, evés</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> 1937</td>
+                                                                    <td>Hazám</td>
+                                                                    <td>fröccsre</td>
+                                                                    <td>"levesre telik és kenyérre, /
+                                                                        s fröccsre, hogy csináljon ricsajt.
+                                                                    </td>
+                                                                    <td>evés, ivás</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1937</td>
+                                                                    <td>A pap mosolyog</td>
+                                                                    <td>szöcske</td>
+                                                                    <td>"lombok zizegnek, szöcske ugrik"</td>
+                                                                    <td>a saját temetése
+                                                                    <td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td> 1937</td>
+                                                                    <td>Glas</td>
+                                                                    <td>möchte (szeretnék)</td>
+                                                                    <td>"Ich möchte dir, ich möchte nur so leuchten,"
+                                                                    </td>
+                                                                    <td>magány, egyedüllét</td>
+                                                                </tr>
 
-                                                    <table class="table table-sm table-bordered table-striped">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>év</th>
-                                                                <th>cím</th>
-                                                                <th>kifejezés</th>
-                                                                <th>versrészlet</th>
-                                                                <th>kulcsszó</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>1922</td>
-                                                                <td>Munkáshalál</td>
-                                                                <td>fröccsent</td>
-                                                                <td>"A gép elkapta. Messze fröccsent vére, /
-                                                                    Fehéren hullott földre a feje.
-                                                                </td>
-                                                                <td>balsest, vér, halál</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>1923</td>
-                                                                <td>Tanítások</td>
-                                                                <td>öccsei</td>
-                                                                <td>"Most a jövendő férfiakról szólok. / .../Az Isten
-                                                                    szerető öccsei ők.</td>
-                                                                <td>a jövő</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>1926</td>
-                                                                <td>Beteg vagyok</td>
-                                                                <td>köcsögöt</td>
-                                                                <td>"Beteg vagyok, 3 napja nem láttam senkit, / a
-                                                                    szomszédasszony tejes
-                                                                    köcsögöt állított asztalomra, /
-                                                                    Nem halhatok meg, nem szabad, míg meg nem találtam a
-                                                                    tisztaságot"
-                                                                </td>
-                                                                <td>betegség, meghalás</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>1926</td>
-                                                                <td>Engem temetnek</td>
-                                                                <td>szöcske</td>
-                                                                <td>"Lombok zizegnek, szöcske ugrik"</td>
-                                                                <td>halál, temetés</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>1927</td>
-                                                                <td>Bevezető</td>
-                                                                <td>öccse</td>
-                                                                <td>"Lidi nénémnek öccse itt, / ... /kinek verséért a
-                                                                    halál
-                                                                    /
-                                                                    öles kondérban főz babot –
-                                                                </td>
-                                                                <td>megszemélyesített halál</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>1931</td>
-                                                                <td>Beszél a tej</td>
-                                                                <td>köcsögök</td>
-                                                                <td>Ájtatosak a teli köcsögök.</td>
-                                                                <td>Jóllakottság egy elképzelt jövőben</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>1931</td>
-                                                                <td>Szocialisták</td>
-                                                                <td>köcsögébe</td>
-                                                                <td>"a tejjel, amely megsavanyodott, amíg a munkás /
-                                                                    köcsögébe belecsobbant
-                                                                </td>
-                                                                <td>munkások nyomora, éhség, evés</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td> 1931</td>
-                                                                <td>Munkások</td>
-                                                                <td>fröccsel</td>
-                                                                <td>"s két deci fröccsel becsüljük magunk’"</td>
-                                                                <td>ivás</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td> 1936</td>
-                                                                <td>Ha a hold süt</td>
-                                                                <td>köcsögök</td>
-                                                                <td>Zsirok és köcsögök teje közt kotorász,</td>
-                                                                <td>éhség, evés</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td> 1937</td>
-                                                                <td>Hazám</td>
-                                                                <td>fröccsre</td>
-                                                                <td>"levesre telik és kenyérre, /
-                                                                    s fröccsre, hogy csináljon ricsajt.
-                                                                </td>
-                                                                <td>evés, ivás</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>1937</td>
-                                                                <td>A pap mosolyog</td>
-                                                                <td>szöcske</td>
-                                                                <td>"lombok zizegnek, szöcske ugrik"</td>
-                                                                <td>a saját temetése
-                                                                <td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td> 1937</td>
-                                                                <td>Glas</td>
-                                                                <td>möchte (szeretnék)</td>
-                                                                <td>"Ich möchte dir, ich möchte nur so leuchten,"</td>
-                                                                <td>magány, egyedüllét</td>
-                                                            </tr>
+                                                                <tr>
+                                                                    <td> 1937</td>
+                                                                    <td>Reggeli ájtatosság</td>
+                                                                    <td>öcsém</td>
+                                                                    <td>"Címed öcsém hogy engem meglepett / ... ó de Vác
+                                                                        /
+                                                                        Dutyijja őrzze testedet
+                                                                        ... "</td>
+                                                                    <td>börtön, bezártság</td>
 
-                                                            <tr>
-                                                                <td> 1937</td>
-                                                                <td>Reggeli ájtatosság</td>
-                                                                <td>öcsém</td>
-                                                                <td>"Címed öcsém hogy engem meglepett / ... ó de Vác /
-                                                                    Dutyijja őrzze testedet
-                                                                    ... "</td>
-                                                                <td>börtön, bezártság</td>
+                                                                </tr>
 
-                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
 
-                                                        </tbody>
-                                                    </table>
                                                     <br>
                                                     <p>Az ' ÖC' bigramma tehát látszólag rendkívül alacsony számban
                                                         fordul elő a költő összes költeményeiben. Összesen 11
@@ -5641,7 +5662,8 @@
                                                     </ul>
                                                     <p>Meglepő továbbá, hogy a "ÖDR" trigramma, tehát amikor a 'ÖD' és a
                                                         'GR' bigrammák egymás mellé kerülnek, József Attila összes
-                                                        verseiben összesen 12-szer fordul elő, s ezek közül 5 (8) alkalommal
+                                                        verseiben összesen 12-szer fordul elő, s ezek közül 5 (8)
+                                                        alkalommal
                                                         szerepel a trigramma közelébem egy felsőbb autoritás
                                                         megnevezése. Ezek a következőek:
                                                     </p>
@@ -5658,7 +5680,7 @@
                                                                 <td>A gyermekszemű élet-tavon</td>
                                                                 <td>"Egy vén öreg a parton g<u>ödr</u>öt ás: / ... /
                                                                     S elém bukkant <i>a vízi-óriás</i>."
-                                                                    </td>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Lovas a temetőben</td>
@@ -5666,15 +5688,17 @@
                                                                     Az álmok <i>kapitánya</i>. / ... /
                                                                     Lova már nyihog, g<u>ödr</u>öt kapar,
                                                                     "
-                                                                    </td>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td></td>
-                                                                <td>"Fáj neki a teste, lelke, szíve tája, szemeg<u>ödr</u>e, /
+                                                                <td>"Fáj neki a teste, lelke, szíve tája,
+                                                                    szemeg<u>ödr</u>e, /
                                                                     Nem is tudja, feltámad-e, elpihenne mindörökre. /
                                                                     Titokzatos messzeségben <i>istent</i> keres"
-                                                                    </td>
-                                                                    <td>a versben a 'szemgödre' még további háromszor fordul elő</td>
+                                                                </td>
+                                                                <td>a versben a 'szemgödre' még további háromszor fordul
+                                                                    elő</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Éjjel</td>
@@ -5687,7 +5711,7 @@
                                                                 <td>"Amaz emberebb g<u>ödr</u>ök vámján,
                                                                     / ... /
                                                                     Dadogó <i>Krisztusok</i>"
-                                                                    </td>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Isten</td>
@@ -5696,19 +5720,24 @@
                                                             <tr>
                                                                 <td>Dörmögő</td>
                                                                 <td>"míg fürt<u>ödr</u>e a giz-gaz rátapad"</td>
-                                                                <td>nincs autoritás említése</td>
+                                                                <td>nincs autoritás említése,
+                                                                    helyette:kiszolgáltatottság</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Tiszazug</td>
+                                                                <td>Tiszazug (1929)/td>
                                                                 <td>"s ha ő etet, a malacok
                                                                     habos v<u>ödr</u>östül fellökik".
-                                                                    </td>
-                                                                    <td>nincs autoritás említése</td>
+                                                                </td>
+                                                                <td>nincs autoritás említése,
+                                                                    helyette:kiszolgáltatottság</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Mint a mezőn</td>
-                                                                <td>"árkot betölt és g<u>ödr</u>öt ás"</td>
-                                                                <td>nincs autoritás említése</td>
+                                                                <td>Mint a mezőn (1936)</td>
+                                                                <td>"Mint a mezőn a kisfiut, ha /
+                                                                    eléri a vihar / ... / árkot betölt és g<u>ödr</u>öt
+                                                                    ás"</td>
+                                                                <td>nincs autoritás említése,
+                                                                    helyette:kiszolgáltatottság</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -5725,11 +5754,28 @@
                             </div>
 
 
+                            <div class=" row">
+                                <div class="col">
+                                    <p>Az alábbi két szövegből kérem a közös bigrammákat!</p>
+                                    <textarea id="ketSzoveg1" rows="4"
+                                        cols="50">az Országos Gyermekvédő Liga Öcsödre adott nevelőszülőkhöz. Itt éltem hét éves koromig</textarea>
+                                    <textarea id="ketSzoveg2" rows="4"
+                                        cols="50"> Gyámommá az árvaszék sógoromat, a most elhunyt Makai Ödön doktort nevezte ki. Egy tavaszon és nyáron át az Atlantica Tengerhajózási Rt. Vihar, Török és Tatár nevű vontatógőzösein szolgáltam</textarea>
+                                    <button id="kozosBigrammakButton" onclick="kozosBigrammakFunction()"
+                                        class="ml-3 mb-3 btn btn-secondary btn-sm">Mehet</button>
+                                    <p>A közös bigrammák száma: <span id="aKozosBigrammakSzama"> - </span></p>
+                                    <p>A közös bigrammák:</p>
+                                    <div id="divForKozosBigrammak" class="smallBorder bgDarker">
+                                        <div id="kozosBigrammak"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
 
                             <div class=" row">
-                                <div class="col-6">
-                                </div>
-                                <div class="col-6">
+                                <div class="col">
+
                                 </div>
                             </div>
 
